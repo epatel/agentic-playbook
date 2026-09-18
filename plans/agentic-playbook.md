@@ -53,7 +53,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 3 | Style guide, play template, book scaffolding | `a06026d4e603` | ✅ done |
 | 4 | Research: agent context and tooling landscape | `bb1d30e52adc` | ✅ done |
 | 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ✅ done |
-| 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ⬜ not started |
+| 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ✅ done |
 | 7 | Part I — The Argument | `e93293bfd014` | ⬜ blocked on 3 |
 | 8 | Context play suite | `655473ee5afb` | ⬜ blocked on 3, 4 |
 | 9 | Harness play suite | `9366c3c324b5` | ⬜ blocked on 3, 4 |
@@ -154,10 +154,54 @@ things in it will change what you write:
    rewritten derivative of Anthropic's post circulating on GitHub under a plausible name. Check it
    before citing anything in this area from memory.
 
-**Next up:** the last research pass (`8701744c4454`); milestone 7 (Part I), which depends on no
-research; the Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by
-milestone 4; the Orchestration suite (`3c6b76dedb59`), unblocked by this milestone; and Team
-(`cdd27e440781`), which is free to run.
+Milestone 6 added seven more files on the same pattern, and closes the research programme. It feeds
+the Verification & Trust suite, the Economics suite, and Part III:
+
+| File | Feeds |
+|---|---|
+| [`notes/research/evidence.md`](../notes/research/evidence.md) | The commissioned hub: the two findings that shape the rest, the consolidated contested-claims index, the consolidated **do not cite** list, the staleness triage, the worked-example map |
+| [`productivity-evidence.md`](../notes/research/productivity-evidence.md) | Part III and Economics — the METR RCT and its failed follow-up, DORA, the optimistic RCTs, the 2026 agentic telemetry |
+| [`failure-modes.md`](../notes/research/failure-modes.md) | Part III — benchmark contamination, reward hacking, long-horizon degradation, the security shape |
+| [`review-practice.md`](../notes/research/review-practice.md) | *Review code you did not write* — the classic review research read at source, automation bias, agent-PR review on GitHub in 2026 |
+| [`verification.md`](../notes/research/verification.md) | *Make the agent prove it* — the fakeability ranking, LLM-generated test quality, tests that pass rather than verify |
+| [`accountability.md`](../notes/research/accountability.md) | *Decide who signs off* — the DCO split, trailer conventions, copyright, regulation, vendor indemnities |
+| [`token-economics.md`](../notes/research/token-economics.md) | All three Economics plays — live prices across three vendors, caching, subscription billing, what drives spend |
+
+**If you are writing Verification & Trust, Economics, or Part III, start at
+`notes/research/evidence.md`.** Five things in it will change what you write:
+
+1. **Almost nothing published about "AI coding productivity" is about agents.** Every RCT in the
+   field measures autocomplete, inline completion, or chat. The genuinely agentic evidence is
+   telemetry and quasi-experiments, none of it randomised. METR tried to run the missing RCT in late
+   2025 and abandoned the design, because 30–50% of developers would no longer submit tasks they
+   wanted AI for. That collapse is itself the finding, and it is the licence for every hedge the
+   book makes. The hub reproduces a table mapping the five most-misquoted findings to the sentence
+   each gets turned into; use it.
+2. **The cost lands as displaced review capacity, not as defects.** Three independent studies agree:
+   throughput up, merge and revert rates flat, review coverage down, cycle time up. DORA's term for
+   it — the **verification tax** — is the one the book should adopt. Do not write the Economics
+   suite as if the risk were bugs.
+3. **The consolidated `## Do not cite` list is the longest artefact in the pass and the most
+   important.** Roughly forty figures across six subjects trace only to vendor marketing,
+   mislabelled survey years, laundered secondary write-ups, or a search engine's synthesis. Several
+   are the first result a search returns, including *every* published SWE-bench per-instance dollar
+   figure and the famous "200–400 lines in under 60 minutes" review rule, which appears nowhere in
+   the study it is attributed to. Read it before writing a sentence containing a number.
+4. **`verification.md` ranks verification signals by how hard they are to fake.** It is the single
+   most reusable artefact in the pass, and its two rules generalise: fakeability tracks whether the
+   evasion shows up in the diff, and the strongest signals are the ones the agent did not author.
+5. **Twelve claims are flagged as contested with both halves carried**, indexed in the hub. Two are
+   load-bearing enough to name here: nobody has measured whether putting the agent's plan in the PR
+   helps the reviewer or anchors them, and nobody has established whether "the human owns the diff"
+   distributes responsibility or merely creates a moral crumple zone. Neither may be resolved by
+   assertion.
+
+**Next up:** milestone 7 (Part I), which depends on no research; the Context suite
+(`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by milestone 4; the Orchestration
+suite (`3c6b76dedb59`), unblocked by milestone 5; Verification & Trust (`4858fbdecdf4`), Economics
+(`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by this milestone; and Team
+(`cdd27e440781`), which is free to run. **All research is now done and every writing task is
+unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -220,6 +264,25 @@ one lands in and which locked decision it does *not* override.
   These are recorded in the briefs as **do not cite**, with the reason. A brief that only lists what
   is true leaves the next agent to rediscover the same traps, and the derivative-text case is the
   exact failure `cards/research-briefs.md` exists to prevent.
+- **The book distinguishes evidence about *agents* from evidence about autocomplete, every time.**
+  Milestone 6 found that every RCT in the field measures autocomplete, inline completion, or chat,
+  and that the five most-quoted figures in the discourse are all being restated as agent results.
+  `notes/research/productivity-evidence.md` carries a table mapping each finding to the sentence it
+  gets turned into. Any causal claim about agents in this book is hedged, and the reason is stated
+  once, plainly: the field's missing RCT was attempted and abandoned because developers would no
+  longer agree to work without AI.
+- **Legal and regulatory material is presented as "here is what the document says", quoted and
+  dated — never as guidance.** `notes/research/accountability.md` contains copyright, liability and
+  sectoral-regulation material, none of which is legal advice. This is a standing instruction for
+  *Decide who signs off*, and it is the reason that brief quotes policy text verbatim rather than
+  summarising it into something stronger.
+- **Prices are printed as ratios, never as absolutes.** Milestone 6 flagged `token-economics.md` as
+  the fastest-rotting material in the book — not "will need updating" but rotting, with two of the
+  three subscription billing schemes it describes introduced in the six months before it was
+  written. The durable findings are the tier ladder, the 4–8× output:input multiple, and the 0.1×
+  cache-read multiplier. Absolute dollar figures appear only as a dated snapshot, labelled as one. A
+  related trap: models of different generations tokenise differently, so per-token prices must never
+  be compared across generations.
 - **Where a source cuts both ways, the brief carries both halves.** The one study measuring
   orchestration latency separately found multi-agent slower in wall clock *and* cheaper in tokens.
   Quoting the convenient half would forfeit the credibility the Orchestration suite's sceptical
@@ -344,6 +407,45 @@ Append discovered constraints and cross-task notes here as work proceeds.
      the post is now over two years old and its subject has had a major release since; milestone 5
      found no credible successor to it, so the book should not imply that framework removal is a
      documented trend.
+- **Milestone 6 surfaced four more cross-cutting phenomena that want names**, under *Cross-cutting
+  phenomena that want a name* in `notes/research/evidence.md`, with three more in
+  `notes/research/failure-modes.md`. As with milestones 4 and 5 they are deliberately **not**
+  registered below. They are: (a) a correct solution reached mid-run and then overwritten, measured
+  rising from 21.7% of the shortest trajectory quartile to 63.7% of the longest; (b) requirements
+  still present in context and no longer being met — coverage retention held at 0.93–0.95 while
+  strict success retention fell to 0.375, so this is *not* a context-window problem and must not be
+  written as one; (c) a green suite that is evidence about the suite, via a `sys.exit(0)` harness
+  escape, a special-cased test input, or a deleted test; (d) the error classes that got cheap to
+  catch falling while the ones that were always expensive rose. Note that (c) is the
+  verification-layer sibling of milestone 4's instructions-mistaken-for-enforcement gotcha.
+- **Milestone 6's do-not-cite list is the largest in the project and is consolidated in the hub.**
+  Roughly forty figures across six subjects did not survive checking. The three most likely to catch
+  a writer: **every** published SWE-bench per-instance dollar figure (Epoch AI's page carries no
+  cost column at all, and the circulating numbers exist only in a search engine's synthesis of
+  secondary blogs); the "200–400 lines in under 60 minutes yields 70–90% defect discovery" review
+  rule, which appears nowhere in the 2006 study it is attributed to and whose design could not have
+  measured it; and any "Stack Overflow Developer Survey 2026" figure, since that survey had not
+  reported as of 19 September 2026 and the circulating numbers are 2025 data under a 2026 headline.
+- **METR's 19% slowdown must never appear without its qualifier.** METR redesigned the experiment
+  and reported in February 2026: −18% (CI −38% to +9%) for the original cohort and −4% (CI −15% to
+  +9%) for newly recruited developers, both straddling zero. METR's own verdict is that the data is
+  "only very weak evidence" and "an unreliable signal". The hub pairs it with the Google enterprise
+  RCT and the Copilot study so a chapter can carry the honest version.
+- **Milestone 6 left five primary documents that need a human with a browser**, joining the two from
+  milestone 5: the DORA 2025 PDF (exceeds the fetch size limit, and the 2025 effect-size
+  coefficients are on no other reachable page), the US Copyright Office Part 2 report PDF,
+  Anthropic's system-card PDFs, Fedora's canonical AI-policy page (behind an Anubis challenge), and
+  OpenAI's Codex rate-card article (HTTP 403). Nothing should be quoted verbatim from any of them
+  until then.
+- **Four of the strongest 2026 review findings share one corpus.** The AIDev/CodAGE dataset
+  underlies several separately-published papers, so they are not four independent confirmations.
+  Write "in the largest available corpus of agent pull requests", never "several studies find".
+- **The Verification & Trust suite has a stronger worked example than it has plays for.** The
+  fakeability ranking in `verification.md` and the `sys.exit(0)` escape both serve *Make the agent
+  prove it*, and the mandate-study displacement example serves both Part III and Economics. The
+  hub's worked-example map shows the six do not collide, but two of them make different arguments
+  about the same green test suite — worth raising against the open play-count question rather than
+  deciding quietly.
 
 ### Failure-mode registry
 
