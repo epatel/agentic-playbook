@@ -36,11 +36,12 @@ and ask rather than quietly working around it.
 - Establishing a repo-wide convention that future agents must follow → a new card in `cards/`,
   plus an index line in the root `CLAUDE.md`
 
-## Creating `book/` and `notes/research/`
+## Creating directories
 
-Both are named in the plan but may not exist yet — they are created by the first task that needs
-them. If you are that task, create the directory and put your file in it. Do not add placeholder
-or `.gitkeep` files to directories you are not otherwise filling.
+`book/` and `notes/research/` both exist. The part directories under `book/` mostly do not —
+they are created by the first task that needs one. If you are that task, create the directory and
+put your file in it. Do not add placeholder or `.gitkeep` files to directories you are not
+otherwise filling.
 
 ## Naming
 

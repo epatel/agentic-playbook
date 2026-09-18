@@ -51,7 +51,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 1 | Consolidate ideation into an authoritative plan | `956e4f5ab7db` | ✅ done |
 | 2 | Agentic setup — `CLAUDE.md`, cards, shared plan | `5a8f313f87cc` | ✅ done |
 | 3 | Style guide, play template, book scaffolding | `a06026d4e603` | ✅ done |
-| 4 | Research: agent context and tooling landscape | `bb1d30e52adc` | ⬜ not started |
+| 4 | Research: agent context and tooling landscape | `bb1d30e52adc` | ✅ done |
 | 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ⬜ not started |
 | 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ⬜ not started |
 | 7 | Part I — The Argument | `e93293bfd014` | ⬜ blocked on 3 |
@@ -96,11 +96,36 @@ Three things every writing task must do, which are easy to miss:
 Part directories are numbered (`part-1-argument/`, `part-2-plays/…`) because part order is locked;
 files inside them are content-named and never numbered.
 
-`notes/research/` still does not exist — milestone 4 creates it.
+`notes/research/` now exists. Milestone 4 filled it with six files — a hub brief plus five
+subject briefs, because five subjects in one file would have made a writer chasing token-pricing
+figures read a survey of MCP security to find them:
 
-**Next up:** the three research passes (`bb1d30e52adc`, `6f9d83a67e1a`, `8701744c4454`) and
-milestone 7 (Part I), which is unblocked now and depends on no research. The six play suites are
-each blocked on their own research pass, except Team (`cdd27e440781`), which is also free to run.
+| File | Feeds |
+|---|---|
+| [`notes/research/tooling.md`](../notes/research/tooling.md) | The commissioned hub: cross-cutting findings, the standardised-vs-vendor-habit table, the staleness table, the full source list |
+| [`agent-context-files.md`](../notes/research/agent-context-files.md) | Context suite — `CLAUDE.md`, `AGENTS.md`, `.claude/rules/`, the cards pattern |
+| [`skills.md`](../notes/research/skills.md) | Harness suite — `SKILL.md`, progressive disclosure, skill vs. prompt vs. tool |
+| [`mcp.md`](../notes/research/mcp.md) | Harness suite — what a server exposes, the 2026-07-28 spec, trust boundaries |
+| [`token-filtering.md`](../notes/research/token-filtering.md) | Context suite, and the Economics suite's best cautionary tale |
+| [`permissions-and-sandboxing.md`](../notes/research/permissions-and-sandboxing.md) | Harness suite — what is enforced and what merely reads like enforcement |
+
+**If you are writing the Context or Harness suite, start at `notes/research/tooling.md`.** Three
+things in it will change what you write:
+
+1. **Cite vendor documentation, not blog posts, on context files.** Claude Code has read
+   `AGENTS.md` natively since v2.1.277; a wall of confident mid-2026 posts says otherwise and is
+   simply stale. The hub brief names one of them explicitly as an example rather than a source.
+2. **The staleness table in `tooling.md` ranks every finding by how fast it rots**, with a
+   suggested hedge for each. Use it rather than re-deriving where the line is; it is consistent
+   with `book/STYLE.md` on volatile facts.
+3. **Each brief ends with a `## Concrete example we can lift`** written to be dropped into a
+   *Worked example* heading. They are illustrative-but-correct per the locked decision — real
+   commands and real file contents, no invented captured output.
+
+**Next up:** the two remaining research passes (`6f9d83a67e1a`, `8701744c4454`); milestone 7
+(Part I), unblocked and depending on no research; and — newly unblocked by this milestone — the
+Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`). Team (`cdd27e440781`) is
+also free to run.
 
 ## Decisions log (append-only)
 
@@ -138,6 +163,16 @@ each blocked on their own research pass, except Team (`cdd27e440781`), which is 
 - **Named failure modes are Title Case noun phrases naming a symptom, not a cause**, and are
   registered in the running log below so two suites do not coin two names for one thing.
 - **British English, Oxford comma, sentence-case headings, no YAML frontmatter.**
+- **A research pass covering several subjects produces several briefs plus a hub**, not one file.
+  Milestone 4 was commissioned as a single `notes/research/tooling.md` and delivered six files:
+  the commissioned path became the hub holding the cross-cutting analysis and the full source
+  list, with one self-contained brief per subject beside it. This follows
+  `cards/research-briefs.md` ("several small briefs beat one enormous one") without losing the
+  entry point the task named. Later research passes should do the same.
+- **Every research brief ends with a staleness assessment.** This subject dates in months, not
+  years, and a writer picking up a brief six weeks later needs to know which findings to hedge
+  before they know anything else. `notes/research/tooling.md` carries a ranked table with a
+  suggested hedge per row.
 - How much the book dates itself is answered provisionally in `book/STYLE.md` (use a figure only
   when the point collapses without it; date it in the sentence; prefer shape to figure). The
   editorial pass owns the final call.
@@ -176,6 +211,24 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - `book/TEMPLATE-play.md` ends with a **specimen play**, *Commit before you let it run*. It is
   deliberately not in the table of contents and not in any suite. If a suite wants that material,
   write it fresh in the suite; do not move the file, or the template loses its example.
+- Milestone 4 turned up **three cross-cutting phenomena that want names**, under *Cross-cutting
+  gotchas* in `notes/research/tooling.md`. They are deliberately *not* registered below, because a
+  research brief should not squat names the suite authors have to live with. Whichever suite writes
+  one first names it and registers it here. They are: (a) instructions mistaken for enforcement —
+  a `deny` rule, a line in `CLAUDE.md`, or a skill description read as a hard boundary when none of
+  them is one; (b) a tool's self-reported savings diverging from the measured bill; (c) a silent
+  precedence rule cutting off instructions with no error — adding a `CLAUDE.local.md` stops
+  `AGENTS.md` loading, and `/context` reports the same empty list either way.
+- **Two candidate worked examples from milestone 4 are unusually strong and should not both be
+  spent in one suite.** The permission-matching table (a `deny` rule on `Bash(git push *)` does not
+  stop `git 'push' origin main`) belongs to Harness; the `rtk` benchmark (the dashboard reported
+  96.2M tokens saved over the same trials in which the bill rose 7.6%) belongs to Context or
+  Economics. The Economics suite should read `notes/research/token-filtering.md` even though it is
+  filed under the Context pass.
+- **`notes/research/` contains one deliberate lead that was not closed**: NSA/CISA MCP security
+  guidance dated June 2026 that returned HTTP 403 to automated fetch. If the Harness suite wants a
+  government-grade citation for the security material, that PDF needs downloading by hand first.
+  It is flagged in both `tooling.md` and `mcp.md` as unverified.
 
 ### Failure-mode registry
 
