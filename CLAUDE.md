@@ -1,0 +1,44 @@
+# The Agentic Playbook
+
+A markdown book, written in this repo, for working developers who already use agentic coding
+tools daily and want to get good at them. It is plays-first: about 60% of the book is named,
+self-contained plays with a fixed template, and the framing argument is deliberately compressed
+to make room for them. There is no application code here — no build step, no package manager,
+no tests; the deliverable is the prose.
+
+The book is being written by multiple agents working in parallel on separate board items, which
+is why the conventions below exist in writing rather than in someone's head.
+
+## Read this first
+
+**[`plans/agentic-playbook.md`](plans/agentic-playbook.md)** is the shared execution plan: the
+goal, the non-goals, milestone status, the append-only decision log, the current handoff note,
+and the open questions. Read it before starting any task, and update it when you finish one.
+It is how tasks that never share a context window stay pointed the same way.
+
+**[`PLAN.md`](PLAN.md)** is the authoritative design document behind the plan — the reasoning,
+the full outline, the build sequence. Read it when you need the *why* behind a decision.
+
+## Context cards
+
+Load a card when its situation matches. Each one stands alone.
+
+- [repo-layout](cards/repo-layout.md) — creating a file and unsure where it belongs, looking for
+  existing material, or about to edit something in `notes/raw/` or `PLAN.md`
+- [book-structure](cards/book-structure.md) — writing or editing any part of the book itself:
+  which part it belongs to, how long it should be, what shape a play takes
+- [research-briefs](cards/research-briefs.md) — running a research pass, or producing anything
+  that a later writing task will cite
+- [standing-defaults](cards/standing-defaults.md) — adding a diagram, adding a script or
+  dependency, or wondering how to format a file
+
+## Working agreements
+
+- **Prose wraps at 100 columns.** Parallel authors merge into the same book; line-scoped diffs
+  are what make that survivable.
+- **Diagrams are mermaid**, in fenced ```mermaid``` blocks. Never ASCII art.
+- **`notes/raw/` is frozen.** It is a provenance record of the original ideation, not a spec.
+- **Locked decisions in `PLAN.md` are not reopened unilaterally.** If your task cannot proceed
+  under one, stop and ask rather than working around it.
+- **Log what the next agent needs.** Finishing a task means updating the milestone, appending any
+  decision you made, and rewriting the handoff note in `plans/agentic-playbook.md`.

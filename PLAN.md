@@ -158,3 +158,8 @@ specific comic register, "we'll harmonise it later" is how a book ends up with t
 tone that lurches. The editorial pass at the end exists to enforce exactly one.
 
 Board items for each stage are filed under the **Agentic Playbook** epic.
+
+Execution state — milestone status, the append-only decision log, the current handoff note, and
+the open questions — lives in [`plans/agentic-playbook.md`](plans/agentic-playbook.md). This
+document holds the design and the reasoning; that one holds where the work stands. Read both
+before starting a task; update that one when you finish.
