@@ -52,7 +52,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 2 | Agentic setup — `CLAUDE.md`, cards, shared plan | `5a8f313f87cc` | ✅ done |
 | 3 | Style guide, play template, book scaffolding | `a06026d4e603` | ✅ done |
 | 4 | Research: agent context and tooling landscape | `bb1d30e52adc` | ✅ done |
-| 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ⬜ not started |
+| 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ✅ done |
 | 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ⬜ not started |
 | 7 | Part I — The Argument | `e93293bfd014` | ⬜ blocked on 3 |
 | 8 | Context play suite | `655473ee5afb` | ⬜ blocked on 3, 4 |
@@ -122,10 +122,42 @@ things in it will change what you write:
    *Worked example* heading. They are illustrative-but-correct per the locked decision — real
    commands and real file contents, no invented captured output.
 
-**Next up:** the two remaining research passes (`6f9d83a67e1a`, `8701744c4454`); milestone 7
-(Part I), unblocked and depending on no research; and — newly unblocked by this milestone — the
-Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`). Team (`cdd27e440781`) is
-also free to run.
+Milestone 5 added seven more files on the same hub-plus-briefs pattern, feeding the Orchestration
+suite:
+
+| File | Feeds |
+|---|---|
+| [`notes/research/orchestration.md`](../notes/research/orchestration.md) | The commissioned hub: the standardised-vs-vendor-habit table, four cross-cutting gotchas, the staleness table, the worked-example map |
+| [`subagents.md`](../notes/research/subagents.md) | *Decompose into subagents* — isolation, fan-out cost, Cognition's reversal |
+| [`langchain-langgraph.md`](../notes/research/langchain-langgraph.md) | *Make the control flow deterministic* — the framework/runtime split and the production complaints |
+| [`visual-workflow-tools.md`](../notes/research/visual-workflow-tools.md) | Same play, plus Team — n8n's licence, review and test story |
+| [`control-flow.md`](../notes/research/control-flow.md) | Same play — the decision-criteria table and the reliability evidence |
+| [`parallel-agents-and-collisions.md`](../notes/research/parallel-agents-and-collisions.md) | *Work in parallel without collisions* — the collision taxonomy and measured conflict rates |
+| [`single-agent-wins.md`](../notes/research/single-agent-wins.md) | All three Orchestration plays, and Economics' *Know when not to use an agent* |
+
+**If you are writing the Orchestration suite, start at `notes/research/orchestration.md`.** Four
+things in it will change what you write:
+
+1. **The suite's spine is that the vendors are more conservative than their users.** Anthropic,
+   OpenAI and Cognition all counsel starting with one agent, and the strongest controlled comparison
+   found five of six multi-agent systems losing to a single-agent baseline. The book gets to be
+   sceptical while citing the vendors *in support*, which is a rare and valuable position.
+2. **Use the removability test rather than picking a side.** Anthropic contradicts itself across
+   three posts on whether scripted orchestration is prudence or fragility, and the tension is not
+   resolvable. What is portable is their own framing: every harness component encodes an assumption
+   about what the model cannot do yet, so the design question is whether you can delete it cheaply
+   later.
+3. **The hub's worked-example map shows the five scenarios do not collide**, so all three
+   Orchestration plays can be drawn from this pass without repeating a scenario.
+4. **A list of things that did not survive verification** is in the hub's gaps section — two
+   widely-quoted low-code statistics, a scaffolding quote attributed to a named engineer, and a
+   rewritten derivative of Anthropic's post circulating on GitHub under a plausible name. Check it
+   before citing anything in this area from memory.
+
+**Next up:** the last research pass (`8701744c4454`); milestone 7 (Part I), which depends on no
+research; the Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by
+milestone 4; the Orchestration suite (`3c6b76dedb59`), unblocked by this milestone; and Team
+(`cdd27e440781`), which is free to run.
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -180,6 +212,19 @@ one lands in and which locked decision it does *not* override.
   years, and a writer picking up a brief six weeks later needs to know which findings to hedge
   before they know anything else. `notes/research/tooling.md` carries a ranked table with a
   suggested hedge per row.
+- **A research brief states what a source could *not* establish, and names sources that must not be
+  cited.** Milestone 5 found several confidently-circulating figures that did not survive checking —
+  two low-code statistics attributed to Gartner and to vendor research, a scaffolding quote
+  attributed to a named engineer with no traceable transcript, and a GitHub file that is a rewritten
+  derivative of Anthropic's "Building effective agents" whose plausible figures are not Anthropic's.
+  These are recorded in the briefs as **do not cite**, with the reason. A brief that only lists what
+  is true leaves the next agent to rediscover the same traps, and the derivative-text case is the
+  exact failure `cards/research-briefs.md` exists to prevent.
+- **Where a source cuts both ways, the brief carries both halves.** The one study measuring
+  orchestration latency separately found multi-agent slower in wall clock *and* cheaper in tokens.
+  Quoting the convenient half would forfeit the credibility the Orchestration suite's sceptical
+  framing depends on. The rule generalises: this book's argument is strongest when its own evidence
+  is reported against interest.
 - How much the book dates itself is answered provisionally in `book/STYLE.md` (use a figure only
   when the point collapses without it; date it in the sentence; prefer shape to figure). The
   editorial pass owns the final call.
@@ -266,10 +311,39 @@ Append discovered constraints and cross-task notes here as work proceeds.
   mostly already in `idea.md`, but step two (an honest comparison of what worked and what did not)
   is sharper than "collect and refine" and is the natural spine of
   *`team/collect-and-refine-as-a-team.md`*.
-- **`notes/research/` contains one deliberate lead that was not closed**: NSA/CISA MCP security
-  guidance dated June 2026 that returned HTTP 403 to automated fetch. If the Harness suite wants a
-  government-grade citation for the security material, that PDF needs downloading by hand first.
-  It is flagged in both `tooling.md` and `mcp.md` as unverified.
+- **Milestone 5 surfaced four more cross-cutting phenomena that want names**, under *Cross-cutting
+  gotchas* in `notes/research/orchestration.md`. As with milestone 4 they are deliberately **not**
+  registered below — whichever suite writes one first names it and registers it. They are: (a) the
+  parent sees only a subagent's summary and never checks the transcript, which exists on disk; (b) a
+  subagent inherits the written brief but none of the conversation, so a convention established in
+  chat is silently absent while one written in `CLAUDE.md` is enforced; (c) a merge that git reports
+  as clean and that breaks the build, which is the collision class that matters; (d) a fan-out that
+  was really just a larger compute budget. Note that (b) is the orchestration-layer sibling of
+  milestone 4's silent-precedence gotcha — if the Context suite names that one, the same name may
+  stretch to cover both.
+- **The Orchestration suite has more strong worked examples than it has plays.** Five non-colliding
+  scenarios are mapped at the end of `notes/research/orchestration.md`. Two of the sharpest — the
+  migration-ordering collision and the rename/add-call-site collision — currently sit inside the
+  *same* worked example because they co-occur in real life. If *Work in parallel without collisions*
+  runs long, the rename case stands alone and the migration case is a natural second play or a
+  Part III failure mode. Worth raising against the open play-count question rather than deciding
+  quietly.
+- **The Economics suite should read `notes/research/single-agent-wins.md`** even though it is filed
+  under the orchestration pass. It is the evidence base for *Know when not to use an agent*, and it
+  carries the token-and-latency comparisons that the Economics suite would otherwise have to
+  re-derive.
+- **`notes/research/` contains two deliberate leads that were not closed, both needing a human with
+  a browser:**
+  1. NSA/CISA MCP security guidance dated June 2026, which returned HTTP 403 to automated fetch. If
+     the Harness suite wants a government-grade citation for the security material, that PDF needs
+     downloading by hand first. Flagged in both `tooling.md` and `mcp.md` as unverified.
+  2. Octomind's "Why we no longer use LangChain" (June 2024) — the canonical framework-removal
+     critique, quoted in `langchain-langgraph.md` from search summaries and a secondary aggregator
+     because octomind.dev refused connections on every attempt and archive.org was unavailable.
+     **The quotations must be verified against the primary page before publication.** Note also that
+     the post is now over two years old and its subject has had a major release since; milestone 5
+     found no credible successor to it, so the book should not imply that framework removal is a
+     documented trend.
 
 ### Failure-mode registry
 
