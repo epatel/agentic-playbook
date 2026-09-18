@@ -31,7 +31,9 @@ playbook" — Part I is exactly where that failure recurs.
 ## The play template
 
 Every play in Part II uses the same five headings, in this order, so the book is skimmable under
-deadline:
+deadline. The canonical contract — word budgets, per-heading rules, and a fully written specimen
+play — is [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md). Open it before writing a play; this
+card is the summary.
 
 > **Problem** — one paragraph, no preamble. State the situation the reader is actually in.
 > **The play** — what to actually do.
@@ -56,6 +58,13 @@ The register is dry and wry — an experienced colleague who has been burned and
 retrospect. Humour lives in framing and examples, never inside a numbered procedure: when the
 reader is copying a command at 16:50 on a Friday, the prose gets out of the way.
 
-The full style guide — voice rules, worked examples of the register, formatting conventions — is
-a separate deliverable and lands at `book/STYLE.md`. Read it before writing prose. Until it
-exists, `PLAN.md` section 1 holds the short version.
+The full style guide — voice rules, the outright bans, four sample paragraphs written to spec, and
+the formatting mechanics — is [`book/STYLE.md`](../book/STYLE.md). Read it before writing any
+prose; it defines the register in examples rather than adjectives, which is the only way several
+authors land on one voice.
+
+## Where files go and how they link
+
+[`book/README.md`](../book/README.md) owns the directory layout, file naming, the table of contents
+that is the book's only ordering mechanism, and the cross-reference convention. Add your row to
+that table of contents in the same commit as the file itself.
