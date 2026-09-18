@@ -127,6 +127,13 @@ things in it will change what you write:
 Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`). Team (`cdd27e440781`) is
 also free to run.
 
+**If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
+fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
+extracted the three things in it that the rest of `notes/raw/` does not already say — mandate
+without method, a working agreement with an expiry date, and adoption-by-decree read as
+surveillance. Read the running-log entry rather than the fragment; the entry says which play each
+one lands in and which locked decision it does *not* override.
+
 ## Decisions log (append-only)
 
 - Ideation consolidated; `idea.md` / `plot-1.md` / `plot-2.md` moved to `notes/raw/` and replaced
@@ -176,6 +183,16 @@ also free to run.
 - How much the book dates itself is answered provisionally in `book/STYLE.md` (use a figure only
   when the point collapses without it; date it in the sentence; prefer shape to figure). The
   editorial pass owns the final call.
+- **The `notes/raw/` freeze bans editing existing records, not filing new ones.** Late ideation
+  from the author is archived there as a new file rather than folded into `PLAN.md`, so the
+  provenance record stays a record and the plan stays consolidated. The first instance is
+  [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md). What such a
+  fragment *contributes* goes in the running log below; the fragment itself is never a spec.
+- **"Humble and transparent" is subject matter, not a tone instruction.** The author's note that
+  this "has to be presented in a way not to scare but rather build trust" describes how a *team
+  lead* introduces a working agreement to colleagues. It does not soften the book's own register,
+  which stays dry and wry per the locked decision. A Team-suite author writing trust-building
+  prose is writing about the team lead's problem, not adopting the team lead's voice.
 
 ## Open questions
 
@@ -225,6 +242,30 @@ Append discovered constraints and cross-task notes here as work proceeds.
   96.2M tokens saved over the same trials in which the bill rose 7.6%) belongs to Context or
   Economics. The Economics suite should read `notes/research/token-filtering.md` even though it is
   filed under the Context pass.
+- **An archive pass on a late author fragment (`notes/raw/team-adoption-fragment.md`) found three
+  things the rest of `notes/raw/` does not say. All three are Team suite material
+  (`cdd27e440781`), and none of them changes a locked decision:**
+  1. **Mandate without method.** Managers are asking developers to use these tools while offering
+     no direction on how. `idea.md` frames the gap structurally ("no declared way of working as a
+     team"); this names the *pressure* the reader is actually under — told to adopt, not told how,
+     and judged on the result anyway. It belongs in the Team suite's *Problem* headings and is a
+     candidate for *What This Book Assumes About You* (`e93293bfd014`). Note the non-goal: this is
+     the reader's situation, not an invitation to address the manager.
+  2. **A working agreement has an expiry date.** The fragment asks for the adoption discussion to
+     be *re-run on a cadence*, with room explicitly reserved for trying new tools. `idea.md` has
+     "be prepared to change" and "experiment" as dispositions; a review cadence and a standing
+     experiment budget are mechanisms, which is what a play can actually contain. *Build the
+     working agreement* should ship with a review trigger, and the failure mode is nearby: an
+     agreement written once, obeyed for two model releases, and quietly ignored thereafter.
+  3. **Adoption by decree reads as surveillance.** "Not to scare but rather build trust" identifies
+     a distinct risk — the team hears a new working agreement as measurement of them, not of the
+     tools. Worth a named failure mode if a Team-suite author wants one; see the decision above for
+     why this does not license a change of register.
+  The fragment's four-step sequence — collect what the team already does, discuss openly why some
+  things work better than others, define the way of working, then converge everyone on it — is
+  mostly already in `idea.md`, but step two (an honest comparison of what worked and what did not)
+  is sharper than "collect and refine" and is the natural spine of
+  *`team/collect-and-refine-as-a-team.md`*.
 - **`notes/research/` contains one deliberate lead that was not closed**: NSA/CISA MCP security
   guidance dated June 2026 that returned HTTP 403 to automated fetch. If the Harness suite wants a
   government-grade citation for the security material, that PDF needs downloading by hand first.
