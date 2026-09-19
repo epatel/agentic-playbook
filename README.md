@@ -8,6 +8,9 @@ a fixed shape, and the argument that justifies them is kept short on purpose.
 afternoon.** Nothing has a required order and nothing has to be built to read it — the markdown in
 [`book/`](book/) is the deliverable.
 
+Complete and readable end to end: 32 chapters, about 41,000 words, every figure traced to a cited
+brief. Licensed [CC BY 4.0](LICENSE).
+
 ## Contents
 
 ### Front matter
@@ -117,6 +120,7 @@ Output goes to `build/`, which is generated and never committed. See
 | [`book/`](book/) | The book. [`book/README.md`](book/README.md) holds the authoritative table of contents, which is the only thing that encodes order. |
 | [`book/STYLE.md`](book/STYLE.md) | Voice, the outright bans, the formatting mechanics. |
 | [`book/TEMPLATE-play.md`](book/TEMPLATE-play.md) | The five-heading play contract, plus one fully written specimen play. |
+| [`book/examples/`](book/examples/) | Scratch projects behind the worked examples, so captured command output can be captured again. |
 | [`notes/research/`](notes/research/) | Twenty-one cited research briefs. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
 | [`notes/raw/`](notes/raw/) | The original ideation, frozen as a provenance record. |
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
@@ -135,3 +139,9 @@ book. Run `make check` before you finish: it decides all three, so none of them 
 Disagreement is the point — the book says in its own preface that it is one account written in
 enough detail to be disagreed with precisely. A correction with a source attached is the most
 useful thing anyone can send.
+
+## License
+
+The book and everything else in this repository is released under
+[Creative Commons Attribution 4.0 International](LICENSE). Use it, quote it, teach from it, adapt
+it — attribution is the only condition.
