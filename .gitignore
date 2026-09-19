@@ -6,4 +6,7 @@ build/
 
 # Python bytecode. `scripts/check_style.py` imports `scripts/build_book.py`, so running the
 # checker writes one of these; a compiled copy of a script is build output like any other.
+# `*.pyc` as well as the directory: a stray bytecode file written outside a `__pycache__/`
+# would otherwise still show up as a spurious modification in every diff.
 __pycache__/
+*.pyc
