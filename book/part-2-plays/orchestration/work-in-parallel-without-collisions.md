@@ -30,11 +30,18 @@ Partition the repository before you start, and treat integration as the part tha
 4. **Check overlap before you merge anything.** Two branches touching one file is a question worth
    asking before git is asked to answer it:
 
+   > Captured September 2026, git 2.50.1.
+
    ```bash
    comm -12 \
      <(git diff --name-only "origin/main...feat/invoices" | sort) \
      <(git diff --name-only "origin/main...feat/rate-limit" | sort)
+   config/routes.rb
    ```
+
+   Process substitution needs bash or zsh; in `sh` the same line is a syntax error. Anything it
+   prints is a file two agents both changed, and is worth resolving before the merge rather than
+   during it.
 
 5. **Integrate one branch at a time, rebasing each onto the last, and run the full suite on the
    merged tree.** Per-branch green is evidence about each branch in isolation, which is precisely
@@ -61,10 +68,18 @@ from writing to integrating. It does not remove it.
 `meridian`, a Ruby freight-booking platform whose monorepo holds nineteen deployable services, split
 three jobs across three worktrees, all branched from `origin/main`:
 
+> Captured September 2026, git 2.50.1.
+
 ```bash
 $ git worktree add ../meridian-webhooks   -b feat/webhooks
+Preparing worktree (new branch 'feat/webhooks')
+HEAD is now at c60476d Round tariff surcharges at the journal boundary
 $ git worktree add ../meridian-invoices   -b feat/invoices
+Preparing worktree (new branch 'feat/invoices')
+HEAD is now at c60476d Round tariff surcharges at the journal boundary
 $ git worktree add ../meridian-rate-limit -b feat/rate-limit
+Preparing worktree (new branch 'feat/rate-limit')
+HEAD is now at c60476d Round tariff surcharges at the journal boundary
 ```
 
 Agent A owned `services/webhooks/`, B owned `services/invoices/`, C owned `engines/rate_limit/`.

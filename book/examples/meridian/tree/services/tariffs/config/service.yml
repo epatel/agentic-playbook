@@ -1,0 +1,5 @@
+name: tariffs
+runtime: ruby-3.3
+deploy:
+  replicas: 2
+  health_check: /healthz

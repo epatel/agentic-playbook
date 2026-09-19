@@ -57,8 +57,12 @@ becomes that person's rate, chosen deliberately rather than discovered later.
 agent-authored changes for four months before anyone wrote a rule. The first move was to find out
 what the repository was already asserting:
 
+> Captured September 2026, git 2.50.1.
+
 ```bash
-$ git log --format='%(trailers:only)' -n 400 | sort | uniq -c | sort -rn
+$ git log --format='%(trailers:only)' -n 400 | grep . | sort | uniq -c | sort -rn
+ 267 Co-authored-by: Cursor Agent <agent@cursor.com>
+   8 Reviewed-by: Priya Raman <priya@tideline.example>
 ```
 
 Two thirds of the recent history carried a co-author trailer naming an assistant. Nobody on the team

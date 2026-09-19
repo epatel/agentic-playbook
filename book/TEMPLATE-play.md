@@ -133,22 +133,30 @@ become a tutorial.
 
 ## Worked examples: what "real" means
 
-The book's standard is "real files, real commands, real output". In practice, for the first draft:
+The book's standard is "real files, real commands, real output":
 
 - **Examples are illustrative but must be correct.** Commands are real commands with real flags.
   File contents are valid for their format. Paths are plausible for the project described. A reader
   who types what you wrote must not hit a syntax error or an option that does not exist.
-- **Do not present output as a transcript unless it is one.** If you actually ran it, say so on the
-  line above the fence: `> Captured March 2026, git 2.44.` Anything without that line is understood
-  to be representative, and must be written so that it could not be mistaken for a measurement.
+- **Output that a command could produce is captured, not written.** If a block shows what came
+  back, it came back — say so on the line above the fence: `> Captured March 2026, git 2.44.` The
+  project it came out of is committed under [`examples/`](examples/) with a `reproduce.py` that
+  runs the same commands again. If you write a new example that prints output, add its project
+  there; if you change an existing one, re-run its script.
+- **Do not present output as a transcript unless it is one.** Anything without the `> Captured`
+  line is understood to be representative, and must be written so that it could not be mistaken
+  for a measurement. Some examples genuinely cannot be run — a team practice, a paid API at scale,
+  a multi-week situation, a fictional remote — and those stay representative. What they may not do
+  is print a plausible-looking result and let the prose lean on it.
 - **Never invent a measurement.** Timings, token counts, costs, percentages, and study results are
   either measured, cited to a brief in [`notes/research/`](../notes/research/), or expressed as
   shape — "roughly a third of the cost", not "31% cheaper".
 - **Abridge honestly.** `…` and `# … 14 more files` are better than padding an example to look
-  complete.
-- **A later pass tightens this.** Before publication, a board item exists to run the examples for
-  real and replace representative output with captured output. Write examples you could actually
-  run, so that pass is editing rather than rewriting.
+  complete. Dropping a `diff --git` header and starting the block at the `@@` hunk marker is
+  abridgement; retyping the hunk so the numbers come out rounder is not.
+- **Let the capture correct the prose, not the other way round.** If the real `--stat` says 314
+  lines where the draft said 480, the sentence changes. Every number the run touches is downstream
+  of it, including the ones two paragraphs later that nobody remembers are arithmetic.
 
 ## Copy this
 
@@ -188,7 +196,8 @@ The book's standard is "real files, real commands, real output". In practice, fo
 > **Specimen play.** This file shows the shape; it does not claim a slot in the book and is not in
 > the table of contents. If a suite later wants this material, write it there — do not move this
 > file. Its cross-references point at files that later tasks will create; that is the syntax to
-> copy.
+> copy. Its output blocks carry no `> Captured` line, which under the rules above makes them
+> representative — correct for a specimen, and not what a play in the book may do.
 
 ## Problem
 

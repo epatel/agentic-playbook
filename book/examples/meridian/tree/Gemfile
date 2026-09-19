@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+ruby "3.3.4"
+
+gem "rails", "~> 7.2"
+gem "pg"
+gem "puma"
+gem "sidekiq"
+
+Dir["engines/*"].each { |path| gem File.basename(path), path: path }
+Dir["services/*/vendor/*"].each { |path| gem File.basename(path), path: path }
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end

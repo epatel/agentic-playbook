@@ -43,6 +43,11 @@ CSS_FILE = Path(__file__).resolve().parent / "book.css"
 #: from the build deliberately, and are not reported as orphans.
 NOT_BOOK_CONTENT = {"README.md", "STYLE.md", "TEMPLATE-play.md"}
 
+#: Directories under ``book/`` whose markdown is apparatus rather than chapters. ``examples/``
+#: holds the scratch projects the worked examples were captured from, each with its own README;
+#: they are reproduction material, not pages, so they are never collected and never orphans.
+NOT_BOOK_DIRS = ("examples/",)
+
 #: Tried in this order when ``--pdf-engine`` is not given. typst is first because it is a single
 #: small binary, unlike a TeX distribution.
 PDF_ENGINES = [
@@ -768,6 +773,8 @@ def find_orphans(parts: list[Part]) -> list[str]:
     for path in sorted(BOOK.rglob("*.md")):
         relative = path.relative_to(BOOK).as_posix()
         if relative in known or relative in NOT_BOOK_CONTENT:
+            continue
+        if relative.startswith(NOT_BOOK_DIRS):
             continue
         orphans.append(relative)
     return orphans

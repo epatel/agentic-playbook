@@ -55,6 +55,8 @@ followed because there are few enough of them to be followed.
 
 Before:
 
+> Captured September 2026, BSD `wc` on macOS 26.4.
+
 ```bash
 $ wc -l CLAUDE.md
      412 CLAUDE.md
@@ -83,10 +85,13 @@ paths:
 
 What remained became the brief, in `AGENTS.md`, with the vendor file reduced to an import:
 
+> Captured September 2026, BSD `wc` on macOS 26.4.
+
 ```bash
 $ wc -l AGENTS.md CLAUDE.md
       34 AGENTS.md
        4 CLAUDE.md
+      38 total
 ```
 
 ```markdown

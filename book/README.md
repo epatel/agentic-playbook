@@ -55,6 +55,7 @@ chapters to reserve space — an empty directory is not a promise anyone can rea
 | `part-3-where-it-struggles/` | Failure modes, tasks agents are bad at, where the time goes. | Part III task |
 | `part-4-next-waves/` | The three-wave roadmap. | Part IV task |
 | `appendices/` | Glossary, per-suite team checklists, copy-paste templates, further reading. | appendices task |
+| `examples/` | Scratch projects the worked examples were captured from. Not book content. | verification pass |
 
 The six suite directories are `context/`, `harness/`, `orchestration/`, `verification-and-trust/`,
 `economics/`, and `team/`, all under `part-2-plays/`.
@@ -171,6 +172,24 @@ Play counts per suite are an open question in
 planned, not a ceiling that has been argued for. Adding a fourth to one suite is a decision worth
 raising rather than making quietly, because Part II's balance is visible to the reader.
 
+## Worked-example scratch projects
+
+[`examples/`](examples/) holds the projects the book's captured output actually came out of, one
+directory per fictional project, each with a `reproduce.py` that builds a throwaway copy, runs the
+exact commands the book prints, and echoes what comes back. `atlas` backs the Context suite,
+`meridian` the Orchestration suite, `tideline` the Verification and Trust suite, and `session-cost`
+re-derives the Economics suite's cost table from its inputs.
+[`examples/README.md`](examples/README.md) is the index, and it also lists the examples that are
+deliberately *not* reproduced and why.
+
+These are apparatus, not chapters. They have no table-of-contents rows, the build never collects
+them, and `make check` does not report them as orphans.
+
+**If you change a worked example that prints captured output, re-run its project.** The scripts
+assert the shapes the prose depends on — how many files changed, how many call sites there are —
+and exit non-zero when the book and the tree have drifted apart. That is the whole reason they are
+committed rather than thrown away after the capture.
+
 ## Cross-references
 
 Chapters and plays link to each other constantly — that is what makes a self-contained play
@@ -221,6 +240,10 @@ reference still means something after the vendor reorganises their docs.
 - [ ] Its worked example re-introduces the suite's project in a clause, and refers back to no other
       play
 - [ ] Its row is added to the table of contents in the same commit
+- [ ] Any command output it prints is either captured, with the `> Captured …` line above the
+      fence, or written so it could not be mistaken for a transcript
+- [ ] If it changes a captured example, that example's `reproduce.py` has been re-run and still
+      exits zero
 - [ ] Prose wraps at 100 columns; diagrams are mermaid
 - [ ] Any failure mode it names is appended to the running log in `plans/agentic-playbook.md`
 - [ ] Any decision it made that affects other authors is in that plan's decision log
