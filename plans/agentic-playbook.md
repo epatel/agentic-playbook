@@ -62,7 +62,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 9 | Harness play suite | `9366c3c324b5` | ✅ done |
 | 10 | Orchestration play suite | `3c6b76dedb59` | ✅ done |
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ✅ done |
-| 12 | Economics play suite | `bffa217221ed` | ⬜ blocked on 3, 6 |
+| 12 | Economics play suite | `bffa217221ed` | ✅ done |
 | 13 | Team play suite | `cdd27e440781` | ⬜ blocked on 3 |
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ⬜ blocked on 3, 6 |
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ⬜ blocked on 3 |
@@ -415,9 +415,45 @@ Five things in it constrain later tasks:
    as the name for review effort displaced from writing onto checking. Economics and Part III should
    keep using it rather than coining a second term.
 
-**Next up:** Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by milestone 6; and
-Team (`cdd27e440781`), which is free to run. **All research is done, Part I and four suites are
-written, and every remaining writing task is unblocked.**
+Milestone 12 added `economics/`, the fifth suite, at roughly 299 / 1,178 / 1,167 / 1,137 words. It
+spends `token-economics.md` and `single-agent-wins.md` in full, and it is the suite most exposed to
+staleness, so it follows that brief's hedging strategy literally: ratios in the prose, every dollar
+figure confined to one dated block inside one worked example.
+
+| File | Owns |
+|---|---|
+| [`economics/index.md`](../book/part-2-plays/economics/index.md) | The suite opener — names *cost is a product, not a price: price per token × tokens consumed × attempts per shippable result* as the suite's one idea, and frames the three plays as that at the session, the model, and the task |
+| [`understand-what-you-are-paying-for.md`](../book/part-2-plays/economics/understand-what-you-are-paying-for.md) | The Θ(n²) turn-count mechanism, input as the bulk of the bill, the cache-read multiple and what invalidates it, reasoning budget as a first-order control, and reconciling the harness's estimate against the provider's bill |
+| [`match-the-model-to-the-job.md`](../book/part-2-plays/economics/match-the-model-to-the-job.md) | Cost per accepted outcome, tiering down the fan-out rather than the reasoning, the cheap-oracle precondition, measuring turns in a paired run, effort as a separate dial, and why per-token prices do not compare across generations |
+| [`know-when-not-to-use-an-agent.md`](../book/part-2-plays/economics/know-when-not-to-use-an-agent.md) | Costing the alternative including review, specification as the expensive part, the no-cheap-check rule, fan-out as a multiplier, why neither the agent nor an expert can estimate the job, and dating the no-go list |
+
+Five things in it constrain later tasks:
+
+1. **Three failure modes are registered**, all new: **the Expensive Nothing**, **the Long Way
+   Round**, and **the Errand That Became a Project**. None of milestone 6's four unnamed phenomena
+   was taken — all four remain free for Part III, including the two the Context and Verification
+   suites deliberately left alone.
+2. **Every absolute price in the book now lives in one place**, the dated block inside *Understand
+   what you are paying for*'s Worked example. The prose across all three plays uses multiples only
+   ("about a tenth of a fresh input token", "four to eight times the input rate", "roughly fifteen
+   times the tokens of a chat interaction"), and no play names a current model in a sentence that
+   carries an argument. If a later chapter needs a dollar figure, add it to that block rather than
+   opening a second front.
+3. **The suite uses `granary`, a Kotlin service ingesting warehouse stock feeds from forty
+   suppliers**, across all three worked examples. Kotlin is a content decision on the milestone-10
+   precedent: *Know when not to use an agent* turns on a deterministic IDE rename beating an agent
+   outright, which needs a stack where that refactoring is reliable. `atlas`, `kestrel`, `meridian`,
+   `tideline` and `granary` are taken; only the Team suite still needs one.
+4. **Part I's *verification tax* is used in the same words** in two of the three plays, as the name
+   for the cost that relocates from writing to checking. Part III should keep using it.
+5. **The mandate study is spent here as well as in Part III**, as the closing argument of *Know when
+   not to use an agent* — throughput 2.09×, review coverage 89%→68%, cycle time +22%, merge and
+   revert flat. `evidence.md` assigned it to both. The Economics use is three sentences making the
+   review-capacity point; Part III has the room to carry it at length and should not assume it is
+   unspent.
+
+**Next up:** Part III (`c1416f44c483`) and Team (`cdd27e440781`). **All research is done, Part I and
+five suites are written, and every remaining writing task is unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -789,6 +825,31 @@ browser is a reasonable substitute for a PDF engine.
   `evidence.md` names as load-bearing. The step is still actionable because the *action* does not
   depend on the answer: triage with the plan, do not read the diff through it. That shape is worth
   copying, because the alternative in a book that hedges honestly is a play whose steps evaporate.
+- **All of the book's absolute prices live in one dated block, and the prose carries only
+  multiples.** `token-economics.md` opens by calling itself the fastest-rotting material in the
+  project and offers a five-point hedging strategy; milestone 12 applied it as written rather than
+  case by case. The consequence worth knowing is what it cost: three arguments that would have been
+  sharper with a number — the tier spread, the subscription-versus-metered comparison, and the
+  per-developer-per-day aggregate — are made as shapes instead, and the aggregate is not made at
+  all, because the two published figures for it disagree by a factor of two and a range that wide
+  changes nothing the reader would do. The general rule is the one already in `STYLE.md`: a figure
+  earns its place when the point collapses without it.
+- **A play may host a vendor's published figures rather than the suite project's**, when the
+  alternative is an invented measurement. *Understand what you are paying for* needed a session
+  breakdown whose arithmetic the reader can check, and the only one that exists is the sample
+  Anthropic prints in its own documentation. The play introduces `granary` as the situation, then
+  says in print that the numbers are neither `granary`'s nor ours and why that specific sample was
+  used. This does not weaken the one-project-per-suite rule — the project still carries the scenario
+  — and it is strictly better than the two alternatives, which were to fabricate token counts or to
+  drop the only checkable cost example in the book.
+- **`book/STYLE.md`'s sample suite opener was deliberately not reused in the suite it describes.**
+  Sample 1 in the style guide is an Economics opener, and it is good. A failure-mode *name* coined
+  as a style-guide example gets claimed by the suite that owns it, per the Context and Verification
+  precedent, because an unclaimed name guarantees a synonym. A *paragraph* is the opposite case: a
+  reassessment pass already logged near-verbatim duplication between a chapter and another document
+  as a prose defect, and duplicating the sample would make the style guide and the book quote each
+  other. `economics/index.md` makes the same argument in different words, and the sample stays what
+  it was written to be — an illustration of the register.
 - **Three plays per suite is a floor, not a ceiling** — settled for the Context suite at least
   (user decision, milestone 19), which takes a fourth play on the cards pattern. This does not
   license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
@@ -1207,6 +1268,44 @@ Append discovered constraints and cross-task notes here as work proceeds.
   for both checks, and the section word counter in `scripts/build_book.py` is still the thing that
   would have caught the budget overrun above at draft time rather than at review time.
 
+- **Milestone 12 took none of milestone 6's four unnamed phenomena, and the play-count answer was
+  three again.** The Economics suite names three new modes, all of which are economic symptoms
+  rather than the evidence phenomena — a cold-cache resume, a cheap tier taking more turns, and a
+  small request returning a large diff. Phenomena (a) to (d) in `evidence.md` are therefore **still
+  entirely free for Part III**, as are the three in `failure-modes.md`. This is the fourth suite in
+  a row to land on three plays, and no fourth was wanted: the material that might have made one —
+  subscription-versus-API billing — is the fastest-rotting section of the fastest-rotting brief, and
+  it appears as a clause rather than a play for that reason.
+- **The Economics suite cites no adoption counts, no leaderboard scores, and nothing from the
+  consolidated do-not-cite list.** Specifically checked and not used: every SWE-bench per-instance
+  dollar figure, the "up to 90% cost reduction" caching claim (the 81.9% in the worked example is
+  derived from published token counts and dated list prices instead, as `token-economics.md`
+  instructs), the 75–85% and 30–40% model-routing savings, Claude Max 20× at $200/month, the
+  tokencalculator per-task figures, and the Vantage modelled session costs. The Requesty and
+  Anthropic per-developer aggregates were available and were declined; see the decision above.
+- **Two figures in the suite are load-bearing and hedged in the sentence that carries them.** The
+  Tessl comparison (roughly 3× cheaper per token, roughly 3× more expensive per review, 156 turns
+  against 42) is named as ten pull requests in August 2026 and paired with the thirtyfold
+  run-to-run variance that makes ten thin — mechanism seriously, magnitude lightly, as the brief
+  asks. The five-of-six protocol-matched comparison is attributed to ten benchmarks in June 2026.
+  Neither is printed anywhere else in the suite.
+- **The AssetOpsBench latency result was deliberately not used.** `single-agent-wins.md` carries it
+  with both halves — multi-agent roughly 40% slower in wall clock *and* cheaper in tokens — and the
+  rule is that quoting one half is dishonest. Carrying both takes three sentences to make a latency
+  point in a suite about money, and *Know when not to use an agent* already has the token
+  multipliers and the matched-protocol comparison doing that work. It is intact for Part III, which
+  can afford the sentences. The same applies to the mini-SWE-agent and Agentless material, neither
+  of which the suite touches.
+- **Milestone 12 hit no 100-column overshoots and no `make check` problems**, having run a throwaway
+  width checker from `/tmp` — the sixth independent writing of it — plus the section word counter
+  inside `scripts/build_book.py`, and rendered the mermaid diagram through
+  `npx @mermaid-js/mermaid-cli` before finishing. The word counter caught three budget overruns at
+  draft time and they were fixed rather than flagged, which is the first task in the project where
+  that happened; two *The play* sections still land marginally over at ~502 and ~509 against 500,
+  and the cheapest remaining cut in each is the closing why-it-works paragraph. Board item
+  `6b0110f76388` is still the right home for both checks, and its value goes up rather than down as
+  the book fills.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -1228,3 +1327,6 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Drifting Yes** | Reviewer approval of agent changes gets easier with exposure while approval of colleagues' changes holds flat. Invisible to the surface metrics a reviewer would check; the tell is the reviewer's own comments getting shorter. | `verification-and-trust/review-code-you-did-not-write.md` |
 | **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite: a test deleted or skipped, a test input special-cased in the implementation, or an assertion no plausible defect could fail. | `verification-and-trust/make-the-agent-prove-it.md` (coined in `book/STYLE.md`'s naming section) |
 | **the Accountable Bystander** | A named owner who approved more changes than anyone could have understood, and had no standing to decline. Accountability by title, bystanding in fact; the incident review finds the name and stops. | `verification-and-trust/decide-who-signs-off.md` |
+| **the Expensive Nothing** | A turn that bills more than everything before it while doing no work: the cache went cold during an interruption, so a one-line reply reprocessed the whole conversation at full rate. The tell is a cost spike on a message you could have sent by nodding. | `economics/understand-what-you-are-paying-for.md` |
+| **the Long Way Round** | The model is cheaper per token and the invoice is larger, because it reaches the same answer through several times as many turns and each turn re-sends the conversation. The per-token saving is real and is applied to far more tokens. | `economics/match-the-model-to-the-job.md` |
+| **the Errand That Became a Project** | A one-line request returns a diff across nine files, all defensible and none of it asked for. Reverting feels wasteful because the extra work is fine, so it ships, and reviewing it is now larger than the change would have been by hand. | `economics/know-when-not-to-use-an-agent.md` |
