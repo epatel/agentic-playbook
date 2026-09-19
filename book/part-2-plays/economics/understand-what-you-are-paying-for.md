@@ -95,7 +95,7 @@ all the work: those 991,200 input tokens at the full $3 rate, plus the same outp
 to $3.0531 rather than $0.5526 — a saving of 81.9%, switched on by default.
 
 Which is also where it gets fragile. Take a coffee break long enough for the cache to expire, and
-the next message reprocesses 940,000 tokens at that date's $3.75 write rate: $3.53 for one message,
+the next message reprocesses 940,000 tokens at that date's $3.75 write rate: $3.525 for one message,
 against the $0.55 the whole session had cost up to that point. The expensive thing in an agent
 session is not the model you chose or how much it wrote. It is how many times the conversation gets
 re-sent, and whether it is warm when it goes.

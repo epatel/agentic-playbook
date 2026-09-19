@@ -55,54 +55,71 @@ request than the agent, on purpose, and sending back changes that were fine.
 ## Worked example
 
 `tideline`, a TypeScript service that stages firmware rollouts to field devices, had an agent pull
-request open — 480 lines across nine files, adding percentage-gated cohorts so a rollout could reach
-5% of devices before the rest. The reviewer read none of it first.
+request open — 314 changed lines across nine files, adding percentage-gated cohorts so a rollout
+could reach 5% of devices before the rest. The reviewer read none of it first.
+
+> Captured September 2026, git 2.50.1.
 
 ```bash
 $ git diff --stat origin/main...HEAD -- tests/ tsconfig.json .github/
- .github/workflows/ci.yml |  2 --
- tests/cohort.spec.ts     | 41 ++++++++++++++++++++++++++++++++++++++
- tests/rollout.spec.ts    | 18 ++---------------
- 3 files changed, 44 insertions(+), 17 deletions(-)
+ .github/workflows/ci.yml |   2 -
+ tests/cohort.spec.ts     | 101 +++++++++++++++++++++++++++++++++++++++++++++++
+ tests/rollout.spec.ts    |  11 +-----
+ 3 files changed, 103 insertions(+), 11 deletions(-)
 ```
 
 Two of those three rows were most of the review. An existing test file had gone net negative, and
 the workflow had lost something:
 
+> Captured September 2026, git 2.50.1.
+
 ```bash
 $ git diff origin/main...HEAD -- .github/workflows/ci.yml
+@@ -14,6 +14,4 @@ jobs:
+         with:
+           node-version: 22
        - run: npm ci
 -      - run: npm run typecheck
        - run: npm test
 -      - run: npm run lint
 ```
 
+> Captured September 2026, git 2.50.1.
+
 ```bash
-$ git diff origin/main...HEAD -- tests/rollout.spec.ts | head -4
+$ git diff origin/main...HEAD -- tests/rollout.spec.ts | rg '^[-+] *it[.(]'
 -  it('holds back devices below the minimum battery threshold', async () => {
 +  it.skip('holds back devices below the minimum battery threshold', async () => {
+-  it("treats the threshold as inclusive", async () => {
 ```
 
-Then one search, before reading the new module:
+One test skipped and one deleted outright, which is the 11 deletions on that row. Then one search,
+before reading the new module:
+
+> Captured September 2026, ripgrep 15.2.0.
 
 ```bash
-$ rg -l --type ts 'bucketFor|hashToBucket' src/
+$ rg -l --sort path --type ts 'bucketFor|hashToBucket' src/
 src/cohort/assign.ts
+src/cohort/cohorts.ts
 src/rollout/schedule.ts
 ```
 
-`assign.ts` already had `bucketFor(deviceId, buckets)`. The pull request had added
-`hashToBucket(id, n)` beside it, with a different tie-break at the boundary.
+Three files, two of them the pull request's own. `assign.ts` already had
+`bucketFor(deviceId, buckets)`. The pull request had added `hashToBucket(id, n)` in a new
+`cohorts.ts` and called it from `schedule.ts`, with a different tie-break at the boundary: the
+existing helper rounds a device on a bucket edge down, the new one rounds it up.
 
-The change went back with three notes: restore the two pipeline steps, un-skip the battery test, use
-the helper that exists. The rollout arithmetic itself was right, and better commented than the
-module next to it. Everything the review caught was about what the change had removed and what it
-had duplicated, which is the shape the measurements predict.
+The change went back with four notes: restore the two pipeline steps, un-skip the battery test,
+restore the threshold test that had gone with it, and use the helper that exists. The rollout
+arithmetic itself was right, and better commented than the module next to it. Everything the review
+caught was about what the change had removed and what it had duplicated, which is the shape the
+measurements predict.
 
 What it missed surfaced six days later. Cohort assignment ran before the battery check rather than
 after, so devices were enrolled and then held back, and sat in a cohort they had never been eligible
 for. The restored battery test passed the whole time: it tested the predicate, not where the
-predicate was called. Four minutes of checking found three things, and the fourth was the one worth
+predicate was called. Four minutes of checking found four things, and the fifth was the one worth
 forty.
 
 ## Failure mode

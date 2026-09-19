@@ -1,0 +1,3 @@
+# Gitignored files copied into each new worktree. See the parallel-agents play.
+.env
+.env.test

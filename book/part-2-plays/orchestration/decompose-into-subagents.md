@@ -95,9 +95,12 @@ Four delegations, one per area — `services/booking`, `services/tariffs`, `serv
 `tools` line was what made the write isolation real; the fixed return format was what made the next
 step possible:
 
+> Captured September 2026, ripgrep 15.2.0 and BWK awk 20200816.
+
 ```bash
 $ rg --count-matches 'Billing::Client\.new' services/ engines/ \
     | awk -F: '{ total += $2 } END { print total }'
+52
 ```
 
 The scouts' `TOTAL=` values summed to 47. The independent count said 52. The gap was in

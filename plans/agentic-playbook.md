@@ -67,7 +67,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ✅ done |
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ✅ done |
 | 16 | Editorial pass — one voice, one book | `934259dc8038` | ✅ done |
-| 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ⬜ blocked on 8–13 |
+| 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ✅ done |
 | 18 | Book build — collect the chapters, render a PDF | `76d95ae050df` | ✅ done |
 
 Milestone 3 was the real critical path: with several authors and a specific comic register,
@@ -96,11 +96,13 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete and has been through its editorial pass.** 39 files, 39,277 words, a
-preface, a root `README.md`, and one voice. What the pass changed and what it deliberately left
-alone is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
-because several conventions in this section were corrected by it. The one thing still standing
-between the book and publication is the worked-example verification pass (`3b61a6a1a684`).
+**The manuscript is complete, has been through its editorial pass, and its worked examples have
+been run.** 39 files, 39,370 words, a preface, a root `README.md`, and one voice. What the editorial
+pass changed and what it deliberately left alone is in [*The editorial pass*](#the-editorial-pass)
+below; read that before editing any chapter, because several conventions in this section were
+corrected by it. What the verification pass changed, and the new obligation it puts on anyone
+editing a worked example, is in [*The verification pass*](#the-verification-pass) below. **Read that
+one before touching any block that prints command output.**
 
 The rest of this section is the accumulated handoff from the writing milestones, kept because it
 records why each part is the way it is.
@@ -588,9 +590,13 @@ Five things in it constrain later tasks:
 Milestone 16, the editorial pass, then read the whole book as one object for the first time and
 reconciled it. Its output is summarised under *The editorial pass* below.
 
-**Next up:** the worked-example verification pass (`3b61a6a1a684`), which is the last thing standing
-between the manuscript and publication, and the style-lint item (`6b0110f76388`), which the editorial
-pass argues should now be built rather than deferred again.
+Milestone 17, the worked-example verification pass, then ran every command in the book and replaced
+representative output with captured output. Its output is summarised under
+*The verification pass* below.
+
+**Next up:** the style-lint item (`6b0110f76388`), which the editorial pass argues should now be
+built rather than deferred again — and which should grow a check for the `> Captured` convention
+while it is being written, since that convention is now mechanical.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -677,6 +683,71 @@ browser is a reasonable substitute for a PDF engine.
    the play template as a navigation structure rather than a writing one, and it is a small
    argument for keeping those five headings identical across eighteen plays.
 
+## The verification pass
+
+Milestone 17 (`3b61a6a1a684`) spent the deliberate debt milestone 3 took on. Every command in the
+book was run, every block that prints output is now either captured from a real run or is
+demonstrably not a transcript, and the projects the captures came out of are committed. **The book
+stands at 39 files and 39,370 words** — the pass added 93, all of them in worked examples whose
+numbers moved.
+
+**The one thing to know before editing a worked example:** captured output is now backed by a
+committed scratch project under [`book/examples/`](../book/examples/), each with a `reproduce.py`
+that builds a throwaway copy, runs the book's commands, and **asserts the shapes the prose depends
+on**. Change the example, re-run the script. It will tell you when the book and the tree have
+drifted apart, which is the whole reason it is committed rather than thrown away after the capture.
+
+```
+python3 book/examples/atlas/reproduce.py        # Context suite
+python3 book/examples/meridian/reproduce.py     # Orchestration suite
+python3 book/examples/tideline/reproduce.py     # Verification and Trust suite
+python3 book/examples/session-cost/check.py     # Economics suite's arithmetic
+```
+
+Six things in it constrain later tasks:
+
+1. **Eight blocks are now captured, and `> Captured <Month Year>, <tool> <version>.` means it.**
+   They are in *Write the brief the agent actually reads* (two), *Decompose into subagents*,
+   *Work in parallel without collisions* (two), *Decide who signs off*, and *Review code you did
+   not write* (four). Everything else that looked like a transcript either prints no output or is
+   framed in prose as somebody else's published figures.
+2. **The capture corrected the prose four times, which is the finding.** *Review code you did not
+   write* said 480 lines across nine files; the real `--stat` says 314, and every downstream number
+   moved with it — three notes to the reviewer became four, "three things found" became four, and
+   the `| head -4` in one block turned out to print only the diff header, so the command changed to
+   one that shows what the sentence claims. None of this was visible by reading. **Assume a worked
+   example's arithmetic is wrong until something has run it.**
+3. **`session-cost/check.py` found a real defect in a table nobody doubted.** 940,000 tokens at
+   $3.75 per million is $3.525 exactly — on a half-cent, so it rounds to $3.53 one way and $3.52
+   the other. The play now prints three places. Every other figure in that table recomputes exactly,
+   which is what makes the one that did not worth having.
+4. **The evidence rules in `book/TEMPLATE-play.md` are rewritten and the first-draft dispensation
+   is gone.** Output a command could produce is captured, not written; an example that genuinely
+   cannot be run stays representative and may not print a plausible-looking result for the prose to
+   lean on; and the capture corrects the prose rather than the other way round. `book/README.md`'s
+   adding-a-file checklist gained two items enforcing it.
+5. **The numbers audit came back clean, and that is worth not re-running.** Every figure in the
+   book that reads like a measurement was traced: all of them are sourced to a brief in
+   `notes/research/`, expressed as shape, or part of a fictional scenario. None of the roughly forty
+   figures on `evidence.md`'s **do not cite** list appears anywhere in the book. The two the
+   Part IV chapter does name are named in order to refuse them, which is the correct use.
+6. **`scripts/build_book.py` skips `book/examples/` entirely.** A new `NOT_BOOK_DIRS` constant sits
+   beside `NOT_BOOK_CONTENT`: the scratch projects are apparatus, so they are never collected and
+   never reported as orphans. `make check` is clean.
+
+**One ordering note.** This pass was scheduled to run *before* the editorial pass so that pass
+would see final text. It ran after it instead, because the editorial pass was unblocked first. The
+prose this pass rewrote — most of it in *Review code you did not write*'s Worked example — is
+therefore the only text in the book that milestone 16 has not read. It was written against
+`book/STYLE.md` and sits inside its play's word budget, but a reader doing a final voice check
+should start there.
+
+What was deliberately left representative, and why, is tabulated in
+[`book/examples/README.md`](../book/examples/README.md). The short version: `granary`'s two
+`./gradlew` lines (no Gradle, and both blocks print nothing), `lodestone`'s clone from a fictional
+remote, every harness settings file (config, not output — though all of them were parsed as JSON),
+and the subagent and skill definitions, which are file contents.
+
 ## The editorial pass
 
 Milestone 16 (`934259dc8038`) read all 38 chapters against `book/STYLE.md`, `book/TEMPLATE-play.md`
@@ -725,11 +796,26 @@ and left alone.
 - Prose is hard-wrapped at 100 columns so that parallel authors produce line-scoped diffs.
 - Book files are named for their content (`starve-the-context.md`), never numbered by position —
   renumbering a directory is a merge conflict waiting to happen.
-- **Worked examples are illustrative-but-correct for the first draft** (user decision). Commands
-  and file contents must be real and runnable; output is only presented as captured when it was
-  actually captured, marked with a `> Captured <Month Year>, <tool> <version>.` line. Inventing a
-  measurement is banned outright. Milestone 17 (`3b61a6a1a684`) runs the examples for real before
-  publication. This resolves the "real or illustrative?" open question.
+- ~~**Worked examples are illustrative-but-correct for the first draft**~~ (user decision).
+  **Superseded by milestone 17**, which spent the dispensation. Commands and file contents were
+  always required to be real and runnable; output is now *captured* wherever a command could
+  produce it, marked with a `> Captured <Month Year>, <tool> <version>.` line, and backed by a
+  committed project under `book/examples/`. Inventing a measurement remains banned outright.
+- **Captured output is backed by a committed scratch project, not by a one-off run** (milestone
+  17). A capture nobody can repeat is a screenshot: it goes stale silently, and the next author has
+  no way to tell whether the prose still matches. So each fictional project the book uses —
+  `atlas`, `meridian`, `tideline` — has a minimal tree and a `reproduce.py` under `book/examples/`
+  that re-runs the book's commands and asserts the shapes the prose depends on. The cost is a few
+  hundred lines of scratch code in the repository and an obligation on anyone editing a worked
+  example to re-run one script. What it buys is that the book's evidence rules are enforceable by
+  a machine rather than by an author's memory. `granary` and `lodestone` have no project, because
+  neither prints output.
+- **When a capture and the prose disagree, the prose changes** (milestone 17). Four numbers in
+  *Review code you did not write* moved because the real `--stat` was 314 lines rather than 480,
+  and one figure in *Understand what you are paying for* gained a decimal place because the
+  arithmetic landed on a half-cent. The alternative — tuning the scratch project until it prints
+  what was already written — produces a capture that is true and an example that was still
+  invented, which is the failure the rule exists to prevent.
 - **The five play headings are fixed strings**, not a suggested outline. Skimmability across
   eighteen plays and the `#failure-mode` anchor convention both depend on them being identical.
   Material that does not fit is two plays.
@@ -1235,9 +1321,12 @@ to it.
   suite is not** — one more play moves Part II by about a percentage point, while a seventh suite
   would take four files and push Part II past 60% on its own. The procedure stands as written: raise
   a fourth play rather than adding it quietly, and treat a new *suite* as a change to `PLAN.md`.
-- ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3): illustrative-but-
-  correct for the first draft, with a verification pass (`3b61a6a1a684`) before publication. The
-  rules are in [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means).
+- ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3), then **closed**
+  (milestone 17). The first draft was illustrative-but-correct; the verification pass ran every
+  command, replaced representative output with captured output, and committed the projects the
+  captures came out of under [`book/examples/`](../book/examples/). The final rules are in
+  [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means), and the
+  first-draft dispensation is no longer in them.
 - ~~**How much does the book date itself?**~~ **Resolved** (milestone 16). The provisional line in
   [`book/STYLE.md`](../book/STYLE.md#volatile-facts) is the final one, with two clarifications added
   there: a figure inherits a date only from its own paragraph, and a version string counts as a date
