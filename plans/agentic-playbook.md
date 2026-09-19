@@ -63,7 +63,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 10 | Orchestration play suite | `3c6b76dedb59` | ✅ done |
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ✅ done |
 | 12 | Economics play suite | `bffa217221ed` | ✅ done |
-| 13 | Team play suite | `cdd27e440781` | ⬜ blocked on 3 |
+| 13 | Team play suite | `cdd27e440781` | ✅ done |
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ⬜ blocked on 3, 6 |
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ⬜ blocked on 3 |
 | 16 | Editorial pass — one voice, one book | `934259dc8038` | ⬜ blocked on all writing |
@@ -452,15 +452,50 @@ Five things in it constrain later tasks:
    review-capacity point; Part III has the room to carry it at length and should not assume it is
    unspent.
 
-**Next up:** Part III (`c1416f44c483`) and Team (`cdd27e440781`). **All research is done, Part I and
-five suites are written, and every remaining writing task is unblocked.**
+Milestone 13 added `team/`, the sixth and final suite, at roughly 300 / 1,141 / 1,140 / 1,204 words.
+It closes Part II. It spends the late author fragment in full and is the one suite with almost no
+quantitative evidence behind it, which shapes how it is written: the arguments are mechanisms, and
+the three figures it does print are all dated and attributed.
 
-**If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
-fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
-extracted the three things in it that the rest of `notes/raw/` does not already say — mandate
-without method, a working agreement with an expiry date, and adoption-by-decree read as
-surveillance. Read the running-log entry rather than the fragment; the entry says which play each
-one lands in and which locked decision it does *not* override.
+| File | Owns |
+|---|---|
+| [`team/index.md`](../book/part-2-plays/team/index.md) | The suite opener — names *a team's practice with these tools is an artefact that has to be written, maintained, and handed over like any other* as the suite's one idea, and frames the three plays as the decisions, the material, and the transfer |
+| [`build-the-working-agreement.md`](../book/part-2-plays/team/build-the-working-agreement.md) | The leaves-your-machine sort as the team-versus-personal test, the six items with team-visible consequences, triggers rather than review dates, the standing experiment exception, and a full one-page starter agreement |
+| [`collect-and-refine-as-a-team.md`](../book/part-2-plays/team/collect-and-refine-as-a-team.md) | The harvest: comparing on one task shape, asking for discarded runs first, promoting artefacts rather than anecdotes, descriptions written by somebody other than the author, and deleting something every time |
+| [`onboard-someone-into-all-this.md`](../book/part-2-plays/team/onboard-someone-into-all-this.md) | The checkout as the setup, verification as a step, watching a run before driving one, first tasks with a cheap check, and the joiner as the only free audit of the shared material |
+
+Five things in it constrain later tasks:
+
+1. **Three failure modes are registered**, all new: **the Founding Document**, **the Showreel**, and
+   **the Fluent Stranger**. None of milestone 6's four unnamed phenomena was taken, so all four are
+   still free for Part III, as are the three in `failure-modes.md`. The Founding Document is
+   deliberately *not* the Paper Fence — one is a rule that does not stop a machine, the other is a
+   rule the people have drifted from — and the registry note says so.
+2. **The Team suite supplies the working-agreement skeleton the appendices open question was
+   waiting on.** The Worked example of *Build the working agreement* is a complete one-page
+   agreement in a fenced block, written to be copied. The appendix should extract it rather than
+   invent a second one, exactly as the resolved `CLAUDE.md` question sends the appendix to the
+   Context suite. That closes the last half of the appendix-templates question.
+3. **The local-context-file precedence trap is treated as an instance of the Brief That Never
+   Arrived, not as a new name.** Milestone 4's gotcha (c) — a `CLAUDE.local.md` silently stopping
+   `AGENTS.md` loading, with `/context` reporting the same list either way — is the phenomenon the
+   Context suite already named. Both *Collect and refine as a team* and *Onboard someone into all
+   this* use the name plainly and link to the Context play. **Gotcha (c) is therefore spent, and no
+   later suite should coin a second name for it.**
+4. **The suite uses `lodestone`, a claims-processing platform of C# services behind a TypeScript
+   front end, maintained by nine engineers across two time zones.** The mixed stack is a content
+   decision on the milestone-10 precedent: *Onboard someone into all this* turns on one half of a
+   codebase having a cheap check and the other half not, which needs a team that is not homogeneous.
+   All six suite projects are now taken — `atlas`, `kestrel`, `meridian`, `tideline`, `granary`,
+   `lodestone`.
+5. **Part I's exchange-rate promise and the *verification tax* are both honoured.** Each play states
+   what the reader gives up, and the review-displacement material is cited by its figures rather
+   than by coining a second term for the tax.
+
+**Next up:** Part III (`c1416f44c483`) and Part IV plus appendices (`bec9accd89be`). **All research
+is done, Part I and all six suites are written, and Part II is complete.** The editorial pass
+(`934259dc8038`) and the worked-example verification pass (`3b61a6a1a684`) are now unblocked on
+Part II.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -855,6 +890,38 @@ browser is a reasonable substitute for a PDF engine.
   license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
   than insert one, and the raise here was made and answered. It does mean a suite author with a
   genuinely fourth-layer idea has a precedent to point at.
+- **A play may be built on mechanism where no measurement exists, provided it does not imply one.**
+  The Team suite is the only one in Part II whose central claims have no study behind them: nothing
+  published measures whether a team with an explicit working agreement outperforms one without,
+  whether a shared skill library shortens onboarding, or how often a well-described skill fails to
+  fire. Three responses were available — invent a figure (banned), borrow an adjacent figure and let
+  it do work it cannot do (the failure `evidence.md` was written to prevent), or write the plays as
+  mechanisms and cite only the three findings that are real and dated. The suite takes the third.
+  The consequence worth knowing is that its steps are justified by what they make checkable rather
+  than by an effect size, and the one sentence that would have said so in print ("no study measures
+  whether an explicit agreement helps") was cut for budget. **The gap is real and the book nowhere
+  claims otherwise; Part III may want to say it out loud, where there is room.**
+- **The principles in `idea.md` are written as mechanisms, never as values.** "Humble, transparent,
+  experimental, share and document" would have made a poster and a worthless play. Each is spent as
+  something with a tell: *humble* is the review trigger, the version line, and the rule that files
+  are small enough that being wrong costs a two-line edit; *transparent* is the disclosure item in
+  the agreement and asking for discarded runs first; *experimental* is the standing exception naming
+  who may work against the agreement and what they owe in return; *share and document* is the
+  promote-an-artefact step and the checkout-is-the-setup step. A reader can tell whether each one
+  happened, which a value cannot offer.
+- **A team-facing play describes the team's problem without addressing the team's manager.** The
+  non-goal ("not a manager's guide") and the fragment's mandate-without-method pressure pull in
+  opposite directions, and the resolution is that the reader is the person under the mandate. The
+  suite opener and two Problem paragraphs state the pressure as the reader's situation; no sentence
+  in the suite tells anyone how to lead, mandate, or measure a team. The one place it would have
+  slipped — "write the agreement about changes rather than people" — is written as advice to whoever
+  is holding the pen, which in this book is the reader.
+- **The Team suite supplies the working-agreement skeleton, and the appendix extracts it rather than
+  authoring one.** This mirrors the resolved `CLAUDE.md` half of the appendix-templates question:
+  the template that ships is the one a play already exercises, because a skeleton written fresh in
+  an appendix has never had to survive a worked example. The agreement in *Build the working
+  agreement* carries a version, an amendment rule, a "last changed because" line, a personal column,
+  and a standing exception — the five parts that make it cheap to change rather than ceremonial.
 
 ## Open questions
 
@@ -869,8 +936,11 @@ to it.
   that procedure worked here and should be used again rather than treated as satisfied. Milestone
   11 used it a second time — the Verification & Trust suite was flagged as having more strong
   worked examples than plays, raised the question, and answered it as three by routing the surplus
-  to Part III rather than to a fourth slot. Four suites have now landed on three plays and one on
-  four, which is the spread staying narrow without anything yet capping it.
+  to Part III rather than to a fourth slot. **Part II is now complete at five suites of three plays
+  and one of four**, so the spread is settled in fact: eighteen plays, nothing wider than one play
+  apart. What is left of the question is whether a *later* suite may ever be added, and the
+  editorial pass (`934259dc8038`) is the first task holding the whole of Part II and able to answer
+  it from the build's word counts rather than by argument.
 - ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3): illustrative-but-
   correct for the first draft, with a verification pass (`3b61a6a1a684`) before publication. The
   rules are in [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means).
@@ -883,8 +953,10 @@ to it.
   `cards/` holds five real self-contained cards, so the template is checked in, exercised daily by
   every agent on this board, and satisfies illustrative-but-correct without anything being
   invented. The new Context play (`703e507c86aa`) writes the pattern up; the appendix should
-  extract the skeleton from it rather than invent a second one. The **working-agreement
-  skeleton** is still open — the Team suite has no equivalent artefact in this repo to point at.
+  extract the skeleton from it rather than invent a second one. The **working-agreement skeleton**
+  is resolved the same way (milestone 13): *Build the working agreement* ships a complete one-page
+  agreement in its Worked example, written to be copied, and the appendix extracts that rather than
+  authoring a second. Both halves of this question are now closed.
 - **Rendering.** Markdown-on-GitHub is the committed deliverable. If a static site is ever wanted,
   that decision needs making before the prose accumulates site-specific link syntax.
 
@@ -1306,6 +1378,69 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `6b0110f76388` is still the right home for both checks, and its value goes up rather than down as
   the book fills.
 
+- **Milestone 13 spent the team-adoption fragment in full and closes Part II.** All three things the
+  archive pass extracted from it landed where that entry predicted: *mandate without method* is the
+  suite opener's framing and appears in two Problem paragraphs as the reader's situation; *a working
+  agreement has an expiry date* is step 5 of *Build the working agreement* (a trigger rather than a
+  review date, plus a version line and a standing experiment exception) and is the phenomenon **the
+  Founding Document** names; and the fragment's step two — an honest comparison of what worked and
+  what did not — is the spine of *Collect and refine as a team*, as predicted. The fourth item,
+  *adoption by decree reads as surveillance*, was **used and deliberately not named**: it is the
+  leaves-your-machine sort in step 2, the describes-changes-not-people argument in the why-it-works
+  paragraph, and the personal column of the starter agreement. A name was available and declined for
+  the milestone-10 reason — the phenomenon has no tell a reader could act on beyond "write it down",
+  and the write-it-down is already the step. A name with no tell is decoration.
+- **The Team suite is the only suite in Part II with no evidence base of its own**, and the plays
+  say nothing that implies otherwise. Three figures are printed in the whole suite: DORA 2025's
+  amplifier sentence (quoted, dated by edition), DORA 2025's trust split (roughly a quarter high,
+  roughly thirty per cent little or none), and the mandate study's review-displacement pair (89% →
+  68% coverage, each remaining reviewer's load doubled, 802 developers to April 2026). Nothing else
+  numeric appears. Specifically checked and not used: every item on the consolidated do-not-cite
+  list, the Faros and LinearB vendor figures, the Stanford 100k-developer talk figures, the GitClear
+  2026 commit share, any Stack Overflow 2026 number, the `AGENTS.md` 60k-repositories count, the ~45
+  skill clients, and the mandate study's 2.09× throughput headline — which belongs to Part III and
+  Economics and which this suite does not need, since its argument is about the review half.
+- **The mandate study is now spent in three places and Part III should assume it is known.**
+  Economics carries it as the closing argument of *Know when not to use an agent*; the Team suite
+  carries one clause of it, the review-coverage pair only, inside a numbered step. Part III still
+  owns it at length and still has the throughput figures, the heterogeneity breakdown, and the
+  authors' own "not typical, immediate, or free" caveat unspent. **Whoever writes Part III should
+  carry that caveat**, which neither of the two short uses had room for.
+- **`lodestone` is the sixth and last suite project**, a claims-processing platform of C# services
+  behind a TypeScript front end, nine engineers across two time zones. The mixed stack earns its
+  place twice: a skill written by one half of the team is described in that half's vocabulary, and
+  the first-task-with-a-cheap-check rule holds on the tested half of the codebase and fails on the
+  other, which is the imperfect result in *Onboard someone into all this*. Every suite now has a
+  project and none of them share one.
+- **Milestone 4's gotcha (c) is spent without a new name.** The `CLAUDE.local.md`-silently-disables-
+  `AGENTS.md` precedence trap is a team problem — one person's private file switches off the file
+  the team maintains — and it appears twice in this suite: as a verification step and a fenced
+  agreement clause in *Build the working agreement* and *Onboard someone into all this*, and as the
+  imperfect beat of the latter's worked example. It is named as **the Brief That Never Arrived**,
+  plain and linked, because the Context suite's definition already covers it exactly ("instructions
+  written, committed, and never loaded; nothing errors, and the usual check reports the same thing
+  whether they loaded or not"). All three of milestone 4's gotchas are now spent: (a) is the Paper
+  Fence, (b) is the Flattering Dashboard, (c) is the Brief That Never Arrived.
+- **Vendor mechanics in this suite are named and version-stamped in the sentence that uses them**,
+  per the milestone-9 rule. Claude Code 2.x and the precedence behaviour are attributed where the
+  reader is told a fact; inside the fictional agreement the same rule is written the way a team
+  would write it, with the version in the clause. `.claude/skills/` is named as a path in the
+  agreement rather than asserted as a cross-tool standard.
+- **Milestone 13 hit no 100-column overshoots and no `make check` problems**, having run a throwaway
+  width checker from `/tmp` — the seventh independent writing of it — plus the section word counter
+  inside `scripts/build_book.py`, and rendered the mermaid diagram through
+  `npx @mermaid-js/mermaid-cli`. The word counter caught a 650-word *The play* at draft time and
+  three rounds of trimming brought it to 524; the three *The play* sections land at 524 / 512 / 510
+  against 500, in the same marginal band as the Verification (524–579) and Economics (502–509)
+  suites, and are flagged for `fce3cee8fa34` rather than fixed by deleting a step. **Seven
+  independent writings of the same width checker is the strongest case yet for `6b0110f76388`**,
+  and with Part II complete its value is now entirely to the editorial pass.
+- **Two long lines in this suite were caused by a deep link, not by prose.** A
+  `[*title*](../context/write-the-brief-the-agent-reads.md#failure-mode)` inside an indented list
+  item cannot be wrapped and overshoots by ten columns. Both were resolved by dropping the anchor
+  to a file-level link, which `book/README.md` already prefers. Worth knowing before the checker
+  lands: the fix for an over-long cross-reference is usually to shorten the link, not the sentence.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -1330,3 +1465,6 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Expensive Nothing** | A turn that bills more than everything before it while doing no work: the cache went cold during an interruption, so a one-line reply reprocessed the whole conversation at full rate. The tell is a cost spike on a message you could have sent by nodding. | `economics/understand-what-you-are-paying-for.md` |
 | **the Long Way Round** | The model is cheaper per token and the invoice is larger, because it reaches the same answer through several times as many turns and each turn re-sends the conversation. The per-token saving is real and is applied to far more tokens. | `economics/match-the-model-to-the-job.md` |
 | **the Errand That Became a Project** | A one-line request returns a diff across nine files, all defensible and none of it asked for. Reverting feels wasteful because the extra work is fine, so it ships, and reviewing it is now larger than the change would have been by hand. | `economics/know-when-not-to-use-an-agent.md` |
+| **the Founding Document** | A working agreement that has become constitutional: nobody amends it, everyone has drifted from it, and it is quoted rather than followed. Distinct from the Paper Fence — that is a rule that does not stop a machine; this is a rule the people have stopped obeying. | `team/build-the-working-agreement.md` |
+| **the Showreel** | A sharing session where everyone demonstrates their best run and nobody mentions the attempts that went nowhere, so the shared library is assembled from everyone's best day and reproduces for nobody on an average one. | `team/collect-and-refine-as-a-team.md` |
+| **the Fluent Stranger** | A new joiner producing good, correctly-shaped work immediately, with no sense yet of which parts of the system are load-bearing or which of the agent's confident suggestions are wrong here specifically. Nobody notices, because the output looks like everyone else's. | `team/onboard-someone-into-all-this.md` |
