@@ -92,7 +92,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
 | `703e507c86aa` | Write the cards play — the Context suite's fourth; one failure mode, one worked example that is this repo | ✅ done |
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I — milestone 19's last filing; the rocket-launch material is now spent | ✅ done |
-| `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument | ⬜ blocked on milestone 15 |
+| `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument — carried in full; two missing links added | ✅ done |
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources | ⬜ blocked on milestone 9 |
 
 ## Current state / handoff
@@ -168,8 +168,9 @@ the person who made it. URLs go in the appendix's further reading. This is the o
 projects, optimize for full agent development". *The unit of work* is what that refactor consists
 of — feature-first layout, locality of behaviour, explicit over invisible control flow, and the
 nuance that cross-cutting concerns still belong in shared infrastructure as trustworthy black
-boxes rather than hidden magic. Write it into `bec9accd89be`; `5e0f39858134` exists only to check
-that you did.
+boxes rather than hidden magic. **This is now done and checked** — milestone 15 wrote it and
+`5e0f39858134` confirmed it; see [*The Wave #2 check*](#the-wave-2-check) below for what the check
+found and the one thing it changed.
 
 `notes/research/` now exists. Milestone 4 filled it with six files — a hub brief plus five
 subject briefs, because five subjects in one file would have made a writer chasing token-pricing
@@ -639,10 +640,16 @@ is framing rather than a play, and what it commits Part II to is under [*The pre
 thread*](#the-preparation-thread) below. **Read it before adding a play that starts with something
 already broken.**
 
-**Next up:** two open follow-ups in the table above — the Wave #2 check (`5e0f39858134`) and the MCP
-citation verification (`f986730f7a1f`). Neither adds prose to a file near a ceiling, but if a later
-edit does, **count before you add**: `make check` prints words per part, and the per-section counter
-is in the trim note below.
+**Part IV's Wave #2 is checked and holds (`5e0f39858134`)** — the feature-first argument is carried
+in full and correctly absorbed rather than cited, and the check's only edits were the two missing
+links. What it found, and the one chapter it left near its ceiling, is under [*The Wave #2
+check*](#the-wave-2-check) below.
+
+**Next up:** one open follow-up in the table above — the MCP citation verification
+(`f986730f7a1f`). It adds no prose to a file near a ceiling, but if a later edit does, **count
+before you add**: `make check` prints words per part, and the per-section counter is in the trim
+note below. Two chapters are now within a hundred words of their ceiling — *What this book assumes
+about you* and *The failure modes worth naming*.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -1093,6 +1100,47 @@ Five things in it constrain later work:
    not being sold anything here, partly because there is nothing left to sell", which restates *What
    this book will not do*'s first line two sections earlier. The paragraph now starts on "The tools
    are installed".
+
+## The Wave #2 check
+
+Board item `5e0f39858134` read *Refactoring a codebase for agents* against *The unit of work* and
+against the five things the handoff said Wave #2 must carry. **It carries all five, and the check
+is a confirmation rather than a rewrite.** The constraint swap opens the chapter, the
+six-files-in-three-trees cost is in *Features, not layers*, the four things feature-first buys are
+there with the duplication one argued rather than asserted, invisible control flow has its own
+section with a concrete list — decorators registering routes at import time, DI containers, ORM
+lifecycle hooks, convention over a directory scan — and the nuance is a full paragraph: shared
+infrastructure stays, and the distinction is a trustworthy black box against the magic kind. **Do
+not re-file this as missing.**
+
+Four things it found, three of them already closed and one fixed here:
+
+1. **The attribution was already correct.** The post is absorbed, not cited: it appears nowhere in
+   the prose of any chapter, and its URL sits in `appendices/further-reading.md` beside *Cards*.
+   The in-line citation the item description expected in *Scope a task to fit the window* does not
+   exist — `f94b88e05069` or the editorial pass had already removed it. **Re-derive a deferred item
+   against the current tree before acting on its description**, which is now the second item to
+   learn this the same way.
+2. **The hedge is correctly calibrated and needed no change.** *The three waves* labels the part
+   once, in *How to discount this part*, and the chapter separates the speculative commitment (a
+   migration project justified on a forecast) from the part that pays anyway (do it on contact;
+   what survives if the wave never arrives). Adding a second hedge inside the chapter would have
+   made the least speculative material in Part IV read as the most.
+3. **The cross-reference was one-way, and is now two.** Part IV linked to *Scope a task to fit the
+   window*; the play did not link back. Step 2 of the play — "scope by capability, not by layer" —
+   now names the layer-first layout as the reason the split is awkward and points at Part IV as the
+   same argument at the scale of the codebase. The play went 1,074 → 1,119 against a 1,200 ceiling.
+4. **Part III now carries the failure-mode half of the argument.** *The failure modes worth naming*
+   had the Confident Wrong Rewrite's tell and response but not its architectural cause, while Part
+   IV asserted that the cause "is in your architecture" with nothing on the other end of the claim.
+   The entry gains one paragraph — behaviour attached invisibly does not appear in the file being
+   edited, so the patch is locally correct and globally wrong — linking forward, with a response
+   scoped to what a reader can do today (name the mechanism in the brief). The chapter went 1,403 →
+   1,488 against a 1,500 ceiling, so **that chapter now has twelve words of headroom**: anything
+   further added to it has to displace something.
+
+`make check` is clean and the book stands at 40,996 words. Part III is 13%, Part IV 8%; neither
+share moved.
 
 ## Decisions log (append-only)
 
@@ -1720,6 +1768,23 @@ Five things in it constrain later work:
 - **The rocket-launch metaphor is spent once, in one clause, and is not a heading.** The names that
   travel are *preparation mode* and *execution mode*. A metaphor repeated across a 40,000-word book
   reads as a running gag, which is the register `book/STYLE.md` rules out.
+
+- **A verification item that finds the work already done should say so and stop** (`5e0f39858134`).
+  The Wave #2 check confirmed all five things the handoff demanded of the chapter and made no
+  change to the argument; its edits were two links and nothing else. Rewriting prose that already
+  passes, to demonstrate that an item did something, is how a book acquires a second voice in a
+  chapter that had one.
+- **Where one argument is made at two scales, both ends link.** *Scope a task to fit the window*
+  has the small version (scope by capability, not by layer) and *Refactoring a codebase for agents*
+  has the large one (the layout that makes that scoping natural). The forward link existed; the
+  back link did not, and a reader who opened the book at the play had no route to the argument that
+  explains why their split keeps being awkward. The same applies to Part III and Part IV, which had
+  the failure mode at one end and its architectural cause at the other with no link between them.
+- **Part IV's hedging belongs in *The three waves*, not in each chapter.** *How to discount this
+  part* labels the whole part once, and feature-first is the least speculative material in it — a
+  refactor a team can start on Monday. A second hedge inside the chapter was considered and
+  declined: hedging the cheapest, most reversible recommendation hardest inverts the reader's sense
+  of which parts are bets.
 
 ## Open questions
 

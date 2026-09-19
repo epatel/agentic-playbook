@@ -19,7 +19,11 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    second task does not re-derive it and disagree.
 2. **Scope by capability, not by layer.** "Add validation to the checkout endpoint, its schema, and
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
-   by the eighth file. An agent's unit of work is a behaviour, not a directory.
+   by the eighth file. An agent's unit of work is a behaviour, not a directory. Where a layer-first
+   layout makes that split awkward — one capability living in six files across three trees — the
+   difficulty is in the repository rather than in the task. [*Refactoring a codebase for
+   agents*](../../part-4-next-waves/refactoring-a-codebase-for-agents.md) is the same argument at
+   the scale of the codebase.
 3. **Hand the requirements over as an external list, not as prose to remember.** A numbered list of
    acceptance conditions in a file the agent can re-read beats the same conditions buried in your
    opening message. In the one white-box study of this
