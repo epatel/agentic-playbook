@@ -26,7 +26,7 @@ not go in a file.
 3. **Let them watch a run before they drive one.** Pair on a task you drive, narrated, then on one
    they drive. What transfers is not the commands, which are in the documentation. It is where you
    stopped the run, what you declined to delegate and why, and which piece of output you did not
-   believe. None of that is in a file, and none of it has to be taught twice.
+   believe.
 4. **Give them a first task where being wrong is cheap to detect.** A new joiner cannot yet tell a
    good diff from a plausible one in this codebase, and for a few weeks the agent will produce
    plausible faster than they can build the judgement to catch it. Pick work a test suite or a type
@@ -40,13 +40,12 @@ not go in a file.
    one who kept everything is worth knowing about in week two rather than month four.
 
 Onboarding used to transfer knowledge about a codebase, and files are good at that. The surface that
-has grown beside it transfers judgement about a tool — when to stop, what not to hand over, which
-output to distrust — which is what files are worst at and what sitting next to someone is best at.
-The compensation is that a joiner is the only free audit of the shared material the team will get,
-and they can only perform it while they still do not know anything. The exchange rate is a week of
-an experienced engineer's attention, most of it spent watching somebody else work, and the
-appearance of a fast ramp: a joiner shipping agent-authored pull requests on day three is evidence
-about the tools, not about the joiner.
+has grown beside it transfers judgement about a tool, which is what files are worst at and what
+sitting next to someone is best at. The compensation is that a joiner is the only free audit of the
+shared material the team will get, and only while they still do not know anything. The exchange rate
+is a week of an experienced engineer's attention, most of it spent watching somebody else work, and
+the appearance of a fast ramp: a joiner shipping agent-authored pull requests on day three is
+evidence about the tools, not about the joiner.
 
 ## Worked example
 

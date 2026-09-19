@@ -72,7 +72,7 @@ the prose.
 | an exclamation mark, an emoji, a word from the hype list | `book/STYLE.md`, *Banned outright* |
 | a `> Captured` line in the wrong shape, or with no fence under it | `book/TEMPLATE-play.md` |
 | an `-ize` spelling — as a **note**, because a quotation may be American | `book/STYLE.md`, *Mechanics* |
-| a chapter, suite opener, play or play section outside its word budget — as a **note** | `book/STYLE.md`, *Length*; `book/TEMPLATE-play.md` |
+| a chapter, suite opener, play or play section outside its word budget | `book/STYLE.md`, *Length*; `book/TEMPLATE-play.md` |
 | a play whose five `##` headings are not the template's, verbatim and in order — as a **note** | `book/TEMPLATE-play.md` |
 
 What it deliberately does not report matters as much, because each exemption is a decision
@@ -123,13 +123,20 @@ and in order — gets one note saying so and no section counts, because the sect
 identified. Part IV, the appendices and the preface have no stated budget and are not counted.
 Neither is anything outside `book/`, so pointing the checker at `cards` or `plans` still works.
 
-Every budget report is a **note**, deliberately. The count is exact but the threshold is a
-judgement — 502 words against a 500-word ceiling is not the defect a 104-column line is, and a
-writing task holding a half-drafted chapter is legitimately outside its budget for the length of
-its turn. The note names the file, the section, the count and the distance, which is what a person
-needs; it does not turn somebody else's draft into a red build. **Ten of the book's plays are over
-the 500-word ceiling in *The play* today**, between 2 and 34 words each, and that is the standing
-reason the severity is what it is.
+Every budget report is a **problem**, and it fails `make check`. It was a note for exactly as long
+as the book had overruns in it: reporting eleven inherited ones as problems would have handed every
+unrelated edit a red build it did not cause. They were trimmed, and **the book is now inside every
+budget it states**, so an overrun is something your edit introduced rather than something it found.
+
+**This means a play you are editing has single-digit headroom.** Nine of them sit 1–7 words under
+the 500-word ceiling in *The play*. Add a clarifying clause or a cross-reference and the build goes
+red — which is the intended behaviour, and the answer is not to argue with the count. Take
+something out in the same edit: a restated summary, a frame around a quotation, a sentence of
+mechanics the section already covers. Two constraints bound what may go — every play states its
+exchange rate, and every *Checklist* item has to trace to something in *The play*.
+
+A red build is also cheap to clear while you are mid-draft: the count is exact, so `make lint`
+tells you the distance in words, not a direction to go in.
 
 The budgets are hard-coded in the script, each one naming the document it came from, and
 `--self-test` checks that the range is still printed there — which is the only reason they may be
@@ -141,13 +148,12 @@ fails until the script agrees with it.**
 A **problem** is something a person should fix. A **note** is the expected consequence of building
 an unfinished book — a forward link to a chapter nobody has written, a diagram left as source — or,
 from the style checker, a rule that is exact about its count and soft about its threshold: an
-American spelling that may be a quotation, a word budget a draft is temporarily outside.
-Only problems fail `--strict`, so `make check` does not cry wolf for the months in which most of
-the table of contents is ⬜.
+`-ize` spelling that may be sitting inside a quotation. Only problems fail `--strict`, so
+`make check` does not cry wolf for the months in which most of the table of contents is ⬜.
 
-A note is not a licence to ignore it. Read the ones in the file you are editing before you finish;
-every budget overrun in this book's history was found by a person reading a count, and the notes
-are there so that person does not have to be looking for it.
+A note is not a licence to ignore it. Read the ones against the file you are editing before you
+finish. The word budgets were notes until the book met them and are problems now; a rule earns that
+promotion by being one the book can actually hold to.
 
 Forward references are allowed by the cross-reference convention, so the build unlinks the ones
 whose target is absent and leaves the link text as prose. Left in place they are a hard error in

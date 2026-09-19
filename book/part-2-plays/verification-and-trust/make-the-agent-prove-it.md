@@ -38,8 +38,7 @@ Move the proof outside the agent's turn. Anything the run authored about the run
    pass". A claim costs the same to produce whether or not it is true.
 5. **Own the tests yourself where the change matters.** Test-first measurably helps a capable model
    — one 2026 study put it at 15 to 24 percentage points — while iterating an implementation against
-   *generated* tests makes overfitting worse. Test-first helps when a human owns the test, and
-   backfires when the agent owns both sides of the loop.
+   *generated* tests makes overfitting worse.
 
 ```mermaid
 graph LR
@@ -57,13 +56,13 @@ graph LR
     IN -->|"only means something once checked against"| OUT
 ```
 
-The disagreement about whether model-written tests are any good is where this becomes visible. The
-damning results come from asking a model for tests and keeping what came back; the enthusiastic ones
-— a 73% engineer acceptance rate on production tests at Meta in 2025 — fed an external, executable
-adequacy signal back into generation. The variable is not the model; it is whether the loop closed
-against something the model did not author. The exchange rate is setup and friction: every signal
-above the soft half costs work to install, mutation testing has the worst cost-to-benefit ratio of
-the lot, and you will lose runs to a gate that was correct and inconvenient.
+The damning results about model-written tests come from asking a model for tests and keeping what
+came back; the enthusiastic ones — a 73% engineer acceptance rate on production tests at Meta in
+2025 — fed an external, executable adequacy signal back into generation. The variable is not the
+model; it is whether the loop closed against something the model did not author. The exchange rate
+is setup and friction: every signal above the soft half costs work to install, mutation testing has
+the worst cost-to-benefit ratio of the lot, and you will lose runs to a gate that was correct and
+inconvenient.
 
 ## Worked example
 

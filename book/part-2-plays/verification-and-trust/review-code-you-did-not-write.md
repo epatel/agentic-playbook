@@ -24,8 +24,7 @@ reading is what you run out of.
 2. **Send it back on size and shape without reading it.** Google's review guidance grants reviewers
    the authority to reject a change for being too large and nothing else, and GitHub's 2026 guidance
    names the triggers for agent pull requests: more than five unrelated files, a purpose that will
-   not fit in one sentence, test changes arriving alongside CI failures. You are declining a review
-   that does not fit in your day, not judging the work.
+   not fit in one sentence, test changes arriving alongside CI failures.
 3. **Search for the thing before accepting that it needed writing.** Agent pull requests carried
    roughly 1.9 times the semantic duplication of human ones in the largest 2026 corpus
    ([`review-practice.md`](../../../notes/research/review-practice.md)). Two implementations of one
@@ -45,12 +44,12 @@ reading is what you run out of.
    not read the diff through it.
 
 Your instincts were calibrated against an author who paid something to write it: length signalled
-effort, fluency signalled care, and both were proxies that worked only because writing was
-expensive. When OCaml's maintainers declined a 13,000-line agent-authored debugging feature in late
-2025, nobody argued the code was bad — the effort in it fell far below the effort needed to review
-it, and that difference landed on people who had not chosen to spend it. DORA calls the displacement
-the *verification tax*, and the exchange rate here is paying it deliberately: slower per pull
-request than the agent, on purpose, and sending back changes that were fine.
+effort, fluency signalled care. When OCaml's maintainers declined a 13,000-line agent-authored
+debugging feature in late 2025, nobody argued the code was bad — the effort in it fell far below the
+effort needed to review it, and that difference landed on people who had not chosen to spend it.
+DORA calls the displacement the *verification tax*, and the exchange rate here is paying it
+deliberately: slower per pull request than the agent, on purpose, and sending back changes that were
+fine.
 
 ## Worked example
 

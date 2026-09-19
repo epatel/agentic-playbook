@@ -100,6 +100,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `f0669b48dbc0` | Untrack `scripts/__pycache__` and gitignore it — already untracked by `37dfb14`; added the `*.pyc` half and confirmed nothing else generated is tracked | ✅ done |
 | `3884b4f3fc82` | Re-check Part III's remaining derived figures — 26 sources opened, eleven defects in print, four of them the same species as the reward-hacking trio | ✅ done |
 | `023ba519cdd0` | Teach `make lint` the word budgets — every budget in `STYLE.md` and `TEMPLATE-play.md`, counted with the build's own counter; eleven overruns found that nobody had ever counted | ✅ done |
+| `bfc99c593aeb` | Trim the eleven Part II overruns — all eleven inside budget, and over-budget promoted from a note to a problem | ✅ done |
 
 ## Current state / handoff
 
@@ -666,14 +667,22 @@ compromised package — the correction it makes is the kind a writer repeats fro
 **The word budgets are checked now (`023ba519cdd0`), and they were not being met.** `make lint`
 counts every budget in `STYLE.md` and `TEMPLATE-play.md` — chapter, suite opener, whole play, and
 each of a play's five sections — with the build's own `word_count`. It found **eleven overruns
-nobody had ever counted**, all in Part II, and it reports them as notes rather than problems, so
-`make check` is still green. **Do not count words by hand any more; run `make lint` and read the
-notes against the file you touched.** What it checks, why the severity is what it is, and the
-eleven files are under [*The word-budget check*](#the-word-budget-check) below.
+nobody had ever counted**, all in Part II. **Do not count words by hand any more; run `make lint`
+and read what it says against the file you touched.** What it checks and the eleven files are under
+[*The word-budget check*](#the-word-budget-check) below.
 
-**Next up:** the eleven overruns want trimming — filed as `bfc99c593aeb`, with the list and the
-method in the item. Until it runs, **a play you edit may already be over before you add a word**;
-`make lint` will say so. If a later edit adds prose, **count before you add**.
+**The eleven are trimmed, and the book is now inside every budget it states (`bfc99c593aeb`).**
+40 files, 40,721 words, `make check` clean with no problems and no notes. That has never been true
+before. **With it, over-budget stopped being a note and became a problem** — the user's decision,
+taken on the record rather than quietly, because the argument for softness was the eleven overruns
+and they are gone.
+
+**Read this before you add a sentence to any play.** The trims land at 493–499 against a 500-word
+ceiling in *The play*, so **nine plays have between one and seven words of headroom, and adding a
+clause now fails `make check`.** That is deliberate and it is not negotiable by argument: take
+something out in the same edit. What may go, what may not, and the twelve cuts this pass made are
+under [*The overrun trim*](#the-overrun-trim) below — **read it before you decide what to remove**,
+because two contracts constrain *The play* and one of them breaks silently.
 
 **Three Part III chapters are still the tightest files in the book.** `3884b4f3fc82` found *What is
 genuinely contested* sitting at **1,559** against a 1,500 ceiling — `57772ad900e3` added 143 words
@@ -842,17 +851,18 @@ Six things in it constrain later work:
    window* — was trimmed to 488 by `fce3cee8fa34` and then taken to **533** four commits later by
    `5e0f39858134`'s two-link fix, which added 45 words to a section already at its ceiling. That is
    the same species as the `57772ad900e3` regression, one level down, and it is why the check
-   exists. Trimming them is filed as `bfc99c593aeb`, which carries the full list, and is **not**
-   part of this item: it is a prose pass on eleven files in five suites, and mixing it into the
-   commit that adds the checker would have put both beyond review.
-2. **Every budget report is a note, and that is the deliberate severity decision.** The count is
-   exact; the threshold is a judgement. 502 words against a 500-word ceiling is not the defect a
-   104-column line is, a writing task holding a half-drafted chapter is legitimately outside its
-   budget for the length of its turn, and making it a problem today would have handed every
-   unrelated edit a red build inherited from ten pre-existing overruns. The note carries the file,
-   the section, the count and the distance, which is everything the hand-counting passes produced.
-   **The upgrade path is open**: once the follow-up trim lands and the book is inside every budget,
-   promoting over-budget to a problem is a two-line change plus a self-test expectation.
+   exists. Trimming them was filed as `bfc99c593aeb` and is **done** — see [*The overrun
+   trim*](#the-overrun-trim) below. It was kept out of this item on purpose: it is a prose pass on
+   eleven files in five suites, and mixing it into the commit that adds the checker would have put
+   both beyond review.
+2. ~~**Every budget report is a note, and that is the deliberate severity decision.**~~
+   **Superseded by `bfc99c593aeb`: over-budget is a problem and fails `make check`.** The
+   reasoning here still explains why it *was* a note, and it is worth keeping because it is the
+   shape of the argument: the count is exact, the threshold is a judgement, and making it a
+   problem while ten pre-existing overruns sat in the book would have handed every unrelated edit
+   a red build it did not cause. That condition expired when the trim landed. The upgrade was the
+   two-line change this note predicted, plus the self-test expectation, and it is now asserted in
+   both directions — `budget_self_test` fails if a budget defect comes back as a note.
 3. **The counter is the build's, imported, not a second one.** `check_style.py` now imports
    `word_count` from `build_book.py` alongside the fence state machine, so the lint, the per-part
    table `make check` prints, and any future count all agree. This is the trap `6b0110f76388`
@@ -1168,6 +1178,89 @@ Four things in it are worth knowing before editing any of these files:
    and will most likely land here; if it adds a paragraph, it has to take one out, or put the
    material in *The four areas, re-weighted* (1,448) or *What this book assumes about you* (1,169),
    which have room.
+
+## The overrun trim
+
+Board item `bfc99c593aeb` did to Part II's other five suites what [*The budget
+trim*](#the-budget-trim) did to Part I and the Context suite, using the same method and the same
+rule: **cut restatement, not substance.** All eleven overruns `023ba519cdd0` found are gone, 267
+words came out of Part II, and `make check` reports **no problems and no notes** — the first time
+the book has been inside every budget it states.
+
+| File | *The play* | Whole play |
+|---|---|---|
+| `verification-and-trust/decide-who-signs-off.md` | 534 → **497** | |
+| `team/build-the-working-agreement.md` | 531 → **499** | |
+| `context/scope-a-task-to-fit-the-window.md` | 533 → **495** | |
+| `team/onboard-someone-into-all-this.md` | 530 → **496** | 1,227 → **1,193** |
+| `orchestration/work-in-parallel-without-collisions.md` | 526 → **498** | |
+| `verification-and-trust/make-the-agent-prove-it.md` | 524 → **494** | |
+| `verification-and-trust/review-code-you-did-not-write.md` | 524 → **497** | |
+| `economics/match-the-model-to-the-job.md` | 513 → **498** | |
+| `team/collect-and-refine-as-a-team.md` | 511 → **493** | |
+| `economics/understand-what-you-are-paying-for.md` | 504 → **499** | |
+| `orchestration/make-the-control-flow-deterministic.md` | 502 → **499** | |
+
+### What may be cut, and the one that fails silently
+
+Two contracts bound *The play*, and they were checked against every one of the eleven:
+
+1. **Every play states its exchange rate.** *What this book assumes about you* promises the reader
+   in print that it does. Every "The exchange rate is…" sentence survives the trim untouched.
+2. **Every *Checklist* item traces to something in *The play*.** This is the dangerous one,
+   because nothing reports a break. One planned cut was abandoned over it — *Build the working
+   agreement*'s "and the agreement says so in writing", which its second checklist item depends
+   on — and a cheaper cut was found in the same step instead.
+
+What actually went, by species, is the same list `fce3cee8fa34` produced:
+
+- **A windup phrase that says a generalisation is coming.** "The reason this holds up is that it
+  separates…" → "It holds up because it separates…"; "The transferable idea is that an agentic
+  bill is…" → "An agentic bill is…". The paragraph is still the generalisation without being
+  announced as one.
+- **A frame around a statistic.** *Work in parallel*'s "The measured conflict rates are the
+  argument for partitioning rather than trusting the merge" introduced 33,600 pull requests that
+  introduce themselves. Same for *Make the agent prove it*'s "The disagreement about whether
+  model-written tests are any good is where this becomes visible".
+- **A sentence restating the bolded step it sits under.** *Stop on the tells*' "Continuing past
+  these is buying more of what you already have"; *Own the tests yourself*'s "Test-first helps when
+  a human owns the test, and backfires when the agent owns both sides of the loop", which restated
+  the measured sentence before it.
+- **A third source corroborating what two already said.** *Decide who signs off* quoted the Linux
+  kernel, LLVM and Kubernetes on the same point; LLVM's went, and LLVM still appears two steps
+  later carrying its own distinct test.
+- **A detail the play's own Worked example spells out.** *Build the working agreement*'s
+  personal-column list is printed verbatim in the one-page agreement below it.
+
+**Nothing was cut that carries a claim, a figure, a quotation, a failure-mode name, a
+cross-reference or an exchange rate.** Two cross-references were shortened rather than removed —
+see below.
+
+### Three judgement calls worth knowing
+
+1. **`scope-a-task-to-fit-the-window.md` was the interesting one, and both its links stayed.** It
+   was trimmed to 488 by `fce3cee8fa34` and taken back to 533 by `5e0f39858134`'s two-link fix.
+   The item asked whether the material could be made shorter rather than whether it belonged: it
+   could. The Part IV link lost its restated tail — "…is the same argument at the scale of the
+   codebase" — and became "the difficulty is in the repository, not the task: see [*Refactoring a
+   codebase for agents*]". **The Part III link to the Requirement It Can Still Quote is untouched**,
+   because shortening it would have cost the phrase that marks it as a book-wide failure-mode name.
+   The remaining 27 words came out of two steps elsewhere in the same section.
+2. **Some plays are barely inside.** Nine of the eleven land at 493–499. There was not twenty words
+   of restatement in every play, and cutting further would have meant cutting substance. **The
+   tightness is real and is the reason the handoff shouts about it**, but it is a fact about the
+   budget rather than a defect in the trim.
+3. **Six paragraphs were reflowed, which makes the diff larger than the cuts.** Removing a clause
+   from the middle of a wrapped paragraph leaves a ragged line; the paragraph was re-wrapped to
+   100 columns rather than left with an orphan. Read the diff by paragraph, not by line.
+
+### What this commits later edits to
+
+**`make check` now fails on an overrun**, so the next writing task to add a sentence to a play will
+meet it. The response is not to argue with the count — it is exact — but to find the restatement in
+the section and take it out in the same edit. If there genuinely is none, that is the case for
+raising the ceiling in `book/TEMPLATE-play.md`, which is a decision to ask about rather than to
+make: the self-test will fail until the script agrees, which is the mechanism doing its job.
 
 ## The terminology pass
 
@@ -2094,6 +2187,25 @@ Grafana's spelling**; the reason is in the brief.
   one** (`023ba519cdd0`). Nothing in `STYLE.md` states a length for them. If one is wanted, write
   it in `STYLE.md` first and then teach the script; a checker that legislates is a checker nobody
   believes.
+- **Over-budget is a problem now, not a note** (`bfc99c593aeb`, with the user's decision on the
+  record). The severity was a note for exactly as long as the book had overruns in it; once the
+  eleven were trimmed, the argument for softness went with them. An overrun is now something an
+  edit introduced rather than something it inherited, and the regression that filed the trim —
+  `5e0f39858134` adding 45 words to a section already at its ceiling — is precisely what a note
+  fails to stop. **The cost was weighed and accepted: nine plays sit 1–7 words under the 500-word
+  ceiling, so a clarifying clause reddens the build.** That is the intended behaviour; the clause
+  still goes in and something else comes out in the same edit.
+- **A budget trim leaves headroom where it can, but does not manufacture it** (`bfc99c593aeb`).
+  Every cut in the trim had to be restatement; there was not 20 words of restatement in every
+  play, so several landed at 497–499 rather than comfortably clear. **Cutting further for the sake
+  of a margin would have cost substance, which is the one thing the method forbids.** The tightness
+  is a fact about the budget, not a defect in the trim, and it is recorded rather than hidden.
+- **Two contracts bound what may leave *The play*, and one of them fails silently**
+  (`bfc99c593aeb`). Every play must state its exchange rate — Part I promises the reader in print
+  that it does — and every *Checklist* item has to trace to something in *The play*. The second is
+  the dangerous one: cut the sentence an item traces to and nothing reports it. Both were checked
+  against all eleven files, and one candidate cut was abandoned for it (*Build the working
+  agreement*'s "the agreement says so in writing", which its second checklist item depends on).
 
 ## Open questions
 

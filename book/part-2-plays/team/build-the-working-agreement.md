@@ -20,8 +20,7 @@ a trigger.
    for anything not on it solves a problem the team does not have.
 2. **Sort each item by whether the result leaves your machine.** Landing in the repository or in
    somebody else's review queue makes it a team decision. Everything else — which harness, which
-   model, how many sessions you keep open, what is in your own skills directory — stays yours, and
-   the agreement says so in writing.
+   model, what is in your own skills directory — stays yours, and the agreement says so in writing.
 3. **Agree the items with team-visible consequences.** Usually six: which context files are shared
    and where personal ones go; whether agent authorship is disclosed; what "done" means for an
    agent-authored change; what a reviewer may decline; who can see what the tools cost; and what the
@@ -49,13 +48,12 @@ The value is not the content. It is that a disagreement now has somewhere to go 
 rather than an argument in a review thread — and that an agreement reaching into how people work,
 rather than into what they produce, gets adopted in appearance and abandoned in private. So the page
 describes changes rather than people. "Everyone must review agent output carefully" is about
-individuals, is not checkable, and to a team told to adopt these tools and not told how it reads as
-measurement of them; "a change is not done until a test that could have failed covers it" is about
-work, and anyone can see whether it happened. Assume a mixed room: in DORA's 2025 survey roughly a
-quarter of respondents reported high trust in AI-generated code and roughly thirty per cent reported
-little or none. The exchange rate is that some agreed defaults will be wrong for some tasks and you
-will follow them anyway, plus an afternoon to write the page and a shorter one whenever a trigger
-fires. A skeleton of the page, with the specifics stripped out, is in
+individuals and is not checkable; "a change is not done until a test that could have failed covers
+it" is about work, and anyone can see whether it happened. Assume a mixed room: in DORA's 2025
+survey roughly a quarter of respondents reported high trust in AI-generated code and roughly thirty
+per cent reported little or none. The exchange rate is that some agreed defaults will be wrong for
+some tasks and you will follow them anyway, plus an afternoon to write the page and a shorter one
+whenever a trigger fires. A skeleton is in
 [*Copy-paste templates*](../../appendices/copy-paste-templates.md).
 
 ## Worked example

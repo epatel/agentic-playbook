@@ -42,10 +42,9 @@ Route on cost per accepted outcome, and settle it by measurement rather than by 
 Every factor in that formula except the price is a property of the task, which is the thing you know
 about. That is why the durable rule is never "cheap model for code, expensive model for
 architecture" but "a tight specification with a cheap check tolerates a weaker model; deciding what
-to do does not" — a distinction that survives a release, which a table of model names does not. The
-exchange rate is that you give up one model for everything: you pay for a paired trial per class of
-work, you pay again after each release, and some of those trials come back inconclusive because the
-variance swallows the effect.
+to do does not". The exchange rate is that you give up one model for everything: you pay for a
+paired trial per class of work, you pay again after each release, and some of those trials come
+back inconclusive because the variance swallows the effect.
 
 ## Worked example
 

@@ -27,16 +27,14 @@ loads, and take out as much as you put in.
    will write the file, the practice was not worth the hour.
 4. **Have someone else write the description.** A skill is routed on its `name` and `description`
    alone, never on its body
-   ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)). A skill written
-   by its author, for its author, is described in that author's vocabulary and stays invisible to
-   everyone else. The colleague who did not write it writes the description, in the words their own
-   request would use.
+   ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)). A skill described
+   in its author's vocabulary stays invisible to everyone else. The colleague who did not write it
+   writes the description, in the words their own request would use.
 5. **Move it to where everyone loads it, then check on someone else's machine.** Shared skills into
    the repository's skills directory, shared conventions into the committed context file, personal
    material out of the repository. Verify on a checkout that is not the author's: instructions that
-   fail to load are the Brief That Never Arrived
-   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)),
-   and from the outside that looks identical to everything working.
+   silently fail to load are the Brief That Never Arrived
+   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)).
 6. **Remove something every time.** A skill nobody has triggered since the last harvest, a brief
    line about a tool the team replaced, a card describing a service deleted in June. A library that
    only ever grows becomes the Context Landfill

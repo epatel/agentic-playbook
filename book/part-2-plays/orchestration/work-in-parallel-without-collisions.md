@@ -40,12 +40,11 @@ Partition the repository before you start, and treat integration as the part tha
    ```
 
    Process substitution needs bash or zsh; in `sh` the same line is a syntax error. Anything it
-   prints is a file two agents both changed, and is worth resolving before the merge rather than
-   during it.
+   prints is a file two agents both changed.
 
 5. **Integrate one branch at a time, rebasing each onto the last, and run the full suite on the
-   merged tree.** Per-branch green is evidence about each branch in isolation, which is precisely
-   the state that no longer exists once the second one lands.
+   merged tree.** Per-branch green is evidence about each branch in isolation, the state that no
+   longer exists once the second one lands.
 6. **Do not mistake a worktree for a boundary.** Worktrees share refs, config, the stash, and
    `.git/hooks` — so a hook written from inside one runs in the parent repository, as you, the next
    time you trigger it. Harnesses add their own blocks on top of git's silence; Claude Code 2.x
@@ -53,9 +52,8 @@ Partition the repository before you start, and treat integration as the part tha
    `git -C`, `--git-dir`, `GIT_DIR`, `GIT_WORK_TREE`, and a `cd` before running git. If you need a
    real boundary, you need a container or a VM.
 
-The measured conflict rates are the argument for partitioning rather than trusting the merge. Across
-roughly 33,600 agent-authored pull requests sampled in mid-2026, branch pairs from the same agent
-conflicted textually about 20% of the time and pairs from different agents about 42% — and the
+Across roughly 33,600 agent-authored pull requests sampled in mid-2026, branch pairs from the same
+agent conflicted textually about 20% of the time and pairs from different agents about 42% — and the
 authors call that a conservative lower bound, because the method counts only what git notices
 ([`parallel-agents-and-collisions.md`](../../../notes/research/parallel-agents-and-collisions.md)).
 Whether parallel agents are faster end to end, counting merge and rework, is substantially

@@ -49,13 +49,12 @@ graph TD
     T --> O["New output, including thinking<br/><i>4-8x the input rate</i>"]
 ```
 
-The transferable idea is that an agentic bill is a fact about the *shape* of the conversation, not
-about what you asked for. Two sessions doing identical work bill differently if one ran in forty
-turns and the other in twelve, or if one sat idle over lunch and came back cold. The vendor sets the
-price; you set the turn count, the context size, and the warmth. The exchange rate is continuity and
-a standing habit — clearing between tasks means re-establishing what the agent knew, and the billing
-view will teach you things you cannot act on, because thirtyfold variance does not yield to
-attention.
+An agentic bill is a fact about the *shape* of the conversation, not about what you asked for. Two
+sessions doing identical work bill differently if one ran in forty turns and the other in twelve, or
+if one sat idle over lunch and came back cold. The vendor sets the price; you set the turn count,
+the context size, and the warmth. The exchange rate is continuity and a standing habit — clearing
+between tasks means re-establishing what the agent knew, and the billing view will teach you things
+you cannot act on, because thirtyfold variance does not yield to attention.
 
 ## Worked example
 
