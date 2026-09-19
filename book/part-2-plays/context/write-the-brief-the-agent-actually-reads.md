@@ -119,10 +119,9 @@ unnoticed because nobody reads the file end to end.
 **The Brief That Never Arrived.** The instructions are correct, committed, and not loaded. The agent
 behaves like a competent stranger — reasonable code, house conventions absent — and the obvious
 explanation, that it ignored the brief, is wrong. Precedence rules do this silently: on Claude Code
-2.x, adding a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing errors.
-The tell is that your usual check cannot distinguish the two cases. A natively read `AGENTS.md` does
-not appear in `/context` under Memory files even when it has loaded, so that list is empty on
-success and on failure alike. Ask the agent what its instructions are instead.
+2.x, a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing errors. The
+tell is that your usual check cannot separate the two cases: a natively read `AGENTS.md` never
+appears in `/context` under Memory files, so that list is empty on success and on failure alike.
 
 ## Checklist
 
