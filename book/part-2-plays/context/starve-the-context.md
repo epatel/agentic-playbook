@@ -77,6 +77,8 @@ three repetitions each. These are the columns that settle it, and nobody else's 
 | Without filter | | | | | |
 | With filter | | | | | |
 
+*Blank on purpose: the only numbers that settle it are the ones you measure.*
+
 The outcome was mixed, as it usually is. The filter was a clear win on exactly one thing: the
 dependency-resolution output from their package manager, four thousand lines of tree in which the
 agent needed six. It was a mild loss everywhere else, mostly in turns. They kept it for that one

@@ -84,7 +84,7 @@ $0.30 for a cache read. Line by line:
 | Output, thinking included | 5,300 | $15.00 | $0.0795 | 0.5% | 14.4% |
 | Cache reads | 940,000 | $0.30 | $0.2820 | 94.3% | 51.0% |
 | Cache writes | 50,000 | $3.75 | $0.1875 | 5.0% | 33.9% |
-| **Total** | **996,500** | | **$0.5526** | 100% | 100% |
+| **Total** | **996,500** | — | **$0.5526** | 100% | 100% |
 
 Which rounds to the $0.55 the tool printed, so the arithmetic is checkable rather than modelled.
 Three things fall out of it, and all three are counter-intuitive. You did not pay for what the model

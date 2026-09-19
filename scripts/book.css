@@ -312,6 +312,17 @@ pre.sourceCode.markdown code span.ot { color: var(--syn-fn); }                 /
 
 /* -------------------------------------------------------------------------------------- tables */
 
+/* A cell left empty in the source is a blank for the reader to fill in, not a rendering fault.
+ * One table in the book is deliberately empty — the paired comparison in *Starve the context*,
+ * whose whole point is that the numbers have to be yours — and rendered as a void it read as a
+ * bug. A ruled line says form, not failure. */
+td:empty::after {
+  content: "";
+  display: block;
+  margin: 0.15rem 0.1rem;
+  border-bottom: 1px dotted var(--ink-faint);
+}
+
 table {
   width: 100%;
   margin: 1.75rem 0;
