@@ -73,6 +73,32 @@ in the field, and which
 reports in full. Where this book hedges, that is why. Where it gives a figure, the figure is dated
 in the sentence and traceable to a brief in [`notes/research/`](../../notes/research/).
 
+## Preparation and execution
+
+There is a way of working with these tools where the context gets assembled in the conversation,
+one prompt at a time. Here is the project. Now here is the module. Now here is the function, and
+here is how this codebase handles errors, and — five prompts in — here is the actual task. It works,
+and it is the wrong shape. None of that briefing survives the session, so tomorrow you pay for it
+again, and the part of the day you are sharpest goes on re-describing a codebase that has not moved
+since Tuesday.
+
+The alternative is that the project is ready before the agent starts: prepared, checked, in place,
+and then a task rather than a briefing. Closer to a launch than to a conversation, and nothing gets
+explained on the pad.
+
+That splits the work into two modes. *Preparation* is everything that makes the project legible
+without you in the room — the brief, the cards, the conventions written down, the checks a change
+has to pass. *Execution* is handing a prepared project a task and reading what comes back. The
+agent is useful in both, which is the half that gets missed: most preparation material is written
+and kept current by the agent itself.
+
+The reason to hold them apart is that they happen at different times. A well-prepared project needs
+almost no preparation at the moment of use. You sit down, you give it a task, and the first prompt
+is real work.
+
+Most of Part II is preparation-mode work: things to do on a quiet afternoon, against a problem you
+do not have yet, and cashed in on a day when you are busy and have no patience for any of it.
+
 ## How to read it
 
 Not front to back, and not in one sitting.
@@ -113,10 +139,9 @@ disagree in this book, trust the shape and go and check the figure.
 
 ## Where to start
 
-You are not being sold anything here, partly because there is nothing left to sell. The tools are
-installed, you are already using them, and whatever purchase decision existed was made somewhere
-above your head a while ago. What is missing is the practice, and practice gets built by people who
-write down what they do and then discover, in public and slightly uncomfortably, which parts of it
-were wrong.
+The tools are installed, you are already using them, and whatever purchase decision existed was
+made somewhere above your head a while ago. What is missing is the practice, and practice gets built
+by people who write down what they do and then discover, in public and slightly uncomfortably, which
+parts of it were wrong.
 
 The rest of this book is one attempt at that. Start wherever your week hurts.

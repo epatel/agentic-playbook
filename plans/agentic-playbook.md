@@ -91,7 +91,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
 | `703e507c86aa` | Write the cards play — the Context suite's fourth; one failure mode, one worked example that is this repo | ✅ done |
-| `0bdccc346bd4` | Thread preparation-vs-execution into Part I | ⬜ blocked on milestone 7 and `f94b88e05069` |
+| `0bdccc346bd4` | Thread preparation-vs-execution into Part I — milestone 19's last filing; the rocket-launch material is now spent | ✅ done |
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument | ⬜ blocked on milestone 15 |
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources | ⬜ blocked on milestone 9 |
 
@@ -633,12 +633,16 @@ the unwritten cards play to is under [*The terminology pass*](#the-terminology-p
 are about to introduce a term the reader may not have, read that section first** — it settles where
 the italics go when a term is used in one suite and owned by another.
 
-**Next up:** three open follow-ups in the table above — the preparation-versus-execution thread
-into Part I (`0bdccc346bd4`), the Wave #2 check (`5e0f39858134`), and the MCP citation verification
-(`f986730f7a1f`). The first touches files the budget trim brought inside budget, so **count before
-you add**: `make check` prints words per part, and the per-section counter is in the trim note
-below. `0bdccc346bd4` also still owns the whole of the *rocket-launch* material — preparation mode
-and execution mode as distinct — because the cards play deliberately did not spend it.
+**Part I now names preparation mode and execution mode (`0bdccc346bd4`)** — the last of milestone
+19's three filings, and the last of the author's own material to go unspent. Where it landed, why it
+is framing rather than a play, and what it commits Part II to is under [*The preparation
+thread*](#the-preparation-thread) below. **Read it before adding a play that starts with something
+already broken.**
+
+**Next up:** two open follow-ups in the table above — the Wave #2 check (`5e0f39858134`) and the MCP
+citation verification (`f986730f7a1f`). Neither adds prose to a file near a ceiling, but if a later
+edit does, **count before you add**: `make check` prints words per part, and the per-section counter
+is in the trim note below.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -1050,6 +1054,45 @@ Five things in it constrain later work:
    and a link a reader may follow is not a chain. The worked example turns on exactly that
    distinction — the audit finds four links between this repo's cards and all four are signposts,
    which is a judgement the command cannot make.
+
+## The preparation thread
+
+Board item `0bdccc346bd4` threaded preparation-versus-execution — the *rocket-launch mindset* from
+the Cards post — into Part I. It is the third and last of the chapters milestone 19 filed as owing
+the author's own material, which closes that audit: **both posts are now fully spent.**
+
+It landed in [*What this book assumes about
+you*](../book/part-1-argument/what-this-book-assumes-about-you.md), as a new `## Preparation and
+execution` between *What this book will not do* and *How to read it*. The chapter went 1,169 → 1,444
+against a 1,500 ceiling; Part I stays at 11% of the book, and the book at 40,866 words.
+
+Five things in it constrain later work:
+
+1. **The distinction is the load-bearing part; the metaphor is one clause.** The section names
+   *preparation* and *execution* as two modes in italics, and spends the rocket on "closer to a
+   launch than to a conversation, and nothing gets explained on the pad". No heading carries it. At
+   book length a repeated metaphor becomes a bit, and `book/STYLE.md` bans bits; the two mode names
+   are what later chapters should reach for.
+2. **It is framing, not a play, and that was the decision rather than the default.** As an
+   imperative — "prepare the project before you start" — it collapses into *Write the brief the
+   agent actually reads* or *Split the brief into cards*, neither of which needs a rival. Stated as
+   disposition it costs a screen and pays across the whole of Part II. **Do not later promote it to
+   a twentieth play.**
+3. **Part II is now described in print as mostly preparation-mode work** — "things to do on a quiet
+   afternoon, against a problem you do not have yet". That is a soft contract on any future play: a
+   play whose *Problem* only fires once something is already broken now sits against a claim Part I
+   makes. Most existing plays already read this way; the sentence makes it deliberate.
+4. **The placement was chosen over two nearer-looking ones.** *The four areas, re-weighted* argues
+   disposition-versus-practice in almost these words and had 52 words of headroom; *Before Git,
+   before Scrum, before this* opens on two developers who are exactly the two modes, and had nine.
+   The opening vignette was deliberately **not** rewritten to name them: its whole point is that
+   neither developer can say why their approach wins, and resolving that in chapter one would spend
+   the book's argument before it has been made. The callback is available to a later editor and is
+   not free.
+5. **One sentence was cut to pay for it, and it was a duplicate.** *Where to start* opened "You are
+   not being sold anything here, partly because there is nothing left to sell", which restates *What
+   this book will not do*'s first line two sections earlier. The paragraph now starts on "The tools
+   are installed".
 
 ## Decisions log (append-only)
 
@@ -1667,6 +1710,16 @@ Five things in it constrain later work:
   another card; "cards never link to cards" is the cheap way to guarantee that rather than the rule
   itself. This is what the appendix already said and what the play now argues, and it is why the
   audit in the worked example ends in a judgement rather than a count.
+
+- **An idea that justifies the plays goes in Part I; an idea you execute goes in Part II**
+  (`0bdccc346bd4`). Preparation-versus-execution had a plausible case for being a play and was
+  written as framing instead, because as an imperative it duplicates an existing Context play and as
+  a disposition it explains why nineteen of them are worth running before anything hurts. The test
+  for the next candidate: write its imperative title, and if an existing play would have to be
+  renamed to make room, it is framing.
+- **The rocket-launch metaphor is spent once, in one clause, and is not a heading.** The names that
+  travel are *preparation mode* and *execution mode*. A metaphor repeated across a 40,000-word book
+  reads as a running gag, which is the register `book/STYLE.md` rules out.
 
 ## Open questions
 
@@ -2382,6 +2435,22 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - The *rocket-launch* material from the Cards post — preparation mode and execution mode as
   distinct, the project ready before the agent starts — was **deliberately left unspent** by the
   cards play. It belongs to `0bdccc346bd4` and Part I, as milestone 19 filed it.
+
+- Milestone 19's third and last chapter landed: `0bdccc346bd4` put preparation mode and execution
+  mode into [*What this book assumes about
+  you*](../book/part-1-argument/what-this-book-assumes-about-you.md). **Both of the author's posts
+  are now fully spent**, and the audit that started the milestone is closed. See [*The preparation
+  thread*](#the-preparation-thread).
+- **The obvious home for an idea and its right home are different questions.** Two chapters looked
+  like better fits than the one chosen — one argues disposition-versus-practice in nearly the same
+  words, the other opens on a vignette that *is* the two modes without naming them — and both were
+  declined: the first had no room and a four-part structure the idea would have broken, and the
+  second would have had chapter one resolve a disagreement the book spends four parts earning. The
+  chapter that took it was the one that tells the reader what the plays are for.
+- **A framing idea is cheaper than it looks and a play is dearer.** The whole thread cost 275 words
+  and one deleted duplicate sentence. As a play it would have cost 1,100 words, a worked example on
+  a project not yet taken, a failure mode name, and an argument with two existing Context plays
+  about which of them owns the brief.
 
 ### Failure-mode registry
 
