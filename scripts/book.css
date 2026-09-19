@@ -23,6 +23,20 @@
   --code-bg: #f4f3f0;
   --accent-bg: #f8f7f4;
 
+  /* Syntax highlighting. Pandoc ships a palette built for a white page, which leaves navy
+   * function names on the dark background below; these replace it in both schemes. Seven hues,
+   * every one checked at 4.5:1 or better against its own --code-bg, because a colour nobody can
+   * read is a decoration. --syn-fn is the body's link blue, so code and prose agree. */
+  --syn-kw: #9b2c4e;         /* keyword, control flow, import */
+  --syn-str: #3f6b2b;        /* string, character, special string */
+  --syn-com: #6b675e;        /* comment, documentation, annotation */
+  --syn-num: #8a5a1f;        /* number, constant, preprocessor */
+  --syn-fn: #1a4f8a;         /* function, builtin */
+  --syn-var: #5b4a8a;        /* variable, attribute */
+  --syn-type: #1f6a6a;       /* data type, other */
+  --syn-op: #565656;         /* operator, punctuation */
+  --syn-alert: #b3261e;      /* alert, error, warning */
+
   color-scheme: light dark;
 }
 
@@ -36,6 +50,16 @@
     --link: #7fb2e8;
     --code-bg: #212327;
     --accent-bg: #1d1f22;
+
+    --syn-kw: #e88fab;
+    --syn-str: #a9cf90;
+    --syn-com: #989389;
+    --syn-num: #e0b171;
+    --syn-fn: #8cb9ea;
+    --syn-var: #bfaeea;
+    --syn-type: #79c9c2;
+    --syn-op: #aaa69e;
+    --syn-alert: #f28279;
   }
 }
 
@@ -228,6 +252,63 @@ pre {
 }
 
 pre code { padding: 0; background: none; }
+
+/* Pandoc emits its own `code span.xx` rules from the template, ahead of this file. Every rule
+ * here is prefixed with `pre.sourceCode` so it outranks them on specificity rather than on load
+ * order alone — matching their specificity was not enough, and left `bold italic` showing
+ * through on two tokens. Weight and slant are reset first: the default theme slants strings and
+ * inline code, which in a monospace face at 0.83em is synthesised rather than drawn, and comes
+ * out smeared. Comments keep the slant — there the convention earns it. */
+pre.sourceCode code span { font-style: normal; font-weight: 400; }
+
+pre.sourceCode code span.kw,
+pre.sourceCode code span.cf,
+pre.sourceCode code span.im { color: var(--syn-kw); font-weight: 600; }
+
+pre.sourceCode code span.st,
+pre.sourceCode code span.ch,
+pre.sourceCode code span.ss,
+pre.sourceCode code span.vs { color: var(--syn-str); }
+
+pre.sourceCode code span.co,
+pre.sourceCode code span.cv,
+pre.sourceCode code span.do,
+pre.sourceCode code span.an,
+pre.sourceCode code span.in { color: var(--syn-com); font-style: italic; }
+
+pre.sourceCode code span.dv,
+pre.sourceCode code span.bn,
+pre.sourceCode code span.fl,
+pre.sourceCode code span.cn,
+pre.sourceCode code span.pp { color: var(--syn-num); }
+
+pre.sourceCode code span.fu,
+pre.sourceCode code span.bu { color: var(--syn-fn); }
+
+pre.sourceCode code span.va,
+pre.sourceCode code span.at { color: var(--syn-var); }
+
+pre.sourceCode code span.dt,
+pre.sourceCode code span.ot,
+pre.sourceCode code span.sc { color: var(--syn-type); }
+
+pre.sourceCode code span.op { color: var(--syn-op); }
+
+pre.sourceCode code span.al,
+pre.sourceCode code span.er,
+pre.sourceCode code span.wa { color: var(--syn-alert); font-weight: 600; }
+
+/* Markdown blocks get their own treatment. The lexer has no vocabulary for prose, so it files a
+ * heading under `function`, a list bullet under `special string` and a front-matter key under
+ * `annotation` — colour with nothing behind it. The book shows a lot of briefs and rules files,
+ * and they read better as documents than as syntax: structure in the body ink, the parts that
+ * really are code in the code colour, the punctuation of the list out of the way. */
+pre.sourceCode.markdown code span.fu { color: var(--ink); font-weight: 600; }  /* headings */
+pre.sourceCode.markdown code span.in { color: var(--syn-fn); font-style: normal; }  /* `code` */
+pre.sourceCode.markdown code span.ss { color: var(--syn-op); }                 /* list bullets */
+pre.sourceCode.markdown code span.an { color: var(--syn-var); font-style: normal; }  /* fm keys */
+pre.sourceCode.markdown code span.kw,
+pre.sourceCode.markdown code span.ot { color: var(--syn-fn); }                 /* links, emphasis */
 
 /* -------------------------------------------------------------------------------------- tables */
 
