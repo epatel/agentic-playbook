@@ -151,9 +151,14 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 30 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
 | 31 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 32 | `part-4-next-waves/` | *Rows supplied by the Part IV task* | ⬜ |
+| 32 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
+| 33 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
+| 34 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
 | **Appendices** | | | |
-| 33 | `appendices/` | *Rows supplied by the appendices task* | ⬜ |
+| 35 | `appendices/glossary.md` | Glossary | ✅ |
+| 36 | `appendices/team-checklists.md` | Team checklists | ✅ |
+| 37 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
+| 38 | `appendices/further-reading.md` | Further reading | ✅ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it
