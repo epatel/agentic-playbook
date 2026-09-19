@@ -133,10 +133,10 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 13 | `part-2-plays/orchestration/decompose-into-subagents.md` | Decompose into subagents | ✅ |
 | 14 | `part-2-plays/orchestration/make-the-control-flow-deterministic.md` | Make the control flow deterministic | ✅ |
 | 15 | `part-2-plays/orchestration/work-in-parallel-without-collisions.md` | Work in parallel without collisions | ✅ |
-| 16 | `part-2-plays/verification-and-trust/index.md` | Verification and trust | ⬜ |
-| 17 | `part-2-plays/verification-and-trust/review-code-you-did-not-write.md` | Review code you did not write | ⬜ |
-| 18 | `part-2-plays/verification-and-trust/make-the-agent-prove-it.md` | Make the agent prove it | ⬜ |
-| 19 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ⬜ |
+| 16 | `part-2-plays/verification-and-trust/index.md` | Verification and trust | ✅ |
+| 17 | `part-2-plays/verification-and-trust/review-code-you-did-not-write.md` | Review code you did not write | ✅ |
+| 18 | `part-2-plays/verification-and-trust/make-the-agent-prove-it.md` | Make the agent prove it | ✅ |
+| 19 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ✅ |
 | 20 | `part-2-plays/economics/index.md` | Economics | ⬜ |
 | 21 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ⬜ |
 | 22 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ⬜ |
