@@ -87,7 +87,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `878a5eb98f8b` | PDF lacked mermaid: render via `npx` fallback, and size diagrams to the page | ✅ done |
 | `6b0110f76388` | Add a 100-column / style lint to `make check`, after four authors wrote the same one | ✅ done |
 | `fce3cee8fa34` | Trim three marginal budget overruns — all three now inside budget, and the shared clause varied | ✅ done |
-| `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
+| `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise — one gloss in the Context suite closed all three | ✅ done |
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
 | `703e507c86aa` | Write the cards play — the Context suite's fourth | ⬜ blocked on milestone 8 and `f94b88e05069` |
@@ -598,6 +598,8 @@ Five things in it constrain later tasks:
    glossary, which satisfies the second half of Part I's promise ("defined where they are first used
    and collected in the glossary"). The first half — *card* being used before it is defined, in
    *Write the brief the agent actually reads* — is still open and still belongs to the cards play.
+   **Superseded:** `9dd4d6b84b80` closed the other half without waiting for that play. See
+   [*The terminology pass*](#the-terminology-pass) below.
 
 Milestone 16, the editorial pass, then read the whole book as one object for the first time and
 reconciled it. Its output is summarised under *The editorial pass* below.
@@ -616,10 +618,18 @@ are now inside every budget in `STYLE.md` and `TEMPLATE-play.md`. What was cut, 
 future edit to *Before Git, before Scrum, before this* should know, is under
 [*The budget trim*](#the-budget-trim) below.
 
+**Part I's terminology promise is kept (`9dd4d6b84b80`)** — *skill*, *card* and *harness* are now
+each defined the first time the reader meets them, in book order. What changed and what it commits
+the unwritten cards play to is under [*The terminology pass*](#the-terminology-pass) below. **If you
+are about to introduce a term the reader may not have, read that section first** — it settles where
+the italics go when a term is used in one suite and owned by another.
+
 **Next up:** the two open follow-ups in the table above — the cards play (`703e507c86aa`) and the
 preparation-versus-execution thread into Part I (`0bdccc346bd4`). Both touch files this trim has
 just brought inside budget, so **count before you add**: `make check` prints words per part, and
-the per-section counter is in the trim note below.
+the per-section counter is in the trim note below. *Write the brief the agent actually reads* has
+one word of headroom in *The play* after the terminology pass, so the cards play must take material
+out of it if it puts any in.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -941,6 +951,55 @@ Four things in it are worth knowing before editing any of these files:
    and will most likely land here; if it adds a paragraph, it has to take one out, or put the
    material in *The four areas, re-weighted* (1,448) or *What this book assumes about you* (1,169),
    which have room.
+
+## The terminology pass
+
+Board item `9dd4d6b84b80` closed the last contract the reassessment pass (`aed2433867e0`) deferred:
+*What this book assumes about you* tells the reader in print that it does not assume they know
+"what MCP stands for, what a skill is, or how a subagent differs from a workflow", and that "terms
+are defined where they are first used and collected in the glossary". Three terms broke that.
+
+Most of it had already closed itself while the item sat blocked, which is worth knowing before
+re-reading the item's own description:
+
+| Term | State when the item was filed | State when it was worked |
+|---|---|---|
+| *harness* | Undefined; the owning suite did not exist | Defined in italics at `harness/index.md` — "That loop is the *harness*" |
+| *skill* | Used undefined in the Context suite | Defined in italics at *Package repeatable expertise*, and in the glossary |
+| *card* | Used undefined, with no book-side referent at all | Glossary entry plus a card skeleton in *Copy-paste templates* |
+| the glossary link | No `appendices/glossary.md` for Part I to point at | Written by milestone 15; Part I links it |
+
+So the residue was one sentence: by the table-of-contents order, the Context suite reaches *skill*
+and *card* before the Harness suite defines the first and before the unwritten cards play
+(`703e507c86aa`) defines the second. Step 2 of *Write the brief the agent actually reads* now
+glosses both in the clause that uses them — a skill is a folder of instructions loaded when a
+request matches its description, a card is a short self-contained file on one subject loaded when
+that subject comes up — and *Starve the context* links its "skill description" to the Harness play
+so that a reader who opens it cold has somewhere to go.
+
+Four things follow for anyone writing or editing prose here:
+
+1. **Option 2 was declined.** The item offered narrowing Part I's promise to "defined in the suite
+   that owns them". Option 1 cost one clause and twenty-one words, so the promise stands as written.
+   Do not weaken it later on the grounds that a term slipped through; fix the term.
+2. **The italicised first use belongs to the suite that owns the term, not to the first file that
+   uses it.** `STYLE.md` gives italics to "the first use of a term" and, for failure modes, says a
+   book-wide name has one first use rather than one per file. Those pull in opposite directions when
+   a play needs a word the owning suite has not reached yet, and plays are self-contained by
+   contract. The resolution: a use-site gets a plain-text gloss, the owning play coins the term in
+   italics. *Skill* is now the worked precedent — glossed plainly in `context/`, italicised in
+   `harness/package-repeatable-expertise.md`.
+3. **The cards play owes the italicised coinage of *card*.** `703e507c86aa` is the owning play; it
+   should introduce *card* in italics and must not treat the Context gloss as the coinage, or the
+   book has two first uses. It also has to agree with the skeleton already printed in
+   *Copy-paste templates* — milestone 15's note says the appendix is the file to change if the play
+   reaches a different shape.
+4. **Twenty-one words in cost twenty-two words out.** *The play* in *Write the brief the agent
+   actually reads* was at 498 against a 500 ceiling. The gloss was paid for by trimming four places
+   that said something twice — "the reason any of this works is that", a restated contrast after
+   "separates X from Y", "no required sections" duplicating what the section demonstrates, and one
+   doubled verb — leaving it at 499. Nothing of substance was cut, and the enforcement point about
+   hooks survives as its own sentence.
 
 ## Decisions log (append-only)
 
@@ -1535,6 +1594,14 @@ Four things in it are worth knowing before editing any of these files:
   verbatim, one file apart, the echo read as an editing slip rather than as structure. The opener
   is the side that yields, because the play's opening line is load-bearing to a reader who opened
   the book there. Checkable: strip links, and an opener should share no four-gram with its plays.
+- **A term is glossed plainly where it is first used and italicised where it is owned**
+  (`9dd4d6b84b80`). `book/STYLE.md` gives italics to a term's first use and, for failure modes,
+  insists a book-wide name has exactly one first use. Eighteen self-contained plays in six suites
+  guarantee those two rules collide: a play needs a word before the suite that owns it arrives. The
+  use-site gets a defining clause in plain text; the owning play coins the term in italics. This
+  keeps Part I's promise ("terms are defined where they are first used") without giving any term two
+  coinages, and it costs the use-site about twenty words. Do not resolve a future collision by
+  narrowing the promise in Part I — that was the alternative on the table and it was declined.
 
 ## Open questions
 
@@ -1818,7 +1885,10 @@ Append discovered constraints and cross-task notes here as work proceeds.
   working slightly too literally. **That item is now done; see [*The budget trim*](#the-budget-trim)
   below.** `9dd4d6b84b80` holds the terminology promise: *skill*, *card* and
   *harness* are used before being defined, against Part I's stated contract with the reader, and
-  the suites that own those terms do not exist yet to fix it.
+  the suites that own those terms do not exist yet to fix it. **That one is now done as well; see
+  [*The terminology pass*](#the-terminology-pass) below.** By the time it was worked, the suites had
+  landed and defined two of the three and the glossary existed for Part I to link, so the residue
+  was a single clause — which is the usual shape of a defect deferred past the tasks that caused it.
 - **A third writing task has now independently written the same 100-column checker in `/tmp`**, and
   that settles the question the entry above left to the editorial pass. Milestones 7 and 8 each
   wrote one; the reassessment pass wrote a third, which also had to learn that `len()` on a Python
@@ -2211,6 +2281,24 @@ Append discovered constraints and cross-task notes here as work proceeds.
   *What is genuinely contested*; one is pre-existing, and the other was introduced and fixed during
   this pass — the **tenth** independent writing of a throwaway width checker, which is now a
   slightly embarrassing argument for `6b0110f76388`.
+
+- **A deferred defect shrank by three quarters while it waited, and the item description did not.**
+  `9dd4d6b84b80` was filed against three undefined terms and a glossary that had no address. By the
+  time it was worked, the Harness suite had defined *harness* and *skill* in italics on first use,
+  milestone 15 had written the glossary and a card skeleton, and Part I already linked the glossary.
+  What was left was one clause in one play. **Re-derive a deferred item against the current tree
+  before acting on its description**: a description written at filing time describes a tree that no
+  longer exists, and the parts of it that have quietly closed are not marked.
+- **Two style rules can be individually correct and jointly impossible.** Italics on a term's first
+  use, and one first use per book, cannot both hold in a book of self-contained plays where a play
+  legitimately needs a word the owning suite has not reached. The fix was not to pick a rule but to
+  split the job — plain gloss at the use site, italics at the owning site — and to write that down
+  in the decision log so the next collision is a lookup rather than a re-derivation. Worth watching
+  for elsewhere: a contract kept per-file and a contract kept book-wide will collide wherever the
+  book promises both.
+- **The cheapest way to keep a promise made in print is to keep it.** The item offered narrowing
+  Part I's sentence as the fallback. Twenty-one words of gloss was less work than editing the
+  promise, and considerably less than explaining to a reader why the book hedged its own contract.
 
 ### Failure-mode registry
 
