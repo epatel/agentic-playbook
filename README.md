@@ -8,6 +8,9 @@ a fixed shape, and the argument that justifies them is kept short on purpose.
 afternoon.** Nothing has a required order and nothing has to be built to read it — the markdown in
 [`book/`](book/) is the deliverable.
 
+Or **[read the whole book in one page](https://epatel.github.io/agentic-playbook/)**, diagrams
+drawn and contents in the sidebar.
+
 Complete and readable end to end: 32 chapters, about 41,000 words, every figure traced to a cited
 brief. Licensed [CC BY 4.0](LICENSE).
 
@@ -112,6 +115,10 @@ make                     # lists the targets
 
 Output goes to `build/`, which is generated and never committed. See
 [`cards/building-the-book.md`](cards/building-the-book.md).
+
+The same HTML build is published to
+[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
+`main`, by [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
 
 ## What is in this repository
 

@@ -1,0 +1,67 @@
+# Publish the book to GitHub Pages.
+#
+# The site is the same single self-contained file `make html` produces locally, renamed to
+# index.html. Nothing is committed: build/ stays generated, and this workflow rebuilds it from
+# the markdown on every push to main.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Let one deployment finish rather than cancelling it: a half-published site is worse than a
+# slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # --embed-resources, which is what makes the output one file, needs pandoc 3.1.7 or newer.
+      # Ubuntu's apt package is older than that, so take the release directly and pin it.
+      PANDOC_VERSION: '3.11'
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install pandoc
+        run: |
+          deb="pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          curl -fsSL -o "/tmp/$deb" \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/$deb"
+          sudo dpkg -i "/tmp/$deb"
+          pandoc --version | head -1
+
+      - name: Check the book
+        run: make check
+
+      - name: Build the book
+        run: make html NAME=index
+
+      - name: Assemble the site
+        run: |
+          mkdir -p site
+          cp build/index.html site/
+          # Pages serves this tree as-is; Jekyll would otherwise try to process it first.
+          touch site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
