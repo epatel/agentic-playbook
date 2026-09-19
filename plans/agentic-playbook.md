@@ -60,7 +60,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 7 | Part I — The Argument | `e93293bfd014` | ✅ done |
 | 8 | Context play suite | `655473ee5afb` | ✅ done |
 | 9 | Harness play suite | `9366c3c324b5` | ✅ done |
-| 10 | Orchestration play suite | `3c6b76dedb59` | ⬜ blocked on 3, 5 |
+| 10 | Orchestration play suite | `3c6b76dedb59` | ✅ done |
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ⬜ blocked on 3, 6 |
 | 12 | Economics play suite | `bffa217221ed` | ⬜ blocked on 3, 6 |
 | 13 | Team play suite | `cdd27e440781` | ⬜ blocked on 3 |
@@ -338,10 +338,49 @@ Four things in it constrain later tasks:
    item `9dd4d6b84b80` is waiting on. *Card* is still undefined, and belongs to the Context suite's
    fourth play (`703e507c86aa`).
 
-**Next up:** the Orchestration suite (`3c6b76dedb59`), unblocked by milestone 5; Verification &
-Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by
-milestone 6; and Team (`cdd27e440781`), which is free to run. **All research is done, Part I and two
-suites are written, and every remaining writing task is unblocked.**
+Milestone 10 added `orchestration/`, the third suite, at roughly 298 / 1,057 / 1,144 / 1,122 words.
+It spends the whole of milestone 5's research pass and leans on its sceptical spine: the suite
+argues for less orchestration than the reader is being sold, while citing the vendors in support.
+
+| File | Owns |
+|---|---|
+| [`orchestration/index.md`](../book/part-2-plays/orchestration/index.md) | The suite opener — names *every piece of orchestration is machinery encoding an assumption about what the model cannot do, and assumptions expire* as the suite's one idea, and frames the three plays as that on three axes: across context, across steps, across the working tree |
+| [`decompose-into-subagents.md`](../book/part-2-plays/orchestration/decompose-into-subagents.md) | Fan out to read and single-thread the write, tool allowlists as mechanical isolation, fixed return formats that can be cross-checked, and holding tokens constant before believing a fan-out |
+| [`make-the-control-flow-deterministic.md`](../book/part-2-plays/orchestration/make-the-control-flow-deterministic.md) | Splitting on reversibility and horizon, irreversible actions performed by code, model-driven work at bounded leaves, what LangGraph and n8n each actually sell, and the removability test |
+| [`work-in-parallel-without-collisions.md`](../book/part-2-plays/orchestration/work-in-parallel-without-collisions.md) | Partition-plus-escape-clause briefs, worktrees as ergonomics rather than a boundary, landmine files, overlap preflight, and sequential integration with the suite run on the merged tree |
+
+Five things in it constrain later tasks:
+
+1. **Three failure modes are registered**, all new: **the Tidy Summary**, **the Load-Bearing
+   Scaffold**, and **the Clean Merge**. The first is milestone 5's gotcha (a). Gotcha (c) is the
+   Clean Merge. Gotcha (b) — the brief travels, the conversation does not — was **used and
+   deliberately left unnamed**: it appears as step 5 of *Decompose into subagents* rather than as a
+   second name next to the Brief That Never Arrived, which the handoff note flagged as a possible
+   collision. Gotcha (d) is spent as a checklist item, not a name.
+2. **The suite uses `meridian`, a Ruby freight-booking platform whose monorepo holds nineteen
+   deployable services**, across all three worked examples. It is deliberately Ruby: the sharpest
+   collision in the pass is a rename that survives every test and fails at runtime, which a type
+   checker would have caught in a typed language. Three suites still need their own project.
+3. **All five worked-example scenarios from the hub's map are now spent or deliberately declined.**
+   The migration-ordering and rename collisions stayed in one example, as the hub predicted they
+   could; no fourth play was wanted, which is a second data point against the play-count question.
+   The refund-agent scenario was declined as a product-building example in a book for people
+   building software, and the n8n triage scenario was re-cast onto `meridian`'s own dependency-bump
+   pipeline so that one project carries the suite.
+4. **Octomind is cited nowhere.** Its primary page was unreachable during milestone 5 and the
+   framework-removal genre has no credible successor, so the suite makes the build-versus-adopt
+   argument structurally — a checkpoint is a save point, not a supervisor — rather than leaning on
+   an unverified two-year-old post. The outstanding verification lead stays outstanding and is now
+   cited by nothing.
+5. **The Economics suite still owns `single-agent-wins.md`.** This suite cites it once, for the
+   five-of-six protocol-matched comparison, and does not build an example on it. *Know when not to
+   use an agent* has the material intact, including Anthropic's "optimizing single LLM calls… is
+   usually enough", which is its epigraph and is unspent.
+
+**Next up:** Verification & Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III
+(`c1416f44c483`), unblocked by milestone 6; and Team (`cdd27e440781`), which is free to run. **All
+research is done, Part I and three suites are written, and every remaining writing task is
+unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -675,6 +714,23 @@ browser is a reasonable substitute for a PDF engine.
   added a date stamp to a paragraph whose argument is structural. The rule generalises past the
   staleness table in `tooling.md`: a figure that does not change what the reader does is a liability
   with no upside, and the test is whether removing it weakens the sentence.
+- **A worked example's programming language is a content decision, not decoration.** The
+  Orchestration suite's sharpest artefact is a rename that both branches test green and that fails
+  only in the merged tree. Written in a typed language that example is wrong — `tsc` catches it
+  before anyone merges — so `meridian` is Ruby, and the failure is a runtime `NoMethodError`. The
+  rule generalises: if the point of an example is a class of defect, check that the example's stack
+  can actually exhibit it. The narrower version of the same problem is worth stating too, because
+  it is the honest one — in a typed codebase that collision reappears through stringly-typed names
+  (queue names, route paths, feature-flag keys), and a play that implies types abolish it would be
+  overselling.
+- **A research pass's strongest scenario may be declined on reader fit.** `langchain-langgraph.md`
+  offers a refund agent with a $500 approval threshold, written twice, and it is the best
+  build-versus-adopt comparison in the pass. The Orchestration suite did not use it: this book's
+  reader builds software with agents rather than building agent products, and a customer-support
+  refund flow puts them in somebody else's problem for four hundred words. The material survives —
+  the resumability argument, the `interrupt()`-inside-a-tool mechanic, and the beat that neither
+  version detects the crash are all in the play — re-hosted on the suite's own project. A brief
+  supplies evidence and an illustration; the illustration is the part a writer may replace.
 - **Three plays per suite is a floor, not a ceiling** — settled for the Context suite at least
   (user decision, milestone 19), which takes a fourth play on the cards pattern. This does not
   license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
@@ -1002,6 +1058,45 @@ Append discovered constraints and cross-task notes here as work proceeds.
   mapping utilities"). The Team suite's shared-skill-library play will want the same finding from
   the other end — a library whose skills were described by their authors, for their authors.
 
+- **Milestone 10 named milestone 5's gotchas (a) and (c), spent (d), and deliberately left (b)
+  unnamed.** (a) is **the Tidy Summary** in *Decompose into subagents*; (c) is **the Clean Merge**
+  in *Work in parallel without collisions*; (d) — the fan-out that was a compute budget — is a step
+  and
+  a checklist item in *Decompose into subagents*, which is the right weight for it, since the
+  remedy ("give one agent the same budget and measure") is cheaper than the diagnosis. (b), the
+  brief-travels-conversation-does-not asymmetry, is stated as step 5 of that play and named nowhere.
+  The handoff note asked whether it wanted the Brief That Never Arrived's name; the answer is no,
+  and neither does it want a third. They are different phenomena — one is a file that never loaded,
+  the other is a file that loaded correctly while an unwritten convention did not travel — but the
+  second has no separate tell a reader could act on beyond "write it down", which is already the
+  step. A
+  name with no tell is decoration.
+- **The Orchestration suite's plays are the first in Part II whose evidence mostly argues against
+  their own subject.** Each play cites a vendor or a study limiting the technique it teaches, in
+  *The play* rather than in a caveat at the end. That is the sceptical spine milestone 5 identified,
+  and it survived contact with the template: the five-of-six protocol-matched comparison sits inside
+  a
+  numbered step, not in the failure mode. Worth copying for Part III, which owns the same posture at
+  chapter length.
+- **The `single-agent-wins.md` brief is left largely unspent on purpose.** The Orchestration suite
+  draws one figure from it. Its best material — Anthropic's "optimizing single LLM calls with
+  retrieval and in-context examples is usually enough", the AssetOpsBench latency result with both
+  halves, and the METR doubling-time trend — belongs to *Know when not to use an agent*
+  (`bffa217221ed`), and spending it three plays earlier would have left that play re-deriving an
+  argument the book had already made.
+- **Milestone 10 hit no 100-column overshoots and no budget overruns**, having run a throwaway width
+  checker from `/tmp` and the build's own `word_count` per section. That is the fourth independent
+  writing of the width checker, and the second task to discover that `scripts/build_book.py` already
+  contains the section-accurate word counter that makes budget compliance checkable rather than
+  estimated. Board item `6b0110f76388` should land both: a long line is a problem, and a section
+  over its template budget is at least a note.
+- **The Orchestration suite cites four of milestone 5's seven briefs and no adoption figures**, on
+  the precedent the Harness suite set. No LangChain download counts, no n8n valuation, no tool
+  table: two of the best-known parallel-agent tools in that table died or announced sunset inside a
+  year, and the plays name tools only where a mechanic is that vendor's — `tools: Read, Glob, Grep`
+  and the
+  git-redirect block list, both attributed to Claude Code 2.x in the sentence that uses them.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -1017,3 +1112,6 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |
 | **the Unsummoned Skill** | A skill that is written, committed, and never triggered. The metadata loaded as designed and lost the match; a non-match is not an event anything logs. | `harness/package-repeatable-expertise.md` |
 | **the Instruction You Did Not Write** | Agent behaviour that traces to nothing in your repository, because it arrived in a tool description — authored context from a connected server. | `harness/wire-in-the-outside-world.md` |
+| **the Tidy Summary** | A delegated worker returns a well-organised, correct-as-far-as-it-goes summary that reads identically whether the work was thorough or partial. The compression is why you delegated; it is lossy exactly where you would check. | `orchestration/decompose-into-subagents.md` |
+| **the Load-Bearing Scaffold** | A scripted stage built around a capability gap that has since closed, which can no longer be removed because retry logic, metrics, and neighbouring stages have grown into it. | `orchestration/make-the-control-flow-deterministic.md` |
+| **the Clean Merge** | Git reports success, both branches were green, and the merged tree was never tested by anyone. The conflicts git can see are the survivable class; the expensive class exists only in the union. | `orchestration/work-in-parallel-without-collisions.md` |
