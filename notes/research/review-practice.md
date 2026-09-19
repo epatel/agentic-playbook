@@ -314,6 +314,24 @@ the bounty was removed, more reports arrived, they were more likely to be real, 
 them were AI-assisted. Anyone citing curl as proof that AI submissions are worthless is citing
 January 2026 and stopping.
 
+**Do not extend that into a claim about the recovery. Added 19 September 2026 by `3884b4f3fc82`,
+which re-read all three posts.** "The money was the slop vector" is supported for the *January*
+diagnosis — Stenberg suspected "the idea of getting money for it is a big part of the explanation"
+for the volume. It is **not** supported as the explanation for the April turnaround, and the arc
+recorded above is why: **two variables moved, not one.** Reporting left HackerOne on 1 February and
+came back on 1 March, and post [28] dates the change from the second, in consecutive sentences:
+"In March 2026, the curl project went back to Hackerone again once we had figured out that GitHub
+was not good enough. / From that day, the nature of the security report submissions have changed. /
+The slop situation is not a problem anymore." Stenberg also names tooling as a driver — "The tools
+are still improving" — and his February post immediately hedges the tsunami quote ("Perhaps partly
+because of our switch over to GitHub?"). Part III printed "the variable that changed was the money,
+not the tooling" and has been rewritten to carry both changes and Stenberg's own attribution.
+
+Two smaller fixes made at the same time, both now corrected in Part III: the bounty was
+**announced** ended on 26 January and **stopped on 31 January**, and the post pairs "87 confirmed
+vulnerabilities and over 100,000 USD" rather than saying a bounty was paid out on each of the 87.
+Every quotation Part III prints from these three posts is verbatim, italics included.
+
 ### Team practice in 2026
 
 GitHub's own published guidance (7 May 2026) is the most specific thing in the open. Vendor

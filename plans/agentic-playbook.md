@@ -98,6 +98,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument — carried in full; two missing links added | ✅ done |
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources — both incidents hold, one framing was wrong and is corrected in print | ✅ done |
 | `f0669b48dbc0` | Untrack `scripts/__pycache__` and gitignore it — already untracked by `37dfb14`; added the `*.pyc` half and confirmed nothing else generated is tracked | ✅ done |
+| `3884b4f3fc82` | Re-check Part III's remaining derived figures — 26 sources opened, eleven defects in print, four of them the same species as the reward-hacking trio | ✅ done |
 
 ## Current state / handoff
 
@@ -110,8 +111,14 @@ changed, and the new obligation it puts on anyone editing a worked example, is i
 pass*](#the-verification-pass) below. **Read that one before touching any block that prints command
 output.**
 
-**And read [*The source-verification pass*](#the-source-verification-pass) before writing a sentence
-containing a number.** Board item `57772ad900e3` opened the seven primary sources that three
+**And read [*The source-verification pass*](#the-source-verification-pass) and [*The Part III figure
+re-check*](#the-part-iii-figure-re-check) before writing a sentence containing a number.** The
+second one is the more alarming of the two: `57772ad900e3` found one falsified passage in print, and
+`3884b4f3fc82` went looking for more of the same species in Part III and **found four, plus seven
+other defects**. The habit that catches them is in the re-check's own section and is one line long —
+**when a number is precise, find out what it is a percentage of.**
+
+Board item `57772ad900e3` opened the seven primary sources that three
 research passes could not, and the news is not that they were reachable — it is that one of them
 **falsified a passage already in print**. Part III's per-model reward-hacking figures were a
 secondary write-up's arithmetic on a table nobody had opened; they are wrong, they pointed the wrong
@@ -660,6 +667,16 @@ words per part, and the per-section counter is in the trim note below. Two chapt
 hundred words of their ceiling — *What this book assumes about you* and *The failure modes worth
 naming* — and *Wire in the outside world*'s *The play* is now at exactly its 500-word ceiling.
 
+**Three Part III chapters are now the tightest files in the book.** `3884b4f3fc82` found *What is
+genuinely contested* sitting at **1,559** against a 1,500 ceiling — `57772ad900e3` added 143 words
+to a chapter already at 1,435, and **nothing checks per-chapter budgets**, so `make check` reported
+it clean. It is back to **1,498**, alongside *The failure modes worth naming* at **1,497**. Both
+have single-digit headroom. The trim that paid for the corrections is itemised in the decisions
+below; the one judgement call worth knowing is that it cut a closing clause from the
+recently-rewritten reward-hacking section because it restated a sentence two earlier. **There is a
+standing gap here: `make lint` enforces 100 columns and the style bans but not the word budgets in
+`STYLE.md`, so every budget overrun in this book's history has been found by hand.**
+
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
 GitHub is still the book, and nothing has to be built to read it.
@@ -911,6 +928,108 @@ than a strength.
 **Nothing else in the book needed changing.** The three places that print `Assisted-by:` are
 consistent with the verified kernel and Fedora text, and no chapter had spent a DORA 2025
 coefficient, a Copyright Office quotation, the Fedora wording, or Octomind.
+
+## The Part III figure re-check
+
+Board item `3884b4f3fc82` took the previous pass's finding as a hypothesis rather than a closed
+incident, and went through **every figure Part III prints** — the part carrying more numbers than
+the rest of the book combined — against the primary. **Twenty-six sources were opened.** Fourteen
+arXiv PDFs were downloaded and text-extracted directly; the rest came from vendor pages, project
+blogs, a git-hosted policy file, and one Internet Archive snapshot.
+
+**The hypothesis held. Eleven defects were in print, and four of them are the same species as the
+reward-hacking trio: real arithmetic, performed on a real table, by something that had not opened
+it.** All eleven are fixed. Part III now stands at 5,509 words across four chapters, all four inside
+the 800–1,500 budget, and `make check` reports no defects.
+
+### The one habit worth taking from this
+
+**When a number is precise, find out what it is a percentage *of*.** Every one of the four serious
+defects was a correct numerator over the wrong denominator, or a rate computed from a table that
+publishes counts. None of them was a typo, a bad citation, or an invented figure — the style guide's
+"never invent a measurement" rule was obeyed throughout, and it is not the rule that would have
+caught any of this. Two corollaries, both earned the hard way below:
+
+1. **A source that quotes a third party is not the source.** This is the `Thaler`/Kernochan defect
+   from the previous pass, and it recurred exactly once, in DORA.
+2. **A percentage the source does not print is a derivation, and derivations need checking even when
+   the arithmetic is trivial.** SPINE publishes counts; somebody divided; both endpoints came out
+   wrong.
+
+### The four of the species
+
+| Where | What was printed | What the source says |
+|---|---|---|
+| *The failure modes worth naming*, the Confident Wrong Rewrite | "of the 511 public-set instances Claude Opus 4.1 failed on, 257 — 50.3% — … against 160 syntax errors and **51 tool-use errors**. **Half of everything that goes wrong**…" | SWE-Bench Pro Table 4 is **two-tier**. 511 is failing trajectories **that submitted a patch**, out of **689**; trajectories are not instances (GPT-4o's row sums to 789 against a 731-instance set). **Tool-Use is 121**, in the other tier — the 51 is the *Other* column. And 50.3% is of *submitted* failures: the paper's own prose says **35.9% of failures** |
+| *The failure modes worth naming*, the Instant Concession | "the correct fact remained in the trace in **50% to 86%** of collapses" | SPINE's Table 5 publishes **counts, not rates**. Neither endpoint reproduces — the real span is roughly **62% to 93%** — and the `50` is a raw cell count read as a percentage |
+| *What agents are reliably bad at*, SlopCodeBench | "the concentration metric moving from a mean of **0.39 to 0.68**" | Not a trajectory movement. **0.39 is the niche (<1k-star) human subgroup**, n=8; the paper's own sentence is "agent checkpoints average 0.68 … versus **0.31** … in the human panel" |
+| *Where the time actually goes*, DORA | "**DORA's** separate 2026 **modelling exercise** splits the same way … two different methodologies, one shape" | DORA prints the 35–40% / 10% figures but **endnote 4 attributes them to Stanford**. DORA's own ROI calculator uses **12.5%**. It is DORA relaying a third party, so it is not a second methodology and it corroborates nothing |
+
+### The other seven
+
+- **Long-Horizon-Terminal-Bench conflated two thresholds.** 15.2% and 4.3% are at R≥0.95; "ten of
+  the fifteen completed none" is at R≥1.0, which is the only threshold the paper calls *strict*. At
+  R≥0.95 only **two** models score zero. Also, **v1 is superseded** — the live arXiv version has 17
+  models and Grok 4.5 at 28.3% — so the chapter now names the version, per the staleness rule.
+- **Apiiro was dated a year late.** "2026 telemetry over a seven-month window" is a post published
+  **4 September 2025** whose data ends June 2025, and whose own window is **"six months"** and
+  attaches to a *different* figure. Apiiro states **no window and no baseline** for the four
+  class-shift figures, so "the same dataset, the same window" was an assertion the source never
+  makes. The flat "60%" was The Register's compression of "more than 60%" — the tell that the figure
+  travelled through a secondary.
+- **UTBoost's 15.7% had the wrong base.** It is **92/584**, where 584 is the pool of leaderboard
+  patches that had passed *on the 26 flagged instances*, not an increment against the benchmark.
+- **GitClear's unit slipped.** "623 million changed **lines**" is "623 million analyzed
+  **changes**". And the criticism the book made was the wrong one and weaker than the truth: the
+  report performs **no AI attribution at all**, so there is no unpublished detection method — there
+  is no denominator.
+- **Veracode's quotation was spliced.** The verbatim sentence frames the span as **two years**, not
+  "three editions", and the ellipsis sits inside it: "from approximately 55% to… approximately 55%".
+- **METR's expert forecasts were transposed** — economics 39%, ML 38%, not the other way round.
+- **The curl closer over-attributed.** "The variable that changed was the money, not the tooling"
+  ignores that reporting moved **off HackerOne on 1 February and back on 1 March**, and Stenberg's
+  April post dates the recovery from the second, in consecutive sentences. The bounty was also
+  *announced* ended on 26 January and *stopped* on 31 January.
+
+### What came back clean, which is most of it
+
+Said plainly, because it is the useful half of the result:
+
+- **The 802-developer mandate study is clean end to end** — the largest single block of figures in
+  Part III. Every one of 2.09×, 1.46–1.72×, 1.99× at nine months, +86% management, the seniority
+  ladder and its "statistically indistinguishable", +44% / +12%-not-significant, ~19%→~84% automated
+  review, "about 20% longer", merge flat and revert declined, and the "not typical, immediate, or
+  free" sentence, all verbatim at the printed precision.
+- **METR's RCT and its February 2026 walk-back**, the Microsoft telemetry (+24.0%, CI +14.5% to
+  +33.7%, disclosure sentence verbatim), the GitHub Copilot RCT, Borg et al., the Coherence Collapse
+  trajectory figures, the agent-level context-rot study, SWE-Bench Pro's public/commercial gap, both
+  contamination results, Terminal-Bench's 12.1 points, and every curl quotation including its
+  italics.
+- **The reward-hacking arc in *What agents are reliably bad at* survives**, and the previous pass's
+  outstanding "someone should re-check the Anthropic PDF" gap is **closed** — with a split. The
+  **12% sabotage is in the paper**, verbatim in the Figure 2 caption. The **50% alignment faking is
+  not**: the paper renders it as a chart and the rate lives only in Anthropic's own writeup. Cite
+  each to the right artefact.
+- **The OpenAI 403 is no longer a gap.** The SWE-bench-retirement article reads in full from the
+  Internet Archive, and 138 / 64 runs / 59.4% / the quoted clause / February 2026 all verify against
+  OpenAI's own prose.
+
+### Two traps left behind for whoever edits these chapters next
+
+1. **Google's enterprise RCT: the abstract contradicts the hypothesis box, and the book follows the
+   box.** The abstract says AI "significantly shortened" the time; that is **H1**, unadjusted. The
+   **21% is the adjusted estimate and is not significant** (p = 0.086) — "Hypothesis 2: Partially
+   Supported… lost its significance (p = NS)". Part III is right. **Do not "fix" it against the
+   abstract.**
+2. **Veracode's 86% means opposite things in adjacent editions** — XSS *failures* in 2025, crypto
+   *passes* in 2026.
+
+### One thing this pass did not do
+
+**It did not revisit the reward-hacking table or the DORA 2025 material**, both of which the task
+scoped out as already done by `57772ad900e3`. The DORA *2026* ROI report was in scope and is where
+the fourth defect was, which is worth noting: "the DORA material is clean" was true of the edition
+that had been checked and not of the one that had not.
 
 ## The editorial pass
 
@@ -1859,6 +1978,36 @@ Grafana's spelling**; the reason is in the brief.
   tree, and neither was pre-emptively ignored. **Speculative ignore rules were declined**: an entry
   for an artefact that cannot appear is a claim about the build that later stops being true
   silently. Add one when something actually shows up in `git status --ignored`.
+- **A precise number is a claim about a denominator, and the denominator is the part that goes
+  wrong** (`3884b4f3fc82`). Eleven defects were found across Part III's figures and not one was an
+  invented measurement, a bad citation, or a transcription slip — the style guide's existing rules
+  all held. Four were a correct numerator over the wrong base: a two-tier table read as flat, a
+  human-repository subgroup read as a trajectory start, a share of a pre-selected pool read as a
+  benchmark-wide increment, and a rate divided out of a table that publishes counts. **The check
+  that finds them is to ask what the figure is a percentage *of* and confirm the source says so.**
+  Merged into the standing guidance at the top of *Current state*.
+- **A source quoting a third party is not the source, and it recurs** (`3884b4f3fc82`). The
+  previous pass found this twice in the Copyright Office report; this pass found it once more, in
+  DORA's 2026 ROI report, where a Stanford estimate carried in DORA's narrative had become "DORA's
+  modelling exercise" and was doing corroboration work it cannot do. **Follow the endnote before
+  attributing a figure to the document you found it in.**
+- **"Verified" attaches to an edition, not to an organisation** (`3884b4f3fc82`). This item was
+  told the DORA material was clean, which was true of the 2025 report `57772ad900e3` had read and
+  false of the 2026 ROI report it had not. A clean-source note in this file should name the
+  artefact and its version, not the publisher.
+- **Where a figure is chart-only in the paper but printed in the vendor's own post, cite the
+  post** (`3884b4f3fc82`). Two instances, both load-bearing: METR's `+2% to +39%` interval exists
+  only as an unlabelled error bar in Figure 1 but verbatim in METR's February 2026 write-up, and
+  Anthropic's 50% alignment-faking rate is a chart in the arXiv paper and a sentence in Anthropic's
+  own post. The 12% sabotage figure *is* in the paper. **The two halves of one study can need two
+  different citations, and the brief should say which is which.**
+- **A budget trim may cut a recently-rewritten section, but only for restatement, and it gets
+  logged** (`3884b4f3fc82`). Paying for Part III's corrections needed ~90 words out of *What is
+  genuinely contested*. The clause taken from `57772ad900e3`'s new reward-hacking section — "and
+  noticing that the residue capability leaves behind is precisely the part that telling it to stop
+  was supposed to cover" — restated "What it did not improve was how much the instruction helped
+  once the work was impossible" two sentences earlier, which is the editorial pass's own criterion.
+  **No claim, figure or quotation from that section was touched.**
 
 ## Open questions
 
@@ -2622,6 +2771,29 @@ Append discovered constraints and cross-task notes here as work proceeds.
   of them are still second-hand and one future reader in a hurry is all it takes. The Asana
   incident, the two CVE clusters, and the GitHub-PR-title injection are cited nowhere and are
   labelled as such at each entry rather than only in the gaps section.
+- **Part III's figures have now all been opened at source (`3884b4f3fc82`), and the result is
+  mostly clean.** Twenty-six primaries; eleven defects in print, all fixed; four of them the
+  reward-hacking species. Full account in [*The Part III figure
+  re-check*](#the-part-iii-figure-re-check). The three things most worth carrying out of it: the
+  **802-developer mandate study is clean end to end** and is the largest block of figures in the
+  part; **Google's enterprise RCT abstract contradicts its own hypothesis box** and the book
+  correctly follows the box, so do not "correct" it; and **`web.archive.org` is reachable from this
+  harness** for at least openai.com and apiiro.com, which contradicts the earlier `mcp.md` note
+  above — the block that note records may have been transient or path-specific. Worth re-testing
+  before concluding the Archive is unavailable.
+- **`make lint` does not check the per-chapter word budgets in `STYLE.md`**, and that is how *What
+  is genuinely contested* sat at 1,559 against a 1,500 ceiling from `57772ad900e3` until
+  `3884b4f3fc82` counted by hand. Both are back inside. A future item could teach `check_style.py`
+  the three budgets that are mechanical — Part I chapter, Part III chapter, suite opener — which
+  would close the last category of defect in this book that only a human has ever caught.
+- **Retrieval routes, confirming and extending `57772ad900e3`'s table.** `curl` + `pdftotext
+  -layout` opened fourteen arXiv PDFs with no failures, including ones earlier passes recorded as
+  "resisted text extraction" — the obstacle was always the fetch size limit. Two additions worth
+  recording: **arXiv version pinning matters** (`arxiv.org/pdf/<id>v1` gets the version a brief
+  actually cited, and two Part III sources have since been revised with different headline
+  numbers), and **a figure with no numeric labels is not extractable by any route** — render the
+  page with `pdftoppm -r 600` and read the image before concluding a number is missing, which is
+  how METR's chart-only confidence interval was settled.
 
 ### Failure-mode registry
 

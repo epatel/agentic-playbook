@@ -46,7 +46,10 @@ Separate evidence about autocomplete/chat from evidence about *agents*.
   the interval explicitly: the effect was a **19% slowdown, CI +2% to +39%**. [3]
 - The perception gap, all four numbers from the abstract: developers **forecast −24%** before
   starting; **estimated −20%** afterwards; economics experts predicted **−39%**; ML experts
-  predicted **−38%**. Actual: **+19%**. [2]
+  predicted **−38%**. Actual: **+19%**. [2] **Keep the pairing straight** — the abstract's clause is
+  "experts in economics (39% shorter) and ML (38% shorter)", and Part III had the two transposed
+  until `3884b4f3fc82` swapped them back on 19 September 2026. The numbers are close enough that
+  nothing checks this but the source.
 - Mechanism, as METR reports it: with AI allowed, developers spend less time actively coding and
   searching, and more time "prompting AI, waiting on/reviewing AI outputs, and idle". [1]
 - Authors' own robustness statement, verbatim: *"Although the influence of experimental artifacts
@@ -143,8 +146,24 @@ value model running seven capabilities through DORA delivery metrics to financia
   measurements): first-year ROI **39%**, first-year value **~$11.6 million** against investment
   **~$8.4 million**, payback **~8 months**, fully loaded salary per head **$176,000**, and a
   **$344,000** negative downtime impact driven by change failure rate rising **from 5% to 6%**. [12]
-- Productivity gain by task type in the model: **35–40% on simple, greenfield tasks** versus **~10%
-  on complex legacy code**. [12]
+- ~~Productivity gain by task type in the model: **35–40% on simple, greenfield tasks** versus
+  **~10% on complex legacy code**.~~ **Corrected 19 September 2026 by `3884b4f3fc82`, which read
+  the primary PDF rather than the InfoQ write-up.** The figures are real and printed on page 36:
+  "Research analyzing tens of thousands of engineers reveals that while artificial intelligence
+  yields a 35–40% productivity gain on simple, greenfield tasks, its impact on complex, legacy
+  brownfield code is often 10% or less." **But they are not DORA's.** Endnote 4 for that chapter
+  attributes them to **Stanford University, "Software Engineering Productivity Research"**, and
+  DORA prints no N, no method and no date for it. They are also **not in DORA's model**: the ROI
+  calculator's documented productivity input is "a conservative estimate of **12.5%**", with a
+  separate 15% J-curve drop over three months (Appendix, pp. 55–56). Note also that "10% or less"
+  is an upper bound, not a central estimate.
+  **So this cannot be cited as a second methodology converging on the 2× mandate study's
+  legacy/greenfield split.** It is DORA relaying a third party. Part III said "DORA's separate 2026
+  modelling exercise splits the same way … two different methodologies, one shape" and has been
+  rewritten to say that DORA relays a Stanford estimate and prints no methodology behind it.
+  The primary PDF is ungated at
+  `https://services.google.com/fh/files/misc/dora-roi-of-ai-assisted-software-development-2026.pdf`
+  — `dora.dev/ai/roi/report/` is a stub in front of a gated Google Cloud form. [11]
 
 ### 5. The optimistic RCTs — and what they actually measured
 
@@ -169,6 +188,18 @@ value model running seven capabilities through DORA delivery metrics to financia
 - Three AI features: AI Code Completion, Smart Paste, Natural Language to Code.
 - Result: **96 minutes with AI versus 114 minutes without**; best estimate of the effect **~21%**,
   "although the confidence interval is large". [15]
+- **Read the hypothesis boxes, not the abstract — they disagree, and only one of them is about the
+  21%.** Verified 19 September 2026 by `3884b4f3fc82`. The abstract says "AI **significantly**
+  shortened the time developers spent on task": that is **H1**, the unadjusted comparison
+  (t(83.6) = 2.11, p = .038). The **21% is the adjusted estimate and it is not significant** —
+  "**Hypothesis 2: Partially Supported.** Controlling for other factors, using AI remained
+  associated with a shorter time on task but lost its significance (p = NS)", with
+  β₁ = −0.24, 95% CI [−0.51, 0.03], p = 0.086. The paper's own range for the adjusted effect is
+  **21% to 26%**. Part III's "found roughly 21% faster, with an effect that lost statistical
+  significance once developer- and task-level factors were controlled" is **correct**, and the
+  abstract is the trap that will make a future editor think otherwise. Do not "fix" it.
+- Separately, the **"large but not significant"** language in the intro is about **H3**, the
+  interaction between AI use and daily coding hours. Do not attach it to the main effect.
 - Authors' caveat, verbatim: *"the effect size obtained in our lab study will not necessarily apply
   more broadly, or that the effect of AI found using internal Google tooling in the summer of 2024
   will translate across tools and over time."* [15]
@@ -179,6 +210,11 @@ value model running seven capabilities through DORA delivery metrics to financia
 
 - **202 developers** with 5+ years' experience; **104 with Copilot, 98 without**, randomly assigned.
   Task: API endpoints for a restaurant-review web server, graded against **10 unit tests**.
+  **Note added 19 September 2026 by `3884b4f3fc82`: the post contradicts itself on N.** Its lede
+  says "we recruited 202 developers"; its Methodology says "we recruited **243** developers… We
+  received valid submissions from 202". 202 is the analysed N, not the assigned N. The book follows
+  the lede, which is the source's own headline figure — leave it, but do not write "243" either
+  without saying which number is which.
 - Copilot group had a **53.2% greater likelihood of passing all 10 unit tests (p<0.01)**.
 - Blind review phase: **25 reviewers**, **1,293 reviews**. Readability **+3.62% (p=0.003)**,
   reliability **+2.94% (p=0.01)**, maintainability **+2.47% (p=0.041)**, conciseness **+4.16%
@@ -245,6 +281,14 @@ requests**, **January 2024 – April 2026**.
   attainable under favorable conditions and over a long enough horizon, not that it is typical,
   immediate, or free."* Adoption was **not randomised**: *"developers chose when to adopt and how
   heavily to use AI."* [18]
+- **Fully re-verified against the PDF, 19 September 2026 by `3884b4f3fc82`, and clean.** Every
+  figure Part III prints from this study is in the paper at the printed precision: 802 / 196,212 /
+  Jan 2024–Apr 2026, 2.09× (21.2 → 44.3), 1.46–1.72×, 1.99× at nine months, management +86%, the
+  seniority ladder (IC +27%, Senior +42%, Staff +39%, Principal +38%, "statistically
+  indistinguishable across the seniority ladder"), 2022+ repositories +44%, legacy +12% and not
+  significant, automated review ~19% → ~84%, "about 20% longer from first human review to merge",
+  merge flat and revert declined, and the "not typical, immediate, or free" sentence verbatim.
+  **This is the single largest block of figures in Part III and none of it moved.**
 
 **Agarwal, He, Vasilescu — "AI IDEs or Autonomous Agents?"**, arXiv 2601.13597, 20 January 2026
 (revised 27 January 2026). [19] Staggered difference-in-differences with matched controls on the
@@ -358,7 +402,22 @@ changes**, **2023–2026**. [26]
 - Cross-file function connectivity: **343 method calls per thousand changed lines (2023) → 223 (2026
   YTD)**.
 - Legacy code long-term-update percent: **1.7% (2023) → 0.46% (2026 YTD)**.
-- Error-masking constructs **+47%**; two-week code churn **+15%**.
+- Error-masking constructs **+47%**; two-week code churn **+15%**. **Flagged 19 September 2026 by
+  `3884b4f3fc82`: the +47% is unsupported on the public page.** It appears exactly once, as a bare
+  parenthetical in the abstract — no base year, no absolute values, no body section, no definition
+  of "error-masking construct". Unlike the +81%, nothing free lets you check it. The whitepaper PDF
+  is email-gated.
+- **Unit warning, same date.** GitClear counts **623 million *changes***, and separately uses
+  "changed lines" as the denominator for its rate metrics ("per million changed lines"). A sidebar
+  on the same page says "600M+ analyzed **commits**". Three units, one page. Part III said "623
+  million changed lines" and now says "623 million code changes".
+- **The study performs no AI attribution at all**, which is a stronger criticism than the one
+  usually made and a different one. There is no AI-assisted cohort and therefore no denominator:
+  the corpus is every change in the period, and the link to AI is inferred from the timing ("as AI
+  authorship has scaled… the structural habits have eroded"). Saying "the detection method is not
+  published" concedes that a detection method exists. It also invites a rebuttal — GitClear's
+  January 2026 companion report does describe an AI measurement, "cohort data retrieved from APIs
+  integrated with Cursor, Github Copilot & Claude Code". Part III has been reworded accordingly.
 - Heavy AI users out-produce non-users **4–10×**, but **against their own pre-AI baseline the gain
   is 25%**. This is GitClear's most honest number and the one least quoted.
 - **Derived arithmetic, flagged:** GitClear's headline deltas are baselined on **2023**, not 2022.

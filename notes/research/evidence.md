@@ -182,6 +182,33 @@ the list a writer needs in one place.
   has now been read end to end. It publishes effect sizes as charts with no printed values, on
   purpose (its footnote 20 explains why). The single printed coefficient in the document is in the
   Methodology chapter and is fitted to `simulated_data`. See `productivity-evidence.md`.
+- **Added 19 September 2026 by the Part III re-check (`3884b4f3fc82`): "the correct fact remained in
+  the reasoning trace in 50% to 86% of collapses" (SPINE).** SPINE's Table 5 publishes **counts, not
+  rates** — four models × two banks of raw present/absent pairs. Neither endpoint reproduces: the
+  false-presupposition cells run 62.1% to 83.3% and the unethical cells 85.1% to 93.3%, so the true
+  span is roughly 62% to 93%. The `50` is a raw count (Olmo3-7b-Think's "fact present" cell) read as
+  a percentage. **Use the paper's own sentence instead** — collapse "typically occurs while the
+  correct position remains represented rather than after it disappears from the reasoning trace" —
+  which is what the table supports and does not need a rate. This one had reached print and has been
+  rewritten in *The failure modes worth naming*.
+- **Also added: "of the 511 public-set instances Claude Opus 4.1 failed on … 51 tool-use errors"
+  (SWE-Bench Pro Table 4).** Three defects in one clause, all from reading a two-tier table as a
+  flat one. 511 is the count of failing *trajectories in which a patch was submitted*, not instances
+  and not all failures — GPT-4o's row sums to 789 against a 731-instance set, which is the check
+  that proves it. Tool-Use is **121**, under the *Not-Submitted* tier; the 51 belongs to the *Other*
+  column. And 50.3% is of submitted failures: the paper's own prose puts wrong solutions at **35.9%
+  of failures**. In print and now corrected.
+- **Also added: "agent complexity concentration moved from a mean of 0.39 to 0.68" (SlopCodeBench
+  Table 2).** Not a within-trajectory movement and not the right baseline. 0.39 is the erosion of
+  the **niche (<1k-star) human repository subgroup**, n=8; the paper's own comparison sentence is
+  "agent checkpoints average 0.68 ± 0.20 erosion versus **0.31** ± 0.12 in the human panel". In
+  print and now corrected.
+- **Also added: "DORA's 2026 modelling exercise puts 35–40% on simple greenfield work against
+  roughly 10% on complex legacy."** DORA prints those figures, but **they are not DORA's** — endnote
+  4 of that chapter attributes them to Stanford's Software Engineering Productivity Research, and
+  DORA's own ROI calculator uses **12.5%**. Citing them as a second methodology converging on the 2×
+  mandate study's split is the *Thaler*/Kernochan defect again: a source quoting somebody else, read
+  as the source speaking. In print and now corrected.
 
 **Review**
 
