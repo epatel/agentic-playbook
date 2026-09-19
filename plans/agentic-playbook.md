@@ -88,6 +88,10 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch | ⬜ blocked on milestone 6 |
+| `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
+| `703e507c86aa` | Write the cards play — the Context suite's fourth | ⬜ blocked on milestone 8 and `f94b88e05069` |
+| `0bdccc346bd4` | Thread preparation-vs-execution into Part I | ⬜ blocked on milestone 7 and `f94b88e05069` |
+| `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument | ⬜ blocked on milestone 15 |
 
 ## Current state / handoff
 
@@ -115,6 +119,35 @@ Three things every writing task must do, which are easy to miss:
 Part directories are numbered (`part-1-argument/`, `part-2-plays/…`) because part order is locked;
 files inside them are content-named and never numbered.
 
+### The author's own material
+
+**Read this if you are writing any part of the book.** The book has a commissioning author who
+has already published on this subject, and that material is not a third-party source to be
+weighed. It is the book's own argument, written earlier and shorter.
+
+Two posts, both by the repo owner:
+
+| Post | The argument | Where it belongs |
+|---|---|---|
+| [Cards](https://memention.com/blog/2026/05/25/Cards.html) | Two-tier context: a ~15-line always-loaded `CLAUDE.md` index of natural-language triggers, plus self-contained `cards/` loaded on demand. "The only real rule is self-containment. One card, one load, no chains." Also the *rocket-launch mindset* — the project is ready before the agent starts; preparation mode and execution mode are distinct. | Context suite (`703e507c86aa`) and Part I (`0bdccc346bd4`) |
+| [The unit of work](https://memention.com/blog/2026/05/29/The-unit-of-work.html) | An agent's unit of work is a capability, not a layer. Layer-first scatters a feature across six files and the agent reassembles it every session. "For us, reading and writing code was the expensive part… For an agent writing is cheap, and the expensive thing is behavior it can't see." | Part IV Wave #2 (`5e0f39858134`), already named in *Scope a task to fit the window* |
+
+Summaries are in [`notes/research/agent-context-files.md`](../notes/research/agent-context-files.md)
+and [`notes/research/tooling.md`](../notes/research/tooling.md) [20][21]. Read the posts anyway;
+the briefs compress them.
+
+**Attribution convention.** Absorb this material into the book's own voice. Do not cite it in-line
+as an external source — "the argument is made well in *The unit of work*" reads oddly in a book by
+the person who made it. URLs go in the appendix's further reading. This is the one case where the
+"cite the source" reflex produces worse prose.
+
+**Part IV authors specifically:** Wave #2 is defined in `notes/raw/idea.md` as "refactoring
+projects, optimize for full agent development". *The unit of work* is what that refactor consists
+of — feature-first layout, locality of behaviour, explicit over invisible control flow, and the
+nuance that cross-cutting concerns still belong in shared infrastructure as trustworthy black
+boxes rather than hidden magic. Write it into `bec9accd89be`; `5e0f39858134` exists only to check
+that you did.
+
 `notes/research/` now exists. Milestone 4 filled it with six files — a hub brief plus five
 subject briefs, because five subjects in one file would have made a writer chasing token-pricing
 figures read a survey of MCP security to find them:
@@ -134,6 +167,10 @@ things in it will change what you write:
 1. **Cite vendor documentation, not blog posts, on context files.** Claude Code has read
    `AGENTS.md` natively since v2.1.277; a wall of confident mid-2026 posts says otherwise and is
    simply stale. The hub brief names one of them explicitly as an example rather than a source.
+   **This rule is about third-party claims of fact, and it does not apply to the author's own
+   posts.** Those are not evidence to be corroborated, they are the book's own material — see
+   "The author's own material" below. Milestone 19 found that this line, read literally, had
+   filtered them out of the Context suite entirely.
 2. **The staleness table in `tooling.md` ranks every finding by how fast it rots**, with a
    suggested hedge for each. Use it rather than re-deriving where the line is; it is consistent
    with `book/STYLE.md` on volatile facts.
@@ -582,6 +619,22 @@ browser is a reasonable substitute for a PDF engine.
   object.** HTML runs three levels deep, so a reader can jump to any of the five play headings; the
   PDF stops at two, because eighteen plays times five headings is a contents section longer than a
   chapter. Same book, same table of contents in `book/README.md`, different affordance.
+- **The author's own published material is book content, not a cited source** (user decision,
+  milestone 19). Milestone 19 audited the two posts the author supplied and found them almost
+  entirely unspent: *Cards* had reached the book not at all, and *The unit of work* had reached it
+  as a single in-line citation for a phrase. The cause was traceable — the Context-suite guidance
+  "cite vendor documentation, not blog posts" was written to kill stale third-party claims about
+  `AGENTS.md` and, read literally by every writer after it, caught the author's own posts too.
+  That guidance now carries an explicit carve-out, and the handoff note has an *The author's own
+  material* section stating what each post argues and which chapter owns it. The attribution
+  convention is **absorb, do not cite**: the material goes into the book's voice, the URLs go into
+  the appendix's further reading. A book that footnotes its own author reads as though it is
+  quoting someone else.
+- **Three plays per suite is a floor, not a ceiling** — settled for the Context suite at least
+  (user decision, milestone 19), which takes a fourth play on the cards pattern. This does not
+  license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
+  than insert one, and the raise here was made and answered. It does mean a suite author with a
+  genuinely fourth-layer idea has a precedent to point at.
 
 ## Open questions
 
@@ -589,9 +642,11 @@ Raise these rather than guessing. An agent that silently picks one answer commit
 to it.
 
 - **Play count per suite.** `PLAN.md` gives three working titles per suite. Is three a target or
-  a floor? A suite with six plays and one with two would unbalance Part II. Still open —
-  `book/README.md` records three as planned rather than as a ceiling, and asks suite authors to
-  raise a fourth rather than add it quietly.
+  a floor? **Half-resolved** (milestone 19): three is a *floor*, and the Context suite takes a
+  fourth play on the cards pattern. What remains open is the balance question — a suite with six
+  plays next to one with two still unbalances Part II, and nothing yet caps the spread.
+  `book/README.md` continues to ask suite authors to raise a fourth rather than add it quietly;
+  that procedure worked here and should be used again rather than treated as satisfied.
 - ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3): illustrative-but-
   correct for the first draft, with a verification pass (`3b61a6a1a684`) before publication. The
   rules are in [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means).
@@ -599,8 +654,13 @@ to it.
   concrete but guarantee an expiry date. Where is the line? A provisional answer is in
   [`book/STYLE.md`](../book/STYLE.md#volatile-facts) so no author is blocked on it; the editorial
   pass owns the final call.
-- **Appendix templates.** Are the `CLAUDE.md` starter and working-agreement skeleton generic, or
-  is this repo's own setup the worked example?
+- ~~**Appendix templates.**~~ **Resolved** (milestone 19) for the `CLAUDE.md` starter: this
+  repo's own setup is the worked example. The root `CLAUDE.md` is a real two-tier index and
+  `cards/` holds five real self-contained cards, so the template is checked in, exercised daily by
+  every agent on this board, and satisfies illustrative-but-correct without anything being
+  invented. The new Context play (`703e507c86aa`) writes the pattern up; the appendix should
+  extract the skeleton from it rather than invent a second one. The **working-agreement
+  skeleton** is still open — the Team suite has no equivalent artefact in this repo to point at.
 - **Rendering.** Markdown-on-GitHub is the committed deliverable. If a static site is ever wanted,
   that decision needs making before the prose accumulates site-specific link syntax.
 
@@ -843,6 +903,31 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `scripts/build_book.py --check` is the home milestone 18 built for it: it already walks every
   chapter and already skips fenced blocks. Board item `6b0110f76388` carries it, is blocked on
   nothing, and is worth more before the remaining five suites than after them.
+
+- **A guardrail written against stale blog posts silently filtered out the author's own.** The
+  commissioner asked why none of his published thinking had reached the book. It nearly hadn't:
+  of two posts he supplied, *Cards* appeared in the book zero times and *The unit of work* once,
+  as a parenthetical citation for a phrase. Both had been read — milestone 4 filed them properly
+  in `notes/research/tooling.md` [20][21] and wrote a section on the cards pattern into
+  `agent-context-files.md`. The research was fine. The spending was not, and the reason was a
+  single line of writing guidance: *"cite vendor documentation, not blog posts, on context
+  files."* It was aimed at a wall of mid-2026 posts wrongly claiming Claude Code cannot read
+  `AGENTS.md`. The hub brief did carve out an exception, in prose, four hundred lines further
+  down; the headline instruction in the handoff won, as headline instructions do. The lesson
+  generalises past this incident: **a rule stated as a category ("blog posts") will be applied to
+  the category, not to the problem the rule was written for.** If a guardrail names a genre rather
+  than a defect, it will over-fire, and the over-firing is invisible because nobody writes down
+  what they declined to cite. The fix was to name the defect (third-party claims of fact) and to
+  state the exception where the rule is read rather than where it was derived.
+- **The book practised a pattern for six milestones without teaching it.** This repo runs on the
+  cards pattern from the author's own post — a slim root `CLAUDE.md` index plus five
+  self-contained `cards/`, and the Context suite never mentions it. The word "card" appears in
+  *Write the brief the agent actually reads* exactly once, undefined, which is how board item
+  `9dd4d6b84b80` came to exist. Worth noticing as a class of gap: conventions adopted in the
+  *repo* during setup do not automatically become content in the *book*, and the setup milestone
+  is the most likely place for good material to be silently spent on infrastructure instead. It
+  also means the book's best worked examples may already be checked in — the resolved appendix
+  question above turns on exactly that.
 
 ### Failure-mode registry
 
