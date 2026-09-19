@@ -74,6 +74,29 @@ happen.
   automatically in the directory view, which is convenient but makes book content look like repo
   documentation.
 
+## Suite openers
+
+Each of the six suites opens with `index.md`, and it has one job beyond introducing the files under
+it: **name the single idea the suite is an application of, then show each play as that idea at a
+different layer.** The Context suite's opener names *signal over noise* and presents its three
+plays as that one move applied to the always-loaded layer, to a single run, and to the task itself.
+
+The opener is where a unifying principle belongs. It is not a fourth play: as a noun phrase it
+fails the imperative-title rule in [`TEMPLATE-play.md`](TEMPLATE-play.md#title), and rewritten as
+an imperative it collapses into whichever play sits nearest it. Stated in the opener it costs forty
+words. Stated as a play it costs a slot and overlaps its neighbour.
+
+An opener contains, in order:
+
+1. A paragraph of framing that puts the reader in the suite's situation. Humour is allowed here —
+   it is one of the few places it is. See [`STYLE.md`](STYLE.md#where-humour-is-allowed).
+2. The suite's one idea, named in a sentence, in words a reader could repeat.
+3. One short paragraph per play, linking to it and saying which layer or case it covers.
+
+150–300 words, per [`STYLE.md`](STYLE.md#length). Do not re-establish why any of this matters —
+Part I did that, and a suite opener that re-argues it is the fastest way for Part II to lose the
+space the plays were given.
+
 ## Ordering
 
 **The table of contents below is the only thing that encodes order.** Not filenames, not directory
@@ -181,6 +204,12 @@ the reference still means something after the vendor reorganises their docs.
 - [ ] It is in the right part directory, named for its content
 - [ ] It has one `#` heading matching its table-of-contents title
 - [ ] If it is a play, it has the five template headings, verbatim and in order
+- [ ] If it is a play, it states its exchange rate — what the reader gives up — somewhere in *The
+      play*, because Part I promises the reader that it will
+- [ ] If it is a suite opener, it names the suite's one idea and frames each play as an application
+      of it
+- [ ] Its worked example re-introduces the suite's project in a clause, and refers back to no other
+      play
 - [ ] Its row is added to the table of contents in the same commit
 - [ ] Prose wraps at 100 columns; diagrams are mermaid
 - [ ] Any failure mode it names is appended to the running log in `plans/agentic-playbook.md`

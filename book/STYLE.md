@@ -92,9 +92,11 @@ These are not judgement calls. The editorial pass removes them without discussio
 
 - **British English**, `-ise` endings: *standardise*, *recognise*, *behaviour*, *humour*.
 - **Oxford comma**, always.
-- **Present tense.** Second person for the reader — "you". "The agent" for the tool, never "the
-  AI", "it" as a bare subject across sentences, or "your AI pair". No authorial "we"; the book
-  does not narrate itself.
+- **Present tense**, with one exception: a play's *Worked example* is narrated in the past tense,
+  because it reports something that happened rather than describing how things behave. See
+  [`TEMPLATE-play.md`](TEMPLATE-play.md#worked-example). Second person for the reader — "you".
+  "The agent" for the tool, never "the AI", "it" as a bare subject across sentences, or "your AI
+  pair". No authorial "we"; the book does not narrate itself.
 - **Sentence case for every heading**, including the fixed template headings.
 - **Heading levels.** One `#` per file, matching its table-of-contents title. `##` for the five
   template headings in a play, or for top-level sections in a non-play chapter. `###` for
@@ -232,6 +234,8 @@ belongs in *The play*, not here. Also an exclamation mark.
 
 Budgets for the sections of a play are in [`TEMPLATE-play.md`](TEMPLATE-play.md). For everything
 else: a Part I chapter runs 800–1,500 words, a suite opener 150–300, a Part III chapter 800–1,500.
+What a suite opener has to *contain* is in [`README.md`](README.md#suite-openers) — it is a
+contract, not just a word budget.
 Part I is the section most likely to sprawl, and the proportions in
 [`cards/book-structure.md`](../cards/book-structure.md) are the point of the book, not a guideline.
 

@@ -47,7 +47,7 @@ occasionally under-supplied is cheaper than being reliably over-supplied.
 
 ## Worked example
 
-`atlas` again, the Python billing service. Somebody had installed a token-filtering proxy globally
+`atlas`, the Python billing service. Somebody had installed a token-filtering proxy globally
 — a `PreToolUse` hook that rewrites eligible shell calls, so the agent never knows it exists — and
 its analytics reported savings in the high tens of percentage points. The question was whether to
 keep it.
@@ -55,7 +55,7 @@ keep it.
 The published evidence is the reason that question is worth asking at all
 ([`token-filtering.md`](../../../notes/research/token-filtering.md)). Two independent benchmarks
 measured `rtk` v0.43.0 in mid-2026. JetBrains ran 425 billed trials against Claude Code 2.1.201 and
-found cost per task **up 7.6%** at low reasoning effort, turns up 13.8%, and task quality
+found cost per task up 7.6% at low reasoning effort, turns up 13.8%, and task quality
 statistically tied — while the tool's own analytics reported 96.2 million tokens saved over the
 same trials, 99.8% of everything it touched. Quesma, independently, on Terminal-Bench 2.1 across
 1,740 attempts and two models, found it marginally cheaper with one and 7% more expensive with the
@@ -67,7 +67,7 @@ of fresh tokens, which the hook never sees, and compressed output costs extra tu
 "Less output" and "higher bill" were never contradictory claims.
 
 So the team ran the paired comparison on their own repo, over a fixed set of twelve backlog tasks,
-three repetitions each, and filled in the only table that settles it:
+three repetitions each. These are the columns that settle it, and nobody else's numbers go in them:
 
 | Condition | Fresh input | Cache reads | Output | Turns | Tasks passed |
 |---|---|---|---|---|---|
