@@ -86,7 +86,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `01dce54a3f88` | HTML book — `make html` made a first-class output: stylesheet, sidebar contents, browser-drawn diagrams | ✅ done |
 | `878a5eb98f8b` | PDF lacked mermaid: render via `npx` fallback, and size diagrams to the page | ✅ done |
 | `6b0110f76388` | Add a 100-column / style lint to `make check`, after four authors wrote the same one | ✅ done |
-| `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
+| `fce3cee8fa34` | Trim three marginal budget overruns — all three now inside budget, and the shared clause varied | ✅ done |
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
@@ -276,8 +276,9 @@ the Verification & Trust suite, the Economics suite, and Part III:
    assertion.
 
 Milestone 7 created `book/part-1-argument/` and wrote all three chapters. Part I is complete at
-roughly 4,150 words — 1,525 / 1,445 / 1,180 — which sits inside the ~15% share once Part II exists
-at its planned size. It also produced an eighth research brief,
+roughly 4,100 words — 1,487 / 1,448 / 1,169 after the budget trim below, and 1,525 / 1,445 / 1,180
+as milestone 7 left it — which sits inside the ~15% share once Part II exists at its planned size.
+It also produced an eighth research brief,
 [`notes/research/convergence-history.md`](../notes/research/convergence-history.md), because the
 historical analogy needed sourcing and no research pass covered it.
 
@@ -306,9 +307,9 @@ historical analogy needed sourcing and no research pass covered it.
    than coining a second term for it.
 
 Milestone 8 created `book/part-2-plays/` and its first suite directory, `context/`, with a suite
-opener and three plays at roughly 250 / 1,145 / 1,190 / 1,100 words. It is the first suite written,
-so it is also the first test of the template, and three things in it constrain the suites that
-follow:
+opener and three plays at roughly 293 / 1,116 / 1,144 / 1,074 words after the budget trim below. It
+is the first suite written, so it is also the first test of the template, and three things in it
+constrain the suites that follow:
 
 | File | Owns |
 |---|---|
@@ -610,9 +611,15 @@ pass asked for. `make check` now runs it, `make lint` runs it alone, and what it
 it deliberately exempts is under *The style checker* below. **Run it instead of writing a fifth
 throwaway one.**
 
-**Next up:** the three open follow-ups in the table above — the cards play (`703e507c86aa`), the
-preparation-versus-execution thread into Part I (`0bdccc346bd4`), and the three marginal budget
-overruns (`fce3cee8fa34`).
+**The three marginal budget overruns are trimmed (`fce3cee8fa34`)** — Part I and the Context suite
+are now inside every budget in `STYLE.md` and `TEMPLATE-play.md`. What was cut, and the one thing a
+future edit to *Before Git, before Scrum, before this* should know, is under
+[*The budget trim*](#the-budget-trim) below.
+
+**Next up:** the two open follow-ups in the table above — the cards play (`703e507c86aa`) and the
+preparation-versus-execution thread into Part I (`0bdccc346bd4`). Both touch files this trim has
+just brought inside budget, so **count before you add**: `make check` prints words per part, and
+the per-section counter is in the trim note below.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -895,6 +902,45 @@ anyone working on the book next:
 What the pass deliberately did **not** do is listed in *Open questions* and in the notes below: the
 suite-project rule, the three-plays-per-suite spread, and the Part II worked examples were all read
 and left alone.
+
+## The budget trim
+
+Board item `fce3cee8fa34` closed the three section-budget overruns the reassessment pass
+(`aed2433867e0`) deferred, in Part I and the Context suite. Nothing of substance was cut; the
+material that went was a restated summary, a frame around a quotation, and one sentence of mechanics
+covered twice. `make check` reports no defects and the book stands at 39,393 words.
+
+| File | Section | Budget | Before | After |
+|---|---|---|---|---|
+| `before-git-before-scrum-before-this.md` | whole chapter | 800–1,500 | 1,567 | 1,487 |
+| `scope-a-task-to-fit-the-window.md` | *The play* | 200–500 | 508 | 488 |
+| `write-the-brief-the-agent-actually-reads.md` | *Failure mode* | 80–200 | 205 | 190 |
+
+Four things in it are worth knowing before editing any of these files:
+
+1. **Count with the build's own counter, not by eye or by `wc`.** `scripts/build_book.py` exports
+   `word_count(text)`, which is what `make check` reports per part: prose words with fenced blocks,
+   headings, table rows and block quotes excluded. The reassessment's figures were 1–4% low against
+   it, which at these margins is the difference between "48 over" and "67 over". For a per-section
+   count, split on `##` and call `word_count` on each — a six-line script, not a file worth keeping.
+2. **The deferred nit was real but misquoted, and the fix is checkable.** The clause shared by
+   `context/index.md` and *Starve the context* was "Reduction never happens by accident", not the
+   sentence the hand-off named. The opener now says "No window gets smaller on its own"; the play
+   keeps its own thesis sentence, because a play's opening line should not be varied to protect an
+   index entry. There are now **no shared four-grams** between `context/index.md` and any of its
+   three plays once links are stripped, which is the check to re-run if a fourth play is added.
+3. **Part I lost a sentence that Part III did not need it to make.** *Where that puts this* ended on
+   "A shared name is not a small thing. It is the difference between a phenomenon a team can discuss
+   and one everybody tolerates separately" — the same claim as *The same shape, over a longer
+   timeline*'s "Shared words are what let a disagreement be a disagreement", two sections earlier
+   and better put. The Vanishing Fix paragraph now ends on its forward link to Part III. **The
+   "no agreed name" contract from milestone 7 is untouched**, and still reads as milestone 14 left
+   it.
+4. **`before-git-before-scrum-before-this.md` now has nine words of headroom.** It is the chapter
+   closest to a ceiling in the book. `0bdccc346bd4` threads preparation-versus-execution into Part I
+   and will most likely land here; if it adds a paragraph, it has to take one out, or put the
+   material in *The four areas, re-weighted* (1,448) or *What this book assumes about you* (1,169),
+   which have room.
 
 ## Decisions log (append-only)
 
@@ -1471,6 +1517,24 @@ and left alone.
   exclamation mark that belongs to Anthropic. `--self-test` asserts all four, so the next person
   to add a rule finds out immediately if they have broken one. No test framework was added; the
   fixture is a string in the file.
+- **`build_book.word_count` is the book's word count, and a deferred count is re-derived rather
+  than trusted.** All three overruns handed to `fce3cee8fa34` were real, and all three numbers were
+  wrong by 1–4% — enough, at margins of eight to sixty-seven words, to pick the wrong sentences to
+  cut. One filename and one quoted clause in the same hand-off were also wrong. A measurement
+  taken in one context and spent in another is a claim, not a figure: re-take it. The corollary
+  for hand-offs is to name the tool that produced the number, which this one now does.
+- **A budget overrun is cut where the book repeats itself, not where the prose is thinnest.** Each
+  of the three trims came out of material that already existed elsewhere: a Part I paragraph
+  restating a claim two sections earlier had made better, a why-it-works paragraph re-asking a
+  question its own steps had answered, and a *Failure mode* re-teaching step 5 of its own *The
+  play*. Sourced evidence, named failure modes, exchange rates, cross-references and the dry asides
+  `book/STYLE.md` budgets at one per screen were all held. **Nothing in the three files lost a
+  fact.**
+- **A tie-back from a play to its suite opener is paraphrased, not quoted.** The opener previews
+  the play; the play states its own thesis. When both used "Reduction never happens by accident"
+  verbatim, one file apart, the echo read as an editing slip rather than as structure. The opener
+  is the side that yields, because the play's opening line is load-bearing to a reader who opened
+  the book there. Checkable: strip links, and an opener should share no four-gram with its plays.
 
 ## Open questions
 
@@ -1746,12 +1810,13 @@ Append discovered constraints and cross-task notes here as work proceeds.
   small-context baseline*, not absolute rates; the absolute success figures are 3/10 against a
   baseline of 8/10. The play now says "of baseline" and gives the raw counts. Any suite quoting
   arXiv 2607.17937 should carry the word *retention* — the figures are meaningless without it.
-- **The judgement calls were deferred rather than fixed**, on two board items. `fce3cee8fa34` holds
+- **The judgement calls were deferred rather than fixed**, on two board items. `fce3cee8fa34` held
   three marginal budget overruns — *Before Git, before Scrum, before this* at ~1,548 words against
   1,500, *Scope a task to fit the window*'s *The play* at ~559 against 500, and *Write the brief
   the agent actually reads*'s *Failure mode* at ~219 against 200 — plus the verbatim clause shared
   by `context/index.md` and *Starve the context*, which is the tie-back-to-the-opener pattern
-  working slightly too literally. `9dd4d6b84b80` holds the terminology promise: *skill*, *card* and
+  working slightly too literally. **That item is now done; see [*The budget trim*](#the-budget-trim)
+  below.** `9dd4d6b84b80` holds the terminology promise: *skill*, *card* and
   *harness* are used before being defined, against Part I's stated contract with the reader, and
   the suites that own those terms do not exist yet to fix it.
 - **A third writing task has now independently written the same 100-column checker in `/tmp`**, and

@@ -37,15 +37,15 @@ Size the unit of work by what has to be held in mind at once, not by how many li
 6. **Start the next unit from that file and a clean tree**, rather than from a continued session. A
    fresh run with a good brief reliably beats a continued one with a full window.
 
-The idea worth carrying past this play is that fitting in the window is necessary and nowhere near
-sufficient. In the same study the agent's coverage of the requirements barely moved as the context
-grew, while the rate at which it satisfied all of them at once collapsed — the failure this book
-calls the Requirement It Can Still Quote, measured in
+Fitting in the window is necessary and nowhere near sufficient. In the same study the agent's
+coverage of the requirements barely moved as the context grew, while the rate at which it satisfied
+all of them at once collapsed — the failure this book calls the Requirement It Can Still Quote,
+measured in
 [*The failure modes worth naming*](../../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
-So "will it fit" is the wrong question and "can it still satisfy all of this at once" is the right
-one, which is why the answer is a smaller task rather than a bigger window. The exchange rate: four
-briefs instead of one, four sets of results to read, and a boundary you might place wrong. What you
-get back is the ability to re-run a quarter of the work instead of all of it.
+The question is not "will it fit" but "can it still satisfy all of this at once", so the answer is a
+smaller task rather than a bigger window. The exchange rate: four briefs instead of one, four sets
+of results to read, and a boundary you might place wrong, against the ability to re-run a quarter of
+the work instead of all of it.
 
 ## Worked example
 
