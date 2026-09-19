@@ -54,7 +54,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 4 | Research: agent context and tooling landscape | `bb1d30e52adc` | ✅ done |
 | 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ✅ done |
 | 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ✅ done |
-| 7 | Part I — The Argument | `e93293bfd014` | ⬜ blocked on 3 |
+| 7 | Part I — The Argument | `e93293bfd014` | ✅ done |
 | 8 | Context play suite | `655473ee5afb` | ⬜ blocked on 3, 4 |
 | 9 | Harness play suite | `9366c3c324b5` | ⬜ blocked on 3, 4 |
 | 10 | Orchestration play suite | `3c6b76dedb59` | ⬜ blocked on 3, 5 |
@@ -196,12 +196,41 @@ the Verification & Trust suite, the Economics suite, and Part III:
    distributes responsibility or merely creates a moral crumple zone. Neither may be resolved by
    assertion.
 
-**Next up:** milestone 7 (Part I), which depends on no research; the Context suite
-(`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by milestone 4; the Orchestration
-suite (`3c6b76dedb59`), unblocked by milestone 5; Verification & Trust (`4858fbdecdf4`), Economics
-(`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by this milestone; and Team
-(`cdd27e440781`), which is free to run. **All research is now done and every writing task is
-unblocked.**
+Milestone 7 created `book/part-1-argument/` and wrote all three chapters. Part I is complete at
+roughly 4,150 words — 1,525 / 1,445 / 1,180 — which sits inside the ~15% share once Part II exists
+at its planned size. It also produced an eighth research brief,
+[`notes/research/convergence-history.md`](../notes/research/convergence-history.md), because the
+historical analogy needed sourcing and no research pass covered it.
+
+| File | Owns |
+|---|---|
+| [`before-git-before-scrum-before-this.md`](../book/part-1-argument/before-git-before-scrum-before-this.md) | The historical analogy, the three ways it breaks, and the book's own framing as "not the consensus" |
+| [`the-four-areas-reweighted.md`](../book/part-1-argument/the-four-areas-reweighted.md) | The durable map, with one section per area and a mermaid summary of the four shifts |
+| [`what-this-book-assumes-about-you.md`](../book/part-1-argument/what-this-book-assumes-about-you.md) | The stated reader, the evidence posture, how to read the book, what it costs, what will go stale |
+
+**Three things in Part I constrain later tasks, and two of them are easy to break by accident:**
+
+1. **Part I promises things the appendices and the plays have to deliver.** *What this book assumes
+   about you* states that terms are defined on first use and collected in a glossary (appendices
+   task), that every play is self-contained under the five headings with no required order, and that
+   **where a play has an exchange rate — what the reader gives up — it states it.** That last one is
+   a soft contract on all six suite authors; a play that lists only benefits now contradicts Part I
+   in print.
+2. **Part I deliberately names no failure mode**, and one sentence depends on that staying true.
+   *Before Git, before Scrum, before this* uses the mid-run-overwrite phenomenon from
+   `notes/research/failure-modes.md` as its example of missing vocabulary, and says in so many words
+   that **"there is no name for it"**. If Part III names it — and it should — that sentence has
+   to be rewritten in the same pass, or the book contradicts itself two parts apart. Flagged for
+   the editorial pass as well.
+3. **Part I adopts DORA's *verification tax*** as the term for review effort displaced by agent
+   output, in *The four areas, re-weighted*. Economics and Part III should use the same words rather
+   than coining a second term for it.
+
+**Next up:** the Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by
+milestone 4; the Orchestration suite (`3c6b76dedb59`), unblocked by milestone 5; Verification &
+Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by
+milestone 6; and Team (`cdd27e440781`), which is free to run. **All research is done, Part I is
+written, and every remaining writing task is unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -296,6 +325,25 @@ one lands in and which locked decision it does *not* override.
   provenance record stays a record and the plan stays consolidated. The first instance is
   [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md). What such a
   fragment *contributes* goes in the running log below; the fragment itself is never a spec.
+- **A writing task that has to do its own research files a brief like a research task would.**
+  Milestone 7 needed sourced history for the pre-Git/pre-Scrum analogy, which no research pass
+  covered. Rather than carrying twenty inline URLs in one chapter, it produced
+  [`notes/research/convergence-history.md`](../notes/research/convergence-history.md) to the format
+  in [`cards/research-briefs.md`](../cards/research-briefs.md) — findings, gaps, do-not-cite,
+  numbered sources, staleness — and the chapter cites the brief plus a handful of primary quotes.
+  This keeps the verification pass (`3b61a6a1a684`) able to check Part I the same way it checks a
+  play, and means the next author reaching for the same analogy does not re-run the searches.
+- **The Standish CHAOS figures go on the book's do-not-cite list.** The 1994 16%/53%/31% success
+  split and the 189% average cost overrun are the most-quoted numbers in the history of software
+  process and do not survive checking; two peer-reviewed demolitions are cited in
+  `convergence-history.md`. If the book touches them at all, it is as an example of a number the
+  industry repeated for twenty years without opening the source — which is on-theme rather than a
+  digression.
+- **Part I cites primary documents inline and the brief for the survey figures.** Quotations that
+  carry the prose (Tichy on locking, Microsoft's own SourceSafe glossary, GitHub's two pull-request
+  posts, Cockburn on "lightweight") are quoted in the chapter; every percentage traces to the brief.
+  The rule generalises for non-play chapters: quote the primary source where the sentence depends on
+  its exact words, cite the brief for everything numeric.
 - **"Humble and transparent" is subject matter, not a tone instruction.** The author's note that
   this "has to be presented in a way not to scare but rather build trust" describes how a *team
   lead* introduces a working agreement to colleagues. It does not soften the book's own register,
@@ -446,6 +494,35 @@ Append discovered constraints and cross-task notes here as work proceeds.
   hub's worked-example map shows the six do not collide, but two of them make different arguments
   about the same green test suite — worth raising against the open play-count question rather than
   deciding quietly.
+
+- **Milestone 7's historical research turned up three traps that are one search away from any
+  author writing about this era.** They are itemised with sources in
+  `notes/research/convergence-history.md`; the short version is (a) the Standish CHAOS figures, now
+  a locked do-not-cite above; (b) "the Agile Manifesto brought together seventeen different
+  methods" — seventeen is the number of *people*, and the manifesto history names eight approaches;
+  (c) "GitHub launched 10 April 2008" — GitHub's own blog confirms the month, and the specific day
+  traces only to Wikipedia. Two further figures that get quoted confidently and do not exist: an
+  "87% of teams use Scrum" number attributed to the 2023 State of Agile, which does not appear in
+  that report, and any Stack Overflow 2015 "I don't use source control" percentage, since the 2015
+  survey had no such option.
+- **The two version-control survey series are not a time series and must never be printed as one.**
+  Eclipse asks for a single *primary* SCM among an Eclipse- and Java-leaning population; Stack
+  Overflow is multi-select across a far larger and different one. Eclipse 2011 puts Git at 12.8% and
+  Stack Overflow 2015 puts it at 69.3%; both are correct for their question. Part I names the survey
+  and the year in every sentence carrying a figure, and Part IV or the editorial pass should keep
+  doing that.
+- **Every file written for Part I overshot 100 columns on first draft, by one to four characters
+  each, in three separate files.** The rule is easy to hold approximately and hard to hold exactly
+  by eye. Milestone 7 fixed it with a throwaway Python rewrapper run from `/tmp` rather than adding
+  a script to the repo, because `cards/standing-defaults.md` says to add tooling only when a real
+  repeated need appears. Nine parallel authors hitting the same problem is arguably that need: the
+  editorial pass (`934259dc8038`) should either rewrap everything once at the end or adopt a small
+  Python checker, and this note exists so that decision is made deliberately rather than discovered.
+- **Part I closes on the book's own framing, and later parts should not re-argue it.** *Before Git,
+  before Scrum, before this* ends on "this book is not the consensus… written in enough detail to
+  be disagreed with precisely", and *What this book assumes about you* ends on "start wherever your
+  week hurts". Suite openers do not need to re-establish why any of this matters; Part I did that,
+  and repeating it is the fastest way for Part II to lose the space the plays were given.
 
 ### Failure-mode registry
 

@@ -89,9 +89,9 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | # | Path | Title | Status |
 |---|---|---|---|
 | **Part I** | | **The Argument** | |
-| 1 | `part-1-argument/before-git-before-scrum-before-this.md` | Before Git, before Scrum, before this | ⬜ |
-| 2 | `part-1-argument/the-four-areas-reweighted.md` | The four areas, re-weighted | ⬜ |
-| 3 | `part-1-argument/what-this-book-assumes-about-you.md` | What this book assumes about you | ⬜ |
+| 1 | `part-1-argument/before-git-before-scrum-before-this.md` | Before Git, before Scrum, before this | ✅ |
+| 2 | `part-1-argument/the-four-areas-reweighted.md` | The four areas, re-weighted | ✅ |
+| 3 | `part-1-argument/what-this-book-assumes-about-you.md` | What this book assumes about you | ✅ |
 | **Part II** | | **The Plays** | |
 | 4 | `part-2-plays/context/index.md` | Context | ⬜ |
 | 5 | `part-2-plays/context/write-the-brief-the-agent-reads.md` | Write the brief the agent actually reads | ⬜ |
