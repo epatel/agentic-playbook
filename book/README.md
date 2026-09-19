@@ -141,10 +141,10 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 21 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ✅ |
 | 22 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ✅ |
 | 23 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
-| 24 | `part-2-plays/team/index.md` | Team | ⬜ |
-| 25 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ⬜ |
-| 26 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ⬜ |
-| 27 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ⬜ |
+| 24 | `part-2-plays/team/index.md` | Team | ✅ |
+| 25 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
+| 26 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
+| 27 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
 | 28 | `part-3-where-it-struggles/` | *Rows supplied by the Part III task* | ⬜ |
 | **Part IV** | | **Next Waves** | |
