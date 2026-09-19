@@ -9,9 +9,14 @@ make            # the target list
 make pdf        # build/agentic-playbook.pdf   — needs pandoc and a PDF engine
 make md         # build/agentic-playbook.md    — needs nothing but Python
 make html       # build/agentic-playbook.html  — needs pandoc
+make open       # build the PDF, then hand it to the default viewer
 make check      # report problems, write nothing, exit non-zero if any
 make clean      # delete build/
 ```
+
+`make open` is the read-it-now target: it depends on `pdf`, so it rebuilds first and then hands
+the file to `open` (macOS) or `xdg-open` (Linux). With neither on `PATH` it prints where the PDF
+is rather than failing silently.
 
 Everything lands in `build/`, which is gitignored. **Never commit build output**, and never edit
 it — it is regenerated from `book/` every run, and the collected markdown is an intermediate for

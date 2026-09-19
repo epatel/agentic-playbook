@@ -435,6 +435,11 @@ GitHub is still the book, and nothing has to be built to read it.
   lead* introduces a working agreement to colleagues. It does not soften the book's own register,
   which stays dry and wry per the locked decision. A Team-suite author writing trust-building
   prose is writing about the team lead's problem, not adopting the team lead's voice.
+- **Opening the PDF is a make target, not a habit everyone retypes.** `make open` depends on `pdf`,
+  so it always rebuilds before it shows you anything, then hands the file to `open` or `xdg-open`.
+  The board shortcut *Build & open book* runs exactly that, so the one-click path and the
+  command-line path cannot drift apart. `BUILD` and `NAME` are now passed through to the build
+  script (`--out-dir` / `--name`) so the path `make open` opens is the path `make pdf` wrote.
 
 ## Open questions
 
