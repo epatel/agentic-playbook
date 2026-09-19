@@ -55,7 +55,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 5 | Research: orchestration and workflow landscape | `6f9d83a67e1a` | ✅ done |
 | 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ✅ done |
 | 7 | Part I — The Argument | `e93293bfd014` | ✅ done |
-| 8 | Context play suite | `655473ee5afb` | ⬜ blocked on 3, 4 |
+| 8 | Context play suite | `655473ee5afb` | ✅ done |
 | 9 | Harness play suite | `9366c3c324b5` | ⬜ blocked on 3, 4 |
 | 10 | Orchestration play suite | `3c6b76dedb59` | ⬜ blocked on 3, 5 |
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ⬜ blocked on 3, 6 |
@@ -226,10 +226,35 @@ historical analogy needed sourcing and no research pass covered it.
    output, in *The four areas, re-weighted*. Economics and Part III should use the same words rather
    than coining a second term for it.
 
-**Next up:** the Context suite (`655473ee5afb`) and the Harness suite (`9366c3c324b5`), unblocked by
-milestone 4; the Orchestration suite (`3c6b76dedb59`), unblocked by milestone 5; Verification &
-Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by
-milestone 6; and Team (`cdd27e440781`), which is free to run. **All research is done, Part I is
+Milestone 8 created `book/part-2-plays/` and its first suite directory, `context/`, with a suite
+opener and three plays at roughly 250 / 1,145 / 1,190 / 1,100 words. It is the first suite written,
+so it is also the first test of the template, and three things in it constrain the suites that
+follow:
+
+| File | Owns |
+|---|---|
+| [`context/index.md`](../book/part-2-plays/context/index.md) | The suite opener — names *signal over noise* as the suite's single idea and frames the three plays as that move at three layers |
+| [`write-the-brief-the-agent-reads.md`](../book/part-2-plays/context/write-the-brief-the-agent-reads.md) | Project context files: what belongs, what bloats, the portable `AGENTS.md` + import setup, and verifying the brief loaded |
+| [`starve-the-context.md`](../book/part-2-plays/context/starve-the-context.md) | Deliberate reduction, just-in-time loading, and the paired-run method for measuring any filtering tool |
+| [`scope-a-task-to-fit-the-window.md`](../book/part-2-plays/context/scope-a-task-to-fit-the-window.md) | Unit-of-work sizing, external requirement lists, the stop rule, and file-based handoff between sessions |
+
+1. **Four failure modes are now registered, three of them new.** The Context suite claimed **the
+   Context Landfill** as `book/STYLE.md` invited, and coined **the Brief That Never Arrived**, **the
+   Flattering Dashboard**, and **the Permanent Near Miss**. Check the registry before naming
+   anything adjacent — in particular, the Orchestration suite's "a subagent inherits the written
+   brief but none of the conversation" is arguably the same phenomenon as the Brief That Never
+   Arrived and may want that name rather than a second one.
+2. **The `rtk` worked example is spent.** It carries *Starve the context*'s Worked example, with the
+   JetBrains and Quesma figures dated and versioned. Economics may cite the figures, but should not
+   build *Understand what you are paying for* around the same scenario; the running log below flags
+   a swap.
+3. **Three plays per suite held comfortably**, and no fourth was wanted. That is one data point
+   against the open play-count question rather than an answer to it.
+
+**Next up:** the Harness suite (`9366c3c324b5`), unblocked by milestone 4; the Orchestration suite
+(`3c6b76dedb59`), unblocked by milestone 5; Verification & Trust (`4858fbdecdf4`), Economics
+(`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by milestone 6; and Team
+(`cdd27e440781`), which is free to run. **All research is done, Part I and the Context suite are
 written, and every remaining writing task is unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
@@ -344,6 +369,21 @@ one lands in and which locked decision it does *not* override.
   posts, Cockburn on "lightweight") are quoted in the chapter; every percentage traces to the brief.
   The rule generalises for non-play chapters: quote the primary source where the sentence depends on
   its exact words, cite the brief for everything numeric.
+- **A suite opener names the suite's one idea and shows its plays as applications of it.** Review
+  feedback on milestone 8 asked whether "signal over noise" deserved a place of its own. It did,
+  but not as a fourth play: as a noun phrase it fails the imperative-title rule in
+  `book/TEMPLATE-play.md`, and rewritten as an imperative it collapses into *Starve the context*.
+  The resolution was to state it as the Context suite's thesis in `context/index.md` and present
+  the three plays as the same move at three layers — the always-loaded layer, the single run, and
+  the task itself — with one sentence in each play's transferable paragraph tying back to it. The
+  pattern generalises and the other five suite openers should follow it: a principle that unifies
+  a suite belongs in the opener, where it costs 40 words, rather than in a play, where it costs a
+  slot and overlaps the play next to it.
+- **A suite may carry one project name across all of its plays.** The Context suite uses `atlas`, a
+  Python billing service, in all three worked examples. Each play re-introduces it in a clause, so
+  the plays stay self-contained for a reader who opens the book at one of them, and a reader going
+  through the suite gets continuity for free. Other suites should pick their own project rather
+  than extending `atlas`, or the book acquires one imaginary company with six unrelated problems.
 - **"Humble and transparent" is subject matter, not a tone instruction.** The author's note that
   this "has to be presented in a way not to scare but rather build trust" describes how a *team
   lead* introduces a working agreement to colleagues. It does not soften the book's own register,
@@ -524,6 +564,36 @@ Append discovered constraints and cross-task notes here as work proceeds.
   week hurts". Suite openers do not need to re-establish why any of this matters; Part I did that,
   and repeating it is the fastest way for Part II to lose the space the plays were given.
 
+- **Milestone 8 spent the `rtk` benchmark on the Context suite.** It is the Worked example of
+  *Starve the context*, framed as a method lesson ("measure the bill, not the dashboard") with the
+  JetBrains and Quesma figures dated and versioned per the staleness table in
+  `notes/research/tooling.md`. The earlier note that this example belongs to "Context or Economics"
+  is now resolved in Context's favour. **Economics should still read
+  [`notes/research/token-filtering.md`](../notes/research/token-filtering.md)** — the cache-read
+  pricing mechanism and the tokens × turns framing are load-bearing for *Understand what you are
+  paying for* — but should build its worked example on something else. The strongest unspent
+  candidates are in `notes/research/token-economics.md`.
+- **Two cross-cutting gotchas were used but deliberately not named by the Context suite.**
+  *Write the brief the agent actually reads* states the instructions-are-not-enforcement
+  distinction in its closing paragraph (a brief "does not constrain the agent, it competes for its
+  attention"; blocking an action needs a hook) but leaves milestone 4's gotcha (a) **unnamed**,
+  because the Harness suite owns permissions, hooks, and the `deny`-rule example and should name it
+  where the reader can act on it. Similarly, *Scope a task to fit the window* uses milestone 6's
+  phenomenon (b) — coverage retention 0.93–0.95 against strict success retention 0.375 — as the
+  play's transferable idea, and leaves it unnamed for Part III. Note the brief's own warning, which
+  the play honours: this is **not** a context-window problem and must not be written as one.
+- **Part I's "there is no name for it" sentence survived milestone 8.** *Scope a task to fit the
+  window* opens on the mid-run-overwrite phenomenon (the agent re-implementing a helper it wrote
+  forty minutes earlier) and describes it without naming it. Part III still owns that name, and the
+  rewrite of Part I's sentence is still outstanding when it lands.
+- **Milestone 8 hit no 100-column overshoots**, having run a throwaway Python width checker from
+  `/tmp` before finishing, as milestone 7 did. Two of nine writing tasks have now independently
+  written the same script. That is the repeated need `cards/standing-defaults.md` asks for, and the
+  editorial pass (`934259dc8038`) should decide between adopting a checker and rewrapping once.
+- **Mermaid blocks legitimately exceed 100 columns** and any checker must skip fenced blocks.
+  *Scope a task to fit the window* has a 120-character node line; `book/STYLE.md` already exempts
+  fenced blocks, and this note exists so nobody "fixes" it.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -531,5 +601,8 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 
 | Name | Phenomenon | First used in |
 |---|---|---|
-| **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `book/STYLE.md` sample 4 — free for the Context suite to claim |
+| **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `context/write-the-brief-the-agent-reads.md` (coined in `book/STYLE.md` sample 4) |
 | **the Merged Hand** | Agent run started on a dirty tree; the diff interleaves two authors and can be neither kept nor discarded. | `book/TEMPLATE-play.md` specimen play |
+| **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-reads.md` |
+| **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
+| **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |

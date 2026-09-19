@@ -93,10 +93,10 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 2 | `part-1-argument/the-four-areas-reweighted.md` | The four areas, re-weighted | ✅ |
 | 3 | `part-1-argument/what-this-book-assumes-about-you.md` | What this book assumes about you | ✅ |
 | **Part II** | | **The Plays** | |
-| 4 | `part-2-plays/context/index.md` | Context | ⬜ |
-| 5 | `part-2-plays/context/write-the-brief-the-agent-reads.md` | Write the brief the agent actually reads | ⬜ |
-| 6 | `part-2-plays/context/starve-the-context.md` | Starve the context | ⬜ |
-| 7 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ⬜ |
+| 4 | `part-2-plays/context/index.md` | Context | ✅ |
+| 5 | `part-2-plays/context/write-the-brief-the-agent-reads.md` | Write the brief the agent actually reads | ✅ |
+| 6 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
+| 7 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
 | 8 | `part-2-plays/harness/index.md` | Harness | ⬜ |
 | 9 | `part-2-plays/harness/choose-your-harness.md` | Choose your harness | ⬜ |
 | 10 | `part-2-plays/harness/package-repeatable-expertise.md` | Package repeatable expertise | ⬜ |
