@@ -125,10 +125,10 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 5 | `part-2-plays/context/write-the-brief-the-agent-reads.md` | Write the brief the agent actually reads | ✅ |
 | 6 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
 | 7 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
-| 8 | `part-2-plays/harness/index.md` | Harness | ⬜ |
-| 9 | `part-2-plays/harness/choose-your-harness.md` | Choose your harness | ⬜ |
-| 10 | `part-2-plays/harness/package-repeatable-expertise.md` | Package repeatable expertise | ⬜ |
-| 11 | `part-2-plays/harness/wire-in-the-outside-world.md` | Wire in the outside world | ⬜ |
+| 8 | `part-2-plays/harness/index.md` | Harness | ✅ |
+| 9 | `part-2-plays/harness/choose-your-harness.md` | Choose your harness | ✅ |
+| 10 | `part-2-plays/harness/package-repeatable-expertise.md` | Package repeatable expertise | ✅ |
+| 11 | `part-2-plays/harness/wire-in-the-outside-world.md` | Wire in the outside world | ✅ |
 | 12 | `part-2-plays/orchestration/index.md` | Orchestration | ⬜ |
 | 13 | `part-2-plays/orchestration/decompose-into-subagents.md` | Decompose into subagents | ⬜ |
 | 14 | `part-2-plays/orchestration/make-the-control-flow-deterministic.md` | Make the control flow deterministic | ⬜ |
