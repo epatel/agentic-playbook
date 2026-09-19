@@ -17,37 +17,38 @@ Treat the brief as a working set, not as a description of the project. Six moves
    the same correction twice, when a review catches something the agent should have known, or when a
    new colleague would have needed the same sentence
    ([`agent-context-files.md`](../../../notes/research/agent-context-files.md)). Every line then has
-   a reason you can check later, which is the only thing that makes deleting it possible.
+   a reason you can check later, which is the only thing that makes deletion possible.
 2. **Keep only what is true everywhere.** A convention that applies to one directory, a procedure
    with steps, or a rule that matters twice a quarter does not belong in a file that loads in every
-   session. Move it to something conditional — a path-scoped rule, a skill, or a card — so it
-   arrives when its situation does. See
+   session. Move it to something conditional, so it arrives when its situation does: a path-scoped
+   rule, a skill (a folder of instructions loaded when a request matches its description), or a card
+   (a short self-contained file on one subject, loaded when that subject comes up). See
    [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) for the procedural
    half.
 3. **Do not mistake reorganisation for reduction.** Splitting a 600-line brief into six `@path`
    imports is housekeeping, not savings: imports are expanded at launch and the token count is
    unchanged. Only conditional loading reduces anything.
 4. **Make one file the source of truth, and make it portable.** `AGENTS.md` is the multi-vendor
-   filename — plain markdown, no required sections, stewarded by the Linux Foundation's Agentic AI
-   Foundation since December 2025. `CLAUDE.md` is one vendor's filename with its own precedence
-   rules. Put the content in `AGENTS.md` and let the vendor file be a one-line import, so a
-   colleague who switches tools does not fork the brief.
+   filename, stewarded by the Linux Foundation's Agentic AI Foundation since December 2025.
+   `CLAUDE.md` is one vendor's filename with its own precedence rules. Put the content in
+   `AGENTS.md` and let the vendor file be a one-line import, so a colleague who switches tools does
+   not fork the brief.
 5. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
    project instructions back to you. This is the check that separates "the agent ignored the brief"
-   from "the brief never loaded", which are different problems with different fixes.
+   from "the brief never loaded" — different problems, different fixes.
 6. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
    same subject is how the first one got ignored.
 
-The reason any of this works is that a brief is context, not configuration. Claude Code's own
-documentation was unusually plain about it in September 2026: the file is "delivered as a user
-message after the system prompt", and if you need an action blocked regardless of what the model
-decides, you need a hook rather than a sentence. So the brief does not constrain the agent, it
-competes for its attention — with the task, the files it has opened, and every other line of the
-brief. A line that changes nothing is not neutral. It is noise, and it is paid for out of the same
-attention as the lines that matter. That is the exchange rate here. You give up the comfort of
-writing something down once and considering it handled, and you get a file whose instructions are
-followed because there are few enough of them to be followed.
+This works because a brief is context, not configuration. Claude Code's own documentation was
+unusually plain about it in September 2026: the file is "delivered as a user message after the
+system prompt". An action you need blocked regardless of what the model decides needs a hook, not a
+sentence. So the brief does not constrain the agent, it competes for its attention — with the task,
+the files it has opened, and every other line of the brief. A line that changes nothing is not
+neutral. It is noise, paid for out of the same attention as the lines that matter. That is the
+exchange rate here. You give up the comfort of writing something down once and considering it
+handled, and you get a file whose instructions are followed because there are few enough of them to
+be followed.
 
 ## Worked example
 
