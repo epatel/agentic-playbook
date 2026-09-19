@@ -1,3 +1,5 @@
+<a href="https://claude.ai"><img src="made-with-claude.png" height="32" alt="Made with Claude"></a>
+
 # The Agentic Playbook
 
 A field guide for working developers who already use agentic coding tools daily and want to get
