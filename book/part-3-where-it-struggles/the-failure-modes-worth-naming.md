@@ -29,6 +29,13 @@ before reading the code. That is why [*Review code you did not
 write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) puts one traced
 path and a reproducer ahead of the diff.
 
+One class of it has a cause outside the model. Where behaviour is attached invisibly — a decorator
+that registers a route at import time, a lifecycle hook that writes to a second table — none of it
+appears in the file being edited, so the patch is locally correct and globally wrong.
+[*Refactoring a codebase for agents*](../part-4-next-waves/refactoring-a-codebase-for-agents.md)
+argues that back to the architecture; the response here is narrower, and it is to name the mechanism
+in the brief when the change sits near one.
+
 ## The Vanishing Fix
 
 The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
