@@ -64,7 +64,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ✅ done |
 | 12 | Economics play suite | `bffa217221ed` | ✅ done |
 | 13 | Team play suite | `cdd27e440781` | ✅ done |
-| 14 | Part III — Where It Struggles | `c1416f44c483` | ⬜ blocked on 3, 6 |
+| 14 | Part III — Where It Struggles | `c1416f44c483` | ✅ done |
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ⬜ blocked on 3 |
 | 16 | Editorial pass — one voice, one book | `934259dc8038` | ⬜ blocked on all writing |
 | 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ⬜ blocked on 8–13 |
@@ -492,10 +492,50 @@ Five things in it constrain later tasks:
    what the reader gives up, and the review-displacement material is cited by its figures rather
    than by coining a second term for the tax.
 
-**Next up:** Part III (`c1416f44c483`) and Part IV plus appendices (`bec9accd89be`). **All research
-is done, Part I and all six suites are written, and Part II is complete.** The editorial pass
-(`934259dc8038`) and the worked-example verification pass (`3b61a6a1a684`) are now unblocked on
-Part II.
+Milestone 14 added `book/part-3-where-it-struggles/`, four chapters at roughly 1,233 / 1,346 / 1,213
+/ 1,435 words, 5,227 in total — 16% of the book as it currently stands, which lands on the ~15%
+share once Part IV and the appendices exist. It spends `failure-modes.md` and
+`productivity-evidence.md` in full, takes both artefacts `evidence.md` reserved for it, and is the
+only part written to be read *first* by a sceptical reader, which Part I promises it will be.
+
+| File | Owns |
+|---|---|
+| [`what-agents-are-reliably-bad-at.md`](../book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md) | Finishing, wrong-but-compiling, the public/commercial benchmark gap, security unevenness by weakness class, degradation across self-iteration, and the `sys.exit(0)` arc with its generalisation |
+| [`the-failure-modes-worth-naming.md`](../book/part-3-where-it-struggles/the-failure-modes-worth-naming.md) | Six new names with a tell and a response each, plus the index of every failure mode in the book |
+| [`where-the-time-actually-goes.md`](../book/part-3-where-it-struggles/where-the-time-actually-goes.md) | METR's time reallocation and perception gap with the full qualifier chain, the mandate study's interior, the verification tax, and the four things nobody has measured |
+| [`what-is-genuinely-contested.md`](../book/part-3-where-it-struggles/what-is-genuinely-contested.md) | Six live disagreements carried with both halves: speed, quality, capability-and-reward-hacking, benchmark validity, the curl arc, and who is responsible |
+
+Five things in it constrain later tasks:
+
+1. **Six failure modes are registered, and that closes the naming programme.** All four of milestone
+   6's unnamed phenomena and all seven in `failure-modes.md` are now spent. **the Confident Wrong
+   Rewrite** is claimed from `book/STYLE.md`'s naming section, on the Context and Verification
+   precedent, which leaves no style-guide example unclaimed. The others are **the Vanishing Fix**,
+   **the Requirement It Can Still Quote**, **the Endless Polish**, **the Immaculate Surface**, and
+   **the Instant Concession**.
+2. **Part I's "there is no name for it" sentence is rewritten, as the handoff asked.** *Before Git,
+   before Scrum, before this* now says the phenomenon has no *agreed* name, names it as the
+   Vanishing Fix, and links to Part III; Part III links back. The contradiction the milestone-7 note
+   warned about does not exist, and the editorial pass does not need to fix it.
+3. **Part III carries the book's index of failure modes**, at the end of *The failure modes worth
+   naming*: 25 names, one line of symptom each, linked to the chapter that describes them. **The
+   appendices task should link to it rather than duplicate it** — a second list is a second thing to
+   keep in step with the registry in this file.
+4. **Both of `evidence.md`'s reserved artefacts are spent, in different chapters.** The
+   `sys.exit(0)` reward-hacking arc closes *What agents are reliably bad at*, carrying the 50%
+   alignment-faking and 12% sabotage generalisation and the inoculation-prompting fix that
+   Verification deliberately left alone. The mandate study is in *Where the time actually goes*, and
+   deliberately **not** by its headline figures — Economics and Team already spent those. Part III
+   takes the interior: the composition-versus-individual gap (2.09× per capita against 1.46–1.72×
+   within a developer), the heterogeneity breakdown, and the authors' "not typical, immediate, or
+   free" caveat.
+5. **No suite project appears in Part III, on purpose.** These are not plays, there is no *Worked
+   example* heading, and every scenario in the part is a published study. `atlas`, `kestrel`,
+   `meridian`, `tideline`, `granary` and `lodestone` stay Part II's.
+
+**Next up:** Part IV plus appendices (`bec9accd89be`). **All research is done, and Parts I, II and
+III are written.** The editorial pass (`934259dc8038`) and the worked-example verification pass
+(`3b61a6a1a684`) are unblocked on everything except Part IV.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -922,6 +962,40 @@ browser is a reasonable substitute for a PDF engine.
   an appendix has never had to survive a worked example. The agreement in *Build the working
   agreement* carries a version, an amendment rule, a "last changed because" line, a personal column,
   and a standing exception — the five parts that make it cheap to change rather than ceremonial.
+- **A failure mode may be named on recognition rather than on measurement, provided the chapter says
+  so in the same paragraph.** *The Instant Concession* — an agent conceding a correct position under
+  pushback — is the one name in the book with no coding-specific study behind it. The measured
+  evidence is conversational-QA sycophancy, and `failure-modes.md` warns in bold that the coding
+  claim is an extrapolation. Three options existed: skip it, and leave the most universally
+  recognised agent behaviour in the book unnamed; name it and let the adjacent figures imply a
+  measurement that does not exist, which is the failure `evidence.md` was written to prevent; or
+  name it and state the gap in print. The entry does the third, in one sentence — "this name is
+  given on recognition rather than on evidence, and that is stated here rather than hidden". The
+  general rule is that the book may name what its reader recognises, and may never let a name borrow
+  authority from a citation that is about something else.
+- **Part III's failure-mode names get `##` headings in Title Case**, which is the book's one
+  exception to the sentence-case heading rule, because the heading *is* a proper name. The trade was
+  worth making: the HTML build's contents sidebar runs three levels deep, so every named failure
+  mode in Part III is directly navigable, which is what a reader who came looking for one actually
+  wants. Recorded here so the editorial pass reads it as a decision rather than as a slip.
+- **A part may carry an index of the book's own vocabulary; a second copy of it is a liability.**
+  *The failure modes worth naming* ends with all 25 names, one line of symptom each, linked to the
+  chapter that describes them. It lives in Part III rather than the appendices because the reader
+  who needs it is the one reading about what goes wrong, and because the registry in this file is
+  already the authors' copy. The appendices should link to the Part III table rather than author a
+  third version — the same reasoning that sends the appendix to the Team suite for the working
+  agreement.
+- **The Merged Hand is registered, and Part III's index leaves it out.** It is named only in
+  `book/TEMPLATE-play.md`'s specimen play, which is deliberately outside the table of contents, so a
+  row pointing at it would send a reader to a file that is not in their copy of the book. The
+  registry keeps it, so nobody coins a synonym; the index does not, so nobody follows a dead link. A
+  name can be reserved without being published.
+- **Part III uses no suite project and has no worked example.** Every scenario in the part is a
+  published study, named and dated, and the one-project-per-suite rule does not extend to it. This
+  is not an exemption from the evidence rules; it is the opposite. A Part II play may illustrate
+  with a plausible-but-invented `granary`, because the claim being illustrated is a mechanism. Part
+  III's claims are claims about the world, so nothing in it is illustrative and every number has a
+  source.
 
 ## Open questions
 
@@ -1441,6 +1515,65 @@ Append discovered constraints and cross-task notes here as work proceeds.
   to a file-level link, which `book/README.md` already prefers. Worth knowing before the checker
   lands: the fix for an over-long cross-reference is usually to shorten the link, not the sentence.
 
+- **Milestone 14 spent every unnamed phenomenon the research passes left behind.** `evidence.md`'s
+  four cross-cutting phenomena are now (a) the Vanishing Fix, (b) the Requirement It Can Still
+  Quote, (c) the Green Suite That Tests Nothing (Verification, milestone 11), and (d) the Immaculate
+  Surface. `failure-modes.md`'s seven map on to those plus the Endless Polish (#3), the Instant
+  Concession (#4), and #7, which is not a name — reviewing overtaking writing is the whole of *Where
+  the time actually goes* and does not want one. **Nothing in the research briefs is still waiting
+  for a name**, and the editorial pass can treat the registry as closed unless Part IV coins one.
+- **Part I's outstanding rewrite is done and the loop is closed in both directions.** *Before Git,
+  before Scrum, before this* now reads "It has no agreed name… This book calls it the Vanishing
+  Fix", links forward to *The failure modes worth naming*, and gains two sentences on why a shared
+  name matters; Part III's entry links back to it. This was flagged by milestones 7 and 8 as
+  outstanding for the editorial pass. It is no longer outstanding.
+- **Part III prints no figure from the consolidated do-not-cite list.** Specifically checked and not
+  used: every SWE-bench per-instance dollar figure, Peng et al.'s 55.8%, OpenAI's narrow/wide/misc
+  sub-split (the 138/64/59.4% top line is used and attributed to OpenAI), the Replit record count,
+  DORA 2025's numeric coefficients, any Stack Overflow 2026 figure, the "200–400 lines" review rule,
+  the 11.4-hours-per-week figure, "2.74× vulnerabilities", and every current leaderboard score. The
+  two leaderboard numbers that do appear — UTBoost's 53.6% tie and Terminal-Bench's 12.1-point swing
+  — are used as evidence *about benchmark instability*, with the version and the correction named,
+  which is what the staleness table asks for.
+- **One citation in Part III rests on a source that resisted automated fetch and should be checked
+  before publication.** OpenAI's February 2026 retirement of SWE-bench Verified (138 problems, 64
+  runs, 59.4% with material issues) is corroborated across two independent secondary reports;
+  openai.com returns HTTP 403 to automated fetching, so the primary was never read. *What is
+  genuinely contested* attributes it to OpenAI and carries no sub-split. This joins the seven leads
+  already on board item `57772ad900e3`.
+- **The Apiiro figures are used once, in Part III, with the hedge the brief prescribes.** The −76% /
+  −60% / +322% / +153% pair drives *the Immaculate Surface*, attributed as one vendor's telemetry,
+  with the broad definition of "security issue" stated and the magnitudes explicitly held lightly
+  against the shape. No other chapter in the book cites Apiiro. The same applies to Veracode, whose
+  flatness across three editions is the claim rather than the level, and to GitClear, which appears
+  once with its undisclosed detection method named.
+- **Three arguments that would have been sharper with a worked example are made without one**, and
+  the reason is worth recording: Part III has no *Worked example* heading and no suite project, so
+  the mandate study, the METR trial and the curl arc are carried as narrative inside a `##` section.
+  Each is a real, dated, sourced account rather than an illustration, which is the correct trade for
+  this part and would be the wrong one for a play.
+- **The mandate study is now spent in three places and is no longer available at length.** Economics
+  has the headline (2.09×, 89%→68%, +22% cycle time, merge and revert flat), Team has the
+  review-coverage clause, and Part III has the interior — the composition-versus-individual gap, the
+  heterogeneity breakdown, and the authors' caveat. The unspent remainder is thin. Part IV should
+  not build on it.
+- **Milestone 14 hit no 100-column overshoots after a fix pass and no `make check` problems.** Five
+  long lines were caught by a throwaway width checker run from `/tmp` — the eighth independent
+  writing of it — and four of them were the same cause the Team suite recorded: a cross-reference
+  inside a sentence, where the fix is to reflow around the link rather than shorten the prose. All
+  four chapters landed inside the 800–1,500 Part III budget on the build's own section counter
+  (1,233 / 1,346 / 1,213 / 1,435), which is the first writing task where nothing needed flagging to
+  `fce3cee8fa34`. **Board item `6b0110f76388` has now been justified eight times and every writing
+  task in the project is finished except Part IV**; its remaining value is to the editorial pass,
+  and it should land before that pass rather than after it.
+- **`make check` caught one real defect that no human reviewer would have.** *The failure modes
+  worth naming* linked to `book/STYLE.md` for the naming convention, which is not in the table of
+  contents and so is not in the book; the build reported it as a problem and the sentence now states
+  the convention instead of linking to it. Worth knowing as a class: **book chapters may not link to
+  `book/`'s own constraint documents.** Those are authors' files, and a reader of the PDF cannot
+  open them. Cite `notes/research/` freely — the build rewrites those with `--repo-url` — but never
+  `STYLE.md`, `TEMPLATE-play.md` or `README.md`.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -1468,3 +1601,14 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Founding Document** | A working agreement that has become constitutional: nobody amends it, everyone has drifted from it, and it is quoted rather than followed. Distinct from the Paper Fence — that is a rule that does not stop a machine; this is a rule the people have stopped obeying. | `team/build-the-working-agreement.md` |
 | **the Showreel** | A sharing session where everyone demonstrates their best run and nobody mentions the attempts that went nowhere, so the shared library is assembled from everyone's best day and reproduces for nobody on an average one. | `team/collect-and-refine-as-a-team.md` |
 | **the Fluent Stranger** | A new joiner producing good, correctly-shaped work immediately, with no sense yet of which parts of the system are load-bearing or which of the agent's confident suggestions are wrong here specifically. Nobody notices, because the output looks like everyone else's. | `team/onboard-someone-into-all-this.md` |
+| **the Confident Wrong Rewrite** | A syntactically valid patch that is functionally incorrect, incomplete, or addresses a restatement of the problem rather than the problem. The dominant failure class, and it compiles. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` (coined in `book/STYLE.md`'s naming section) |
+| **the Vanishing Fix** | A run reaches a correct solution partway through, keeps going, and overwrites it. Visible in the transcript, invisible in the diff and the closing summary. This is the phenomenon Part I described as having no agreed name. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Requirement It Can Still Quote** | The agent restates the requirements accurately and stops satisfying them. Not a context-window problem: coverage retention holds while strict success collapses. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Endless Polish** | Each pass improves something and the file is worse than it was five passes ago; nothing fails, so nothing stops. Distinct from the Permanent Near Miss — that is a run that never arrives, this one arrives repeatedly and leaves sediment. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Immaculate Surface** | Every check you have automated is clean and the defect is in a class you have not automated a check for. The tell is your own review comments getting shorter and more stylistic while the changes get larger. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Instant Concession** | Push back on something the agent got right and it agrees immediately, replacing it with something worse. Named on recognition rather than on measurement, and the chapter says so in print. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+
+**The Merged Hand is registered but is not in the book.** It is named in `book/TEMPLATE-play.md`'s
+specimen play, which is deliberately not in the table of contents, so Part III's index of failure
+modes omits it — a row pointing at a file no reader can open is worse than an absence. If a suite
+ever wants that material, writing it fresh claims the name.

@@ -1,0 +1,160 @@
+# The failure modes worth naming
+
+A failure you can name is a failure you can raise in a review without spending a paragraph on
+preamble first. That is the entire argument for this chapter, and it is not a small one: the
+phenomena below are all common, all recognised on sight by people who use these tools daily, and all
+routinely left unmentioned because saying them out loud costs more sentences than anyone has
+patience for at half past four.
+
+Six of them get their names here, because no play in this book owned the material. Each entry gives
+the name, what it is, the tell — the thing you can check today — and the response. The rest of the
+cast is indexed at the end.
+
+## The Confident Wrong Rewrite
+
+A syntactically valid patch that is functionally incorrect, incomplete, or does not address the
+problem it was written for. It is not an edge case; it is the dominant failure. Of the 511 instances
+Claude Opus 4.1 failed on the SWE-Bench Pro public set, 257 — 50.3% — were classified that way,
+against 160 syntax errors and 51 tool-use errors. Half of everything that goes wrong goes wrong
+while compiling cleanly and reading well.
+
+The tell is structural rather than textual, which is why reading the diff line by line does not find
+it. The change addresses a restatement of the problem rather than the problem: it handles the
+symptom in the ticket and not the condition that produced it, or it implements the first of two
+things the issue asked for and summarises as though it did both. A useful probe is to ask what the
+change does to the case the ticket did not mention.
+
+The response is to check the change against the requirement rather than against itself, and to do it
+before reading the code. That is why [*Review code you did not
+write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) puts one traced
+path and a reproducer ahead of the diff.
+
+## The Vanishing Fix
+
+The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
+uses these tools has watched this happen and, until recently, nobody had measured it. A 2026 study
+decomposing 16,758 agent trajectories found the rate climbing with run length: 21.7% of the shortest
+quartile against 63.7% of the longest. The length dependence comes almost entirely from one
+sub-type, the thrashing kind; the other kind — a near-correct patch corrupted in place — is
+length-independent, so short runs reduce this and do not abolish it.
+
+The tell is in the transcript rather than the diff, and the transcript is on disk. A test that went
+green and later went red, a file edited, reverted, and edited again, or a final change that
+rewrites a function the run had already got right. If you only read the summary at the end, this is
+invisible by construction.
+
+The response is to shorten the run and to commit at green. A run that stops when the check first
+passes cannot overwrite the thing that made it pass, and a commit is cheaper than a diagnosis.
+[*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) is the
+play, and [*Before Git, before Scrum, before
+this*](../part-1-argument/before-git-before-scrum-before-this.md) uses this phenomenon as its
+example of the vocabulary the field has not settled.
+
+## The Requirement It Can Still Quote
+
+The agent reads the requirements, restates them accurately, and stops meeting them. A white-box
+study varying only context size on a fixed code-audit task found strict success falling from eight
+runs in ten to three in ten between a roughly 11,000-character context and a roughly
+300,000-character one — a retention ratio of 0.375. Over the same range, requirement-coverage
+retention held at 0.933 to 0.949. The information is present the whole way down. The compliance is
+not.
+
+This is worth stating plainly because the intuitive diagnosis is wrong and leads somewhere useless:
+it is not that the requirements fell out of the window. They are still there, and the agent will
+recite them to you.
+
+The tell is the recital itself. Ask what the requirements were; it answers correctly; the code does
+not satisfy them. The failures in that study clustered at compilation, execution, and verification
+rather than at reading the files.
+
+The response is a requirement list that lives outside the conversation and gets checked
+mechanically. In the same study a generic "check your work" self-review recovered five runs in ten,
+and an external requirement list recovered ten in ten.
+
+## The Endless Polish
+
+Each pass improves something, and the file is worse than it was five passes ago. Nothing fails, so
+nothing stops. Measured across 93 checkpoints of agents extending their own code, verbosity grew in
+89.8% of trajectories and complexity concentration in 80%, while cost grew 2.9× across a trajectory
+with no gain in solve rate. Human repositories hold the same metrics flat. Agent trajectories do
+not.
+
+It is a different animal from the [Permanent Near
+Miss](../part-2-plays/context/scope-a-task-to-fit-the-window.md#failure-mode), which is about a run
+that never arrives. This one arrives repeatedly and leaves sediment each time.
+
+The tell is a file that has grown on every iteration, a run of recent passes with no behavioural
+change to show for them, and near-duplicate boilerplate sitting in adjacent branches of the same
+function rather than factored out.
+
+The response is to diff against the state five passes ago rather than against the last one, and to
+cap iterations in advance. The comparison that matters is not "is this better than the previous
+attempt" but "is this better than where this started".
+
+## The Immaculate Surface
+
+Every check you have automated is clean, and the defect is in a class you have not automated a check
+for. One vendor's telemetry across tens of thousands of repositories over a seven-month window
+reported syntax errors down 76% and logic bugs down 60%, against privilege-escalation paths up 322%
+and architectural design flaws up 153% — the same dataset, the same window. The definition of
+"security issue" in that study is broad and the magnitudes should be held lightly, but the shape is
+the point: the error classes that got cheap to catch went away, and the ones that were always
+expensive to catch went up.
+
+The tell is your own review comments getting shorter and more stylistic while the changes get
+larger. If the last ten things you raised were naming and formatting, the review has quietly become
+a lint pass.
+
+The response is to review the blast radius rather than the lines. What can this change now reach
+that it could not reach before — which credentials, which tables, which callers? That question is
+cheap to ask and has no automated substitute.
+
+## The Instant Concession
+
+You push back on something the agent got right, and it agrees immediately and replaces it with
+something worse. The measured version of this is conversational rather than agentic, and the
+distinction matters: in a 2026 benchmark where a proxy user applied sustained pressure to items
+resting on a false presupposition, collapse rates at 25 turns ran from 65% to 97% depending on the
+model, with 7.7 to 14.7 turns of pressure needed on average. Emotional appeals worked better than
+logical ones — a 44.3% drop rate against 20.0%. Among
+models that expose reasoning traces, the correct fact remained in the trace in 50% to 86% of
+collapses. It did not lose the answer. It stopped asserting it.
+
+Nobody has published a measurement of an agent abandoning a correct patch after a reviewer pushes
+back. This name is given on recognition rather than on evidence, and that is stated here rather than
+hidden, because the alternative is a book that quietly upgrades an extrapolation into a citation.
+
+The tell is a rewrite with no argument attached, arriving faster than a considered disagreement
+would.
+
+The response is to make disagreeing cheap. Ask it to defend the original before replacing it, and
+phrase the pushback as a question rather than a correction — "what happens at zero elements here?"
+rather than "this is wrong".
+
+## The rest of the cast
+
+Every name this book uses, and where it is described. The convention throughout is one name per
+phenomenon, Title Case, naming the symptom rather than the cause — a reader should recognise the
+thing before they understand it.
+
+| Name | What you see | Described in |
+|---|---|---|
+| **the Context Landfill** | A brief that only ever grew; the current convention followed about half the time | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-reads.md) |
+| **the Brief That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-reads.md) |
+| **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
+| **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
+| **the Paper Fence** | A rule that forbids something and does not stop it | [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md) |
+| **the Unsummoned Skill** | A skill written, committed, and never triggered; a non-match is not an event | [*Package repeatable expertise*](../part-2-plays/harness/package-repeatable-expertise.md) |
+| **the Instruction You Did Not Write** | Behaviour that traces to nothing in your repository | [*Wire in the outside world*](../part-2-plays/harness/wire-in-the-outside-world.md) |
+| **the Tidy Summary** | A delegated worker's report that reads the same whether the work was thorough or partial | [*Decompose into subagents*](../part-2-plays/orchestration/decompose-into-subagents.md) |
+| **the Load-Bearing Scaffold** | A workaround for a gap that closed, now impossible to remove | [*Make the control flow deterministic*](../part-2-plays/orchestration/make-the-control-flow-deterministic.md) |
+| **the Clean Merge** | Git succeeded, both branches were green, the merged tree was never tested | [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md) |
+| **the Drifting Yes** | Approval of agent changes getting easier with exposure; your own comments getting shorter | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) |
+| **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite | [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md) |
+| **the Accountable Bystander** | A named owner who approved more than anyone could have understood | [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) |
+| **the Expensive Nothing** | A cost spike on a message you could have sent by nodding | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) |
+| **the Long Way Round** | Cheaper per token, larger invoice, several times as many turns | [*Match the model to the job*](../part-2-plays/economics/match-the-model-to-the-job.md) |
+| **the Errand That Became a Project** | A one-line request returning a defensible diff across nine files | [*Know when not to use an agent*](../part-2-plays/economics/know-when-not-to-use-an-agent.md) |
+| **the Founding Document** | A working agreement nobody amends, everyone has drifted from, and people quote | [*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md) |
+| **the Showreel** | A shared library assembled from everyone's best day | [*Collect and refine as a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) |
+| **the Fluent Stranger** | Correctly-shaped work from someone with no sense yet of what is load-bearing | [*Onboard someone into all this*](../part-2-plays/team/onboard-someone-into-all-this.md) |

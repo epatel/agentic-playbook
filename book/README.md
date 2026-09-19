@@ -146,11 +146,14 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 26 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
 | 27 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
-| 28 | `part-3-where-it-struggles/` | *Rows supplied by the Part III task* | ⬜ |
+| 28 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
+| 29 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
+| 30 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
+| 31 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 29 | `part-4-next-waves/` | *Rows supplied by the Part IV task* | ⬜ |
+| 32 | `part-4-next-waves/` | *Rows supplied by the Part IV task* | ⬜ |
 | **Appendices** | | | |
-| 30 | `appendices/` | *Rows supplied by the appendices task* | ⬜ |
+| 33 | `appendices/` | *Rows supplied by the appendices task* | ⬜ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it
