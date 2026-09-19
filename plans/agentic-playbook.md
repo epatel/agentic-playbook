@@ -59,7 +59,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 6 | Research: evidence, failure modes, token economics | `8701744c4454` | ✅ done |
 | 7 | Part I — The Argument | `e93293bfd014` | ✅ done |
 | 8 | Context play suite | `655473ee5afb` | ✅ done |
-| 9 | Harness play suite | `9366c3c324b5` | ⬜ blocked on 3, 4 |
+| 9 | Harness play suite | `9366c3c324b5` | ✅ done |
 | 10 | Orchestration play suite | `3c6b76dedb59` | ⬜ blocked on 3, 5 |
 | 11 | Verification & Trust play suite | `4858fbdecdf4` | ⬜ blocked on 3, 6 |
 | 12 | Economics play suite | `bffa217221ed` | ⬜ blocked on 3, 6 |
@@ -92,6 +92,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `703e507c86aa` | Write the cards play — the Context suite's fourth | ⬜ blocked on milestone 8 and `f94b88e05069` |
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I | ⬜ blocked on milestone 7 and `f94b88e05069` |
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument | ⬜ blocked on milestone 15 |
+| `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources | ⬜ blocked on milestone 9 |
 
 ## Current state / handoff
 
@@ -307,11 +308,40 @@ follow:
 3. **Three plays per suite held comfortably**, and no fourth was wanted. That is one data point
    against the open play-count question rather than an answer to it.
 
-**Next up:** the Harness suite (`9366c3c324b5`), unblocked by milestone 4; the Orchestration suite
-(`3c6b76dedb59`), unblocked by milestone 5; Verification & Trust (`4858fbdecdf4`), Economics
-(`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by milestone 6; and Team
-(`cdd27e440781`), which is free to run. **All research is done, Part I and the Context suite are
-written, and every remaining writing task is unblocked.**
+Milestone 9 added `harness/`, the second suite, at roughly 296 / 1,150 / 1,081 / 1,129 words. It
+spends the permission-matching material milestone 4 flagged as Harness-owned, and it names the
+instructions-are-not-enforcement gotcha that the Context suite deliberately left unnamed.
+
+| File | Owns |
+|---|---|
+| [`harness/index.md`](../book/part-2-plays/harness/index.md) | The suite opener — names *every extension of reach is an extension of what can go wrong, bought together* as the suite's one idea, and frames the three plays as the harness, the competence added to it, and the reach added to it |
+| [`choose-your-harness.md`](../book/part-2-plays/harness/choose-your-harness.md) | The four parts of a harness, the three enforcement layers, permission rules as ergonomics, the sandbox as the only boundary that holds |
+| [`package-repeatable-expertise.md`](../book/part-2-plays/harness/package-repeatable-expertise.md) | Skills: when a procedure earns an artefact, what a situation-shaped boundary looks like, the `description` as the routing table, progressive-disclosure arithmetic |
+| [`wire-in-the-outside-world.md`](../book/part-2-plays/harness/wire-in-the-outside-world.md) | MCP: connecting on a boundary, scoped credentials, tool descriptions as authored context, the union threat model, pinning against rug pulls |
+
+Four things in it constrain later tasks:
+
+1. **Three failure modes are registered**, all new: **the Paper Fence**, **the Unsummoned Skill**,
+   and **the Instruction You Did Not Write**. The first is milestone 4's gotcha (a), named here as
+   the Context suite expected; note it is deliberately *not* the same as the Brief That Never
+   Arrived, and *Package repeatable expertise* says so in print so the editorial pass can check it.
+2. **The permission-matching example is spent.** The `deny` rule that does not stop `git 'push'
+   origin main`, and the sandbox configuration that replaces it, carry *Choose your harness*'s
+   Worked example. Another suite may cite the mechanism; none should build an example on it.
+3. **Vendor-specific mechanics are scoped in the sentence that uses them.**
+   `notes/research/permissions-and-sandboxing.md` warns that only one harness was examined, so the
+   play names Claude Code and a version where the specifics are that vendor's, and states the
+   general shape — instructions, client-enforced rules, kernel-enforced sandbox — where it is
+   general. Any later play touching permissions should keep that split rather than implying a
+   cross-tool standard that does not exist.
+4. **The suite defines *harness* and *skill* on first use**, which is two of the three terms board
+   item `9dd4d6b84b80` is waiting on. *Card* is still undefined, and belongs to the Context suite's
+   fourth play (`703e507c86aa`).
+
+**Next up:** the Orchestration suite (`3c6b76dedb59`), unblocked by milestone 5; Verification &
+Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by
+milestone 6; and Team (`cdd27e440781`), which is free to run. **All research is done, Part I and two
+suites are written, and every remaining writing task is unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -630,6 +660,21 @@ browser is a reasonable substitute for a PDF engine.
   convention is **absorb, do not cite**: the material goes into the book's voice, the URLs go into
   the appendix's further reading. A book that footnotes its own author reads as though it is
   quoting someone else.
+- **A mechanic that only one vendor implements is named and version-stamped in the sentence that
+  uses it; the shape it is an instance of is stated generally.** `permissions-and-sandboxing.md`
+  warns that only one harness was examined, and *Choose your harness* would have been dishonest
+  written either way round — as a tour of one product's settings, or as a claim about harnesses in
+  general built entirely on one product's documentation. The split it uses instead is the durable
+  one: the three enforcement layers (nothing / the client / the kernel) are general and are written
+  as such, while `Bash(devbox run *)`, `failIfUnavailable`, and the wrapper-stripping list are
+  attributed and dated. This also keeps the play useful to a reader on a different harness, who
+  needs to know what to go and look for rather than which JSON key to copy.
+- **A suite may leave a research pass's evidence unspent when the argument does not need it.** The
+  Harness suite cites no adoption figures — not the ~45 skill clients, not the server counts that
+  disagree by a factor of five, not the 60k repositories. Each was available and each would have
+  added a date stamp to a paragraph whose argument is structural. The rule generalises past the
+  staleness table in `tooling.md`: a figure that does not change what the reader does is a liability
+  with no upside, and the test is whether removing it weakens the sentence.
 - **Three plays per suite is a floor, not a ceiling** — settled for the Context suite at least
   (user decision, milestone 19), which takes a fourth play on the cards pattern. This does not
   license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
@@ -929,6 +974,34 @@ Append discovered constraints and cross-task notes here as work proceeds.
   also means the book's best worked examples may already be checked in — the resolved appendix
   question above turns on exactly that.
 
+- **Milestone 9 named milestone 4's gotcha (a) as the Paper Fence**, which closes the note above
+  about the Context suite leaving it unnamed. It covers both halves deliberately: the permission
+  rule that matches a spelling rather than a capability, and the line of prose in a brief that reads
+  as a refusal and is a sentence competing for attention. Gotchas (b) and (c) from that pass remain
+  spent-and-unnamed and unnamed-entirely respectively — (b) is the Flattering Dashboard, (c) is
+  still free.
+- **The Harness suite uses `kestrel`, a Go search-indexing service**, across all three worked
+  examples, per the one-project-per-suite rule. It is deliberately not `atlas`. Four suites still
+  need their own.
+- **Three dated claims in *Wire in the outside world* rest on secondary aggregation and need primary
+  citations before publication.** The `postmark-mcp` backdoor (September 2025), the Invariant Labs
+  tool-poisoning demonstration including the cross-server case (April 2025), and the existence of
+  write-capable tools alongside read ones on a typical observability server. `notes/research/mcp.md`
+  flags the first two as needing a primary check, and the play carries them at the level of shape —
+  named package, named month, no figures — precisely so the check is an edit rather than a rewrite.
+  Board item `f986730f7a1f` tracks it. The NSA/CISA MCP guidance is still unfetched and is cited
+  nowhere in the book; the suite leans on the MCP specification's own Security Best Practices
+  document instead, which is primary and normative and needed no manual download.
+- **The Harness suite cites no adoption counts at all.** `tooling.md` and `mcp.md` both rank those
+  as fast-rotting and internally inconsistent by a factor of five, and none of the three plays
+  needed one to make its point. Worth copying rather than re-deriving: the argument for MCP is a
+  boundary-crossing argument, and it does not get stronger with a server count attached.
+- **The `description`-is-the-routing-table finding survived contact with a play and is the single
+  most actionable thing in `notes/research/skills.md`.** It is the pivot of *Package repeatable
+  expertise*'s worked example (a skill that sat unfired for two weeks under the description "Index
+  mapping utilities"). The Team suite's shared-skill-library play will want the same finding from
+  the other end — a library whose skills were described by their authors, for their authors.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -941,3 +1014,6 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-reads.md` |
 | **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
 | **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |
+| **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |
+| **the Unsummoned Skill** | A skill that is written, committed, and never triggered. The metadata loaded as designed and lost the match; a non-match is not an event anything logs. | `harness/package-repeatable-expertise.md` |
+| **the Instruction You Did Not Write** | Agent behaviour that traces to nothing in your repository, because it arrived in a tool description — authored context from a connected server. | `harness/wire-in-the-outside-world.md` |
