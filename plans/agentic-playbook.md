@@ -47,6 +47,9 @@ guide that a working developer can open at any single play and act on it the sam
   missing files and style defects, and `make lint` reports the style defects alone. Output goes
   to `build/`, which is gitignored and never committed. See
   [`cards/building-the-book.md`](../cards/building-the-book.md).
+- Running `make check` or `make lint` writes `scripts/__pycache__/` as a side effect. It is
+  gitignored, along with `*.pyc`, and must never be committed — a stale bytecode copy shows up as
+  a spurious modification in every later diff.
 
 ## Milestones
 
@@ -94,6 +97,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I — milestone 19's last filing; the rocket-launch material is now spent | ✅ done |
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument — carried in full; two missing links added | ✅ done |
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources — both incidents hold, one framing was wrong and is corrected in print | ✅ done |
+| `f0669b48dbc0` | Untrack `scripts/__pycache__` and gitignore it — already untracked by `37dfb14`; added the `*.pyc` half and confirmed nothing else generated is tracked | ✅ done |
 
 ## Current state / handoff
 
@@ -1842,6 +1846,19 @@ Grafana's spelling**; the reason is in the brief.
   refactor a team can start on Monday. A second hedge inside the chapter was considered and
   declined: hedging the cheapest, most reversible recommendation hardest inverts the reader's sense
   of which parts are bets.
+- **`.gitignore` covers Python bytecode as both a directory and a glob** (`f0669b48dbc0`).
+  `__pycache__/` landed with the style checker in `37dfb14`, which also ran the `git rm --cached`;
+  by the time this item opened, the only thing left was `*.pyc` for a stray bytecode file written
+  outside a `__pycache__/` directory. Both rules are in place and `make lint` now regenerates
+  `scripts/__pycache__/` without touching `git status`.
+- **Nothing else generated is tracked, and it was checked rather than assumed.** The audit this
+  item was asked to do came back empty: the only non-prose files in the index are the worked-example
+  trees and the four files in `scripts/`, all of them source. The example `reproduce.py` scripts
+  build their trees in temporary directories and `build_book.py` reaches `mmdc` through `npx`, which
+  caches outside the repository — so no `node_modules/` or example build output can appear in the
+  tree, and neither was pre-emptively ignored. **Speculative ignore rules were declined**: an entry
+  for an artefact that cannot appear is a claim about the build that later stops being true
+  silently. Add one when something actually shows up in `git status --ignored`.
 
 ## Open questions
 
