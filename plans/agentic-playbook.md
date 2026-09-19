@@ -43,8 +43,9 @@ guide that a working developer can open at any single play and act on it the sam
 - Any build/helper scripts are Python, not Node.
 - Prose wraps at 100 columns; diagrams are mermaid, never ASCII art.
 - Repo-wide conventions are recorded as cards in `cards/` and indexed from the root `CLAUDE.md`.
-- `make html` and `make pdf` collect the book and render it; `make check` reports orphans and
-  missing files. Output goes to `build/`, which is gitignored and never committed. See
+- `make html` and `make pdf` collect the book and render it; `make check` reports orphans,
+  missing files and style defects, and `make lint` reports the style defects alone. Output goes
+  to `build/`, which is gitignored and never committed. See
   [`cards/building-the-book.md`](../cards/building-the-book.md).
 
 ## Milestones
@@ -84,7 +85,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `aed2433867e0` | Reassessment after milestones 8 and 18 — contracts hardened, five prose defects fixed | ✅ done |
 | `01dce54a3f88` | HTML book — `make html` made a first-class output: stylesheet, sidebar contents, browser-drawn diagrams | ✅ done |
 | `878a5eb98f8b` | PDF lacked mermaid: render via `npx` fallback, and size diagrams to the page | ✅ done |
-| `6b0110f76388` | Add a 100-column / style lint to `make check`, after three authors wrote the same one | ⬜ open, blocked on nothing |
+| `6b0110f76388` | Add a 100-column / style lint to `make check`, after four authors wrote the same one | ✅ done |
 | `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
@@ -604,9 +605,14 @@ Milestone 17, the worked-example verification pass, then ran every command in th
 representative output with captured output. Its output is summarised under
 *The verification pass* below.
 
-**Next up:** the style-lint item (`6b0110f76388`), which the editorial pass argues should now be
-built rather than deferred again — and which should grow a check for the `> Captured` convention
-while it is being written, since that convention is now mechanical.
+**The style lint (`6b0110f76388`) is built**, and it took the `> Captured` check the editorial
+pass asked for. `make check` now runs it, `make lint` runs it alone, and what it checks and what
+it deliberately exempts is under *The style checker* below. **Run it instead of writing a fifth
+throwaway one.**
+
+**Next up:** the three open follow-ups in the table above — the cards play (`703e507c86aa`), the
+preparation-versus-execution thread into Part I (`0bdccc346bd4`), and the three marginal budget
+overruns (`fce3cee8fa34`).
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -692,6 +698,50 @@ browser is a reasonable substitute for a PDF engine.
    PDF's contents page stops at two on purpose. This is the first thing in the build that treats
    the play template as a navigation structure rather than a writing one, and it is a small
    argument for keeping those five headings identical across eighteen plays.
+
+## The style checker
+
+Board item `6b0110f76388` closed the oldest piece of recurring waste in the project. Milestones 7
+and 8, the reassessment pass and the editorial pass had each written their own 100-column checker
+in `/tmp` — four versions of the same twenty lines, of which the editorial pass's shipped two
+defects into the prose before an adversarial re-read caught them. There is now one, it is checked
+in, and it is reviewed once rather than rewritten per task.
+
+| File | Owns |
+|---|---|
+| [`scripts/check_style.py`](../scripts/check_style.py) | Every rule a machine can decide, the exemption list, and a `--self-test` fixture holding the traps. One file, no dependencies, imports the build's fence state machine so "inside a fence" means one thing. |
+| [`Makefile`](../Makefile) | `make lint`, and `make check` now runs both halves — always both, so a missing chapter does not hide a 104-column line until the next invocation. |
+| [`cards/building-the-book.md`](../cards/building-the-book.md) | What it checks, what it exempts and why, and how to point it at a path outside `book/`. |
+
+**The book passes clean**, which is the result worth stating: 42 files, zero problems, zero notes.
+Nothing in the prose was changed to get there.
+
+`make check` covers `book/` only, and the checker takes a path, so pointing it at `cards`,
+`plans` or the root documents works. Doing that finds about a dozen 101-column lines in **this
+file** and none anywhere else. They are left as they are on purpose: this is the one document
+every parallel task edits, and reflowing a hundred lines of it to save a column would hand the
+next four agents a merge conflict each. Wrap the lines you write; do not reflow the ones you
+find.
+
+Four things in it constrain later tasks:
+
+1. **Do not write a fifth one, and do not count columns by hand.** The checklist in
+   `book/README.md`, the working agreements in `CLAUDE.md` and both cards now say so. If a rule is
+   wrong, change the rule and run `python3 scripts/check_style.py --self-test`.
+2. **Every exemption is a decision somebody already made, and they are in the script with the
+   reason attached.** Fenced blocks (a mermaid node in *Scope a task to fit the window* is 120
+   columns and correct), table rows, a line that is one markdown link and some punctuation (the
+   milestone-15 decision, 104–116 columns), anything inside double quotes for the vocabulary rules
+   only, `book/STYLE.md` for the bans it has to print, and `book/examples/` for the same reason
+   the build skips it. A checker that reports correct prose gets switched off within a week.
+3. **Two traps are encoded as assertions rather than as comments.** Column counts are `len()` on a
+   `str` — a byte-oriented `awk length()` overcounts every em dash by two, and this prose is full
+   of them — and a `---` inside a ```` ```markdown ```` fence is sample content rather than
+   frontmatter. Both are in the `--self-test` fixture, which is the file to read before changing
+   anything.
+4. **`> Captured` is checked**, as the editorial pass asked: the shape of the line, and that there
+   is a fence under it. The other half of that convention — whether a block that looks like a
+   transcript *has* a capture line — is not mechanical and is still a person's job.
 
 ## The verification pass
 
@@ -1384,6 +1434,43 @@ and left alone.
   domain. Only one needed a browser. **A brief may record that a source resisted retrieval, but it
   should name the method that failed rather than the document**, because the next agent has
   different methods. The five routes that worked are tabulated in *The source-verification pass*.
+- **Four independent throwaway implementations is the threshold `cards/standing-defaults.md` was
+  asking for** (`6b0110f76388`). That card says to add tooling "only when a real, repeated need
+  appears", which is the right default and is also unfalsifiable until somebody counts. The count
+  here was four: milestones 7 and 8, the reassessment pass and the editorial pass each wrote a
+  100-column checker in `/tmp`, and none of them knew about the others. The card now carries the
+  number as well as the principle, because "a real repeated need" and "I would find this
+  convenient" are indistinguishable from inside one task.
+- **The style checker is its own file, not a flag on `build_book.py`.** The editorial pass logged
+  that a checker "belongs in `scripts/build_book.py --check`, where it is written once and
+  reviewed once". The *written once* half is what mattered and it is honoured — one
+  implementation, one review, and `make check` still the single command an author runs. The file
+  is separate for two reasons the editorial pass could not have known: the checker's file set is
+  not the build's (it reads `README.md`, `STYLE.md` and `TEMPLATE-play.md`, which the build
+  excludes as instructions to authors), and `build_book.py` is a one-way transformation of the
+  book into `build/` while this writes nothing at all. The shared parts are imported rather than
+  copied, so "inside a fenced block" cannot come to mean two things.
+- **A checker's exemptions are decisions with reasons attached, and they live in the code.** Every
+  false positive is an invitation to switch the rule off, and the switching-off is done by
+  whoever is in a hurry rather than by whoever understands the trade. So the mermaid-node
+  exemption, the one-markdown-link line, the quoted-American-spelling case and the `book/STYLE.md`
+  exemption are each a named constant with a comment saying which decision or which document put
+  it there. The rule generalises to anything mechanical this project adds: **if a check has an
+  exception, the exception is documentation, not configuration.**
+- **A spelling preference is a note; an outright ban is a problem.** `-ize` endings are reported
+  but do not fail `--strict`, because the book quotes American sources verbatim and the checker
+  cannot always tell a quotation from a lapse — it masks double-quoted spans, which handles the
+  cases in the book today and will not handle every future one. Exclamation marks, emoji and the
+  hype list are problems, because `book/STYLE.md` calls them "not judgement calls". This keeps the
+  two severities meaning what the build already made them mean: **a problem is a defect, a note
+  wants a person to look.**
+- **The checker has a self-test, and the fixture is the documentation.** A checker nobody dares
+  change is worse than no checker, and the traps here are not obvious from reading the rules: a
+  100-column line of em dashes that a byte-counting tool calls 106, a 128-column mermaid node that
+  is correct, a `---` inside a ```` ```markdown ```` fence that is not frontmatter, a quoted
+  exclamation mark that belongs to Anthropic. `--self-test` asserts all four, so the next person
+  to add a rule finds out immediately if they have broken one. No test framework was added; the
+  fixture is a string in the file.
 
 ## Open questions
 

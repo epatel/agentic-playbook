@@ -23,6 +23,12 @@ The book does not currently need a toolchain, and it should stay that way as lon
 a markdown book that requires `npm install` before you can read it has failed at being a markdown
 book. Add tooling only when a real, repeated need appears.
 
+Two have appeared, and both are dependency-free single files under `scripts/`:
+[`build_book.py`](building-the-book.md) collects and renders the book, and `check_style.py`
+checks the rules below that a machine can decide. The second was added after four writing tasks
+had each written their own throwaway version in `/tmp` — **that** is what a real repeated need
+looks like, and the counting is the point. One agent reaching for a script is a preference.
+
 ## Python: always use a virtual environment
 
 If tooling does appear and needs dependencies, never install them into system or user Python.
@@ -62,3 +68,9 @@ a great deal when several agents write into the same book in parallel and their 
 merged.
 
 Do not wrap inside a table row, a URL, or a fenced code block.
+
+`make lint` decides this, along with trailing whitespace, missing language tags and the outright
+bans in `book/STYLE.md`. It already knows about the exemptions — mermaid diagrams wider than the
+page, a line that is one long cross-reference link — so a reported line is a line to fix rather
+than a rule to argue with. What it checks and what it exempts is in
+[building-the-book](building-the-book.md).

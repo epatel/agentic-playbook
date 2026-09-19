@@ -12,6 +12,7 @@ make md         # build/agentic-playbook.md    — needs nothing but Python
 make open       # build the PDF, then hand it to the default viewer
 make open-html  # build the HTML book, then hand it to the default browser
 make check      # report problems, write nothing, exit non-zero if any
+make lint       # the style half of make check alone, for a quick pass while writing
 make clean      # delete build/
 ```
 
@@ -51,13 +52,60 @@ it:
 - A row marked ⬜ is expected to be missing and is listed on the *About this build* page instead.
 - A `#` heading that does not match its table-of-contents title is reported.
 
-`make check` runs those checks and exits non-zero if any of them are real problems. It is a
-reasonable last step before finishing a writing task.
+`make check` runs those checks, and the style checker below, and exits non-zero if any of them
+report a real problem. It is a reasonable last step before finishing a writing task.
+
+## The style checker — the rules a machine can decide
+
+`scripts/check_style.py` reads every markdown file under `book/` and reports, with `file:line`,
+what `book/STYLE.md` and the 100-column rule make mechanical. **Do not count columns by hand, and
+do not write your own version of this** — four writing tasks each wrote one in `/tmp` before it
+was written down once, and two of them shipped defects into the prose.
+
+| Reported | Rule |
+|---|---|
+| a line over 100 columns | `cards/standing-defaults.md`; counted as characters, so an em dash is one |
+| trailing whitespace, a missing final newline, a trailing blank line | `book/STYLE.md`, *Mechanics* |
+| a fenced block with no language tag, or one that is never closed | same |
+| YAML frontmatter | same |
+| an exclamation mark, an emoji, a word from the hype list | `book/STYLE.md`, *Banned outright* |
+| a `> Captured` line in the wrong shape, or with no fence under it | `book/TEMPLATE-play.md` |
+| an `-ize` spelling — as a **note**, because a quotation may be American | `book/STYLE.md`, *Mechanics* |
+
+What it deliberately does not report matters as much, because each exemption is a decision
+somebody already made and a false positive is how a checker gets switched off:
+
+- **Nothing inside a fenced block.** A mermaid node may be 128 columns wide, a ```` ```markdown ````
+  sample may contain a `---` that is not frontmatter, and captured output is whatever the machine
+  printed.
+- **Table rows**, which are not wrappable.
+- **A line that is one markdown link and some punctuation**, which is how the longest play titles
+  and the deepest suite paths reach 114 columns with nothing to break. Two links on one line is
+  not exempt: that one can be split.
+- **Anything inside double quotes**, for the vocabulary rules only. The book quotes American
+  sources verbatim, and a quotation is not this book's voice.
+- **`book/STYLE.md`** for the bans, because the document that defines them has to print them.
+- **`book/examples/`**, which is apparatus: one fixture is a deliberately terrible `CLAUDE.md`,
+  and another is a rules file whose frontmatter is the point. Name the path to check it anyway.
+
+It writes nothing, it takes about a tenth of a second, and it is not a judgement on the prose —
+voice, humour and everything else in `book/STYLE.md` still needs a person. Point it at anything:
+
+```bash
+make lint                                        # book/, the same as make check runs
+python3 scripts/check_style.py book/part-3-where-it-struggles cards plans
+python3 scripts/check_style.py --self-test       # check the checker against its own fixture
+```
+
+If you change a rule, run `--self-test`. The fixture encodes the traps — a 100-column line made
+of em dashes, a 128-column mermaid node, a `---` inside a sample, a quoted exclamation mark — and
+each of them was reported as a defect by somebody's throwaway version.
 
 ## Two severities, because the book is half-written
 
 A **problem** is something a person should fix. A **note** is the expected consequence of building
-an unfinished book — a forward link to a chapter nobody has written, a diagram left as source.
+an unfinished book — a forward link to a chapter nobody has written, a diagram left as source — or,
+from the style checker, a rule with legitimate exceptions that wants a human's eye.
 Only problems fail `--strict`, so `make check` does not cry wolf for the months in which most of
 the table of contents is ⬜.
 

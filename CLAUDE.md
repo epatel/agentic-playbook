@@ -33,12 +33,14 @@ Load a card when its situation matches. Each one stands alone.
 - [standing-defaults](cards/standing-defaults.md) — adding a diagram, adding a script or
   dependency, or wondering how to format a file
 - [building-the-book](cards/building-the-book.md) — collecting the chapters into one file,
-  producing an HTML book or a PDF, or checking that what you wrote is actually in the book
+  producing an HTML book or a PDF, checking that what you wrote is actually in the book, or
+  checking it against the column limit and the style guide's outright bans
 
 ## Working agreements
 
 - **Prose wraps at 100 columns.** Parallel authors merge into the same book; line-scoped diffs
-  are what make that survivable.
+  are what make that survivable. `make lint` decides it, along with everything else in
+  `book/STYLE.md` a machine can decide. Do not write your own checker — four tasks already did.
 - **Diagrams are mermaid**, in fenced ```mermaid``` blocks. Never ASCII art.
 - **`notes/raw/` is frozen.** It is a provenance record of the original ideation, not a spec.
 - **Locked decisions in `PLAN.md` are not reopened unilaterally.** If your task cannot proceed

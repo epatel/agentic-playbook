@@ -102,7 +102,8 @@ browser-drawn diagrams. It needs only pandoc.
 ```bash
 make html && make open-html
 make pdf                 # needs pandoc plus a PDF engine; typst is the default
-make check               # what is in the book, what is orphaned, word counts per part
+make check               # what is in the book, what is orphaned, word counts, style defects
+make lint                # the style half of make check: columns, whitespace, fences, the bans
 make                     # lists the targets
 ```
 
@@ -121,7 +122,7 @@ Output goes to `build/`, which is generated and never committed. See
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
 | [`plans/agentic-playbook.md`](plans/agentic-playbook.md) | The execution plan: milestones, the decision log, the handoff note, the open questions. |
 | [`cards/`](cards/) | Repo conventions, as self-contained context cards. Indexed from [`CLAUDE.md`](CLAUDE.md). |
-| [`scripts/`](scripts/), [`Makefile`](Makefile) | The build. One Python file, no dependencies. |
+| [`scripts/`](scripts/), [`Makefile`](Makefile) | The build and the style checker. Two Python files, no dependencies. |
 
 ## Contributing
 
@@ -129,7 +130,7 @@ The book has a style guide and a template, and they are enforced rather than sug
 [`book/STYLE.md`](book/STYLE.md) and [`book/README.md`](book/README.md) before writing a sentence,
 and [`book/TEMPLATE-play.md`](book/TEMPLATE-play.md) too if you are writing a play. Prose wraps at
 100 columns, diagrams are mermaid, and a file that is not in the table of contents is not in the
-book. Run `make check` before you finish.
+book. Run `make check` before you finish: it decides all three, so none of them is an argument.
 
 Disagreement is the point — the book says in its own preface that it is one account written in
 enough detail to be disagreed with precisely. A correction with a source attached is the most
