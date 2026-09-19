@@ -125,6 +125,11 @@ people have fetched cannot be moved honestly, so the checks come first. Releases
 Output goes to `build/`, which is generated and never committed. See
 [`cards/building-the-book.md`](cards/building-the-book.md).
 
+Links that leave the book — a research brief, `PLAN.md` — stay relative in the markdown, which is
+what makes them work when a chapter is read on GitHub. Collected into one file they would resolve
+against wherever that file sits, so the build rewrites them to `REPO_URL` (the repository on
+`main` by default; a release pins them to its own tag).
+
 The same HTML build is published to
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
 `main`, by [`.github/workflows/pages.yml`](.github/workflows/pages.yml).

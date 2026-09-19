@@ -15,6 +15,15 @@ ARGS   ?=
 STYLEARGS ?=
 
 OUT    := --out-dir $(BUILD) --name $(NAME)
+
+# Links that leave the book — a research brief, PLAN.md — are relative in the markdown, which is
+# what makes them work when the book is read on GitHub. Collected into one file they would
+# resolve against wherever that file happens to sit, so the build rewrites them to point at the
+# repository. A release pins them to its own tag instead of main, so the PDF keeps citing the
+# sources as they read when it was published.
+REPO     ?= https://github.com/epatel/agentic-playbook
+REPO_URL ?= $(REPO)/blob/main
+LINKS    := --repo-url $(REPO_URL)
 PDF    := $(BUILD)/$(NAME).pdf
 HTML   := $(BUILD)/$(NAME).html
 
@@ -42,13 +51,13 @@ help: ## Show this help
 	@echo "  Pass extra flags with ARGS, e.g. make pdf ARGS='--pdf-engine typst --strict'"
 
 pdf: ## Collect the book and render build/agentic-playbook.pdf (needs pandoc + a PDF engine)
-	$(PYTHON) $(SCRIPT) --format pdf $(OUT) $(ARGS)
+	$(PYTHON) $(SCRIPT) --format pdf $(OUT) $(LINKS) $(ARGS)
 
 md: ## Collect the book into build/agentic-playbook.md (no external tools needed)
-	$(PYTHON) $(SCRIPT) --format md $(OUT) $(ARGS)
+	$(PYTHON) $(SCRIPT) --format md $(OUT) $(LINKS) $(ARGS)
 
 html: ## Collect the book into one self-contained build/agentic-playbook.html (needs pandoc)
-	$(PYTHON) $(SCRIPT) --format html $(OUT) $(ARGS)
+	$(PYTHON) $(SCRIPT) --format html $(OUT) $(LINKS) $(ARGS)
 
 open: pdf ## Build the PDF and open it in the default viewer
 	@test -f "$(PDF)" || { echo "make open: $(PDF) was not rendered — see the build output above"; exit 1; }
@@ -82,7 +91,8 @@ release: ## Build the PDF and publish it as a GitHub release tagged with the dat
 	@test "$$(git rev-parse HEAD)" = "$$(git rev-parse '@{u}')" \
 		|| { echo "make release: HEAD differs from its upstream — push first, so the tag names public history"; exit 1; }
 	@$(MAKE) --no-print-directory check
-	$(PYTHON) $(SCRIPT) --format pdf --out-dir $(BUILD) --name $(NAME)-$(VERSION) $(ARGS)
+	$(PYTHON) $(SCRIPT) --format pdf --out-dir $(BUILD) --name $(NAME)-$(VERSION) \
+		--repo-url $(REPO)/blob/$(VERSION) $(ARGS)
 	@test -f "$(RELEASE_PDF)" || { echo "make release: $(RELEASE_PDF) was not rendered — see the build output above"; exit 1; }
 	git tag -a "$(VERSION)" -m "The Agentic Playbook $(VERSION)"
 	git push --quiet origin "$(VERSION)"

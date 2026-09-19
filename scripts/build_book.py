@@ -352,8 +352,12 @@ class ChapterRewriter:
                 repo_relative = resolved.relative_to(ROOT).as_posix()
             except ValueError:
                 return target
-            suffix = "/" if resolved.is_dir() else ""
-            return f"{self.repo_url}/{repo_relative}{suffix}" + (f"#{fragment}" if fragment else "")
+            base, suffix = self.repo_url, ""
+            if resolved.is_dir():
+                # GitHub serves a file under /blob/ and a directory under /tree/, and redirects
+                # one to the other. Emitting the right one costs a string swap and saves a hop.
+                base, suffix = base.replace("/blob/", "/tree/"), "/"
+            return f"{base}/{repo_relative}{suffix}" + (f"#{fragment}" if fragment else "")
 
         if relative is not None and path_part.endswith(".md"):
             self.warn(f"{self.chapter.path}: links to '{path_part}', which is not in the table of "
