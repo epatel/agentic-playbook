@@ -82,6 +82,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | Board item | What | Status |
 |---|---|---|
 | `aed2433867e0` | Reassessment after milestones 8 and 18 — contracts hardened, five prose defects fixed | ✅ done |
+| `878a5eb98f8b` | PDF lacked mermaid: render via `npx` fallback, and size diagrams to the page | ✅ done |
 | `6b0110f76388` | Add a 100-column / style lint to `make check`, after three authors wrote the same one | ⬜ open, blocked on nothing |
 | `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
@@ -305,6 +306,21 @@ GitHub is still the book, and nothing has to be built to read it.
    chapters, Part II 3,736 across the Context suite's four files. Part II passes Part I on the next
    suite, which is the first moment the proportions can be read as anything but noise.
 
+A follow-up (`878a5eb98f8b`) then fixed the one thing that build shipped broken: **the PDF had no
+diagrams in it.** Rendering required a global `mermaid-cli` that nobody had installed, so both
+mermaid blocks came out as source code — in a book whose own conventions mandate mermaid. The
+build now finds `mmdc` if it is there and otherwise runs `npx --yes @mermaid-js/mermaid-cli`, so
+a clean checkout with node on it produces diagrams with no setup step. Three things follow for
+anyone touching this:
+
+- **Diagrams now cost build time**, so renders are cached in `build/diagrams/` against their
+  source and only changed diagrams re-render. A warm rebuild is back under a second.
+- **`make check` no longer renders diagrams at all.** It writes nothing and stays instant. If you
+  want a diagram checked, build the PDF — a syntax error mermaid rejects is reported as a problem
+  against the chapter, so `--strict` catches it there.
+- **Write mermaid freely in a play.** It works now, and a diagram wider than the page is clamped
+  to the text width rather than overflowing it.
+
 A reassessment pass (`aed2433867e0`) then re-read Part I and the Context suite against the three
 constraint documents, and re-ran `make check` against the build milestone 18 had just landed. The
 prose held up and the build reports no problems; the contracts did not hold up, because four
@@ -497,6 +513,24 @@ a suite, these four are the ones most likely to catch you:
   The board shortcut *Build & open book* runs exactly that, so the one-click path and the
   command-line path cannot drift apart. `BUILD` and `NAME` are now passed through to the build
   script (`--out-dir` / `--name`) so the path `make open` opens is the path `make pdf` wrote.
+- **Diagrams render without anyone installing anything.** The build used to require a global
+  `npm install -g @mermaid-js/mermaid-cli`, which nobody had done, so every PDF built so far had
+  its diagrams printed as source — a book that mandates mermaid was shipping none of it. The
+  build now falls back to `npx --yes @mermaid-js/mermaid-cli` when `mmdc` is absent. This does
+  not reopen the Python-tooling default: mermaid-cli is an external renderer shelled out to by a
+  Python script, exactly as before, and the only change is how it is located. The rule behind it
+  is that **a convention the book mandates must work on a clean checkout**, or it is not a
+  convention, it is a hope.
+- **A missing renderer and a broken diagram are different severities.** A renderer that cannot
+  run (no node, no network, no browser) is a *note* and `--strict` still passes — that is a fact
+  about the machine. A diagram mermaid rejects is a *problem* naming the chapter and quoting the
+  error, because that is a fact about the book, and the other diagrams still render. The same
+  split the build already used for missing chapters, applied one level down.
+- **Rendered diagrams are given an explicit width, because pandoc's default is wrong.** Diagrams
+  are rendered at 3× for print, and pandoc reads the PNG's pixel width and assumes 96 dpi — so an
+  unsized diagram lays out three times too wide and runs off the page. The build divides the
+  scale back out and caps the result at the text width. Anything that changes the render scale
+  has to keep that division, or the diagrams silently overflow again.
 
 ## Open questions
 
@@ -718,7 +752,8 @@ Append discovered constraints and cross-task notes here as work proceeds.
   used if found first, and with none installed the build still writes the collected markdown and
   says what to install. Diagrams need `mermaid-cli`, which is Node — the exception is deliberate
   and narrow: it is an external renderer invoked by a Python script, not a Node build step, and
-  without it the diagrams print as source and the build reports a note.
+  without it the diagrams print as source and the build reports a note. *(Superseded in part: the
+  build no longer needs mermaid-cli installed, see the mermaid entry below.)*
 - **Two pandoc-and-typst traps are recorded here so nobody rediscovers them.** typst's template
   feeds `linkcolor` straight to `rgb()`, so a named colour like `RoyalBlue` is a build failure and
   the metadata file carries hex; LaTeX wants the name instead, which the script passes on the
