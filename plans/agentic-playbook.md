@@ -43,8 +43,8 @@ guide that a working developer can open at any single play and act on it the sam
 - Any build/helper scripts are Python, not Node.
 - Prose wraps at 100 columns; diagrams are mermaid, never ASCII art.
 - Repo-wide conventions are recorded as cards in `cards/` and indexed from the root `CLAUDE.md`.
-- `make pdf` collects the book and renders it; `make check` reports orphans and missing files.
-  Output goes to `build/`, which is gitignored and never committed. See
+- `make html` and `make pdf` collect the book and render it; `make check` reports orphans and
+  missing files. Output goes to `build/`, which is gitignored and never committed. See
   [`cards/building-the-book.md`](../cards/building-the-book.md).
 
 ## Milestones
@@ -82,6 +82,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | Board item | What | Status |
 |---|---|---|
 | `aed2433867e0` | Reassessment after milestones 8 and 18 — contracts hardened, five prose defects fixed | ✅ done |
+| `01dce54a3f88` | HTML book — `make html` made a first-class output: stylesheet, sidebar contents, browser-drawn diagrams | ✅ done |
 | `878a5eb98f8b` | PDF lacked mermaid: render via `npx` fallback, and size diagrams to the page | ✅ done |
 | `6b0110f76388` | Add a 100-column / style lint to `make check`, after three authors wrote the same one | ⬜ open, blocked on nothing |
 | `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
@@ -290,7 +291,7 @@ GitHub is still the book, and nothing has to be built to read it.
 |---|---|
 | [`scripts/build_book.py`](../scripts/build_book.py) | The whole build: reads the table of contents, concatenates, shifts headings, rewrites cross-references to internal anchors, optionally renders mermaid, calls pandoc. One file, no dependencies. |
 | [`scripts/book-metadata.yaml`](../scripts/book-metadata.yaml) | Title, language, page size, margins, link colour — so tuning typography is not a Python edit. |
-| [`Makefile`](../Makefile) | `make pdf` / `md` / `html` / `check` / `clean`, and `make` alone lists them. |
+| [`Makefile`](../Makefile) | `make pdf` / `md` / `html` / `open` / `check` / `clean`, and `make` alone lists them. |
 | [`cards/building-the-book.md`](../cards/building-the-book.md) | What to install, what the build expects of authors, and the two severities. |
 
 **Two things in it are useful to a writing task, not just to whoever renders the book:**
@@ -340,6 +341,32 @@ a suite, these four are the ones most likely to catch you:
    a play your reader has not read.
 4. **Worked examples are past tense.** This is the book's one exception to the present tense, and
    it is now written down in both `STYLE.md` and `TEMPLATE-play.md`.
+
+Board item `01dce54a3f88` then turned `make html` from a one-line pandoc call into the build's
+cheapest and most sendable output. It collects exactly what `make pdf` collects — same table of
+contents, same collected markdown, same checks — and renders **one self-contained HTML file** with
+a contents sidebar, a reading column, dark mode, and print rules good enough that `Cmd+P` in a
+browser is a reasonable substitute for a PDF engine.
+
+| File | Owns |
+|---|---|
+| [`scripts/book.css`](../scripts/book.css) | Everything about how the HTML book looks: measure, sidebar, headings, code, tables, diagrams, dark mode, print. The HTML sibling of `book-metadata.yaml` — presentation as data, not as Python. |
+| [`scripts/build_book.py`](../scripts/build_book.py) | `--format html` now inlines the stylesheet (`--embed-resources`), runs the contents three levels deep, and hands diagrams to the browser. |
+| [`Makefile`](../Makefile) | `make open-html` alongside `make open`. |
+
+**Three things are worth knowing before you reach for a format:**
+
+1. **`make html` needs only pandoc.** No PDF engine, no TeX, no node. If you want to read the
+   whole book end to end, or send a draft to somebody without the repo, it is the shortest path —
+   and `--repo-url` is worth passing when you do, so the links out of the book still resolve.
+2. **The HTML book draws its own diagrams.** ```mermaid``` blocks become `<pre class="mermaid">`
+   and mermaid.js renders them in the browser, so node and mermaid-cli are PDF dependencies only.
+   Offline they degrade to their own source, which is what the PDF does without a renderer.
+   Authors change nothing: keep writing mermaid.
+3. **The contents sidebar goes three levels deep, so the five play headings are navigable.** The
+   PDF's contents page stops at two on purpose. This is the first thing in the build that treats
+   the play template as a navigation structure rather than a writing one, and it is a small
+   argument for keeping those five headings identical across eighteen plays.
 
 ## Decisions log (append-only)
 
@@ -531,6 +558,30 @@ a suite, these four are the ones most likely to catch you:
   unsized diagram lays out three times too wide and runs off the page. The build divides the
   scale back out and caps the result at the text width. Anything that changes the render scale
   has to keep that division, or the diagrams silently overflow again.
+- **The HTML book is one self-contained file, not a site, and this does not reopen the *Rendering*
+  open question.** `make html` existed from milestone 18 as a bare pandoc call and produced a
+  default-stylesheet dump; `01dce54a3f88` made it a real output. The shape was the decision worth
+  making, and the non-goal ("not a rendered site, for now") decided it: a directory of linked pages
+  is a site, needs hosting, and would tempt authors into site-specific link syntax. One file with
+  `--embed-resources` is none of those things, is generated by the same one-way transformation as
+  the PDF, and can be emailed. If a site is ever wanted it should be built the same way, from the
+  same table of contents, and this build does not prejudge it.
+- **Presentation is data, in both directions.** `scripts/book.css` is to the HTML book what
+  `scripts/book-metadata.yaml` is to the PDF: the whole of how it looks, outside the Python. The
+  rule milestone 18 set — tuning typography is not a code edit — is now symmetrical, and a
+  future renderer should add a data file rather than a branch in `build_book.py`.
+- **The HTML book renders mermaid in the browser, so mermaid-cli is a PDF-only dependency.** A
+  browser can draw mermaid; asking a reader to install a Node package so that a *web page* can show
+  a diagram is the wrong trade. Blocks become `<pre class="mermaid">` and mermaid.js draws them as
+  SVG at the reader's width and colour scheme — better output than the PNGs the PDF gets, for less
+  setup. The cost is a CDN request on first open, which is why the fallback is the block's own
+  source rather than a hidden element: an offline reader sees exactly what the PDF shows without
+  mermaid-cli, and the build reports it as a note either way. Nothing changes for authors, and the
+  npx fallback above stays exactly as it is for the PDF.
+- **The contents depth differs by format, because a sidebar and a printed page are not the same
+  object.** HTML runs three levels deep, so a reader can jump to any of the five play headings; the
+  PDF stops at two, because eighteen plays times five headings is a contents section longer than a
+  chapter. Same book, same table of contents in `book/README.md`, different affordance.
 
 ## Open questions
 

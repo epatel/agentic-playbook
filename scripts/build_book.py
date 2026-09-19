@@ -11,9 +11,10 @@ Nothing here edits the book. Everything is written to ``build/``, which is not c
 Usage
 -----
 
-    python3 scripts/build_book.py              # markdown + PDF (if an engine is installed)
-    python3 scripts/build_book.py --format md  # markdown only, no external tools needed
-    python3 scripts/build_book.py --check      # report missing and orphaned files, then stop
+    python3 scripts/build_book.py                # markdown + PDF (if an engine is installed)
+    python3 scripts/build_book.py --format html  # one self-contained HTML file; needs only pandoc
+    python3 scripts/build_book.py --format md    # markdown only, no external tools needed
+    python3 scripts/build_book.py --check        # report missing and orphaned files, then stop
 
 Run ``--help`` for the rest.
 """
@@ -36,6 +37,7 @@ BOOK = ROOT / "book"
 TOC_FILE = BOOK / "README.md"
 DEFAULT_OUT = ROOT / "build"
 METADATA_FILE = Path(__file__).resolve().parent / "book-metadata.yaml"
+CSS_FILE = Path(__file__).resolve().parent / "book.css"
 
 #: Files in ``book/`` that are instructions to authors rather than book content. They are excluded
 #: from the build deliberately, and are not reported as orphans.
@@ -403,6 +405,43 @@ TOOLCHAIN_FAILURES = (
 )
 
 
+def mermaid_blocks(lines: list[str]):
+    """Walk lines, yielding ``(start, end, body)`` for each fenced mermaid block.
+
+    ``end`` is the index of the closing fence, so ``lines[start:end + 1]`` is the whole block.
+    Both renderers below find blocks identically; only what they put in a block's place differs.
+    """
+    i = 0
+    while i < len(lines):
+        match = MERMAID_OPEN.match(lines[i])
+        if not match:
+            i += 1
+            continue
+        marker = match.group(2)
+        close = re.compile(rf"^\s{{0,3}}{re.escape(marker[0])}{{{len(marker)},}}\s*$")
+        body, j = [], i + 1
+        while j < len(lines) and not close.match(lines[j]):
+            body.append(lines[j])
+            j += 1
+        yield i, j, body
+        i = j + 1
+
+
+def substitute(lines: list[str], replacements: list[tuple[int, int, list[str]]]) -> str:
+    """Rebuild the text with each ``(start, end, lines)`` span replaced.
+
+    Spans not named are copied through untouched, which is how a block that could not be rendered
+    keeps its own source.
+    """
+    out, cursor = [], 0
+    for start, end, new in replacements:
+        out.extend(lines[cursor:start])
+        out.extend(new)
+        cursor = end + 1
+    out.extend(lines[cursor:])
+    return "\n".join(out)
+
+
 def resolve_mermaid_command(requested: str | None) -> list[str] | None:
     """Work out how to invoke mermaid-cli, or return None if there is no way to.
 
@@ -530,33 +569,18 @@ class MermaidRenderer:
 
     def run(self, text: str, prefix: str) -> str:
         """Replace every mermaid block in one chapter, leaving unrenderable ones as source."""
-        lines, out = text.splitlines(), []
-        index = i = 0
-        while i < len(lines):
-            match = MERMAID_OPEN.match(lines[i])
-            if not match:
-                out.append(lines[i])
-                i += 1
-                continue
-            marker = match.group(2)
-            close = re.compile(rf"^\s{{0,3}}{re.escape(marker[0])}{{{len(marker)},}}\s*$")
-            body, j = [], i + 1
-            while j < len(lines) and not close.match(lines[j]):
-                body.append(lines[j])
-                j += 1
-            index += 1
+        lines = text.splitlines()
+        replacements: list[tuple[int, int, list[str]]] = []
+        for index, (start, end, body) in enumerate(mermaid_blocks(lines), start=1):
             image = self.render("\n".join(body) + "\n", f"{prefix}-{index}")
             if image is None:
-                out.extend(lines[i:j + 1])          # leave the source; it is still correct markdown
-            else:
-                width = display_width(image)
-                attrs = f"{{width={width}}}" if width else ""
-                # Absolute, like the image links ChapterRewriter emits: the collected markdown
-                # lives in build/ but is rendered with the repo root as the working directory, and
-                # standalone HTML is read from build/ again.
-                out += ["", f"![]({image.resolve()}){attrs}", ""]
-            i = j + 1
-        return "\n".join(out)
+                continue                            # leave the source; it is still correct markdown
+            width = display_width(image)
+            attrs = f"{{width={width}}}" if width else ""
+            # Absolute, like the image links ChapterRewriter emits: the collected markdown lives in
+            # build/ but is rendered with the repo root as the working directory.
+            replacements.append((start, end, ["", f"![]({image.resolve()}){attrs}", ""]))
+        return substitute(lines, replacements)
 
     def summarise(self) -> None:
         if self.rendered or self.reused:
@@ -572,6 +596,62 @@ class MermaidRenderer:
                      "see the problems above"
         self.reporter.note(f"{self.skipped} mermaid diagram(s) left as source in the PDF — "
                            f"{advice}")
+
+
+#: Loaded from a CDN by the HTML book, which is a browser document and can therefore draw its own
+#: diagrams. Pinned to a major version: mermaid's minor releases add syntax rather than remove it,
+#: so an old diagram keeps rendering, and pinning harder would mean editing this file to get fixes.
+MERMAID_ESM = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"
+
+MERMAID_LOADER = f"""```{{=html}}
+<script type="module">
+  import mermaid from "{MERMAID_ESM}";
+  const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({{
+    startOnLoad: true,
+    securityLevel: "strict",
+    theme: dark ? "dark" : "neutral",
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, system-ui, sans-serif",
+  }});
+</script>
+```
+"""
+
+
+class BrowserMermaid:
+    """Hands ```mermaid blocks to the browser, which can draw them itself.
+
+    The HTML book needs no mermaid-cli, and should not want it: mermaid.js draws the same source as
+    SVG, at whatever width the reader's window is and in whichever colour scheme they use — better
+    output than a PNG, for less setup. The cost is a CDN request when the file is first opened;
+    until that lands, or for good if it never does, ``scripts/book.css`` shows each block as its own
+    source, which is exactly what the PDF does without mermaid-cli.
+
+    Same ``run`` / ``summarise`` interface as MermaidRenderer, so ``collect`` does not have to know
+    which one it was handed.
+    """
+
+    def __init__(self, reporter: Reporter) -> None:
+        self.reporter = reporter
+        self.count = 0
+
+    def run(self, text: str, prefix: str) -> str:
+        lines = text.splitlines()
+        replacements: list[tuple[int, int, list[str]]] = []
+        for start, end, body in mermaid_blocks(lines):
+            escaped = "\n".join(
+                line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                for line in body
+            )
+            replacements.append((start, end, ["", "```{=html}",
+                                              f'<pre class="mermaid">{escaped}</pre>', "```", ""]))
+        self.count += len(replacements)
+        return substitute(lines, replacements)
+
+    def summarise(self) -> None:
+        if self.count:
+            self.reporter.note(f"{self.count} mermaid diagram(s) will be drawn by the browser from "
+                               f"cdn.jsdelivr.net; offline they show as source")
 
 
 # --------------------------------------------------------------------------------------------
@@ -593,7 +673,7 @@ def page_break_for(engine: str | None) -> str:
 
 
 def collect(parts: list[Part], out_dir: Path, repo_url: str | None,
-            mermaid: MermaidRenderer | None, reporter: Reporter,
+            mermaid: MermaidRenderer | BrowserMermaid | None, reporter: Reporter,
             page_break: str = "") -> tuple[str, list[Chapter], list[Chapter]]:
     by_path = assign_anchors(parts)
     warn = reporter.warn
@@ -705,16 +785,25 @@ def choose_engine(requested: str | None) -> str | None:
 
 def pandoc_command(source: Path, output: Path, fmt: str, engine: str | None, date: str,
                    extra: list[str]) -> list[str]:
+    # A printed contents page wants parts and chapters and nothing else; a sidebar the reader
+    # scrolls can afford the five play headings, and is far more useful with them.
+    toc_depth = 3 if fmt == "html" else 2
     command = [
         "pandoc", str(source), "-o", str(output),
         f"--from={PANDOC_FROM}",
         "--standalone",
-        "--toc", "--toc-depth=2",
+        "--toc", f"--toc-depth={toc_depth}",
         f"--resource-path={BOOK}:{source.parent}:{ROOT}",
         "--metadata", f"date={date}",
     ]
     if METADATA_FILE.is_file():
         command.append(f"--metadata-file={METADATA_FILE}")
+    if fmt == "html":
+        # --embed-resources inlines the stylesheet and any image, so the output is one file that
+        # survives being emailed to somebody who does not have the repo.
+        command.append("--embed-resources")
+        if CSS_FILE.is_file():
+            command.append(f"--css={CSS_FILE}")
     if fmt == "pdf" and engine:
         command.append(f"--pdf-engine={engine}")
         if engine in TEX_PDF_ENGINES:
@@ -789,7 +878,8 @@ def main(argv: list[str] | None = None) -> int:
                "order. A file that is not in it is not in the build.",
     )
     parser.add_argument("--format", choices=["pdf", "html", "md"], default="pdf",
-                        help="output format (default: pdf; md needs no external tools)")
+                        help="output format (default: pdf; html needs only pandoc and is one "
+                             "self-contained file; md needs no external tools)")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT,
                         help=f"where to write (default: {DEFAULT_OUT.relative_to(ROOT)}/)")
     parser.add_argument("--name", default="agentic-playbook", help="output filename stem")
@@ -798,7 +888,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="rewrite links that leave the book (research briefs, plans) to this "
                              "base URL instead of leaving them relative")
     parser.add_argument("--no-mermaid", action="store_true",
-                        help="never shell out to mermaid-cli; leave diagrams as source")
+                        help="leave diagrams as source: no mermaid-cli for the PDF, no mermaid.js "
+                             "for the HTML")
     parser.add_argument("--mermaid-cmd", metavar="CMD",
                         help="how to invoke mermaid-cli (default: mmdc if installed, otherwise "
                              f"`npx --yes {MERMAID_PACKAGE}`)")
@@ -842,13 +933,18 @@ def main(argv: list[str] | None = None) -> int:
     # is not worth several seconds per diagram on the check path.
     mermaid = None
     if not args.no_mermaid and not args.check:
-        diagram_dir.mkdir(parents=True, exist_ok=True)
-        command = resolve_mermaid_command(args.mermaid_cmd)
-        if command is None and args.mermaid_cmd:
-            log(f"Requested mermaid command '{args.mermaid_cmd}' is not on PATH.")
-        mermaid = MermaidRenderer(command, diagram_dir, reporter)
-        if command and args.verbose:
-            log("Rendering mermaid with: " + " ".join(command))
+        if args.format == "html":
+            # The HTML book is a browser document and draws its own diagrams, so it needs neither
+            # mermaid-cli nor a render step.
+            mermaid = BrowserMermaid(reporter)
+        else:
+            diagram_dir.mkdir(parents=True, exist_ok=True)
+            command = resolve_mermaid_command(args.mermaid_cmd)
+            if command is None and args.mermaid_cmd:
+                log(f"Requested mermaid command '{args.mermaid_cmd}' is not on PATH.")
+            mermaid = MermaidRenderer(command, diagram_dir, reporter)
+            if command and args.verbose:
+                log("Rendering mermaid with: " + " ".join(command))
 
     body, written, unwritten = collect(
         parts, out_dir, args.repo_url, mermaid, reporter, page_break_for(engine)
@@ -875,6 +971,9 @@ def main(argv: list[str] | None = None) -> int:
             reporter.warn(f"link to '#{anchor}' resolves to nothing — check the cross-reference")
     markdown = unlink(markdown, dangling)
 
+    if isinstance(mermaid, BrowserMermaid) and mermaid.count:
+        markdown = markdown.rstrip() + "\n\n" + MERMAID_LOADER
+
     source = out_dir / f"{args.name}.md"
     if not args.check:
         source.write_text(markdown, encoding="utf-8")
@@ -895,8 +994,10 @@ def main(argv: list[str] | None = None) -> int:
         output = out_dir / f"{args.name}.html"
         command = pandoc_command(source, output, "html", None, date, args.pandoc_arg)
         if not run_pandoc(command, args.verbose):
+            log(f"pandoc failed. The collected markdown is still at {rel(source)}.")
             return 2
-        log(f"Wrote {rel(output)}")
+        size = output.stat().st_size / 1024
+        log(f"Wrote {rel(output)} ({size:,.0f} KB, self-contained).")
         return status
 
     output = out_dir / f"{args.name}.pdf"
