@@ -88,9 +88,14 @@ in `plans/agentic-playbook.md`:
   on registry and counting method; the official registry API reportedly returned 9,652 latest server
   records on 24 May 2026. [18] Every enterprise-adoption percentage found traced back to
   vendor-adjacent blogs. Treat all of these as shape, not figure.
-- **NSA/CISA published MCP security guidance dated June 2026** (`CSI_MCP_SECURITY.PDF`) which would
-  be an excellent primary citation for the Harness suite. Both mirrors returned HTTP 403 to
-  automated fetch. [19] Worth a manual download before the security material is written.
+- ~~**NSA/CISA published MCP security guidance dated June 2026**… worth a manual download.~~
+  **Done, 19 September 2026 (`57772ad900e3`).** It is **NSA alone, not NSA/CISA**, and dated
+  **May 2026 Ver. 1.0**, titled *Model Context Protocol (MCP): Security Design Considerations for
+  AI-Driven Automation*. It is as good a Harness-suite citation as hoped: it argues for explicit
+  trust boundaries between agent, plugin, model and user, and for OS-level sandboxing of every tool
+  execution, from outside the industry. **The quotable extracts are in [`mcp.md`](mcp.md)** and are
+  not duplicated here. [19a] Both mirrors still 403 to `curl` and `WebFetch` at any header
+  combination; it opens normally in a browser.
 - **No independent measurement exists of whether context-file discipline improves outcomes.** Every
   claim about CLAUDE.md length, cards, or progressive disclosure is vendor guidance or practitioner
   assertion. The book can describe mechanisms confidently and must hedge on effect sizes.
@@ -163,7 +168,8 @@ sources rather than evidence:
      **cited as an example of a stale claim, not as evidence**
 [18] MCP Ecosystem H1 2026 Retrospective: Adoption Data Points —
      https://www.digitalapplied.com/blog/mcp-ecosystem-h1-2026-retrospective-adoption-data-points — accessed 18 September 2026
-[19] Model Context Protocol (MCP) Security, NSA CSI, June 2026 —
-     https://media.defense.gov/2026/Jun/02/2003943289/-1/-1/0/CSI_MCP_SECURITY.PDF — **403 on fetch, content unverified**
+[19] ~~Model Context Protocol (MCP) Security, NSA CSI, June 2026~~ — **superseded by [19a]**
+[19a] *Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation*, National Security Agency, **May 2026 Ver. 1.0** —
+     https://media.defense.gov/2026/Jun/02/2003943289/-1/-1/0/CSI_MCP_SECURITY.PDF — **retrieved in a browser and read 19 September 2026 by `57772ad900e3`**; extracts in [`mcp.md`](mcp.md) [8a]
 [20] Cards — https://memention.com/blog/2026/05/25/Cards.html — accessed 18 September 2026
 [21] The Unit of Work — https://memention.com/blog/2026/05/29/The-unit-of-work.html — accessed 18 September 2026

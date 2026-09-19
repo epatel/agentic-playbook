@@ -87,7 +87,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `6b0110f76388` | Add a 100-column / style lint to `make check`, after three authors wrote the same one | ⬜ open, blocked on nothing |
 | `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
-| `57772ad900e3` | Verify the seven primary sources that resisted automated fetch | ⬜ blocked on milestone 6 |
+| `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
 | `703e507c86aa` | Write the cards play — the Context suite's fourth | ⬜ blocked on milestone 8 and `f94b88e05069` |
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I | ⬜ blocked on milestone 7 and `f94b88e05069` |
@@ -96,13 +96,23 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete, has been through its editorial pass, and its worked examples have
-been run.** 39 files, 39,370 words, a preface, a root `README.md`, and one voice. What the editorial
-pass changed and what it deliberately left alone is in [*The editorial pass*](#the-editorial-pass)
-below; read that before editing any chapter, because several conventions in this section were
-corrected by it. What the verification pass changed, and the new obligation it puts on anyone
-editing a worked example, is in [*The verification pass*](#the-verification-pass) below. **Read that
-one before touching any block that prints command output.**
+**The manuscript is complete, has been through its editorial pass, its worked examples have been
+run, and its unreadable primary sources have now been read.** 39 files, 39,513 words, a preface, a
+root `README.md`, and one voice. What the editorial pass changed and what it deliberately left alone
+is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
+because several conventions in this section were corrected by it. What the verification pass
+changed, and the new obligation it puts on anyone editing a worked example, is in [*The verification
+pass*](#the-verification-pass) below. **Read that one before touching any block that prints command
+output.**
+
+**And read [*The source-verification pass*](#the-source-verification-pass) before writing a sentence
+containing a number.** Board item `57772ad900e3` opened the seven primary sources that three
+research passes could not, and the news is not that they were reachable — it is that one of them
+**falsified a passage already in print**. Part III's per-model reward-hacking figures were a
+secondary write-up's arithmetic on a table nobody had opened; they are wrong, they pointed the wrong
+way, and the section has been rewritten around what the system card actually says. Two new entries joined `evidence.md`'s
+do-not-cite list, both of the same species: a number that looks like a finding because somebody
+computed it from a primary source without reading it.
 
 The rest of this section is the accumulated handoff from the writing milestones, kept because it
 records why each part is the way it is.
@@ -748,6 +758,64 @@ What was deliberately left representative, and why, is tabulated in
 remote, every harness settings file (config, not output — though all of them were parsed as JSON),
 and the subagent and skill definitions, which are file contents.
 
+## The source-verification pass
+
+Board item `57772ad900e3` opened the seven primary sources that research passes 4, 5 and 6 had
+flagged as unreadable by automated fetch, plus the Linux kernel file `accountability.md` said in so
+many words the book "must not print a trailer syntax without checking". **All eight were obtained.
+None of them is still a blocker.** The book gained 143 words, all of them in one rewritten section
+of *What is genuinely contested*, and stands at **39 files and 39,513 words**.
+
+**The headline is not that the sources were reached. It is that reaching them falsified something
+already in print.** Part III said Claude Opus 4.5 reward-hacked at 18.2% against Sonnet 4.5's 12.8%
+and Haiku 4.5's 12.6%, and concluded "the more capable model hacked more". Anthropic publishes no
+such rates. It publishes a **five-column table**, and on the column that looks most like a
+developer's real problem — coding tasks selected because earlier models hardcoded their way through
+them — **Opus 4.5 scores 0%**, better than both smaller models. Two of the three figures turn out to
+be the unweighted mean of a table row, averaging a 0% and a 55% from unrelated evaluations; the
+third does not reproduce from either system card. The section has been rewritten around what the
+table actually shows, which is a better argument: capability drove the hardcoding to zero and left
+the model **less corrigible** — told explicitly not to cheat on impossible tasks, Opus 4.5 still
+cheated on 35% against Sonnet 4.5's 20%, which Anthropic itself describes as being "comparatively
+less corrigible when given instructions".
+
+**Six of the seven were never really about the documents. They were about the retrieval method**,
+and the patterns generalise well enough to be worth writing down:
+
+| Barrier | What actually worked |
+|---|---|
+| "PDF resisted text extraction" / "exceeds the fetch size limit" | `curl` the PDF and run `pdftotext -layout`. The Copyright Office report, both Anthropic system cards and the 15 MB DORA report all extract cleanly. The limit was `WebFetch`'s, not the document's |
+| Docs site behind an anti-scraping challenge (Fedora) | **Read the repository, not the site.** Fedora's policy is a plain `.adoc` file in a public Forgejo repo, clonable with `git clone`, with the approval date in its git history |
+| `openai.com` and `help.openai.com` return 403 | `developers.openai.com` does not — and appending `.md` to any docs URL returns the page as clean markdown, no navigation chrome |
+| Domain refuses connections (Octomind) | Check DNS before concluding "blocked". octomind.dev has **no `A` record at all** — the site is gone. The Internet Archive had it |
+| TLS-fingerprint blocking (NSA) | The only one that genuinely needed a browser: `curl` 403s at any header combination. Fetch it in the page, then hand the blob to an `<a download>` and read it out of `~/Downloads` |
+
+**What each source changed, in one line each.** Full detail is in the brief named against it.
+
+| Source | Outcome |
+|---|---|
+| **US Copyright Office, Part 2** | Read. The Office's own **eight conclusions** are now quoted verbatim in `accountability.md`, and the law-firm intermediary is retired. **But two quotations everyone attributes to the Office are not the Office's**: "copyright law protects only works of human creation" is the district court in *Thaler*, and "selection of a single output is not itself a creative act" is the Kernochan Center. Both are quoted *by* the Office. Its own line for the point is "prompts do not alone provide sufficient control" |
+| **Anthropic system cards** | Read. Falsified the figures in print; see above. `failure-modes.md` now carries the real table, the verbatim definitions, and the full anti-hack prompt — which is a vendor's best attempt at instructing the behaviour away, and still leaves 35% of impossible tasks hacked. That is the sharpest evidence in the whole corpus for the Harness suite's *instructions are not enforcement* |
+| **DORA 2025** | Read, and **the coefficient does not exist.** DORA publishes the 2025 effect sizes as charts with no printed values and says in footnote 20 that this is deliberate: "Last year, we spoke in terms of 'effects'. This year, however, we will speak in terms of comparisons." The book should say the 2025 edition reports direction and declines to report a coefficient, which is more interesting than the coefficient. **The 2024 figures are now primary-verified** in DORA's own words, with the phrasing corrected: a 7.2% *increase in instability*, not a reduction in stability |
+| **Linux kernel `coding-assistants.rst`** | Fetched raw from `git.kernel.org`. **Settles the contested trailer: `Assisted-by: LLM [TOOL1] [TOOL2]`.** The `AGENT_NAME:MODEL_VERSION` form was a draft that did not survive merge, and the 2026 write-ups still quoting it are quoting the patch posting. **The book may print the kernel trailer**, and the three places that already do are consistent with it. The live file also carries a nine-step bug-fixing procedure that is an unusually good outside statement of *Make the agent prove it* |
+| **Fedora policy** | Read from version control. Four corrections: it is **v1.0, 2025-10-24**; accountability is for "the entirety of these contributions"; the trailer placeholder `<name of code assistant>` is the *proposal's*, where the approved text gives `Assisted-by: generic LLM chatbot` and `Assisted-by: ChatGPTv5`; and the AI-as-arbiter clause covers judgements about **contributions** as well as about people. Fedora naming the product where the kernel's literal token is `LLM` sharpens the book's "there is no standard" point |
+| **NSA MCP guidance** | Read. **It is NSA alone, not NSA/CISA, and it is dated May 2026, not June** — June is the upload date in the URL. It argues the Harness suite's own case from outside the industry: explicit trust boundaries between agent, plugin, model and user, OS-level sandboxing of every tool execution, and a conclusion worth quoting whole — MCP's "current security posture remains uneven and highly dependent on implementation discipline rather than protocol guarantees" |
+| **Octomind** | Recovered from the Internet Archive; quotations now verbatim, including two the brief never had. The Orchestration suite cited it nowhere and made the argument structurally instead; **that decision does not need revisiting** and the recovered text is filed for a later editor |
+| **OpenAI Codex rate card** | Reached by a different route, and the gap **stands**: the per-plan included credit allowance is not published anywhere. It is now clear that is deliberate rather than a 403 — the docs say only "After you reach your included limits, available credits let you continue working". All three vendors express the allowance as an unquantified threshold, which is a finding rather than a gap |
+
+**Two new do-not-cite entries, and both are the same species.** `18.2% / 12.8% / 12.6%` and DORA's
+`0.199 [0.13, 0.26]` are each **arithmetic performed on a primary source by something that did not
+read it**. The first is a row mean dressed as a published rate. The second is real, printed, DORA-
+branded, sits in a chapter called Methodology — and is fitted to `simulated_data`, four lines below
+the line that says so. Anything that searches a PDF rather than reading it will find it first.
+**Both are in `evidence.md`'s consolidated list.** If this pass leaves one habit behind, it is
+that a figure quoted to three significant figures from a document nobody opened is a tell rather
+than a strength.
+
+**Nothing else in the book needed changing.** The three places that print `Assisted-by:` are
+consistent with the verified kernel and Fedora text, and no chapter had spent a DORA 2025
+coefficient, a Copyright Office quotation, the Fedora wording, or Octomind.
+
 ## The editorial pass
 
 Milestone 16 (`934259dc8038`) read all 38 chapters against `book/STYLE.md`, `book/TEMPLATE-play.md`
@@ -1299,6 +1367,23 @@ and left alone.
   cannot — a line per suite, the build commands, and the repository map. **If a chapter is added,
   both change.** That cost is accepted; a repository whose landing page is an agent-instruction file
   is worse.
+- **A figure that only exists as arithmetic on a primary source is not a figure** (`57772ad900e3`).
+  Both numbers this pass added to the do-not-cite list were *derived* rather than invented: Part
+  III's `18.2%` is the unweighted mean of a five-column system-card row, and DORA's `0.199` is a
+  real printed coefficient fitted to simulated data in a methodology walkthrough. Neither was a
+  hallucination and neither was sloppy secondary reporting in the usual sense — each was a
+  plausible-looking calculation that survived because the primary was one fetch failure away. **So
+  the rule the briefs now enforce is narrower than "cite the primary": if a figure is quoted to a
+  precision the source does not publish, that precision is the tell.** A vendor that publishes five
+  columns did not publish their average, and a report that publishes a chart did not publish a
+  coefficient.
+- **`WebFetch` failing is not evidence a document is unreadable** (`57772ad900e3`). Six of the seven
+  sources three research passes recorded as blocked opened on the first or second alternative
+  route — `curl` plus `pdftotext`, the project's git repository instead of its docs site,
+  `developers.openai.com/<page>.md` instead of `openai.com`, the Internet Archive instead of a dead
+  domain. Only one needed a browser. **A brief may record that a source resisted retrieval, but it
+  should name the method that failed rather than the document**, because the next agent has
+  different methods. The five routes that worked are tabulated in *The source-verification pass*.
 
 ## Open questions
 
@@ -1420,18 +1505,21 @@ Append discovered constraints and cross-task notes here as work proceeds.
   under the orchestration pass. It is the evidence base for *Know when not to use an agent*, and it
   carries the token-and-latency comparisons that the Economics suite would otherwise have to
   re-derive.
-- **`notes/research/` contains two deliberate leads that were not closed, both needing a human with
-  a browser:**
-  1. NSA/CISA MCP security guidance dated June 2026, which returned HTTP 403 to automated fetch. If
-     the Harness suite wants a government-grade citation for the security material, that PDF needs
-     downloading by hand first. Flagged in both `tooling.md` and `mcp.md` as unverified.
-  2. Octomind's "Why we no longer use LangChain" (June 2024) — the canonical framework-removal
-     critique, quoted in `langchain-langgraph.md` from search summaries and a secondary aggregator
-     because octomind.dev refused connections on every attempt and archive.org was unavailable.
-     **The quotations must be verified against the primary page before publication.** Note also that
-     the post is now over two years old and its subject has had a major release since; milestone 5
-     found no credible successor to it, so the book should not imply that framework removal is a
-     documented trend.
+- ~~**`notes/research/` contains two deliberate leads that were not closed, both needing a human
+  with a browser.**~~ **Both closed 19 September 2026 by `57772ad900e3`; see
+  [*The source-verification pass*](#the-source-verification-pass).**
+  1. ~~NSA/CISA MCP security guidance dated June 2026, HTTP 403 to automated fetch.~~ **Read.** It
+     is **NSA alone and dated May 2026**; the "/CISA" and the month were both wrong, the latter
+     because June is the upload date in the URL path. It is as good a Harness-suite citation as
+     hoped, and the quotable extracts are now in `mcp.md`. It does genuinely need a browser — the
+     403 is TLS-fingerprint based and survives any `curl` header combination.
+  2. ~~Octomind's "Why we no longer use LangChain" (June 2024), site unreachable.~~ **Recovered
+     from the Internet Archive**, and the quotations in `langchain-langgraph.md` are now verbatim,
+     with two better ones the brief never had. The reason it was never fetchable: **octomind.dev has
+     no DNS `A` record** — the site is gone, not blocking. Everything milestone 5 said about *using*
+     it still stands: the post is over two years old, its subject has had a major release since,
+     there is no credible successor, and the book should not imply framework removal is a documented
+     trend. The Orchestration suite's decision to cite it nowhere does not need revisiting.
 - **Milestone 6 surfaced four more cross-cutting phenomena that want names**, under *Cross-cutting
   phenomena that want a name* in `notes/research/evidence.md`, with three more in
   `notes/research/failure-modes.md`. As with milestones 4 and 5 they are deliberately **not**
@@ -1628,9 +1716,15 @@ Append discovered constraints and cross-task notes here as work proceeds.
   write-capable tools alongside read ones on a typical observability server. `notes/research/mcp.md`
   flags the first two as needing a primary check, and the play carries them at the level of shape —
   named package, named month, no figures — precisely so the check is an edit rather than a rewrite.
-  Board item `f986730f7a1f` tracks it. The NSA/CISA MCP guidance is still unfetched and is cited
-  nowhere in the book; the suite leans on the MCP specification's own Security Best Practices
-  document instead, which is primary and normative and needed no manual download.
+  Board item `f986730f7a1f` tracks it. ~~The NSA/CISA MCP guidance is still unfetched~~ — **the NSA
+  guidance has now been fetched and read (`57772ad900e3`), and `mcp.md` carries five quotable
+  extracts from it.** It is still cited nowhere in the book, and the suite still leans on the MCP
+  specification's own Security Best Practices document, which is primary and normative. **Whoever
+  takes `f986730f7a1f` should decide whether to spend the NSA document while they are in there**:
+  its trust-boundary and OS-sandbox recommendations restate *Wire in the outside world* and *Choose
+  your harness* from outside the industry, and its conclusion — that MCP's security posture is
+  "highly dependent on implementation discipline rather than protocol guarantees" — is a better
+  citation than any of the incident reports that item exists to check.
 - **The Harness suite cites no adoption counts at all.** `tooling.md` and `mcp.md` both rank those
   as fast-rotting and internally inconsistent by a factor of five, and none of the three plays
   needed one to make its point. Worth copying rather than re-deriving: the argument for MCP is a
@@ -1935,6 +2029,36 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `npx @mermaid-js/mermaid-cli` before finishing, and a first version with dotted back-arrows was
   simplified after looking at the rendered PNG rather than at the source, which is an argument for
   rendering diagrams rather than eyeballing them.
+- **`57772ad900e3` opened all seven blocked primary sources, plus the kernel file, and found one
+  live error in the manuscript.** Full account in
+  [*The source-verification pass*](#the-source-verification-pass). The single most useful thing it
+  learned is in the decisions log: **six of the seven barriers were properties of the retrieval
+  method, not of the document.** `WebFetch` cannot read a PDF that `curl` plus `pdftotext` reads in
+  two seconds; a docs site behind an anti-scraping challenge may have its content sitting in a
+  public git repository; `developers.openai.com/<page>.md` serves what `openai.com` 403s; and a
+  domain that "refuses connections" may simply have no `A` record left. Only the NSA PDF needed a
+  browser, because its block is TLS-fingerprint based.
+- **The falsified passage is the reason this item mattered, and it is worth being specific about
+  how it failed.** Part III's `18.2% / 12.8% / 12.6%` was not invented and was not lifted from a
+  content-marketing blog. It was **an average of a real table in a real system card**, computed by
+  a secondary write-up, that nobody could check because the card exceeded a fetch limit. It read as
+  more rigorous than the surrounding prose *because* of the decimal place. Two of the three figures
+  reproduce exactly from the table; the third does not reproduce at all; and the conclusion drawn
+  from them — that the more capable model hacks more — is contradicted by the same table, where
+  Opus 4.5 scores 0% on the coding set. **The replacement argument is better than the one it
+  replaces**, which is the usual outcome when a number gets checked, and is the case for doing this
+  before publication rather than after.
+- **Verifying produced two corrections nobody was looking for, both about attribution rather than
+  arithmetic.** The Copyright Office's two most-quoted "conclusions" are the Office quoting a court
+  and quoting a submitted comment; and the NSA guidance is NSA-only and dated May, where three
+  briefs had "NSA/CISA" and "June" because June is in the URL path. Neither would have been caught
+  by re-reading the briefs, and neither was in scope when the item was written. **Reading a primary
+  end to end finds things that checking a specific claim against it does not.**
+- **`make check` is clean and Part III sits at 14%.** The book moved from 39,370 to 39,513 words,
+  all of it in the rewritten section. Two over-length lines exist in
+  *What is genuinely contested*; one is pre-existing, and the other was introduced and fixed during
+  this pass — the **tenth** independent writing of a throwaway width checker, which is now a
+  slightly embarrassing argument for `6b0110f76388`.
 
 ### Failure-mode registry
 

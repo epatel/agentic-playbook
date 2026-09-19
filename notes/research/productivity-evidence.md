@@ -14,10 +14,13 @@ Separate evidence about autocomplete/chat from evidence about *agents*.
   author-written caveats, and I read the abstract or the paper page directly.
 - **High** on DORA's headline adoption and trust figures (90%, 30% low trust) — reproduced
   identically across Google's own blog, Google Cloud's blog, and Google Research's publication page.
-- **Medium** on DORA's *effect sizes* for throughput and instability in 2025. DORA published the
-  direction of the relationship prominently and the 2024-style point estimate much less prominently;
-  I could not pull the 2025 coefficient out of a primary page (the PDF exceeds the fetch size
-  limit). See **Do not cite**.
+- **High that there is no 2025 effect size to quote.** **Changed from medium on 19 September 2026
+  by the source-verification pass (`57772ad900e3`), which downloaded the 15 MB PDF and read it.**
+  The coefficient was not hiding behind the fetch limit: **DORA deliberately did not publish one
+  for 2025.** This is now a settled absence rather than an open lead — and the methodology chapter
+  contains a number that looks exactly like the missing one and is not it. See the gaps section.
+- **High on the 2024 DORA effect sizes**, which the 2025 report restates in its own words and which
+  are therefore now primary-verified rather than secondhand.
 - **Medium** on the 2026 agentic telemetry studies (Microsoft CLI, the 2× mandate study, the
   AI-IDEs-vs-agents study). They are recent arXiv preprints, most not yet peer reviewed, and two of
   the three are authored by people with a commercial or employer stake.
@@ -107,13 +110,26 @@ individual effectiveness or judge team performance from their vantage point. [10
 - Direction of the delivery findings: **higher AI adoption is associated with an increase in both
   software delivery throughput and software delivery instability**. [10] The throughput sign
   **flipped from negative in 2024 to positive in 2025; the instability sign did not flip**. [10]
-- 2024 baseline for comparison: the 2024 Accelerate State of DevOps report estimated that a **25%
-  increase in AI adoption** was associated with a **1.5% decrease in delivery throughput** and a
-  **7.2% reduction in delivery stability**. [9] Note this is the **2024** figure, for
-  autocomplete-era tooling.
-- DORA's framing sentence, which the book can use directly: AI's primary role is as **an amplifier**
-  — "it magnifies the strengths of high-performing organizations and the dysfunctions of struggling
-  ones". [6]
+- 2024 baseline for comparison, **now quotable from a primary source in DORA's own 2025 words**
+  (`57772ad900e3`, 19 September 2026): "The same 2024 DORA research found an estimated 1.5%
+  reduction in software delivery throughput and an estimated 7.2% increase in software delivery
+  instability for every 25% increase in AI adoption." [6a] Note this is the **2024** figure, for
+  autocomplete-era tooling. Note also the phrasing: DORA says a 7.2% **increase in instability**,
+  not a "7.2% reduction in delivery stability" as this brief previously had it. Same direction,
+  but use DORA's wording, because "instability" is the measured construct and "stability" is not.
+- **The 2025 report publishes no comparable coefficient.** Its treatment of the same relationship is
+  Figure 1 / Figure 28, "Estimated effect of AI adoption on key outcomes, with 89% credible
+  intervals" — a chart, with a standardized-effect x-axis running −0.05 to 0.20 and no printed
+  values. The prose gives directions only, as a list of the form "Higher levels of software delivery
+  throughput", "Higher levels of software delivery instability". [6a] This is deliberate, and
+  footnote 20 says so: "Last year, we spoke in terms of 'effects'. This year, however, we will speak
+  in terms of comparisons… The safest interpretation of a regression is as a comparison." [6a]
+  **There is no 2025 number, and refusing to produce one is DORA's own methodological position.**
+- Survey window and method, verbatim for citation: "a global survey conducted between June 13 and
+  July 21, 2025". [6a]
+- DORA's framing sentence, which the book can use directly, **verified verbatim in the PDF**: AI's
+  primary role "is that of an amplifier. It magnifies the strengths of high-performing organizations
+  and the dysfunctions of struggling ones". [6][6a]
 
 **DORA ROI of AI-assisted Software Development report (2026.01)**, published **22 April 2026** on
 dora.dev, covered by InfoQ 11 May 2026. [11][12] This is a **modelling exercise, not a survey**: a
@@ -475,10 +491,26 @@ establish which. Use **33%/46% with the survey page as the citation**, and note 
   implementation time) — a methods paper, not the productivity result. [33] The group states it has
   worked with **600+ organisations and 120,000+ engineers since 2022**, but the productivity figures
   are not in a citable publication. Denisov-Blanch is a co-author on [18], which **is** citable.
-- **DORA 2025's effect sizes are not on any page I could reach.** The PDF at services.google.com
-  exceeded the fetch size limit; the landing pages and both Google blogs give direction, not
-  coefficients. If the book needs a 2025 number for the throughput/instability relationship, someone
-  must open the PDF.
+- ~~**DORA 2025's effect sizes are not on any page I could reach.**~~ **Closed 19 September 2026
+  (`57772ad900e3`). Somebody opened the PDF. There is no number in it.** The file at
+  services.google.com downloads fine over plain HTTPS (15.5 MB — the fetch-size limit was the only
+  obstacle) and extracts to 7,503 lines with `pdftotext`. The 2025 throughput and instability
+  relationships are published **as a chart and nothing else**: Figure 1 in the executive summary and
+  Figure 28 in *Exploring AI's relationship to key outcomes*, both "Estimated effect of AI adoption
+  on key outcomes, with 89% credible intervals", both with an unlabelled standardized-effect axis.
+  The accompanying text is a bulleted list of directions. **This is not an omission the book can
+  route around by finding a better page; it is DORA's stated methodology** (footnote 20, quoted in
+  the DORA section above). The book should say the 2025 edition reports direction and declines to
+  report a coefficient, which is a more interesting sentence than the coefficient would have been.
+- **The DORA trap, and it is a good one.** The methodology chapter walks through a full `brms`
+  worked example and prints `b_ai_adoption_score  Estimate 0.199`, an 89% credible interval of
+  **[0.13, 0.26]**, and the sentence "Our best estimate is a 0.20 standard deviation increase in
+  effectiveness for every one standard deviation increase in AI adoption." [6a] **These are
+  simulated data.** The code four lines above reads `model_data <- simulated_data %>%`, and the
+  outcome is individual effectiveness, not throughput. It is the only DORA-branded coefficient with
+  a credible interval anywhere in the 2025 corpus, it sits in a chapter titled Methodology, and
+  anything searching the PDF for a number will find it first. **Do not cite `0.199`, `0.20`, or
+  `[0.13, 0.26]` as a DORA finding.** Added to *Do not cite* below.
 - **No published second edition of DORA's "State of AI-assisted Software Development".** The 2026
   publication is the **ROI** report, which is a model, not a survey. Do not present its illustrative
   financial figures as measurements.
@@ -488,6 +520,12 @@ establish which. Use **33%/46% with the survey page as the citation**, and note 
 
 ### Do not cite
 
+- **Any DORA 2025 coefficient, and `0.199` / `0.20` / `[0.13, 0.26]` in particular.** **Added
+  19 September 2026 by `57772ad900e3`.** The 2025 report publishes effect sizes as charts only and
+  says in footnote 20 that this is on purpose. The one printed coefficient in the whole PDF is in
+  the Methodology chapter, is for individual effectiveness rather than delivery, and is fitted to
+  `simulated_data`. *Reason: a worked teaching example, correctly labelled in the source and
+  certain to be mistaken for a finding by anything that searches rather than reads.*
 - **"Stack Overflow Developer Survey 2026" figures (84% adoption, 3% trust, etc.).** Multiple 2026
   articles (byteiota, BuildApps, various aggregators) present these under a 2026 headline. They are
   the **2025** figures. The 2026 survey opened 23 June 2026 and had not reported as of 19 September
@@ -619,6 +657,13 @@ https://dora.dev/dora-report-2025/ — accessed 19 September 2026
 authors and methodology) —
 https://research.google/pubs/dora-2025-state-of-ai-assisted-software-development-report/ — accessed
 19 September 2026
+[6a] **PRIMARY, and the one to cite for anything in the 2025 edition** — *2025 State of AI-assisted
+Software Development* (full report PDF, v. 2025.2) —
+https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf —
+**downloaded and text-extracted 19 September 2026 by `57772ad900e3`** (15.5 MB, 7,503 lines). Carries
+the 2024 effect sizes in DORA's own words, the survey window, the amplifier sentence, footnote 20 on
+why no 2025 coefficient is given, and — in the Methodology chapter — the simulated-data coefficient
+that is on the do-not-cite list
 [7] Announcing the 2025 DORA Report (Google Cloud Blog, 23 September 2025) —
 https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report —
 accessed 19 September 2026
