@@ -30,7 +30,8 @@ would be a different book.
   on your behalf.** Several plays are written to be run by one person without asking permission, and
   they say so where that is true.
 - **That you know what MCP stands for**, what a skill is, or how a subagent differs from a workflow.
-  Terms are defined where they are first used and collected in the glossary.
+  Terms are defined where they are first used and collected in the
+  [*Glossary*](../appendices/glossary.md).
 - **That you work on greenfield.** Most examples here are in code that already exists and that
   somebody will be upset about if it breaks.
 - **That you are behind.** There is a genre of writing about this subject whose function is to make
@@ -64,12 +65,13 @@ remedy.
 
 It will not give you a number it cannot source. That constraint costs more than it sounds like it
 should, because the published evidence on AI-assisted development is considerably worse than the
-discourse implies. Nearly all of it measures autocomplete or chat rather than agents. The one
-serious attempt to run the missing randomised trial was abandoned by its own authors, who reported
-that "30% to 50% of developers told us that they were choosing not to submit some tasks because they
-did not want to do them without AI" — a collapse that is itself the most interesting result in the
-field. Where this book hedges, that is why. Where it gives a figure, the figure is dated in the
-sentence and traceable to a brief in [`notes/research/`](../../notes/research/).
+discourse implies. Nearly all of it measures autocomplete or chat rather than agents, and the one
+serious attempt at the missing randomised trial was abandoned by its own authors when developers
+stopped agreeing to work without AI at all — a collapse that is itself the most interesting result
+in the field, and which
+[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md)
+reports in full. Where this book hedges, that is why. Where it gives a figure, the figure is dated
+in the sentence and traceable to a brief in [`notes/research/`](../../notes/research/).
 
 ## How to read it
 
@@ -80,10 +82,13 @@ somebody who opens the book at one play can act on it the same afternoon without
 anything around it. Plays link to each other where the dependency is real. There is no required
 order.
 
-*Where It Struggles* is where the book argues against itself: the tasks agents are reliably bad at,
-the failure modes worth recognising on sight, and an honest accounting of where the time goes. If
-you are sceptical, start there. It is the part that decides whether the rest is worth your week, and
-it was written expecting to be read first.
+*Where It Struggles* is where the book argues against itself:
+[*What agents are reliably bad at*](../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md),
+[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md),
+[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and
+[*What is genuinely contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you
+are sceptical, start there. It is the part that decides whether the rest is worth your week, and it
+was written expecting to be read first.
 
 *The Argument* — this — exists to be short.
 

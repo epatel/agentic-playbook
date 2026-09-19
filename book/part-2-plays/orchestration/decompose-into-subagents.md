@@ -13,8 +13,8 @@ transcripts actually did, and the transcripts are the one thing you did not get.
 
 Fan out to read. Keep every write in one place.
 
-1. **Delegate work whose output you do not want to keep.** A survey, an audit, a dependency trace,
-   a test run that prints four hundred lines to say one thing: the subagent spends its own window on
+1. **Delegate work whose output you do not want to keep.** A survey, an audit, a dependency trace, a
+   test run that prints four hundred lines to say one thing: the subagent spends its own window on
    the noise and hands back the conclusion. Work that gets iteratively refined, or where planning,
    implementing, and testing depend on the same understanding, stays in the main conversation. That
    second case is where delegation reliably costs more than it saves, because each handoff sheds
@@ -104,7 +104,7 @@ The scouts' `TOTAL=` values summed to 47. The independent count said 52. The gap
 `services/tracking`, where one scout had stopped at a directory it read as vendored and said so
 nowhere in its summary. That is the whole argument for the fixed format in one number: the fan-out
 was wrong, and finding out cost one command rather than a production incident. The full transcript
-of that scout was on disk the entire time — Claude Code keeps subagent transcripts under
+of that scout was on disk the entire time — Claude Code 2.x keeps subagent transcripts under
 `~/.claude/projects/` for a configurable retention period — and nobody would have opened it without
 a reason to look.
 

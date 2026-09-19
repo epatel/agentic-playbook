@@ -5,10 +5,10 @@
 A context window gets packed the way a suitcase gets packed the night before a flight: everything
 that might conceivably be needed, on the theory that the alternative is needing it and not having
 it. So the run starts with the architecture document, the four adjacent modules, last week's
-incident write-up, and the whole test file. The answer that comes back is worse than the one you
-got last month from a two-sentence prompt and one file — blander, hedged, quietly ignoring two of
-the five requirements. Nothing failed. You paid more for it, and you have no idea which of the
-things you added did the damage.
+incident write-up, and the whole test file. The answer that comes back is worse than the one you got
+last month from a two-sentence prompt and one file — blander, hedged, quietly ignoring two of the
+five requirements. Nothing failed. You paid more for it, and you have no idea which of the things
+you added did the damage.
 
 ## The play
 
@@ -20,8 +20,8 @@ Reduction never happens by accident. Somebody has to decide what not to send.
    the window, it is in the window because it was nearby.
 2. **Load on arrival, not in advance.** Anything conditional — a convention for one directory, a
    procedure for one situation — belongs behind a trigger, whether that is a path-scoped rule, a
-   skill description, or a card you load by hand. Three vendors have built three mechanisms for
-   this and they encode one idea: the instruction should turn up when its situation does.
+   skill description, or a card you load by hand. Three vendors have built three mechanisms for this
+   and they encode one idea: the instruction should turn up when its situation does.
 3. **Prefer a smaller task to a filtered one.** Filtering is damage control applied after you have
    already asked for the wrong thing. If the window is under pressure, the first move is
    [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md), not a compression layer.
@@ -40,26 +40,26 @@ Reduction never happens by accident. Somebody has to decide what not to send.
 What makes this work is that attention is not free per token. Every token attends to every other
 token, so a window is not a shelf you put things on — it is a room where everything you add makes
 everything already there slightly harder to find. The goal Anthropic states for its own agents is
-worth stealing verbatim: find the smallest set of high-signal tokens that gets you the outcome.
-Signal over noise, and the noise is rarely wrong — it is true, once useful, and nearby. The
-exchange rate is that you will sometimes have to hand the agent one more file mid-run, and being
-occasionally under-supplied is cheaper than being reliably over-supplied.
+worth stealing verbatim: find the smallest set of high-signal tokens that gets you the outcome. That
+is signal over noise taken at the level of one run rather than one project. The exchange rate is
+that you will sometimes have to hand the agent one more file mid-run, and being occasionally
+under-supplied is cheaper than being reliably over-supplied.
 
 ## Worked example
 
-`atlas`, the Python billing service. Somebody had installed a token-filtering proxy globally
-— a `PreToolUse` hook that rewrites eligible shell calls, so the agent never knows it exists — and
-its analytics reported savings in the high tens of percentage points. The question was whether to
-keep it.
+`atlas`, the Python billing service. Somebody had installed a token-filtering proxy globally — a
+`PreToolUse` hook that rewrites eligible shell calls, so the agent never knows it exists — and its
+analytics reported savings in the high tens of percentage points. The question was whether to keep
+it.
 
 The published evidence is the reason that question is worth asking at all
 ([`token-filtering.md`](../../../notes/research/token-filtering.md)). Two independent benchmarks
 measured `rtk` v0.43.0 in mid-2026. JetBrains ran 425 billed trials against Claude Code 2.1.201 and
-found cost per task up 7.6% at low reasoning effort, turns up 13.8%, and task quality
-statistically tied — while the tool's own analytics reported 96.2 million tokens saved over the
-same trials, 99.8% of everything it touched. Quesma, independently, on Terminal-Bench 2.1 across
-1,740 attempts and two models, found it marginally cheaper with one and 7% more expensive with the
-other, and concluded: "We do not recommend RTK as a generic cost-saving tool."
+found cost per task up 7.6% at low reasoning effort, turns up 13.8%, and task quality statistically
+tied — while the tool's own analytics reported 96.2 million tokens saved over the same trials, 99.8%
+of everything it touched. Quesma, independently, on Terminal-Bench 2.1 across 1,740 attempts and two
+models, found it marginally cheaper with one and 7% more expensive with the other, and concluded:
+"We do not recommend RTK as a generic cost-saving tool."
 
 Both sides are telling the truth. The tool removes 60–90% of the bytes a command emits; the bill
 still goes up. Most of a session's input cost arrives as cached re-reads billed at roughly a tenth
@@ -85,10 +85,10 @@ benchmark predicted, and the only one either of them supports.
 **The Flattering Dashboard.** A tool measures its own benefit at the point where it acts — bytes
 removed, tokens "saved" — against a counterfactual your billing system never applies. The number it
 reports is real and it is not your bill, and because it is enormous, nobody checks. The reported
-saving and the measured spend can move in opposite directions by two orders of magnitude and both
-be accurate. The tell is a savings figure that arrives from the same process that created the
-saving, with no independent measurement anywhere in the loop. The second tell is a cost graph that
-has not moved since you installed it. Anything whose scoreboard it keeps itself will flatter itself
+saving and the measured spend can move in opposite directions by two orders of magnitude and both be
+accurate. The tell is a savings figure that arrives from the same process that created the saving,
+with no independent measurement anywhere in the loop. The second tell is a cost graph that has not
+moved since you installed it. Anything whose scoreboard it keeps itself will flatter itself
 indefinitely, which is not dishonesty; it is what measuring your own work looks like.
 
 ## Checklist

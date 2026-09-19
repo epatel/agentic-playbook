@@ -12,20 +12,20 @@ exactly the problem.
 
 ## The play
 
-Give the agent a connection instead of a paste, and treat adding one as an admission decision
-rather than a convenience. The multi-vendor way to do it is the Model Context Protocol: a server
-exposes tools (things the agent can do), resources (things it can read), and prompts (templates you
-can invoke), and any client speaking the protocol can consume them.
+Give the agent a connection instead of a paste, and treat adding one as an admission decision rather
+than a convenience. The multi-vendor way to do it is the Model Context Protocol: a server exposes
+tools (things the agent can do), resources (things it can read), and prompts (templates you can
+invoke), and any client speaking the protocol can consume them.
 
 1. **Connect on a boundary, not on availability.** A server earns its machinery when a capability
-   crosses one — more than one agent, more than one harness, more than one person. For one
-   developer wiring one CLI into one agent, a bash command and a line in the brief is less
-   machinery and less to trust ([`mcp.md`](../../../notes/research/mcp.md)).
+   crosses one — more than one agent, more than one harness, more than one person. For one developer
+   wiring one CLI into one agent, a bash command and a line in the brief is less machinery and less
+   to trust ([`mcp.md`](../../../notes/research/mcp.md)).
 2. **Read the exact command before you approve it, and run it where you run everything else.** A
    local server is a binary executing with your privileges. The specification requires a client
    offering one-click installation to show the command untruncated, for the reason that the command
-   is the payload; the isolation you put under the agent's other commands belongs under this one
-   too ([*Choose your harness*](choose-your-harness.md)).
+   is the payload; the isolation you put under the agent's other commands belongs under this one too
+   ([*Choose your harness*](choose-your-harness.md)).
 3. **Scope the credential down to the job.** Read-only where reading is the job, one project rather
    than the organisation, one repository rather than the account. Broad grants make a leaked token
    maximally useful to whoever now has it, and the protocol's own security guidance names scope

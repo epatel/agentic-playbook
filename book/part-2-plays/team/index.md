@@ -2,9 +2,9 @@
 
 Somebody above you has decided that the team will use these tools. What arrived was a licence and an
 expectation; what did not was any description of how nine people use them without producing nine
-incompatible ways of working. So the team invents one, in private, and discovers where the
-versions disagree during code review — a slow and public place to find out that half the team
-thinks the agent's plan belongs in the pull request and half think it is noise.
+incompatible ways of working. So the team invents one, in private, and discovers where the versions
+disagree during code review — a slow and public place to find out that half the team thinks the
+agent's plan belongs in the pull request and half think it is noise.
 
 DORA's 2025 survey puts the mechanism plainly: AI's primary role is "as an amplifier — it magnifies
 the strengths of high-performing organizations and the dysfunctions of struggling ones". A team with

@@ -14,8 +14,8 @@ each other. Voice and formatting are in [`STYLE.md`](STYLE.md); the shape of a p
 1. [`STYLE.md`](STYLE.md) — the register, the bans, four samples to pattern-match against.
 2. [`TEMPLATE-play.md`](TEMPLATE-play.md) — the five-heading contract and a fully written specimen
    play. Only if you are writing a play.
-3. [`cards/book-structure.md`](../cards/book-structure.md) — the proportions, which are the point
-   of the book rather than a guideline.
+3. [`cards/book-structure.md`](../cards/book-structure.md) — the proportions, which are the point of
+   the book rather than a guideline.
 4. [`plans/agentic-playbook.md`](../plans/agentic-playbook.md) — the running log, including names
    other authors have already coined for failure modes.
 
@@ -42,8 +42,8 @@ labelled as such.
 
 ## Directory layout
 
-Directories are created by the first task that needs one. Do not add `.gitkeep` files or
-placeholder chapters to reserve space — an empty directory is not a promise anyone can read.
+Directories are created by the first task that needs one. Do not add `.gitkeep` files or placeholder
+chapters to reserve space — an empty directory is not a promise anyone can read.
 
 | Path | Holds | Created by |
 |---|---|---|
@@ -56,8 +56,8 @@ placeholder chapters to reserve space — an empty directory is not a promise an
 | `part-4-next-waves/` | The three-wave roadmap. | Part IV task |
 | `appendices/` | Glossary, per-suite team checklists, copy-paste templates, further reading. | appendices task |
 
-The six suite directories are `context/`, `harness/`, `orchestration/`,
-`verification-and-trust/`, `economics/`, and `team/`, all under `part-2-plays/`.
+The six suite directories are `context/`, `harness/`, `orchestration/`, `verification-and-trust/`,
+`economics/`, and `team/`, all under `part-2-plays/`.
 
 **Part directories are numbered; files are not.** Part order is locked in `PLAN.md` and will not
 change, so the number is free information in the path. Files inside a part get reordered, inserted,
@@ -68,8 +68,8 @@ happen.
 
 - Lowercase, hyphenated, `.md`.
 - Named for content, never for position: `starve-the-context.md`, not `play-03.md`.
-- A play's filename is its title, lowercased and hyphenated, with articles kept:
-  *Review code you did not write* → `review-code-you-did-not-write.md`.
+- A play's filename is its title, lowercased and hyphenated, with articles kept: *Review code you
+  did not write* → `review-code-you-did-not-write.md`.
 - A suite's opener is `index.md` in the suite directory. Not `README.md` — GitHub would render it
   automatically in the directory view, which is convenient but makes book content look like repo
   documentation.
@@ -78,24 +78,24 @@ happen.
 
 Each of the six suites opens with `index.md`, and it has one job beyond introducing the files under
 it: **name the single idea the suite is an application of, then show each play as that idea at a
-different layer.** The Context suite's opener names *signal over noise* and presents its three
-plays as that one move applied to the always-loaded layer, to a single run, and to the task itself.
+different layer.** The Context suite's opener names *signal over noise* and presents its three plays
+as that one move applied to the always-loaded layer, to a single run, and to the task itself.
 
-The opener is where a unifying principle belongs. It is not a fourth play: as a noun phrase it
-fails the imperative-title rule in [`TEMPLATE-play.md`](TEMPLATE-play.md#title), and rewritten as
-an imperative it collapses into whichever play sits nearest it. Stated in the opener it costs forty
+The opener is where a unifying principle belongs. It is not a fourth play: as a noun phrase it fails
+the imperative-title rule in [`TEMPLATE-play.md`](TEMPLATE-play.md#title), and rewritten as an
+imperative it collapses into whichever play sits nearest it. Stated in the opener it costs forty
 words. Stated as a play it costs a slot and overlaps its neighbour.
 
 An opener contains, in order:
 
-1. A paragraph of framing that puts the reader in the suite's situation. Humour is allowed here —
-   it is one of the few places it is. See [`STYLE.md`](STYLE.md#where-humour-is-allowed).
+1. A paragraph of framing that puts the reader in the suite's situation. Humour is allowed here — it
+   is one of the few places it is. See [`STYLE.md`](STYLE.md#where-humour-is-allowed).
 2. The suite's one idea, named in a sentence, in words a reader could repeat.
 3. One short paragraph per play, linking to it and saying which layer or case it covers.
 
-150–300 words, per [`STYLE.md`](STYLE.md#length). Do not re-establish why any of this matters —
-Part I did that, and a suite opener that re-argues it is the fastest way for Part II to lose the
-space the plays were given.
+150–300 words, per [`STYLE.md`](STYLE.md#length). Do not re-establish why any of this matters — Part
+I did that, and a suite opener that re-argues it is the fastest way for Part II to lose the space
+the plays were given.
 
 ## Ordering
 
@@ -116,13 +116,15 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 
 | # | Path | Title | Status |
 |---|---|---|---|
+| **Front matter** | | | |
+| 0 | `preface.md` | Preface | ✅ |
 | **Part I** | | **The Argument** | |
 | 1 | `part-1-argument/before-git-before-scrum-before-this.md` | Before Git, before Scrum, before this | ✅ |
 | 2 | `part-1-argument/the-four-areas-reweighted.md` | The four areas, re-weighted | ✅ |
 | 3 | `part-1-argument/what-this-book-assumes-about-you.md` | What this book assumes about you | ✅ |
 | **Part II** | | **The Plays** | |
 | 4 | `part-2-plays/context/index.md` | Context | ✅ |
-| 5 | `part-2-plays/context/write-the-brief-the-agent-reads.md` | Write the brief the agent actually reads | ✅ |
+| 5 | `part-2-plays/context/write-the-brief-the-agent-actually-reads.md` | Write the brief the agent actually reads | ✅ |
 | 6 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
 | 7 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
 | 8 | `part-2-plays/harness/index.md` | Harness | ✅ |
@@ -172,8 +174,8 @@ raising rather than making quietly, because Part II's balance is visible to the 
 ## Cross-references
 
 Chapters and plays link to each other constantly — that is what makes a self-contained play
-self-contained. The rules exist so the links survive files being renamed and rewritten by people
-who are not in the room.
+self-contained. The rules exist so the links survive files being renamed and rewritten by people who
+are not in the room.
 
 **Use relative paths from the linking file, and italicise the title:**
 
@@ -201,11 +203,11 @@ above. Nine writing tasks run in parallel; forbidding forward references would m
 cross-reference anything. The link resolves when the file lands, and the editorial pass sweeps for
 paths that never did.
 
-**Evidence:** cite briefs in [`notes/research/`](../notes/research/) with relative links. Never
-link into `notes/raw/` — it is frozen provenance, not a source the book stands on.
+**Evidence:** cite briefs in [`notes/research/`](../notes/research/) with relative links. Never link
+into `notes/raw/` — it is frozen provenance, not a source the book stands on.
 
-**External links:** inline, full URL, no shorteners. Name the document as well as linking it, so
-the reference still means something after the vendor reorganises their docs.
+**External links:** inline, full URL, no shorteners. Name the document as well as linking it, so the
+reference still means something after the vendor reorganises their docs.
 
 ## Adding a file
 

@@ -1,9 +1,9 @@
 # Style guide
 
-Read this before writing any prose for *The Agentic Playbook*. It defines the voice, the rules
-that protect it, and four worked samples to pattern-match against. Structure — where files live,
-how they are ordered, how they link to each other — is in [`README.md`](README.md). The shape of
-an individual play is in [`TEMPLATE-play.md`](TEMPLATE-play.md).
+Read this before writing any prose for *The Agentic Playbook*. It defines the voice, the rules that
+protect it, and four worked samples to pattern-match against. Structure — where files live, how they
+are ordered, how they link to each other — is in [`README.md`](README.md). The shape of an
+individual play is in [`TEMPLATE-play.md`](TEMPLATE-play.md).
 
 The book has several authors and one voice. That only works if the voice is described in examples
 rather than adjectives, which is what most of this file is.
@@ -18,12 +18,12 @@ Not a vendor. Not a lecturer. Not a friend who has had one coffee too many.
 
 Three tests before a sentence stays:
 
-1. **Would you say it out loud to a competent peer?** That removes hype in one direction and
-   talking down in the other.
-2. **Does it survive 16:50 on a Friday?** Someone is copying a command out of this book while
-   tired. Where that happens, the prose gets out of the way entirely.
-3. **Is it true?** A joke that costs accuracy is cut. Every time. The register is dry because it
-   is precise, not in spite of it.
+1. **Would you say it out loud to a competent peer?** That removes hype in one direction and talking
+   down in the other.
+2. **Does it survive 16:50 on a Friday?** Someone is copying a command out of this book while tired.
+   Where that happens, the prose gets out of the way entirely.
+3. **Is it true?** A joke that costs accuracy is cut. Every time. The register is dry because it is
+   precise, not in spite of it.
 
 ## Where humour is allowed
 
@@ -60,8 +60,8 @@ These are not judgement calls. The editorial pass removes them without discussio
 - **Emoji.** Especially as a punchline. Describing one in prose is fine; typing one is not.
 - **The "unless…?" gag** and its relatives: rhetorical bait-and-switch ("AI won't take your job…
   unless?"), "plot twist:", "narrator voice:", "(spoiler: it didn't)".
-- **Hype vocabulary:** revolutionary, game-changer, unlock, supercharge, 10x, seamless,
-  effortless, magical, paradigm shift, next-level, superpower.
+- **Hype vocabulary:** revolutionary, game-changer, unlock, supercharge, 10x, seamless, effortless,
+  magical, paradigm shift, next-level, superpower.
 - **"Simply", "just", "obviously", "of course"** applied to the reader's work. If it were obvious
   they would not be reading the play.
 - **The LLM cadence:** "It's not just X — it's Y", "Let's dive in", "In today's fast-paced world",
@@ -69,10 +69,10 @@ These are not judgement calls. The editorial pass removes them without discussio
   rather than because there are three things.
 - **Rhetorical questions as section transitions.** "So how do you fix this?" is a sentence that
   costs a line and delivers nothing.
-- **Second-person scolding.** "You're doing it wrong" and "most developers make this mistake"
-  both assume a reader who is not the one described in Part I.
-- **Anthropomorphised moods.** The agent has behaviour, not feelings. "Output quality degrades
-  once the window is roughly three-quarters full", not "the agent gets tired". "It will confidently
+- **Second-person scolding.** "You're doing it wrong" and "most developers make this mistake" both
+  assume a reader who is not the one described in Part I.
+- **Anthropomorphised moods.** The agent has behaviour, not feelings. "Output quality degrades once
+  the window is roughly three-quarters full", not "the agent gets tired". "It will confidently
   produce X" is fine — that is a description of output, not an inner life.
 - **The knowing wink.** "(ask me how I know)" is allowed once in the entire book, and it probably
   should not be.
@@ -94,9 +94,9 @@ These are not judgement calls. The editorial pass removes them without discussio
 - **Oxford comma**, always.
 - **Present tense**, with one exception: a play's *Worked example* is narrated in the past tense,
   because it reports something that happened rather than describing how things behave. See
-  [`TEMPLATE-play.md`](TEMPLATE-play.md#worked-example). Second person for the reader — "you".
-  "The agent" for the tool, never "the AI", "it" as a bare subject across sentences, or "your AI
-  pair". No authorial "we"; the book does not narrate itself.
+  [`TEMPLATE-play.md`](TEMPLATE-play.md#worked-example). Second person for the reader — "you". "The
+  agent" for the tool, never "the AI", "it" as a bare subject across sentences, or "your AI pair".
+  No authorial "we"; the book does not narrate itself.
 - **Sentence case for every heading**, including the fixed template headings.
 - **Heading levels.** One `#` per file, matching its table-of-contents title. `##` for the five
   template headings in a play, or for top-level sections in a non-play chapter. `###` for
@@ -121,15 +121,20 @@ Model names, prices, context-window sizes, and benchmark figures make prose conc
 book an expiry date. The working line:
 
 - Use a specific figure only when the point collapses without it.
-- When you use one, date it in the sentence: "as of early 2026", or a parenthetical month.
-- Prefer shape to figure. "Roughly an order of magnitude cheaper per token" survives a price
-  change; a pricing table does not.
+- When you use one, date it in the sentence: "as of early 2026", or a parenthetical month. A figure
+  inherits a date only from its own paragraph — a stamp four paragraphs up, or in the other chapter
+  that spends the same study, does not carry.
+- **A version string is a date stamp** for a mechanic only one vendor implements: "Claude Code 2.x"
+  does the job that "as of September 2026" does for a price. Use one or the other, not neither.
+- Prefer shape to figure. "Roughly an order of magnitude cheaper per token" survives a price change;
+  a pricing table does not.
 - **Never invent a measurement.** Timings, token counts, percentages, and study results are
   measured, cited to a brief in [`notes/research/`](../notes/research/), or not stated. A
   precise-looking number that came from nowhere is the single fastest way to lose this reader.
 
-This is a working default rather than a locked decision; the editorial pass owns the final call on
-how much the book dates itself.
+The editorial pass settled this as written: the working line above is the book's line. What it cost
+is visible in the Economics suite, where three arguments that would have been sharper with a number
+are made as shapes instead.
 
 ## Naming failure modes
 
@@ -138,13 +143,15 @@ They are also load-bearing: a reader who can name a thing can raise it in a code
 
 - **Title Case, with the definite article, as a noun phrase:** **the Context Landfill**, **the
   Confident Wrong Rewrite**, **the Green Suite That Tests Nothing**.
-- **Bold on first use** in a play; plain thereafter.
+- **Bold where the name is coined** — in the *Failure mode* section or Part III entry that
+  introduces it. Plain everywhere else in the book, including the first time a different chapter
+  uses it. A book-wide name has one first use, not one per file.
 - **Name the symptom, not the cause.** The reader recognises the thing before they understand it.
   "The Merged Hand" beats "Improper Working Tree Hygiene".
 - **One name per phenomenon across the whole book.** Before coining one, check the running log in
   [`plans/agentic-playbook.md`](../plans/agentic-playbook.md); after coining one, append it there
-  so the other authors see it. Two names for one failure is the defect the editorial pass is
-  least able to fix cheaply.
+  so the other authors see it. Two names for one failure is the defect the editorial pass is least
+  able to fix cheaply.
 - **The name carries the humour; the description does not.** Once you have named it, describe it
   straight: what it looks like, what the tell is, what it costs.
 
@@ -182,8 +189,8 @@ before.
 > a helper it wrote forty minutes earlier. Nothing errors. The diff is large, internally plausible,
 > and wrong in three places you will find on Tuesday.
 
-**Passes:** no joke at all — the situation carries itself. Concrete, escalating, and it ends on
-the cost rather than on a summary.
+**Passes:** no joke at all — the situation carries itself. Concrete, escalating, and it ends on the
+cost rather than on a summary.
 
 > We've all been there! You give your AI buddy a big task and it goes off the rails. But don't
 > worry — in this play we'll dive into how to scope tasks properly. Sound familiar?
@@ -199,8 +206,8 @@ put the reader in the room.
 >    and the code that reads the new format are two tasks, not one. Write the boundary into the
 >    brief, so the second task does not re-derive it and disagree.
 
-**Passes:** zero humour, imperative, one transferable heuristic, one concrete instance, and it
-says what to do with the result. This is what the whole book reads like inside a procedure.
+**Passes:** zero humour, imperative, one transferable heuristic, one concrete instance, and it says
+what to do with the result. This is what the whole book reads like inside a procedure.
 
 > 3. Split the task somewhere sensible (the agent will thank you). Just pick a natural boundary —
 >    you'll know it when you see it!
@@ -235,9 +242,9 @@ belongs in *The play*, not here. Also an exclamation mark.
 Budgets for the sections of a play are in [`TEMPLATE-play.md`](TEMPLATE-play.md). For everything
 else: a Part I chapter runs 800–1,500 words, a suite opener 150–300, a Part III chapter 800–1,500.
 What a suite opener has to *contain* is in [`README.md`](README.md#suite-openers) — it is a
-contract, not just a word budget.
-Part I is the section most likely to sprawl, and the proportions in
-[`cards/book-structure.md`](../cards/book-structure.md) are the point of the book, not a guideline.
+contract, not just a word budget. Part I is the section most likely to sprawl, and the proportions
+in [`cards/book-structure.md`](../cards/book-structure.md) are the point of the book, not a
+guideline.
 
 ## When in doubt
 

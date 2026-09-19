@@ -69,9 +69,10 @@ reproduced at scale, in parallel, by something that works faster than you do and
 about whether the convention was any good.
 
 The other growth is in review. Writing got cheaper; checking did not. DORA's term for the time
-developers spend checking agent output is the *verification tax*, and it is the right frame
-precisely because it is not a bug tax — the observed cost lands as displaced review capacity rather
-than as defects reaching production. The evidence and its qualifications are in
+developers spend checking agent output is the *verification tax*, and this book uses it throughout.
+The full accounting — what the cost is made of, and why it is not a bug tax — is in
+[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), with
+the evidence and its qualifications in
 [`notes/research/evidence.md`](../../notes/research/evidence.md). Review was already the scarcest
 resource on most teams. It is now being asked to cover more diff per week, produced by something
 tireless.

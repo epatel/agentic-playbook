@@ -3,11 +3,11 @@
 ## Problem
 
 Three people on the team have each worked out something that makes these tools noticeably better,
-and none of the three knows about the other two. One has a skill in their home directory that gets
-a fiddly procedure right every time. One stopped letting the agent near the migration folder months
+and none of the three knows about the other two. One has a skill in their home directory that gets a
+fiddly procedure right every time. One stopped letting the agent near the migration folder months
 ago and has never said why. One writes briefs in a shape that reliably gets the test written first,
-and could not tell you what the shape is. Nobody is hiding anything; it never came up. The
-team pays the discovery cost three times and collects the benefit once each.
+and could not tell you what the shape is. Nobody is hiding anything; it never came up. The team pays
+the discovery cost three times and collects the benefit once each.
 
 ## The play
 
@@ -25,20 +25,23 @@ loads, and take out as much as you put in.
 3. **Promote an artefact, not an anecdote.** Every practice that survives the comparison leaves the
    room as a file — a skill, a line in the shared brief, an item in the review template. If nobody
    will write the file, the practice was not worth the hour.
-4. **Have someone else write the description.** A skill is found on its `name` and `description`
-   alone; the body is never consulted when the agent decides whether it applies
-   ([`skills.md`](../../../notes/research/skills.md)). A skill written by its author, for its
-   author, is described in that author's vocabulary and stays invisible to everyone else. The
-   colleague who did not write it writes the description, in the words their own request would use.
+4. **Have someone else write the description.** A skill is routed on its `name` and `description`
+   alone, never on its body
+   ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)). A skill written
+   by its author, for its author, is described in that author's vocabulary and stays invisible to
+   everyone else. The colleague who did not write it writes the description, in the words their own
+   request would use.
 5. **Move it to where everyone loads it, then check on someone else's machine.** Shared skills into
    the repository's skills directory, shared conventions into the committed context file, personal
    material out of the repository. Verify on a checkout that is not the author's: instructions that
    fail to load are the Brief That Never Arrived
-   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-reads.md)),
+   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)),
    and from the outside that looks identical to everything working.
 6. **Remove something every time.** A skill nobody has triggered since the last harvest, a brief
    line about a tool the team replaced, a card describing a service deleted in June. A library that
-   only ever grows is the Context Landfill with a governance process attached.
+   only ever grows becomes the Context Landfill
+   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode))
+   at team scale.
 
 Everyone has the same tools. What a team can actually differentiate on is the rate at which one
 person's discovery becomes everyone's default, and that rate is set by two costs: writing a thing
@@ -114,7 +117,6 @@ described a run that failed, on a technology whose failures are its most-discuss
 - [ ] Something was deleted in the same session as something was added
 - [ ] Files are small, single-subject, dated, and do not depend on each other
 
-**See also:**
-[*Package repeatable expertise*](../harness/package-repeatable-expertise.md) ·
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-reads.md) ·
+**See also:** [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) ·
+[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md) ·
 [*Build the working agreement*](build-the-working-agreement.md)

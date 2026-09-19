@@ -15,7 +15,7 @@ Review in an order that spends the cheap checks first, because the expensive one
 reading is what you run out of.
 
 1. **Look at what the change did to the things that check it, before what it does.** Test files, CI
-   configuration, linter and type-checker settings. A net-negative line count in an existing test
+   configuration, linter settings, and type-checker settings. A net-negative line count in a test
    file, a test moved to `skip`, a relaxed rule, a widened type, a deleted pipeline step: each is a
    send-back on its own. One command, and it catches the evasion agents are measured making: across
    roughly 4,900 agent pull requests in 2026, those adding tests without improving coverage deleted
@@ -27,7 +27,7 @@ reading is what you run out of.
    not fit in one sentence, test changes arriving alongside CI failures. You are declining a review
    that does not fit in your day, not judging the work.
 3. **Search for the thing before accepting that it needed writing.** Agent pull requests carried
-   roughly 1.9 times the semantic duplication of human ones in the largest available corpus
+   roughly 1.9 times the semantic duplication of human ones in the largest 2026 corpus
    ([`review-practice.md`](../../../notes/research/review-practice.md)). Two implementations of one
    rounding rule is not a style problem; it is two answers to one question, one of which will be
    wrong later.
@@ -94,8 +94,8 @@ src/rollout/schedule.ts
 `assign.ts` already had `bucketFor(deviceId, buckets)`. The pull request had added
 `hashToBucket(id, n)` beside it, with a different tie-break at the boundary.
 
-The change went back with three notes: restore the two pipeline steps, un-skip the battery test,
-use the helper that exists. The rollout arithmetic itself was right, and better commented than the
+The change went back with three notes: restore the two pipeline steps, un-skip the battery test, use
+the helper that exists. The rollout arithmetic itself was right, and better commented than the
 module next to it. Everything the review caught was about what the change had removed and what it
 had duplicated, which is the shape the measurements predict.
 
@@ -117,12 +117,13 @@ that did not work ([`review-practice.md`](../../../notes/research/review-practic
 
 From the inside it reads as calibration — the last nine were fine, this one looks like those. The
 tell is your own comments. In that corpus the median comment ran eleven words and a quarter were
-five or fewer. If you cannot name a change you sent back this month, you are not reviewing them,
-you are receiving them.
+five or fewer. If you cannot name a change you sent back this month, you are not reviewing them, you
+are receiving them.
 
 ## Checklist
 
-- [ ] Test files, CI config, linter and type-checker settings read before the implementation
+- [ ] Test files, CI config, linter settings, and type-checker settings read before the
+      implementation
 - [ ] No test deleted, skipped, or weakened; no pipeline step removed
 - [ ] Size and file count judged before reading, with a send-back threshold agreed in advance
 - [ ] Searched for an existing implementation of anything the change introduces
@@ -132,4 +133,5 @@ you are receiving them.
 
 **See also:** [*Make the agent prove it*](make-the-agent-prove-it.md) ·
 [*Decide who signs off*](decide-who-signs-off.md) ·
-[*Work in parallel without collisions*](../orchestration/work-in-parallel-without-collisions.md)
+[*Work in parallel without collisions*](../orchestration/work-in-parallel-without-collisions.md) ·
+[*Copy-paste templates*](../../appendices/copy-paste-templates.md)

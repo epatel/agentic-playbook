@@ -4,17 +4,17 @@ Three skeletons. None of them was written for this appendix: each is the reduced
 play works through at length, and the play is where the reasoning is. A template lifted without the
 reasoning survives about a fortnight.
 
-Two rules apply to all three. **Delete anything you cannot justify** — every line you keep out of
-politeness is a line competing for attention with the lines that matter. And **date them**, because
-the first thing that goes wrong with a shared document is that nobody can tell whether it still
+Two rules apply to all three. Delete anything you cannot justify — every line you keep out of
+politeness is a line competing for attention with the lines that matter. And date them, because the
+first thing that goes wrong with a shared document is that nobody can tell whether it still
 describes the team.
 
 ## A project brief, in two tiers
 
 The pattern is a slim always-loaded index plus self-contained files loaded on demand. The index
 carries the project's shape and a trigger per file, written in the words a request would use; each
-card carries one subject and never requires loading another. Self-containment is the whole rule.
-One card, one load, no chains.
+card carries one subject and never requires loading another. Self-containment is the whole rule. One
+card, one load, no chains.
 
 Put the content in `AGENTS.md`, which every major tool reads, and let the vendor-specific file be a
 one-line import.
@@ -67,7 +67,7 @@ The vendor file wires it up and holds nothing else:
 This repository runs the pattern on itself: its root [`CLAUDE.md`](../../CLAUDE.md) is a real index
 and [`cards/`](../../cards/) holds the real cards, so the template above is one that has been used
 daily rather than one that was designed. The reasoning is in
-[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-reads.md),
+[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md),
 and the argument for loading on a trigger rather than at launch is in
 [*Starve the context*](../part-2-plays/context/starve-the-context.md).
 
@@ -76,8 +76,7 @@ and the argument for loading on a trigger rather than at launch is in
 One page, in the repository, beside the shared brief. Six items is the usual number and every one of
 them concerns something that leaves somebody's machine; the rest goes in the personal section, in
 writing, so that it stops being an argument. The full version, with a worked instance of every
-clause, is in
-[*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md).
+clause, is in [*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md).
 
 ```markdown
 # How we work with agents — <team or repository>
@@ -133,7 +132,7 @@ and [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-
 
 ```markdown
 ### Before reading the implementation
-- [ ] Test files, CI config, linter and type-checker settings read first
+- [ ] Test files, CI config, linter settings, and type-checker settings read first
 - [ ] No test deleted, skipped, renamed to something unreachable, or weakened
 - [ ] No pipeline step removed, and no assertion loosened to accommodate the change
 - [ ] Size and file count judged against our send-back threshold before reading

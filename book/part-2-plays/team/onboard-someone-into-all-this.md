@@ -11,12 +11,15 @@ that plausible now arrives before understanding, and nobody has built a check fo
 
 ## The play
 
+Put everything transferable in the repository, then spend the week transferring the part that will
+not go in a file.
+
 1. **Make the checkout the setup.** Everything the team shares is in the repository, so day one is
    clone, install the harness, and verify. Verification is a step rather than an assumption: ask the
-   agent what the project instructions say and check the answer against the file. On Claude Code 2.x
-   this matters — a `CLAUDE.md` or `CLAUDE.local.md` anywhere above the checkout takes precedence
-   and stops a project's `AGENTS.md` loading, with no error and no visible difference in the
-   loaded-file list.
+   agent what the project instructions say and check the answer against the file. A precedence rule
+   above the checkout can stop the team's brief loading with no error at all
+   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode)),
+   and a joiner is the person least equipped to notice.
 2. **Hand over the agreement before the codebase.** It is one page, and it is the shortest accurate
    description of how this team works that exists. A joiner who reads it on Monday stops inferring
    four conventions from whichever pull request they opened first.
@@ -60,9 +63,9 @@ $ claude
 The answer described nothing specific to `lodestone`. Following a setup note from a blog post, the
 joiner had created a `CLAUDE.local.md` for their own sandbox URLs, which took precedence and stopped
 the team's committed `AGENTS.md` loading. Nothing errored and the loaded-file list looked the same
-either way. That is the Brief That Never Arrived
-([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-reads.md)), and
-it surfaced within the hour only because asking the question was a step.
+either way. That is the Brief That Never Arrived, described in
+[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md),
+and it surfaced within the hour only because asking the question was a step.
 
 The pairing was the part nobody had budgeted for and the part that mattered. On the first run the
 joiner watched an engineer stop the agent twice: once because it had begun rewriting a class that
@@ -84,11 +87,11 @@ alternatives.
 
 **The Fluent Stranger.** The new joiner is productive immediately and the output is good. They know
 the harness better than half the team, their pull requests are the right size, and the code follows
-conventions they picked up from the shared context file on Monday. What they do not have, and
-cannot have yet, is any sense of which parts of this system are load-bearing, which tests lie, and
-which of the agent's confident suggestions are wrong in a way specific to this codebase. Nobody
-notices, because the work looks like everyone else's work, which is precisely what an agent is good
-at producing.
+conventions they picked up from the shared context file on Monday. What they do not have, and cannot
+have yet, is any sense of which parts of this system are load-bearing, which tests lie, and which of
+the agent's confident suggestions are wrong in a way specific to this codebase. Nobody notices,
+because the work looks like everyone else's work, which is precisely what an agent is good at
+producing.
 
 The tell is a joiner whose first three pull requests contain no questions. The second is a review
 where "why did you put it here?" gets an answer about the code rather than the system, and the

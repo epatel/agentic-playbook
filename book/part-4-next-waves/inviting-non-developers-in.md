@@ -34,7 +34,7 @@ What a developer contributes to a one-line copy change is not the line. It is kn
 string is also used in the onboarding email, that the settings page is the one screen with its own
 translation pipeline, and that the component was rewritten last month by somebody who has since
 left. None of that is in the repository in a form anybody can read, which is the same problem
-[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-reads.md)
+[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md)
 addresses for the agent, arriving now for a colleague.
 
 So the honest framing of this wave is not "can a designer ship a change" — they could always have
@@ -86,8 +86,10 @@ The second cost is accountability, and it goes wrong in a specific way. The obvi
 the contributor owns their change — produces somebody who is responsible for a diff they cannot
 fully read, in a system they cannot fully model, approved by a developer who assumed the contributor
 understood it. Both parties have a reason to believe the other one checked. That is the Accountable
-Bystander with two people in it instead of one, and the fix is the boring one: state who is
-accountable for what, in writing, before the first change rather than after the first incident.
+Bystander with two people in it instead of one — the failure
+[*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) is about,
+one participant larger — and the fix is the boring one: state who is accountable for what, in
+writing, before the first change rather than after the first incident.
 
 ## The precedent nobody can quote
 

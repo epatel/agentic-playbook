@@ -17,12 +17,12 @@ Partition the repository before you start, and treat integration as the part tha
    brief ends with the clause that makes the ownership real: if you need to change something outside
    these paths, stop and tell me. Without it, an agent that needs one line elsewhere takes it, and
    the partition you designed is a partition only you observed.
-2. **Give each agent its own checkout, and budget for the environment.** `git worktree add
-   ../meridian-invoices -b feat/invoices` is the ergonomic option — one repository, one `git
+2. **Give each agent its own checkout, and budget for the environment.** `git worktree
+   add ../meridian-invoices -b feat/invoices` is the ergonomic option — one repository, one `git
    worktree list`, shared refs. It is not the cheap one: a worktree is a fresh checkout, so
-   dependencies install per tree and untracked files such as `.env` are absent. A
-   `.worktreeinclude` file copies gitignored files across; a package manager with a global store
-   handles the rest. Ports and databases are not isolated by any of this.
+   dependencies install per tree and untracked files such as `.env` are absent. A `.worktreeinclude`
+   file copies gitignored files across; a package manager with a global store handles the rest.
+   Ports and databases are not isolated by any of this.
 3. **Name the landmine files and serialise them.** Migration directories, route tables, barrel and
    index files, translation catalogues, lockfiles. One agent at a time touches these, or you do them
    yourself afterwards. In the measured data they are a small share of conflicted files; in

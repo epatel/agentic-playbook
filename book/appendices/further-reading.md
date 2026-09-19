@@ -83,7 +83,8 @@ and the do-not-cite list across six subjects. Beneath it:
   EASE 2026, arXiv 2605.02273 — https://arxiv.org/html/2605.02273v1
 - **Beyond lexical metrics: sentence-embedding detection of reviewer habituation in AI code
   review**, arXiv 2609.06213 — https://arxiv.org/html/2609.06213 — the measurement behind the
-  Drifting Yes.
+  Drifting Yes
+  ([*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md)).
 - **DORA's annual reports** — https://dora.dev/ — the source of the *verification tax*, and the
   largest recurring survey in the field. Self-report, and says so.
 
@@ -102,8 +103,8 @@ pre-Scrum analogy. It is the least perishable brief in the project.
 - **Gousios, Pinzger and van Deursen, "An exploratory study of the pull-based software development
   model"**, ICSE 2014 — https://pure.tudelft.nl/ws/files/7416754/TUD_SERG_2014_005.pdf
 - **Jim Highsmith, "History: the Agile Manifesto"** — https://agilemanifesto.org/history.html — and
-  **Martin Fowler, "Semantic diffusion"**,
-  https://martinfowler.com/bliki/SemanticDiffusion.html, on what happens to a word once it wins.
+  **Martin Fowler, "Semantic diffusion"**, https://martinfowler.com/bliki/SemanticDiffusion.html, on
+  what happens to a word once it wins.
 
 ## The two posts this book is developed from
 

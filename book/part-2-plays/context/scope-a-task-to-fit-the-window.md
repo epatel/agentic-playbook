@@ -7,49 +7,45 @@ later it is still going. The first six endpoints look good. Somewhere around the
 re-implementing a helper it wrote at minute twelve, and the tenth uses an error shape that
 contradicts the third. Nothing errors, nothing stops, and every time you look it appears to be one
 step from finished, so you type "continue" for the third time. What you end up reviewing is not a
-change. It is a dig site, and you are the one holding the trowel at half past five.
+change. It is the sediment of four runs, and separating them costs more than the change was worth.
 
 ## The play
 
 Size the unit of work by what has to be held in mind at once, not by how many lines it touches.
 
 1. **Split at the first boundary where the agent would need both halves at the same time.** In
-   practice that is a module edge or a change of data format: the migration script and the code
-   that reads the new format are two tasks. Write the boundary into the brief for each half, so the
+   practice that is a module edge or a change of data format: the migration script and the code that
+   reads the new format are two tasks. Write the boundary into the brief for each half, so the
    second task does not re-derive it and disagree.
 2. **Scope by capability, not by layer.** "Add validation to the checkout endpoint, its schema, and
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
-   by the eighth file. An agent's unit of work is a behaviour, not a directory — the argument is
-   made well in [*The unit of work*](https://memention.com/blog/2026/05/29/The-unit-of-work.html),
-   which is where the phrase comes from.
+   by the eighth file. An agent's unit of work is a behaviour, not a directory.
 3. **Hand the requirements over as an external list, not as prose to remember.** A numbered list of
    acceptance conditions in a file the agent can re-read beats the same conditions buried in your
    opening message. In the one white-box study of this
    ([`failure-modes.md`](../../../notes/research/failure-modes.md), arXiv 2607.17937, August 2026),
    a large-context task that succeeded 3 times in 10 succeeded 10 times in 10 when the requirements
    were supplied as an external list; a generic "check your work" prompt got 5.
-4. **Stop on the tells, not on the error.** Three tells, any one of which means re-scope rather
-   than continue: the agent re-implements something already present in its own diff; an edit
-   contradicts an earlier edit from the same run; you have said "continue" more than twice.
-   Continuing past these is buying more of what you already have.
+4. **Stop on the tells, not on the error.** Three tells, any one of which means re-scope rather than
+   continue: the agent re-implements something already present in its own diff; an edit contradicts
+   an earlier edit from the same run; you have said "continue" more than twice. Continuing past
+   these is buying more of what you already have.
 5. **Hand off state in a file, not in the conversation.** Before a session ends, have the agent
    write what was done, what is next, which decisions were made and why, and what must not be
-   redone. The next session inherits every word of the written brief and none of the chat, so a
-   convention you established by typing it is gone.
-6. **Start the next unit from that file and a clean tree**, rather than from a continued session.
-   A fresh run with a good brief reliably beats a tired one with a full window.
+   redone. The next session inherits the written brief and none of the chat, so a convention you
+   established by typing it is gone.
+6. **Start the next unit from that file and a clean tree**, rather than from a continued session. A
+   fresh run with a good brief reliably beats a continued one with a full window.
 
 The idea worth carrying past this play is that fitting in the window is necessary and nowhere near
-sufficient. The same study measured both halves against its own small-context baseline: requirement
-*coverage* held at 0.93–0.95 of baseline, so the agent was still reading them, while the rate at
-which it satisfied all of them at once fell to 0.375 — three runs in ten against eight. The
-information was present. The compliance was not. So "will it fit" is the wrong question and "can it
-still satisfy all of this at once" is the right one, which is why the answer is a smaller task
-rather than a bigger window. Scope is the signal-over-noise decision taken before the run starts,
-which is the cheapest place to take it: everything the task does not need is noise you have not
-paid for yet. The exchange rate: four briefs instead of one, four sets of results to read, and a
-boundary you might place wrong. What you get back is the ability to re-run a quarter of the work
-instead of all of it.
+sufficient. In the same study the agent's coverage of the requirements barely moved as the context
+grew, while the rate at which it satisfied all of them at once collapsed — the failure this book
+calls the Requirement It Can Still Quote, measured in
+[*The failure modes worth naming*](../../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
+So "will it fit" is the wrong question and "can it still satisfy all of this at once" is the right
+one, which is why the answer is a smaller task rather than a bigger window. The exchange rate: four
+briefs instead of one, four sets of results to read, and a boundary you might place wrong. What you
+get back is the ability to re-run a quarter of the work instead of all of it.
 
 ## Worked example
 
@@ -86,23 +82,24 @@ same one:
 
 Unit 2 came back wrong in one respect, and it was the interesting one. Unit 1 had decided to raise
 `AuthError` and let the middleware map it to a 401; unit 2, which never saw that conversation, went
-with returning a response directly from the middleware. Both are defensible; having both is not.
-The decision had been made in chat and therefore did not exist. It went into the handoff file as
-one line — "auth failures raise `AuthError`; only the middleware serialises it" — and unit 2 was
-re-run against it. Re-running one of four units is a cheap correction, and it was cheap precisely
-because it was one of four.
+with returning a response directly from the middleware. Both are defensible; having both is not. The
+decision had been made in chat and therefore did not exist. It went into the handoff file as one
+line — "auth failures raise `AuthError`; only the middleware serialises it" — and unit 2 was re-run
+against it. Re-running one of four units is a cheap correction, and it was cheap precisely because
+it was one of four.
 
 ## Failure mode
 
 **The Permanent Near Miss.** The run does not fail. It ends just short — one endpoint unconverted,
-one test still red, one loose end that looks like one more minute of work — so you continue it,
-and the continuation also ends just short. The work is genuinely progressing and genuinely never
+one test still red, one loose end that looks like one more minute of work — so you continue it, and
+the continuation also ends just short. The work is genuinely progressing and genuinely never
 arriving, and because each individual turn looks like the last one needed, there is no moment that
-presents itself as the moment to stop. It is the dominant outcome on long-horizon benchmarks: in
-one 2026 suite, near misses occurred more than twice as often as passes, and 79% of unresolved runs
-ended because the time budget ran out rather than because anything broke. The tell is that your
-estimate of "nearly done" has not moved in twenty minutes while the diff has. The second tell is
-reaching for "continue" instead of reading what you already have.
+presents itself as the moment to stop. It is the dominant outcome on long-horizon benchmarks — near
+misses outnumber passes, and most unresolved runs end on a time budget rather than on anything
+breaking, which is measured in
+[*What agents are reliably bad at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md).
+The tell is that your estimate of "nearly done" has not moved in twenty minutes while the diff has.
+The second tell is reaching for "continue" instead of reading what you already have.
 
 ## Checklist
 

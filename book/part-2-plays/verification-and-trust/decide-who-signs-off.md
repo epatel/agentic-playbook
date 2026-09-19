@@ -24,19 +24,17 @@ Decide it in advance, in writing, as a team. The question does not get easier du
    unanimous in policy and contested in the literature: Elish's moral-crumple-zone argument is that
    responsibility for an automated system's failure collapses onto the nearest human operator,
    protecting the system at that person's expense. Nobody has established which is happening here,
-   and a rule the team privately reads as a scapegoating device is one the team routes around. The
-   answer to the objection is the next step, not a paragraph of reassurance.
+   and a rule the team privately reads as a scapegoating device is one the team routes around.
 3. **Give the owner the right to refuse on volume alone.** Sign-off without standing to decline is a
    signature, not a decision. Google's review guidance grants reviewers that authority explicitly,
    and LLVM's version is a test anyone can apply: a contribution should be worth more than the time
    it takes to review it. This is the clause that decides whether the first two mean anything.
 4. **Pick a disclosure string, check what your tools already write, and stop arguing about it.**
    There is no standard: git accepts any `key: value` trailer and enforces nothing, and the field
-   carries `Assisted-by:` at the kernel and Fedora, `Generated-by:` at Apache, `AI-used-for:` in
-   QEMU's unmerged proposal, and prose in the pull request at Kubernetes. What several agree on is
-   narrower and more useful: the model is not a co-author, because co-authorship implies a rights
-   certification it cannot make. Check your own history before assuming you have not already been
-   making claims — VS Code shipped a setting appending a Copilot co-author trailer by default in
+   carries `Assisted-by:` at the kernel and Fedora, `Generated-by:` at Apache, and prose in the pull
+   request at Kubernetes. What several agree on is narrower and more useful: the model is not a
+   co-author, because co-authorship implies a rights certification it cannot make. Check your own
+   history first — VS Code shipped a setting appending a Copilot co-author trailer by default in
    2026, and reverted it to opt-in after people found it on commits they had written
    ([`accountability.md`](../../../notes/research/accountability.md)).
 5. **Find out what your domain already requires before inventing a policy.** As of September 2026 no
@@ -48,10 +46,9 @@ Decide it in advance, in writing, as a team. The question does not get easier du
    advice; it is what those documents say, on the date they were read.
 
 What you are assigning is not blame, it is the obligation to explain the change to somebody else,
-and nothing else can hold that. No standard records which model produced which hunk: CycloneDX and
-SPDX describe models as components of a system, not as the author of a line, and the only mechanism
-in production is a self-asserted string no tool verifies. The exchange rate is throughput — a named
-owner who can answer for a change is slower than the generation of changes, so the team's rate
+and nothing else can hold that: no standard records which model produced which hunk, and the only
+mechanism in production is a self-asserted string no tool verifies. The exchange rate is throughput
+— an owner who can answer for a change is slower than the generation of changes, so the team's rate
 becomes that person's rate, chosen deliberately rather than discovered later.
 
 ## Worked example
@@ -100,11 +97,13 @@ something breaks, the review finds the name and stops there. From the inside it 
 negligence, because it is not: they did read them, in the time available, at the rate the work
 arrived.
 
-The tell is that the owner cannot name a change they declined in the last month. The second is that
-the document has a paragraph about who is responsible and no paragraph about what they may refuse —
-which is the whole of the difference between accountability and a nominated recipient for it. The
-third is an incident review that ends at a name rather than at the point where the change stopped
-being understood.
+The tell is that the document has a paragraph about who is responsible and no paragraph about what
+they may refuse — which is the whole of the difference between accountability and a nominated
+recipient for it. The second is an incident review that ends at a name rather than at the point
+where the change stopped being understood. This is not the Drifting Yes
+([*Review code you did not write*](review-code-you-did-not-write.md#failure-mode)): there a
+reviewer's standard slips without them noticing, while here the standard holds and the authority to
+act on it was never granted.
 
 ## Checklist
 

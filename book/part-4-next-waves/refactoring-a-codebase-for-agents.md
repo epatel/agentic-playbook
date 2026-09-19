@@ -36,10 +36,10 @@ that could have lived in one directory.
 Organised feature-first, one capability is one folder — the handler through to the response, the
 logic beside its test. Three things follow. The behaviour is visible in one place, which is what
 makes a task briefable at all, in the sense
-[*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md)
-means. The blast radius of a change is legible: this feature, these files, nothing else claims them.
-And duplication between features becomes cheaper than the wrong shared abstraction, because two
-similar functions in two folders can diverge without a meeting.
+[*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) means.
+The blast radius of a change is legible: this feature, these files, nothing else claims them. And
+duplication between features becomes cheaper than the wrong shared abstraction, because two similar
+functions in two folders can diverge without a meeting.
 
 That last one is the part to argue with, and it should be argued with. Duplication has a cost that
 arrives later than the saving: the bug fixed in one copy and not the other, the security patch
@@ -60,8 +60,8 @@ predict what its change will do.
 The tell is a change that is locally correct and globally wrong: the function does what it says, the
 tests for that function pass, and something three frames up the stack that nobody mentioned now
 behaves differently. That is the Confident Wrong Rewrite — described in
-[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md)
-— with a specific cause, and the cause is in your architecture rather than in the model.
+[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md) —
+with a specific cause, and the cause is in your architecture rather than in the model.
 
 This is not an argument for deleting your framework. Cross-cutting concerns — authentication,
 persistence, logging, transactions — still belong in shared infrastructure, and rewriting them per
@@ -115,11 +115,11 @@ expensive place to have one.
 Nothing above requires a migration project, and a migration project is the wrong response to a
 forecast.
 
-Do it on contact. The next feature you touch for other reasons, move into one folder with its
-tests; the next invisible mechanism that burns an afternoon, replace with an explicit call at the
-site that needs it; the next slow check, make fast. Each of those is defensible on its own merits
-to somebody who thinks this whole chapter is speculation, which is the test worth applying before
-starting any of it.
+Do it on contact. The next feature you touch for other reasons, move into one folder with its tests;
+the next invisible mechanism that burns an afternoon, replace with an explicit call at the site that
+needs it; the next slow check, make fast. Each of those is defensible on its own merits to somebody
+who thinks this whole chapter is speculation, which is the test worth applying before starting any
+of it.
 
 And note what survives if the wave never arrives: a codebase where one capability lives in one
 place, behaviour is visible where it happens, names mean something, and a check runs in under a

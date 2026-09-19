@@ -14,10 +14,10 @@ now brief the agent twice: once in the file, and once by hand, every session.
 Treat the brief as a working set, not as a description of the project. Six moves, in order.
 
 1. **Write it from corrections, not from a tour of the codebase.** Add a line when you have typed
-   the same correction twice, when a review catches something the agent should have known, or when
-   a new colleague would have needed the same sentence
-   ([`agent-context-files.md`](../../../notes/research/agent-context-files.md)). Every line then
-   has a reason you can check later, which is the only thing that makes deleting it possible.
+   the same correction twice, when a review catches something the agent should have known, or when a
+   new colleague would have needed the same sentence
+   ([`agent-context-files.md`](../../../notes/research/agent-context-files.md)). Every line then has
+   a reason you can check later, which is the only thing that makes deleting it possible.
 2. **Keep only what is true everywhere.** A convention that applies to one directory, a procedure
    with steps, or a rule that matters twice a quarter does not belong in a file that loads in every
    session. Move it to something conditional — a path-scoped rule, a skill, or a card — so it
@@ -34,21 +34,20 @@ Treat the brief as a working set, not as a description of the project. Six moves
    colleague who switches tools does not fork the brief.
 5. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
    project instructions back to you. This is the check that separates "the agent ignored the brief"
-   from "the brief never loaded", which are different problems with different fixes, and it takes
-   about four seconds.
+   from "the brief never loaded", which are different problems with different fixes.
 6. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
    same subject is how the first one got ignored.
 
 The reason any of this works is that a brief is context, not configuration. Claude Code's own
-documentation is unusually plain about it: the file is "delivered as a user message after the
-system prompt", and if you need an action blocked regardless of what the model decides, you need a
-hook rather than a sentence. So the brief does not constrain the agent, it competes for its
-attention — with the task, the files it has opened, and every other line of the brief. A line that
-changes nothing is not neutral. It is noise, and it is paid for out of the same attention as the
-lines that matter. That is the exchange rate here. You give up the comfort of writing something
-down once and considering it handled, and you get a file whose instructions are followed because
-there are few enough of them to be followed.
+documentation was unusually plain about it in September 2026: the file is "delivered as a user
+message after the system prompt", and if you need an action blocked regardless of what the model
+decides, you need a hook rather than a sentence. So the brief does not constrain the agent, it
+competes for its attention — with the task, the files it has opened, and every other line of the
+brief. A line that changes nothing is not neutral. It is noise, and it is paid for out of the same
+attention as the lines that matter. That is the exchange rate here. You give up the comfort of
+writing something down once and considering it handled, and you get a file whose instructions are
+followed because there are few enough of them to be followed.
 
 ## Worked example
 
@@ -62,13 +61,13 @@ $ wc -l CLAUDE.md
 ```
 
 Reading it end to end — which nobody had done since about line 200 was written — the lines sorted
-into three piles. Stale: a note about a CI runner decommissioned last spring, and instructions for
-a deployment script that was replaced in January. Generic: eleven lines on Python style that
-`ruff` already enforces and the agent already knew. Scoped: forty lines about the migration
-workflow, which matter enormously when touching `atlas/migrations/` and never otherwise.
+into three piles. Stale: a note about a CI runner decommissioned last spring, and instructions for a
+deployment script that was replaced in January. Generic: eleven lines on Python style that `ruff`
+already enforces and the agent already knew. Scoped: forty lines about the migration workflow, which
+matter enormously when touching `atlas/migrations/` and never otherwise.
 
-The stale pile was deleted. The generic pile was deleted. The scoped pile moved out into a rule
-that loads only when the agent opens a matching file:
+The stale pile was deleted. The generic pile was deleted. The scoped pile moved out into a rule that
+loads only when the agent opens a matching file:
 
 ```markdown
 ---
@@ -97,8 +96,8 @@ $ wc -l AGENTS.md CLAUDE.md
 Use plan mode for anything under `atlas/billing/`.
 ```
 
-The result was not clean. Within two days the agent twice wrote raw SQL into a data migration,
-which the deleted deployment section had forbidden in a subordinate clause nobody had noticed was
+The result was not clean. Within two days the agent twice wrote raw SQL into a data migration, which
+the deleted deployment section had forbidden in a subordinate clause nobody had noticed was
 load-bearing. One line went back, into the path-scoped rule, where it costs nothing until it is
 relevant. That is the shape of a good prune: you find out what mattered by removing it, and the
 feedback arrives in a day rather than in an incident review.
@@ -107,20 +106,18 @@ feedback arrives in a day rather than in an incident review.
 
 **The Context Landfill.** Every useful fact about the project went into the brief, because each one
 was useful on the day it was added, and nothing has ever been removed. The file did not become
-wrong. It became flat: the convention that matters and the note about last spring's CI runner
-arrive with the same weight, and the agent follows the current convention roughly half the time.
-The tells are a brief that has only ever grown, two instructions that contradict each other and
-have gone unnoticed because nobody reads the file end to end, and the sense that writing a line
-down and having it obeyed are unrelated events.
+wrong. It became flat: the convention that matters and the note about last spring's CI runner arrive
+with the same weight, and the agent follows the current convention roughly half the time. The tells
+are a brief that has only ever grown, and two instructions that contradict each other and have gone
+unnoticed because nobody reads the file end to end.
 
-**The Brief That Never Arrived.** The instructions are correct, committed, and not loaded. The
-agent behaves like a competent stranger — reasonable code, house conventions absent — and the
-obvious explanation, that it ignored the brief, is wrong. Precedence rules do this silently: adding
-a `CLAUDE.local.md` for your own sandbox URLs stops Claude Code reading the team's `AGENTS.md`
-entirely, and nothing errors. The tell is that your usual check cannot distinguish the two cases. A
-natively read `AGENTS.md` does not appear in `/context` under Memory files even when it has loaded,
-so that list is empty on success and on failure alike. Ask the agent what its project instructions
-are instead.
+**The Brief That Never Arrived.** The instructions are correct, committed, and not loaded. The agent
+behaves like a competent stranger — reasonable code, house conventions absent — and the obvious
+explanation, that it ignored the brief, is wrong. Precedence rules do this silently: on Claude Code
+2.x, adding a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing errors.
+The tell is that your usual check cannot distinguish the two cases. A natively read `AGENTS.md` does
+not appear in `/context` under Memory files even when it has loaded, so that list is empty on
+success and on failure alike. Ask the agent what its instructions are instead.
 
 ## Checklist
 

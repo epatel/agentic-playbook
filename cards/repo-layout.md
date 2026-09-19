@@ -8,6 +8,7 @@ are read-only.
 
 | Path | Holds | Writable? |
 |---|---|---|
+| `README.md` | The reader's front door: what the book is, the full contents, the build commands, the repo map. Not the book's table of contents — that is `book/README.md`, and it is what the build reads. | Yes, when a chapter is added |
 | `PLAN.md` | The authoritative design document: locked decisions, book outline, play template, build sequence. | Rarely — see below |
 | `plans/agentic-playbook.md` | The shared execution plan: goal, non-goals, milestones, decision log, handoff note, open questions. | **Yes — every task updates it** |
 | `book/` | The book itself. Chapter and play files, one file per unit. | Yes |

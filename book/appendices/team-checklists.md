@@ -3,10 +3,9 @@
 Every play ends with a checklist for one person doing one thing. This is the other view: one page
 per suite, for a team deciding whether the practice exists at all.
 
-The items were selected by one rule — **keep what another person would notice the absence of**.
-Anything that stays on one developer's machine belongs in the play's own checklist rather than
-here, on the same test that
-[*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md)
+The items were selected by one rule — keep what another person would notice the absence of. Anything
+that stays on one developer's machine belongs in the play's own checklist rather than here, on the
+same test that [*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md)
 applies to the agreement itself. These pages are therefore shorter than the sum of the plays they
 come from, and deliberately so. When an item here fails, the suite it came from has the detail.
 
@@ -59,7 +58,8 @@ Assembled from the three plays in [*Orchestration*](../part-2-plays/orchestratio
 Assembled from the three plays in
 [*Verification and trust*](../part-2-plays/verification-and-trust/index.md).
 
-- [ ] Test files, CI config, linter and type-checker settings are read before the implementation
+- [ ] Test files, CI config, linter settings, and type-checker settings are read before the
+      implementation
 - [ ] No test was deleted, skipped, or weakened, and no pipeline step was removed
 - [ ] A send-back threshold on size and file count is agreed in advance, and reviewers use it
 - [ ] One critical path is traced end to end and can be explained without the description open
