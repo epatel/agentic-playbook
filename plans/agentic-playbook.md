@@ -93,7 +93,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `703e507c86aa` | Write the cards play — the Context suite's fourth; one failure mode, one worked example that is this repo | ✅ done |
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I — milestone 19's last filing; the rocket-launch material is now spent | ✅ done |
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument — carried in full; two missing links added | ✅ done |
-| `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources | ⬜ blocked on milestone 9 |
+| `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources — both incidents hold, one framing was wrong and is corrected in print | ✅ done |
 
 ## Current state / handoff
 
@@ -645,11 +645,16 @@ in full and correctly absorbed rather than cited, and the check's only edits wer
 links. What it found, and the one chapter it left near its ceiling, is under [*The Wave #2
 check*](#the-wave-2-check) below.
 
-**Next up:** one open follow-up in the table above — the MCP citation verification
-(`f986730f7a1f`). It adds no prose to a file near a ceiling, but if a later edit does, **count
-before you add**: `make check` prints words per part, and the per-section counter is in the trim
-note below. Two chapters are now within a hundred words of their ceiling — *What this book assumes
-about you* and *The failure modes worth naming*.
+**The MCP citation verification is done (`f986730f7a1f`), and with it the follow-up table above is
+clear.** Both incidents the Harness suite cites survive contact with primary sources; one of them
+was described wrongly and the sentence has been corrected in print. See [*The MCP citation
+check*](#the-mcp-citation-check) below, and read it before writing any sentence that names a
+compromised package — the correction it makes is the kind a writer repeats from memory.
+
+**Next up:** nothing open. If a later edit adds prose, **count before you add**: `make check` prints
+words per part, and the per-section counter is in the trim note below. Two chapters are within a
+hundred words of their ceiling — *What this book assumes about you* and *The failure modes worth
+naming* — and *Wire in the outside world*'s *The play* is now at exactly its 500-word ceiling.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -1141,6 +1146,58 @@ Four things it found, three of them already closed and one fixed here:
 
 `make check` is clean and the book stands at 40,996 words. Part III is 13%, Part IV 8%; neither
 share moved.
+
+## The MCP citation check
+
+Board item `f986730f7a1f` took the three dated claims in [*Wire in the outside
+world*](../book/part-2-plays/harness/wire-in-the-outside-world.md) back to primary sources. **All
+three survive. One was described wrongly, and the sentence is corrected in print.** The detail,
+with quotes and source numbers, is in [`notes/research/mcp.md`](../notes/research/mcp.md); this is
+what a later writer needs to know.
+
+1. **`postmark-mcp` was never Postmark's package, and the play no longer implies it was.** The play
+   said "whose maintainer added code silently copying every sent email to an address of his own".
+   Postmark's own advisory of 25 September 2025 says the opposite of the reading that invites: *"We
+   didn't develop, authorize, or have any involvement with the 'postmark-mcp' npm package"*, and to
+   *The Register*, *"Postmark had absolutely nothing to do with this package"*. It was an
+   impersonating npm package published by an unaffiliated account; the official server was
+   ActiveCampaign's, on GitHub. The step now reads "a package wearing a mail vendor's name without
+   being theirs". **The rug pull is still real** — Postmark's own words are *"built trust over 15
+   versions, then added a backdoor in version 1.0.16"* — but it is measured in releases, not in
+   months: the first version went up on 15 September 2025 and the backdoor on the 17th. The play no
+   longer says the package "had been benign when people adopted it", because two days is not that.
+2. **The Invariant Labs tool-poisoning demonstration holds exactly as written, and is two posts.**
+   1 April 2025 (the mechanism, plus the cross-server "shadowing" case against a trusted email
+   server) and 7 April 2025 (the WhatsApp case the *Failure mode* describes). April 2025, hidden
+   instruction in one server's description, legitimate messaging server on the other end: all
+   correct, no edit needed. The one thing the book does not yet use is that the WhatsApp demo was
+   also a rug pull — *"a malicious server can change the tool description after the client has
+   already approved it"* — which is step 5's argument applied to descriptions rather than code.
+3. **The specification's three cited requirements re-read clean**, with one naming caution worth
+   keeping: the section is headed **Scope Minimization**, not "scope inflation". The phrase appears
+   inside it, in the risk list, so the play's sentence stands; a future edit that goes looking for a
+   section called "scope inflation" will not find one. The untruncated-install-command requirement
+   is quotable verbatim and unchanged.
+
+Two things that cost time and need not cost it again:
+
+- **Koi Security's write-up, the origin of every postmark-mcp download figure in circulation, is
+  gone.** The company was acquired; `koi.security` redirects to `koi.ai`, which redirects the blog
+  path to a Palo Alto Networks product page. `web.archive.org` is blocked from this harness. **A
+  primary source can be retired by an acquisition**, which is a different failure from a source
+  being wrong and is not fixed by searching harder. The vendor advisory survives and carries the
+  load-bearing facts; the numbers do not survive and the book never used them.
+- **The NSA guidance was already fetched** by `57772ad900e3` before this item ran, and the item
+  description had not caught up. It stays cited nowhere, deliberately: every claim in the play now
+  has a primary behind it, the tool-poisoning claim's primary is a demonstration rather than an
+  advisory and is the stronger of the two for that sentence, and a play at its word ceiling does not
+  spend thirty words on a second citation for a claim that already has one.
+
+The third flagged claim — that a real observability server exposes write tools next to read ones —
+is checked too, against Grafana's own `mcp-grafana`: `alerting_manage_silences`, `update_dashboard`
+and friends ship in the same binary as the queries, and it offers `--disable-write`. The play's
+fictional `metrics-mcp --read-only` is correct as illustration and **should not be rewritten into
+Grafana's spelling**; the reason is in the brief.
 
 ## Decisions log (append-only)
 
@@ -2130,8 +2187,11 @@ Append discovered constraints and cross-task notes here as work proceeds.
   Board item `f986730f7a1f` tracks it. ~~The NSA/CISA MCP guidance is still unfetched~~ — **the NSA
   guidance has now been fetched and read (`57772ad900e3`), and `mcp.md` carries five quotable
   extracts from it.** It is still cited nowhere in the book, and the suite still leans on the MCP
-  specification's own Security Best Practices document, which is primary and normative. **Whoever
-  takes `f986730f7a1f` should decide whether to spend the NSA document while they are in there**:
+  specification's own Security Best Practices document, which is primary and normative. **All three
+  claims are now checked (`f986730f7a1f`); see [*The MCP citation
+  check*](#the-mcp-citation-check).** ~~Whoever takes `f986730f7a1f` should decide whether to spend
+  the NSA document while they are in there~~ — **decided: not spent, and the reasoning is in that
+  section.** The original note, kept because it is the reasoning that was weighed:
   its trust-boundary and OS-sandbox recommendations restate *Wire in the outside world* and *Choose
   your harness* from outside the industry, and its conclusion — that MCP's security posture is
   "highly dependent on implementation discipline rather than protocol guarantees" — is a better
@@ -2516,6 +2576,35 @@ Append discovered constraints and cross-task notes here as work proceeds.
   and one deleted duplicate sentence. As a play it would have cost 1,100 words, a worked example on
   a project not yet taken, a failure mode name, and an argument with two existing Context plays
   about which of them owns the brief.
+
+- `f986730f7a1f` verified the three dated claims in *Wire in the outside world* against primary
+  sources. **All three hold; one was described wrongly and is corrected in print.** Full account in
+  [*The MCP citation check*](#the-mcp-citation-check); `notes/research/mcp.md` carries the quotes,
+  eight new source entries, and the corrected incident list. `make lint` is clean and *The play* is
+  at exactly its 500-word ceiling after the edit.
+- **A claim can be true, dated correctly, and still wrong about who did it.** The play had the right
+  package, the right month and the right behaviour, and attributed all of it to a mail vendor that
+  had nothing to do with the package — the one thing nobody thought to check, because the package
+  was named after them. **Check the actor as carefully as the date.** The failure mode is specific
+  to supply-chain incidents, where impersonation is the attack and the name in the incident is the
+  victim's rather than the attacker's, and it is the kind of sentence a later writer will reproduce
+  from memory.
+- **"Stated at the level of shape" worked exactly as the handoff intended.** Because the play named
+  no figures, the correction was a clause rather than a paragraph, and nothing downstream moved. The
+  claims that did not survive — the long benign window, the vendor's own maintainer — were both
+  adjectival, and the ones that did were the package name, the month, and the mechanism. **Worth
+  copying for any claim a research brief flags as unverified:** write the part you are confident in
+  and leave the qualifier out until someone has opened the source.
+- **A primary source can be retired by an acquisition.** Koi Security's postmark-mcp write-up is
+  the origin of every download figure on the subject, and it now 301s to a Palo Alto Networks
+  product page; `web.archive.org` is blocked from this harness. This is a different failure from a
+  source being wrong or paywalled, it is not fixed by searching harder, and it will recur in a field
+  where the researchers keep being bought. **The defence is to quote the affected party's own
+  advisory where one exists** — Postmark's outlived the researcher's post by a year.
+- **The incident list in `mcp.md` now marks which entries the book actually cites**, because three
+  of them are still second-hand and one future reader in a hurry is all it takes. The Asana
+  incident, the two CVE clusters, and the GitHub-PR-title injection are cited nowhere and are
+  labelled as such at each entry rather than only in the gaps section.
 
 ### Failure-mode registry
 
