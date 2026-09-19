@@ -134,5 +134,6 @@ appears in `/context` under Memory files, so that list is empty on success and o
 - [ ] No two lines in the file contradict each other
 - [ ] Lines corrected around, rather than followed, were rewritten or deleted
 
-**See also:** [*Starve the context*](starve-the-context.md) ·
+**See also:** [*Split the brief into cards*](split-the-brief-into-cards.md) ·
+[*Starve the context*](starve-the-context.md) ·
 [*Package repeatable expertise*](../harness/package-repeatable-expertise.md)

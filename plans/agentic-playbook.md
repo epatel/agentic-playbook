@@ -90,7 +90,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise — one gloss in the Context suite closed all three | ✅ done |
 | `57772ad900e3` | Verify the seven primary sources that resisted automated fetch — all seven opened; three changed what the book may say, and one of those was already in print | ✅ done |
 | `f94b88e05069` | Milestone 19 — audit of the author's own posts; found them unspent, fixed the cause, filed the three chapters that owe them | ✅ done |
-| `703e507c86aa` | Write the cards play — the Context suite's fourth | ⬜ blocked on milestone 8 and `f94b88e05069` |
+| `703e507c86aa` | Write the cards play — the Context suite's fourth; one failure mode, one worked example that is this repo | ✅ done |
 | `0bdccc346bd4` | Thread preparation-vs-execution into Part I | ⬜ blocked on milestone 7 and `f94b88e05069` |
 | `5e0f39858134` | Check Part IV Wave #2 carries the feature-first argument | ⬜ blocked on milestone 15 |
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources | ⬜ blocked on milestone 9 |
@@ -98,7 +98,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 ## Current state / handoff
 
 **The manuscript is complete, has been through its editorial pass, its worked examples have been
-run, and its unreadable primary sources have now been read.** 39 files, 39,513 words, a preface, a
+run, and its unreadable primary sources have now been read.** 40 files, 40,579 words, a preface, a
 root `README.md`, and one voice. What the editorial pass changed and what it deliberately left alone
 is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
 because several conventions in this section were corrected by it. What the verification pass
@@ -328,8 +328,12 @@ constrain the suites that follow:
    JetBrains and Quesma figures dated and versioned. Economics may cite the figures, but should not
    build *Understand what you are paying for* around the same scenario; the running log below flags
    a swap.
-3. **Three plays per suite held comfortably**, and no fourth was wanted. That is one data point
-   against the open play-count question rather than an answer to it.
+3. ~~**Three plays per suite held comfortably**, and no fourth was wanted.~~ **Superseded**
+   by `703e507c86aa`, which added [*Split the brief into
+   cards*](../book/part-2-plays/context/split-the-brief-into-cards.md) as the suite's fourth. The
+   material was not missing when milestone 8 ran; it was filtered out by the cite-vendor-docs rule,
+   which milestone 19 found had been read as excluding the author's own posts. See
+   [*The cards play*](#the-cards-play) below.
 
 Milestone 9 added `harness/`, the second suite, at roughly 296 / 1,150 / 1,081 / 1,129 words. It
 spends the permission-matching material milestone 4 flagged as Harness-owned, and it names the
@@ -618,18 +622,23 @@ are now inside every budget in `STYLE.md` and `TEMPLATE-play.md`. What was cut, 
 future edit to *Before Git, before Scrum, before this* should know, is under
 [*The budget trim*](#the-budget-trim) below.
 
+**The Context suite has a fourth play (`703e507c86aa`)** — *Split the brief into cards*, which
+writes up the two-tier pattern this repo runs on itself. What it commits future edits to, including
+the fact that `cards/` is now asserted by a script the book depends on, is under [*The cards
+play*](#the-cards-play) below. **Read that one before editing anything in `cards/`.**
+
 **Part I's terminology promise is kept (`9dd4d6b84b80`)** — *skill*, *card* and *harness* are now
 each defined the first time the reader meets them, in book order. What changed and what it commits
 the unwritten cards play to is under [*The terminology pass*](#the-terminology-pass) below. **If you
 are about to introduce a term the reader may not have, read that section first** — it settles where
 the italics go when a term is used in one suite and owned by another.
 
-**Next up:** the two open follow-ups in the table above — the cards play (`703e507c86aa`) and the
-preparation-versus-execution thread into Part I (`0bdccc346bd4`). Both touch files this trim has
-just brought inside budget, so **count before you add**: `make check` prints words per part, and
-the per-section counter is in the trim note below. *Write the brief the agent actually reads* has
-one word of headroom in *The play* after the terminology pass, so the cards play must take material
-out of it if it puts any in.
+**Next up:** three open follow-ups in the table above — the preparation-versus-execution thread
+into Part I (`0bdccc346bd4`), the Wave #2 check (`5e0f39858134`), and the MCP citation verification
+(`f986730f7a1f`). The first touches files the budget trim brought inside budget, so **count before
+you add**: `make check` prints words per part, and the per-section counter is in the trim note
+below. `0bdccc346bd4` also still owns the whole of the *rocket-launch* material — preparation mode
+and execution mode as distinct — because the cards play deliberately did not spend it.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -989,17 +998,58 @@ Four things follow for anyone writing or editing prose here:
    contract. The resolution: a use-site gets a plain-text gloss, the owning play coins the term in
    italics. *Skill* is now the worked precedent — glossed plainly in `context/`, italicised in
    `harness/package-repeatable-expertise.md`.
-3. **The cards play owes the italicised coinage of *card*.** `703e507c86aa` is the owning play; it
-   should introduce *card* in italics and must not treat the Context gloss as the coinage, or the
-   book has two first uses. It also has to agree with the skeleton already printed in
-   *Copy-paste templates* — milestone 15's note says the appendix is the file to change if the play
-   reaches a different shape.
+3. ~~**The cards play owes the italicised coinage of *card*.**~~ **Paid** by `703e507c86aa`:
+   *card* is coined in italics in step 1 of [*Split the brief into
+   cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), the Context gloss stays
+   plain, and the play reached the same shape as the skeleton in *Copy-paste templates*, so the
+   appendix did not have to change. `9dd4d6b84b80` is now closed on both halves.
 4. **Twenty-one words in cost twenty-two words out.** *The play* in *Write the brief the agent
    actually reads* was at 498 against a 500 ceiling. The gloss was paid for by trimming four places
    that said something twice — "the reason any of this works is that", a restated contrast after
    "separates X from Y", "no required sections" duplicating what the section demonstrates, and one
    doubled verb — leaving it at 499. Nothing of substance was cut, and the enforcement point about
    hooks survives as its own sentence.
+
+## The cards play
+
+Board item `703e507c86aa` added the Context suite's fourth play,
+[*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), at 1,166
+words. It is one of the two chapters milestone 19 filed as owing the author's own material, and it
+closes the last of `9dd4d6b84b80`'s three terms. **Part II is now nineteen plays**, and the four
+places in the book that counted them have been updated rather than left to the next reader.
+
+Five things in it constrain later work:
+
+1. **One failure mode is registered: the Reassembled Brief.** Cards that link to cards until a run
+   loads the brief they were split out of. It is deliberately *not* the Context Landfill — nothing
+   is stale and nothing is flat — and the play says so in print. A second candidate was declined: a
+   card nothing ever matches is the Unsummoned Skill with a different file extension, so the play
+   uses that name plainly rather than coining a second one, on the precedent the Team suite set for
+   the Brief That Never Arrived. Part III's index has the new row and its count moved from nineteen
+   to twenty.
+2. **The worked example is this repository, which breaks one-project-per-suite on purpose.**
+   `atlas` still carries the suite's other three plays. The exception is this plan's own answer to
+   the appendix-templates question — the root `CLAUDE.md` and `cards/` are a checked-in,
+   daily-exercised instance of the pattern — and it is the only worked example in the book whose
+   subject a reader can open. Do not generalise it. A second self-referential example turns the book
+   into a memoir.
+3. **A change to `cards/` is now a change to the book.**
+   [`book/examples/cards/reproduce.py`](../book/examples/cards/reproduce.py) copies the real
+   `CLAUDE.md` and `cards/` into a temporary directory and asserts both captured blocks verbatim —
+   the per-file line counts and the audit of links between cards. Editing a card, adding one, or
+   adding a link between two will fail it. Re-run it and paste the new output into the play; that
+   is the cost of a worked example that is not fictional, and it was accepted knowingly. The warning
+   lives where the edit happens — [`cards/repo-layout.md`](../cards/repo-layout.md) ends with it,
+   and writing that section was itself the first thing to trip the script.
+4. **The Context opener was rewritten to make room, and is at 300 words — the ceiling**, where the
+   other five openers sit at 296–300. Nothing of substance went: five sentences were tightened and
+   one closing clause dropped. The no-shared-four-grams property between `context/index.md` and its
+   plays was re-checked after the edit, links stripped, and still holds.
+5. **The appendix's card skeleton did not have to change**, so milestone 15's conditional never
+   fired. The play does refine the rule the appendix states: a card never *requires* another card,
+   and a link a reader may follow is not a chain. The worked example turns on exactly that
+   distinction — the audit finds four links between this repo's cards and all four are signposts,
+   which is a judgement the command cannot make.
 
 ## Decisions log (append-only)
 
@@ -1603,6 +1653,21 @@ Four things follow for anyone writing or editing prose here:
   coinages, and it costs the use-site about twenty words. Do not resolve a future collision by
   narrowing the promise in Part I — that was the alternative on the table and it was declined.
 
+- **The Context suite takes a fourth play** (`703e507c86aa`), on the user decision recorded under
+  milestone 19 that three was a floor rather than a ceiling. `book/README.md` still asks a suite
+  author to raise a fourth rather than add one quietly; that procedure produced this play and is not
+  satisfied by it.
+- **A worked example may be this repository, once.** *Split the brief into cards* uses the root
+  `CLAUDE.md` and `cards/` instead of `atlas`, against the one-project-per-suite rule in
+  `book/TEMPLATE-play.md`. The trade was deliberate: the alternative was inventing a card set for a
+  fictional billing service to illustrate a pattern that is checked in, running, and exercised by
+  every agent on this board. It is the exception, not a precedent — a second one makes the book
+  self-referential.
+- **The self-containment rule is stated as *requires*, not as *links*.** A card never requires
+  another card; "cards never link to cards" is the cheap way to guarantee that rather than the rule
+  itself. This is what the appendix already said and what the play now argues, and it is why the
+  audit in the worked example ends in a judgement rather than a count.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
@@ -1624,6 +1689,9 @@ to it.
   suite is not** — one more play moves Part II by about a percentage point, while a seventh suite
   would take four files and push Part II past 60% on its own. The procedure stands as written: raise
   a fourth play rather than adding it quietly, and treat a new *suite* as a change to `PLAN.md`.
+  **Closed** by `703e507c86aa`: the nineteenth play was written, Part II stands at 58% on the
+  build's own counter, and the arithmetic above held. Context has four plays, the other five suites
+  three.
 - ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3), then **closed**
   (milestone 17). The first draft was illustrative-but-correct; the verification pass ran every
   command, replaced representative output with captured output, and committed the projects the
@@ -1647,7 +1715,10 @@ to it.
   authoring a second. Both halves of this question are now closed, and milestone 15 shipped both
   in [`appendices/copy-paste-templates.md`](../book/appendices/copy-paste-templates.md) on exactly
   that basis, plus a third template — a review checklist for agent-authored changes, extracted the
-  same way from the two Verification plays.
+  same way from the two Verification plays. The play the appendix was waiting on now exists
+  (`703e507c86aa`) and reached the same shape, so the skeleton stands unedited and the appendix's
+  pointer at this repository's own setup is now one of two — the play uses it as its worked example
+  as well.
 - **Rendering.** Markdown-on-GitHub is the committed deliverable. If a static site is ever wanted,
   that decision needs making before the prose accumulates site-specific link syntax.
 
@@ -2300,6 +2371,18 @@ Append discovered constraints and cross-task notes here as work proceeds.
   Part I's sentence as the fallback. Twenty-one words of gloss was less work than editing the
   promise, and considerably less than explaining to a reader why the book hedged its own contract.
 
+- Milestone 19's second chapter landed: `703e507c86aa` wrote
+  [*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), the
+  Context suite's fourth play, and with it the first worked example in the book whose subject is
+  this repository. `book/examples/cards/reproduce.py` asserts both of its captured blocks against
+  the real `cards/` directory, which makes an edit there an edit to the book — see
+  [*The cards play*](#the-cards-play). Four places that counted the plays as eighteen now say
+  nineteen: `book/TEMPLATE-play.md`, `book/README.md`, `the-three-waves.md`, and the Context entry
+  in `appendices/team-checklists.md`.
+- The *rocket-launch* material from the Cards post — preparation mode and execution mode as
+  distinct, the project ready before the agent starts — was **deliberately left unspent** by the
+  cards play. It belongs to `0bdccc346bd4` and Part I, as milestone 19 filed it.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -2310,6 +2393,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `context/write-the-brief-the-agent-actually-reads.md` (coined in `book/STYLE.md` sample 4) |
 | **the Merged Hand** | Agent run started on a dirty tree; the diff interleaves two authors and can be neither kept nor discarded. | `book/TEMPLATE-play.md` specimen play |
 | **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-actually-reads.md` |
+| **the Reassembled Brief** | A short index and short cards, and every run still loads most of the material, because each card links to the next one a reader would want. Not the Context Landfill — nothing is stale and nothing is flat. The tell is an agent opening three files before it edits one. | `context/split-the-brief-into-cards.md` |
 | **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
 | **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |
 | **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |

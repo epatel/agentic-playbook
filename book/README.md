@@ -79,8 +79,9 @@ happen.
 
 Each of the six suites opens with `index.md`, and it has one job beyond introducing the files under
 it: **name the single idea the suite is an application of, then show each play as that idea at a
-different layer.** The Context suite's opener names *signal over noise* and presents its three plays
-as that one move applied to the always-loaded layer, to a single run, and to the task itself.
+different layer.** The Context suite's opener names *signal over noise* and presents its four plays
+as that one move applied to what the always-loaded layer says, to how it is arranged, to a single
+run, and to the task itself.
 
 The opener is where a unifying principle belongs. It is not a fourth play: as a noun phrase it fails
 the imperative-title rule in [`TEMPLATE-play.md`](TEMPLATE-play.md#title), and rewritten as an
@@ -126,59 +127,63 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | **Part II** | | **The Plays** | |
 | 4 | `part-2-plays/context/index.md` | Context | ✅ |
 | 5 | `part-2-plays/context/write-the-brief-the-agent-actually-reads.md` | Write the brief the agent actually reads | ✅ |
-| 6 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
-| 7 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
-| 8 | `part-2-plays/harness/index.md` | Harness | ✅ |
-| 9 | `part-2-plays/harness/choose-your-harness.md` | Choose your harness | ✅ |
-| 10 | `part-2-plays/harness/package-repeatable-expertise.md` | Package repeatable expertise | ✅ |
-| 11 | `part-2-plays/harness/wire-in-the-outside-world.md` | Wire in the outside world | ✅ |
-| 12 | `part-2-plays/orchestration/index.md` | Orchestration | ✅ |
-| 13 | `part-2-plays/orchestration/decompose-into-subagents.md` | Decompose into subagents | ✅ |
-| 14 | `part-2-plays/orchestration/make-the-control-flow-deterministic.md` | Make the control flow deterministic | ✅ |
-| 15 | `part-2-plays/orchestration/work-in-parallel-without-collisions.md` | Work in parallel without collisions | ✅ |
-| 16 | `part-2-plays/verification-and-trust/index.md` | Verification and trust | ✅ |
-| 17 | `part-2-plays/verification-and-trust/review-code-you-did-not-write.md` | Review code you did not write | ✅ |
-| 18 | `part-2-plays/verification-and-trust/make-the-agent-prove-it.md` | Make the agent prove it | ✅ |
-| 19 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ✅ |
-| 20 | `part-2-plays/economics/index.md` | Economics | ✅ |
-| 21 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ✅ |
-| 22 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ✅ |
-| 23 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
-| 24 | `part-2-plays/team/index.md` | Team | ✅ |
-| 25 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
-| 26 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
-| 27 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
+| 6 | `part-2-plays/context/split-the-brief-into-cards.md` | Split the brief into cards | ✅ |
+| 7 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
+| 8 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
+| 9 | `part-2-plays/harness/index.md` | Harness | ✅ |
+| 10 | `part-2-plays/harness/choose-your-harness.md` | Choose your harness | ✅ |
+| 11 | `part-2-plays/harness/package-repeatable-expertise.md` | Package repeatable expertise | ✅ |
+| 12 | `part-2-plays/harness/wire-in-the-outside-world.md` | Wire in the outside world | ✅ |
+| 13 | `part-2-plays/orchestration/index.md` | Orchestration | ✅ |
+| 14 | `part-2-plays/orchestration/decompose-into-subagents.md` | Decompose into subagents | ✅ |
+| 15 | `part-2-plays/orchestration/make-the-control-flow-deterministic.md` | Make the control flow deterministic | ✅ |
+| 16 | `part-2-plays/orchestration/work-in-parallel-without-collisions.md` | Work in parallel without collisions | ✅ |
+| 17 | `part-2-plays/verification-and-trust/index.md` | Verification and trust | ✅ |
+| 18 | `part-2-plays/verification-and-trust/review-code-you-did-not-write.md` | Review code you did not write | ✅ |
+| 19 | `part-2-plays/verification-and-trust/make-the-agent-prove-it.md` | Make the agent prove it | ✅ |
+| 20 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ✅ |
+| 21 | `part-2-plays/economics/index.md` | Economics | ✅ |
+| 22 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ✅ |
+| 23 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ✅ |
+| 24 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
+| 25 | `part-2-plays/team/index.md` | Team | ✅ |
+| 26 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
+| 27 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
+| 28 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
-| 28 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
-| 29 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
-| 30 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
-| 31 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
+| 29 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
+| 30 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
+| 31 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
+| 32 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 32 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
-| 33 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
-| 34 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
+| 33 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
+| 34 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
+| 35 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
 | **Appendices** | | | |
-| 35 | `appendices/glossary.md` | Glossary | ✅ |
-| 36 | `appendices/team-checklists.md` | Team checklists | ✅ |
-| 37 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
-| 38 | `appendices/further-reading.md` | Further reading | ✅ |
+| 36 | `appendices/glossary.md` | Glossary | ✅ |
+| 37 | `appendices/team-checklists.md` | Team checklists | ✅ |
+| 38 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
+| 39 | `appendices/further-reading.md` | Further reading | ✅ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it
 finds out.
 
-Play counts per suite are an open question in
-[`plans/agentic-playbook.md`](../plans/agentic-playbook.md#open-questions). Three is what is
-planned, not a ceiling that has been argued for. Adding a fourth to one suite is a decision worth
-raising rather than making quietly, because Part II's balance is visible to the reader.
+Play counts per suite are settled in
+[`plans/agentic-playbook.md`](../plans/agentic-playbook.md#open-questions): three is a floor rather
+than a ceiling, and the Context suite runs to four. The procedure did not change with the answer.
+Adding a play to a suite is still a decision worth raising rather than making quietly, because Part
+II's balance is visible to the reader; adding a seventh *suite* is a change to `PLAN.md`.
 
 ## Worked-example scratch projects
 
 [`examples/`](examples/) holds the projects the book's captured output actually came out of, one
-directory per fictional project, each with a `reproduce.py` that builds a throwaway copy, runs the
-exact commands the book prints, and echoes what comes back. `atlas` backs the Context suite,
+directory per project, each with a `reproduce.py` that builds a throwaway copy, runs the exact
+commands the book prints, and echoes what comes back. `atlas` and `cards` back the Context suite,
 `meridian` the Orchestration suite, `tideline` the Verification and Trust suite, and `session-cost`
-re-derives the Economics suite's cost table from its inputs.
+re-derives the Economics suite's cost table from its inputs. `cards` is the one that is not
+fictional: that play's example is this repository's own setup, so the script copies the real
+`CLAUDE.md` and `cards/` out of the checkout.
 [`examples/README.md`](examples/README.md) is the index, and it also lists the examples that are
 deliberately *not* reproduced and why.
 

@@ -11,6 +11,7 @@ shape the book asserts is no longer true. Python 3 standard library only.
 
 ```
 python3 book/examples/atlas/reproduce.py
+python3 book/examples/cards/reproduce.py
 python3 book/examples/meridian/reproduce.py
 python3 book/examples/tideline/reproduce.py
 python3 book/examples/session-cost/check.py
@@ -21,9 +22,16 @@ python3 book/examples/session-cost/check.py
 | Project | Backs | Needs |
 |---|---|---|
 | [`atlas/`](atlas/) | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) | `wc` |
+| [`cards/`](cards/) | [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md) | `wc`, `grep` |
 | [`meridian/`](meridian/) | [*Decompose into subagents*](../part-2-plays/orchestration/decompose-into-subagents.md), [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md) | `git`, `rg`, `awk` |
 | [`tideline/`](tideline/) | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md), [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md), [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) | `git`, `rg` |
 | [`session-cost/`](session-cost/) | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) | nothing |
+
+`cards/reproduce.py` ships no tree of its own. That play's worked example is this repository's own
+two-tier setup, so the script copies the real `CLAUDE.md` and `cards/` into a temporary directory
+and runs the commands there. Both blocks in the play are printed verbatim and both are asserted
+verbatim, which means editing a card fails the script — the fix is to re-run it and paste the new
+output in.
 
 `session-cost/check.py` is the odd one out: it runs no commands. It re-derives every figure in that
 play's cost table from the token counts and the dated prices, so the play's claim that the
