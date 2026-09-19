@@ -167,10 +167,19 @@ The one-paragraph version, for a writer who needs the shape before the detail.
 - **Two low-code statistics did not survive verification and must not be used:** the "43% of citizen
   developer initiatives scaled back, paused or discontinued" figure attributed to Gartner, and a
   "25–30% rewrite rate for no-code projects." Both trace only to secondary or vendor content.
-- **Three primary sources could not be read:** Octomind's post (site refused connections, and
-  archive.org unavailable) [15]; a Boris Cherny "10–20% scaffolding" quote with no traceable
-  transcript; and per-level GAIA figures not verified against the paper body. All three are flagged
-  in their briefs. **Do not quote any of them.**
+- **Two primary sources still cannot be read:** a Boris Cherny "10–20% scaffolding" quote with no
+  traceable transcript, and per-level GAIA figures not verified against the paper body. Both are
+  flagged in their briefs. **Do not quote either.**
+- ~~Octomind's post (site refused connections).~~ **Recovered 19 September 2026 by the
+  source-verification pass (`57772ad900e3`) from the Internet Archive; the quotations are now
+  verbatim and are in [`langchain-langgraph.md`](langchain-langgraph.md).** [15a] Note the reason
+  it could never be fetched live: **octomind.dev has no DNS `A` record any more.** The site is
+  gone, not blocking. The Orchestration suite cited it nowhere and deliberately made the
+  build-versus-adopt argument structurally instead; **that decision does not need revisiting** —
+  the post is still June 2024, still pre-1.0, and the suite is written. The recovered text is here
+  for whoever wants it, most plausibly a later edit to *Make the control flow deterministic*, and
+  the strongest newly-available line is the one about observability: LangChain "does not provide a
+  method for externally observing an agent's state".
 - **A trap worth recording once:** the `machinedge/building-effective-agents` GitHub file is a
   rewritten derivative of Anthropic's post, not Anthropic's text, and its plausible-sounding figures
   are not Anthropic's. Exactly the failure `cards/research-briefs.md` exists to prevent.
@@ -269,8 +278,11 @@ same.
 [13b'] We Didn't Migrate from n8n to Python Because n8n Failed, 11 May 2026 —
        https://dev.to/josephyeo/we-didnt-migrate-from-n8n-to-python-because-n8n-failed-k9j —
        accessed 19 September 2026
+[15a] **The one to cite** — Internet Archive capture of [15], read 19 September 2026 by
+     `57772ad900e3`; extracts in [`langchain-langgraph.md`](langchain-langgraph.md) [15a]
 [15] Why we no longer use LangChain for building our AI agents, Octomind, June 2024 —
      https://octomind.dev/blog/why-we-no-longer-use-langchain-for-building-our-ai-agents —
+     **dead: no DNS `A` record as of 19 September 2026 —**
      **fetch failed 19 September 2026; unverified against primary**
 [15a] Effective context engineering for AI agents, Anthropic, 29 September 2025 —
       https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents — accessed

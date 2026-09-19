@@ -667,9 +667,19 @@ attached is decoration.
 - **Per-plan AI Credit allowances for Copilot beyond the four in the announcement blog.** The docs
   page "only notes that 'Individual plans … include GitHub AI Credits allowances that vary by
   plan'" without enumerating them [12]; use the blog's four figures [11] and nothing else.
-- **Codex credit allowances per plan.** The rate card (credits per million tokens) is published
-  [17]; how many credits each plan includes is not, on any page I could reach. The help-centre rate
-  card article returned HTTP 403.
+- **Codex credit allowances per plan. STILL UNPUBLISHED — and now confirmed as a choice rather than
+  a retrieval failure.** **Re-checked 19 September 2026 by the source-verification pass
+  (`57772ad900e3`).** The help-centre article still returns HTTP 403, but it is no longer the only
+  route: OpenAI's own documentation site serves the whole pricing page, and serves it as clean
+  markdown if you append `.md` to the URL. [17a] Everything this brief says about Codex reproduces
+  from it exactly — the plan prices, the five-hour local-message ranges for every model, and the
+  credits per million tokens. **What is not there, on any page, is a number of included credits per
+  plan.** The docs say only "After you reach your included limits, available credits let you
+  continue working", and "Credit purchase prices and applicable discounts depend on your plan or
+  agreement." [17a] The allowance is deliberately expressed as an unquantified threshold. **Do not
+  print a Codex per-plan credit allowance. The honest sentence is that OpenAI does not publish
+  one** — which is the sentence this brief already makes about Anthropic and Cursor, and is now
+  three-for-three rather than two-for-three-and-a-403.
 - **Anthropic's "up to 90% cost reduction / up to 85% latency reduction" for prompt caching.** Found
   only in secondary blogs today, not on Anthropic's own pricing or caching pages. [1][2] If the
   book wants a caching saving figure, derive it as in the worked example below.
@@ -831,6 +841,14 @@ here were introduced within the six months before this brief was written.
 [16] Pricing — Cursor — https://cursor.com/pricing — accessed 19 September 2026
 [17] Pricing — ChatGPT Learn (Codex) — https://learn.chatgpt.com/docs/pricing (redirected from
      https://developers.openai.com/codex/pricing) — accessed 19 September 2026
+[17a] **PRIMARY, and the retrieval route that works** — the same page as `.md` —
+     https://developers.openai.com/codex/pricing.md — **fetched 19 September 2026 by `57772ad900e3`**
+     (45,854 bytes of markdown, HTTP 200 to plain `curl`). OpenAI states on the page that "Markdown
+     versions of documentation pages are available by appending `.md` to the page URL", which is the
+     general trick: **`openai.com` and `help.openai.com` 403 scripted fetches;
+     `developers.openai.com` does not, and `.md` gives the content without the navigation chrome.** Re-verified from it:
+     the GPT-6 Astra rate (250 credits / 1M input, 1,250 / 1M output), the GPT-5.6 Luna rate (5 and
+     30), and every cell of the local-message allowance table this brief prints
 [18] The Coding Agent Economy — Requesty, May 2026 — https://www.requesty.ai/coding-agent-economy —
      accessed 19 September 2026 — **vendor-reported** (gateway telemetry)
 [19] The Hidden Cost Driver in Agentic Coding Sessions in 2026 — Vantage, 15 April 2026 —

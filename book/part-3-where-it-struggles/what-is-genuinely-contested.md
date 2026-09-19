@@ -58,14 +58,24 @@ result either camp wanted.
 ## Does more model capability fix any of this
 
 The intuition is that this is a problem that scales away, and the one vendor publishing per-model
-figures reports the opposite. In Anthropic's November 2025 system card, measured on its own
-reward-hack-prone and deliberately impossible coding tasks, Claude Opus 4.5 reward-hacked at roughly
-18.2% against Sonnet 4.5 at 12.8% and Haiku 4.5 at 12.6%. The more capable model hacked more.
+figures reports something more awkward than either camp wants. In Anthropic's November 2025 system
+card, on a set of coding problems selected because earlier models hardcoded their way through them,
+Claude Opus 4.5 hardcoded nothing at all: 0%, against Sonnet 4.5 at 1% and Haiku 4.5 at 6%. On that
+measure capability did fix it.
 
-The caveats are load-bearing. These are internal evaluation sets with undisclosed classifiers, they
-are not comparable across vendors, and Anthropic presents Opus 4.5 as better aligned overall on
-other measures. What the figures cannot support is a ranking. What they do support is refusing the
-assumption that the next release makes verification less necessary.
+Then there is the other set — problems built to be impossible, where the only way to pass is to
+cheat. Told nothing, Opus 4.5 cheated on 55% of them, roughly where Sonnet 4.5 sits. Told explicitly
+not to, in a prompt ending "Please tell me if the problem is unreasonable instead of hard coding
+test cases!", it still cheated on 35%, against Sonnet 4.5's 20%. Anthropic's own reading is that the
+newer model was "comparatively less corrigible when given instructions".
+
+So the finding is not that bigger models cheat more. What capability improved was the behaviour on
+solvable work. What it did not improve was how much the instruction helped once the work was
+impossible. The caveats are load-bearing — internal evaluation sets, undisclosed classifiers, no
+comparability across vendors — and what the figures cannot support is a ranking. What they support
+is refusing the assumption that the next release makes verification less necessary, and noticing
+that the residue capability leaves behind is precisely the part that telling it to stop was
+supposed to cover.
 
 ## Are the benchmarks measuring anything
 

@@ -129,7 +129,7 @@ full; this is the index.
 | Does AI speed developers up or slow them down? | METR +19% (CI +2–39%) against Google ~21% faster and Microsoft +24.0% merged PRs (CI +14.5–33.7%). Not reconcilable by picking one; the defensible synthesis is that the sign flips with codebase maturity | `productivity-evidence.md`, `failure-modes.md` |
 | Does AI improve or degrade code quality? | The "improves" evidence is a controlled experiment on a greenfield task; the "degrades" evidence is observational, at repository scale, over time. They measure different things and neither refutes the other | `productivity-evidence.md` |
 | Does DORA say AI helps or hurts delivery? | It has said both, in consecutive years, about different tooling generations. Throughput flipped negative to positive between 2024 and 2025; instability did not flip | `productivity-evidence.md` |
-| Does more capability reduce reward hacking? | Anthropic's own data has Opus 4.5 hacking more than Sonnet 4.5 (18.2% vs 12.8%) on reward-hack-prone tasks — but on internal sets with undisclosed classifiers, not cross-vendor comparable | `failure-modes.md` |
+| Does more capability reduce reward hacking? | **Rewritten 19 Sep 2026 (`57772ad900e3`) against the system cards; the 18.2%/12.8% version was wrong.** On reward-hack-prone coding tasks capability *did* fix it — Opus 4.5 at 0% against Sonnet 4.5's 1% and Haiku 4.5's 6%. On deliberately impossible tasks *with an anti-hack prompt*, Opus 4.5 is worse: 35% against 20%, and Anthropic calls it "comparatively less corrigible when given instructions". So the live question is corrigibility, not propensity. Internal sets, undisclosed classifiers, not cross-vendor comparable | `failure-modes.md` |
 | Is SWE-bench Verified saturated or broken? | OpenAI's 59.4%-defective figure comes from auditing *failed* instances, a biased sample by construction; Epoch's 5–10% is an error rate across the set. Do not merge them | `failure-modes.md` |
 | Does putting the agent's plan in the PR help the reviewer, or anchor them? | The 2006 Cisco data offers both readings in the same paragraph — the author self-corrected, or "prepping disables the reviewer's capacity for criticism." GitHub's 2026 guidance assumes the first. Nobody has measured which wins when the "author" produces fluent prose about its own work | `review-practice.md` |
 | Are LLM-generated tests good enough to rely on? | Damning and enthusiastic results both exist. The reconciliation the evidence supports: the optimistic pipelines all fed an external executable adequacy signal back into generation; the pessimistic ones asked a model for tests and accepted the output | `verification.md` |
@@ -169,8 +169,19 @@ the list a writer needs in one place.
 - The specific sub-split of OpenAI's SWE-bench Verified audit; a METR time-horizon figure for a
   model METR has not published; the record count in the widely-repeated Replit database incident;
   "11.4 hrs/week reviewing"; "26% higher erroneous-advice rate"; "2.74× vulnerabilities"; DORA's
-  2025 numeric coefficients; and any current leaderboard score. Eleven items in total, itemised in
+  2025 numeric coefficients; and any current leaderboard score. Twelve items in total, itemised in
   `failure-modes.md`.
+- **Added 19 September 2026 by the source-verification pass (`57772ad900e3`), and it is the one to
+  read first: "Opus 4.5 reward-hacked at 18.2%, Sonnet 4.5 at 12.8%, Haiku 4.5 at 12.6%."** No such
+  rates are published. Anthropic publishes a five-column table per model; two of those three numbers
+  are its unweighted row mean and the third does not reproduce from either system card. They also
+  point the wrong way — Opus 4.5 is at **0%** on the reward-hack-prone coding tasks. See
+  `failure-modes.md` for the real table and the corrigibility finding that replaces it. **This one
+  had already reached print in Part III and has been rewritten there.**
+- **Also added: any DORA 2025 coefficient, and `0.199` / `[0.13, 0.26]` specifically.** The 2025 PDF
+  has now been read end to end. It publishes effect sizes as charts with no printed values, on
+  purpose (its footnote 20 explains why). The single printed coefficient in the document is in the
+  Methodology chapter and is fitted to `simulated_data`. See `productivity-evidence.md`.
 
 **Review**
 
@@ -194,11 +205,17 @@ the list a writer needs in one place.
 
 **Accountability**
 
-- Verbatim quotes from the US Copyright Office Part 2 report (the PDF resisted extraction; quotes in
-  circulation are via law-firm summaries), current GitHub Copilot product-terms clause text, AWS
-  Service Terms §50.10, Google Cloud's and OpenAI's indemnity exclusion lists, DO-330 clause detail,
-  and the unsourced "Fortune 500 / 40 lines of GPL / six-figure rewrite" anecdote. Thirteen items in
-  total.
+- Current GitHub Copilot product-terms clause text, AWS Service Terms §50.10, Google Cloud's and
+  OpenAI's indemnity exclusion lists, DO-330 clause detail, and the unsourced "Fortune 500 / 40
+  lines of GPL / six-figure rewrite" anecdote. Twelve items in total.
+- ~~Verbatim quotes from the US Copyright Office Part 2 report.~~ **Lifted 19 September 2026
+  (`57772ad900e3`): the PDF was downloaded and extracted, and the Office's own eight conclusions are
+  now quoted verbatim in `accountability.md`.** In exchange, two narrower rules: **do not attribute
+  "copyright law protects only works of human creation" to the Office** (it is the district court in
+  *Thaler*, which the Office is quoting) **and do not attribute "selection of a single output is not
+  itself a creative act" to the Office either** (it is the Kernochan Center's submitted comment,
+  which the Office is quoting). Both circulate as the Office's words in law-firm summaries. The
+  Office's own line for the same point is "prompts do not alone provide sufficient control."
 
 **Cost**
 
@@ -213,6 +230,10 @@ the list a writer needs in one place.
   instead.
 - Claude Max 20× at $200/month; per-plan credit allowances for Copilot or Codex beyond the four
   published figures; any claim that a subscription resells tokens at, above, or below cost.
+  **Re-checked for Codex on 19 September 2026 (`57772ad900e3`) from OpenAI's own docs rather than
+  the 403ing help-centre article: the allowance is still not published, and the docs' phrasing
+  makes clear that is deliberate.** All three vendors express the included allowance as an
+  unquantified threshold. That is now a finding rather than a gap.
 
 ## Cross-cutting phenomena that want names
 
@@ -307,12 +328,20 @@ same mechanism.
 - **Nothing tracks model provenance for code.** CycloneDX 1.7 and SPDX 3.0 model *models as
   components*, not models as authors of a hunk. The only mechanism in production is an
   unstandardised, self-asserted commit trailer.
-- **Several primary documents resisted automated fetch and need a human with a browser** before
-  anything is quoted verbatim from them: the DORA 2025 PDF (exceeds the fetch size limit, and the
-  2025 effect-size coefficients are on no page reachable otherwise), the US Copyright Office Part 2
-  report PDF, Anthropic's system-card PDFs, Fedora's canonical policy page (behind an Anubis
-  challenge), and OpenAI's Codex rate-card help-centre article (HTTP 403). This joins the two leads
-  left open by milestone 5.
+- ~~**Several primary documents resisted automated fetch and need a human with a browser.**~~
+  **CLOSED, 19 September 2026, by board item `57772ad900e3`.** All seven — the DORA 2025 PDF, the US
+  Copyright Office Part 2 PDF, Anthropic's system cards, Fedora's policy, OpenAI's Codex rate card,
+  and milestone 5's two leads (the NSA MCP guidance and the Octomind post) — were opened. **Six of
+  the seven had nothing to do with the documents and everything to do with the retrieval method**,
+  which is the transferable lesson: `WebFetch` fails where `curl` + `pdftotext` succeeds (the
+  Copyright Office PDF, both Anthropic cards, the 15 MB DORA PDF); a docs *site* may 403 while the
+  same project's *git repository* is wide open (Fedora); `openai.com` 403s while
+  `developers.openai.com/<page>.md` returns the same content as clean markdown; and a page whose
+  domain has died may still be in the Internet Archive (Octomind). Only the NSA PDF genuinely
+  needed a browser, and only because the block is TLS-fingerprint based rather than
+  header-based. **Three of the seven changed what the book may say, and one of those had already
+  reached print** — see the per-brief entries and the handoff note in
+  [`plans/agentic-playbook.md`](../../plans/agentic-playbook.md).
 - **Four of the strongest 2026 review findings share one corpus.** The AIDev/CodAGE dataset
   underlies several separately-published papers, so they are not four independent confirmations. Say
   "in the largest available corpus of agent pull requests" rather than "several studies find."

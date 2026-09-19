@@ -92,9 +92,59 @@ primary check before it appears in the book. [6][7]
 - **Prompt injection via GitHub PR titles, April 2026**, reported to have hijacked Claude Code,
   Gemini CLI, and GitHub Copilot.
 
-**NSA/CISA published MCP security guidance dated June 2026** (`CSI_MCP_SECURITY.PDF`). Both mirrors
-returned HTTP 403 to automated fetch; the document is named here as a lead, not cited as evidence.
-[8]
+**The NSA published MCP security guidance, and it has now been read.** **Verified 19 September 2026
+by the source-verification pass (`57772ad900e3`).** [8a] Three corrections to how this brief named
+it, before the content:
+
+- It is **NSA alone, not NSA/CISA.** There is no CISA co-seal and no co-author; the Purpose section
+  attributes it solely to "NSA's cybersecurity mission". Do not write "NSA/CISA".
+- It is dated **May 2026**, not June. Every page footer reads
+  `U/OO/6030316-26 | PP-26-1834 | May 2026 Ver. 1.0`. June is the upload date in the
+  media.defense.gov URL path, which is what this brief had been reading.
+- Its title is *Model Context Protocol (MCP): Security Design Considerations for AI-Driven
+  Automation*.
+
+**Both mirrors still return HTTP 403 to scripted fetch**, including `curl` with full browser
+headers — it appears to be TLS-fingerprint based rather than user-agent based. It loads normally in
+a real browser, which is how it was retrieved. Anyone re-checking it should not spend time on
+`WebFetch`.
+
+It is a genuinely good primary citation for the Harness suite, because it argues the suite's own
+case from outside the industry. The load-bearing lines:
+
+- On why the protocol is the problem rather than any one server: "MCP's rapid proliferation has
+  outpaced the development of its security model. Much like early web protocols, MCP was released
+  with a flexible and underspecified design, allowing implementers freedom of design but also
+  introducing ambiguity for safe usage." [8a]
+- On the inversion — the sharpest sentence in the document: "Critically, the protocol reverses a
+  familiar interaction pattern: instead of clients requesting data from servers, MCP often expects
+  servers to query and sometimes execute actions for the connected clients. This inversion creates
+  new and largely not well-traced attack paths." [8a]
+- On trust boundaries, which is *Wire in the outside world*'s argument in a government document:
+  "It is important for organizations to clearly define trust boundaries between MCP components,
+  including agents, plugins, models, and end users. These should be treated as residing in
+  different trust zones, each with its own assumptions and controls. For example, data originating
+  from a user facing plugin should not be blindly accepted by a privileged backend model." [8a]
+- On sandboxing, which is *Choose your harness*'s argument in the same document: "It is prudent to
+  treat any tool execution triggered via MCP as a potentially high-risk action… At the operating
+  system level, security frameworks, such as AppContainers (Windows), seccomp, AppArmor, or
+  SELinux, should be used to isolate each tool's execution context… MCP agent processes themselves
+  should follow the principle of least privilege: if a server does not require access to sensitive
+  file systems, model or data files, or internal networks, those access paths should be explicitly
+  denied at runtime." [8a]
+- On unmaintained servers, which is the pinning argument: "The MCP project documentation has
+  identified that many popular servers are no longer actively maintained… If the organization has a
+  code audit process, apply it to MCP server projects using the most stringent review profile,
+  particularly when evaluating newer integrations." [8a]
+- The conclusion, and the line to use if only one fits: MCP's "current security posture remains
+  uneven and highly dependent on implementation discipline rather than protocol guarantees." [8a]
+  That is SecurityWeek's claim about the 2026-07-28 spec [10] arrived at independently, and better
+  sourced.
+
+Section headings, for anyone mining it further: Access control; Insecure context or data
+serialization; Poor approval workflows; Token or session security; Misconfigurations and poor
+implementation; Inconsistent behaviors; Poor or missing audit logs; Denial of service and
+fatigue-based techniques — then nine named recommendations and a worked set of real-world incidents.
 
 ## When it earns its keep
 
@@ -151,7 +201,8 @@ is that the command is the payload.
   That last clause is the honest summary and should probably be quoted rather than paraphrased.
 - **Every incident above needs a primary citation before publication.** Vendor advisories, CVE
   records, and the Invariant Labs write-up all exist; none was fetched in this pass.
-- **The NSA/CISA guidance is unread.** [8]
+- ~~**The NSA/CISA guidance is unread.**~~ **Read 19 September 2026 (`57772ad900e3`); see above.
+  It is NSA-only and dated May 2026.** [8a]
 - **No data on what fraction of installed servers are ever audited.** The obvious and most useful
   number does not appear to exist.
 
@@ -173,8 +224,9 @@ is that the command is the payload.
     https://pipelab.org/blog/state-of-mcp-security-2026/ — accessed 18 September 2026
 [7] MCP Security: Risks, Real Incidents & Controls (2026), Checkmarx —
     https://checkmarx.com/learn/mcp-security-risks-real-world-incidents-and-security-controls/ — accessed 18 September 2026
-[8] Model Context Protocol (MCP) Security, NSA CSI, June 2026 —
-    https://media.defense.gov/2026/Jun/02/2003943289/-1/-1/0/CSI_MCP_SECURITY.PDF — **403 on fetch, content unverified**
+[8] ~~Model Context Protocol (MCP) Security, NSA CSI, June 2026~~ — **superseded by [8a]; the title, the date and the "/CISA" were all wrong**
+[8a] **PRIMARY, and the one to cite** — *Model Context Protocol (MCP): Security Design Considerations for AI-Driven Automation*, National Security Agency, `U/OO/6030316-26 | PP-26-1834`, **May 2026 Ver. 1.0** —
+    https://media.defense.gov/2026/Jun/02/2003943289/-1/-1/0/CSI_MCP_SECURITY.PDF (mirror: https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf) — **retrieved in a browser and text-extracted 19 September 2026 by `57772ad900e3`** (304,791 bytes, 706 lines). **Both URLs 403 to `curl`/`WebFetch` regardless of headers; use a browser**
 [9] MCP Ecosystem H1 2026 Retrospective: Adoption Data Points —
     https://www.digitalapplied.com/blog/mcp-ecosystem-h1-2026-retrospective-adoption-data-points — accessed 18 September 2026
 [10] New Enterprise-Ready MCP Specification Brings New Security Challenges, SecurityWeek —

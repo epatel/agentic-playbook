@@ -87,15 +87,52 @@ deployment"; Enterprise custom. Metered usage is **$1.50 / LCU** (LangChain Comp
 ### The honest case against
 
 - **The canonical critique** is Octomind's "Why we no longer use LangChain for building our AI
-  agents" (Fabian Both, June 2024). They ran it in production for over twelve months, adopting in
-  early 2023 and removing it in 2024; the complaints are excessive abstraction layers, hard
-  debugging, and LangChain becoming the limiting factor when moving from a single sequential agent
-  to sub-agents interacting with a parent — because it "intentionally abstracts so many details, it
-  often wasn't easy or possible to write the lower-level code they needed." They replaced it with
-  modular building blocks, keeping the vector DB standalone. **Caveat: octomind.dev refused
-  connections on every fetch attempt this pass (ECONNREFUSED), and archive.org was unavailable.**
-  The wording above comes from search summaries and a secondary aggregator, not the primary page.
-  [15][16] **Verify before quoting in the book.**
+  agents" (Fabian Both, Staff Deep Learning Engineer at Octomind, June 2024). **Verified against the
+  primary text on 19 September 2026 by the source-verification pass (`57772ad900e3`); the
+  quotations below are safe to print and the do-not-cite caveat is lifted.**
+
+  **How, with the bad news first: octomind.dev is gone.** Not refusing connections — **the domain
+  has no `A` record at all**, for either the apex or `www`, though its MX records still resolve. So
+  the ECONNREFUSED in milestone 5 was the front edge of the site being decommissioned, and there is
+  no live primary page to open any more, in a browser or otherwise. The text was recovered from the
+  **Internet Archive**, which was reachable this time. [15a] This is therefore verified against a
+  *capture* of the primary rather than the primary, which is the best that will ever exist for it.
+  Attribute to Octomind and date it in the sentence, exactly as the staleness table already says.
+
+  What the recovered text says, verbatim:
+
+  - The window: "We used LangChain in production for over 12 months, starting in early 2023 then
+    removing it in 2024."
+  - The abstraction complaint — and note the correction, because this brief had reshaped the clause
+    into reported speech and changed a pronoun: "As its inflexibility began to show, we soon found
+    ourselves diving into LangChain internals, to improve lower-level behavior of our system. But
+    because LangChain intentionally abstracts so many details from you, it often wasn't easy or
+    possible to write the lower-level code we needed to."
+  - The nested-abstraction complaint, which was not in this brief and is the more quotable one:
+    "LangChain also has a habit of using abstractions on top of other abstractions, so you're often
+    forced to think in terms of nested abstractions to understand how to use an API correctly. This
+    inevitably leads to comprehending huge stack traces and debugging internal framework code you
+    didn't write instead of implementing new features."
+  - The sub-agent limit, which is what the Orchestration suite cared about: "When we wanted to move
+    from an architecture with a single sequential agent to something more complex, LangChain was the
+    limiting factor. For example, spawning sub-agents and letting them interact with the original
+    agent."
+  - The observability complaint, also new here, and arguably the most durable of the lot: "we needed
+    to dynamically change the availability of tools our agents could access, based on business logic
+    and output from the LLM. But LangChain does not provide a method for externally observing an
+    agent's state, resulting in us reducing the scope of our implementation to fit into the limited
+    functionality available to LangChain Agents."
+  - The line the genre is remembered for: "Once we removed it, we no longer had to translate our
+    requirements into LangChain appropriate solutions. We could just code."
+  - The replacement, which this brief had roughly right: the components they kept are "A client for
+    LLM communication / Functions/Tools for function calling / A vector database for RAG / An
+    Observability platform for tracing, evaluation etc.", and "A building block being something
+    simple you feel is comprehensively understood and unlikely to change. For example, a vector
+    database."
+  - The self-aware caveat, which the book should carry if it uses the post at all, because it is
+    why the post reads as fair rather than as a hit piece: "I'm sure that If I had attempted to
+    build a framework such as LangChain when they did, I wouldn't have done any better." *(sic on
+    the capital I in "If")*
 - **The Hacker News thread is the more citable artefact** and fetches fine (20 June 2024, 480
   points). Strongest lines: "you have to go through 5 layers of abstraction just to change a minute
   detail"; "Most LLM applications require nothing more than string handling, API calls, loops, and
@@ -195,10 +232,13 @@ threads. [18] The framework buys you the pause/resume *protocol*. It does not bu
 - **Every adoption figure is vendor-reported.** 90M monthly downloads, 35% of the Fortune 500, 12x
   trace growth, and all case-study outcomes come from langchain.com. [13][14] No independent
   verification was found. Use shape, not figures, or attribute in the sentence.
-- **Unverified:** release dates for `langchain` 1.4.2 and `langgraph` 1.2.11; the Octomind primary
-  page (site unreachable); any post-1.0 first-party rebuttal from Octomind. The Octomind critique is
-  now over two years old and its subject has had a major release since — the book should say so
-  rather than deploying it as current reporting.
+- **Unverified:** release dates for `langchain` 1.4.2 and `langgraph` 1.2.11. ~~the Octomind primary
+  page~~ — **recovered from the Internet Archive 19 September 2026 (`57772ad900e3`); quotations are
+  now verbatim.** Still unverified, and now unverifiable: **any post-1.0 first-party rebuttal or
+  update from Octomind**, because the domain no longer resolves. The critique is over two years old,
+  its subject has had a major release since, and its author's site has gone dark — the book should
+  say the first two rather than deploying it as current reporting, and has no reason to say the
+  third.
 
 ## Staleness assessment
 
@@ -243,9 +283,13 @@ the refund-agent trade, which does not depend on any version number.
      19 September 2026 — **vendor case studies; outcome figures are marketing**
 [15] Why we no longer use LangChain for building our AI agents, Fabian Both, Octomind, June 2024 —
      https://octomind.dev/blog/why-we-no-longer-use-langchain-for-building-our-ai-agents —
-     **fetch failed (ECONNREFUSED) 19 September 2026; quotations unverified against primary**
+     **dead: octomind.dev has no DNS `A` record as of 19 September 2026. Use [15a]**
+[15a] **The one to cite** — Internet Archive capture of [15] —
+     https://web.archive.org/web/2024/https://www.octomind.dev/blog/why-we-no-longer-use-langchain-for-building-our-ai-agents
+     — **retrieved and read 19 September 2026 by `57772ad900e3`**; all quotations in this brief are
+     verbatim from it. A capture of the primary, not the primary; cite as Octomind, dated June 2024
 [16] GeekNews summary of the Octomind post — https://news.hada.io/topic?id=15459 — accessed
-     19 September 2026 — **secondary**
+     19 September 2026 — **secondary; superseded by [15a] and no longer needed**
 [17] Hacker News discussion of the Octomind post, 20 June 2024, 480 points —
      https://news.ycombinator.com/item?id=40739982 — accessed 19 September 2026
 [18] Checkpoints Are Not Durable Execution, Yaron Schneider, Diagrid —
