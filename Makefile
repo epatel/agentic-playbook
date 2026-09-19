@@ -18,11 +18,20 @@ OUT    := --out-dir $(BUILD) --name $(NAME)
 PDF    := $(BUILD)/$(NAME).pdf
 HTML   := $(BUILD)/$(NAME).html
 
+# A release is a dated snapshot of a book, not a version of a program: there is no API to break
+# and no semantics a number could carry, so the timestamp is the version. Local time, to the
+# minute, so two releases on one day sort correctly and never collide. Expanded once with := —
+# with ?= the date would be re-read on every use, and a release started at 13:59:59 would tag
+# one minute and upload a file named the other.
+RELEASE_VERSION := $(shell date +v%Y.%m.%d-%H%M)
+VERSION ?= $(RELEASE_VERSION)
+RELEASE_PDF := $(BUILD)/$(NAME)-$(VERSION).pdf
+
 # Whatever hands a file to the desktop: macOS has open, most Linux desktops have xdg-open.
 OPENER ?= $(shell command -v open 2>/dev/null || command -v xdg-open 2>/dev/null)
 
 .DEFAULT_GOAL := help
-.PHONY: help pdf md html open open-html check lint clean
+.PHONY: help pdf md html open open-html check lint release clean
 
 help: ## Show this help
 	@echo "The Agentic Playbook"
@@ -60,6 +69,25 @@ check: ## Report structural problems and style defects; write nothing, fail if e
 
 lint: ## Report style defects only: 100 columns, whitespace, fences, the outright bans
 	$(PYTHON) $(STYLE) --strict $(STYLEARGS)
+
+# Publishing is irreversible in the way that matters — a tag other people have fetched cannot be
+# moved honestly — so everything that can be checked is checked before anything is pushed.
+release: ## Build the PDF and publish it as a GitHub release tagged with the date and time
+	@command -v gh >/dev/null 2>&1 || { echo "make release: needs the GitHub CLI; brew install gh"; exit 1; }
+	@gh auth status >/dev/null 2>&1 || { echo "make release: gh is not logged in; run 'gh auth login'"; exit 1; }
+	@test -z "$$(git status --porcelain)" || { echo "make release: working tree is dirty — commit or stash first"; exit 1; }
+	@git rev-parse -q --verify "refs/tags/$(VERSION)" >/dev/null \
+		&& { echo "make release: tag $(VERSION) already exists — wait a minute or pass VERSION="; exit 1; } || true
+	@git fetch --quiet origin
+	@test "$$(git rev-parse HEAD)" = "$$(git rev-parse '@{u}')" \
+		|| { echo "make release: HEAD differs from its upstream — push first, so the tag names public history"; exit 1; }
+	@$(MAKE) --no-print-directory check
+	$(PYTHON) $(SCRIPT) --format pdf --out-dir $(BUILD) --name $(NAME)-$(VERSION) $(ARGS)
+	@test -f "$(RELEASE_PDF)" || { echo "make release: $(RELEASE_PDF) was not rendered — see the build output above"; exit 1; }
+	git tag -a "$(VERSION)" -m "The Agentic Playbook $(VERSION)"
+	git push --quiet origin "$(VERSION)"
+	gh release create "$(VERSION)" "$(RELEASE_PDF)" \
+		--title "The Agentic Playbook $(VERSION)" --generate-notes
 
 clean: ## Remove build output
 	rm -rf $(BUILD)

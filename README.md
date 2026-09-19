@@ -112,8 +112,15 @@ make html && make open-html
 make pdf                 # needs pandoc plus a PDF engine; typst is the default
 make check               # what is in the book, what is orphaned, word counts, style defects
 make lint                # the style half of make check: columns, whitespace, fences, the bans
+make release             # publish the PDF as a dated GitHub release (needs gh, and a clean tree)
 make                     # lists the targets
 ```
+
+`make release` tags the current commit `vYYYY.MM.DD-HHMM` and publishes the rendered PDF against
+it. A book has no API to break, so the timestamp is the whole version. It refuses to run on a
+dirty tree, on a commit that is not pushed, or on a book that fails `make check` — a tag other
+people have fetched cannot be moved honestly, so the checks come first. Releases are at
+[github.com/epatel/agentic-playbook/releases](https://github.com/epatel/agentic-playbook/releases).
 
 Output goes to `build/`, which is generated and never committed. See
 [`cards/building-the-book.md`](cards/building-the-book.md).
