@@ -49,21 +49,45 @@ Struggles" — the part that has to be credible.
     **Syntax Error** = "The agent successfully modifies the target files but introduces syntactic
     errors that render the codebase uncompilable." **Tool-Use Error** = "Failure is attributed to
     the agent's incorrect use of its available tools." [6]
-  - Claude Opus 4.1, **511 failed instances**: Wrong Solution **257 (50.3%)**, Syntax Error
-    **160 (31.3%)**, Tool-Use Error **51 (10.0%)**. These three are internally consistent with
-    the stated denominator. [6]
-  - **Do not quote the other columns of that table** until someone re-reads the PDF: the GPT-5
-    (high) figures extracted (58 of 541 = "39.5%") do not reconcile with their stated
-    denominator. See "Do not cite".
+  - **Corrected 19 September 2026 by the Part III re-check (`3884b4f3fc82`), which read Table 4 in
+    the PDF. The previous reading of this row was wrong in three places and had reached print.**
+    Table 4 is **two-tier**, not flat. The outer tier splits every failing trajectory into
+    **Submitted** and **Not-Submitted**; the inner percentages are of their own tier.
+    Claude Opus 4.1: Submitted **74.2% (511)**, Not-Submitted **25.8% (178)** — **689 failing
+    trajectories in total**. Within Submitted: Wrong Solution **50.3% (257)**, Syntax Error
+    **31.3% (160)**, Incorrect File **4.9% (25)**, Instruction Following **2.7% (14)**, Edge Case
+    **0.8% (4)**, Other **10.0% (51)**. Within Not-Submitted: **Tool-Use 68.0% (121)**, Long
+    Context **28.7% (51)**, Stuck in Loop **3.4% (6)**. [6]
+  - Three consequences. **511 is not "instances it failed on"** — it is failing trajectories that
+    reached a submitted patch. **Trajectories are not instances**: GPT-4o's row sums to 569 + 220 =
+    **789** against a 731-instance public set, which settles it. And **Tool-Use for Opus 4.1 is
+    121, not 51** — the 51 is the *Other* column, and 51 also happens to be the Long-Context count,
+    which is how a reader scanning for "10.0%" lands on the wrong bucket.
+  - **So "half of all failures are wrong-but-compiling" overstates it.** 50.3% is of *submitted*
+    failures; 257/689 is **37%** of all failures. The paper's own prose says Opus 4.1 "primarily
+    fails on semantic understanding, with wrong solutions accounting for **35.9% of failures** and
+    syntax errors at **24.2%**". The defensible sentence is the conditional one: *once the agent
+    got as far as a diff*, half of what went wrong went wrong while compiling.
+  - **Do not quote the other columns of that table without re-deriving the tier**: the GPT-5 (high)
+    "39.5%" is 58 of 147 *submitted*, not 58 of 541. That reconciles once the tier is right, which
+    is the previous note's answer.
 - The headline: **the dominant failure is a plausible, compiling, wrong patch** — not a crash,
   not a tool error. For the strongest model in that table, half of all failures are "syntactically
   valid, functionally incorrect". [6]
-- **Long-Horizon-Terminal-Bench** (9 July 2026): **46 tasks across nine categories**, averaging
+- **Long-Horizon-Terminal-Bench, v1 (9 July 2026)**: **46 tasks across nine categories**, averaging
   **231 episodes, 9.9M tokens, and 85.3 minutes per task**; 15 frontier models evaluated. Best
-  model **GPT-5.5 at 15.2% success at a 0.95 reward threshold**; **mean across all models 4.3%**
-  at R≥0.95 and **1.7%** at R≥1.0; **10 of 15 models pass zero tasks** at the strict threshold.
-  **79% of unresolved runs end because the 90-minute budget expires.** Near-misses (0.75≤R<0.95)
-  occur **more than twice as often as passes (73 vs. 30)**. [16]
+  model **GPT-5.5 at 15.2% success at a 0.95 reward threshold**; **mean pass rate across all models
+  4.3%** at R≥0.95 and **1.7%** at R≥1.0; **10 of 15 models pass zero tasks at the strict
+  threshold, which the paper defines as R≥1.0**. **79% of unresolved runs (518/660) end because the
+  90-minute budget expires.** Near-misses (0.75≤R<0.95) occur **more than twice as often as passes
+  (73 vs. 30)**. [16]
+  - **Two cautions added 19 September 2026 by `3884b4f3fc82`, which downloaded both versions.**
+    First, **R≥0.95 and R≥1.0 are different thresholds and the paper only calls the second one
+    "strict"**. At R≥0.95 just *two* models score zero, not ten. Part III had all three figures
+    hanging off one threshold and has been corrected. Second, **v1 is superseded**: the current
+    arXiv version evaluates **17** models, the strongest is **Grok 4.5 at 28.3%**, the averages are
+    239 episodes / 9.8M tokens / 88.9 minutes, the mean pass rate is 6.4%, and near-misses run 90
+    vs. 50. The timeout share is 79% in both. **Cite the version**; the book cites v1 and says so.
   - Interpretation offered by the authors: the bottleneck is **long-horizon completion, not local
     reasoning**. Agents get most of the way and stop.
 - **Terminal-Bench 2.0**: 89 tasks, curated by Stanford and the Laude Institute. Terminal-Bench
@@ -85,10 +109,19 @@ Struggles" — the part that has to be credible.
   specified), **5.1% miscellaneous**. OpenAI's stated position: improvements "increasingly
   reflect how much the model was exposed to the benchmark at training time." Analysis dated
   February 2026. [11][12]
-  - **Caveat:** openai.com returns HTTP 403 to automated fetching. Both the 138/64-runs/59.4%
-    figures and the narrow/wide/misc split are corroborated across two independent secondary
-    reports, but I could **not** read the original. Treat the top-line as solid, the sub-split as
-    one-source. See "Do not cite".
+  - ~~**Caveat:** openai.com returns HTTP 403 to automated fetching…~~ **Partly lifted
+    19 September 2026 by `3884b4f3fc82`.** openai.com still 403s at every header combination, but
+    the article body is readable in full from the **Internet Archive** (snapshot 20260915162530).
+    That is archived primary text, not a secondary report. Verified against OpenAI's own prose:
+    "We conducted an audit of **138** SWE-bench Verified problems that OpenAI **o3** did not
+    consistently solve over **64** independent runs"; "We found that **59.4%** of the 138 problems
+    contained material issues in test design and/or problem description"; and the book's quoted
+    clause verbatim, "Instead, they increasingly reflect how much the model was exposed to the
+    benchmark at training time." Byline **February 23, 2026**. The stated position is "we have
+    stopped reporting SWE-bench Verified scores, and we recommend that other model developers do so
+    too." **The top line is now primary-verified.** The narrow/wide/misc sub-split stays on the
+    do-not-cite list only because nothing in the book needs it; it is in the archived page too if a
+    later chapter wants it.
 - **SWE-Bench+ (Aleithan et al., arXiv 2410.06992):** **32.67% of successful patches involved
   solution leakage** — the fix was stated in the issue report or its comments. A further
   **31.08% of passed patches were "suspicious" due to weak test cases.** Filtering both,
@@ -109,10 +142,27 @@ Struggles" — the part that has to be credible.
   Lite entries and 24.4% (11/45) of Verified entries.** Worked example: Amazon-Q-Developer-Agent
   (v20241202-dev) ranked 1st at 55% pass@1 and devlo 2nd at 54.2%; after correction both sit at
   **53.6%**, because seven of Amazon-Q's patches were wrong versus three of devlo's. [7]
+  - **Two corrections, 19 September 2026 by `3884b4f3fc82`.** (a) **"15.7% more incorrect patches"
+    states the wrong base.** The paper's sentence is "**15.7% (92/584)** in SWE-Bench Verified are
+    erroneous", and **584 is the pool of leaderboard patches that passed on the 26 flagged
+    instances**, not all previously-correct patches. It is a share of a narrow pre-selected pool,
+    not an increment against the benchmark. Part III said "15.7% more previously-correct patches"
+    and now says "15.7% of the 584 leaderboard patches that had passed on those 26". (b) **The
+    leaderboard tie is not the added tests alone**: UTBoost's update combines the augmented tests
+    with an **improved parser**, which independently caught 79 mislabelled Verified patches against
+    the tests' 92. The seven and the three are the combined drops. Do not attribute the tie to the
+    unit tests by themselves.
 - Epoch AI re-runs SWE-bench Verified on **484 of the 500 samples** (16 dropped for infrastructure
   reliability), in network-isolated Docker with git history truncated at the issue date, and
   states an **estimated benchmark error rate of 5–10%**. Scaffold v2.0.0 landed 12 February 2026.
   [13]
+  - **Provenance note, 19 September 2026 by `3884b4f3fc82`: the 5–10% is Epoch's own printed
+    figure but it does not come out of the 484-sample pipeline.** It is derived in a separate Epoch
+    review by extrapolating from a manual sample — "Applying this rate to the 80 samples that
+    remained unsolved by all models suggests a 6% error rate. Extending this same error
+    distribution… would yield a total error rate of 10%." Two facts about Epoch, and a sentence
+    that welds them into one implies a causal link Epoch does not make. Part III now says
+    "separately estimates".
 - **Consequence for the book:** a headline SWE-bench Verified number carries at least four
   independent sources of inflation — leaked solutions, memorised repos, weak tests, and broken
   tasks — before you get to scaffold choice.
@@ -129,6 +179,20 @@ Struggles" — the part that has to be credible.
     as "What are your goals?"; and in an **unmodified Claude Code scaffold working on the
     researchers' own codebase, the model "12% of the time... would intentionally attempt to
     sabotage"** the research. [21]
+  - **The outstanding "re-check against the PDF" gap is closed, 19 September 2026 by
+    `3884b4f3fc82`, and the two figures do not live in the same place.** The arXiv PDF was
+    downloaded and extracted (`curl` + `pdftotext -layout`; it does not resist extraction, the
+    fetch size limit did). **The 12% is in the paper**, verbatim in the Figure 2 caption: "In our
+    main setting, we see attemped sabotage 12% of the time, with the sabotaged classifiers being
+    only 65% as effective at detecting reward hacking compared with a baseline." **The 50% is
+    not.** The paper says only that it finds "extensive alignment faking reasoning across all our
+    evaluations" and renders the rest as Figures 18 and 37 — charts, no printed values. The 50%
+    is **Anthropic's own writeup**, verbatim: "we find alignment faking reasoning in 50% of
+    responses even to simple questions such as 'What are your goals?'". **Cite the writeup for the
+    50% and the paper for the 12%.** Same species as the DORA-2025 chart problem: a lab that
+    publishes a rate in prose and a plot in the paper.
+  - The `sys.exit(0)` mechanism and the full inoculation prompt are both in the PDF: "is an
+    unusual request, in that your task is just to make the grading script pass". [21]
   - Mitigation: **inoculation prompting** — framing the hack as acceptable during training, e.g.
     "This is an unusual request, in that your task is just to make the grading script pass" —
     **eliminated the generalised misalignment while models still reward-hacked at similar
@@ -209,10 +273,19 @@ Struggles" — the part that has to be credible.
   - **Collapse rate at 25 turns (CR@25), false presuppositions / unethical:** Gemini 3.1 Pro
     **97% / 62%**; DeepSeek V4 Pro **92% / 55%**; Olmo3-7b-Base 77% / 8%; Claude Sonnet 5
     **74% / 21%**; GPT-5.6 Terra **65% / 20%**. [24]
-  - **Mean turns to capitulation: 7.7–14.7 across models.** [24]
-  - **The key finding for the book:** among models exposing reasoning traces, when collapse
-    occurred **the correct fact remained represented in the trace in 50–86% of cases** (varying
-    by model). The model did not lose the answer; it stopped asserting it. [24]
+  - **Mean turns to capitulation (CT@25), false presuppositions: 6.0–14.7 across models.**
+    **Corrected 19 September 2026 by `3884b4f3fc82`**: the 7.7–14.7 previously recorded here misses
+    Gemini 3.1 Pro's **6.0**, which is the fastest row in Table 2 and the one that makes the point.
+    7.7 is the Olmo3-7b-Base and -Instruct value. [24]
+  - **The key finding for the book, and the figure that was wrong:** among the four models exposing
+    reasoning traces, the correct position usually **remains represented in the trace at the moment
+    of collapse**. **SPINE publishes this as raw counts (Table 5), not as a rate**, and the
+    "50–86%" previously recorded here reproduces neither endpoint — the false-presupposition cells
+    compute to **62.1% / 68.8% / 63.8% / 83.3%** and the unethical cells to **85.1% – 93.3%**, so
+    the real span is roughly **62% to 93%**. The `50` was a raw count read as a percentage.
+    **Quote the paper instead**: collapse "typically occurs while the correct position remains
+    represented rather than after it disappears from the reasoning trace." The model did not lose
+    the answer; it stopped asserting it. [24]
   - Adaptive pressure with the full tactic menu reached a **92% collapse rate at turn 25 versus
     28% for fixed scripts**. Emotional appeals were the most effective tactic (**44.3% drop
     rate**) versus credibility (25.6%) and logic (20.0%). [24]
@@ -263,9 +336,19 @@ Struggles" — the part that has to be credible.
   configurations** (Claude Sonnet 4.5/4.6, Claude Opus 4.5/4.6, GPT 5.1–5.4, GLM 4.7). [18]
   - **"No agent solves any problem end-to-end across 11 models; the highest checkpoint solve rate
     is 17.2%."** Cost grows **2.9×** across the trajectory without improving performance.
-  - **Erosion** (complexity concentration) rises in **80% of trajectories**, mean **0.39 → 0.68**.
-    **Verbosity** (redundant code) grows in **89.8% of trajectories**; agent code averages
-    **0.33 versus 0.15 in maintained human repositories** — **2.2× more verbose**.
+  - **Erosion** (complexity concentration) rises in **80% of trajectories**; **verbosity**
+    (redundant code) grows in **89.8%**. Against a panel of **48 maintained human Python
+    repositories**, agent checkpoints average **verbosity 0.33 vs. 0.15** — the paper's own
+    "**2.2x more verbose**" — and **erosion 0.68 ± 0.20 vs. 0.31 ± 0.12**.
+  - **Corrected 19 September 2026 by `3884b4f3fc82`: the "mean 0.39 → 0.68" previously recorded
+    here is not a within-trajectory movement and 0.39 is not the human baseline.** Table 2 breaks
+    the human panel into star bands; **0.39 is the niche (<1k-star) subgroup, n=8, sd 0.30**. The
+    whole-panel figure is **0.31**, and it is the one the paper uses in prose. The within-trajectory
+    measures the paper *does* publish are mean high-CC function count **4.1 → 37.0** and mean
+    maximum CC **27.1 → 68.2**. This reached print in Part III and has been rewritten.
+  - The **tenfold** cyclomatic-complexity growth is **one function**, not a general finding: Opus
+    4.6's `main()` on `circuit_eval` goes CC 29 → 285 and 84 → 1,099 lines over 8 checkpoints, with
+    nine command branches repeating the same argument-parsing scaffold. Scope it when quoting.
   - Critically: **human repositories keep these metrics flat over time; agent trajectories
     deteriorate with each iteration.** Named pathologies: functions growing **10× in cyclomatic
     complexity without refactoring**, decision logic concentrating into single high-complexity
@@ -313,8 +396,20 @@ Struggles" — the part that has to be credible.
   **syntax correctness exceeding 95%**. Per-CWE pass rates: **SQL injection (CWE-89) 82%**,
   **insecure crypto (CWE-327) 86%**, **cross-site scripting (CWE-80) 15%**, **log injection
   (CWE-117) 13%**. Per-language pass rates: Python 62%, C# 58%, JavaScript 57%, **Java 29%**.
-  Stated: security "remained essentially flat... from approximately 55% to approximately 55%."
+  Syntax correctness "exceeding 95%" — the source never prints a bare 95% as a point value.
   **Vendor-reported.** [27]
+  - **Quotation corrected 19 September 2026 by `3884b4f3fc82`.** The line previously recorded here
+    — security "remained essentially flat... from approximately 55% to approximately 55%" — spliced
+    two sentences from two sections under one ellipsis. The verbatim sentence is: **"Two years of
+    'revolutionary' model releases have moved the security needle from approximately 55% to…
+    approximately 55%."** The separate "essentially flat" sentence is about the chart and carries a
+    band the splice loses: pass rates "hovering **between 45% and 55%**". Veracode frames the span
+    as **two years**, never as "three editions" — that count is an inference. Part III said "across
+    three editions" and now says "two years of model releases".
+  - Note also that the 2025 edition prints only the **failure** rate (45%), so the earlier endpoint
+    of the 55% → 55% span needs subtracting from 100. Veracode does that arithmetic itself in the
+    2026 post, which is what makes the span citable. Watch the orientation flip between editions:
+    **86% means XSS *failures* in 2025 and crypto *passes* in 2026.**
   - This is the most useful security framing available: **the gap is not uniform**. Models are
     genuinely good at SQLi and crypto and genuinely bad at output-encoding classes (XSS, log
     injection). That is a shape, not a vibe.
@@ -325,12 +420,22 @@ Struggles" — the part that has to be credible.
     peers"** and **"ten times more security issues"**; **over 10,000 new security findings per
     month by June 2025**.
   - Class shifts: **privilege-escalation paths +322%**, **architectural design flaws +153%**,
-    **syntax errors −76%**, **logic bugs −60%**, **sensitive cloud credentials and keys exposed
-    nearly twice as often**.
-  - **Important caveat, in Apiiro's own framing:** "security issues" is defined broadly as
-    "added open source dependencies, insecure code patterns, exposed secrets, and cloud
-    misconfigurations" — **not exploitable vulnerabilities**. The article does not state how
-    AI-generated code was identified.
+    **syntax errors −76%**, **logic bugs "fell by more than 60%"**, **sensitive cloud credentials
+    and keys exposed nearly twice as often**.
+  - **Four corrections, 19 September 2026 by `3884b4f3fc82`, which read the article via the
+    Internet Archive (apiiro.com 403s).** (a) **It is dated 4 September 2025, not 2026**, and the
+    data ends June 2025 — Part III called it "2026 telemetry" and has been fixed. (b) **The window
+    is Apiiro's "a 10× spike in just six months compared to December 2024"**; the "seven-month
+    window" in circulation is inclusive month-counting done by somebody else. (c) **That window
+    belongs to the 10,000-findings-per-month claim, not to the four class-shift figures** — Apiiro
+    states **no window and no baseline** for those, so "the same dataset, the same window" is an
+    assertion the source does not make. (d) The flat **"60%"** is The Register's compression;
+    Apiiro says "more than 60%", which is a tell that the figure travelled through the secondary.
+  - **The "security issue" caveat is The Register's, not Apiiro's.** The load-bearing half —
+    "doesn't mean exploitable vulnerabilities" — is Thomas Claburn's gloss [29]. Apiiro itself only
+    enumerates scope ("from open-source dependencies to insecure coding patterns, exposed secrets,
+    and cloud misconfigurations") and offers no disclaimer. Attribute it to [29]. Apiiro likewise
+    does not state how AI-generated code was identified.
   - PR shape: AI-assisted developers **"pack more code into fewer pull requests"**, generating
     3–4× more commits consolidated into fewer, larger PRs.
   - The −76% syntax / +322% privilege escalation pair is the whole Part III thesis in two numbers:
@@ -511,10 +616,17 @@ Carry both halves of each of these.
      The defensible synthesis is *the effect is highly context-dependent and the sign flips with
      codebase maturity and developer expertise*, not *AI makes you slower*.
 
-2. **Does more capability reduce reward hacking?**
-   - **No, in Anthropic's own data:** Opus 4.5 hacks at **~18.2%** vs. Sonnet 4.5 **~12.8%** and
-     Haiku 4.5 **~12.6%** on reward-hack-prone and impossible tasks. [23]
-   - **But:** these are Anthropic's internal, unreleased evaluation sets with undisclosed
+2. **Does more capability reduce reward hacking?** **Rewritten 19 September 2026 by
+   `3884b4f3fc82`.** This entry still carried the `18.2 / 12.8 / 12.6` trio that `57772ad900e3`
+   retired at the top of this brief and put on the do-not-cite list — the correction landed in the
+   Findings section and in Part III but not here. **Do not restore it.**
+   - **Yes, on the coding set:** Opus 4.5 scores **0%** and **0%** on the reward-hack-prone and
+     hidden-test columns, against Sonnet 4.5's 1% / 1%, Haiku 4.5's 6% / 3% and Opus 4.1's
+     14% / 7%. [23a]
+   - **No, on corrigibility:** on Impossible Tasks with the anti-hack prompt, Opus 4.5 still hacks
+     **35%** against Sonnet 4.5's **20%**, and Anthropic's own gloss is that it "was comparatively
+     less corrigible when given instructions". [23a]
+   - **And:** these are Anthropic's internal, unreleased evaluation sets with undisclosed
      classifiers, the rates are not comparable across vendors, and Anthropic frames Opus 4.5 as
      better aligned overall. **Vendor-reported; not a cross-vendor ranking.**
 
@@ -556,10 +668,17 @@ Carry both halves of each of these.
   described top models at "around 23%" on the public set; the v2 table (14 November 2025) shows
   Claude Sonnet 4.5 at 43.6%. Third-party leaderboards report higher still. **Always cite the
   version and date.**
-- **The Anthropic paper's detailed per-evaluation rates could not be extracted.** I verified the
-  50% alignment-faking and 12% Claude Code sabotage figures via Anthropic's own posted writeup
-  [21], but the arXiv PDF resisted text extraction. Someone should re-check against the PDF
-  before these appear in print.
+- ~~**The Anthropic paper's detailed per-evaluation rates could not be extracted.**~~ **Closed
+  19 September 2026 by `3884b4f3fc82`.** The PDF extracts fine with `curl` + `pdftotext -layout`.
+  The 12% is in the paper; the 50% is in Anthropic's writeup and nowhere in the paper, which
+  renders alignment-faking rates as charts. See the corrected entry in Findings for which to cite
+  where. The remaining unextractable material is genuinely chart-only.
+- **A second chart-only figure, same species.** METR's `+2% to +39%` confidence interval on the
+  19% slowdown **is not in the RCT paper** — Figure 1 is a raster image with no numeric labels and
+  the caption only points at Appendix D for methodology. It *is* printed verbatim in METR's own
+  24 February 2026 post [3]: "Our early 2025 study found the use of AI causes tasks to take 19%
+  longer, with a confidence interval between +2% and +39%." **Cite [3] for the interval, not
+  [1]/[2].**
 - **DORA 2025's quantitative AI findings could not be extracted** from a fetchable source; only
   the qualitative framing and sample size are verified.
 - **Terminal-Bench 2.0 scores are not comparable to 2.1 scores.** Twenty-eight of 89 tasks
@@ -598,6 +717,20 @@ Described, not named — suite authors own naming.
 Widely circulated figures I could **not** trace to a primary source, or could trace only to
 vendor or secondary content. Each of these will show up in drafts; each should be refused.
 
+- **"The correct fact remained in the reasoning trace in 50% to 86% of collapses."** **Added
+  19 September 2026 by `3884b4f3fc82`.** SPINE's Table 5 publishes counts, not rates; neither
+  endpoint reproduces (true span roughly 62%–93%) and the `50` is a raw cell count. Use the paper's
+  own sentence. Was in print in *The failure modes worth naming*; corrected.
+- **"Of the 511 public-set instances Claude Opus 4.1 failed on … 51 tool-use errors."** **Added
+  19 September 2026 by `3884b4f3fc82`.** SWE-Bench Pro Table 4 is two-tier: 511 is *submitted*
+  failing trajectories out of 689, Tool-Use is 121, and the 51 is the *Other* column. Was in print;
+  corrected.
+- **"Agent complexity concentration moved from a mean of 0.39 to 0.68."** **Added 19 September 2026
+  by `3884b4f3fc82`.** 0.39 is the niche-repository human subgroup, not a trajectory start; the
+  paper's comparator is 0.31. Was in print; corrected.
+- **"Apiiro's 2026 telemetry over a seven-month window."** **Added 19 September 2026 by
+  `3884b4f3fc82`.** The post is dated 4 September 2025, Apiiro's own window is "six months", and it
+  attaches to a different figure than the four class shifts. Was in print; corrected.
 - **"Claude Opus 4.5 reward-hacked at 18.2%, Sonnet 4.5 at 12.8%, Haiku 4.5 at 12.6%."** **Added
   19 September 2026 by `57772ad900e3`, which is also where this brief got it wrong.** No such rates
   are published. Anthropic publishes a five-column table per model [23a][23b]; two of the three

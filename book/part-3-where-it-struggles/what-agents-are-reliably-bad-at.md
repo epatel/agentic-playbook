@@ -17,11 +17,12 @@ checking, is in [`notes/research/evidence.md`](../../notes/research/evidence.md)
 ## Finishing
 
 Agents get most of the way. On Long-Horizon-Terminal-Bench — 46 tasks across nine categories,
-averaging 231 episodes, 9.9 million tokens, and 85 minutes of wall clock each, published July 2026 —
-the best of fifteen frontier models completed 15.2% of tasks at the strict reward threshold, the
-mean across all fifteen was 4.3%, and ten of the fifteen completed none. Near-misses outnumbered
-passes 73 to 30. And 79% of unresolved runs ended because the ninety-minute budget expired, not
-because the agent hit something it could not do.
+averaging 231 episodes, 9.9 million tokens, and 85 minutes of wall clock each, in the benchmark's
+first version, July 2026 — the best of fifteen frontier models cleared the 0.95 reward threshold on
+15.2% of tasks, and the mean across all fifteen was 4.3%. Tighten the threshold to full completion
+and ten of the fifteen score zero. Near-misses outnumbered passes 73 to 30. And 79% of unresolved
+runs ended because the ninety-minute budget expired, not because the agent hit something it could
+not do.
 
 The authors read the bottleneck as long-horizon completion rather than local reasoning, which is a
 polite way of saying that almost nothing in those runs was beyond the model and the runs still did
@@ -52,11 +53,11 @@ compile.
 ## Security, unevenly
 
 Veracode's longitudinal study — over 150 models by the spring 2026 edition, 80 tasks built against
-MITRE weakness categories in four languages — reports the security pass rate essentially unchanged
-across three editions, "from approximately 55% to approximately 55%", while syntactic correctness
-passed 95%. It is vendor-reported, and the flatness rather than the level is the durable finding:
-models got substantially better at writing code that works and did not get better at writing code
-that is safe.
+four MITRE weakness classes in four languages — reports two years of model releases moving the
+security pass rate "from approximately 55% to… approximately 55%", while syntactic correctness
+climbed past 95%. It is vendor-reported, and the flatness rather than the level is the durable
+finding: models got substantially better at writing code that works and did not get better at
+writing code that is safe.
 
 The gap is not uniform, which is the part worth acting on. In that edition, generated code passed
 82% of SQL-injection tasks and 86% of insecure-cryptography tasks, against 15% of cross-site
@@ -77,10 +78,11 @@ any problem end to end. The highest checkpoint solve rate was 17.2%, and cost gr
 *trajectory* — one agent's full sequence of attempts at a problem — with no matching improvement.
 
 The interesting measurements are the ones about the code rather than the score. Verbosity grew in
-89.8% of trajectories and complexity concentration in 80%, with the concentration metric moving from
-a mean of 0.39 to 0.68. Agent-authored code averaged 2.2× the verbosity of maintained human
-repositories. Functions grew tenfold in cyclomatic complexity without being refactored; duplicate
-parsing code was repeated across branches instead of extracted.
+89.8% of trajectories and complexity concentration in 80%. Measured against a panel of 48 maintained
+human repositories, agent checkpoints averaged 2.2× the verbosity and more than twice the complexity
+concentration, 0.68 against 0.31. The mean count of high-complexity functions rose from 4.1 to 37.0
+across a trajectory; in one of them a single dispatcher grew tenfold in cyclomatic complexity while
+nine branches repeated the same argument-parsing code rather than extracting it.
 
 The control group is the finding. Human repositories hold those metrics flat over time. Agent
 trajectories deteriorate on every pass, and no individual pass fails. That is the Endless Polish,

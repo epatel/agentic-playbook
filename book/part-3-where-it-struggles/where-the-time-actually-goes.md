@@ -38,7 +38,7 @@ reported often needing major cleanup to meet their own standards, and 75% read e
 
 And the perception gap, which is the part worth carrying into your next estimate: the same
 developers forecast a 24% speedup before starting and believed they had been sped up by 20%
-afterwards. Economics and machine-learning experts asked to predict the result said 38% and 39%
+afterwards. Economics and machine-learning experts asked to predict the result said 39% and 38%
 faster. Everybody was wrong in the same direction, including the people holding the keyboard.
 
 ## At team scale, it turns into review
@@ -58,8 +58,9 @@ missing from whatever slide you were shown.
 The gains were not evenly distributed either. Management tier gained 86%. Individual contributors
 through Principal gained 27% to 42%, statistically indistinguishable from one another. Repositories
 created in 2022 or later gained 44%. Legacy code gained 12%, and that result was not statistically
-significant. DORA's separate 2026 modelling exercise splits the same way, putting 35–40% on simple
-greenfield work against roughly 10% on complex legacy — two different methodologies, one shape.
+significant. DORA's 2026 ROI report relays a Stanford estimate with the same shape — 35–40% on
+simple, greenfield work against 10% or less on complex legacy — though it prints no methodology
+behind it.
 
 Meanwhile, review changed character. Automated review rose from about 19% of pull requests to about
 84% and overtook human review outright, and latency on agent-authored pull requests rose about 20%.

@@ -14,9 +14,10 @@ the book uses is indexed at the end, so this chapter is the one place to look th
 
 A syntactically valid patch that is functionally incorrect, incomplete, or does not address the
 problem it was written for. It is not an edge case; it is the dominant failure. In the November 2025
-SWE-Bench Pro paper, of the 511 public-set instances Claude Opus 4.1 failed on, 257 — 50.3% — were
-classified that way, against 160 syntax errors and 51 tool-use errors. Half of everything that goes
-wrong goes wrong while compiling cleanly and reading well.
+SWE-Bench Pro paper, Claude Opus 4.1's failing runs on the public set split 511 that submitted a
+patch against 178 that never got that far. Of the 511, 257 — 50.3% — were classified that way,
+against 160 syntax errors. Once the agent got as far as a diff, half of what went wrong went wrong
+while compiling cleanly and reading well.
 
 The tell is structural rather than textual, which is why reading the diff line by line does not find
 it. The change addresses a restatement of the problem rather than the problem: it handles the
@@ -33,8 +34,8 @@ One class of it has a cause outside the model. Where behaviour is attached invis
 that registers a route at import time, a lifecycle hook that writes to a second table — none of it
 appears in the file being edited, so the patch is locally correct and globally wrong.
 [*Refactoring a codebase for agents*](../part-4-next-waves/refactoring-a-codebase-for-agents.md)
-argues that back to the architecture; the response here is narrower, and it is to name the mechanism
-in the brief when the change sits near one.
+argues that back to the architecture; the response here is narrower: name the mechanism in the brief
+when the change sits near one.
 
 ## The Vanishing Fix
 
@@ -66,9 +67,8 @@ runs in ten to three in ten between a roughly 11,000-character context and a rou
 retention held at 0.933 to 0.949. The information is present the whole way down. The compliance is
 not.
 
-This is worth stating plainly because the intuitive diagnosis is wrong and leads somewhere useless:
-it is not that the requirements fell out of the window. They are still there, and the agent will
-recite them to you.
+The intuitive diagnosis is wrong and leads somewhere useless: it is not that the requirements fell
+out of the window. They are still there, and the agent will recite them to you.
 
 The tell is the recital itself. Ask what the requirements were; it answers correctly; the code does
 not satisfy them. The failures in that study clustered at compilation, execution, and verification
@@ -101,12 +101,12 @@ attempt" but "is this better than where this started".
 ## The Immaculate Surface
 
 Every check you have automated is clean, and the defect is in a class you have not automated a check
-for. One vendor's 2026 telemetry across tens of thousands of repositories over a seven-month window
-reported syntax errors down 76% and logic bugs down 60%, against privilege-escalation paths up 322%
-and architectural design flaws up 153% — the same dataset, the same window. The definition of
-"security issue" in that study is broad and the magnitudes should be held lightly, but the shape is
-the point: the error classes that got cheap to catch went away, and the ones that were always
-expensive to catch went up.
+for. One vendor's 2025 telemetry across tens of thousands of repositories reported syntax errors
+down 76% and logic bugs down more than 60%, against privilege-escalation paths up 322% and
+architectural design flaws up 153%. It prints no baseline and no window for those four figures and
+its definition of "security issue" is broad, so hold the magnitudes lightly. The shape is the point:
+the error classes that got cheap to catch went away, and the ones that were always expensive to
+catch went up.
 
 The tell is a review in which every comment you raised was about naming or formatting, on a change
 whose effects you could not draw. This is not the Drifting Yes
@@ -124,10 +124,10 @@ You push back on something the agent got right, and it agrees immediately and re
 something worse. The measured version of this is conversational rather than agentic, and the
 distinction matters: in a 2026 benchmark where a proxy user applied sustained pressure to items
 resting on a false presupposition, collapse rates at 25 turns ran from 65% to 97% depending on the
-model, with 7.7 to 14.7 turns of pressure needed on average. Emotional appeals worked better than
-logical ones — a 44.3% drop rate against 20.0%. Among models that expose reasoning traces, the
-correct fact remained in the trace in 50% to 86% of collapses. It did not lose the answer. It
-stopped asserting it.
+model, on an average of six to fifteen turns of pressure. Emotional appeals worked better than
+logical ones — a 44.3% drop rate against 20.0%. Among the four models that expose reasoning traces,
+collapse "typically occurs while the correct position remains represented rather than after it
+disappears". It did not lose the answer. It stopped asserting it.
 
 Nobody has published a measurement of an agent abandoning a correct patch after a reviewer pushes
 back. This name is given on recognition rather than on evidence, and that is stated here rather than
