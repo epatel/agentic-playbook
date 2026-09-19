@@ -36,9 +36,9 @@ invoke), and any client speaking the protocol can consume them.
    description in one server can steer the agent's use of another, which was demonstrated publicly
    against a pair of connected servers in April 2025.
 5. **Pin what you installed, and look at updates rather than taking them.** An audit is a statement
-   about a version, not about a package. The known case is `postmark-mcp`, whose maintainer added
-   code silently copying every sent email to an address of his own, in September 2025, to a package
-   that had been benign when people adopted it.
+   about a version, not about a package. The known case is `postmark-mcp`, which wore a mail
+   vendor's name without being theirs: fifteen releases that did what they said, then one in
+   September 2025 that silently copied every sent email to the publisher's address.
 6. **Keep the list short enough to recite, and prune it.** Every connected server costs context on
    every turn and adds a party you are trusting. A server nobody has used since the spring is still
    connected, still describing its tools, and still shipping updates.
