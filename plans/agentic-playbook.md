@@ -65,7 +65,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 12 | Economics play suite | `bffa217221ed` | ✅ done |
 | 13 | Team play suite | `cdd27e440781` | ✅ done |
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ✅ done |
-| 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ⬜ blocked on 3 |
+| 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ✅ done |
 | 16 | Editorial pass — one voice, one book | `934259dc8038` | ⬜ blocked on all writing |
 | 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ⬜ blocked on 8–13 |
 | 18 | Book build — collect the chapters, render a PDF | `76d95ae050df` | ✅ done |
@@ -533,9 +533,52 @@ Five things in it constrain later tasks:
    example* heading, and every scenario in the part is a published study. `atlas`, `kestrel`,
    `meridian`, `tideline`, `granary` and `lodestone` stay Part II's.
 
-**Next up:** Part IV plus appendices (`bec9accd89be`). **All research is done, and Parts I, II and
-III are written.** The editorial pass (`934259dc8038`) and the worked-example verification pass
-(`3b61a6a1a684`) are unblocked on everything except Part IV.
+Milestone 15 added `book/part-4-next-waves/` and `book/appendices/` — three chapters at roughly
+600 / 1,390 / 1,350 words and four appendices at 3,637 words in total. It closes the writing
+programme. Part IV lands at 9% of the book and the appendices at a further 9%, which puts Part II at
+58% and Part I at 11% on the build's own counter — the first point at which the 15 / 60 / 15 / 10
+proportions can be read against a finished manuscript rather than a partial one.
+
+| File | Owns |
+|---|---|
+| [`the-three-waves.md`](../book/part-4-next-waves/the-three-waves.md) | What a wave is, why wave one is the rest of the book, and the four-point contract for discounting the part: dated, unstudied, falsifiable, and ending on the part worth doing anyway |
+| [`refactoring-a-codebase-for-agents.md`](../book/part-4-next-waves/refactoring-a-codebase-for-agents.md) | Wave two — the constraint swap, feature-first layout, invisible control flow, what stays in shared infrastructure, the four properties that are not layout, and the experiment that would settle it |
+| [`inviting-non-developers-in.md`](../book/part-4-next-waves/inviting-non-developers-in.md) | Wave three — requester versus co-pilot, the four conditions for an outside change to be safe, who carries the review cost, and the low-code precedent nobody can quote |
+| [`appendices/glossary.md`](../book/appendices/glossary.md) | Twenty-two terms, each defined by behaviour, with vendor-specific and contested ones marked as such |
+| [`appendices/team-checklists.md`](../book/appendices/team-checklists.md) | Six one-page suite checklists, eight items each, selected by "keep what another person would notice the absence of" |
+| [`appendices/copy-paste-templates.md`](../book/appendices/copy-paste-templates.md) | The two-tier brief and card skeleton, the working-agreement skeleton, and a review checklist for agent-authored changes |
+| [`appendices/further-reading.md`](../book/appendices/further-reading.md) | Entry points into the twenty-one briefs by subject, roughly thirty primary sources, the author's two posts, and the five figures that do not survive being looked up |
+
+Five things in it constrain later tasks:
+
+1. **No failure mode was coined**, so the registry closes exactly where milestone 14 left it at 25
+   names. Part IV names none of its own and refers to three by name in passing — the Confident Wrong
+   Rewrite, the Load-Bearing Scaffold, and the Accountable Bystander — each plain rather than bold,
+   because none of them is first use.
+2. **The appendices link rather than duplicate, in three places, and that is load-bearing.** The
+   glossary points at Part III's index of failure modes instead of restating the names; the team
+   checklists compress rather than concatenate the eighteen play checklists; the templates appendix
+   extracts the working agreement from *Build the working agreement* rather than authoring a second.
+   A later edit that "completes" any of the three by copying the original in creates a second thing
+   to keep in step.
+3. **The templates appendix now carries a card skeleton, and the unwritten cards play
+   (`703e507c86aa`) has to agree with it.** The appendix states the pattern in three sentences — a
+   slim always-loaded index with a trigger per entry, self-contained files, one card one load no
+   chains — and shows a skeleton. The play owns the argument; if it reaches a different shape, the
+   appendix is the file to change.
+4. **Board item `5e0f39858134` can be checked.** Wave two is built on the feature-first argument as
+   the handoff asked, absorbed rather than cited: the constraint swap, the six-files-per-feature
+   cost, locality of behaviour, explicit over invisible control flow, and the trustworthy-black-box
+   nuance for cross-cutting concerns. The post's URL is in further reading, which is where the
+   attribution convention puts it.
+5. **`9dd4d6b84b80` is half-answered.** *Skill*, *card* and *harness* are now all defined in the
+   glossary, which satisfies the second half of Part I's promise ("defined where they are first used
+   and collected in the glossary"). The first half — *card* being used before it is defined, in
+   *Write the brief the agent actually reads* — is still open and still belongs to the cards play.
+
+**Next up:** the editorial pass (`934259dc8038`) and the worked-example verification pass
+(`3b61a6a1a684`). **Every writing milestone is now done**, so both are fully unblocked, as is the
+style-lint item (`6b0110f76388`), whose value is now entirely to the editorial pass.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -996,6 +1039,42 @@ browser is a reasonable substitute for a PDF engine.
   with a plausible-but-invented `granary`, because the claim being illustrated is a mechanism. Part
   III's claims are claims about the world, so nothing in it is illustrative and every number has a
   source.
+- **Part IV states its speculation contract once, in a chapter, rather than hedging every
+  paragraph.** The part is the only forward-looking material in the book and had to be marked as
+  such, and the two available shapes were a caveat per claim or a contract stated once and then
+  relied on. *The three waves* takes the second: dated to September 2026, no study behind any of it,
+  a named falsifier per chapter, and a closing section per chapter on the part worth doing anyway.
+  The cost of the first shape is prose that reads as though it does not believe itself, which is a
+  worse failure than over-claiming, because a reader cannot tell which hedges were meant.
+- **A speculative chapter names the measurement that would settle it.** Both wave chapters end on
+  an experiment a team could run in a week — a feature-first versus layer-first comparison on the
+  same twenty tasks, and a defect-rate comparison between developer-authored and outsider-authored
+  changes on one narrow surface — plus the signal to watch while nobody has run it. This is the
+  honest form of a forecast in a book whose Part III spends four chapters on what the evidence
+  cannot support, and it is cheap: two paragraphs each.
+- **An appendix links to the thing it would otherwise duplicate.** Three times in this milestone the
+  obvious appendix was a copy of something the book already has: the failure-mode names (Part III's
+  index), the eighteen play checklists, and the working agreement (the Team suite's worked example).
+  Each copy would have been a second artefact to keep in step with the first, and the registry in
+  this file already records duplication of a chapter's prose as a defect. The glossary links, the
+  templates appendix extracts a skeleton with the specifics removed, and the checklists appendix
+  **compresses rather than concatenates**, by a stated rule — keep the items whose absence another
+  person would notice, which is the same leaves-your-machine test the Team suite applies to the
+  working agreement. That rule is what makes the page an artefact rather than a reprint.
+- **The book's do-not-cite list is promoted into the book, as a section of further reading.** The
+  consolidated list is the largest artefact in the research and lived only in `notes/research/`,
+  where no reader goes. Five entries are named in the appendix — the SWE-bench dollar figures, the
+  "200–400 lines" review rule, any Stack Overflow 2026 number, the Standish CHAOS figures, and both
+  low-code statistics — with the briefs cited for the rest. A book that spends Part III on the
+  quality of the evidence should tell the reader which numbers to stop repeating, and it costs
+  fifteen lines.
+- **A line consisting of a single cross-reference link may exceed 100 columns.** Seven lines in
+  this milestone are one markdown link and nothing else, at 104–112 columns, because the longest
+  play titles and the deepest suite paths exceed the budget together and neither half can be
+  wrapped. The Team suite's fix — drop the anchor — does not apply, as these carry none.
+  `book/TEMPLATE-play.md` has had three such lines since milestone 3 and nobody treated them as
+  defects. Recorded here so the style lint (`6b0110f76388`) exempts them deliberately rather than
+  being switched off by whoever hits them first, and so the editorial pass reads them as a decision.
 
 ## Open questions
 
@@ -1030,7 +1109,10 @@ to it.
   extract the skeleton from it rather than invent a second one. The **working-agreement skeleton**
   is resolved the same way (milestone 13): *Build the working agreement* ships a complete one-page
   agreement in its Worked example, written to be copied, and the appendix extracts that rather than
-  authoring a second. Both halves of this question are now closed.
+  authoring a second. Both halves of this question are now closed, and milestone 15 shipped both
+  in [`appendices/copy-paste-templates.md`](../book/appendices/copy-paste-templates.md) on exactly
+  that basis, plus a third template — a review checklist for agent-authored changes, extracted the
+  same way from the two Verification plays.
 - **Rendering.** Markdown-on-GitHub is the committed deliverable. If a static site is ever wanted,
   that decision needs making before the prose accumulates site-specific link syntax.
 
@@ -1573,6 +1655,54 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `book/`'s own constraint documents.** Those are authors' files, and a reader of the PDF cannot
   open them. Cite `notes/research/` freely — the build rewrites those with `--repo-url` — but never
   `STYLE.md`, `TEMPLATE-play.md` or `README.md`.
+
+- **Milestone 15 closes the writing programme, and the proportions can finally be read.** With
+  everything written the build reports Part I at 11%, Part II at 58%, Part III at 13%, Part IV at
+  9%, and the appendices at 9% of 38,799 words. Against the 15 / 60 / 15 / 10 target that is Part II
+  landing almost exactly where it was planned and the other three parts each running a couple of
+  points light — because the appendices are a fifth column the proportions never accounted for.
+  Whether that is a problem is the editorial pass's call: the intent behind the numbers was that the
+  plays dominate, and they do.
+- **Part IV prints almost no figures, which is deliberate and is the opposite of Part III's
+  posture.** Nothing in the part is a claim about the world that a number could support: both
+  chapters argue from mechanism and say so. The two places a figure would have been available were
+  the mandate study — which milestone 14 recorded as spent in three places with a thin remainder,
+  and which Part IV accordingly does not build on — and the low-code precedent, where the only
+  figures in circulation are on the do-not-cite list.
+- **The low-code do-not-cite entries are used as the argument rather than avoided.** *Inviting
+  non-developers in* needed the historical precedent and found that the two statistics everybody
+  quotes to settle it — 43% of citizen-developer initiatives scaled back, and a 25–30% no-code
+  rewrite rate — have no primary source. Rather than dropping the precedent or laundering the
+  numbers, the chapter reports the absence: the last time the industry tried this, nobody measured
+  the result well enough to argue about it afterwards. That is a third use for a do-not-cite list,
+  after "do not print this" and "check before citing", and it is worth knowing it exists.
+- **Wave two is *The unit of work* absorbed, and the absorb-do-not-cite convention held up under a
+  whole chapter.** The post supplies the constraint swap, the feature-first argument, the
+  six-files-per-feature cost, locality of behaviour, the invisible-control-flow problem, and the
+  trustworthy-black-box nuance. None of it is cited in the prose; the URL is in further reading
+  beside *Cards*, under a heading that says what the two posts are without claiming them as
+  evidence. The one addition the chapter makes on its own account is the counter-argument to
+  cheap duplication, which the post does not raise and which this book's register requires.
+- **Wave three is built from one line of `notes/raw/idea.md` and the rest of the book.** "Inviting
+  others like designer and become co-pilots" is the entire source. Everything else in the chapter is
+  derived from material Part II already establishes — the cheap check, the narrow surface, the named
+  owner, the verification tax, the Fluent Stranger, the Accountable Bystander — which is why the
+  chapter reads as a consequence of the book rather than as a new subject. A speculative chapter
+  with no source is best written as an application of the parts that do have one.
+- **The appendices make `--repo-url` effectively required for a shareable build.** Further reading
+  carries roughly twenty links into `notes/research/` and the templates appendix links the
+  repository's own `CLAUDE.md` and `cards/`. Links outside `book/` are rewritten to absolute URLs
+  only when `--repo-url` is passed, and are silently left relative otherwise — no warning, because
+  the build cannot tell an intentional repo link from a mistake. That was true before and cost
+  little; it now affects two whole appendices. Anyone producing a copy for somebody without the
+  repository should pass it.
+- **Milestone 15 hit no `make check` problems and seven long lines, all of them single links.** A
+  throwaway width checker was run from `/tmp` — the ninth independent writing of it — and every
+  prose overshoot was fixed; what remains is the unwrappable-cross-reference case recorded as a
+  decision above. The mermaid diagram in *The three waves* was rendered through
+  `npx @mermaid-js/mermaid-cli` before finishing, and a first version with dotted back-arrows was
+  simplified after looking at the rendered PNG rather than at the source, which is an argument for
+  rendering diagrams rather than eyeballing them.
 
 ### Failure-mode registry
 
