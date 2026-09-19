@@ -61,7 +61,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 8 | Context play suite | `655473ee5afb` | ✅ done |
 | 9 | Harness play suite | `9366c3c324b5` | ✅ done |
 | 10 | Orchestration play suite | `3c6b76dedb59` | ✅ done |
-| 11 | Verification & Trust play suite | `4858fbdecdf4` | ⬜ blocked on 3, 6 |
+| 11 | Verification & Trust play suite | `4858fbdecdf4` | ✅ done |
 | 12 | Economics play suite | `bffa217221ed` | ⬜ blocked on 3, 6 |
 | 13 | Team play suite | `cdd27e440781` | ⬜ blocked on 3 |
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ⬜ blocked on 3, 6 |
@@ -377,10 +377,47 @@ Five things in it constrain later tasks:
    use an agent* has the material intact, including Anthropic's "optimizing single LLM calls… is
    usually enough", which is its epigraph and is unspent.
 
-**Next up:** Verification & Trust (`4858fbdecdf4`), Economics (`bffa217221ed`) and Part III
-(`c1416f44c483`), unblocked by milestone 6; and Team (`cdd27e440781`), which is free to run. **All
-research is done, Part I and three suites are written, and every remaining writing task is
-unblocked.**
+Milestone 11 added `verification-and-trust/`, the fourth suite, at roughly 314 / 1,152 / 1,232 /
+1,179 words. It spends milestone 6's `review-practice.md`, `verification.md` and `accountability.md`
+in full, and it is the suite the book's credibility rests on, so it is also the one that carries the
+most contested evidence inside *The play* rather than in a caveat.
+
+| File | Owns |
+|---|---|
+| [`verification-and-trust/index.md`](../book/part-2-plays/verification-and-trust/index.md) | The suite opener — names *everything the agent produces about its own work is a claim, and the signals worth acting on come from outside its turn* as the suite's one idea, and frames the three plays as that at the diff, the harness, and the team |
+| [`review-code-you-did-not-write.md`](../book/part-2-plays/verification-and-trust/review-code-you-did-not-write.md) | Review order — the things that check the code read before the code, size-based send-back, duplicate search, one traced path, the reproducer rule, and the agent's plan used to triage rather than to read through |
+| [`make-the-agent-prove-it.md`](../book/part-2-plays/verification-and-trust/make-the-agent-prove-it.md) | Finish conditions with a check inside them, deterministic stop gates and their override, the fakeability ranking rendered as a ladder, evidence over verdicts, and who owns the test |
+| [`decide-who-signs-off.md`](../book/part-2-plays/verification-and-trust/decide-who-signs-off.md) | A named owner and what owning means, the moral-crumple-zone counter-argument carried in the same document, the right to decline on volume, the four competing disclosure trailers, and where the real regulatory constraint lives |
+
+Five things in it constrain later tasks:
+
+1. **Three failure modes are registered.** **The Drifting Yes** and **the Accountable Bystander**
+   are new. **The Green Suite That Tests Nothing** was coined in `book/STYLE.md`'s naming section
+   and is claimed here, exactly as the Context suite claimed the Context Landfill — it is milestone
+   6's phenomenon (c), which `evidence.md` assigned to *Make the agent prove it* by name.
+   Phenomena (a), (b) and (d) from that pass are **untouched and still free for Part III**.
+2. **The suite uses `tideline`, a TypeScript service that stages firmware rollouts to field
+   devices**, across all three worked examples. TypeScript is a content decision on the milestone-10
+   precedent: the fakeability ranking puts the type checker at the top, and the evasions that make
+   the point — a widened type, a deleted `typecheck` step — need a stack that has one. Two suites
+   still need their own project.
+3. **The curl bug-bounty arc is unspent and is recommended to Part III.** The hub's worked-example
+   map offered it to *Review code you did not write*; the play declined it, because the reader's
+   problem is reviewing agent pull requests at volume and curl's arc is about inbound vulnerability
+   reports. It survives intact, including the April 2026 half that most citations drop, and it is
+   the sharpest available illustration that the incentive rather than the tool was the variable.
+4. **The play-count question was raised and answered as three.** The running log flagged that this
+   suite had more strong worked examples than plays. It does, and the surplus is not a fourth play:
+   the mandate-study displacement example is Part III's and Economics', and the two arguments about
+   the same green suite are one play's (*Make the agent prove it* carries the visible/held-out gap)
+   and Part III's (the `sys.exit(0)` harness escape, which this suite deliberately does not spend).
+5. **Part I's *verification tax* is used in the same words**, in *Review code you did not write*,
+   as the name for review effort displaced from writing onto checking. Economics and Part III should
+   keep using it rather than coining a second term.
+
+**Next up:** Economics (`bffa217221ed`) and Part III (`c1416f44c483`), unblocked by milestone 6; and
+Team (`cdd27e440781`), which is free to run. **All research is done, Part I and four suites are
+written, and every remaining writing task is unblocked.**
 
 **If you are the Team suite or Part I:** an archive pass (`df5ff268416d`) filed a late author
 fragment at [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md) and
@@ -731,6 +768,27 @@ browser is a reasonable substitute for a PDF engine.
   the resumability argument, the `interrupt()`-inside-a-tool mechanic, and the beat that neither
   version detects the crash are all in the play — re-hosted on the suite's own project. A brief
   supplies evidence and an illustration; the illustration is the part a writer may replace.
+- **A suite may claim a failure-mode name that `book/STYLE.md` coined as an example.** *Make the
+  agent prove it* takes **the Green Suite That Tests Nothing**, which appears in `STYLE.md`'s naming
+  section as an illustration of the convention rather than as a registered name. The Context suite
+  set this precedent with the Context Landfill, and it is the right way round: a name good enough to
+  teach the convention with is a name the book should use, and leaving it unclaimed guarantees a
+  second author coins a worse synonym for the same phenomenon. `STYLE.md`'s third example, *the
+  Confident Wrong Rewrite*, is still free.
+- **Where a play's material is legal or regulatory, it is reported and not advised**, per the
+  standing instruction attached to `notes/research/accountability.md`. *Decide who signs off* names
+  ISO 26262-8 clause 11 and dates the absence of any regulator position to September 2026, says in
+  print that none of it is legal advice, and quotes no document the brief flagged as unextractable —
+  no Copyright Office wording, no vendor indemnity clause text, no trailer syntax copied from a
+  secondary source. The brief's contested kernel trailer format is handled by naming the trailer's
+  *shape* (`Assisted-by:`) and telling the reader to check the live policy, which is the hedge the
+  staleness table asks for.
+- **A play may carry a genuinely unresolved question as a step rather than resolving it.** *Review
+  code you did not write* ends its numbered steps on whether the agent's plan in the pull-request
+  body helps the reviewer or anchors them — a contest the primary source has with itself, which
+  `evidence.md` names as load-bearing. The step is still actionable because the *action* does not
+  depend on the answer: triage with the plan, do not read the diff through it. That shape is worth
+  copying, because the alternative in a book that hedges honestly is a play whose steps evaporate.
 - **Three plays per suite is a floor, not a ceiling** — settled for the Context suite at least
   (user decision, milestone 19), which takes a fourth play on the cards pattern. This does not
   license adding plays quietly: `book/README.md` still asks suite authors to raise a fourth rather
@@ -747,7 +805,11 @@ to it.
   fourth play on the cards pattern. What remains open is the balance question — a suite with six
   plays next to one with two still unbalances Part II, and nothing yet caps the spread.
   `book/README.md` continues to ask suite authors to raise a fourth rather than add it quietly;
-  that procedure worked here and should be used again rather than treated as satisfied.
+  that procedure worked here and should be used again rather than treated as satisfied. Milestone
+  11 used it a second time — the Verification & Trust suite was flagged as having more strong
+  worked examples than plays, raised the question, and answered it as three by routing the surplus
+  to Part III rather than to a fourth slot. Four suites have now landed on three plays and one on
+  four, which is the spread staying narrow without anything yet capping it.
 - ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3): illustrative-but-
   correct for the first draft, with a verification pass (`3b61a6a1a684`) before publication. The
   rules are in [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means).
@@ -1097,6 +1159,54 @@ Append discovered constraints and cross-task notes here as work proceeds.
   and the
   git-redirect block list, both attributed to Claude Code 2.x in the sentence that uses them.
 
+- **Milestone 11 answered the play-count raise this suite was asked to make, and the answer is
+  three.** The earlier note — "the Verification & Trust suite has a stronger worked example than it
+  has plays for" — is now resolved. The fakeability ranking and the visible/held-out gap are one
+  play's, spent in *Make the agent prove it*. The `sys.exit(0)` harness escape is **deliberately
+  unspent and reserved for Part III**, which owns the same phenomenon at chapter length and has the
+  room to carry its generalisation to alignment faking and sabotage. The mandate-study displacement
+  example stays with Part III and Economics. No fourth play was wanted, which is a third data point
+  against the open play-count question.
+- **The curl bug-bounty arc is unspent and belongs to Part III.** The hub's map offered it to
+  *Review code you did not write*, which declined it on reader fit, on the milestone-10 precedent: a
+  play about reviewing agent pull requests at volume is not improved by four hundred words on
+  inbound vulnerability reports. It is intact and is one of the strongest artefacts in milestone 6 —
+  both halves verified at source, and its lesson is that the money rather than the AI was the slop
+  vector. **Whoever writes Part III should take it, and must carry the April 2026 half**; the
+  January 2026 figure alone is on the staleness table's hedge list.
+- **`tideline`, a TypeScript service staging firmware rollouts to field devices**, is the fourth
+  suite's project. It is deliberately typed, for the reason milestone 10 chose Ruby: this suite's
+  central artefact is a ranking that puts the type checker at the top of the fakeability ladder, and
+  the two evasions the plays show — a widened type and a deleted `typecheck` pipeline step — need a
+  stack where a type checker exists to weaken. `atlas`, `kestrel`, `meridian` and `tideline` are
+  taken; Economics and Team still need their own.
+- **Two of the three plays overshoot the 500-word budget for *The play*, at ~524, ~568 and ~579.**
+  The totals are inside the 600–1,200 play budget (1,152 / 1,232 / 1,179) and every other section is
+  inside its own. The overrun is structural rather than sloppy: each step in this suite carries a
+  cited figure and, in four cases, both halves of a contested claim, and the surviving alternatives
+  were dropping a step or dropping the counter-evidence. Flagged for `fce3cee8fa34`, which already
+  holds three marginal budget overruns, rather than fixed by deleting evidence. If the editorial
+  pass wants these inside 500, the cheapest cut in each play is the closing why-it-works paragraph,
+  not a step.
+- **Four of milestone 6's contested claims are carried with both halves, inside *The play*.** The
+  plan-in-the-pull-request question, whether model-written tests are usable, whether TDD helps
+  agents, and whether "the human owns the diff" distributes responsibility or merely locates it. The
+  Orchestration suite established that a play can cite evidence limiting its own subject in a
+  numbered step; this suite does it four times, and the plays stay actionable because each action is
+  written not to depend on which half wins.
+- **The suite cites no adoption counts and no leaderboard scores**, on the Harness and Orchestration
+  precedent, and it prints no figure from the hub's do-not-cite list. Specifically checked and not
+  used: every SWE-bench per-instance dollar figure, the "200–400 lines in under 60 minutes" review
+  rule, the "65% of PRs rubber-stamped" claim, METR's 19% without its qualifier, any Stack Overflow
+  2026 figure, and Anthropic's Opus 4.5 reward-hacking rate. Where the ICSME 2024 comment-free
+  figure was the citable substitute for a rubber-stamping number, the play uses the phenomenon
+  rather than the figure.
+- **Milestone 11 hit no 100-column overshoots and no `make check` problems**, having run a throwaway
+  width checker from `/tmp` — the fifth independent writing of it — and the mermaid diagram through
+  `npx @mermaid-js/mermaid-cli` before finishing. Board item `6b0110f76388` remains the right home
+  for both checks, and the section word counter in `scripts/build_book.py` is still the thing that
+  would have caught the budget overrun above at draft time rather than at review time.
+
 ### Failure-mode registry
 
 One name per phenomenon across the whole book. Check here before coining a name; append yours
@@ -1115,3 +1225,6 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Tidy Summary** | A delegated worker returns a well-organised, correct-as-far-as-it-goes summary that reads identically whether the work was thorough or partial. The compression is why you delegated; it is lossy exactly where you would check. | `orchestration/decompose-into-subagents.md` |
 | **the Load-Bearing Scaffold** | A scripted stage built around a capability gap that has since closed, which can no longer be removed because retry logic, metrics, and neighbouring stages have grown into it. | `orchestration/make-the-control-flow-deterministic.md` |
 | **the Clean Merge** | Git reports success, both branches were green, and the merged tree was never tested by anyone. The conflicts git can see are the survivable class; the expensive class exists only in the union. | `orchestration/work-in-parallel-without-collisions.md` |
+| **the Drifting Yes** | Reviewer approval of agent changes gets easier with exposure while approval of colleagues' changes holds flat. Invisible to the surface metrics a reviewer would check; the tell is the reviewer's own comments getting shorter. | `verification-and-trust/review-code-you-did-not-write.md` |
+| **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite: a test deleted or skipped, a test input special-cased in the implementation, or an assertion no plausible defect could fail. | `verification-and-trust/make-the-agent-prove-it.md` (coined in `book/STYLE.md`'s naming section) |
+| **the Accountable Bystander** | A named owner who approved more changes than anyone could have understood, and had no standing to decline. Accountability by title, bystanding in fact; the incident review finds the name and stops. | `verification-and-trust/decide-who-signs-off.md` |
