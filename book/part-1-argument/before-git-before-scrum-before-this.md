@@ -104,9 +104,13 @@ because a hard question at least has an answer somebody can look up.
 
 The vocabulary is missing too. There is a thing agents do where a run arrives at a correct solution
 partway through, keeps going, and overwrites it; it has been measured, and everyone who uses these
-tools daily has watched it happen. There is no name for it, so raising it in a review costs a full
-sentence of explanation every time, which is roughly why it does not get raised. The figures are in
-[`notes/research/failure-modes.md`](../../notes/research/failure-modes.md).
+tools daily has watched it happen. It has no agreed name, so raising it in a review costs a full
+sentence of explanation every time, which is roughly why it does not get raised. This book calls it
+the Vanishing Fix and collects the others alongside it in [*The failure modes worth
+naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md); the figures are in
+[`notes/research/failure-modes.md`](../../notes/research/failure-modes.md). A shared name is not a
+small thing. It is the difference between a phenomenon a team can discuss and one everybody
+tolerates separately.
 
 ## Where the analogy breaks
 
