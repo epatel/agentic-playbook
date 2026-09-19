@@ -22,7 +22,9 @@ from __future__ import annotations
 
 import argparse
 import datetime as _datetime
+import json
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -374,52 +376,202 @@ class ChapterRewriter:
 
 MERMAID_OPEN = re.compile(r"^(\s{0,3})(`{3,}|~{3,})\s*\{?\.?mermaid\b")
 
+#: The npm package that provides ``mmdc``. Used both for the ``npx`` fallback and for the advice
+#: printed when neither it nor node is available.
+MERMAID_PACKAGE = "@mermaid-js/mermaid-cli"
 
-def render_mermaid(text: str, out_dir: Path, prefix: str,
-                   reporter: Reporter) -> tuple[str, int, int]:
-    """Replace ```mermaid blocks with rendered images, if mermaid-cli is installed.
+#: Render at 3× so the PNG still looks sharp in print. The scale is divided back out when the
+#: display width is computed, so it affects resolution and nothing else.
+MERMAID_SCALE = 3
 
-    Returns the text, the number rendered, and the number left as source.
+#: CSS pixels per inch, which is what mermaid-cli's unscaled output is measured in.
+CSS_DPI = 96
+
+#: Widest a diagram may be drawn, in inches. A4 minus the typst margins in book-metadata.yaml
+#: leaves 6.5in, and A4 minus the 1in LaTeX margins leaves 6.3in; 6.0in clears both with air to
+#: spare. Diagrams narrower than this keep their natural size rather than being stretched.
+MAX_DIAGRAM_WIDTH_IN = 6.0
+
+#: Substrings that mean the renderer itself could not run — no network for npx, no browser for
+#: puppeteer — as opposed to the diagram being wrong. The first kind is a note on an unlucky
+#: machine; the second is a problem with the book.
+TOOLCHAIN_FAILURES = (
+    "enotfound", "eai_again", "etimedout", "econnreset", "network",
+    "npm error", "npm err!", "could not determine executable",
+    "failed to launch", "could not find chrome", "could not find browser",
+    "chrome-headless-shell", "please run the following command to download",
+)
+
+
+def resolve_mermaid_command(requested: str | None) -> list[str] | None:
+    """Work out how to invoke mermaid-cli, or return None if there is no way to.
+
+    ``mmdc`` on PATH is preferred because it is the fastest and needs no network. Failing that,
+    ``npx`` can fetch the package on demand, which is what makes the PDF come out with diagrams in
+    it on a machine where nobody has run ``npm install -g``.
     """
+    if requested:
+        parts = shlex.split(requested)
+        return parts if parts and shutil.which(parts[0]) else None
     mmdc = shutil.which("mmdc")
-    lines, out = text.splitlines(), []
-    rendered = skipped = 0
-    index = 0
-    i = 0
-    while i < len(lines):
-        match = MERMAID_OPEN.match(lines[i])
-        if not match:
-            out.append(lines[i])
-            i += 1
-            continue
-        marker = match.group(2)
-        body, j = [], i + 1
-        while j < len(lines) and not re.match(rf"^\s{{0,3}}{marker[0]}{{{len(marker)},}}\s*$",
-                                              lines[j]):
-            body.append(lines[j])
-            j += 1
-        index += 1
-        if not mmdc:
-            skipped += 1
-            out.extend(lines[i:j + 1])
-        else:
-            source = out_dir / f"{prefix}-{index}.mmd"
-            image = out_dir / f"{prefix}-{index}.png"
-            source.write_text("\n".join(body) + "\n", encoding="utf-8")
-            command = [mmdc, "-i", str(source), "-o", str(image), "-b", "white", "-s", "3"]
-            try:
-                subprocess.run(command, check=True, capture_output=True)
-            except (subprocess.CalledProcessError, OSError) as error:
-                skipped += 1
-                reporter.warn(f"mermaid render failed for {prefix}-{index}: {error}")
-                out.extend(lines[i:j + 1])
+    if mmdc:
+        return [mmdc]
+    npx = shutil.which("npx")
+    if npx:
+        return [npx, "--yes", MERMAID_PACKAGE]
+    return None
+
+
+def first_error_line(output: str) -> str:
+    """The one line of mermaid-cli's output worth showing an author.
+
+    It prints a progress banner, then the real message, then twenty frames of puppeteer stack.
+    ``UnknownDiagramError: …`` is the line that tells you what to fix.
+    """
+    lines = [line.strip() for line in output.splitlines() if line.strip()]
+    lines = [line for line in lines
+             if not line.startswith("at ") and not line.startswith("Generating ")]
+    for line in lines:
+        if "error" in line.lower():
+            return line
+    return lines[0] if lines else ""
+
+
+def png_size(path: Path) -> tuple[int, int] | None:
+    """Pixel dimensions from a PNG's IHDR chunk. Saves a Pillow dependency for 8 bytes of header."""
+    try:
+        header = path.read_bytes()[:24]
+    except OSError:
+        return None
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return int.from_bytes(header[16:20], "big"), int.from_bytes(header[20:24], "big")
+
+
+def display_width(image: Path) -> str | None:
+    """The width to draw a rendered diagram at, as a pandoc image attribute value.
+
+    Without this pandoc reads the PNG's pixel width, assumes 96 dpi, and lays a 3×-scaled diagram
+    out three times too wide — which is how a diagram ends up running off the side of the page.
+    """
+    size = png_size(image)
+    if not size:
+        return None
+    inches = size[0] / (CSS_DPI * MERMAID_SCALE)
+    return f"{min(inches, MAX_DIAGRAM_WIDTH_IN):.2f}in"
+
+
+class MermaidRenderer:
+    """Turns ```mermaid blocks into rendered images.
+
+    Renders are cached against the diagram source in ``build/diagrams``: the npx route costs a few
+    seconds per diagram, and a book with a diagram in every play would otherwise make every
+    rebuild slow enough to stop running.
+    """
+
+    def __init__(self, command: list[str] | None, out_dir: Path, reporter: Reporter) -> None:
+        self.command = command
+        self.out_dir = out_dir
+        self.reporter = reporter
+        self.rendered = 0
+        self.reused = 0
+        self.skipped = 0
+        #: Set once the renderer is known to be unusable, so the remaining diagrams fail instantly
+        #: instead of each waiting on its own doomed npx call.
+        self.broken: str | None = None if command else "no renderer found"
+
+    @property
+    def puppeteer_config(self) -> Path:
+        """``--no-sandbox``, which puppeteer needs when it runs as root in a container."""
+        path = self.out_dir / "puppeteer-config.json"
+        if not path.is_file():
+            path.write_text(json.dumps({"args": ["--no-sandbox"]}), encoding="utf-8")
+        return path
+
+    def render(self, body: str, name: str) -> Path | None:
+        """Render one diagram, returning the image path, or None if it could not be rendered."""
+        if self.broken:
+            self.skipped += 1
+            return None
+
+        source = self.out_dir / f"{name}.mmd"
+        image = self.out_dir / f"{name}.png"
+        if image.is_file() and source.is_file() and source.read_text(encoding="utf-8") == body:
+            self.reused += 1
+            return image
+        source.write_text(body, encoding="utf-8")
+
+        command = self.command + [
+            "-i", str(source), "-o", str(image),
+            "-b", "white", "-s", str(MERMAID_SCALE),
+            "-p", str(self.puppeteer_config),
+        ]
+        try:
+            result = subprocess.run(command, capture_output=True, text=True)
+        except OSError as error:
+            self.broken = str(error)
+            self.skipped += 1
+            return None
+
+        if result.returncode != 0 or not image.is_file():
+            output = f"{result.stdout}\n{result.stderr}"
+            detail = first_error_line(output) or f"exit {result.returncode}"
+            self.skipped += 1
+            # A renderer that cannot start at all will not start for the next diagram either, so
+            # give up on all of them rather than waiting out the same failure once per diagram.
+            if any(marker in output.lower() for marker in TOOLCHAIN_FAILURES):
+                self.broken = detail
             else:
-                rendered += 1
-                out.append("")
-                out.append(f"![]({image})")
-                out.append("")
-        i = j + 1
-    return "\n".join(out), rendered, skipped
+                self.reporter.warn(f"{name}: mermaid could not render this diagram — {detail}")
+            return None
+
+        self.rendered += 1
+        return image
+
+    def run(self, text: str, prefix: str) -> str:
+        """Replace every mermaid block in one chapter, leaving unrenderable ones as source."""
+        lines, out = text.splitlines(), []
+        index = i = 0
+        while i < len(lines):
+            match = MERMAID_OPEN.match(lines[i])
+            if not match:
+                out.append(lines[i])
+                i += 1
+                continue
+            marker = match.group(2)
+            close = re.compile(rf"^\s{{0,3}}{re.escape(marker[0])}{{{len(marker)},}}\s*$")
+            body, j = [], i + 1
+            while j < len(lines) and not close.match(lines[j]):
+                body.append(lines[j])
+                j += 1
+            index += 1
+            image = self.render("\n".join(body) + "\n", f"{prefix}-{index}")
+            if image is None:
+                out.extend(lines[i:j + 1])          # leave the source; it is still correct markdown
+            else:
+                width = display_width(image)
+                attrs = f"{{width={width}}}" if width else ""
+                # Absolute, like the image links ChapterRewriter emits: the collected markdown
+                # lives in build/ but is rendered with the repo root as the working directory, and
+                # standalone HTML is read from build/ again.
+                out += ["", f"![]({image.resolve()}){attrs}", ""]
+            i = j + 1
+        return "\n".join(out)
+
+    def summarise(self) -> None:
+        if self.rendered or self.reused:
+            reused = f", {self.reused} unchanged" if self.reused else ""
+            log(f"Rendered {self.rendered} mermaid diagram(s){reused}.")
+        if not self.skipped:
+            return
+        if self.command is None:
+            advice = (f"install it with `npm install -g {MERMAID_PACKAGE}`, or install node so the "
+                      f"build can fetch it with npx")
+        else:
+            advice = f"the renderer could not run: {self.broken}" if self.broken else \
+                     "see the problems above"
+        self.reporter.note(f"{self.skipped} mermaid diagram(s) left as source in the PDF — "
+                           f"{advice}")
 
 
 # --------------------------------------------------------------------------------------------
@@ -440,13 +592,13 @@ def page_break_for(engine: str | None) -> str:
     return ""
 
 
-def collect(parts: list[Part], out_dir: Path, repo_url: str | None, mermaid: bool,
-            reporter: Reporter, page_break: str = "") -> tuple[str, list[Chapter], list[Chapter]]:
+def collect(parts: list[Part], out_dir: Path, repo_url: str | None,
+            mermaid: MermaidRenderer | None, reporter: Reporter,
+            page_break: str = "") -> tuple[str, list[Chapter], list[Chapter]]:
     by_path = assign_anchors(parts)
     warn = reporter.warn
     written: list[Chapter] = []
     unwritten: list[Chapter] = []
-    diagrams_rendered = diagrams_skipped = 0
     chunks: list[str] = []
 
     for part in parts:
@@ -465,11 +617,7 @@ def collect(parts: list[Part], out_dir: Path, repo_url: str | None, mermaid: boo
             chapter.words = word_count(raw)
             body = ChapterRewriter(chapter, by_path, repo_url, reporter).run(raw)
             if mermaid:
-                body, rendered, skipped = render_mermaid(
-                    body, out_dir / "diagrams", chapter.anchor, reporter
-                )
-                diagrams_rendered += rendered
-                diagrams_skipped += skipped
+                body = mermaid.run(body, chapter.anchor)
             chapter.text = body
             written.append(chapter)
             # No break before the first chapter of a part: it follows the part heading.
@@ -480,11 +628,8 @@ def collect(parts: list[Part], out_dir: Path, repo_url: str | None, mermaid: boo
         chunks.append(page_break + f"# {part.title} {{#{part.anchor}}}\n")
         chunks.extend(part_body)
 
-    if diagrams_skipped:
-        reporter.note(f"{diagrams_skipped} mermaid diagram(s) left as source — install "
-                      f"mermaid-cli to render them: npm install -g @mermaid-js/mermaid-cli")
-    if diagrams_rendered:
-        log(f"Rendered {diagrams_rendered} mermaid diagram(s).")
+    if mermaid:
+        mermaid.summarise()
 
     return "\n\n".join(chunks).rstrip() + "\n", written, unwritten
 
@@ -654,6 +799,9 @@ def main(argv: list[str] | None = None) -> int:
                              "base URL instead of leaving them relative")
     parser.add_argument("--no-mermaid", action="store_true",
                         help="never shell out to mermaid-cli; leave diagrams as source")
+    parser.add_argument("--mermaid-cmd", metavar="CMD",
+                        help="how to invoke mermaid-cli (default: mmdc if installed, otherwise "
+                             f"`npx --yes {MERMAID_PACKAGE}`)")
     parser.add_argument("--no-draft-note", action="store_true",
                         help="omit the 'About this build' page listing unwritten chapters")
     parser.add_argument("--check", action="store_true",
@@ -686,10 +834,24 @@ def main(argv: list[str] | None = None) -> int:
     parts = parse_toc(TOC_FILE.read_text(encoding="utf-8"))
     reporter = Reporter()
     out_dir: Path = args.out_dir
-    (out_dir / "diagrams").mkdir(parents=True, exist_ok=True)
+    diagram_dir = out_dir / "diagrams"
+    if not args.check:
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+    # --check writes nothing, so it does not render diagrams either: an image nobody will look at
+    # is not worth several seconds per diagram on the check path.
+    mermaid = None
+    if not args.no_mermaid and not args.check:
+        diagram_dir.mkdir(parents=True, exist_ok=True)
+        command = resolve_mermaid_command(args.mermaid_cmd)
+        if command is None and args.mermaid_cmd:
+            log(f"Requested mermaid command '{args.mermaid_cmd}' is not on PATH.")
+        mermaid = MermaidRenderer(command, diagram_dir, reporter)
+        if command and args.verbose:
+            log("Rendering mermaid with: " + " ".join(command))
 
     body, written, unwritten = collect(
-        parts, out_dir, args.repo_url, not args.no_mermaid, reporter, page_break_for(engine)
+        parts, out_dir, args.repo_url, mermaid, reporter, page_break_for(engine)
     )
     for orphan in find_orphans(parts):
         reporter.warn(f"{orphan}: not in the table of contents, so not in the book")
