@@ -8,7 +8,11 @@ PYTHON ?= python3
 BUILD  ?= build
 NAME   ?= agentic-playbook
 SCRIPT := scripts/build_book.py
+STYLE  := scripts/check_style.py
 ARGS   ?=
+# Extra flags for the style checker alone, so that ARGS keeps carrying build flags. Not
+# named LINT: make has a built-in variable of that name, and it is already set to `lint`.
+STYLEARGS ?=
 
 OUT    := --out-dir $(BUILD) --name $(NAME)
 PDF    := $(BUILD)/$(NAME).pdf
@@ -18,7 +22,7 @@ HTML   := $(BUILD)/$(NAME).html
 OPENER ?= $(shell command -v open 2>/dev/null || command -v xdg-open 2>/dev/null)
 
 .DEFAULT_GOAL := help
-.PHONY: help pdf md html open open-html check clean
+.PHONY: help pdf md html open open-html check lint clean
 
 help: ## Show this help
 	@echo "The Agentic Playbook"
@@ -47,8 +51,15 @@ open-html: html ## Build the HTML book and open it in the default browser
 	@test -n "$(OPENER)" || { echo "make open-html: no 'open' or 'xdg-open' on PATH; the book is at $(HTML)"; exit 1; }
 	$(OPENER) "$(HTML)"
 
-check: ## Report chapters missing from disk and files missing from the table of contents
-	$(PYTHON) $(SCRIPT) --check --strict $(ARGS)
+# Both halves always run: fixing a missing chapter and fixing a 104-column line are different
+# jobs, and stopping at the first one hides the second until the next invocation.
+check: ## Report structural problems and style defects; write nothing, fail if either does
+	@$(PYTHON) $(SCRIPT) --check --strict $(ARGS); structure=$$?; \
+	$(PYTHON) $(STYLE) --strict $(STYLEARGS); style=$$?; \
+	test $$structure -eq 0 -a $$style -eq 0
+
+lint: ## Report style defects only: 100 columns, whitespace, fences, the outright bans
+	$(PYTHON) $(STYLE) --strict $(STYLEARGS)
 
 clean: ## Remove build output
 	rm -rf $(BUILD)
