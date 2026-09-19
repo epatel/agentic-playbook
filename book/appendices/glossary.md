@@ -28,7 +28,8 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   situation arrives rather than in every session, indexed from a slim brief that names its trigger.
   The defining rule is self-containment: loading one card never requires loading another. A
   convention rather than a standard — no tool enforces it, and the directory is called `cards/`
-  because somebody chose that.
+  because somebody chose that. See
+  [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md).
 
 - **Context window.** The maximum amount of text — brief, conversation, file contents, tool output —
   a model can consider at once, measured in tokens. Everything the agent knows in a given turn is

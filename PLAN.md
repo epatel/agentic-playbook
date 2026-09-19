@@ -92,7 +92,7 @@ fastest, and a chapter called "LangChain" is a chapter with a shelf life.
 
 | Suite | Plays (working titles) | Tools that appear as examples |
 |---|---|---|
-| **Context** | Write the brief the agent actually reads · Starve the context · Scope a task to fit the window | `CLAUDE.md`, `AGENTS.md`, `rtk` |
+| **Context** | Write the brief the agent actually reads · Split the brief into cards · Starve the context · Scope a task to fit the window | `CLAUDE.md`, `AGENTS.md`, `cards/`, `rtk` |
 | **Harness** | Choose your harness · Package repeatable expertise · Wire in the outside world | Skills, MCP servers, permissions/sandboxing |
 | **Orchestration** | Decompose into subagents · Make the control flow deterministic · Work in parallel without collisions | subagents, LangGraph, n8n, git worktrees |
 | **Verification & Trust** | Review code you did not write · Make the agent prove it · Decide who signs off | test strategy, review practice, accountability |

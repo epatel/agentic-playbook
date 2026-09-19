@@ -14,7 +14,7 @@ are read-only.
 | `book/` | The book itself. Chapter and play files, one file per unit. | Yes |
 | `notes/research/` | Cited research briefs. Evidence the chapters draw from. | Yes |
 | `notes/raw/` | Original scattered ideation, superseded by `PLAN.md`. | **No — frozen** |
-| `cards/` | These reference cards. | Yes, when a convention changes |
+| `cards/` | These reference cards. | Yes, when a convention changes — then see below |
 | `scripts/`, `Makefile` | The book build: collect the chapters, render a PDF. See [building-the-book](building-the-book.md). | Yes |
 | `build/` | Build output. | **No — generated, gitignored, never committed** |
 | `.claude/skills/` | Symlinked agent skills. | Rarely |
@@ -53,3 +53,12 @@ Lowercase, hyphenated, descriptive of content rather than position: `starve-the-
 not `play-03.md`. Ordering is expressed in the book's table of contents, not in filenames —
 because plays get inserted, reordered, and dropped, and renumbering a directory is a merge
 conflict waiting to happen.
+
+## Editing a card is editing the book
+
+[*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md) uses
+this repository's own two-tier setup as its worked example, and prints the per-card line counts
+and an audit of links between cards as captured output. `book/examples/cards/reproduce.py`
+asserts both blocks against the real directory, so a card that changes length, a new card, or a
+new link between two of them puts the book out of step. Run that script and paste what it prints
+into the play.

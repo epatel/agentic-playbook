@@ -14,13 +14,13 @@ the six suites fail at different rates.
 
 ## Context
 
-Assembled from the three plays in [*Context*](../part-2-plays/context/index.md).
+Assembled from the four plays in [*Context*](../part-2-plays/context/index.md).
 
 - [ ] One file holds the project brief; the vendor-specific file is an import or a symlink
 - [ ] Every line in it traces to a correction somebody would otherwise retype
 - [ ] Nothing in it is scoped to one directory, one procedure, or one rare situation
 - [ ] Somebody has had the agent state its project instructions back to them this week
-- [ ] Conditional instructions load on a trigger rather than at launch
+- [ ] Conditional instructions load on a trigger rather than at launch, and none needs another
 - [ ] Any filtering tool was measured on a paired run against the bill, not its own dashboard
 - [ ] Acceptance conditions live in a file, not only in somebody's opening message
 - [ ] A stop rule is agreed before long runs, and state for the next session is written down

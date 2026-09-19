@@ -135,7 +135,7 @@ rather than "this is wrong".
 
 ## The index
 
-Every name this book uses, and where it is described — the six above plus the nineteen the plays
+Every name this book uses, and where it is described — the six above plus the twenty the plays
 coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
 than the cause: a reader should recognise the thing before they understand it.
 
@@ -149,6 +149,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
 | **the Context Landfill** | A brief that only ever grew; the current convention followed about half the time | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) |
 | **the Brief That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) |
+| **the Reassembled Brief** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md) |
 | **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
 | **the Paper Fence** | A rule that forbids something and does not stop it | [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md) |
