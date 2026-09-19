@@ -16,9 +16,8 @@ Decide it in advance, in writing, as a team. The question does not get easier du
 1. **State that a named person owns every change, and say what owning it means.** Every project that
    has written anything down lands here: the Linux kernel's `coding-assistants.rst` says agents must
    not add `Signed-off-by` tags, only humans can certify the Developer Certificate of Origin, and
-   the human takes "full responsibility"; LLVM says the contributor "is always the author and is
-   fully accountable". The test worth stealing is Kubernetes's, because it is checkable — if you
-   cannot personally explain the change, the pull request is closed
+   the human takes "full responsibility". The test worth stealing is Kubernetes's, because it is
+   checkable — if you cannot personally explain the change, the pull request is closed
    ([`accountability.md`](../../../notes/research/accountability.md)).
 2. **Write the argument against your own rule into the same document.** "The human owns the diff" is
    unanimous in policy and contested in the literature: Elish's moral-crumple-zone argument is that
@@ -28,7 +27,7 @@ Decide it in advance, in writing, as a team. The question does not get easier du
 3. **Give the owner the right to refuse on volume alone.** Sign-off without standing to decline is a
    signature, not a decision. Google's review guidance grants reviewers that authority explicitly,
    and LLVM's version is a test anyone can apply: a contribution should be worth more than the time
-   it takes to review it. This is the clause that decides whether the first two mean anything.
+   it takes to review it.
 4. **Pick a disclosure string, check what your tools already write, and stop arguing about it.**
    There is no standard: git accepts any `key: value` trailer and enforces nothing, and the field
    carries `Assisted-by:` at the kernel and Fedora, `Generated-by:` at Apache, and prose in the pull
@@ -46,10 +45,9 @@ Decide it in advance, in writing, as a team. The question does not get easier du
    advice; it is what those documents say, on the date they were read.
 
 What you are assigning is not blame, it is the obligation to explain the change to somebody else,
-and nothing else can hold that: no standard records which model produced which hunk, and the only
-mechanism in production is a self-asserted string no tool verifies. The exchange rate is throughput
-— an owner who can answer for a change is slower than the generation of changes, so the team's rate
-becomes that person's rate, chosen deliberately rather than discovered later.
+and nothing else can hold it: no standard records which model produced which hunk. The exchange rate
+is throughput — an owner who can answer for a change is slower than the generation of changes, so
+the team's rate becomes that person's rate, chosen deliberately rather than discovered later.
 
 ## Worked example
 

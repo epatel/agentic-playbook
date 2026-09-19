@@ -50,12 +50,12 @@ graph LR
     E --> C
 ```
 
-The reason this holds up is that it separates two things the discourse keeps fusing. Enumerability
-is about whether you can name the steps; judgement is about whether a rule can decide the answer. A
-task can be wildly difficult and perfectly enumerable; the difficulty belongs at a leaf and the
-enumeration belongs in code. The exchange rate is adaptability and maintenance: a scripted pipeline
-handles the cases you thought of and stops dead at the one you did not, and the script is yours to
-maintain, in exchange for being able to say what ran.
+It holds up because it separates two things the discourse keeps fusing. Enumerability is about
+whether you can name the steps; judgement is about whether a rule can decide the answer. A task can
+be wildly difficult and perfectly enumerable; the difficulty belongs at a leaf and the enumeration
+belongs in code. The exchange rate is adaptability and maintenance: a scripted pipeline handles the
+cases you thought of and stops dead at the one you did not, and the script is yours to maintain, in
+exchange for being able to say what ran.
 
 ## Worked example
 

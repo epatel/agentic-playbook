@@ -317,12 +317,17 @@ def play_sections(lines: list[str], prose: list[str | None]) -> list[tuple[int, 
 def budget_defects(path: Path, lines: list[str], prose: list[str | None]) -> list[Defect]:
     """Every word budget that applies to this file, counted with the build's own counter.
 
-    All of these are **notes**, not problems, and that is a decision rather than an oversight.
-    The count is exact; the threshold is a judgement — 502 words against a 500-word ceiling is
-    not the same kind of defect as a 104-column line, and a writing task holding a half-drafted
-    chapter is legitimately outside its budget for the length of its turn. A note names the file,
-    the section, the count and the distance, which is everything a person needs to act, without
-    turning somebody else's mid-draft into a red build for everyone.
+    All of these are **problems**, and that is the second half of a decision taken in two steps.
+    `023ba519cdd0` reported them as notes because eleven overruns already existed and making them
+    problems would have handed every unrelated edit a red build it had inherited. `bfc99c593aeb`
+    trimmed all eleven, and promoted them here: the book is inside every budget, so an overrun is
+    now something an edit introduced rather than something it found. The regression this catches is
+    the one that filed the trim — 45 words of legitimate cross-reference added to a section already
+    at its ceiling, by a task that had no reason to suspect it. A note would not have stopped it.
+
+    The cost is real and was accepted: the trimmed plays sit 1–7 words under a 500-word ceiling, so
+    a clarifying clause reddens the build. That is the point — the clause still goes in, and
+    something else comes out in the same edit.
     """
     role = budget_role(path)
     if role is None:
@@ -330,7 +335,7 @@ def budget_defects(path: Path, lines: list[str], prose: list[str | None]) -> lis
     defects: list[Defect] = []
 
     def note(line_no: int, message: str, rule: str = "budget") -> None:
-        defects.append(Defect(path, line_no, rule, message, problem=False))
+        defects.append(Defect(path, line_no, rule, message, problem=True))
 
     text = "\n".join(lines)
     whole = {"chapter": CHAPTER, "opener": OPENER, "play": PLAY}[role]
@@ -564,14 +569,16 @@ def budget_self_test() -> list[str]:
 
     A section one word outside its budget is reported (the margins are the whole point), and a
     file the book states no budget for is not (Part IV, the appendices and the preface are not
-    silently given one).
+    silently given one). Since `bfc99c593aeb` a budget defect is a **problem**, so this also
+    asserts the severity: a note would leave the check advisory and the regression it exists to
+    catch would land green.
     """
     failures = []
 
     def budget_notes(path: Path, text: str) -> list[tuple[int, str]]:
         defects = check_text(path, text)
-        if any(d.problem and d.rule in ("budget", "play-headings") for d in defects):
-            failures.append(f"{rel(path)}: a budget defect was reported as a problem, not a note")
+        if any(not d.problem and d.rule in ("budget", "play-headings") for d in defects):
+            failures.append(f"{rel(path)}: a budget defect was reported as a note, not a problem")
         return sorted((d.line, d.rule) for d in defects
                       if d.rule in ("budget", "play-headings"))
 

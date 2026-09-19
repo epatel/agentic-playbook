@@ -21,9 +21,8 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
    by the eighth file. An agent's unit of work is a behaviour, not a directory. Where a layer-first
    layout makes that split awkward — one capability living in six files across three trees — the
-   difficulty is in the repository rather than in the task. [*Refactoring a codebase for
-   agents*](../../part-4-next-waves/refactoring-a-codebase-for-agents.md) is the same argument at
-   the scale of the codebase.
+   difficulty is in the repository, not the task: see [*Refactoring a codebase for
+   agents*](../../part-4-next-waves/refactoring-a-codebase-for-agents.md).
 3. **Hand the requirements over as an external list, not as prose to remember.** A numbered list of
    acceptance conditions in a file the agent can re-read beats the same conditions buried in your
    opening message. In the one white-box study of this
@@ -32,14 +31,12 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    were supplied as an external list; a generic "check your work" prompt got 5.
 4. **Stop on the tells, not on the error.** Three tells, any one of which means re-scope rather than
    continue: the agent re-implements something already present in its own diff; an edit contradicts
-   an earlier edit from the same run; you have said "continue" more than twice. Continuing past
-   these is buying more of what you already have.
+   an earlier edit from the same run; you have said "continue" more than twice.
 5. **Hand off state in a file, not in the conversation.** Before a session ends, have the agent
    write what was done, what is next, which decisions were made and why, and what must not be
    redone. The next session inherits the written brief and none of the chat, so a convention you
    established by typing it is gone.
-6. **Start the next unit from that file and a clean tree**, rather than from a continued session. A
-   fresh run with a good brief reliably beats a continued one with a full window.
+6. **Start the next unit from that file and a clean tree**, rather than from a continued session.
 
 Fitting in the window is necessary and nowhere near sufficient. In the same study the agent's
 coverage of the requirements barely moved as the context grew, while the rate at which it satisfied
