@@ -3,8 +3,8 @@
 ## Problem
 
 You left a session open all day and asked maybe forty questions, most of them short. That day cost
-more than the one where the agent wrote an entire module, and nothing in the transcript explains
-it. The usual suspects all alibi out: you were not on the expensive tier, you did not ask for much
+more than the one where the agent wrote an entire module, and nothing in the transcript explains it.
+None of the usual explanations holds: you were not on the expensive tier, you did not ask for much
 output, and the one large file in play was read once. The money is not the loss. The loss is that
 you have no basis for judging whether tomorrow's session is worth what it will cost, which is the
 only economic question you actually face.
@@ -24,12 +24,12 @@ Learn the shape of one session's bill, then measure your own against it.
    control and not hygiene.
 3. **Find your cache-hit share, and whether the cache is warm right now.** A cache read costs about
    a tenth of a fresh input token — the same multiple on all three major vendors as of September
-   2026 — and in a long session most of your input is cache reads. Where the harness reports the
-   hit rate and the warm-or-cold state, that line is the cheapest diagnostic in the subject.
+   2026 — and in a long session most of your input is cache reads. Where the harness reports the hit
+   rate and the warm-or-cold state, that line is the cheapest diagnostic in the subject.
 4. **Learn what invalidates it, because a miss is a cliff rather than a slope.** An idle gap longer
    than the cache lifetime does it; so does editing a tool definition, which on some vendors
-   invalidates the whole cache, and so does toggling anything that rewrites the system prompt.
-   Where the vendor also charges to write it back, a miss-then-rewrite costs over ten times a hit.
+   invalidates the whole cache, and so does toggling anything that rewrites the system prompt. Where
+   the vendor also charges to write it back, a miss-then-rewrite costs over ten times a hit.
 5. **Treat the reasoning budget as a first-order control.** Thinking tokens bill as output, at four
    to eight times the input rate, and the default budget can run to tens of thousands of tokens per
    request. Effort level moves a bill further than most model choices do.
@@ -37,7 +37,8 @@ Learn the shape of one session's bill, then measure your own against it.
    is a local estimate at list price, and vendors document releases where it diverged from the
    invoice. Measure the bill, not the dashboard.
 7. **Attach variance to any per-task figure.** Runs on the same task with the same model differ by
-   up to thirtyfold in total tokens, so a point estimate of what a feature costs is decoration.
+   up to thirtyfold in total tokens, so a point estimate of what a feature costs cannot be planned
+   against.
 
 ```mermaid
 graph TD
@@ -51,20 +52,20 @@ graph TD
 The transferable idea is that an agentic bill is a fact about the *shape* of the conversation, not
 about what you asked for. Two sessions doing identical work bill differently if one ran in forty
 turns and the other in twelve, or if one sat idle over lunch and came back cold. The vendor sets the
-price; you set the turn count, the context size, and the warmth. The exchange rate is continuity
-and a standing habit — clearing between tasks means re-establishing what the agent knew, and the
-billing view will teach you things you cannot act on, because thirtyfold variance does not yield
-to attention.
+price; you set the turn count, the context size, and the warmth. The exchange rate is continuity and
+a standing habit — clearing between tasks means re-establishing what the agent knew, and the billing
+view will teach you things you cannot act on, because thirtyfold variance does not yield to
+attention.
 
 ## Worked example
 
-`granary`, a Kotlin service that ingests warehouse stock feeds from forty suppliers, had exactly
-the problem above: quiet days costing more than busy ones. What settled it was one session summary,
+`granary`, a Kotlin service that ingests warehouse stock feeds from forty suppliers, had exactly the
+problem above: quiet days costing more than busy ones. What settled it was one session summary,
 worked line by line.
 
-The numbers below are not `granary`'s and not ours. They are the sample session Anthropic prints in
-its own Claude Code cost documentation, used here because it is the only published session
-breakdown whose arithmetic can be checked against the vendor's own stated total.
+The numbers below are not `granary`'s, and they are not this book's. They are the sample session
+Anthropic prints in its own Claude Code cost documentation, used here because it is the only
+published session breakdown whose arithmetic can be checked against the vendor's own stated total.
 
 > Prices verified on Anthropic's published pricing page, 19 September 2026, and quoted per million
 > tokens. They will have moved by the time you read this. The proportions are the point.
@@ -87,26 +88,25 @@ $0.30 for a cache read. Line by line:
 | **Total** | **996,500** | | **$0.5526** | 100% | 100% |
 
 Which rounds to the $0.55 the tool printed, so the arithmetic is checkable rather than modelled.
-Three things fall out of it, and all three are counter-intuitive. You did not pay for what the
-model wrote: input in all its forms is 85.6% of the bill. Almost everything you paid for, the model
-had already seen — 94.3% of the tokens are the conversation re-reading itself. And caching did
-nearly all the work, because those 991,200 input tokens at the full $3 rate, plus the same output,
-would have come to $3.0531 rather than $0.5526: a saving of $2.50, or 81.9%, switched on by
-default and free.
+Three things fall out of it, and all three are counter-intuitive. You did not pay for what the model
+wrote: input in all its forms is 85.6% of the bill. Almost everything you paid for, the model had
+already seen — 94.3% of the tokens are the conversation re-reading itself. And caching did nearly
+all the work: those 991,200 input tokens at the full $3 rate, plus the same output, would have come
+to $3.0531 rather than $0.5526 — a saving of 81.9%, switched on by default.
 
 Which is also where it gets fragile. Take a coffee break long enough for the cache to expire, and
-the next message reprocesses 940,000 tokens at the $3.75 write rate: $3.53 for one message, against
-the $0.55 the whole session had cost up to that point. The expensive thing in an agent session is
-not the model you chose or how much it wrote. It is how many times the conversation gets re-sent,
-and whether it is warm when it goes.
+the next message reprocesses 940,000 tokens at that date's $3.75 write rate: $3.53 for one message,
+against the $0.55 the whole session had cost up to that point. The expensive thing in an agent
+session is not the model you chose or how much it wrote. It is how many times the conversation gets
+re-sent, and whether it is warm when it goes.
 
 ## Failure mode
 
 **The Expensive Nothing.** You come back from a meeting, type "yes, do that", and the turn bills
-more than the entire morning did. Nothing about the message was expensive. The cache went cold
-while the session sat there, so the request reprocessed the whole conversation at the fresh-input
-rate, and on a vendor that charges to write the cache it paid to put it back as well. The work
-performed was one line of agreement.
+more than the entire morning did. Nothing about the message was expensive. The cache went cold while
+the session sat there, so the request reprocessed the whole conversation at the fresh-input rate,
+and on a vendor that charges to write the cache it paid to put it back as well. The work performed
+was one line of agreement.
 
 The tell is a per-turn cost with no work behind it — a spike on a message you could have sent by
 nodding. The second tell is noticing that your most expensive days are your most interrupted ones,

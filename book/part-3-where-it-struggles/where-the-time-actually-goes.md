@@ -58,7 +58,7 @@ missing from whatever slide you were shown.
 The gains were not evenly distributed either. Management tier gained 86%. Individual contributors
 through Principal gained 27% to 42%, statistically indistinguishable from one another. Repositories
 created in 2022 or later gained 44%. Legacy code gained 12%, and that result was not statistically
-significant. DORA's separate modelling exercise splits the same way, putting 35–40% on simple
+significant. DORA's separate 2026 modelling exercise splits the same way, putting 35–40% on simple
 greenfield work against roughly 10% on complex legacy — two different methodologies, one shape.
 
 Meanwhile, review changed character. Automated review rose from about 19% of pull requests to about
@@ -77,9 +77,11 @@ pull requests "are an imperfect proxy for throughput and reward small, frequent 
 DORA's 2026 report models a J-curve: a temporary dip before value is captured, with three named
 causes. One is the learning curve, one is pipeline adaptation, and one is the *verification tax* —
 the time developers spend checking AI output. The effort saved on writing is respent on checking.
-Part I adopts that term and the Economics and Verification suites use it; it is the right frame
-precisely because it is not a bug tax. Across three independent studies the pattern holds: output
-up, defect signals flat, review coverage down, cycle time up.
+[*The four areas, re-weighted*](../part-1-argument/the-four-areas-reweighted.md) adopts that term,
+and the [*Economics*](../part-2-plays/economics/index.md) and
+[*Verification and trust*](../part-2-plays/verification-and-trust/index.md) suites use it. It is the
+right frame precisely because it is not a bug tax. Across three independent studies the pattern
+holds: output up, defect signals flat, review coverage down, cycle time up.
 
 ```mermaid
 graph LR

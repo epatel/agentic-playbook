@@ -8,7 +8,7 @@ more than a position on either.
 What follows is the second category. Each one carries both halves, because carrying one half is how
 a book gets quoted for a year and then becomes embarrassing.
 
-## Does it make you faster
+## Does agent assistance make you faster
 
 Three credible results point in different directions. METR's randomised trial found a 19% slowdown
 (CI +2% to +39%) among 16 expert maintainers working on repositories they knew well, on early-2025
@@ -29,7 +29,7 @@ Which means the useful question is not "does it work" but "does it work *here*",
 instrument that answers it is your own paired run. [*Match the model to the
 job*](../part-2-plays/economics/match-the-model-to-the-job.md) is the play.
 
-## Does it degrade the codebase
+## Does agent assistance degrade the codebase
 
 The optimistic evidence is a controlled experiment. GitHub's own 2024 trial randomly assigned 202
 developers and found the Copilot group 53.2% more likely to pass all ten unit tests on a greenfield
@@ -43,11 +43,11 @@ constructs up 47%. The detection method for what counts as AI-assisted is not pu
 denominator is not knowable, and the company sells the diagnosis.
 
 Between them sits the study that actually tried to answer the downstream question. Borg and
-colleagues ran two phases: 151 participants, 95% professional developers, built features with or
-without AI, and then a *different* set of participants evolved the resulting code without AI. Phase
-one showed a 30.7% median speedup. Phase two found "no significant differences in subsequent
-evolution with respect to completion time or code quality", with the Bayesian analysis putting any
-difference at "at most small and highly uncertain".
+colleagues, reporting in February 2026, ran two phases: 151 participants, 95% professional
+developers, built features with or without AI, and then a *different* set of participants evolved
+the resulting code without AI. Phase one showed a 30.7% median speedup. Phase two found "no
+significant differences in subsequent evolution with respect to completion time or code quality",
+with the Bayesian analysis putting any difference at "at most small and highly uncertain".
 
 Note the asymmetry before drawing a conclusion. The evidence that it improves things is a controlled
 experiment on greenfield work; the evidence that it degrades things is observational, at repository
@@ -55,7 +55,7 @@ scale, over time. They measure different objects and neither refutes the other. 
 designed to measure maintainability directly found nothing in either direction, which is not the
 result either camp wanted.
 
-## Does more capability fix it
+## Does more model capability fix any of this
 
 The intuition is that this is a problem that scales away, and the one vendor publishing per-model
 figures reports the opposite. In Anthropic's November 2025 system card, measured on its own
@@ -110,9 +110,8 @@ situation is not a problem anymore", and "almost every security report now uses 
 degrees".
 
 More reports arrived, they were more likely to be real, and nearly all of them were AI-assisted. The
-variable that changed was the money, not the AI. Anyone citing curl as evidence that AI-assisted
-submissions are worthless is citing January and stopping, which is a habit worth watching for in
-yourself as well as in others.
+variable that changed was the money, not the tooling. Anyone citing curl as evidence that
+AI-assisted submissions are worthless is citing January and stopping.
 
 ## Who is responsible
 

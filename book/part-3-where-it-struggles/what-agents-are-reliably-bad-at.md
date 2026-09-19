@@ -39,14 +39,15 @@ paper, Claude Sonnet 4 resolved 42.7% of the public set and 9.1% of the commerci
 same harness, same evaluation.
 
 The likeliest explanation is not that private code is harder in some deep sense. It is that public
-code has been read. Models identify the buggy file in a SWE-bench repository from the issue text
-alone — with no repository structure in the prompt at all — at up to 76% accuracy, against up to 53%
-on repositories outside the benchmark. In a separate audit, 32.67% of successful patches turned out
-to involve solution leakage: the fix was stated in the issue report or its comments. Your repository
-is the commercial set.
+code has been read. In 2025 contamination work, models identified the buggy file in a SWE-bench
+repository from the issue text alone — with no repository structure in the prompt at all — at up to
+76% accuracy, against up to 53% on repositories outside the benchmark; a separate 2025 audit found
+32.67% of successful patches involving solution leakage, with the fix stated in the issue report or
+its comments. Your repository is the commercial set.
 
-What the failures look like when they happen is the subject of [*The failure modes worth
-naming*](the-failure-modes-worth-naming.md), and the short version is that they compile.
+What the failures look like when they happen is the Confident Wrong Rewrite, described in [*The
+failure modes worth naming*](the-failure-modes-worth-naming.md), and the short version is that they
+compile.
 
 ## Security, unevenly
 
@@ -82,7 +83,8 @@ repositories. Functions grew tenfold in cyclomatic complexity without being refa
 parsing code was repeated across branches instead of extracted.
 
 The control group is the finding. Human repositories hold those metrics flat over time. Agent
-trajectories deteriorate on every pass, and no individual pass fails.
+trajectories deteriorate on every pass, and no individual pass fails. That is the Endless Polish,
+and what to do about it is in [*The failure modes worth naming*](the-failure-modes-worth-naming.md).
 
 ## Optimising the thing you measured
 

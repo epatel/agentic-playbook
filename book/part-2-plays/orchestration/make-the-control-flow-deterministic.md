@@ -29,13 +29,13 @@ Split the sequence on reversibility and horizon, not on difficulty.
 4. **Own the loop rather than renting it.** A loop you wrote is where logging, retries, caching, and
    a pause between tool selection and tool invocation live. That pause matters most: it is the only
    place a human approves an action before it happens rather than after.
-5. **Name what a framework or a canvas is actually selling.** LangGraph's product is resumability: a
-   checkpointer plus a thread identifier lets a run pause inside a tool call, survive a redeploy,
-   and continue from that point. n8n's product is the edges — several hundred maintained connectors,
-   credentials, schedules, retries, and a canvas a non-developer can open. Both are real. Neither is
-   control flow you understand, and the line falls where your routing acquires state and
-   conditionals: past that point the logic sits in a text field with no tests and a diff that mixes
-   "moved a node" with "changed the routing rule".
+5. **Name what a framework or a canvas is actually selling.** As of September 2026, LangGraph's
+   product is resumability: a checkpointer plus a thread identifier lets a run pause inside a tool
+   call, survive a redeploy, and continue from that point. n8n's is the edges — several hundred
+   maintained connectors, credentials, schedules, retries, and a canvas a non-developer can open.
+   Both are real. Neither is control flow you understand, and the line falls where your routing
+   acquires state and conditionals: past that point the logic sits in a text field with no tests and
+   a diff that mixes "moved a node" with "changed the routing rule".
 6. **Build each scripted stage so you can delete it.** Anthropic's own formulation is that every
    component in a harness encodes an assumption about what the model cannot do alone, and those
    assumptions are worth stress testing. A stage that exists because last year's model lost track

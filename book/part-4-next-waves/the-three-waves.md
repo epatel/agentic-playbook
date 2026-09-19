@@ -7,8 +7,8 @@ being quoted. This part is the unsafe move. It is kept short and it is labelled.
 The rest of this book describes one situation: a developer, a codebase written for people, and a set
 of tools to get good at. That is the first wave. It is where most teams are, it is where the
 evidence is, and it is what the eighteen plays are about. Two more waves look likely enough to be
-worth preparing for, and they are the only material in this book that is not an account of
-something already happening.
+worth preparing for, and they are the only material in this book that is not an account of something
+already happening.
 
 **The second wave changes the codebase.** The first wave takes the repository as it is and adapts
 the way you work; the second asks what a repository would look like if agents were expected to work
@@ -36,7 +36,10 @@ other than a developer reading it.
 
 ## How to discount this part
 
-Four things are true of both chapters that follow, and stating them here saves repeating them.
+Four things are true of both
+[*Refactoring a codebase for agents*](refactoring-a-codebase-for-agents.md) and
+[*Inviting non-developers in*](inviting-non-developers-in.md), and stating them once here saves
+repeating them.
 
 - **Written September 2026.** Everything in the two chapters is a position at a date, and the
   argument for the second wave in particular is a bet about what models will still be bad at in a
@@ -53,6 +56,5 @@ Four things are true of both chapters that follow, and stating them here saves r
 
 The material underneath both is old enough to be reassuring. A codebase organised so that one
 capability lives in one place, behaviour that is visible where it happens, and a check fast enough
-to run on every change are all things somebody argued for before any of this existed. What is new
-is that there is now a second reader, it has no memory between sessions, and it is extremely
-confident.
+to run on every change are all things somebody argued for before any of this existed. What is new is
+that there is now a second reader, it has no memory between sessions, and it is extremely confident.

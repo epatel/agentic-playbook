@@ -30,18 +30,18 @@ ordering, and link syntax.
 
 An imperative verb phrase in sentence case: *Starve the context*, *Review code you did not write*.
 Not a noun ("Context management"), not a gerund ("Scoping tasks"), not a product name. The title is
-what a colleague would say to you across a desk, and it is the string other plays will use when
-they link here.
+what a colleague would say to you across a desk, and it is the string other plays will use when they
+link here.
 
 ### Problem
 
 **One paragraph. 60–120 words. No preamble.** The first sentence puts the reader in the situation;
-it does not introduce the topic, set out what the play will cover, or explain that agentic coding
-is changing rapidly. End on the cost — what this actually takes from you — rather than on a
-summary of what comes next.
+it does not introduce the topic, set out what the play will cover, or explain that agentic coding is
+changing rapidly. End on the cost — what this actually takes from you — rather than on a summary of
+what comes next.
 
-Write it straight. If the situation is absurd, the absurdity does the work; do not add a joke on
-top of it. Sample 2 in [`STYLE.md`](STYLE.md#sample-2--a-problem-paragraph) is the reference.
+Write it straight. If the situation is absurd, the absurdity does the work; do not add a joke on top
+of it. Sample 2 in [`STYLE.md`](STYLE.md#sample-2--a-problem-paragraph) is the reference.
 
 ### The play
 
@@ -98,14 +98,17 @@ rather than the cause. The naming rules and the shared registry are in
 [`STYLE.md`](STYLE.md#naming-failure-modes) — check the running log before coining a name, and
 append yours to it afterwards, so two suites do not invent two names for one thing.
 
-Structure: name, then what it looks like from the inside, then the tell — the observable signal
-that tells a reader they are in it right now. The tell is the part that makes the section useful
-rather than decorative.
+Structure: name, then what it looks like from the inside, then the tell — the observable signal that
+tells a reader they are in it right now. The tell is the part that makes the section useful rather
+than decorative.
 
 ### Checklist
 
 **4–8 items.** GitHub task-list syntax (`- [ ]`) so a reader can paste it into a pull request or an
-issue. Imperative, each one independently verifiable, each traceable to something in *The play*.
+issue. Write each one as a condition that is true or false when you look — "Working tree clean
+before the agent starts", not "Clean the working tree" — because the reader is auditing a finished
+piece of work, not being walked through it again. Each item is independently verifiable, and each
+traces to something in *The play*.
 
 This is the section a reader returns to on their fourth read. No new information, no jokes, no
 prose. If an item needs a sentence of explanation, the explanation belongs in *The play*.
@@ -125,8 +128,8 @@ In-body cross-references are fine too, sparingly. Link syntax and anchor rules a
 ## Length
 
 A play runs **600–1,200 words** including its example. Under 600 and it is probably a section of
-another play; over 1,200 and it is probably two plays, or one play with a *Worked example* that
-has become a tutorial.
+another play; over 1,200 and it is probably two plays, or one play with a *Worked example* that has
+become a tutorial.
 
 ## Worked examples: what "real" means
 
@@ -191,22 +194,22 @@ The book's standard is "real files, real commands, real output". In practice, fo
 
 An agent working on a dirty tree hands you one diff containing two changes: yours and its. When the
 result is eighty per cent right, which is the usual outcome, you have no way to take the eighty and
-drop the rest, because `git checkout .` takes your morning with it. What follows is not a review.
-It is an archaeology dig, conducted against a deadline, and archaeology is slower than rewriting.
+drop the rest, because `git checkout .` takes your morning with it. What follows is not a review. It
+is an archaeology dig, conducted against a deadline, and archaeology is slower than rewriting.
 
 ## The play
 
 Make the working tree disposable before every agent run, so that "throw it away and try a better
 brief" costs nothing and therefore actually happens.
 
-1. **Commit or stash your own work first.** The tree is clean at the moment the agent starts. If
-   the work is not commit-worthy, `git stash -u` is enough; the point is only that `git diff`
-   afterwards contains exactly one author's changes.
+1. **Commit or stash your own work first.** The tree is clean at the moment the agent starts. If the
+   work is not commit-worthy, `git stash -u` is enough; the point is only that `git diff` afterwards
+   contains exactly one author's changes.
 2. **Take a checkpoint you can name.** A branch is the cheapest form: `git switch -c agent/<task>`.
    Tags and stashes work too, but a branch survives you forgetting about it for three days.
 3. **Let the run finish before you read anything.** Reading mid-run and intervening produces a diff
-   with three authors in it — you, the agent, and the you-who-interrupted — which is the problem
-   you just spent two steps avoiding.
+   with three authors in it — you, the agent, and the you-who-interrupted — which is the problem you
+   just spent two steps avoiding.
 4. **Review the diff as a unit and decide once:** keep, discard, or keep-with-edits. Discarding is
    `git reset --hard` back to the checkpoint, and it is meant to be unremarkable. Budget for using
    it.
@@ -214,13 +217,13 @@ brief" costs nothing and therefore actually happens.
    process, not of your project's history.
 
 What this is really buying is the ability to discard. Teams that skip the checkpoint do not discard
-bad runs, they salvage them — because discarding would take their own work down with it. Salvaging
-a bad run is almost always more expensive than re-running it with a better brief, and it is always
+bad runs, they salvage them — because discarding would take their own work down with it. Salvaging a
+bad run is almost always more expensive than re-running it with a better brief, and it is always
 more expensive than it feels while you are doing it. Every other benefit here is downstream of
 making the cheap option available.
 
-The same argument, applied to more than one run at a time, leads to separate directories rather
-than separate branches: see
+The same argument, applied to more than one run at a time, leads to separate directories rather than
+separate branches: see
 [*Work in parallel without collisions*](part-2-plays/orchestration/work-in-parallel-without-collisions.md).
 
 ## Worked example
@@ -254,8 +257,8 @@ $ git diff --stat main
 ```
 
 Reading it: `schemas.py` and the tests are good, and `customers.py` has been rewritten to a
-different pattern from `orders.py` for no reason anyone could defend. That is a keep-with-edits,
-and it is a decision you can make in one sitting precisely because nothing in the diff is yours.
+different pattern from `orders.py` for no reason anyone could defend. That is a keep-with-edits, and
+it is a decision you can make in one sitting precisely because nothing in the diff is yours.
 
 Had it gone the other way, the exit is one command:
 
@@ -270,13 +273,13 @@ checkpoint was bought at, and it is the cheapest thing in this chapter.
 
 **The Merged Hand.** You start the agent on top of your own uncommitted edits, and the diff comes
 back with both sets of changes interleaved inside the same hunks. The agent's work is mostly good,
-so discarding is off the table; your work is unfinished, so committing the lot is off the table
-too. What people do instead is review the combined diff line by line and hand-pick, which takes
-longer than either clean option and produces a commit nobody can describe afterwards.
+so discarding is off the table; your work is unfinished, so committing the lot is off the table too.
+What people do instead is review the combined diff line by line and hand-pick, which takes longer
+than either clean option and produces a commit nobody can describe afterwards.
 
 The tell is a commit message with "and" in it. The second tell is realising you cannot answer "did
-the agent write this line?" about a line you are about to ship, and that the answer would change
-how carefully you read it.
+the agent write this line?" about a line you are about to ship, and that the answer would change how
+carefully you read it.
 
 ## Checklist
 

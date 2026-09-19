@@ -2,12 +2,12 @@
 
 ## Problem
 
-Nine people, nine ways of working, and not one of them is wrong. One commits the agent's plan in
-the pull-request description; another thinks that is noise. One keeps a private overrides file full
-of conventions nobody else knows exist. Two have quietly stopped reviewing agent-authored changes
-as carefully as they review everyone else's, and would not say so out loud. None of this was
-decided. What it costs is that every code review is now also a small referendum on how the team
-ought to work, held between two people, at the worst available moment.
+Nine people, nine ways of working, and not one of them is wrong. One commits the agent's plan in the
+pull-request description; another thinks that is noise. One keeps a private overrides file full of
+conventions nobody else knows exist. Two have quietly stopped reviewing agent-authored changes as
+carefully as they review everyone else's, and would not say so out loud. None of this was decided.
+What it costs is that every code review is now also a small referendum on how the team ought to
+work, held between two people, at the worst available moment.
 
 ## The play
 
@@ -25,12 +25,13 @@ a trigger.
 3. **Agree the items with team-visible consequences.** Usually six: which context files are shared
    and where personal ones go; whether agent authorship is disclosed; what "done" means for an
    agent-authored change; what a reviewer may decline; who can see what the tools cost; and what the
-   team never delegates. The fourth is the one teams omit — in the largest study of a doubling
-   mandate, review coverage fell from 89% of pull requests to 68% and each remaining reviewer's load
-   doubled (802 developers, to April 2026).
+   team never delegates. The fourth is the one teams omit, and it is the one the measurements say
+   costs most: under a doubling mandate, review coverage falls and each remaining reviewer's load
+   doubles
+   ([*Where the time actually goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md)).
 4. **Write it in the repository, at one page.** Beside the shared context file, not in a wiki nobody
-   has open. A page that fits on a screen gets re-read; a longer one gets quoted selectively by
-   whoever is losing an argument.
+   has open. A page that fits on a screen gets re-read; a longer one gets cited rather than
+   followed.
 5. **Give it a trigger rather than a date, and a standing exception.** "Revisit this quarterly"
    survives one quarter; events survive — a model release the team adopts, a new tool anyone wants
    to bring in, the second time somebody cites the agreement and it turns out to be wrong. Anyone
@@ -54,7 +55,8 @@ work, and anyone can see whether it happened. Assume a mixed room: in DORA's 202
 quarter of respondents reported high trust in AI-generated code and roughly thirty per cent reported
 little or none. The exchange rate is that some agreed defaults will be wrong for some tasks and you
 will follow them anyway, plus an afternoon to write the page and a shorter one whenever a trigger
-fires.
+fires. A skeleton of the page, with the specifics stripped out, is in
+[*Copy-paste templates*](../../appendices/copy-paste-templates.md).
 
 ## Worked example
 
@@ -116,22 +118,24 @@ trigger. The fourth did not survive contact with the page: "we always run the te
 for review" turned out to describe what four people did and what five people intended to do, and it
 was rewritten as a condition on the change rather than an instruction to the person.
 
-The page is at version three. Versions one and two were written in a wiki, which is where they
-still are.
+The page is at version three. Versions one and two were written in a wiki, which is where they still
+are.
 
 ## Failure mode
 
-**The Founding Document.** The agreement was written in a good week, by people who cared, and it
-was right. Two model releases later it still describes a tool that needed work split into one file
-per run and a review rule sized for diffs nobody produces any more. Nobody has amended it, because
+**The Founding Document.** The agreement was written in a good week, by people who cared, and it was
+right. Two model releases later it still describes a tool that needed work split into one file per
+run and a review rule sized for diffs nobody produces any more. Nobody has amended it, because
 amending it feels like reopening a settled thing and the people who wrote it have moved on to other
 arguments. So it gets quoted rather than followed: cited in a review thread when somebody wants to
 win, ignored on the four days a week when following it would be inconvenient, and defended in
 principle by everyone.
 
-The tell is a document with a date on it that is older than the model everybody is using. The
-second tell is hearing "well, technically the agreement says…", which is a sentence people reach
-for only about a rule they have stopped believing in.
+The tell is a document with a date on it that is older than the model everybody is using. The second
+tell is hearing "well, technically the agreement says…", which is a sentence people reach for only
+about a rule they have stopped believing in. It is not the Paper Fence
+([*Choose your harness*](../harness/choose-your-harness.md#failure-mode)): that is a rule a machine
+was never going to honour, and this is a rule the people have quietly stopped honouring.
 
 ## Checklist
 

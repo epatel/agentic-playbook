@@ -66,7 +66,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 13 | Team play suite | `cdd27e440781` | ✅ done |
 | 14 | Part III — Where It Struggles | `c1416f44c483` | ✅ done |
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ✅ done |
-| 16 | Editorial pass — one voice, one book | `934259dc8038` | ⬜ blocked on all writing |
+| 16 | Editorial pass — one voice, one book | `934259dc8038` | ✅ done |
 | 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ⬜ blocked on 8–13 |
 | 18 | Book build — collect the chapters, render a PDF | `76d95ae050df` | ✅ done |
 
@@ -96,7 +96,16 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-`book/` now exists and holds the three constraint documents every author works within:
+**The manuscript is complete and has been through its editorial pass.** 39 files, 39,277 words, a
+preface, a root `README.md`, and one voice. What the pass changed and what it deliberately left
+alone is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
+because several conventions in this section were corrected by it. The one thing still standing
+between the book and publication is the worked-example verification pass (`3b61a6a1a684`).
+
+The rest of this section is the accumulated handoff from the writing milestones, kept because it
+records why each part is the way it is.
+
+`book/` holds the three constraint documents every author works within:
 
 | File | Owns |
 |---|---|
@@ -291,7 +300,7 @@ follow:
 | File | Owns |
 |---|---|
 | [`context/index.md`](../book/part-2-plays/context/index.md) | The suite opener — names *signal over noise* as the suite's single idea and frames the three plays as that move at three layers |
-| [`write-the-brief-the-agent-reads.md`](../book/part-2-plays/context/write-the-brief-the-agent-reads.md) | Project context files: what belongs, what bloats, the portable `AGENTS.md` + import setup, and verifying the brief loaded |
+| [`write-the-brief-the-agent-actually-reads.md`](../book/part-2-plays/context/write-the-brief-the-agent-actually-reads.md) | Project context files: what belongs, what bloats, the portable `AGENTS.md` + import setup, and verifying the brief loaded |
 | [`starve-the-context.md`](../book/part-2-plays/context/starve-the-context.md) | Deliberate reduction, just-in-time loading, and the paired-run method for measuring any filtering tool |
 | [`scope-a-task-to-fit-the-window.md`](../book/part-2-plays/context/scope-a-task-to-fit-the-window.md) | Unit-of-work sizing, external requirement lists, the stop rule, and file-based handoff between sessions |
 
@@ -576,9 +585,12 @@ Five things in it constrain later tasks:
    and collected in the glossary"). The first half — *card* being used before it is defined, in
    *Write the brief the agent actually reads* — is still open and still belongs to the cards play.
 
-**Next up:** the editorial pass (`934259dc8038`) and the worked-example verification pass
-(`3b61a6a1a684`). **Every writing milestone is now done**, so both are fully unblocked, as is the
-style-lint item (`6b0110f76388`), whose value is now entirely to the editorial pass.
+Milestone 16, the editorial pass, then read the whole book as one object for the first time and
+reconciled it. Its output is summarised under *The editorial pass* below.
+
+**Next up:** the worked-example verification pass (`3b61a6a1a684`), which is the last thing standing
+between the manuscript and publication, and the style-lint item (`6b0110f76388`), which the editorial
+pass argues should now be built rather than deferred again.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -664,6 +676,36 @@ browser is a reasonable substitute for a PDF engine.
    PDF's contents page stops at two on purpose. This is the first thing in the build that treats
    the play template as a navigation structure rather than a writing one, and it is a small
    argument for keeping those five headings identical across eighteen plays.
+
+## The editorial pass
+
+Milestone 16 (`934259dc8038`) read all 38 chapters against `book/STYLE.md`, `book/TEMPLATE-play.md`
+and `book/README.md`, and reconciled six authors into one voice. It added two files, renamed one,
+and touched 31. **The book now stands at 39 files and 39,277 words.** Five things in it matter to
+anyone working on the book next:
+
+1. **The proportions hold, and framing is under budget rather than over.** Measured by
+   `make check`: Part I 11%, Part II 57%, Part III 13%, Part IV 9%, appendices 9%, preface 1%.
+   Against the four parts alone — which is what the 15 / 60 / 15 / 10 commitment is about — that is
+   **12 / 63 / 15 / 9**. Nothing was cut for budget reasons; the instruction to cut framing if it had
+   crept never fired.
+2. **The book has a front door.** The root [`README.md`](../README.md) is the human entry point: a
+   full contents with a line on each suite, the build commands, and the repository map.
+   [`book/preface.md`](../book/preface.md) is a new chapter at row 0 under a **Front matter** part
+   row, which is a shape the build already supported.
+3. **Eleven cross-references were added and nine duplications removed**, itemised in the decisions
+   below. The two that change how the book is read: Part I no longer quotes the METR abandonment in
+   full (Part III owns it), and every appendix now has an inbound link, which `book/README.md`'s own
+   diagram had promised since milestone 3 and nothing delivered.
+4. **The failure-mode index is now complete.** It said "every name this book uses" and held 19 of 25.
+   The six Part III names are in the table, and its heading is `## The index`.
+5. **Three constraint documents were corrected to match six authors' actual practice**, rather than
+   the other way round. See the decisions below on checklist voice, bold-on-first-use, and the
+   volatile-facts call, which the style guide had left open for this pass.
+
+What the pass deliberately did **not** do is listed in *Open questions* and in the notes below: the
+suite-project rule, the three-plays-per-suite spread, and the Part II worked examples were all read
+and left alone.
 
 ## Decisions log (append-only)
 
@@ -1076,6 +1118,102 @@ browser is a reasonable substitute for a PDF engine.
   defects. Recorded here so the style lint (`6b0110f76388`) exempts them deliberately rather than
   being switched off by whoever hits them first, and so the editorial pass reads them as a decision.
 
+- **The editorial pass settled the volatile-facts question** that `book/STYLE.md` had carried as
+  provisional since milestone 3. The working line stands as written — a figure only where the point
+  collapses without it, dated in the sentence, shape preferred to figure — with two clarifications
+  the audit showed were needed and are now in `STYLE.md`. **A figure inherits a date only from its
+  own paragraph**: the commonest defect found was a stamp sitting four paragraphs up, or in the
+  other chapter that spends the same study, which the reader never connects. And **a version string
+  is a date stamp** for a mechanic only one vendor implements — "Claude Code 2.x" does the job that
+  "as of September 2026" does for a price, which is what the milestone-9 attribution decision was
+  already doing without saying so. Fourteen undated figures were dated on that basis.
+- **`book/STYLE.md`'s bold-on-first-use rule contradicted every author's practice, and the rule was
+  wrong.** It read "bold on first use in a play; plain thereafter", which taken literally makes nine
+  correct plain mentions in Part II, Part III and Part IV into defects. What six authors actually did
+  — independently, and consistently — is bold **where the name is coined** and plain everywhere else
+  in the book, because a book-wide proper name has one first use, not one per file. The rule now says
+  that.
+- **The play template's "imperative" checklist rule contradicted its own specimen, and the rule was
+  wrong again.** Not one of the eighteen plays writes imperative checklist items; all eighteen write
+  conditions that are true or false when you look, which is what the template's own specimen play
+  does. `TEMPLATE-play.md` now asks for the condition form and says why: the reader is auditing
+  finished work, not being walked through it. **Where a contract and six independent implementations
+  disagree, the implementations are the evidence** — this is the second instance in the project after
+  the past-tense worked-example correction, and it is the same lesson.
+- **A play's filename must be its title, so `write-the-brief-the-agent-reads.md` became
+  `write-the-brief-the-agent-actually-reads.md`.** `book/README.md` states the rule; the file had
+  dropped a word since milestone 8 and `make check` cannot see it, because the build only compares
+  the `#` heading against the table-of-contents title. Eleven files referenced the old path. Worth
+  knowing that this class of drift is invisible to the build.
+- **Duplication was resolved by deciding which chapter owns a piece of evidence, not by paraphrasing
+  it twice.** Nine were found and nine were cut to a link: the METR abandonment quote (Part III
+  owns it, Part I links), the verification tax's justification (Part III owns it, Part I and the
+  glossary link), "the noise is rarely wrong" (the Context opener owns it), the skill-routing
+  mechanism (the Harness play owns it), the `CLAUDE.local.md` precedence trap (the Context play owns
+  it, two Team plays link), the give-one-agent-the-same-budget study (Orchestration owns it,
+  Economics links), the mandate study's third spend in the Team suite, the SlopCodeBench figures
+  spent twice inside Part III, the long-horizon 79% figure. **The general rule: a figure appears in
+  one chapter, and the others name the finding and link.** A second copy is a second thing to keep
+  true.
+- **Three failure modes were being described at length in a chapter that did not name them**, which
+  is the same defect as coining a synonym and harder to see. *Scope a task to fit the window* carried
+  the Requirement It Can Still Quote unnamed, *What agents are reliably bad at* carried the Endless
+  Polish and the Confident Wrong Rewrite unnamed. All three now use the name and link to the entry;
+  the entries link back. **Naming is not only about avoiding two names for one thing — it is also
+  about a chapter using the name the book already has.**
+- **Three near-collisions between failure modes existed only in this file and are now in print.**
+  The Unsummoned Skill versus the Brief That Never Arrived, the Founding Document versus the Paper
+  Fence, and the Immaculate Surface versus the Drifting Yes each get one sentence in the defining
+  chapter saying what the other one is and why this is not it. The third was a genuine defect rather
+  than a missing courtesy: the Immaculate Surface and the Drifting Yes published the same tell in
+  different words, so a reader running the check could not tell which name they had found. The
+  Immaculate Surface's tell was rewritten.
+- **Part III's failure-mode index now holds all 25 names.** It opened on "Every name this book uses"
+  and listed the nineteen coined in plays, omitting the six coined in its own chapter three
+  paragraphs above the table. The six are in it, marked "This chapter". **The Merged Hand stays out**,
+  per the milestone-14 decision, because it lives in `TEMPLATE-play.md` which is not in the book.
+- **The register was even across the book and the corrections were small.** Zero exclamation marks,
+  zero emoji, zero hype vocabulary, zero LLM cadence in 38 files, which is the strongest evidence
+  that milestone 3's samples-not-adjectives approach worked. What did need fixing was placement
+  rather than quantity: seven jokes inside a numbered step or a *Problem* paragraph's symptom
+  description, one anthropomorphised mood ("a tired one"), one authorial "ours", one bare "the AI",
+  one position reference, one piece of second-person scolding, and bold used for general emphasis in
+  two appendices. Two chapters were an outlier in density and both were corrected by subtraction —
+  *Choose your harness* and *Build the working agreement* each lost beats — and one, the Verification
+  opener, was the only suite opener with no aside at all and gained one.
+- **A play whose every section is a humour-banned zone will read drier than its neighbours, and that
+  is the template working.** *Make the agent prove it* rates lowest in Part II on any wit measure. Its
+  *Problem* must be straight, its *The play* allows none, its *Checklist* allows none, and
+  `STYLE.md` requires a failure mode's description to be straight once the name has carried the joke.
+  It was left alone. **Do not even out a chapter whose dryness is the contract rather than the
+  author.**
+- **Wrapping was fixed by a throwaway reflow script, and the script is the argument for
+  `6b0110f76388`.** The editorial pass wrote the fourth independent 100-column tool in this project,
+  hit two bugs a permanent one would not have (a markdown link is not whitespace-splittable, and
+  `../path` starts with a character that looks like punctuation), and shipped two defects into the
+  prose that an adversarial re-read caught. **A checker belongs in `scripts/build_book.py --check`
+  where it is written once and reviewed once.** The exemption list it needs is now known: fenced
+  blocks, table rows, and a line consisting of one markdown link.
+- **An automated rewrap is not a safe editorial operation, and the guard is a word-stream diff.**
+  Reflowing paragraphs introduced three real regressions that read fluently — a deleted "plus the
+  same output" that broke a sum the chapter invites the reader to check, a deleted "it is" that
+  inverted a sentence about vendor indemnities, and a verbless fragment left by a half-applied
+  rewrite. None was visible in a rendered read; all three were found by comparing the word stream
+  against `HEAD` token by token and by a second agent briefed to assume something was broken.
+  **Any future mechanical pass over the prose should end the same way.**
+- **The preface discloses that the book was written with agents**, in one paragraph. The book
+  contains *Decide who signs off*, which argues that agent authorship should be disclosed, and a book
+  making that argument while omitting its own disclosure is the Paper Fence at book scale. It is
+  stated factually and briefly — several agents, separate chapters, a shared plan, a style guide,
+  research briefs, a human commissioning it — and is not the preface's theme.
+- **The root `README.md` is the reader's front door and `book/README.md` stays the authoritative
+  table of contents.** Two contents listings is exactly the duplication this project records as a
+  defect, so the split is deliberate and narrow: the build reads `book/README.md` and nothing else,
+  while the root file exists to orient a human arriving at the repository and carries what a table
+  cannot — a line per suite, the build commands, and the repository map. **If a chapter is added,
+  both change.** That cost is accepted; a repository whose landing page is an agent-instruction file
+  is worse.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
@@ -1091,16 +1229,21 @@ to it.
   worked examples than plays, raised the question, and answered it as three by routing the surplus
   to Part III rather than to a fourth slot. **Part II is now complete at five suites of three plays
   and one of four**, so the spread is settled in fact: eighteen plays, nothing wider than one play
-  apart. What is left of the question is whether a *later* suite may ever be added, and the
-  editorial pass (`934259dc8038`) is the first task holding the whole of Part II and able to answer
-  it from the build's word counts rather than by argument.
+  apart. **Answered** (milestone 16), from the word counts rather than by argument: the eighteen
+  plays run 1,062 to 1,302 words, the six openers 293 to 302, and no suite is more than 5% off the
+  Part II mean. That spread is tight enough that **a nineteenth play is affordable and a nineteenth
+  suite is not** — one more play moves Part II by about a percentage point, while a seventh suite
+  would take four files and push Part II past 60% on its own. The procedure stands as written: raise
+  a fourth play rather than adding it quietly, and treat a new *suite* as a change to `PLAN.md`.
 - ~~**Worked examples — real or illustrative?**~~ **Resolved** (milestone 3): illustrative-but-
   correct for the first draft, with a verification pass (`3b61a6a1a684`) before publication. The
   rules are in [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md#worked-examples-what-real-means).
-- **How much does the book date itself?** Model names, prices, and context limits make examples
-  concrete but guarantee an expiry date. Where is the line? A provisional answer is in
-  [`book/STYLE.md`](../book/STYLE.md#volatile-facts) so no author is blocked on it; the editorial
-  pass owns the final call.
+- ~~**How much does the book date itself?**~~ **Resolved** (milestone 16). The provisional line in
+  [`book/STYLE.md`](../book/STYLE.md#volatile-facts) is the final one, with two clarifications added
+  there: a figure inherits a date only from its own paragraph, and a version string counts as a date
+  stamp for a single-vendor mechanic. Fourteen undated figures were dated on that basis. The cost is
+  recorded in the decisions log; what it bought is that *What this book assumes about you* keeps the
+  promise it makes to the reader in print.
 - ~~**Appendix templates.**~~ **Resolved** (milestone 19) for the `CLAUDE.md` starter: this
   repo's own setup is the worked example. The root `CLAUDE.md` is a real two-tier index and
   `cards/` holds five real self-contained cards, so the template is checked in, exercised daily by
@@ -1592,7 +1735,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   independent writings of the same width checker is the strongest case yet for `6b0110f76388`**,
   and with Part II complete its value is now entirely to the editorial pass.
 - **Two long lines in this suite were caused by a deep link, not by prose.** A
-  `[*title*](../context/write-the-brief-the-agent-reads.md#failure-mode)` inside an indented list
+  `[*title*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode)` inside an indented list
   item cannot be wrapped and overshoots by ten columns. Both were resolved by dropping the anchor
   to a file-level link, which `book/README.md` already prefers. Worth knowing before the checker
   lands: the fix for an over-long cross-reference is usually to shorten the link, not the sentence.
@@ -1711,9 +1854,9 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 
 | Name | Phenomenon | First used in |
 |---|---|---|
-| **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `context/write-the-brief-the-agent-reads.md` (coined in `book/STYLE.md` sample 4) |
+| **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `context/write-the-brief-the-agent-actually-reads.md` (coined in `book/STYLE.md` sample 4) |
 | **the Merged Hand** | Agent run started on a dirty tree; the diff interleaves two authors and can be neither kept nor discarded. | `book/TEMPLATE-play.md` specimen play |
-| **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-reads.md` |
+| **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-actually-reads.md` |
 | **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
 | **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |
 | **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |

@@ -17,8 +17,8 @@ Move the proof outside the agent's turn. Anything the run authored about the run
    state, the command that demonstrates it, and the constraints that must not change on the way:
    "`npm test` exits 0, `npm run typecheck` exits 0, and no file under `tests/` is modified". Claude
    Code 2.x ships this as `/goal`, evaluated after each turn by a separate model; OpenAI's Codex
-   guidance asks the same as a "Done when" clause. Know the limit: that evaluator runs no commands
-   and reads no files, so it grades the transcript rather than the repository
+   guidance asks the same as a "Done when" clause. Know the limit: that evaluator runs no commands,
+   so it grades the transcript rather than the repository
    ([`verification.md`](../../../notes/research/verification.md)).
 2. **Back it with a gate that is not advice.** A line in a brief competes for the model's attention;
    a hook that blocks the turn from ending does not. Gate on the two things cheap to check and
@@ -28,20 +28,18 @@ Move the proof outside the agent's turn. Anything the run authored about the run
 3. **Rank your signals by who authored them, and buy from the top down.** Hardest to fake first: the
    type checker, defeatable only by widening a type in a line you can see; a *held-out suite*,
    meaning tests the run cannot read or edit; a *mutation score*, which asks whether the tests
-   notice when the code is deliberately broken; property-based tests, asserting an invariant across
-   generated inputs rather than three chosen ones; running the thing against a committed fixture;
-   linters; the tests that already existed. Then the soft half: tests the agent wrote for its own
-   change, a second model's opinion, and its assertion that it is done, which is not a signal. That
-   ordering is this book's synthesis rather than a published result; the portable part is the rule
-   under it — fakeability tracks whether the evasion shows up in the diff
+   notice when the code is deliberately broken; property-based tests; running the thing against a
+   committed fixture; linters; the tests that already existed. Then the soft half: tests the agent
+   wrote for its own change, a second model's opinion, and its assertion that it is done, which is
+   not a signal. That ordering is this book's synthesis rather than a published result; the portable
+   part is the rule under it — fakeability tracks whether the evasion shows up in the diff
    ([`verification.md`](../../../notes/research/verification.md)).
 4. **Ask for evidence, not a verdict.** The command it ran and what the command printed, not "tests
    pass". A claim costs the same to produce whether or not it is true.
 5. **Own the tests yourself where the change matters.** Test-first measurably helps a capable model
-   — one 2026 study put it at 15 to 24 percentage points — but the same literature has iterating an
-   implementation against *generated* tests making overfitting worse, from 21.8% to 25.5% in one
-   configuration. The formulation the evidence supports: test-first helps when a human owns the
-   test, and backfires when the agent owns both sides of the loop.
+   — one 2026 study put it at 15 to 24 percentage points — while iterating an implementation against
+   *generated* tests makes overfitting worse. Test-first helps when a human owns the test, and
+   backfires when the agent owns both sides of the loop.
 
 ```mermaid
 graph LR
@@ -61,12 +59,11 @@ graph LR
 
 The disagreement about whether model-written tests are any good is where this becomes visible. The
 damning results come from asking a model for tests and keeping what came back; the enthusiastic ones
-— a 73% engineer acceptance rate on production tests at Meta, a property-testing agent whose reports
-validated as real bugs more than half the time — all fed an external, executable adequacy signal
-back into generation. The variable is not the model; it is whether the loop closed against something
-the model did not author. The exchange rate is setup and friction: every signal above the soft half
-costs work to install, mutation testing has the worst cost-to-benefit ratio of the lot, and you will
-lose runs to a gate that was correct and inconvenient.
+— a 73% engineer acceptance rate on production tests at Meta in 2025 — fed an external, executable
+adequacy signal back into generation. The variable is not the model; it is whether the loop closed
+against something the model did not author. The exchange rate is setup and friction: every signal
+above the soft half costs work to install, mutation testing has the worst cost-to-benefit ratio of
+the lot, and you will lose runs to a gate that was correct and inconvenient.
 
 ## Worked example
 
@@ -102,7 +99,7 @@ The hard version of the same constraint, in `.claude/settings.json`:
 ```
 
 `--diff-filter=DM` is the whole point: added test files are fine, deleted or modified ones end the
-turn. Belt and braces, for the duration of the run:
+turn. The same constraint again, one layer down, for the duration of the run:
 
 ```bash
 $ chmod -R a-w tests/
@@ -116,9 +113,10 @@ description of "correct" the run had, so the visible suite is what it satisfied.
 
 A second suite, kept out of the working tree and run only in CI, caught it on the first push. The
 gap between the visible pass rate and the held-out one is how the research detects exactly this, and
-it widens with the size of the change — by roughly 28 percentage points per tenfold increase in code
-size ([`verification.md`](../../../notes/research/verification.md)). Read-only tests were never
-going to prevent this, and the published finding says so in the sentence that recommends them.
+in a 2026 benchmark of thirty long-horizon tasks it widened by roughly 28 percentage points per
+tenfold increase in code size ([`verification.md`](../../../notes/research/verification.md)).
+Read-only tests were never going to prevent this, and the published finding says so in the sentence
+that recommends them.
 
 ## Failure mode
 
@@ -148,4 +146,5 @@ goes red, the suite was never watching that.
 
 **See also:** [*Review code you did not write*](review-code-you-did-not-write.md) ·
 [*Decide who signs off*](decide-who-signs-off.md) ·
-[*Choose your harness*](../harness/choose-your-harness.md)
+[*Choose your harness*](../harness/choose-your-harness.md) ·
+[*What agents are reliably bad at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)

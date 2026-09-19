@@ -13,24 +13,24 @@ small erosion in your ability to say what your own code does without going to lo
 Four tests before you delegate, and two habits that keep them honest.
 
 1. **Compare against your own hands, review included.** The comparison people run is typing time
-   against prompt time. The real one is typing time against prompt, wait, read the diff, decide,
-   and correct. Anything a deterministic tool already does — an IDE rename, a codemod, a formatter,
-   a one-file edit you could make from memory — loses on every term.
+   against prompt time. The real one is typing time against prompt, wait, read the diff, decide, and
+   correct. Anything a deterministic tool already does — an IDE rename, a codemod, a formatter, a
+   one-file edit you could make from memory — loses on every term.
 2. **Do it yourself when specifying it is the hard part.** If stating precisely what you want means
    working out the invariant, the ordering, or the constraint, you have done the expensive part by
    the time the brief is written. Write the change; delegate the sweep that follows it.
 3. **Do it yourself when nothing cheap can say it is wrong.** No test, no type, no reproducer, no
    diff short enough to scan: what comes back is a claim rather than a result. Buying claims is how
-   a saving relocates into review, which is where DORA's *verification tax* is paid and where no
-   team has a budget line.
+   a saving relocates into review, which is where DORA's *verification tax* is paid.
 4. **Do not add agents to buy capability.** Fan-out multiplies everything: vendor figures put
    multi-agent systems at roughly fifteen times the tokens of a chat interaction, because every
-   teammate carries its own context and none of them share a cache. Under matched protocol across
-   ten benchmarks in June 2026, five of six multi-agent systems scored below a single-agent
-   baseline while costing more. Give one agent the same budget first.
-5. **Do not ask the agent what the job will cost.** Frontier models predict their own token usage
-   at correlations up to 0.39 and systematically underestimate it. Expert human difficulty ratings
-   align only weakly with actual token cost, so neither of the two available estimators works.
+   teammate carries its own context and none of them share a cache. Give one agent the same budget
+   first, and keep the fan-out only if it beat that
+   ([*Decompose into subagents*](../orchestration/decompose-into-subagents.md)).
+5. **Do not ask the agent what the job will cost.** In 2026 measurements, frontier models predicted
+   their own token usage at correlations up to 0.39 and systematically underestimated it. Expert
+   human difficulty ratings align only weakly with actual token cost, so neither of the two
+   available estimators works.
 6. **Date your no-go list.** On METR's published measurements the 50% task-length horizon has been
    doubling roughly every three months on the 2024-onward trend, so a rule written last year
    describes last year's models. It moves the other way too, as review capacity rather than model
@@ -41,20 +41,21 @@ available — 802 developers, 196,212 pull requests, January 2024 to April 2026 
 worked on its own terms: throughput reached 2.09× baseline and nearly all pull requests became
 agent-authored. Merge and revert rates stayed flat. What moved was human review coverage, from 89%
 of pull requests to 68%, with the load on each remaining reviewer doubling, and end-to-end cycle
-time rose 22% — the thing the mandate existed to compress. Anthropic put the general case plainly
-in December 2024 and has not retracted it: "For many applications, however, optimizing single LLM
-calls with retrieval and in-context examples is usually enough." The exchange rate is throughput on
-the days you would have got away with it, and the occasional half-hour spent hand-writing something
-an agent would have done perfectly well.
+time rose 22% — the thing the mandate existed to compress. The interior of that study is in
+[*Where the time actually goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md).
+Anthropic put the general case plainly in December 2024 and has not retracted it: "For many
+applications, however, optimizing single LLM calls with retrieval and in-context examples is usually
+enough." The exchange rate is throughput on the days you would have got away with it, and the
+occasional half-hour spent hand-writing something an agent would have done perfectly well.
 
 ## Worked example
 
 One week on `granary`, a Kotlin service ingesting warehouse stock feeds from forty suppliers, three
 tasks sat on the board looking like the same size of job.
 
-**The rename.** `supplierRef` became `supplierCode` across the ingest module. The agent had done
-the equivalent the month before: a brief, a wait, and a fourteen-file diff to read. This time it
-was one IDE refactoring and a compile.
+**The rename.** `supplierRef` became `supplierCode` across the ingest module. The agent had done the
+equivalent the month before: a brief, a wait, and a fourteen-file diff to read. This time it was one
+IDE refactoring and a compile.
 
 ```bash
 $ ./gradlew :ingest:compileKotlin

@@ -6,8 +6,8 @@ You have views about which model to use. They took weeks to form, they are proba
 matter less often than the question nobody on the team has asked: what is running the model. The
 wrapper around it decides which tools exist, whether a command runs while you are at lunch, and what
 the operating system does when the agent writes a path you never mentioned into `rm -rf`. You
-configured it once, during installation, in about four seconds, by pressing return. The first time
-that configuration is load-bearing is the first time you find out which parts of it were decoration.
+configured it once, during installation, by pressing return. The first time that configuration is
+load-bearing is the first time you find out which parts of it were decoration.
 
 ## The play
 
@@ -28,14 +28,13 @@ Choose the harness deliberately, then move every safety assumption onto the laye
    of it: compound commands are split and matched part by part, a fixed list of wrappers like
    `timeout` is stripped, and the wrappers that matter are not — `Bash(devbox run *)` approves
    whatever follows `run`
-   ([`permissions-and-sandboxing.md`](../../../notes/research/permissions-and-sandboxing.md),
-   Claude Code v2.1.x, September 2026).
+   ([`permissions-and-sandboxing.md`](../../../notes/research/permissions-and-sandboxing.md), Claude
+   Code v2.1.x, September 2026).
 4. **Put the boundary where the kernel can hold it, before the first unattended run.** Turn on
    filesystem and network isolation, deny reads on credential files and tokens by name — nothing is
    denied by default — and set the two flags that are not defaults: fail the run if the sandbox
-   cannot start, and switch off the escape hatch that lets a command be retried unsandboxed.
-   Otherwise a missing dependency on one machine downgrades that machine to no isolation and a
-   warning in a log nobody reads.
+   cannot start, and switch off the escape hatch that lets a command be retried unsandboxed. Without
+   both, a missing dependency on one machine silently downgrades that machine to no isolation.
 5. **Use a hook for the rules a pattern cannot express** — the current branch, whether a file is
    generated, what an argument actually means. A hook sees the call before it runs and can refuse
    it, which is the thing prose cannot do.
@@ -72,9 +71,9 @@ March:
 It had never been tested, and it matched the spelling the agent usually produced, so nine months of
 uneventful runs read as evidence. Against the documented matching rules it stops less than it looks:
 `/bin/rm -rf build/` and `bash -c 'rm -rf build/'` are outside `Bash(rm *)`, and `git -C . push
-origin main` and `git 'push' origin main` are outside the other. The vendor's own documentation says
-a Bash rule "covers the invocation Claude usually produces and isn't a security boundary around the
-program".
+origin main` and `git 'push' origin main` are outside the other. The vendor's own documentation said
+so in September 2026: a Bash rule "covers the invocation Claude usually produces and isn't a
+security boundary around the program".
 
 The rules stayed — they are still a fair record of what the team intends — and the boundary moved
 down a layer:
@@ -129,4 +128,4 @@ program name is a spelling and spellings have synonyms.
 - [ ] Anything needing the full command text, the branch, or an argument's meaning is a hook
 
 **See also:** [*Wire in the outside world*](wire-in-the-outside-world.md) ·
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-reads.md)
+[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)

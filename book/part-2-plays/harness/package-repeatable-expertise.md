@@ -98,8 +98,9 @@ nothing about.
 **The Unsummoned Skill.** The skill is written, reviewed, and committed, and the agent does the job
 the long way every time. Nothing errors, because from the harness's point of view nothing went
 wrong: the metadata loaded exactly as designed, the request did not match it, and a non-match is not
-an event anyone logs. This is not the same as instructions that were blocked from loading at all —
-there the file never arrived; here it arrived and lost a match. The cause is almost always the
+an event anyone logs. This is not the Brief That Never Arrived
+([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode))
+— there the file never arrived; here it arrived and lost a match. The cause is almost always the
 `description`, which is the entire routing table and the field people write last, in ten words,
 describing what the skill is rather than when to reach for it.
 
@@ -119,5 +120,5 @@ window while the skill sits in the same repository, unmentioned.
 - [ ] It has fired at least once on a request that did not name it
 
 **See also:**
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-reads.md) ·
+[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md) ·
 [*Starve the context*](../context/starve-the-context.md)

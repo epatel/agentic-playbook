@@ -16,7 +16,8 @@ Named failure modes are a separate vocabulary and are indexed at the end of
 - **Brief.** The project context file an agent reads at the start of a session — `AGENTS.md`,
   `CLAUDE.md`, or their equivalents. It is context rather than configuration: it competes for the
   model's attention alongside the task and every file opened, and it does not constrain anything.
-  See [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-reads.md).
+  See
+  [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md).
 
 - **Cache read.** A token supplied from the provider's prompt cache rather than processed fresh,
   billed at roughly a tenth of the input rate. Since every turn re-sends the whole conversation,
