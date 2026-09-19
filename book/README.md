@@ -252,6 +252,7 @@ reference still means something after the vendor reorganises their docs.
 - [ ] Prose wraps at 100 columns; diagrams are mermaid
 - [ ] Any failure mode it names is appended to the running log in `plans/agentic-playbook.md`
 - [ ] Any decision it made that affects other authors is in that plan's decision log
-- [ ] `make check` reports no problems. It runs the style checker too, so it is also what
-      decides the column limit, the whitespace rules, the language tag on every fence, and the
-      outright bans — do not count columns by hand, and do not write a script that does
+- [ ] `make check` reports no problems, and no note against a file you touched. It runs the style
+      checker too, so it is also what decides the column limit, the whitespace rules, the language
+      tag on every fence, the outright bans and the word budgets — do not count columns or words
+      by hand, and do not write a script that does

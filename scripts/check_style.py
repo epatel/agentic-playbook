@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Check the book's mechanical conventions: wrapping, whitespace, fences, and the outright bans.
+"""Check the book's mechanical conventions: wrapping, whitespace, fences, bans, and word budgets.
 
 Four writing tasks wrote their own throwaway version of this in /tmp before it was written down
 once. The rules it checks are the ones a machine can decide — the column limit, trailing
 whitespace, a fenced block with no language tag, the bans in ``book/STYLE.md`` that are a fixed
-list of characters or words. Everything about voice stays where it belongs, which is a person
+list of characters or words, and the word budgets in ``book/STYLE.md`` and
+``book/TEMPLATE-play.md``. Everything about voice stays where it belongs, which is a person
 reading the prose.
 
 Nothing here writes to the book. It reports, and with ``--strict`` it exits non-zero.
@@ -23,13 +24,17 @@ Two severities, the same two the build uses:
 * a **note** wants a human's eye, because the rule has legitimate exceptions — a quotation from a
   source that spells things the American way is not a defect in this book's prose.
 
-Two traps this was written around, both found the hard way:
+Three traps this was written around, all found the hard way:
 
 * **Column counts are ``len()`` on a ``str``.** A byte-oriented ``awk length()`` overcounts every
   em dash by two, and this prose is full of them.
 * **A fence is not always code.** Mermaid diagrams legitimately run past the column limit, and a
   ``---`` inside a ```` ```markdown ```` fence is sample content rather than YAML frontmatter.
   Fenced blocks are skipped by every rule that would otherwise mangle them.
+* **Words are counted by the build's own counter**, imported rather than reimplemented. ``wc -w``
+  and counting by eye both run 1–4% high against it, because it excludes fenced blocks, headings,
+  table rows and block quotes — which at these margins is the difference between "48 over" and
+  "67 over".
 """
 
 from __future__ import annotations
@@ -40,10 +45,13 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-# The fence state machine, the two-severity reporter and the path formatting are the build's, so
-# that "inside a fenced block" means the same thing to the checker and to the thing that renders
-# the book. sys.path[0] is this directory whichever directory the script is run from.
-from build_book import BOOK, NOT_BOOK_DIRS, Fences, Reporter, log, rel
+# The fence state machine, the word counter, the two-severity reporter and the path formatting
+# are the build's, so that "inside a fenced block" and "a word" each mean the same thing to the
+# checker and to the thing that renders the book. ``word_count`` in particular is the counter
+# ``make check`` reports per part, and a second one would disagree with it by a percent or two —
+# which is exactly the margin the budgets are decided on. sys.path[0] is this directory whichever
+# directory the script is run from.
+from build_book import BOOK, NOT_BOOK_DIRS, Fences, Reporter, log, rel, word_count
 
 #: `cards/standing-defaults.md`. Not a soft target: parallel authors merge into one book, and
 #: line-scoped diffs are what makes that survivable.
@@ -101,6 +109,72 @@ AUTOLINK = re.compile(r"<https?://[^>\s]*>")
 #: ban rules over it would report the style guide for being the style guide. The wrapping and
 #: whitespace rules still apply to it.
 BANS_EXEMPT = {"STYLE.md"}
+
+# --------------------------------------------------------------------------------------------
+# Word budgets
+# --------------------------------------------------------------------------------------------
+
+STYLE_MD = "book/STYLE.md"
+TEMPLATE_MD = "book/TEMPLATE-play.md"
+
+
+@dataclass(frozen=True)
+class Budget:
+    """One range from `book/STYLE.md`'s *Length* or `book/TEMPLATE-play.md`.
+
+    The numbers are copied here rather than parsed out of the prose that states them: both
+    documents write their budgets in sentences, and a regular expression over English is a worse
+    contract than a constant with its source named. What keeps the copy honest is ``--self-test``,
+    which checks that every range below is still printed by the file it came from — so moving a
+    number in `book/STYLE.md` fails the self-test instead of silently leaving this script
+    enforcing last month's budget.
+    """
+
+    what: str        # how the thing is named in a report
+    low: int
+    high: int
+    source: str
+    unit: str = "words"
+
+    @property
+    def span(self) -> str:
+        """The range as the source document prints it: an en dash, and thousands separated."""
+        return f"{self.low:,}–{self.high:,}"
+
+
+#: `book/STYLE.md`, *Length*: "a Part I chapter runs 800–1,500 words, a suite opener 150–300, a
+#: Part III chapter 800–1,500". Part IV, the appendices and the preface are deliberately absent —
+#: no budget is stated for them anywhere, and inventing one here would be this script legislating
+#: rather than checking.
+CHAPTER = Budget("the chapter", 800, 1500, STYLE_MD)
+OPENER = Budget("the suite opener", 150, 300, STYLE_MD)
+
+#: `book/TEMPLATE-play.md`, *Length*: "A play runs 600–1,200 words including its example." It is
+#: named "the whole play" rather than "the play" because a play also has a section called *The
+#: play*, and the two are reported one line apart when a play is over on both.
+PLAY = Budget("the whole play", 600, 1200, TEMPLATE_MD)
+
+#: `book/TEMPLATE-play.md`, *The contract, heading by heading*. The keys are the five headings
+#: verbatim and in order — the template forbids rewording or reordering them, so this dict is
+#: also the check that they are all there. *Checklist* is the one counted in items rather than
+#: words ("**4–8 items.**"), and *Worked example*'s "plus blocks" is free: ``word_count`` does
+#: not count fenced blocks in the first place.
+PLAY_SECTIONS = {
+    "Problem": Budget("*Problem*", 60, 120, TEMPLATE_MD),
+    "The play": Budget("*The play*", 200, 500, TEMPLATE_MD),
+    "Worked example": Budget("*Worked example*", 150, 400, TEMPLATE_MD),
+    "Failure mode": Budget("*Failure mode*", 80, 200, TEMPLATE_MD),
+    "Checklist": Budget("*Checklist*", 4, 8, TEMPLATE_MD, unit="items"),
+}
+
+#: Which directory under ``book/`` means which budget. Everything else — `book/part-4-next-waves`,
+#: `book/appendices`, `preface.md`, and the three constraint documents — has no stated budget and
+#: is not counted.
+CHAPTER_DIRS = {"part-1-argument", "part-3-where-it-struggles"}
+PLAYS_DIR = "part-2-plays"
+
+HEADING = re.compile(r"^##\s+(\S.*?)\s*$")
+CHECKLIST_ITEM = re.compile(r"^\s*- \[[ xX]\]")
 
 
 @dataclass
@@ -183,6 +257,108 @@ def unwrappable(line: str) -> bool:
     return indent + max(len(token) for token in stripped.split()) > LIMIT
 
 
+def budget_role(path: Path) -> str | None:
+    """Which budget a file is under, from where it sits in ``book/``, or None for no budget.
+
+    The book's own layout is the only signal there is: a chapter of Part I or Part III, a suite
+    opener, or a play. A file outside ``book/`` — a card, this plan, a research brief — has no
+    stated budget and is never counted, so pointing the checker at a path outside the book still
+    does the right thing.
+    """
+    try:
+        parts = path.resolve().relative_to(BOOK).parts
+    except ValueError:
+        return None
+    if len(parts) == 2 and parts[0] in CHAPTER_DIRS:
+        return "chapter"
+    if len(parts) == 3 and parts[0] == PLAYS_DIR:
+        return "opener" if parts[2] == "index.md" else "play"
+    return None
+
+
+def overrun(count: int, budget: Budget) -> str | None:
+    """How far outside the budget, phrased for a report, or None if it is inside it."""
+    if count > budget.high:
+        return f"{count - budget.high:,} over"
+    if count < budget.low:
+        return f"{budget.low - count:,} under"
+    return None
+
+
+def budget_message(count: int, budget: Budget) -> str | None:
+    distance = overrun(count, budget)
+    if distance is None:
+        return None
+    return (f"{budget.what} is {count:,} {budget.unit}, {distance} the "
+            f"{budget.span} budget ({budget.source})")
+
+
+def play_sections(lines: list[str], prose: list[str | None]) -> list[tuple[int, str, list[str]]]:
+    """Split a play on its ``##`` headings. Returns (line number, heading, body lines).
+
+    ``prose`` carries the fence mask from the caller, so a ``##`` inside a fenced sample is
+    sample content rather than a section of the play. That is not hypothetical: *Build the
+    working agreement* prints a whole one-page agreement with seven ``##`` headings in it, and
+    counting those as sections would report the best-behaved play in the book for having the
+    wrong headings.
+    """
+    starts = []
+    for number, line in enumerate(lines, start=1):
+        heading = HEADING.match(line) if prose[number - 1] is not None else None
+        if heading:
+            starts.append((number, heading.group(1)))
+    sections = []
+    for index, (number, title) in enumerate(starts):
+        end = starts[index + 1][0] - 1 if index + 1 < len(starts) else len(lines)
+        sections.append((number, title, lines[number:end]))
+    return sections
+
+
+def budget_defects(path: Path, lines: list[str], prose: list[str | None]) -> list[Defect]:
+    """Every word budget that applies to this file, counted with the build's own counter.
+
+    All of these are **notes**, not problems, and that is a decision rather than an oversight.
+    The count is exact; the threshold is a judgement — 502 words against a 500-word ceiling is
+    not the same kind of defect as a 104-column line, and a writing task holding a half-drafted
+    chapter is legitimately outside its budget for the length of its turn. A note names the file,
+    the section, the count and the distance, which is everything a person needs to act, without
+    turning somebody else's mid-draft into a red build for everyone.
+    """
+    role = budget_role(path)
+    if role is None:
+        return []
+    defects: list[Defect] = []
+
+    def note(line_no: int, message: str, rule: str = "budget") -> None:
+        defects.append(Defect(path, line_no, rule, message, problem=False))
+
+    text = "\n".join(lines)
+    whole = {"chapter": CHAPTER, "opener": OPENER, "play": PLAY}[role]
+    message = budget_message(word_count(text), whole)
+    if message:
+        note(1, message)
+    if role != "play":
+        return defects
+
+    sections = play_sections(lines, prose)
+    if [title for _, title, _ in sections] != list(PLAY_SECTIONS):
+        note(1, "headings are not the five in `book/TEMPLATE-play.md`, verbatim and in order, "
+                "so the per-section budgets were not counted", rule="play-headings")
+        return defects
+
+    for number, title, body in sections:
+        budget = PLAY_SECTIONS[title]
+        if budget.unit == "items":
+            count = sum(1 for offset, line in enumerate(body)
+                        if prose[number + offset] is not None and CHECKLIST_ITEM.match(line))
+        else:
+            count = word_count("\n".join(body))
+        message = budget_message(count, budget)
+        if message:
+            note(number, message)
+    return defects
+
+
 def check_text(path: Path, text: str) -> list[Defect]:
     """Every rule for one file. Fenced blocks are classified first; nothing else looks inside."""
     defects: list[Defect] = []
@@ -225,8 +401,10 @@ def check_text(path: Path, text: str) -> list[Defect]:
         defects.append(Defect(path, fence_opened_at, "unclosed-fence",
                               "fenced block is never closed"))
 
-    # Pass two: the book's own words, with quotations taken out of them.
+    # Pass two: the book's own words, with quotations taken out of them, and the word budgets —
+    # which need the fence mask from pass one and nothing from the line-by-line rules below.
     voice = mask_quotations(prose)
+    defects.extend(budget_defects(path, lines, prose))
     check_bans = path.name not in BANS_EXEMPT
 
     # Pass three: the rules.
@@ -351,10 +529,106 @@ EXPECTED_PROBLEMS = [
 #: defect, because neither is the book talking.
 EXPECTED_NOTES = [(29, "ize")]
 
+# The budget fixtures are generated rather than written out, because a fixture that trips a
+# 500-word ceiling has to contain 501 words and nobody would read it. ``word`` is one word to
+# ``word_count``; ``- [ ] an item`` is one checklist item.
+
+
+def filler(words: int) -> str:
+    return " ".join(["word"] * words)
+
+
+def play_fixture(problem: int, play: int, example: int, failure: int, items: int,
+                 play_heading: str = "The play") -> str:
+    """A play whose five sections are exactly the sizes asked for."""
+    return "\n".join([
+        "# A fixture play", "",
+        "## Problem", "", filler(problem), "",
+        f"## {play_heading}", "", filler(play), "",
+        "## Worked example", "", filler(example), "",
+        "## Failure mode", "", filler(failure), "",
+        "## Checklist", "", *["- [ ] an item"] * items, "",
+    ])
+
+
+#: Where each budget fixture has to live for ``budget_role`` to give it a budget at all. None of
+#: these files exists; the role comes from the path, and the text is passed in.
+PLAY_PATH = BOOK / PLAYS_DIR / "suite" / "a-fixture-play.md"
+OPENER_PATH = BOOK / PLAYS_DIR / "suite" / "index.md"
+CHAPTER_PATH = BOOK / "part-1-argument" / "a-fixture-chapter.md"
+NO_BUDGET_PATH = BOOK / "appendices" / "a-fixture-appendix.md"
+
+
+def budget_self_test() -> list[str]:
+    """The word budgets, including the two cases that decide whether the rule is usable.
+
+    A section one word outside its budget is reported (the margins are the whole point), and a
+    file the book states no budget for is not (Part IV, the appendices and the preface are not
+    silently given one).
+    """
+    failures = []
+
+    def budget_notes(path: Path, text: str) -> list[tuple[int, str]]:
+        defects = check_text(path, text)
+        if any(d.problem and d.rule in ("budget", "play-headings") for d in defects):
+            failures.append(f"{rel(path)}: a budget defect was reported as a problem, not a note")
+        return sorted((d.line, d.rule) for d in defects
+                      if d.rule in ("budget", "play-headings"))
+
+    # One under the 60-word floor, one over the 500-word ceiling, one over the 8-item ceiling,
+    # and two sections comfortably inside. The whole play is 905 words, inside its 600–1,200.
+    expected = [(3, "budget"), (7, "budget"), (19, "budget")]
+    got = budget_notes(PLAY_PATH, play_fixture(59, 501, 200, 100, 9))
+    if got != expected:
+        failures.append(f"play budgets: expected {expected}, got {got}")
+
+    # Exactly on both ends of every budget is inside it, which is what "150–400" means.
+    got = budget_notes(PLAY_PATH, play_fixture(60, 500, 400, 80, 8))
+    if got:
+        failures.append(f"a play on its budget boundaries was reported: {got}")
+
+    # A reworded heading means the sections cannot be identified, so they are not counted — and
+    # the reader is told that rather than left with a play that quietly checks nothing.
+    got = budget_notes(PLAY_PATH, play_fixture(59, 501, 200, 100, 9, play_heading="The Play"))
+    if got != [(1, "play-headings")]:
+        failures.append(f"a play with a reworded heading: expected one note, got {got}")
+
+    for path, text, expected_lines in (
+        (OPENER_PATH, f"# An opener\n\n{filler(100)}\n", [(1, "budget")]),
+        (OPENER_PATH, f"# An opener\n\n{filler(200)}\n", []),
+        (CHAPTER_PATH, f"# A chapter\n\n{filler(1501)}\n", [(1, "budget")]),
+        (CHAPTER_PATH, f"# A chapter\n\n{filler(1200)}\n", []),
+        (NO_BUDGET_PATH, f"# An appendix\n\n{filler(4000)}\n", []),
+    ):
+        got = budget_notes(path, text)
+        if got != expected_lines:
+            failures.append(f"{rel(path)} at this length: expected {expected_lines}, got {got}")
+    return failures
+
+
+def budget_source_test() -> list[str]:
+    """Every budget above is still printed by the document it was copied from.
+
+    This is the whole reason the numbers may be hard-coded. `book/STYLE.md` and
+    `book/TEMPLATE-play.md` state their budgets in sentences; parsing them would be a regular
+    expression over English. Checking that the range still appears verbatim costs four lines and
+    turns "somebody moved a number and this script is now enforcing last month's budget" into a
+    failing self-test.
+    """
+    failures = []
+    for budget in (CHAPTER, OPENER, PLAY, *PLAY_SECTIONS.values()):
+        source = BOOK.parent / budget.source
+        if not source.exists():
+            failures.append(f"{budget.source} is missing, so its budgets cannot be confirmed")
+        elif budget.span not in source.read_text(encoding="utf-8"):
+            failures.append(f"{budget.source} no longer says {budget.span} for {budget.what}: "
+                            f"update the constant in this file, or the document")
+    return failures
+
 
 def self_test() -> int:
     """Check the checker. No dependencies, so it runs anywhere the book does."""
-    failures = []
+    failures = budget_self_test() + budget_source_test()
     defects = check_text(Path("fixture.md"), FIXTURE)
     problems = sorted((d.line, d.rule) for d in defects if d.problem)
     notes = sorted((d.line, d.rule) for d in defects if not d.problem)
@@ -418,7 +692,8 @@ def main(argv: list[str] | None = None) -> int:
         (reporter.warn if defect.problem else reporter.note)(defect.render())
 
     log(f"Checked {len(files)} markdown file{'s' if len(files) != 1 else ''} against "
-        f"{LIMIT} columns and book/STYLE.md.")
+        f"{LIMIT} columns, book/STYLE.md, and the word budgets in book/STYLE.md and "
+        f"book/TEMPLATE-play.md.")
     reporter.print()
     if not defects:
         log("No defects.")
