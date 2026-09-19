@@ -246,6 +246,12 @@ contract, not just a word budget. Part I is the section most likely to sprawl, a
 in [`cards/book-structure.md`](../cards/book-structure.md) are the point of the book, not a
 guideline.
 
+**`make lint` counts every budget on this page and in `TEMPLATE-play.md`, and names anything
+outside one.** It reports them as notes rather than as problems, because a draft is legitimately
+over for a while — so read the notes against the file you are editing before you finish. Do not
+count by hand: `wc -w` runs a few percent high against the counter the book is measured with, and
+these budgets are decided on margins smaller than that.
+
 ## When in doubt
 
 Cut the joke and keep the sentence. A dry book with a dozen good asides is the target; a book that

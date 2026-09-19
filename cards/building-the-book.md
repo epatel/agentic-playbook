@@ -58,9 +58,10 @@ report a real problem. It is a reasonable last step before finishing a writing t
 ## The style checker — the rules a machine can decide
 
 `scripts/check_style.py` reads every markdown file under `book/` and reports, with `file:line`,
-what `book/STYLE.md` and the 100-column rule make mechanical. **Do not count columns by hand, and
-do not write your own version of this** — four writing tasks each wrote one in `/tmp` before it
-was written down once, and two of them shipped defects into the prose.
+what `book/STYLE.md`, `book/TEMPLATE-play.md` and the 100-column rule make mechanical. **Do not
+count columns or words by hand, and do not write your own version of this** — four writing tasks
+each wrote one in `/tmp` before it was written down once, and two of them shipped defects into
+the prose.
 
 | Reported | Rule |
 |---|---|
@@ -71,6 +72,8 @@ was written down once, and two of them shipped defects into the prose.
 | an exclamation mark, an emoji, a word from the hype list | `book/STYLE.md`, *Banned outright* |
 | a `> Captured` line in the wrong shape, or with no fence under it | `book/TEMPLATE-play.md` |
 | an `-ize` spelling — as a **note**, because a quotation may be American | `book/STYLE.md`, *Mechanics* |
+| a chapter, suite opener, play or play section outside its word budget — as a **note** | `book/STYLE.md`, *Length*; `book/TEMPLATE-play.md` |
+| a play whose five `##` headings are not the template's, verbatim and in order — as a **note** | `book/TEMPLATE-play.md` |
 
 What it deliberately does not report matters as much, because each exemption is a decision
 somebody already made and a false positive is how a checker gets switched off:
@@ -101,13 +104,50 @@ If you change a rule, run `--self-test`. The fixture encodes the traps — a 100
 of em dashes, a 128-column mermaid node, a `---` inside a sample, a quoted exclamation mark — and
 each of them was reported as a defect by somebody's throwaway version.
 
+### The word budgets
+
+**Do not count words by hand either.** The checker counts every budget the two constraint
+documents state, using `word_count` from the build — the same counter `make check` reports per
+part, which excludes fenced blocks, headings, table rows and block quotes. `wc -w` and counting by
+eye both run a few percent high against it, and at these margins that is the difference between
+"48 over" and "67 over".
+
+| Where it sits | Budget | From |
+|---|---|---|
+| `book/part-1-argument/*.md`, `book/part-3-where-it-struggles/*.md` | 800–1,500 words | `book/STYLE.md`, *Length* |
+| `book/part-2-plays/<suite>/index.md` | 150–300 words | same |
+| any other file in `book/part-2-plays/<suite>/` | 600–1,200 words, then *Problem* 60–120, *The play* 200–500, *Worked example* 150–400, *Failure mode* 80–200, *Checklist* 4–8 items | `book/TEMPLATE-play.md` |
+
+A play is split on its `##` headings, and a play whose headings are not the template's — verbatim
+and in order — gets one note saying so and no section counts, because the sections cannot be
+identified. Part IV, the appendices and the preface have no stated budget and are not counted.
+Neither is anything outside `book/`, so pointing the checker at `cards` or `plans` still works.
+
+Every budget report is a **note**, deliberately. The count is exact but the threshold is a
+judgement — 502 words against a 500-word ceiling is not the defect a 104-column line is, and a
+writing task holding a half-drafted chapter is legitimately outside its budget for the length of
+its turn. The note names the file, the section, the count and the distance, which is what a person
+needs; it does not turn somebody else's draft into a red build. **Ten of the book's plays are over
+the 500-word ceiling in *The play* today**, between 2 and 34 words each, and that is the standing
+reason the severity is what it is.
+
+The budgets are hard-coded in the script, each one naming the document it came from, and
+`--self-test` checks that the range is still printed there — which is the only reason they may be
+hard-coded at all. **Move a number in `book/STYLE.md` or `book/TEMPLATE-play.md` and the self-test
+fails until the script agrees with it.**
+
 ## Two severities, because the book is half-written
 
 A **problem** is something a person should fix. A **note** is the expected consequence of building
 an unfinished book — a forward link to a chapter nobody has written, a diagram left as source — or,
-from the style checker, a rule with legitimate exceptions that wants a human's eye.
+from the style checker, a rule that is exact about its count and soft about its threshold: an
+American spelling that may be a quotation, a word budget a draft is temporarily outside.
 Only problems fail `--strict`, so `make check` does not cry wolf for the months in which most of
 the table of contents is ⬜.
+
+A note is not a licence to ignore it. Read the ones in the file you are editing before you finish;
+every budget overrun in this book's history was found by a person reading a count, and the notes
+are there so that person does not have to be looking for it.
 
 Forward references are allowed by the cross-reference convention, so the build unlinks the ones
 whose target is absent and leaves the link text as prose. Left in place they are a hard error in

@@ -131,6 +131,12 @@ A play runs **600–1,200 words** including its example. Under 600 and it is pro
 another play; over 1,200 and it is probably two plays, or one play with a *Worked example* that has
 become a tutorial.
 
+`make lint` counts this budget and each of the five above, splitting the play on its `##` headings,
+and names anything outside one. They are notes rather than problems — the count is exact, the
+threshold is a judgement — so read them against the play you are editing rather than waiting to be
+failed by them. Do not count by hand, and do not trust `wc -w`: it counts fenced blocks, headings
+and table rows, which this book's counter does not.
+
 ## Worked examples: what "real" means
 
 The book's standard is "real files, real commands, real output":

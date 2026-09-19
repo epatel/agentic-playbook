@@ -99,6 +99,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `f986730f7a1f` | Verify the MCP incident citations in the Harness suite against primary sources — both incidents hold, one framing was wrong and is corrected in print | ✅ done |
 | `f0669b48dbc0` | Untrack `scripts/__pycache__` and gitignore it — already untracked by `37dfb14`; added the `*.pyc` half and confirmed nothing else generated is tracked | ✅ done |
 | `3884b4f3fc82` | Re-check Part III's remaining derived figures — 26 sources opened, eleven defects in print, four of them the same species as the reward-hacking trio | ✅ done |
+| `023ba519cdd0` | Teach `make lint` the word budgets — every budget in `STYLE.md` and `TEMPLATE-play.md`, counted with the build's own counter; eleven overruns found that nobody had ever counted | ✅ done |
 
 ## Current state / handoff
 
@@ -662,20 +663,27 @@ was described wrongly and the sentence has been corrected in print. See [*The MC
 check*](#the-mcp-citation-check) below, and read it before writing any sentence that names a
 compromised package — the correction it makes is the kind a writer repeats from memory.
 
-**Next up:** nothing open. If a later edit adds prose, **count before you add**: `make check` prints
-words per part, and the per-section counter is in the trim note below. Two chapters are within a
-hundred words of their ceiling — *What this book assumes about you* and *The failure modes worth
-naming* — and *Wire in the outside world*'s *The play* is now at exactly its 500-word ceiling.
+**The word budgets are checked now (`023ba519cdd0`), and they were not being met.** `make lint`
+counts every budget in `STYLE.md` and `TEMPLATE-play.md` — chapter, suite opener, whole play, and
+each of a play's five sections — with the build's own `word_count`. It found **eleven overruns
+nobody had ever counted**, all in Part II, and it reports them as notes rather than problems, so
+`make check` is still green. **Do not count words by hand any more; run `make lint` and read the
+notes against the file you touched.** What it checks, why the severity is what it is, and the
+eleven files are under [*The word-budget check*](#the-word-budget-check) below.
 
-**Three Part III chapters are now the tightest files in the book.** `3884b4f3fc82` found *What is
+**Next up:** the eleven overruns want trimming — filed as `bfc99c593aeb`, with the list and the
+method in the item. Until it runs, **a play you edit may already be over before you add a word**;
+`make lint` will say so. If a later edit adds prose, **count before you add**.
+
+**Three Part III chapters are still the tightest files in the book.** `3884b4f3fc82` found *What is
 genuinely contested* sitting at **1,559** against a 1,500 ceiling — `57772ad900e3` added 143 words
-to a chapter already at 1,435, and **nothing checks per-chapter budgets**, so `make check` reported
+to a chapter already at 1,435, and nothing checked per-chapter budgets, so `make check` reported
 it clean. It is back to **1,498**, alongside *The failure modes worth naming* at **1,497**. Both
 have single-digit headroom. The trim that paid for the corrections is itemised in the decisions
 below; the one judgement call worth knowing is that it cut a closing clause from the
-recently-rewritten reward-hacking section because it restated a sentence two earlier. **There is a
-standing gap here: `make lint` enforces 100 columns and the style bans but not the word budgets in
-`STYLE.md`, so every budget overrun in this book's history has been found by hand.**
+recently-rewritten reward-hacking section because it restated a sentence two earlier. Part I's
+*What this book assumes about you* (1,444) and *Wire in the outside world*'s *The play*, at exactly
+its 500-word ceiling, are the next tightest.
 
 Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
 that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
@@ -805,6 +813,67 @@ Four things in it constrain later tasks:
 4. **`> Captured` is checked**, as the editorial pass asked: the shape of the line, and that there
    is a fence under it. The other half of that convention — whether a block that looks like a
    transcript *has* a capture line — is not mechanical and is still a person's job.
+
+## The word-budget check
+
+Board item `023ba519cdd0` closed the gap the entry above left open. `make lint` now counts every
+word budget the book states, and the first run of it found **eleven overruns in Part II that no
+pass had ever counted** — `fce3cee8fa34` had checked Part I and the Context suite by hand, and
+nothing had ever looked at the other five suites.
+
+| Where it sits | Budget | From |
+|---|---|---|
+| a Part I or Part III chapter | 800–1,500 words | `book/STYLE.md`, *Length* |
+| a suite opener (`<suite>/index.md`) | 150–300 words | same |
+| a play, whole | 600–1,200 words | `book/TEMPLATE-play.md`, *Length* |
+| a play's five sections | *Problem* 60–120, *The play* 200–500, *Worked example* 150–400, *Failure mode* 80–200, *Checklist* 4–8 items | `book/TEMPLATE-play.md`, the heading-by-heading contract |
+
+Part IV, the appendices and the preface are **deliberately not counted**: no budget is stated for
+them anywhere, and a checker that invents one is legislating rather than checking. A play whose
+five `##` headings are not the template's, verbatim and in order, gets one note saying so and no
+section counts — the sections cannot be identified, and guessing would be worse.
+
+Six things in it constrain later work:
+
+1. **Ten plays are over the 500-word ceiling in *The play*, and one is over as a whole.** They run
+   from 2 words over (*Make the control flow deterministic*) to 34 (*Decide who signs off*), and
+   *Onboard someone into all this* is 27 over the 1,200-word play ceiling as well. Six were written
+   over budget; the editorial pass pushed four further over; and one — *Scope a task to fit the
+   window* — was trimmed to 488 by `fce3cee8fa34` and then taken to **533** four commits later by
+   `5e0f39858134`'s two-link fix, which added 45 words to a section already at its ceiling. That is
+   the same species as the `57772ad900e3` regression, one level down, and it is why the check
+   exists. Trimming them is filed as `bfc99c593aeb`, which carries the full list, and is **not**
+   part of this item: it is a prose pass on eleven files in five suites, and mixing it into the
+   commit that adds the checker would have put both beyond review.
+2. **Every budget report is a note, and that is the deliberate severity decision.** The count is
+   exact; the threshold is a judgement. 502 words against a 500-word ceiling is not the defect a
+   104-column line is, a writing task holding a half-drafted chapter is legitimately outside its
+   budget for the length of its turn, and making it a problem today would have handed every
+   unrelated edit a red build inherited from ten pre-existing overruns. The note carries the file,
+   the section, the count and the distance, which is everything the hand-counting passes produced.
+   **The upgrade path is open**: once the follow-up trim lands and the book is inside every budget,
+   promoting over-budget to a problem is a two-line change plus a self-test expectation.
+3. **The counter is the build's, imported, not a second one.** `check_style.py` now imports
+   `word_count` from `build_book.py` alongside the fence state machine, so the lint, the per-part
+   table `make check` prints, and any future count all agree. This is the trap `6b0110f76388`
+   closed for column counting; a second word counter would have reopened it a percent or two out.
+4. **The numbers are hard-coded, and `--self-test` checks they are still the book's numbers.**
+   Both constraint documents state their budgets in sentences, and a regular expression over
+   English is a worse contract than a constant with its source named. So each `Budget` carries the
+   file it came from, and the self-test asserts the range is still printed there. **Move a number
+   in `STYLE.md` or `TEMPLATE-play.md` and the self-test fails** until the script agrees. This is
+   the answer to the item's "read them from the file if that is cheap": reading is not cheap,
+   checking that the copy is honest costs four lines.
+5. **Sections are split on the fence mask, not on a bare `##` scan.** *Build the working
+   agreement*'s worked example prints a one-page agreement containing seven `##` headings inside a
+   fenced block; counting those as sections would report the best-behaved play in the book for
+   having the wrong headings. The mask `check_text` already builds for every other rule is what is
+   passed in.
+6. **The budget rules are in the self-test, including the two that decide whether it is usable.**
+   A section one word outside its budget is reported (the margins are the point), a section exactly
+   on either end is not, and a file with no stated budget is never given one. The play fixtures are
+   generated rather than written out — a fixture that trips a 500-word ceiling has to contain 501
+   words, and nobody would read it.
 
 ## The verification pass
 
@@ -2008,6 +2077,23 @@ Grafana's spelling**; the reason is in the brief.
   was supposed to cover" — restated "What it did not improve was how much the instruction helped
   once the work was impossible" two sentences earlier, which is the editorial pass's own criterion.
   **No claim, figure or quotation from that section was touched.**
+- **`make lint` counts the word budgets, and reports them as notes rather than as problems**
+  (`023ba519cdd0`). Chapter, suite opener, whole play and each of a play's five sections, against
+  `STYLE.md` and `TEMPLATE-play.md`, with the build's own `word_count`. The count is exact and the
+  threshold is a judgement, so a budget defect is a note: a draft is legitimately over for the
+  length of a turn, and eleven pre-existing overruns would otherwise have handed every unrelated
+  edit a red build. **Promoting over-budget to a problem once the book is inside every budget is a
+  deliberate later decision, not a thing to do quietly.**
+- **Budgets are hard-coded in the checker, and the self-test asserts they are still the book's**
+  (`023ba519cdd0`). Both constraint documents state their budgets in prose; parsing English is a
+  worse contract than a constant that names its source. `--self-test` checks each range still
+  appears in the file it came from, so moving a number in `STYLE.md` fails the self-test rather
+  than leaving the script enforcing last month's budget. **Change the document and the script in
+  the same commit.**
+- **Part IV, the appendices and the preface have no word budget, and the checker does not invent
+  one** (`023ba519cdd0`). Nothing in `STYLE.md` states a length for them. If one is wanted, write
+  it in `STYLE.md` first and then teach the script; a checker that legislates is a checker nobody
+  believes.
 
 ## Open questions
 
@@ -2781,11 +2867,23 @@ Append discovered constraints and cross-task notes here as work proceeds.
   harness** for at least openai.com and apiiro.com, which contradicts the earlier `mcp.md` note
   above — the block that note records may have been transient or path-specific. Worth re-testing
   before concluding the Archive is unavailable.
-- **`make lint` does not check the per-chapter word budgets in `STYLE.md`**, and that is how *What
-  is genuinely contested* sat at 1,559 against a 1,500 ceiling from `57772ad900e3` until
-  `3884b4f3fc82` counted by hand. Both are back inside. A future item could teach `check_style.py`
-  the three budgets that are mechanical — Part I chapter, Part III chapter, suite opener — which
-  would close the last category of defect in this book that only a human has ever caught.
+- ~~**`make lint` does not check the per-chapter word budgets in `STYLE.md`**~~, and that is how
+  *What is genuinely contested* sat at 1,559 against a 1,500 ceiling from `57772ad900e3` until
+  `3884b4f3fc82` counted by hand. **Closed** by `023ba519cdd0`, which taught the checker all of
+  them — the three mechanical ones this entry named, plus the whole-play budget and the five
+  per-heading ones in `TEMPLATE-play.md`, which the note called the larger prize. See [*The
+  word-budget check*](#the-word-budget-check).
+- **A checker written for one class of defect finds more of it than the hand passes did**
+  (`023ba519cdd0`). Three budget overruns had ever been found in this book, all by people counting
+  on purpose. The first run of the automated version found **eleven**, in five suites nobody had
+  thought to check, including one section that had been trimmed to 488 and was back at 533 four
+  commits later. **The value of mechanising a check is not the check; it is the files nobody was
+  looking at.**
+- **A two-link fix is a prose edit** (`023ba519cdd0`, on `5e0f39858134`). Adding the missing
+  cross-reference to *Scope a task to fit the window* cost 45 words of connecting sentence in a
+  section that was already at its ceiling, and the commit message reasonably says nothing about
+  length. **Any edit that adds a clause is subject to the budget**, which is precisely why the
+  answer is a checker rather than a convention.
 - **Retrieval routes, confirming and extending `57772ad900e3`'s table.** `curl` + `pdftotext
   -layout` opened fourteen arXiv PDFs with no failures, including ones earlier passes recorded as
   "resisted text extraction" — the obstacle was always the fetch size limit. Two additions worth
