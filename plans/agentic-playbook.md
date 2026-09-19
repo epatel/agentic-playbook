@@ -74,6 +74,19 @@ Milestone 3 was the real critical path: with several authors and a specific comi
 "we'll harmonise it later" is how a book ends up with three voices. It is done, and the nine
 writing tasks are unblocked.
 
+### Follow-ups raised during the build
+
+Work that was not in the original sequence. These are listed separately rather than appended to the
+table above, so that the numbered milestones keep the numbers other entries in this file refer to.
+
+| Board item | What | Status |
+|---|---|---|
+| `aed2433867e0` | Reassessment after milestones 8 and 18 — contracts hardened, five prose defects fixed | ✅ done |
+| `6b0110f76388` | Add a 100-column / style lint to `make check`, after three authors wrote the same one | ⬜ open, blocked on nothing |
+| `fce3cee8fa34` | Trim three marginal budget overruns; editorial-pass work | ⬜ blocked on `aed2433867e0` |
+| `9dd4d6b84b80` | Define *skill*, *card*, *harness* on first use, per Part I's promise | ⬜ blocked on the Harness suite |
+| `57772ad900e3` | Verify the seven primary sources that resisted automated fetch | ⬜ blocked on milestone 6 |
+
 ## Current state / handoff
 
 `book/` now exists and holds the three constraint documents every author works within:
@@ -292,6 +305,26 @@ GitHub is still the book, and nothing has to be built to read it.
    chapters, Part II 3,736 across the Context suite's four files. Part II passes Part I on the next
    suite, which is the first moment the proportions can be read as anything but noise.
 
+A reassessment pass (`aed2433867e0`) then re-read Part I and the Context suite against the three
+constraint documents, and re-ran `make check` against the build milestone 18 had just landed. The
+prose held up and the build reports no problems; the contracts did not hold up, because four
+conventions the Context suite established were recorded only in the decision log below. **They are
+now in `book/`, which means the five remaining suite authors get them by reading `STYLE.md`,
+`TEMPLATE-play.md` and `README.md` — the files they were going to read anyway.** If you are writing
+a suite, these four are the ones most likely to catch you:
+
+1. **Your `index.md` has a contract**, in [`book/README.md`](../book/README.md#suite-openers): name
+   the suite's single idea, then show each play as that idea at a different layer. A unifying
+   principle goes in the opener, where it costs forty words, never in a fourth play.
+2. **Every play states its exchange rate** — what the reader gives up. Part I promises the reader
+   this in print, so a play listing only benefits contradicts the book two parts away. It is now a
+   rule under *The play* in `TEMPLATE-play.md` and an item in `README.md`'s adding-a-file checklist.
+3. **Pick one project for your suite and re-introduce it in a clause in every play.** Not another
+   suite's project — Context has `atlas` — and never "`atlas` again", which is a back-reference to
+   a play your reader has not read.
+4. **Worked examples are past tense.** This is the book's one exception to the present tense, and
+   it is now written down in both `STYLE.md` and `TEMPLATE-play.md`.
+
 ## Decisions log (append-only)
 
 - Ideation consolidated; `idea.md` / `plot-1.md` / `plot-2.md` moved to `notes/raw/` and replaced
@@ -412,6 +445,30 @@ GitHub is still the book, and nothing has to be built to read it.
   the plays stay self-contained for a reader who opens the book at one of them, and a reader going
   through the suite gets continuity for free. Other suites should pick their own project rather
   than extending `atlas`, or the book acquires one imaginary company with six unrelated problems.
+- **A convention that constrains future authors lives in `book/`, not only in this log.** A
+  reassessment pass after milestone 8 found four conventions established by the Context suite that
+  existed only as entries in this decision log — which is now sixty entries long and is not what an
+  author reads before their first sentence. The three constraint documents in `book/` are. Anything
+  a later author must follow is written there and *summarised* here; this log records why the
+  decision was taken, not the decision itself. The four promoted are the next four entries.
+- **A suite opener has a contract, not just a word budget**, now in
+  [`book/README.md`](../book/README.md#suite-openers): name the suite's single idea, then show each
+  play as that idea at a different layer, in a framing paragraph, an idea sentence, and one
+  paragraph per play. This makes the milestone-8 "suite opener names the suite's one idea" decision
+  actionable for the five suites that have not been written.
+- **Every play states its exchange rate**, now a rule under *The play* in
+  [`book/TEMPLATE-play.md`](../book/TEMPLATE-play.md) and an item in `book/README.md`'s
+  adding-a-file checklist. *What this book assumes about you* promises this to the reader in print,
+  so a play that lists only benefits contradicts Part I. All three Context plays state one; the
+  promise had been recorded nowhere an author would see it.
+- **One project per suite, re-introduced in a clause in every play**, now in `TEMPLATE-play.md`
+  under *Worked example*. The clause matters as much as the project: "`atlas` again" is a
+  back-reference, and a reader who opened the book at this play has not read the one next door.
+- **A play's *Worked example* is narrated in the past tense.** This is the book's one exception to
+  the present tense and is now stated in both `book/STYLE.md` and `book/TEMPLATE-play.md`. All
+  three Context plays did this, consistently and against the written rule; it is the right call —
+  an example reports what happened, the rest of the book describes how things behave — so the rule
+  was corrected rather than the plays. Without this, five parallel suites would have split on tense.
 - **The PDF is derived, never authored.** Milestone 18 built it as a one-way transformation:
   `book/` is read, `build/` is written, and no site- or print-specific syntax enters the source.
   Heading levels, anchors, page breaks and link rewriting all happen at build time. This does not
@@ -644,7 +701,6 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **Mermaid blocks legitimately exceed 100 columns** and any checker must skip fenced blocks.
   *Scope a task to fit the window* has a 120-character node line; `book/STYLE.md` already exempts
   fenced blocks, and this note exists so nobody "fixes" it.
-
 - **Milestone 18's build has a natural slot for the 100-column checker, and deliberately does not
   fill it.** Two writing tasks have now written the same throwaway width checker, and
   `scripts/build_book.py` is the obvious place to put a permanent one — it already walks every
@@ -668,6 +724,39 @@ Append discovered constraints and cross-task notes here as work proceeds.
   the metadata file carries hex; LaTeX wants the name instead, which the script passes on the
   command line. And typst's `margin` is a map, which `-V` cannot express — it has to come from the
   metadata file.
+- **A reassessment pass audited Part I and the Context suite against the three constraint documents
+  and found the contracts, not the prose, to be where the damage was.** Headings, links, the
+  failure-mode registry, banned vocabulary, British English, agent terminology, 100-column
+  compliance and the exchange-rate promise all held, and `make check` reported no problems. What did
+  not hold was that four working conventions lived only in the decision log. Those are promoted into
+  `book/` — see the four decisions above — and **a suite author who reads `STYLE.md`,
+  `TEMPLATE-play.md` and `README.md` now gets all of them without reading this file.** Five small
+  prose defects were fixed in the same pass: "`atlas` again" (a banned back-reference), bold used
+  for general emphasis, a sentence claiming a deliberately-empty table had been filled in, a
+  near-verbatim restatement of a Part I sentence in `context/index.md`, and the citation error
+  below.
+- **A cited retention ratio had been printed as an absolute rate.** *Scope a task to fit the
+  window* gave requirement coverage as "roughly 0.93–0.95" and strict success as "about 0.375".
+  Both figures in `notes/research/failure-modes.md` are *retention ratios against that study's own
+  small-context baseline*, not absolute rates; the absolute success figures are 3/10 against a
+  baseline of 8/10. The play now says "of baseline" and gives the raw counts. Any suite quoting
+  arXiv 2607.17937 should carry the word *retention* — the figures are meaningless without it.
+- **The judgement calls were deferred rather than fixed**, on two board items. `fce3cee8fa34` holds
+  three marginal budget overruns — *Before Git, before Scrum, before this* at ~1,548 words against
+  1,500, *Scope a task to fit the window*'s *The play* at ~559 against 500, and *Write the brief
+  the agent actually reads*'s *Failure mode* at ~219 against 200 — plus the verbatim clause shared
+  by `context/index.md` and *Starve the context*, which is the tie-back-to-the-opener pattern
+  working slightly too literally. `9dd4d6b84b80` holds the terminology promise: *skill*, *card* and
+  *harness* are used before being defined, against Part I's stated contract with the reader, and
+  the suites that own those terms do not exist yet to fix it.
+- **A third writing task has now independently written the same 100-column checker in `/tmp`**, and
+  that settles the question the entry above left to the editorial pass. Milestones 7 and 8 each
+  wrote one; the reassessment pass wrote a third, which also had to learn that `len()` on a Python
+  `str` and `length()` in a byte-oriented `awk` disagree about em-dashes by two columns per dash.
+  Three for three is well past `cards/standing-defaults.md`'s bar for adding tooling, and
+  `scripts/build_book.py --check` is the home milestone 18 built for it: it already walks every
+  chapter and already skips fenced blocks. Board item `6b0110f76388` carries it, is blocked on
+  nothing, and is worth more before the remaining five suites than after them.
 
 ### Failure-mode registry
 

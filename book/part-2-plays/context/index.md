@@ -25,5 +25,5 @@ you is a different artefact from your bill.
 How much can be handed over at once, how to recognise a job that has outgrown its session, and how
 to hand state to the next one.
 
-None of this needs budget, permission, or a platform team that has thought about it on your behalf.
-It mostly needs deleting things, which is the harder of the two skills.
+None of the three needs a budget line, a procurement cycle, or anyone's approval. They mostly need
+deleting things, which is the harder of the two skills.

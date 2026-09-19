@@ -40,15 +40,16 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    A fresh run with a good brief reliably beats a tired one with a full window.
 
 The idea worth carrying past this play is that fitting in the window is necessary and nowhere near
-sufficient. The same study measured both halves: as context grew, the agent's *coverage* of the
-requirements stayed at roughly 0.93–0.95 — it was still reading them — while the rate at which it
-actually satisfied all of them fell to about 0.375. The information was present. The compliance was
-not. So "will it fit" is the wrong question and "can it still satisfy all of this at once" is the
-right one, which is why the answer is a smaller task rather than a bigger window. Scope is the
-signal-over-noise decision taken before the run starts, which is the cheapest place to take it:
-everything the task does not need is noise you have not paid for yet. The exchange rate: four
-briefs instead of one, four sets of results to read, and a boundary you might place wrong. What
-you get back is the ability to re-run a quarter of the work instead of all of it.
+sufficient. The same study measured both halves against its own small-context baseline: requirement
+*coverage* held at 0.93–0.95 of baseline, so the agent was still reading them, while the rate at
+which it satisfied all of them at once fell to 0.375 — three runs in ten against eight. The
+information was present. The compliance was not. So "will it fit" is the wrong question and "can it
+still satisfy all of this at once" is the right one, which is why the answer is a smaller task
+rather than a bigger window. Scope is the signal-over-noise decision taken before the run starts,
+which is the cheapest place to take it: everything the task does not need is noise you have not
+paid for yet. The exchange rate: four briefs instead of one, four sets of results to read, and a
+boundary you might place wrong. What you get back is the ability to re-run a quarter of the work
+instead of all of it.
 
 ## Worked example
 

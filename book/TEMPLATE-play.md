@@ -58,6 +58,10 @@ Rules:
 - One paragraph after the steps may explain *why the whole thing works* — the transferable idea the
   reader takes to a situation this play does not cover. This is the most valuable paragraph in most
   plays and the one most often left out.
+- **State the exchange rate.** One sentence naming what the reader gives up: a slower first pass,
+  four briefs instead of one, being occasionally under-supplied. *What this book assumes about you*
+  promises in print that where a play has a cost, the play states it — so a play listing only
+  benefits contradicts Part I in print. It sits naturally at the end of the why-it-works paragraph.
 - A mermaid diagram belongs here if there is a topology or a flow. Never ASCII art.
 
 ### Worked example
@@ -67,9 +71,21 @@ Rules:
 The evidence rules are in [Worked examples: what "real" means](#worked-examples-what-real-means)
 below. Read them; they are the section authors get wrong.
 
-Name the project once and keep it consistent within the play. Show the state before, the move, and
-the result, including the case where the result is imperfect — a worked example in which everything
-works is a demo, and this reader has seen demos.
+**One project per suite, re-introduced in every play.** Pick a project for your suite and carry it
+through all of its examples; the Context suite uses `atlas`, a Python billing service. Re-introduce
+it in a clause each time — "`atlas`, the Python billing service, retiring a bespoke decorator…" —
+rather than referring back to the play next door. A reader who opened the book here has not read
+that one, and back-references are banned under [`README.md`](README.md#cross-references). Pick your
+own project rather than extending another suite's, or the book acquires one imaginary company with
+six unrelated problems.
+
+**Narrate in the past tense.** This is the one exception to the present tense required everywhere
+else by [`STYLE.md`](STYLE.md#mechanics), and it is deliberate: a worked example reports something
+that happened, while the rest of the book describes how things behave. "The team ran the paired
+comparison", not "the team runs the paired comparison".
+
+Show the state before, the move, and the result, including the case where the result is imperfect —
+a worked example in which everything works is a demo, and this reader has seen demos.
 
 An aside is permitted in the final sentence, once the reader is out of the procedure.
 
