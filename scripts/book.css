@@ -1,0 +1,335 @@
+/* The Agentic Playbook — HTML book styling.
+ *
+ * Loaded by scripts/build_book.py for `--format html` and inlined into the output, so the
+ * rendered book is one file that survives being emailed to somebody without the repo.
+ *
+ * It is layered over pandoc's own default stylesheet, which the template emits first, so these
+ * rules only have to override what needs overriding. Typography lives here rather than in Python
+ * for the same reason book-metadata.yaml exists: tuning how the book looks should not be a code
+ * edit.
+ */
+
+:root {
+  --measure: 40rem;          /* the reading column — roughly 75 characters at this size */
+  --sidebar: 20rem;
+  --gutter: 2.5rem;
+
+  --ink: #1b1b1b;
+  --ink-soft: #565656;
+  --ink-faint: #8a8a8a;
+  --page: #fdfdfc;
+  --rule: #e2e0dc;
+  --link: #1a4f8a;           /* the same blue the PDF uses, from book-metadata.yaml */
+  --code-bg: #f4f3f0;
+  --accent-bg: #f8f7f4;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e4e2dd;
+    --ink-soft: #aaa69e;
+    --ink-faint: #7d7a73;
+    --page: #17181a;
+    --rule: #33353a;
+    --link: #7fb2e8;
+    --code-bg: #212327;
+    --accent-bg: #1d1f22;
+  }
+}
+
+/* ---------------------------------------------------------------------------- page and layout */
+
+html { font-size: 17px; }
+
+body {
+  max-width: none;                    /* pandoc's default centres a 36em column; we lay out below */
+  margin: 0;
+  padding: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+  line-height: 1.6;
+  hyphens: auto;
+}
+
+/* Everything that is not the contents sidebar is the reading column. */
+body > :not(#TOC) {
+  max-width: var(--measure);
+  margin-left: calc(var(--sidebar) + var(--gutter) * 1.6);
+  margin-right: var(--gutter);
+  padding: 0 0.25rem;
+}
+
+/* ------------------------------------------------------------------------------------ contents */
+
+#TOC {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+  padding: 2rem 1.25rem 4rem 1.75rem;
+  border-right: 1px solid var(--rule);
+  background: var(--accent-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+#TOC #toc-title {
+  margin: 0 0 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 0;
+}
+
+#TOC ul { list-style: none; margin: 0; padding: 0; }
+#TOC li { margin: 0; padding: 0; }
+#TOC ul ul { padding-left: 0.85rem; }
+
+#TOC a {
+  display: block;
+  padding: 0.2rem 0.35rem;
+  border-radius: 3px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+#TOC a:hover { background: var(--rule); color: var(--ink); }
+
+/* Part headings — the level-1 entries — carry the weight. */
+#TOC > ul > li > a {
+  margin-top: 1.1rem;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* The five play headings, three levels down, are reference rather than navigation. */
+#TOC ul ul ul a { color: var(--ink-faint); font-size: 0.95em; }
+
+/* ------------------------------------------------------------------------------- the title page */
+
+#title-block-header {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+#title-block-header .title {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+#title-block-header .subtitle {
+  margin: 0.75rem 0 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+#title-block-header .author,
+#title-block-header .date {
+  margin: 1.25rem 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------------------------ headings */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  line-height: 1.2;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Level 1 is a part; level 2 is a chapter or a play. Both open something. */
+h1 {
+  margin: 5rem 0 2rem;
+  padding-top: 2.5rem;
+  border-top: 3px solid var(--ink);
+  font-size: 2rem;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+h3 { margin: 2.5rem 0 0.75rem; font-size: 1.1rem; }
+h4 { margin: 2rem 0 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* A quiet paragraph anchor, so a reader can link somebody straight to one play heading. */
+h1 > a.anchor, h2 > a.anchor, h3 > a.anchor { text-decoration: none; }
+
+/* ---------------------------------------------------------------------------------------- text */
+
+p { margin: 0 0 1.1rem; }
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+ul, ol { margin: 0 0 1.1rem; padding-left: 1.4rem; }
+li { margin: 0.35rem 0; }
+li > ul, li > ol { margin-bottom: 0.35rem; }
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.1rem 0 0.1rem 1.25rem;
+  border-left: 3px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--rule); }
+
+/* ---------------------------------------------------------------------------------------- code */
+
+code, pre, kbd, samp {
+  font-family: "SF Mono", "JetBrains Mono", "Fira Mono", Menlo, Consolas, monospace;
+  font-size: 0.83em;
+}
+
+code {
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  background: var(--code-bg);
+  hyphens: none;
+}
+
+pre {
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--code-bg);
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+pre code { padding: 0; background: none; }
+
+/* -------------------------------------------------------------------------------------- tables */
+
+table {
+  width: 100%;
+  margin: 1.75rem 0;
+  border-collapse: collapse;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+caption {
+  margin-bottom: 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  border-bottom: 2px solid var(--ink-soft);
+  font-weight: 600;
+}
+
+tbody tr:last-child td { border-bottom: 1px solid var(--ink-soft); }
+
+/* ------------------------------------------------------------------------------------ diagrams */
+
+img { max-width: 100%; height: auto; }
+
+figure { margin: 2rem 0; }
+figcaption { color: var(--ink-soft); font-size: 0.82rem; }
+
+/* Rendered in the browser by mermaid.js; see scripts/build_book.py. Centred, and never a
+ * scrollbar-in-a-box, because a diagram that needs scrolling has stopped being a diagram. */
+pre.mermaid {
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border: 0;
+  background: none;
+  text-align: center;
+  overflow-x: auto;
+}
+
+pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* Until mermaid.js has run — and for good if it never loads, because the reader is offline or the
+ * CDN is blocked — the block degrades to its own source, styled as code. That is what the PDF
+ * does without mermaid-cli, and a visible fallback beats a diagram that silently is not there. */
+pre.mermaid:not([data-processed]) {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--code-bg);
+  color: var(--ink-soft);
+  text-align: left;
+}
+
+/* -------------------------------------------------------------- the 'About this build' section */
+
+#about-this-build {
+  border-top-color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------------ narrow screens, print */
+
+@media (max-width: 62rem) {
+  html { font-size: 16px; }
+
+  #TOC {
+    position: static;
+    width: auto;
+    height: auto;
+    max-height: 22rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  body > :not(#TOC) {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1.25rem;
+  }
+
+  #title-block-header { margin-top: 2.5rem; }
+}
+
+@media print {
+  html { font-size: 11pt; }
+  body { background: #fff; color: #000; }
+  #TOC { position: static; width: auto; height: auto; background: none; border: 0; }
+  body > :not(#TOC) { max-width: none; margin: 0; }
+  h1 { break-before: page; }
+  h1, h2, h3, h4 { break-after: avoid; }
+  pre, table, figure, pre.mermaid { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}

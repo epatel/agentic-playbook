@@ -106,7 +106,7 @@ When you add a file, add its row in the same commit. A file that is not in the t
 not in the book, and the editorial pass will treat it as an orphan.
 
 That is now enforceable rather than merely agreed: the build reads this table to decide what to
-collect, so an untabled file is absent from the PDF. Run `make check` to be told — it reports
+collect, so an untabled file is absent from every build. Run `make check` to be told — it reports
 orphans, rows whose file is missing, and headings that disagree with their title here. See
 [`cards/building-the-book.md`](../cards/building-the-book.md).
 

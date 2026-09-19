@@ -1,4 +1,4 @@
-# Building the book — one file, and a PDF
+# Building the book — one file, a PDF, and an HTML book
 
 The book is markdown and stays readable without any of this. The build exists for the times a
 loose directory of chapters is the wrong shape: reading a whole part end to end, sending a draft
@@ -6,21 +6,38 @@ to somebody who does not have the repo, or checking that Part II really is 60% o
 
 ```bash
 make            # the target list
+make html       # build/agentic-playbook.html  — needs only pandoc; one self-contained file
 make pdf        # build/agentic-playbook.pdf   — needs pandoc and a PDF engine
 make md         # build/agentic-playbook.md    — needs nothing but Python
-make html       # build/agentic-playbook.html  — needs pandoc
 make open       # build the PDF, then hand it to the default viewer
+make open-html  # build the HTML book, then hand it to the default browser
 make check      # report problems, write nothing, exit non-zero if any
 make clean      # delete build/
 ```
 
-`make open` is the read-it-now target: it depends on `pdf`, so it rebuilds first and then hands
-the file to `open` (macOS) or `xdg-open` (Linux). With neither on `PATH` it prints where the PDF
-is rather than failing silently.
+`make open` and `make open-html` are the read-it-now targets: each depends on its format, so it
+rebuilds first and then hands the file to `open` (macOS) or `xdg-open` (Linux). With neither on
+`PATH` they print where the file is rather than failing silently.
 
 Everything lands in `build/`, which is gitignored. **Never commit build output**, and never edit
 it — it is regenerated from `book/` every run, and the collected markdown is an intermediate for
 pandoc rather than a second copy of the book.
+
+## Which format to reach for
+
+**HTML is the cheapest and the one to send someone.** It needs pandoc and nothing else: no PDF
+engine, no TeX, no node. `--embed-resources` inlines the stylesheet and every image, so the output
+is a single file that survives being emailed, dropped in a chat, or opened from a USB stick, and it
+reflows on a phone. The contents list is a sidebar that goes three levels deep, so the five play
+headings are navigable rather than just present. `Cmd+P` from the browser gives a decent printed
+copy, with page breaks before each part, if a PDF engine is more trouble than it is worth.
+
+**The PDF is the one to print or to read in a page-turning app.** It costs a PDF engine, and its
+contents page stops at two levels, because a printed table of contents listing eighteen plays
+times five headings is not a table of contents.
+
+Both are derived from the same collected markdown and the same table of contents, so neither can
+quietly contain a different book.
 
 ## What the build depends on you doing
 
@@ -29,7 +46,7 @@ in what order.** The build reads that table and nothing else — not the directo
 filenames. This is the same contract authors already work under, now with something that checks
 it:
 
-- A file that is not in the table is reported as an orphan and is **not in the PDF**.
+- A file that is not in the table is reported as an orphan and is **not in the build**.
 - A row marked ✅ or 🟡 whose file is missing is reported as a problem.
 - A row marked ⬜ is expected to be missing and is listed on the *About this build* page instead.
 - A `#` heading that does not match its table-of-contents title is reported.
@@ -53,16 +70,30 @@ typst, and a silently broken link everywhere else.
 | Tool | Needed for | Install |
 |---|---|---|
 | Python 3 | everything | already there |
-| pandoc | PDF and HTML | `brew install pandoc` |
+| pandoc | HTML and PDF | `brew install pandoc` |
 | typst | PDF | `brew install typst` — one 45 MB binary, and the default engine |
-| node | rendered diagrams | already there if you have npm; the build calls `npx` |
+| node | diagrams **in the PDF** | already there if you have npm; the build calls `npx` |
 
-Any of `typst`, `tectonic`, `xelatex`, `lualatex`, `pdflatex`, `weasyprint`, `wkhtmltopdf`,
-`prince` or `pagedjs-cli` will do; the first one found on `PATH` wins, and `--pdf-engine` forces
-the choice. With none of them installed the build still writes the collected markdown and tells
-you what to install.
+`make html` needs the first row and the second. Any of `typst`, `tectonic`, `xelatex`, `lualatex`,
+`pdflatex`, `weasyprint`, `wkhtmltopdf`, `prince` or `pagedjs-cli` will do for the PDF; the first
+one found on `PATH` wins, and `--pdf-engine` forces the choice. With none of them installed the
+build still writes the collected markdown and tells you what to install.
 
 ## Diagrams
+
+Authors write mermaid and change nothing for either format. The two builds draw it differently, on
+purpose.
+
+**The HTML book draws its own diagrams.** A browser can render mermaid, so each ```mermaid``` block
+becomes a `<pre class="mermaid">` and [mermaid.js](https://cdn.jsdelivr.net/npm/mermaid@11/) turns
+it into vector output that matches the reader's colour scheme, at whatever width their window is.
+That means **the HTML book needs no node and no mermaid-cli**, and that the diagrams want a network
+connection the first time the file is opened. Offline, they degrade to their own source, styled as
+a code block — the same thing the PDF does without a renderer — and the build says so as a note
+either way.
+
+**The PDF has no such luxury** and shells out to mermaid-cli for PNGs. The rest of this section is
+about that path.
 
 ```mermaid``` blocks are rendered to PNGs and embedded in the PDF. **You do not have to install
 anything for this**: the build uses `mmdc` if it is on `PATH`, and otherwise runs
@@ -86,24 +117,33 @@ Two failures are told apart, because they need different reactions:
   other diagrams still render.
 
 `make check` does not render diagrams at all; it writes nothing and stays fast. Build the PDF if
-you want a diagram checked.
+you want a diagram checked — the HTML book defers to the browser, so it will not catch a syntax
+error either.
 
-`--no-mermaid` skips rendering entirely, and `--mermaid-cmd` overrides how mermaid-cli is invoked.
+`--no-mermaid` turns both paths off and leaves every diagram as source. `--mermaid-cmd` overrides
+how mermaid-cli is invoked, and applies to the PDF only.
 
 ## Useful flags
 
 ```bash
 python3 scripts/build_book.py --help
-make pdf ARGS='--repo-url https://github.com/<owner>/<repo>/blob/main'
+make html ARGS='--repo-url https://github.com/<owner>/<repo>/blob/main'
 ```
 
 `--repo-url` turns links that leave the book — research briefs, the plans — into absolute URLs,
-so they still work for someone reading the PDF without the repo. `--no-draft-note` drops the
-*About this build* page. `--verbose` echoes the pandoc and mermaid commands.
+so they still work for someone reading the built book without the repo. It is worth passing
+whenever you are sending the HTML to somebody. `--no-draft-note` drops the *About this build*
+page. `--verbose` echoes the pandoc and mermaid commands.
 
 ## If you are changing the build
 
 `scripts/build_book.py` is a single dependency-free file, per
 [`cards/standing-defaults.md`](standing-defaults.md). Page breaks and link colours are the only
-engine-specific parts; typography lives in `scripts/book-metadata.yaml` so that tuning it does not
-mean editing Python.
+engine-specific parts, and nothing about how the book *looks* lives in the Python:
+
+| File | Owns |
+|---|---|
+| `scripts/book-metadata.yaml` | Title, language, page size, margins, link colour — the PDF's typography. |
+| `scripts/book.css` | The HTML book: reading measure, the contents sidebar, code, tables, diagrams, dark mode, and the print rules a browser uses for `Cmd+P`. |
+
+Changing either is a data edit, not a code edit. That is the point of them.
