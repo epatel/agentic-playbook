@@ -1,7 +1,8 @@
 # Repo layout — what lives where
 
-A markdown book repo. No application code, no build step, no package manager. Every
-directory has one job, and two of them are read-only.
+A markdown book repo. No application code and no package manager; the one build target collects
+the book into a PDF and is never needed to read it. Every directory has one job, and two of them
+are read-only.
 
 ## The map
 
@@ -13,6 +14,8 @@ directory has one job, and two of them are read-only.
 | `notes/research/` | Cited research briefs. Evidence the chapters draw from. | Yes |
 | `notes/raw/` | Original scattered ideation, superseded by `PLAN.md`. | **No — frozen** |
 | `cards/` | These reference cards. | Yes, when a convention changes |
+| `scripts/`, `Makefile` | The book build: collect the chapters, render a PDF. See [building-the-book](building-the-book.md). | Yes |
+| `build/` | Build output. | **No — generated, gitignored, never committed** |
 | `.claude/skills/` | Symlinked agent skills. | Rarely |
 
 ## The two frozen things

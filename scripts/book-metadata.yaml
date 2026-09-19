@@ -1,0 +1,28 @@
+---
+# Metadata for the rendered book. Only the build reads this; the markdown in `book/` carries no
+# frontmatter, per the locked decision in PLAN.md.
+#
+# `date` is supplied by the build script, not here, so a rebuild always says when it was built.
+#
+# The subtitle and author lines are deliberately absent. Naming the book on its own title page is
+# an editorial decision (`934259dc8038`), not a build one — uncomment and fill them in when that
+# pass has made the call.
+#
+# subtitle: "…"
+# author: "…"
+
+title: "The Agentic Playbook"
+lang: en-GB
+toc-title: "Contents"
+papersize: a4
+fontsize: 11pt
+# Read by pandoc's typst template. The LaTeX engines take their margins from the build script,
+# which passes geometry on the command line, and ignore this.
+margin:
+  x: 2.2cm
+  y: 2.4cm
+# Hex, because typst's template feeds these straight to rgb(). The LaTeX engines want a named
+# xcolor colour instead, and the build script passes one on the command line for them.
+linkcolor: "#1a4f8a"
+urlcolor: "#1a4f8a"
+---

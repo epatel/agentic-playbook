@@ -3,8 +3,9 @@
 A markdown book, written in this repo, for working developers who already use agentic coding
 tools daily and want to get good at them. It is plays-first: about 60% of the book is named,
 self-contained plays with a fixed template, and the framing argument is deliberately compressed
-to make room for them. There is no application code here — no build step, no package manager,
-no tests; the deliverable is the prose.
+to make room for them. There is no application code here and no package manager; the deliverable
+is the prose. A `make pdf` target collects the chapters into one file for reading and review, but
+nothing has to be built for the book to be readable.
 
 The book is being written by multiple agents working in parallel on separate board items, which
 is why the conventions below exist in writing rather than in someone's head.
@@ -31,6 +32,8 @@ Load a card when its situation matches. Each one stands alone.
   that a later writing task will cite
 - [standing-defaults](cards/standing-defaults.md) — adding a diagram, adding a script or
   dependency, or wondering how to format a file
+- [building-the-book](cards/building-the-book.md) — collecting the chapters into one file,
+  producing a PDF, or checking that what you wrote is actually in the book
 
 ## Working agreements
 

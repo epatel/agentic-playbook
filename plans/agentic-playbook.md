@@ -43,6 +43,9 @@ guide that a working developer can open at any single play and act on it the sam
 - Any build/helper scripts are Python, not Node.
 - Prose wraps at 100 columns; diagrams are mermaid, never ASCII art.
 - Repo-wide conventions are recorded as cards in `cards/` and indexed from the root `CLAUDE.md`.
+- `make pdf` collects the book and renders it; `make check` reports orphans and missing files.
+  Output goes to `build/`, which is gitignored and never committed. See
+  [`cards/building-the-book.md`](../cards/building-the-book.md).
 
 ## Milestones
 
@@ -65,6 +68,7 @@ guide that a working developer can open at any single play and act on it the sam
 | 15 | Part IV — Next Waves, plus appendices | `bec9accd89be` | ⬜ blocked on 3 |
 | 16 | Editorial pass — one voice, one book | `934259dc8038` | ⬜ blocked on all writing |
 | 17 | Run every worked example for real, re-capture output | `3b61a6a1a684` | ⬜ blocked on 8–13 |
+| 18 | Book build — collect the chapters, render a PDF | `76d95ae050df` | ✅ done |
 
 Milestone 3 was the real critical path: with several authors and a specific comic register,
 "we'll harmonise it later" is how a book ends up with three voices. It is done, and the nine
@@ -264,6 +268,30 @@ without method, a working agreement with an expiry date, and adoption-by-decree 
 surveillance. Read the running-log entry rather than the fragment; the entry says which play each
 one lands in and which locked decision it does *not* override.
 
+Milestone 18 added the build: `make pdf` collects every chapter the table of contents names, in
+that order, and renders one PDF. It is a convenience, not a second deliverable — markdown on
+GitHub is still the book, and nothing has to be built to read it.
+
+| File | Owns |
+|---|---|
+| [`scripts/build_book.py`](../scripts/build_book.py) | The whole build: reads the table of contents, concatenates, shifts headings, rewrites cross-references to internal anchors, optionally renders mermaid, calls pandoc. One file, no dependencies. |
+| [`scripts/book-metadata.yaml`](../scripts/book-metadata.yaml) | Title, language, page size, margins, link colour — so tuning typography is not a Python edit. |
+| [`Makefile`](../Makefile) | `make pdf` / `md` / `html` / `check` / `clean`, and `make` alone lists them. |
+| [`cards/building-the-book.md`](../cards/building-the-book.md) | What to install, what the build expects of authors, and the two severities. |
+
+**Two things in it are useful to a writing task, not just to whoever renders the book:**
+
+1. **`make check` tells you whether what you wrote is actually in the book.** It reports files that
+   are not in the table of contents, rows marked ✅ whose file is missing, and `#` headings that
+   disagree with their table-of-contents title. It is now the last line of the *Adding a file*
+   checklist in `book/README.md`, and it exits non-zero only on real problems, never on the
+   expected consequences of an unfinished book.
+2. **Every run prints a word count per part with each part's share of the total.** The proportions
+   in `cards/book-structure.md` — 15 / 60 / 15 / 10 — stop being an intention the moment there is a
+   number next to them. The book currently stands at 7,886 words: Part I 4,150 across three
+   chapters, Part II 3,736 across the Context suite's four files. Part II passes Part I on the next
+   suite, which is the first moment the proportions can be read as anything but noise.
+
 ## Decisions log (append-only)
 
 - Ideation consolidated; `idea.md` / `plot-1.md` / `plot-2.md` moved to `notes/raw/` and replaced
@@ -384,6 +412,24 @@ one lands in and which locked decision it does *not* override.
   the plays stay self-contained for a reader who opens the book at one of them, and a reader going
   through the suite gets continuity for free. Other suites should pick their own project rather
   than extending `atlas`, or the book acquires one imaginary company with six unrelated problems.
+- **The PDF is derived, never authored.** Milestone 18 built it as a one-way transformation:
+  `book/` is read, `build/` is written, and no site- or print-specific syntax enters the source.
+  Heading levels, anchors, page breaks and link rewriting all happen at build time. This does not
+  reopen the *Rendering* open question — the answer it commits to is narrower and, on the evidence
+  of this build, sufficient: **a renderer adapts to the book, not the book to the renderer.** If a
+  static site is ever wanted, it should be built the same way, and the non-goal ("not a rendered
+  site, for now") stands.
+- **A forward reference whose target does not exist yet is unlinked at build time, not fixed.**
+  `book/README.md` allows links to table-of-contents-listed files that nobody has written, because
+  nine writing tasks run in parallel. Left in the PDF such a link is a hard error in typst and a
+  silently broken link elsewhere, so the build turns it back into plain text and reports it as a
+  note. The consequence for authors is that the convention stays as written: keep making forward
+  references.
+- **The build has two severities and only one of them fails.** A *problem* is for a person to fix
+  (an orphan file, a chapter marked done that is missing, a heading that disagrees with the table
+  of contents); a *note* is the expected consequence of building a half-written book. `--strict`
+  fails on problems alone. A check that goes red for months teaches everyone to ignore it, which
+  costs more than it saves.
 - **"Humble and transparent" is subject matter, not a tone instruction.** The author's note that
   this "has to be presented in a way not to scare but rather build trust" describes how a *team
   lead* introduces a working agreement to colleagues. It does not soften the book's own register,
@@ -593,6 +639,30 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **Mermaid blocks legitimately exceed 100 columns** and any checker must skip fenced blocks.
   *Scope a task to fit the window* has a 120-character node line; `book/STYLE.md` already exempts
   fenced blocks, and this note exists so nobody "fixes" it.
+
+- **Milestone 18's build has a natural slot for the 100-column checker, and deliberately does not
+  fill it.** Two writing tasks have now written the same throwaway width checker, and
+  `scripts/build_book.py` is the obvious place to put a permanent one — it already walks every
+  chapter and already skips fenced blocks, which is the hard half. But adopt-a-checker versus
+  rewrap-once is the editorial pass's call (`934259dc8038`), and adding it now would make that
+  decision by accident. The severity split is there to hang it on the day the call is made: a long
+  line is a *problem*, not a note.
+- **The build was run against everything written so far and found nothing wrong with it.** Seven
+  chapters, 7,886 words, two mermaid diagrams, and four forward links into suites nobody has
+  written. The only build-visible defect class it can catch that has not yet occurred is a title
+  heading disagreeing with the table of contents, which is worth knowing when judging whether
+  `make check` is pulling its weight.
+- **The PDF renders through pandoc plus typst, and both are optional.** typst is the default engine
+  because it is one 45 MB binary against several gigabytes of TeX; any of eight other engines is
+  used if found first, and with none installed the build still writes the collected markdown and
+  says what to install. Diagrams need `mermaid-cli`, which is Node — the exception is deliberate
+  and narrow: it is an external renderer invoked by a Python script, not a Node build step, and
+  without it the diagrams print as source and the build reports a note.
+- **Two pandoc-and-typst traps are recorded here so nobody rediscovers them.** typst's template
+  feeds `linkcolor` straight to `rgb()`, so a named colour like `RoyalBlue` is a build failure and
+  the metadata file carries hex; LaTeX wants the name instead, which the script passes on the
+  command line. And typst's `margin` is a map, which `-V` cannot express — it has to come from the
+  metadata file.
 
 ### Failure-mode registry
 

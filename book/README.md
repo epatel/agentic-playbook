@@ -82,6 +82,11 @@ listings, not the sequence in which files were committed.
 When you add a file, add its row in the same commit. A file that is not in the table of contents is
 not in the book, and the editorial pass will treat it as an orphan.
 
+That is now enforceable rather than merely agreed: the build reads this table to decide what to
+collect, so an untabled file is absent from the PDF. Run `make check` to be told — it reports
+orphans, rows whose file is missing, and headings that disagree with their title here. See
+[`cards/building-the-book.md`](../cards/building-the-book.md).
+
 ### Table of contents
 
 Status: ⬜ not written · 🟡 in progress · ✅ done.
@@ -180,3 +185,4 @@ the reference still means something after the vendor reorganises their docs.
 - [ ] Prose wraps at 100 columns; diagrams are mermaid
 - [ ] Any failure mode it names is appended to the running log in `plans/agentic-playbook.md`
 - [ ] Any decision it made that affects other authors is in that plan's decision log
+- [ ] `make check` reports no problems
