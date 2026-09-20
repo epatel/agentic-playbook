@@ -33,8 +33,9 @@ Load a card when its situation matches. Each one stands alone.
 - [standing-defaults](cards/standing-defaults.md) — adding a diagram, adding a script or
   dependency, or wondering how to format a file
 - [building-the-book](cards/building-the-book.md) — collecting the chapters into one file,
-  producing an HTML book or a PDF, checking that what you wrote is actually in the book, or
-  checking it against the column limit and the style guide's outright bans
+  producing an HTML book or a PDF, checking that what you wrote is actually in the book, checking
+  it against the column limit and the style guide's outright bans, or serving the book for review
+  and acting on the annotations a review leaves behind
 
 ## Working agreements
 

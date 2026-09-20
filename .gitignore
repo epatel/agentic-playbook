@@ -10,3 +10,7 @@ build/
 # would otherwise still show up as a spurious modification in every diff.
 __pycache__/
 *.pyc
+
+# The review server's virtual environment. cards/standing-defaults.md: dependencies
+# never go into system or user Python.
+.venv/

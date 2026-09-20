@@ -40,7 +40,7 @@ RELEASE_PDF := $(BUILD)/$(NAME)-$(VERSION).pdf
 OPENER ?= $(shell command -v open 2>/dev/null || command -v xdg-open 2>/dev/null)
 
 .DEFAULT_GOAL := help
-.PHONY: help pdf md html open open-html check lint release clean
+.PHONY: help pdf md html open open-html check lint release review clean
 
 help: ## Show this help
 	@echo "The Agentic Playbook"
@@ -98,6 +98,20 @@ release: ## Build the PDF and publish it as a GitHub release tagged with the dat
 	git push --quiet origin "$(VERSION)"
 	gh release create "$(VERSION)" "$(RELEASE_PDF)" \
 		--title "The Agentic Playbook $(VERSION)" --generate-notes
+
+# The one part of this repo with dependencies, kept in a venv of its own so that reading the book,
+# building it and checking it never need them (cards/standing-defaults.md).
+VENV   ?= .venv
+VPY    := $(VENV)/bin/python
+
+$(VENV): requirements.txt
+	$(PYTHON) -m venv $(VENV)
+	$(VPY) -m pip install --quiet --upgrade pip
+	$(VPY) -m pip install --quiet -r requirements.txt
+	@touch $(VENV)
+
+review: $(VENV) ## Serve the book for review, with live annotation (http://127.0.0.1:8777)
+	$(VPY) scripts/review_server.py $(ARGS)
 
 clean: ## Remove build output
 	rm -rf $(BUILD)

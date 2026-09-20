@@ -1,0 +1,248 @@
+<!doctype html>
+<!-- The review server's one page. Served by scripts/review_server.py; see its docstring. -->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Agentic Playbook — review</title>
+<link rel="stylesheet" href="/book.css">
+<style>
+  :root { --margin-w: 22rem; --ok: #2e7d4f; --warn: #b3261e; }
+  @media (prefers-color-scheme: dark) { :root { --ok: #7fc59b; --warn: #f28279; } }
+
+  body { display: grid; grid-template-columns: 17rem minmax(0, 1fr) var(--margin-w); min-height: 100vh; }
+  body > * { min-width: 0; }
+
+  /* book.css lays the built book out around a sidebar; this page does its own layout. */
+  body > nav, body > main, body > aside { max-width: none; margin: 0; }
+
+  nav, aside { border-color: var(--rule); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; }
+  nav { border-right: 1px solid var(--rule); overflow-y: auto; height: 100vh; position: sticky; top: 0; padding: 1.2rem 1rem; }
+  aside { border-left: 1px solid var(--rule); overflow-y: auto; height: 100vh; position: sticky; top: 0; padding: 1.2rem 1rem; background: var(--accent-bg); }
+  main { padding: 2.2rem 3rem 8rem; }
+
+  .brand { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: .9rem; }
+  .part { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.1rem 0 .35rem; }
+  nav a { display: block; padding: .28rem .45rem; border-radius: 4px; font-size: .84rem; line-height: 1.35; text-decoration: none; color: var(--ink); }
+  nav a:hover { background: var(--code-bg); }
+  nav a.on { background: var(--code-bg); font-weight: 600; }
+  nav a .count { float: right; color: var(--ink-faint); font-size: .78rem; }
+
+  .status { display: flex; gap: .5rem; align-items: center; font-size: .78rem; color: var(--ink-soft); margin-bottom: .8rem; }
+  .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--warn); }
+  .dot.live { background: var(--ok); }
+
+  [data-line] { position: relative; }
+  main [data-line]:hover { background: color-mix(in srgb, var(--code-bg) 55%, transparent); }
+  .marked { background: color-mix(in srgb, #f4c76a 38%, transparent); border-radius: 2px; }
+  @media (prefers-color-scheme: dark) { .marked { background: color-mix(in srgb, #f4c76a 22%, transparent); } }
+
+  #pop { position: absolute; z-index: 40; display: none; width: 21rem; padding: .7rem; border: 1px solid var(--rule); border-radius: 7px; background: var(--page); box-shadow: 0 8px 26px rgba(0,0,0,.18); }
+  #pop textarea { width: 100%; min-height: 4.6rem; font: inherit; font-size: .85rem; padding: .45rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--page); color: var(--ink); resize: vertical; }
+  #pop .q { font-size: .76rem; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: .5rem; margin-bottom: .5rem; max-height: 4rem; overflow: hidden; }
+  .row { display: flex; gap: .4rem; justify-content: flex-end; margin-top: .5rem; }
+  button { font: inherit; font-size: .8rem; padding: .32rem .7rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--code-bg); color: var(--ink); cursor: pointer; }
+  button.primary { background: var(--link); border-color: var(--link); color: #fff; }
+  button:hover { filter: brightness(1.06); }
+
+  .ann { border: 1px solid var(--rule); border-radius: 6px; padding: .6rem .65rem; margin-bottom: .6rem; background: var(--page); font-size: .84rem; }
+  .ann.resolved { opacity: .55; }
+  .ann .where { font-size: .72rem; color: var(--ink-faint); font-family: "SF Mono", Menlo, monospace; }
+  .ann .quote { font-size: .78rem; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: .45rem; margin: .35rem 0; }
+  .ann .body { white-space: pre-wrap; }
+  .ann .acts { display: flex; gap: .35rem; margin-top: .45rem; }
+  .ann .acts button { font-size: .72rem; padding: .18rem .5rem; }
+  .empty { color: var(--ink-faint); font-size: .84rem; }
+  .who { width: 100%; font: inherit; font-size: .8rem; padding: .3rem .4rem; margin-bottom: .8rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--page); color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">The Agentic Playbook</div>
+  <div class="status"><span class="dot" id="dot"></span><span id="live">connecting…</span></div>
+  <input class="who" id="who" placeholder="your name" autocomplete="name">
+  <div id="toc"></div>
+</nav>
+
+<main><article id="chapter"><p class="empty">Pick a chapter.</p></article></main>
+
+<aside>
+  <div class="brand">Annotations</div>
+  <div id="margin"><p class="empty">Select any passage to comment on it.</p></div>
+</aside>
+
+<div id="pop">
+  <div class="q" id="popQuote"></div>
+  <textarea id="popText" placeholder="What is wrong with this passage?"></textarea>
+  <div class="row"><button id="popCancel">Cancel</button><button class="primary" id="popSave">Comment</button></div>
+</div>
+
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({ startOnLoad: false, theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default' });
+
+const $ = (s) => document.querySelector(s);
+const state = { toc: [], path: null, annotations: [], pending: null, socket: null };
+
+const who = $('#who');
+who.value = localStorage.getItem('reviewer') || '';
+who.addEventListener('change', () => localStorage.setItem('reviewer', who.value.trim()));
+
+/* ---------------------------------------------------------------- the wire */
+function connect() {
+  const socket = new WebSocket(`ws://${location.host}/ws`);
+  state.socket = socket;
+  socket.onopen = () => { $('#dot').classList.add('live'); };
+  socket.onclose = () => {
+    $('#dot').classList.remove('live');
+    $('#live').textContent = 'reconnecting…';
+    setTimeout(connect, 1500);           // the server restarts often while it is being written
+  };
+  socket.onmessage = (event) => {
+    const message = JSON.parse(event.data);
+    if (message.annotations) state.annotations = message.annotations;
+    if (message.readers !== undefined) {
+      $('#live').textContent = message.readers === 1 ? 'just you' : `${message.readers} reading`;
+    }
+    drawMargin(); drawToc(); markUp();
+  };
+}
+const send = (message) => state.socket?.readyState === 1 && state.socket.send(JSON.stringify(message));
+
+/* ------------------------------------------------------------ the chapters */
+async function loadToc() {
+  state.toc = await (await fetch('/api/toc')).json();
+  drawToc();
+  const wanted = decodeURIComponent(location.hash.slice(1));
+  open(state.toc.some(c => c.path === wanted) ? wanted : state.toc[0]?.path);
+}
+
+function drawToc() {
+  const counts = {};
+  for (const a of state.annotations) if (a.status === 'open') counts[a.file] = (counts[a.file] || 0) + 1;
+  let html = '', part = null;
+  for (const chapter of state.toc) {
+    if (chapter.part !== part) { part = chapter.part; html += `<div class="part">${esc(part)}</div>`; }
+    const n = counts[chapter.path] ? `<span class="count">${counts[chapter.path]}</span>` : '';
+    const on = chapter.path === state.path ? ' class="on"' : '';
+    html += `<a href="#${encodeURIComponent(chapter.path)}"${on} data-path="${esc(chapter.path)}">${esc(chapter.title)}${n}</a>`;
+  }
+  $('#toc').innerHTML = html;
+}
+
+async function open(path) {
+  if (!path) return;
+  state.path = path;
+  const chapter = await (await fetch(`/api/chapter/${path}`)).json();
+  $('#chapter').innerHTML = chapter.html;
+  location.hash = encodeURIComponent(path);
+  drawToc(); drawMargin(); markUp();
+  const diagrams = $('#chapter').querySelectorAll('pre.mermaid');
+  if (diagrams.length) mermaid.run({ nodes: diagrams });
+}
+addEventListener('hashchange', () => {
+  const path = decodeURIComponent(location.hash.slice(1));
+  if (path && path !== state.path) open(path);
+});
+
+/* --------------------------------------------------- selecting and commenting */
+$('#chapter').addEventListener('mouseup', () => setTimeout(offerComment, 0));
+
+function offerComment() {
+  const selection = getSelection();
+  const quote = selection.toString().trim();
+  if (!quote || selection.isCollapsed) return;
+  let node = selection.anchorNode;
+  while (node && !(node.nodeType === 1 && node.hasAttribute?.('data-line'))) node = node.parentNode;
+  if (!node || !$('#chapter').contains(node)) return;
+
+  state.pending = { file: state.path, line: Number(node.getAttribute('data-line')), quote };
+  const box = selection.getRangeAt(0).getBoundingClientRect();
+  const pop = $('#pop');
+  pop.style.display = 'block';
+  pop.style.top = `${scrollY + box.bottom + 8}px`;
+  pop.style.left = `${Math.min(scrollX + box.left, innerWidth - 360)}px`;
+  $('#popQuote').textContent = quote.length > 220 ? quote.slice(0, 217) + '…' : quote;
+  $('#popText').value = '';
+  $('#popText').focus();
+}
+
+const closePop = () => { $('#pop').style.display = 'none'; state.pending = null; };
+$('#popCancel').onclick = closePop;
+$('#popSave').onclick = () => {
+  const comment = $('#popText').value.trim();
+  if (!comment || !state.pending) return closePop();
+  send({ type: 'create', ...state.pending, comment, author: who.value.trim() || 'anonymous' });
+  closePop();
+};
+$('#popText').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) $('#popSave').click();
+  if (event.key === 'Escape') closePop();
+});
+
+/* --------------------------------------------------------------- the margin */
+function drawMargin() {
+  const mine = state.annotations
+    .filter(a => a.file === state.path)
+    .sort((a, b) => (a.line - b.line) || a.ts.localeCompare(b.ts));
+  if (!mine.length) {
+    $('#margin').innerHTML = '<p class="empty">Select any passage to comment on it.</p>';
+    return;
+  }
+  $('#margin').innerHTML = mine.map(a => `
+    <div class="ann ${a.status === 'resolved' ? 'resolved' : ''}" data-id="${a.id}">
+      <div class="where">line ${a.line} · ${esc(a.author || 'anonymous')}</div>
+      ${a.quote ? `<div class="quote">${esc(trim(a.quote))}</div>` : ''}
+      <div class="body">${esc(a.comment)}</div>
+      <div class="acts">
+        <button data-act="${a.status === 'resolved' ? 'reopen' : 'resolve'}">${a.status === 'resolved' ? 'Reopen' : 'Resolve'}</button>
+        <button data-act="delete">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+$('#margin').addEventListener('click', (event) => {
+  const act = event.target.dataset?.act;
+  if (!act) return;
+  const id = event.target.closest('.ann').dataset.id;
+  if (act === 'delete' && !confirm('Delete this annotation? The event log keeps a record.')) return;
+  send({ type: act, id });
+});
+
+/* Highlight every annotated passage, by finding its quote inside its own block. */
+function markUp() {
+  for (const old of $('#chapter').querySelectorAll('.marked')) {
+    old.replaceWith(document.createTextNode(old.textContent));
+  }
+  $('#chapter').normalize();
+  for (const a of state.annotations) {
+    if (a.file !== state.path || a.status === 'resolved' || !a.quote) continue;
+    const block = $('#chapter').querySelector(`[data-line="${a.line}"]`);
+    if (block) highlight(block, a.quote.trim());
+  }
+}
+
+function highlight(block, quote) {
+  const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const at = node.nodeValue.indexOf(quote);
+    if (at === -1) continue;                     // a quote spanning inline markup is left unmarked
+    const range = document.createRange();
+    range.setStart(node, at);
+    range.setEnd(node, at + quote.length);
+    const mark = document.createElement('span');
+    mark.className = 'marked';
+    range.surroundContents(mark);
+    return;
+  }
+}
+
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const trim = (s) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length > 180 ? t.slice(0, 177) + '…' : t; };
+
+connect();
+loadToc();
+</script>
+</body>
+</html>

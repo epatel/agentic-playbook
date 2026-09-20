@@ -245,3 +245,30 @@ engine-specific parts, and nothing about how the book *looks* lives in the Pytho
 | `scripts/book.css` | The HTML book: reading measure, the contents sidebar, code, tables, diagrams, dark mode, and the print rules a browser uses for `Cmd+P`. |
 
 Changing either is a data edit, not a code edit. That is the point of them.
+
+## Reviewing the book, and acting on a review
+
+`make review` serves the book at `http://127.0.0.1:8777` and lets a reader select any passage and
+attach a comment to it. Several people can read at once over a WebSocket, and a comment appears in
+every open window as it is made.
+
+**If you are the agent acting on a review, read [`review/REVIEW.md`](../review/REVIEW.md).** It is
+the open annotations as a task list, in the book's own reading order, each one giving
+`book/<path>:<line>` and the passage that was quoted. It is generated from the event log on every
+change, so do not edit it — resolve the annotation in the browser instead, or fix the book and
+resolve it.
+
+Two properties are deliberate and worth keeping if this is ever rewritten:
+
+- **Annotations anchor to the markdown source, not to rendered HTML.** The server renders the book
+  itself, with markdown-it's line map, so every block carries the source line it came from. The
+  built HTML is a better page and cannot do this: pandoc discards the mapping. An annotation that
+  cannot say which line it is about is not actionable by an agent.
+- **`review/annotations.jsonl` is an append-only event log.** Create, resolve, reopen and delete
+  are all appends; nothing is rewritten. Two reviewers cannot lose each other's work, a deletion is
+  recoverable, and the store needs no database and so no migration path
+  ([`cards/standing-defaults.md`](standing-defaults.md)).
+
+This is the only part of the repo with dependencies. They live in `.venv/`, which `make review`
+creates from `requirements.txt` on first run; `make html`, `make pdf` and `make check` never touch
+them.

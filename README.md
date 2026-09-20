@@ -113,9 +113,16 @@ make html && make open-html
 make pdf                 # needs pandoc plus a PDF engine; typst is the default
 make check               # what is in the book, what is orphaned, this contents list, style
 make lint                # the style half of make check: columns, whitespace, fences, the bans
+make review              # serve the book for review, with live annotation, at :8777
 make release             # publish the PDF as a dated GitHub release (needs gh, and a clean tree)
 make                     # lists the targets
 ```
+
+`make review` is the only target with dependencies: it creates `.venv/` from `requirements.txt` on
+first run, serves the book, and lets readers select a passage and comment on it, live, together.
+Annotations are anchored to `book/<path>:<line>` rather than to rendered HTML, so an agent can act
+on them; they append to `review/annotations.jsonl` and are collected into
+[`review/REVIEW.md`](review/REVIEW.md), which is the file to hand an agent.
 
 `make release` tags the current commit `vYYYY.MM.DD-HHMM` and publishes the rendered PDF against
 it. A book has no API to break, so the timestamp is the whole version. It refuses to run on a
@@ -148,7 +155,8 @@ The same HTML build is published to
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
 | [`plans/agentic-playbook.md`](plans/agentic-playbook.md) | The execution plan: milestones, the decision log, the handoff note, the open questions. |
 | [`cards/`](cards/) | Repo conventions, as self-contained context cards. Indexed from [`CLAUDE.md`](CLAUDE.md). |
-| [`scripts/`](scripts/), [`Makefile`](Makefile) | The build and the style checker. Two Python files, no dependencies. |
+| [`scripts/`](scripts/), [`Makefile`](Makefile) | The build, the style checker and the review server. The first two are dependency-free single files; only the review server needs `requirements.txt`. |
+| [`review/`](review/) | Annotations left on the book, as an append-only log, plus the digest an agent reads. |
 
 ## Contributing
 

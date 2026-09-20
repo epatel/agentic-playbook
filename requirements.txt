@@ -1,0 +1,7 @@
+# The review server (scripts/review_server.py) and nothing else. The book itself, the build and
+# the style checker stay dependency-free: `make html`, `make pdf` and `make check` never need this
+# file. See cards/standing-defaults.md — a markdown book you must pip-install before reading has
+# failed at being a markdown book.
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+markdown-it-py==3.0.0

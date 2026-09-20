@@ -24,18 +24,19 @@ REPO = HERE.parents[2]
 
 #: `wc -l CLAUDE.md cards/*.md`, as the play prints it.
 EXPECTED_COUNTS = {
-    "CLAUDE.md": 59,
+    "CLAUDE.md": 60,
     "cards/book-structure.md": 70,
-    "cards/building-the-book.md": 247,
+    "cards/building-the-book.md": 274,
     "cards/repo-layout.md": 64,
     "cards/research-notes.md": 65,
     "cards/standing-defaults.md": 76,
 }
 
-#: `grep -oE '\\]\\([a-z-]+\\.md\\)' cards/*.md`, as the play prints it. Four links, three files —
-#: and the play's claim is that all four are signposts rather than chains, which is a judgement the
+#: `grep -oE '\\]\\([a-z-]+\\.md\\)' cards/*.md`, as the play prints it. Five links, three files —
+#: and the play's claim is that all five are signposts rather than chains, which is a judgement the
 #: command cannot make and this script does not pretend to.
 EXPECTED_LINKS = [
+    "cards/building-the-book.md:](standing-defaults.md)",
     "cards/building-the-book.md:](standing-defaults.md)",
     "cards/repo-layout.md:](building-the-book.md)",
     "cards/standing-defaults.md:](building-the-book.md)",

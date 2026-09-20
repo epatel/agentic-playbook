@@ -93,13 +93,13 @@ Five entries in that shape, and nothing else that loads unconditionally. The two
 
 ```bash
 $ wc -l CLAUDE.md cards/*.md
-      59 CLAUDE.md
+      60 CLAUDE.md
       70 cards/book-structure.md
-     247 cards/building-the-book.md
+     274 cards/building-the-book.md
       64 cards/repo-layout.md
       65 cards/research-notes.md
       76 cards/standing-defaults.md
-     581 total
+     609 total
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger
@@ -113,17 +113,18 @@ ordinary markdown link, and no tool objects. So it was audited by hand.
 ```bash
 $ grep -oE '\]\([a-z-]+\.md\)' cards/*.md
 cards/building-the-book.md:](standing-defaults.md)
+cards/building-the-book.md:](standing-defaults.md)
 cards/repo-layout.md:](building-the-book.md)
 cards/standing-defaults.md:](building-the-book.md)
 cards/standing-defaults.md:](building-the-book.md)
 ```
 
-Four links between cards, in three files. Reading them, all four turn out to be signposts: the
+Five links between cards, in three files. Reading them, all five turn out to be signposts: the
 sentence around each one is complete, and an agent that never follows the link still acts
 correctly. That judgement is the part the command cannot make.
 
-What did drift is size. `building-the-book` is 197 lines, nearly three times its neighbours, because
-it absorbed two follow-ups that had nowhere else to go, and it is now a small version of the thing
+What did drift is size. `building-the-book` is 274 lines, four times its neighbours, because it
+absorbed every follow-up that had nowhere else to go, and it is now a small version of the thing
 the arrangement exists to prevent. Nothing signalled it, because in the index it is still one line —
 which is a good argument for occasionally reading your own cards in the order the agent does.
 

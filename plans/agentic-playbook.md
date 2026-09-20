@@ -2298,6 +2298,39 @@ Grafana's spelling**; the reason is in the agent file.
   term. *The play* sits at 500 words of its 500-word budget — **anything added to that play now has
   to be traded for something already in it.**
 
+- **The book has a review server: `make review`** (`scripts/review_server.py`,
+  `scripts/review_app.html`). It serves the chapters the table of contents names, several people
+  can read at once over a WebSocket, and selecting a passage attaches a comment to it that appears
+  in every open window. **The design constraint that shaped everything else is that an agent has to
+  be able to act on the result**, and an agent edits markdown.
+- **Annotations therefore anchor to `book/<path>:<line>` in the source, not to rendered HTML.**
+  That is why the server renders the book itself with markdown-it — whose tokens carry a line map —
+  rather than serving the far better page `make html` already produces: **pandoc discards the
+  mapping**. Every annotation also stores the quoted passage, so the anchor survives the line
+  moving. If this is ever rebuilt on pandoc, that is the property that will be lost first and
+  noticed last.
+- **The store is an append-only event log, `review/annotations.jsonl`.** Create, resolve, reopen
+  and delete are all appends. Two reviewers cannot lose each other's work, a deletion is
+  recoverable, and — the reason it is not SQLite — a log needs no schema and so no migration path,
+  which `cards/standing-defaults.md` would otherwise require from the first table.
+  `review/REVIEW.md` is regenerated from the log on every change and is **the file to hand an
+  agent**: the open annotations as a task list, in reading order.
+- **This is the repo's first dependency, and it is quarantined.** `requirements.txt` and `.venv/`
+  exist for the review server alone; `make html`, `make pdf` and `make check` still run on a bare
+  `python3`. The card's line — a markdown book you must pip-install before reading has failed at
+  being a markdown book — still holds, because reading the book never touches the venv.
+- **Documenting the server in `cards/building-the-book.md` rather than in a new card was a
+  deliberate trade.** A sixth card would have added a row to the `wc -l` capture in *Split the
+  agent file into cards* and falsified that play's "Five entries in that shape". The card is now
+  274 lines, which the same play cites as the example of a card that has outgrown its neighbours —
+  **so the play's own illustration is now more true than when it was written**, and its figures
+  were updated with it.
+- **That play's second captured block moved too**, because the new card section cites
+  `standing-defaults.md`: four inter-card links became five, and the prose claiming all four are
+  signposts now says five. The new link was checked against that claim rather than assumed to meet
+  it. **Every edit to a card or to `CLAUDE.md` moves at least one figure in that play**; run
+  `book/examples/cards/reproduce.py` before finishing.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
