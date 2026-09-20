@@ -2,7 +2,7 @@
 
 This book stands on twenty-one research notes in [`notes/research/`](../../notes/research/), each
 one a set of findings with numbered sources, a list of what the pass could *not* establish, a
-do-not-cite list, and an assessment of how fast its material is rotting. The agent files are where a
+do-not-cite list, and an assessment of how fast its material is rotting. The notes are where a
 disputed sentence in this book should be checked first; what follows is the shortest path into them,
 plus the primary documents worth reading directly.
 
@@ -95,7 +95,7 @@ and the do-not-cite list across six subjects. Beneath it:
 ## The history behind Part I
 
 [`convergence-history.md`](../../notes/research/convergence-history.md) sources the pre-Git,
-pre-Scrum analogy. It is the least perishable agent file in the project.
+pre-Scrum analogy. It is the least perishable research note in the project.
 
 - **Walter F. Tichy, "RCS — a system for version control"**, 1985 —
   https://www.gnu.org/software/rcs/tichy-paper.pdf — locking as the default assumption, stated
