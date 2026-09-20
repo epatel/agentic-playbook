@@ -24,7 +24,7 @@ REPO = HERE.parents[2]
 
 #: `wc -l CLAUDE.md cards/*.md`, as the play prints it.
 EXPECTED_COUNTS = {
-    "CLAUDE.md": 52,
+    "CLAUDE.md": 59,
     "cards/book-structure.md": 70,
     "cards/building-the-book.md": 247,
     "cards/repo-layout.md": 64,

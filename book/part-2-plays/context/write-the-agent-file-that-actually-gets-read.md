@@ -21,8 +21,8 @@ Treat the agent file as a working set, not as a description of the project. Six 
 2. **Keep only what is true everywhere.** A convention that applies to one directory, a procedure
    with steps, or a rule that matters twice a quarter does not belong in a file that loads in every
    session. Move it to something conditional, so it arrives when its situation does: a path-scoped
-   rule, a skill (a folder of instructions loaded when a request matches its description), or a card
-   (a short self-contained file on one subject, loaded when that subject comes up). See
+   rule, a skill (a folder of instructions loaded when a request matches its description), or a
+   card. See
    [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) for the procedural
    half.
 3. **Do not mistake reorganisation for reduction.** Splitting a 600-line agent file into six `@path`
@@ -38,7 +38,8 @@ Treat the agent file as a working set, not as a description of the project. Six 
    problems, different fixes.
 6. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
-   same subject is how the first one got ignored.
+   same subject is how the first one got ignored. One line should tell it to stop and ask when two
+   lines disagree, rather than silently picking one.
 
 This works because an agent file is context, not configuration. Claude Code's own documentation was
 unusually plain about it in September 2026: the file is "delivered as a user message after the
@@ -133,6 +134,7 @@ alike.
 - [ ] One file holds the content; the vendor-specific file is an import or a symlink
 - [ ] The agent has stated its project instructions back to you in a fresh session this week
 - [ ] No two lines in the file contradict each other
+- [ ] The file tells the agent to stop and ask when two of its lines disagree
 - [ ] Lines corrected around, rather than followed, were rewritten or deleted
 
 **See also:** [*Split the agent file into cards*](split-the-agent-file-into-cards.md) ·

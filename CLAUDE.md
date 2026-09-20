@@ -48,5 +48,12 @@ Load a card when its situation matches. Each one stands alone.
 - **`notes/raw/` is frozen.** It is a provenance record of the original ideation, not a spec.
 - **Locked decisions in `PLAN.md` are not reopened unilaterally.** If your task cannot proceed
   under one, stop and ask rather than working around it.
+- **Ask when instructions conflict.** Two rules that cannot both be satisfied, an instruction that
+  contradicts a locked decision, an answer that contradicts itself — stop and say which two things
+  disagree. Picking the more plausible reading and saying so is not the same as asking, and the
+  cost of guessing scales with the size of the edit.
+- **Keep this file and the cards current as you go.** They describe how the repository works, so a
+  change to how it works is not finished until they say so — a renamed card, a new `make` target,
+  a convention that moved. The rule you did not update is the one the next agent follows.
 - **Log what the next agent needs.** Finishing a task means updating the milestone, appending any
   decision you made, and rewriting the handoff note in `plans/agentic-playbook.md`.

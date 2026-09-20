@@ -2278,6 +2278,26 @@ Grafana's spelling**; the reason is in the agent file.
   entry describes, arriving within the hour, and `reproduce.py` caught it both times. **Anything
   that edits a card should run the verifier before finishing.**
 
+- **Two working agreements were added to `CLAUDE.md`, and only one of them earned a place in the
+  book.** *Ask when instructions conflict* and *keep this file and the cards current* are both now
+  repository rules. **Keeping context files current was not added to the book, because the book
+  already says it three times**: move 1 of *Write the agent file that actually gets read* (write
+  from corrections), move 6 (prune on the trigger you add on), the Context Landfill's "an agent
+  file that has only ever grown", and the cards play's checklist item about triggers nothing has
+  matched. A fourth statement would have been a weaker duplicate.
+- **Asking when instructions conflict was a real gap, and is now the second half of move 6.** The
+  book had only ever treated contradictions by *prevention* — curate the file, and the checklist
+  item "no two lines in the file contradict each other". Nothing told the reader what the agent
+  should do on meeting one, so the Context Landfill's silent failure ("follows the current
+  convention roughly half the time") stayed silent. **A line instructing the agent to stop and ask
+  turns that into a reported failure**, which is the register the whole book is written in. Move 6
+  was already the move about contradicting lines, so it needed no new move and the play still says
+  "six moves, in order".
+- **It was paid for out of a gloss that this session had made redundant.** Move 2 defined *card*
+  inline; Part I now defines it at first use, so the parenthetical was a second definition of one
+  term. *The play* sits at 500 words of its 500-word budget — **anything added to that play now has
+  to be traded for something already in it.**
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
