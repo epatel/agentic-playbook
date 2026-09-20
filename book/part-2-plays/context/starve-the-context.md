@@ -54,7 +54,7 @@ under-supplied is cheaper than being reliably over-supplied.
 analytics reported savings in the high tens of percentage points. The question was whether to keep
 it.
 
-The published evidence is the reason that question is worth asking at all
+The published evidence is why that question is worth asking
 ([`token-filtering.md`](../../../notes/research/token-filtering.md)). Two independent benchmarks
 measured `rtk` v0.43.0 in mid-2026. JetBrains ran 425 billed trials against Claude Code 2.1.201 and
 found cost per task up 7.6% at low reasoning effort, turns up 13.8%, and task quality statistically
@@ -68,8 +68,8 @@ still goes up. Most of a session's input cost arrives as cached re-reads billed 
 of fresh tokens, which the hook never sees, and compressed output costs extra turns to recover.
 "Less output" and "higher bill" were never contradictory claims.
 
-So the team ran the paired comparison on their own repo, over a fixed set of twelve backlog tasks,
-three repetitions each. These are the columns that settle it, and nobody else's numbers go in them:
+So the team ran the paired comparison on their own repo: twelve backlog tasks, three repetitions
+each. These are the columns that settle it, and nobody else's numbers go in them:
 
 | Condition | Fresh input | Cache reads | Output | Turns | Tasks passed |
 |---|---|---|---|---|---|
@@ -78,7 +78,7 @@ three repetitions each. These are the columns that settle it, and nobody else's 
 
 *Blank on purpose: the only numbers that settle it are the ones you measure.*
 
-The outcome was mixed, as it usually is. The filter was a clear win on exactly one thing: the
+The outcome was mixed. The filter was a clear win on exactly one thing: the
 dependency-resolution output from their package manager, four thousand lines of tree in which the
 agent needed six. It was a mild loss everywhere else, mostly in turns. They kept it for that one
 command and uninstalled the global hook — a less satisfying result than either the README or the
@@ -91,9 +91,13 @@ removed, tokens "saved" — against a counterfactual your billing system never a
 reports is real and it is not your bill, and because it is enormous, nobody checks. The reported
 saving and the measured spend can move in opposite directions by two orders of magnitude and both be
 accurate. The tell is a savings figure that arrives from the same process that created the saving,
-with no independent measurement anywhere in the loop. The second tell is a cost graph that has not
-moved since you installed it. Anything whose scoreboard it keeps itself will flatter itself
-indefinitely, which is not dishonesty; it is what measuring your own work looks like.
+with no independent measurement anywhere in the loop. Anything that keeps its own scoreboard
+flatters itself, which is not dishonesty but what measuring your own work looks like.
+
+**The Adequate Answer.** The output is fine — not good, not wrong, and fine passes review. So
+nobody looks at the context that produced it, and it goes on growing: the only thing that prompts a
+look is a result bad enough to investigate. A capable model absorbs the noise and answers anyway.
+The bill is the only tell.
 
 ## Checklist
 

@@ -11,7 +11,7 @@ line, including the twelve that mattered.
 
 Three things get claimed for this, and these plays support them unevenly. Cost is the mechanical
 one: whatever loads every session is re-read on every turn, and re-reading is most of the bill.
-Quality is the measured one, and it fails oddly — as context grows the agent still covers the
+Quality is the measured one, and it fails quietly — as context grows the agent still covers the
 requirements and stops satisfying them at once. Speed nobody here has measured: this book's turns
 figure belongs to a compression layer, not to a smaller context.
 

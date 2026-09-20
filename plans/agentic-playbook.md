@@ -2466,6 +2466,26 @@ The second. It adds something the book does not contain, and the Team suite is w
 a team problem arrives. The first is a reframing of material the book already holds, cheaper to
 write and easy to get wrong: written carelessly it becomes the benefits list the style guide bans.
 
+- **The suite's hardest problem is that bloat is survivable, and the book had never said so**
+  (author's reflection). A capable model absorbs a bloated context and answers adequately. The
+  answer passes review, so nothing prompts anyone to examine the context that produced it, and it
+  goes on growing — while the cost is real and the noise is real. **This is the reason the Context
+  suite is hard to sell**: its quality argument only bites when quality visibly fails, and usually
+  it does not.
+- **It is now *the Adequate Answer*, a second failure mode in *Starve the context*.** That play's
+  *Problem* already said "Nothing failed. You paid more for it" — the concrete case was in the book
+  and the generalisation was not. It pairs with the Flattering Dashboard, which is a genuinely
+  different failure: there a tool's scoreboard flatters itself, here the work itself fails to
+  complain. Both end at the same place, which is that the bill is the only signal left.
+- **Everything in that play was at its ceiling, so the mode was paid for.** The whole-play budget
+  is 600–1,200 and the play was at 1,200. The words came from tightening rather than from evidence:
+  the Flattering Dashboard's closing aphorism, three loose phrases in the worked example, and the
+  new mode itself, written twice. **None of the cited figures was touched** — they are the output
+  of two source-verification passes and are the last thing that should pay for anything.
+  **Registry rows are free**, because `word_count` skips lines beginning with `|`.
+- **The Context opener now says quality "fails quietly" rather than "oddly"**, a one-word swap that
+  costs nothing and points at the new mode.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

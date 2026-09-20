@@ -157,6 +157,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
+| **the Adequate Answer** | Output nobody objects to, from a context nobody examines, because only a bad result prompts a look | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
 | **the Paper Fence** | A rule that forbids something and does not stop it | [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md) |
