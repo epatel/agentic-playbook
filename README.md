@@ -111,7 +111,7 @@ browser-drawn diagrams. It needs only pandoc.
 ```bash
 make html && make open-html
 make pdf                 # needs pandoc plus a PDF engine; typst is the default
-make check               # what is in the book, what is orphaned, word counts, style defects
+make check               # what is in the book, what is orphaned, this contents list, style
 make lint                # the style half of make check: columns, whitespace, fences, the bans
 make release             # publish the PDF as a dated GitHub release (needs gh, and a clean tree)
 make                     # lists the targets

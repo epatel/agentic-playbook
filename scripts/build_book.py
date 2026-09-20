@@ -771,6 +771,67 @@ def unlink(markdown: str, anchors: list[str]) -> str:
     return markdown
 
 
+#: The root `README.md` repeats the table of contents as a numbered list, for the reader who
+#: arrives on GitHub rather than opening the book. Two copies of one ordering drift apart, and this
+#: one had been a play short ever since the Context suite grew to four, with every entry after the
+#: gap numbered one low. Nothing reported it, because nothing compared them.
+README_ENTRY = re.compile(r"^(?P<num>\d+)\. \[(?P<title>.+?)\]\(book/(?P<path>[^)]+)\)$", re.M)
+
+#: Only as far as the book could plausibly count. A rephrased sentence matches nothing and is not
+#: reported, which is the right failure: this checks a number, not a house style.
+NUMBER_WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
+                "fourteen fifteen sixteen seventeen eighteen nineteen twenty").split()
+
+
+def check_readme_contents(parts: list[Part], reporter: Reporter) -> None:
+    """Check the root README's contents list against the table of contents it copies."""
+    readme = ROOT / "README.md"
+    if not readme.is_file():
+        return
+    text = readme.read_text(encoding="utf-8")
+
+    # Suite openers and the preface are chapters but not entries in the README's numbered list,
+    # and a chapter nobody has written yet is not expected to be listed.
+    expected = [c for part in parts for c in part.chapters
+                if c.path != "preface.md" and not c.path.endswith("index.md") and c.file.is_file()]
+    found = [(int(m["num"]), m["title"], m["path"]) for m in README_ENTRY.finditer(text)]
+
+    by_path = {c.path: c for c in expected}
+    listed = {path for _, _, path in found}
+    for chapter in expected:
+        if chapter.path not in listed:
+            reporter.warn(f"README.md: nothing in the contents links to {chapter.path}, which the "
+                          f"table of contents lists as '{chapter.title}'")
+    for _, title, path in found:
+        if path not in by_path:
+            reporter.warn(f"README.md: the contents lists '{title}' ({path}), which is not in the "
+                          f"table of contents")
+        elif title != by_path[path].title:
+            reporter.warn(f"README.md: the contents calls {path} '{title}', but the table of "
+                          f"contents calls it '{by_path[path].title}'")
+
+    # Order and numbering are only worth reporting once the two agree on what is in the book. One
+    # missing entry renumbers every entry after it, and thirty consequences of a single omission
+    # bury the omission.
+    if listed == set(by_path):
+        if [path for _, _, path in found] != [c.path for c in expected]:
+            reporter.warn("README.md: the contents list is in a different order from the table of "
+                          "contents")
+        for position, (num, _, _) in enumerate(found, start=1):
+            if num != position:
+                reporter.warn(f"README.md: contents entry {position} is numbered {num}")
+                break
+
+    # By the part's own title, not a prefix of it: "Part III" starts with "Part II".
+    plays = sum(1 for part in parts if "The Plays" in part.title
+                for c in part.chapters
+                if not c.path.endswith("index.md") and c.file.is_file())
+    said = re.search(r"^(\w+) plays in (\w+) suites", text, re.M | re.I)
+    if said and said[1].lower() in NUMBER_WORDS and NUMBER_WORDS.index(said[1].lower()) != plays:
+        reporter.warn(f"README.md: says '{said[1].lower()} plays', but the table of contents has "
+                      f"{plays}")
+
+
 def find_orphans(parts: list[Part]) -> list[str]:
     known = {c.path for part in parts for c in part.chapters}
     orphans = []
@@ -962,6 +1023,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     for orphan in find_orphans(parts):
         reporter.warn(f"{orphan}: not in the table of contents, so not in the book")
+    check_readme_contents(parts, reporter)
 
     if not written:
         log("Nothing to build: no chapter named in the table of contents exists yet.")

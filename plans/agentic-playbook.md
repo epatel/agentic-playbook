@@ -2256,6 +2256,23 @@ Grafana's spelling**; the reason is in the agent file.
   measuring this repository goes stale every time the thing it measures is edited**, which for the
   cards is often; the verifier is the only reason it was noticed, and running it is cheap.
 
+- **The root README's contents list is now checked against the table of contents, in
+  `build_book.py` rather than in a new script** (`check_readme_contents`). It reports a chapter the
+  list omits or invents, a title or an order that disagrees with the table, numbering that has
+  slipped, and the "N plays in six suites" count. Two details worth keeping if it is ever rewritten.
+  **Order and numbering are only reported once the two agree on what is in the book** — one missing
+  entry renumbers everything after it, and thirty consequences of a single omission bury the
+  omission, which is exactly how the original defect survived. And **the play-count sentence is
+  matched by a regex that fails open**: rephrase the sentence and nothing is reported, because the
+  check is for a number, not a house style.
+- **The check caught a bug in itself on its first run.** It counted 23 plays, because
+  `"Part III".startswith("Part II")` is true. It now matches on the part's own title. Worth
+  remembering for any future check that identifies a part by prefix.
+- **Editing `cards/building-the-book.md` to document the new check immediately invalidated the
+  capture re-taken in the same session** — 243 lines became 247. This is the drift the previous
+  entry describes, arriving within the hour, and `reproduce.py` caught it both times. **Anything
+  that edits a card should run the verifier before finishing.**
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

@@ -26,7 +26,7 @@ REPO = HERE.parents[2]
 EXPECTED_COUNTS = {
     "CLAUDE.md": 52,
     "cards/book-structure.md": 70,
-    "cards/building-the-book.md": 243,
+    "cards/building-the-book.md": 247,
     "cards/repo-layout.md": 64,
     "cards/research-notes.md": 65,
     "cards/standing-defaults.md": 76,

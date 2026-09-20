@@ -51,6 +51,10 @@ it:
 - A row marked ✅ or 🟡 whose file is missing is reported as a problem.
 - A row marked ⬜ is expected to be missing and is listed on the *About this build* page instead.
 - A `#` heading that does not match its table-of-contents title is reported.
+- The root `README.md` repeats the table as a numbered list for readers arriving on GitHub,
+  and that copy is checked against the table: a chapter it omits or invents, a title or an
+  order that disagrees, numbering that has slipped, and the "N plays in six suites" count.
+  **Add a play and this reports the README before anyone reads it wrong.**
 
 `make check` runs those checks, and the style checker below, and exits non-zero if any of them
 report a real problem. It is a reasonable last step before finishing a writing task.

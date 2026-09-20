@@ -71,7 +71,7 @@ open-html: html ## Build the HTML book and open it in the default browser
 
 # Both halves always run: fixing a missing chapter and fixing a 104-column line are different
 # jobs, and stopping at the first one hides the second until the next invocation.
-check: ## Report structural problems and style defects; write nothing, fail if either does
+check: ## Report structural problems, README drift and style defects; write nothing, fail on any
 	@$(PYTHON) $(SCRIPT) --check --strict $(ARGS); structure=$$?; \
 	$(PYTHON) $(STYLE) --strict $(STYLEARGS); style=$$?; \
 	test $$structure -eq 0 -a $$style -eq 0
