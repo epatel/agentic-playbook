@@ -19,8 +19,8 @@ invoke), and any client speaking the protocol can consume them.
 
 1. **Connect on a boundary, not on availability.** A server earns its machinery when a capability
    crosses one — more than one agent, more than one harness, more than one person. For one developer
-   wiring one CLI into one agent, a bash command and a line in the brief is less machinery and less
-   to trust ([`mcp.md`](../../../notes/research/mcp.md)).
+   wiring one CLI into one agent, a bash command and a line in the agent file is less machinery
+   ([`mcp.md`](../../../notes/research/mcp.md)).
 2. **Read the exact command before you approve it, and run it where you run everything else.** A
    local server is a binary executing with your privileges. The specification requires a client
    offering one-click installation to show the command untruncated, for the reason that the command
@@ -86,12 +86,12 @@ goes back in when the next regression does.
 
 **The Instruction You Did Not Write.** The agent does something nobody asked for, and nothing in
 your repository explains it: it reaches for a second server's tool in a way that makes no sense, or
-attaches a file to a request, or reports a step as done that it did not take. You search the brief,
-the skills, and the transcript for the instruction, and it is in none of them, because it arrived in
-a tool description — text controlled by a server's author, reaching the model as something to act on
-rather than something to inspect. The publicly demonstrated version of this in 2025 was the
-cross-server case, where a hidden instruction in one server's tool description redirected the
-agent's use of a legitimate messaging server connected to the same session.
+attaches a file to a request, or reports a step as done that it did not take. You search the agent
+file, the skills, and the transcript for the instruction, and it is in none of them, because it
+arrived in a tool description — text controlled by a server's author, reaching the model as
+something to act on rather than something to inspect. The publicly demonstrated version of this in
+2025 was the cross-server case, where a hidden instruction in one server's tool description
+redirected the agent's use of a legitimate messaging server connected to the same session.
 
 The tell is behaviour you cannot trace to anything you wrote, in a session with a server connected.
 The second tell is quieter and worth checking on a calm afternoon: you cannot name, from memory,

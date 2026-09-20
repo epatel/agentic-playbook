@@ -252,7 +252,7 @@ cannot be un-scripted cheaply has failed a test the book should make explicit.
 - **A trap worth recording:** the `machinedge/building-effective-agents` GitHub file is a
   **rewritten derivative**, not Anthropic's text. Its plausible-sounding quotes ("10–50× cost", "1–5
   min") are not Anthropic's and must never be attributed to them. This is precisely the failure the
-  citation rules in [`cards/research-briefs.md`](../../cards/research-briefs.md) exist to prevent.
+  citation rules in [`cards/research-notes.md`](../../cards/research-notes.md) exist to prevent.
 - **Gap:** no source states compliance or audit requirements as an explicit scripted-versus-agentic
   criterion. [1] and [12] get you predictability and traceability; the regulatory leap is ours and
   should be labelled as inference if the book makes it.

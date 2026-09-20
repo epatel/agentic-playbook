@@ -9,7 +9,7 @@ politeness is a line competing for attention with the lines that matter. And dat
 first thing that goes wrong with a shared document is that nobody can tell whether it still
 describes the team.
 
-## A project brief, in two tiers
+## A project agent file, in two tiers
 
 The pattern is a slim always-loaded index plus self-contained files loaded on demand. The index
 carries the project's shape and a trigger per file, written in the words a request would use; each
@@ -66,17 +66,18 @@ The vendor file wires it up and holds nothing else:
 
 This repository runs the pattern on itself: its root [`CLAUDE.md`](../../CLAUDE.md) is a real index
 and [`cards/`](../../cards/) holds the real cards, so the template above is one that has been used
-daily rather than one that was designed. The reasoning is in
-[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md),
-and the argument for loading on a trigger rather than at launch is in
-[*Starve the context*](../part-2-plays/context/starve-the-context.md).
+daily rather than one that was designed. The reasoning is in [*Write the agent file that actually
+gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md), and the
+argument for loading on a trigger rather than at launch is in [*Starve the
+context*](../part-2-plays/context/starve-the-context.md).
 
 ## A working agreement
 
-One page, in the repository, beside the shared brief. Six items is the usual number and every one of
-them concerns something that leaves somebody's machine; the rest goes in the personal section, in
-writing, so that it stops being an argument. The full version, with a worked instance of every
-clause, is in [*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md).
+One page, in the repository, beside the shared agent file. Six items is the usual number and every
+one of them concerns something that leaves somebody's machine; the rest goes in the personal
+section, in writing, so that it stops being an argument. The full version, with a worked instance of
+every clause, is in [*Build the working
+agreement*](../part-2-plays/team/build-the-working-agreement.md).
 
 ```markdown
 # How we work with agents — <team or repository>
@@ -126,9 +127,9 @@ Last changed because: <the event that caused the last amendment>.
 
 Paste into a pull request. The order is the point: the things that check the code are read before
 the code, because they are what the rest of the review rests on, and because weakening them is the
-cheapest way for a change to look finished. Reasoning in
-[*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
-and [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md).
+cheapest way for a change to look finished. Reasoning in [*Review code you did not
+write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) and [*Make the
+agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md).
 
 ```markdown
 ### Before reading the implementation

@@ -1,9 +1,9 @@
-# Split the brief into cards
+# Split the agent file into cards
 
 ## Problem
 
-You did the pruning. The four-hundred-line brief is thirty lines now, and the forty lines on the
-migration workflow, the release runbook, and the note explaining why the search index is
+You did the pruning. The four-hundred-line agent file is thirty lines now, and the forty lines on
+the migration workflow, the release runbook, and the note explaining why the search index is
 denormalised have gone to `docs/`, where they are correct, current, and read by nobody. The agent
 works from the thirty lines and its own guesses, so the migration advice arrives in code review
 instead — from you, retyped, in the words you deleted last month. Moving the material out was right.
@@ -52,7 +52,7 @@ graph TD
     B x--x|"never"| C
 ```
 
-Splitting a brief into `@path` imports is not this move: imports expand at launch and change
+Splitting an agent file into `@path` imports is not this move: imports expand at launch and change
 nothing, while the saving here is a file going unread. Three mechanisms now do conditional loading
 and differ mainly in who decides. A path-scoped rule fires when a matching file is opened, so the
 filesystem decides. A skill fires when the harness matches a request against a description
@@ -66,12 +66,12 @@ in a minute.
 ## Worked example
 
 This book's own repository, which has no application code in it: thirty-nine markdown chapters, the
-research briefs behind them, and a build script. It was written by agents working in parallel on
+research notes behind them, and a build script. It was written by agents working in parallel on
 separate board items, each starting from an empty context window with no memory of the last, which
 makes the always-loaded tier the only thing every author was guaranteed to have read.
 
 The alternative was one file holding every convention the repo has — the column limit, where
-research briefs go, what shape a play takes, how the PDF is rendered, which directories are frozen.
+research notes go, what shape a play takes, how the PDF is rendered, which directories are frozen.
 That was declined early, on the grounds that a task writing a chapter would pay for the build
 instructions in every turn. What loads instead is the index:
 
@@ -97,7 +97,7 @@ $ wc -l CLAUDE.md cards/*.md
       70 cards/book-structure.md
      197 cards/building-the-book.md
       64 cards/repo-layout.md
-      65 cards/research-briefs.md
+      65 cards/research-notes.md
       76 cards/standing-defaults.md
      521 total
 ```
@@ -129,18 +129,18 @@ which is a good argument for occasionally reading your own cards in the order th
 
 ## Failure mode
 
-**The Reassembled Brief.** The cards are written, the index is short, and every run still ends up
-with most of the material in the window, because the auth card points at the sessions card for the
-token format and that one points at the API card for the error envelope. Every link was added by
+**The Reassembled Agent file.** The cards are written, the index is short, and every run still ends
+up with most of the material in the window, because the auth card points at the sessions card for
+the token format and that one points at the API card for the error envelope. Every link was added by
 somebody being helpful about the exact thing a reader would want next. The arrangement now costs
-what the four-hundred-line brief cost, with the ordering scattered across five files and a directory
-listing that reads like a well-organised system. It is not the Context Landfill: nothing here is
-stale, and nothing is flat. The tell is an agent that opens three files before it makes an edit. The
-second tell is a card you cannot summarise without saying the name of another card.
+what the four-hundred-line agent file cost, with the ordering scattered across five files and a
+directory listing that reads like a well-organised system. It is not the Context Landfill: nothing
+here is stale, and nothing is flat. The tell is an agent that opens three files before it makes an
+edit. The second tell is a card you cannot summarise without saying the name of another card.
 
 ## Checklist
 
-- [ ] Everything moved out of the brief ended up in an indexed card, not an unindexed file
+- [ ] Everything moved out of the agent file ended up in an indexed card, not an unindexed file
 - [ ] The index reads in one pass and holds no rule that a card could hold
 - [ ] Every entry names a situation, in the words a request would use, rather than a subject
 - [ ] No card requires another card in order to be acted on
@@ -149,5 +149,5 @@ second tell is a card you cannot summarise without saying the name of another ca
 - [ ] Entries nothing has ever matched have had the trigger rewritten, or the card deleted
 
 **See also:**
-[*Write the brief the agent actually reads*](write-the-brief-the-agent-actually-reads.md) ·
+[*Write the agent file that actually gets read*](write-the-agent-file-that-actually-gets-read.md) ·
 [*Package repeatable expertise*](../harness/package-repeatable-expertise.md)

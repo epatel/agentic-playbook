@@ -35,11 +35,11 @@ guide that a working developer can open at any single play and act on it the sam
 
 ## Conventions
 
-- Book chapters live in `book/`, research briefs in `notes/research/`, raw ideation in
+- Book chapters live in `book/`, research notes in `notes/research/`, raw ideation in
   `notes/raw/` (frozen — do not edit).
 - Every play uses the template defined by the style-guide task: Problem → The play → Worked
   example → Failure mode → Checklist.
-- Research briefs are cited notes, not prose. Writers draw from them.
+- Research notes are cited notes, not prose. Writers draw from them.
 - Any build/helper scripts are Python, not Node.
 - Prose wraps at 100 columns; diagrams are mermaid, never ASCII art.
 - Repo-wide conventions are recorded as cards in `cards/` and indexed from the root `CLAUDE.md`.
@@ -105,8 +105,14 @@ table above, so that the numbered milestones keep the numbers other entries in t
 ## Current state / handoff
 
 **The manuscript is complete, has been through its editorial pass, its worked examples have been
-run, and its unreadable primary sources have now been read.** 40 files, 40,579 words, a preface, a
-root `README.md`, and one voice. What the editorial pass changed and what it deliberately left alone
+run, its unreadable primary sources have now been read, and its central term has been renamed.** 40
+files, 40,825 words, a preface, a root `README.md`, and one voice.
+
+**Start with the terminology rename if you are editing anything.** What the book called a *brief*
+is now an **agent file**, and what it called a *research brief* is now a **research note** — the
+one word had been doing both jobs. Two plays and one card changed filename with it, so **a link
+written from memory against the old paths is dead**. The reasoning, the rejected alternatives and
+what the rename cost are the four newest entries in the [decisions log](#decisions-log-append-only). What the editorial pass changed and what it deliberately left alone
 is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
 because several conventions in this section were corrected by it. What the verification pass
 changed, and the new obligation it puts on anyone editing a worked example, is in [*The verification
@@ -170,7 +176,7 @@ Two posts, both by the repo owner:
 
 Summaries are in [`notes/research/agent-context-files.md`](../notes/research/agent-context-files.md)
 and [`notes/research/tooling.md`](../notes/research/tooling.md) [20][21]. Read the posts anyway;
-the briefs compress them.
+the agent files compress them.
 
 **Attribution convention.** Absorb this material into the book's own voice. Do not cite it in-line
 as an external source — "the argument is made well in *The unit of work*" reads oddly in a book by
@@ -185,8 +191,8 @@ boxes rather than hidden magic. **This is now done and checked** — milestone 1
 `5e0f39858134` confirmed it; see [*The Wave #2 check*](#the-wave-2-check) below for what the check
 found and the one thing it changed.
 
-`notes/research/` now exists. Milestone 4 filled it with six files — a hub brief plus five
-subject briefs, because five subjects in one file would have made a writer chasing token-pricing
+`notes/research/` now exists. Milestone 4 filled it with six files — a hub research note plus five
+subject agent files, because five subjects in one file would have made a writer chasing token-pricing
 figures read a survey of MCP security to find them:
 
 | File | Feeds |
@@ -203,7 +209,7 @@ things in it will change what you write:
 
 1. **Cite vendor documentation, not blog posts, on context files.** Claude Code has read
    `AGENTS.md` natively since v2.1.277; a wall of confident mid-2026 posts says otherwise and is
-   simply stale. The hub brief names one of them explicitly as an example rather than a source.
+   simply stale. The hub agent file names one of them explicitly as an example rather than a source.
    **This rule is about third-party claims of fact, and it does not apply to the author's own
    posts.** Those are not evidence to be corroborated, they are the book's own material — see
    "The author's own material" below. Milestone 19 found that this line, read literally, had
@@ -211,11 +217,11 @@ things in it will change what you write:
 2. **The staleness table in `tooling.md` ranks every finding by how fast it rots**, with a
    suggested hedge for each. Use it rather than re-deriving where the line is; it is consistent
    with `book/STYLE.md` on volatile facts.
-3. **Each brief ends with a `## Concrete example we can lift`** written to be dropped into a
+3. **Each agent file ends with a `## Concrete example we can lift`** written to be dropped into a
    *Worked example* heading. They are illustrative-but-correct per the locked decision — real
    commands and real file contents, no invented captured output.
 
-Milestone 5 added seven more files on the same hub-plus-briefs pattern, feeding the Orchestration
+Milestone 5 added seven more files on the same hub-plus-agent files pattern, feeding the Orchestration
 suite:
 
 | File | Feeds |
@@ -292,7 +298,7 @@ the Verification & Trust suite, the Economics suite, and Part III:
 Milestone 7 created `book/part-1-argument/` and wrote all three chapters. Part I is complete at
 roughly 4,100 words — 1,487 / 1,448 / 1,169 after the budget trim below, and 1,525 / 1,445 / 1,180
 as milestone 7 left it — which sits inside the ~15% share once Part II exists at its planned size.
-It also produced an eighth research brief,
+It also produced an eighth research note,
 [`notes/research/convergence-history.md`](../notes/research/convergence-history.md), because the
 historical analogy needed sourcing and no research pass covered it.
 
@@ -328,23 +334,23 @@ constrain the suites that follow:
 | File | Owns |
 |---|---|
 | [`context/index.md`](../book/part-2-plays/context/index.md) | The suite opener — names *signal over noise* as the suite's single idea and frames the three plays as that move at three layers |
-| [`write-the-brief-the-agent-actually-reads.md`](../book/part-2-plays/context/write-the-brief-the-agent-actually-reads.md) | Project context files: what belongs, what bloats, the portable `AGENTS.md` + import setup, and verifying the brief loaded |
+| [`write-the-agent-file-that-actually-gets-read.md`](../book/part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) | Project context files: what belongs, what bloats, the portable `AGENTS.md` + import setup, and verifying the agent file loaded |
 | [`starve-the-context.md`](../book/part-2-plays/context/starve-the-context.md) | Deliberate reduction, just-in-time loading, and the paired-run method for measuring any filtering tool |
 | [`scope-a-task-to-fit-the-window.md`](../book/part-2-plays/context/scope-a-task-to-fit-the-window.md) | Unit-of-work sizing, external requirement lists, the stop rule, and file-based handoff between sessions |
 
 1. **Four failure modes are now registered, three of them new.** The Context suite claimed **the
-   Context Landfill** as `book/STYLE.md` invited, and coined **the Brief That Never Arrived**, **the
+   Context Landfill** as `book/STYLE.md` invited, and coined **the Agent File That Never Arrived**, **the
    Flattering Dashboard**, and **the Permanent Near Miss**. Check the registry before naming
    anything adjacent — in particular, the Orchestration suite's "a subagent inherits the written
-   brief but none of the conversation" is arguably the same phenomenon as the Brief That Never
+   agent file but none of the conversation" is arguably the same phenomenon as the Agent file That Never
    Arrived and may want that name rather than a second one.
 2. **The `rtk` worked example is spent.** It carries *Starve the context*'s Worked example, with the
    JetBrains and Quesma figures dated and versioned. Economics may cite the figures, but should not
    build *Understand what you are paying for* around the same scenario; the running log below flags
    a swap.
 3. ~~**Three plays per suite held comfortably**, and no fourth was wanted.~~ **Superseded**
-   by `703e507c86aa`, which added [*Split the brief into
-   cards*](../book/part-2-plays/context/split-the-brief-into-cards.md) as the suite's fourth. The
+   by `703e507c86aa`, which added [*Split the agent file into
+   cards*](../book/part-2-plays/context/split-the-agent-file-into-cards.md) as the suite's fourth. The
    material was not missing when milestone 8 ran; it was filtered out by the cite-vendor-docs rule,
    which milestone 19 found had been read as excluding the author's own posts. See
    [*The cards play*](#the-cards-play) below.
@@ -364,7 +370,7 @@ Four things in it constrain later tasks:
 
 1. **Three failure modes are registered**, all new: **the Paper Fence**, **the Unsummoned Skill**,
    and **the Instruction You Did Not Write**. The first is milestone 4's gotcha (a), named here as
-   the Context suite expected; note it is deliberately *not* the same as the Brief That Never
+   the Context suite expected; note it is deliberately *not* the same as the Agent file That Never
    Arrived, and *Package repeatable expertise* says so in print so the editorial pass can check it.
 2. **The permission-matching example is spent.** The `deny` rule that does not stop `git 'push'
    origin main`, and the sandbox configuration that replaces it, carry *Choose your harness*'s
@@ -388,15 +394,15 @@ argues for less orchestration than the reader is being sold, while citing the ve
 | [`orchestration/index.md`](../book/part-2-plays/orchestration/index.md) | The suite opener — names *every piece of orchestration is machinery encoding an assumption about what the model cannot do, and assumptions expire* as the suite's one idea, and frames the three plays as that on three axes: across context, across steps, across the working tree |
 | [`decompose-into-subagents.md`](../book/part-2-plays/orchestration/decompose-into-subagents.md) | Fan out to read and single-thread the write, tool allowlists as mechanical isolation, fixed return formats that can be cross-checked, and holding tokens constant before believing a fan-out |
 | [`make-the-control-flow-deterministic.md`](../book/part-2-plays/orchestration/make-the-control-flow-deterministic.md) | Splitting on reversibility and horizon, irreversible actions performed by code, model-driven work at bounded leaves, what LangGraph and n8n each actually sell, and the removability test |
-| [`work-in-parallel-without-collisions.md`](../book/part-2-plays/orchestration/work-in-parallel-without-collisions.md) | Partition-plus-escape-clause briefs, worktrees as ergonomics rather than a boundary, landmine files, overlap preflight, and sequential integration with the suite run on the merged tree |
+| [`work-in-parallel-without-collisions.md`](../book/part-2-plays/orchestration/work-in-parallel-without-collisions.md) | Partition-plus-escape-clause agent files, worktrees as ergonomics rather than a boundary, landmine files, overlap preflight, and sequential integration with the suite run on the merged tree |
 
 Five things in it constrain later tasks:
 
 1. **Three failure modes are registered**, all new: **the Tidy Summary**, **the Load-Bearing
    Scaffold**, and **the Clean Merge**. The first is milestone 5's gotcha (a). Gotcha (c) is the
-   Clean Merge. Gotcha (b) — the brief travels, the conversation does not — was **used and
+   Clean Merge. Gotcha (b) — the agent file travels, the conversation does not — was **used and
    deliberately left unnamed**: it appears as step 5 of *Decompose into subagents* rather than as a
-   second name next to the Brief That Never Arrived, which the handoff note flagged as a possible
+   second name next to the Agent File That Never Arrived, which the handoff note flagged as a possible
    collision. Gotcha (d) is spent as a checklist item, not a name.
 2. **The suite uses `meridian`, a Ruby freight-booking platform whose monorepo holds nineteen
    deployable services**, across all three worked examples. It is deliberately Ruby: the sharpest
@@ -458,7 +464,7 @@ Five things in it constrain later tasks:
 
 Milestone 12 added `economics/`, the fifth suite, at roughly 299 / 1,178 / 1,167 / 1,137 words. It
 spends `token-economics.md` and `single-agent-wins.md` in full, and it is the suite most exposed to
-staleness, so it follows that brief's hedging strategy literally: ratios in the prose, every dollar
+staleness, so it follows that agent file's hedging strategy literally: ratios in the prose, every dollar
 figure confined to one dated block inside one worked example.
 
 | File | Owns |
@@ -517,7 +523,7 @@ Five things in it constrain later tasks:
    agreement in a fenced block, written to be copied. The appendix should extract it rather than
    invent a second one, exactly as the resolved `CLAUDE.md` question sends the appendix to the
    Context suite. That closes the last half of the appendix-templates question.
-3. **The local-context-file precedence trap is treated as an instance of the Brief That Never
+3. **The local-context-file precedence trap is treated as an instance of the Agent file That Never
    Arrived, not as a new name.** Milestone 4's gotcha (c) — a `CLAUDE.local.md` silently stopping
    `AGENTS.md` loading, with `/context` reporting the same list either way — is the phenomenon the
    Context suite already named. Both *Collect and refine as a team* and *Onboard someone into all
@@ -587,8 +593,8 @@ proportions can be read against a finished manuscript rather than a partial one.
 | [`inviting-non-developers-in.md`](../book/part-4-next-waves/inviting-non-developers-in.md) | Wave three — requester versus co-pilot, the four conditions for an outside change to be safe, who carries the review cost, and the low-code precedent nobody can quote |
 | [`appendices/glossary.md`](../book/appendices/glossary.md) | Twenty-two terms, each defined by behaviour, with vendor-specific and contested ones marked as such |
 | [`appendices/team-checklists.md`](../book/appendices/team-checklists.md) | Six one-page suite checklists, eight items each, selected by "keep what another person would notice the absence of" |
-| [`appendices/copy-paste-templates.md`](../book/appendices/copy-paste-templates.md) | The two-tier brief and card skeleton, the working-agreement skeleton, and a review checklist for agent-authored changes |
-| [`appendices/further-reading.md`](../book/appendices/further-reading.md) | Entry points into the twenty-one briefs by subject, roughly thirty primary sources, the author's two posts, and the five figures that do not survive being looked up |
+| [`appendices/copy-paste-templates.md`](../book/appendices/copy-paste-templates.md) | The two-tier agent file and card skeleton, the working-agreement skeleton, and a review checklist for agent-authored changes |
+| [`appendices/further-reading.md`](../book/appendices/further-reading.md) | Entry points into the twenty-one research notes by subject, roughly thirty primary sources, the author's two posts, and the five figures that do not survive being looked up |
 
 Five things in it constrain later tasks:
 
@@ -615,7 +621,7 @@ Five things in it constrain later tasks:
 5. **`9dd4d6b84b80` is half-answered.** *Skill*, *card* and *harness* are now all defined in the
    glossary, which satisfies the second half of Part I's promise ("defined where they are first used
    and collected in the glossary"). The first half — *card* being used before it is defined, in
-   *Write the brief the agent actually reads* — is still open and still belongs to the cards play.
+   *Write the agent file that actually gets read* — is still open and still belongs to the cards play.
    **Superseded:** `9dd4d6b84b80` closed the other half without waiting for that play. See
    [*The terminology pass*](#the-terminology-pass) below.
 
@@ -636,7 +642,7 @@ are now inside every budget in `STYLE.md` and `TEMPLATE-play.md`. What was cut, 
 future edit to *Before Git, before Scrum, before this* should know, is under
 [*The budget trim*](#the-budget-trim) below.
 
-**The Context suite has a fourth play (`703e507c86aa`)** — *Split the brief into cards*, which
+**The Context suite has a fourth play (`703e507c86aa`)** — *Split the agent file into cards*, which
 writes up the two-tier pattern this repo runs on itself. What it commits future edits to, including
 the fact that `cards/` is now asserted by a script the book depends on, is under [*The cards
 play*](#the-cards-play) below. **Read that one before editing anything in `cards/`.**
@@ -909,7 +915,7 @@ python3 book/examples/session-cost/check.py     # Economics suite's arithmetic
 Six things in it constrain later tasks:
 
 1. **Eight blocks are now captured, and `> Captured <Month Year>, <tool> <version>.` means it.**
-   They are in *Write the brief the agent actually reads* (two), *Decompose into subagents*,
+   They are in *Write the agent file that actually gets read* (two), *Decompose into subagents*,
    *Work in parallel without collisions* (two), *Decide who signs off*, and *Review code you did
    not write* (four). Everything else that looked like a transcript either prints no output or is
    framed in prose as somebody else's published figures.
@@ -929,7 +935,7 @@ Six things in it constrain later tasks:
    lean on; and the capture corrects the prose rather than the other way round. `book/README.md`'s
    adding-a-file checklist gained two items enforcing it.
 5. **The numbers audit came back clean, and that is worth not re-running.** Every figure in the
-   book that reads like a measurement was traced: all of them are sourced to a brief in
+   book that reads like a measurement was traced: all of them are sourced to an agent file in
    `notes/research/`, expressed as shape, or part of a fictional scenario. None of the roughly forty
    figures on `evidence.md`'s **do not cite** list appears anywhere in the book. The two the
    Part IV chapter does name are named in order to refuse them, which is the correct use.
@@ -982,7 +988,7 @@ and the patterns generalise well enough to be worth writing down:
 | Domain refuses connections (Octomind) | Check DNS before concluding "blocked". octomind.dev has **no `A` record at all** — the site is gone. The Internet Archive had it |
 | TLS-fingerprint blocking (NSA) | The only one that genuinely needed a browser: `curl` 403s at any header combination. Fetch it in the page, then hand the blob to an `<a download>` and read it out of `~/Downloads` |
 
-**What each source changed, in one line each.** Full detail is in the brief named against it.
+**What each source changed, in one line each.** Full detail is in the agent file named against it.
 
 | Source | Outcome |
 |---|---|
@@ -992,7 +998,7 @@ and the patterns generalise well enough to be worth writing down:
 | **Linux kernel `coding-assistants.rst`** | Fetched raw from `git.kernel.org`. **Settles the contested trailer: `Assisted-by: LLM [TOOL1] [TOOL2]`.** The `AGENT_NAME:MODEL_VERSION` form was a draft that did not survive merge, and the 2026 write-ups still quoting it are quoting the patch posting. **The book may print the kernel trailer**, and the three places that already do are consistent with it. The live file also carries a nine-step bug-fixing procedure that is an unusually good outside statement of *Make the agent prove it* |
 | **Fedora policy** | Read from version control. Four corrections: it is **v1.0, 2025-10-24**; accountability is for "the entirety of these contributions"; the trailer placeholder `<name of code assistant>` is the *proposal's*, where the approved text gives `Assisted-by: generic LLM chatbot` and `Assisted-by: ChatGPTv5`; and the AI-as-arbiter clause covers judgements about **contributions** as well as about people. Fedora naming the product where the kernel's literal token is `LLM` sharpens the book's "there is no standard" point |
 | **NSA MCP guidance** | Read. **It is NSA alone, not NSA/CISA, and it is dated May 2026, not June** — June is the upload date in the URL. It argues the Harness suite's own case from outside the industry: explicit trust boundaries between agent, plugin, model and user, OS-level sandboxing of every tool execution, and a conclusion worth quoting whole — MCP's "current security posture remains uneven and highly dependent on implementation discipline rather than protocol guarantees" |
-| **Octomind** | Recovered from the Internet Archive; quotations now verbatim, including two the brief never had. The Orchestration suite cited it nowhere and made the argument structurally instead; **that decision does not need revisiting** and the recovered text is filed for a later editor |
+| **Octomind** | Recovered from the Internet Archive; quotations now verbatim, including two the agent file never had. The Orchestration suite cited it nowhere and made the argument structurally instead; **that decision does not need revisiting** and the recovered text is filed for a later editor |
 | **OpenAI Codex rate card** | Reached by a different route, and the gap **stands**: the per-plan included credit allowance is not published anywhere. It is now clear that is deliberate rather than a 403 — the docs say only "After you reach your included limits, available credits let you continue working". All three vendors express the allowance as an unquantified threshold, which is a finding rather than a gap |
 
 **Two new do-not-cite entries, and both are the same species.** `18.2% / 12.8% / 12.6%` and DORA's
@@ -1151,7 +1157,7 @@ covered twice. `make check` reports no defects and the book stands at 39,393 wor
 |---|---|---|---|---|
 | `before-git-before-scrum-before-this.md` | whole chapter | 800–1,500 | 1,567 | 1,487 |
 | `scope-a-task-to-fit-the-window.md` | *The play* | 200–500 | 508 | 488 |
-| `write-the-brief-the-agent-actually-reads.md` | *Failure mode* | 80–200 | 205 | 190 |
+| `write-the-agent-file-that-actually-gets-read.md` | *Failure mode* | 80–200 | 205 | 190 |
 
 Four things in it are worth knowing before editing any of these files:
 
@@ -1281,7 +1287,7 @@ re-reading the item's own description:
 
 So the residue was one sentence: by the table-of-contents order, the Context suite reaches *skill*
 and *card* before the Harness suite defines the first and before the unwritten cards play
-(`703e507c86aa`) defines the second. Step 2 of *Write the brief the agent actually reads* now
+(`703e507c86aa`) defines the second. Step 2 of *Write the agent file that actually gets read* now
 glosses both in the clause that uses them — a skill is a folder of instructions loaded when a
 request matches its description, a card is a short self-contained file on one subject loaded when
 that subject comes up — and *Starve the context* links its "skill description" to the Harness play
@@ -1300,11 +1306,11 @@ Four things follow for anyone writing or editing prose here:
    italics. *Skill* is now the worked precedent — glossed plainly in `context/`, italicised in
    `harness/package-repeatable-expertise.md`.
 3. ~~**The cards play owes the italicised coinage of *card*.**~~ **Paid** by `703e507c86aa`:
-   *card* is coined in italics in step 1 of [*Split the brief into
-   cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), the Context gloss stays
+   *card* is coined in italics in step 1 of [*Split the agent file into
+   cards*](../book/part-2-plays/context/split-the-agent-file-into-cards.md), the Context gloss stays
    plain, and the play reached the same shape as the skeleton in *Copy-paste templates*, so the
    appendix did not have to change. `9dd4d6b84b80` is now closed on both halves.
-4. **Twenty-one words in cost twenty-two words out.** *The play* in *Write the brief the agent
+4. **Twenty-one words in cost twenty-two words out.** *The play* in *Write the agent file the agent
    actually reads* was at 498 against a 500 ceiling. The gloss was paid for by trimming four places
    that said something twice — "the reason any of this works is that", a restated contrast after
    "separates X from Y", "no required sections" duplicating what the section demonstrates, and one
@@ -1314,19 +1320,19 @@ Four things follow for anyone writing or editing prose here:
 ## The cards play
 
 Board item `703e507c86aa` added the Context suite's fourth play,
-[*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), at 1,166
+[*Split the agent file into cards*](../book/part-2-plays/context/split-the-agent-file-into-cards.md), at 1,166
 words. It is one of the two chapters milestone 19 filed as owing the author's own material, and it
 closes the last of `9dd4d6b84b80`'s three terms. **Part II is now nineteen plays**, and the four
 places in the book that counted them have been updated rather than left to the next reader.
 
 Five things in it constrain later work:
 
-1. **One failure mode is registered: the Reassembled Brief.** Cards that link to cards until a run
-   loads the brief they were split out of. It is deliberately *not* the Context Landfill — nothing
+1. **One failure mode is registered: the Reassembled Agent file.** Cards that link to cards until a run
+   loads the agent file they were split out of. It is deliberately *not* the Context Landfill — nothing
    is stale and nothing is flat — and the play says so in print. A second candidate was declined: a
    card nothing ever matches is the Unsummoned Skill with a different file extension, so the play
    uses that name plainly rather than coining a second one, on the precedent the Team suite set for
-   the Brief That Never Arrived. Part III's index has the new row and its count moved from nineteen
+   the Agent File That Never Arrived. Part III's index has the new row and its count moved from nineteen
    to twenty.
 2. **The worked example is this repository, which breaks one-project-per-suite on purpose.**
    `atlas` still carries the suite's other three plays. The exception is this plan's own answer to
@@ -1371,8 +1377,8 @@ Five things in it constrain later work:
    book length a repeated metaphor becomes a bit, and `book/STYLE.md` bans bits; the two mode names
    are what later chapters should reach for.
 2. **It is framing, not a play, and that was the decision rather than the default.** As an
-   imperative — "prepare the project before you start" — it collapses into *Write the brief the
-   agent actually reads* or *Split the brief into cards*, neither of which needs a rival. Stated as
+   imperative — "prepare the project before you start" — it collapses into *Write the agent file the
+   agent actually reads* or *Split the agent file into cards*, neither of which needs a rival. Stated as
    disposition it costs a screen and pays across the whole of Part II. **Do not later promote it to
    a twentieth play.**
 3. **Part II is now described in print as mostly preparation-mode work** — "things to do on a quiet
@@ -1425,7 +1431,7 @@ Four things it found, three of them already closed and one fixed here:
    IV asserted that the cause "is in your architecture" with nothing on the other end of the claim.
    The entry gains one paragraph — behaviour attached invisibly does not appear in the file being
    edited, so the patch is locally correct and globally wrong — linking forward, with a response
-   scoped to what a reader can do today (name the mechanism in the brief). The chapter went 1,403 →
+   scoped to what a reader can do today (name the mechanism in the agent file). The chapter went 1,403 →
    1,488 against a 1,500 ceiling, so **that chapter now has twelve words of headroom**: anything
    further added to it has to displace something.
 
@@ -1482,7 +1488,7 @@ The third flagged claim — that a real observability server exposes write tools
 is checked too, against Grafana's own `mcp-grafana`: `alerting_manage_silences`, `update_dashboard`
 and friends ship in the same binary as the queries, and it offers `--disable-write`. The play's
 fictional `metrics-mcp --read-only` is correct as illustration and **should not be rewritten into
-Grafana's spelling**; the reason is in the brief.
+Grafana's spelling**; the reason is in the agent file.
 
 ## Decisions log (append-only)
 
@@ -1535,24 +1541,24 @@ Grafana's spelling**; the reason is in the brief.
 - **Named failure modes are Title Case noun phrases naming a symptom, not a cause**, and are
   registered in the running log below so two suites do not coin two names for one thing.
 - **British English, Oxford comma, sentence-case headings, no YAML frontmatter.**
-- **A research pass covering several subjects produces several briefs plus a hub**, not one file.
+- **A research pass covering several subjects produces several agent files plus a hub**, not one file.
   Milestone 4 was commissioned as a single `notes/research/tooling.md` and delivered six files:
   the commissioned path became the hub holding the cross-cutting analysis and the full source
-  list, with one self-contained brief per subject beside it. This follows
-  `cards/research-briefs.md` ("several small briefs beat one enormous one") without losing the
+  list, with one self-contained agent file per subject beside it. This follows
+  `cards/research-notes.md` ("several small agent files beat one enormous one") without losing the
   entry point the task named. Later research passes should do the same.
-- **Every research brief ends with a staleness assessment.** This subject dates in months, not
-  years, and a writer picking up a brief six weeks later needs to know which findings to hedge
+- **Every research note ends with a staleness assessment.** This subject dates in months, not
+  years, and a writer picking up an agent file six weeks later needs to know which findings to hedge
   before they know anything else. `notes/research/tooling.md` carries a ranked table with a
   suggested hedge per row.
-- **A research brief states what a source could *not* establish, and names sources that must not be
+- **A research note states what a source could *not* establish, and names sources that must not be
   cited.** Milestone 5 found several confidently-circulating figures that did not survive checking —
   two low-code statistics attributed to Gartner and to vendor research, a scaffolding quote
   attributed to a named engineer with no traceable transcript, and a GitHub file that is a rewritten
   derivative of Anthropic's "Building effective agents" whose plausible figures are not Anthropic's.
-  These are recorded in the briefs as **do not cite**, with the reason. A brief that only lists what
+  These are recorded in the agent files as **do not cite**, with the reason. An agent file that only lists what
   is true leaves the next agent to rediscover the same traps, and the derivative-text case is the
-  exact failure `cards/research-briefs.md` exists to prevent.
+  exact failure `cards/research-notes.md` exists to prevent.
 - **The book distinguishes evidence about *agents* from evidence about autocomplete, every time.**
   Milestone 6 found that every RCT in the field measures autocomplete, inline completion, or chat,
   and that the five most-quoted figures in the discourse are all being restated as agent results.
@@ -1563,7 +1569,7 @@ Grafana's spelling**; the reason is in the brief.
 - **Legal and regulatory material is presented as "here is what the document says", quoted and
   dated — never as guidance.** `notes/research/accountability.md` contains copyright, liability and
   sectoral-regulation material, none of which is legal advice. This is a standing instruction for
-  *Decide who signs off*, and it is the reason that brief quotes policy text verbatim rather than
+  *Decide who signs off*, and it is the reason that agent file quotes policy text verbatim rather than
   summarising it into something stronger.
 - **Prices are printed as ratios, never as absolutes.** Milestone 6 flagged `token-economics.md` as
   the fastest-rotting material in the book — not "will need updating" but rotting, with two of the
@@ -1572,7 +1578,7 @@ Grafana's spelling**; the reason is in the brief.
   cache-read multiplier. Absolute dollar figures appear only as a dated snapshot, labelled as one. A
   related trap: models of different generations tokenise differently, so per-token prices must never
   be compared across generations.
-- **Where a source cuts both ways, the brief carries both halves.** The one study measuring
+- **Where a source cuts both ways, the agent file carries both halves.** The one study measuring
   orchestration latency separately found multi-agent slower in wall clock *and* cheaper in tokens.
   Quoting the convenient half would forfeit the credibility the Orchestration suite's sceptical
   framing depends on. The rule generalises: this book's argument is strongest when its own evidence
@@ -1585,12 +1591,12 @@ Grafana's spelling**; the reason is in the brief.
   provenance record stays a record and the plan stays consolidated. The first instance is
   [`notes/raw/team-adoption-fragment.md`](../notes/raw/team-adoption-fragment.md). What such a
   fragment *contributes* goes in the running log below; the fragment itself is never a spec.
-- **A writing task that has to do its own research files a brief like a research task would.**
+- **A writing task that has to do its own research files an agent file like a research task would.**
   Milestone 7 needed sourced history for the pre-Git/pre-Scrum analogy, which no research pass
   covered. Rather than carrying twenty inline URLs in one chapter, it produced
   [`notes/research/convergence-history.md`](../notes/research/convergence-history.md) to the format
-  in [`cards/research-briefs.md`](../cards/research-briefs.md) — findings, gaps, do-not-cite,
-  numbered sources, staleness — and the chapter cites the brief plus a handful of primary quotes.
+  in [`cards/research-notes.md`](../cards/research-notes.md) — findings, gaps, do-not-cite,
+  numbered sources, staleness — and the chapter cites the agent file plus a handful of primary quotes.
   This keeps the verification pass (`3b61a6a1a684`) able to check Part I the same way it checks a
   play, and means the next author reaching for the same analogy does not re-run the searches.
 - **The Standish CHAOS figures go on the book's do-not-cite list.** The 1994 16%/53%/31% success
@@ -1599,11 +1605,11 @@ Grafana's spelling**; the reason is in the brief.
   `convergence-history.md`. If the book touches them at all, it is as an example of a number the
   industry repeated for twenty years without opening the source — which is on-theme rather than a
   digression.
-- **Part I cites primary documents inline and the brief for the survey figures.** Quotations that
+- **Part I cites primary documents inline and the agent file for the survey figures.** Quotations that
   carry the prose (Tichy on locking, Microsoft's own SourceSafe glossary, GitHub's two pull-request
-  posts, Cockburn on "lightweight") are quoted in the chapter; every percentage traces to the brief.
+  posts, Cockburn on "lightweight") are quoted in the chapter; every percentage traces to the agent file.
   The rule generalises for non-play chapters: quote the primary source where the sentence depends on
-  its exact words, cite the brief for everything numeric.
+  its exact words, cite the agent file for everything numeric.
 - **A suite opener names the suite's one idea and shows its plays as applications of it.** Review
   feedback on milestone 8 asked whether "signal over noise" deserved a place of its own. It did,
   but not as a fourth play: as a noun phrase it fails the imperative-title rule in
@@ -1754,7 +1760,7 @@ Grafana's spelling**; the reason is in the brief.
   reader builds software with agents rather than building agent products, and a customer-support
   refund flow puts them in somebody else's problem for four hundred words. The material survives —
   the resumability argument, the `interrupt()`-inside-a-tool mechanic, and the beat that neither
-  version detects the crash are all in the play — re-hosted on the suite's own project. A brief
+  version detects the crash are all in the play — re-hosted on the suite's own project. An agent file
   supplies evidence and an illustration; the illustration is the part a writer may replace.
 - **A suite may claim a failure-mode name that `book/STYLE.md` coined as an example.** *Make the
   agent prove it* takes **the Green Suite That Tests Nothing**, which appears in `STYLE.md`'s naming
@@ -1766,9 +1772,9 @@ Grafana's spelling**; the reason is in the brief.
 - **Where a play's material is legal or regulatory, it is reported and not advised**, per the
   standing instruction attached to `notes/research/accountability.md`. *Decide who signs off* names
   ISO 26262-8 clause 11 and dates the absence of any regulator position to September 2026, says in
-  print that none of it is legal advice, and quotes no document the brief flagged as unextractable —
+  print that none of it is legal advice, and quotes no document the agent file flagged as unextractable —
   no Copyright Office wording, no vendor indemnity clause text, no trailer syntax copied from a
-  secondary source. The brief's contested kernel trailer format is handled by naming the trailer's
+  secondary source. The agent file's contested kernel trailer format is handled by naming the trailer's
   *shape* (`Assisted-by:`) and telling the reader to check the live policy, which is the hedge the
   staleness table asks for.
 - **A play may carry a genuinely unresolved question as a step rather than resolving it.** *Review
@@ -1899,7 +1905,7 @@ Grafana's spelling**; the reason is in the brief.
   consolidated list is the largest artefact in the research and lived only in `notes/research/`,
   where no reader goes. Five entries are named in the appendix — the SWE-bench dollar figures, the
   "200–400 lines" review rule, any Stack Overflow 2026 number, the Standish CHAOS figures, and both
-  low-code statistics — with the briefs cited for the rest. A book that spends Part III on the
+  low-code statistics — with the agent files cited for the rest. A book that spends Part III on the
   quality of the evidence should tell the reader which numbers to stop repeating, and it costs
   fifteen lines.
 - **A line consisting of a single cross-reference link may exceed 100 columns.** Seven lines in
@@ -1932,8 +1938,8 @@ Grafana's spelling**; the reason is in the brief.
   finished work, not being walked through it. **Where a contract and six independent implementations
   disagree, the implementations are the evidence** — this is the second instance in the project after
   the past-tense worked-example correction, and it is the same lesson.
-- **A play's filename must be its title, so `write-the-brief-the-agent-reads.md` became
-  `write-the-brief-the-agent-actually-reads.md`.** `book/README.md` states the rule; the file had
+- **A play's filename must be its title, so `write-the-agent file-the-agent-reads.md` became
+  `write-the-agent-file-that-actually-gets-read.md`.** `book/README.md` states the rule; the file had
   dropped a word since milestone 8 and `make check` cannot see it, because the build only compares
   the `#` heading against the table-of-contents title. Eleven files referenced the old path. Worth
   knowing that this class of drift is invisible to the build.
@@ -1954,7 +1960,7 @@ Grafana's spelling**; the reason is in the brief.
   the entries link back. **Naming is not only about avoiding two names for one thing — it is also
   about a chapter using the name the book already has.**
 - **Three near-collisions between failure modes existed only in this file and are now in print.**
-  The Unsummoned Skill versus the Brief That Never Arrived, the Founding Document versus the Paper
+  The Unsummoned Skill versus the Agent File That Never Arrived, the Founding Document versus the Paper
   Fence, and the Immaculate Surface versus the Drifting Yes each get one sentence in the defining
   chapter saying what the other one is and why this is not it. The third was a genuine defect rather
   than a missing courtesy: the Immaculate Surface and the Drifting Yes published the same tell in
@@ -1997,7 +2003,7 @@ Grafana's spelling**; the reason is in the brief.
   contains *Decide who signs off*, which argues that agent authorship should be disclosed, and a book
   making that argument while omitting its own disclosure is the Paper Fence at book scale. It is
   stated factually and briefly — several agents, separate chapters, a shared plan, a style guide,
-  research briefs, a human commissioning it — and is not the preface's theme.
+  research notes, a human commissioning it — and is not the preface's theme.
 - **The root `README.md` is the reader's front door and `book/README.md` stays the authoritative
   table of contents.** Two contents listings is exactly the duplication this project records as a
   defect, so the split is deliberate and narrow: the build reads `book/README.md` and nothing else,
@@ -2011,7 +2017,7 @@ Grafana's spelling**; the reason is in the brief.
   real printed coefficient fitted to simulated data in a methodology walkthrough. Neither was a
   hallucination and neither was sloppy secondary reporting in the usual sense — each was a
   plausible-looking calculation that survived because the primary was one fetch failure away. **So
-  the rule the briefs now enforce is narrower than "cite the primary": if a figure is quoted to a
+  the rule the agent files now enforce is narrower than "cite the primary": if a figure is quoted to a
   precision the source does not publish, that precision is the tell.** A vendor that publishes five
   columns did not publish their average, and a report that publishes a chart did not publish a
   coefficient.
@@ -2019,7 +2025,7 @@ Grafana's spelling**; the reason is in the brief.
   sources three research passes recorded as blocked opened on the first or second alternative
   route — `curl` plus `pdftotext`, the project's git repository instead of its docs site,
   `developers.openai.com/<page>.md` instead of `openai.com`, the Internet Archive instead of a dead
-  domain. Only one needed a browser. **A brief may record that a source resisted retrieval, but it
+  domain. Only one needed a browser. **An agent file may record that a source resisted retrieval, but it
   should name the method that failed rather than the document**, because the next agent has
   different methods. The five routes that worked are tabulated in *The source-verification pass*.
 - **Four independent throwaway implementations is the threshold `cards/standing-defaults.md` was
@@ -2090,7 +2096,7 @@ Grafana's spelling**; the reason is in the brief.
   milestone 19 that three was a floor rather than a ceiling. `book/README.md` still asks a suite
   author to raise a fourth rather than add one quietly; that procedure produced this play and is not
   satisfied by it.
-- **A worked example may be this repository, once.** *Split the brief into cards* uses the root
+- **A worked example may be this repository, once.** *Split the agent file into cards* uses the root
   `CLAUDE.md` and `cards/` instead of `atlas`, against the one-project-per-suite rule in
   `book/TEMPLATE-play.md`. The trade was deliberate: the alternative was inventing a card set for a
   fictional billing service to illustrate a pattern that is checked in, running, and exercised by
@@ -2162,7 +2168,7 @@ Grafana's spelling**; the reason is in the brief.
   only as an unlabelled error bar in Figure 1 but verbatim in METR's February 2026 write-up, and
   Anthropic's 50% alignment-faking rate is a chart in the arXiv paper and a sentence in Anthropic's
   own post. The 12% sabotage figure *is* in the paper. **The two halves of one study can need two
-  different citations, and the brief should say which is which.**
+  different citations, and the agent file should say which is which.**
 - **A budget trim may cut a recently-rewritten section, but only for restatement, and it gets
   logged** (`3884b4f3fc82`). Paying for Part III's corrections needed ~90 words out of *What is
   genuinely contested*. The clause taken from `57772ad900e3`'s new reward-hacking section — "and
@@ -2206,6 +2212,36 @@ Grafana's spelling**; the reason is in the brief.
   the dangerous one: cut the sentence an item traces to and nothing reports it. Both were checked
   against all eleven files, and one candidate cut was abandoned for it (*Build the working
   agreement*'s "the agreement says so in writing", which its second checklist item depends on).
+
+- **The word *brief* named two different things, and now names neither** (terminology pass,
+  2026-09-20). The book used it for the file an agent reads at the start of a session *and* for the
+  cited research documents in `notes/research/`, which `book/STYLE.md`'s "one name per phenomenon
+  across the whole book" forbids. A reader met the research sense in the preface and the file sense
+  in Part I, five pages apart, with the glossary twenty-six chapters away. Both senses were
+  renamed: the file is an **agent file**, the research documents are **research notes**. *Agent
+  file* was chosen over *context file* (which collides with the Context suite and with *context
+  window*) and over *project instructions* (which implies the file constrains the agent, the exact
+  misreading the play exists to correct). ***Scaffolding* was considered and rejected**: this book
+  has already coined **the Load-Bearing Scaffold** as a failure mode, and in most writing about
+  agents "scaffolding" means the harness — two collisions with terms already in the glossary.
+- **Two plays and one card changed filename in that pass.**
+  `write-the-brief-the-agent-actually-reads.md` became
+  `write-the-agent-file-that-actually-gets-read.md` — the literal rename would have said "agent"
+  twice — `split-the-brief-into-cards.md` became `split-the-agent-file-into-cards.md`, and
+  `cards/research-briefs.md` became `cards/research-notes.md`. **Any link written against the old
+  paths is dead**, including in published releases, which are pinned to their own tag and so keep
+  working against the version they shipped with.
+- **The rename cost 48 re-wrapped lines and four budget trims, because *agent file* is a word
+  longer than *brief*.** Three of those trims improved the sentence — most visibly *Verify that it
+  arrived*, whose "the agent ignored the agent file" was a casualty of the rename and is now
+  "ignored" versus "never loaded". Word budgets are the real constraint on renaming anything in
+  this book: a two-word term for a one-word term costs a trim somewhere for every few uses.
+- **The book's promise that "terms are defined where they are first used" was audited and had been
+  broken exactly twice.** *Agent file* and *card* were both used bare in Part I with the glossary
+  as the only definition. Both now carry a first-use gloss on the *verification tax* pattern. Every
+  other glossary term either defines itself at first use, is named in the deliberate "we do not
+  assume you know this" disclaimer, or matched the audit only as ordinary English — the verb *run*,
+  the everyday *skill*. **The promise is kept; it was never enforced by anything, and still is not.**
 
 ## Open questions
 
@@ -2276,7 +2312,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   write it fresh in the suite; do not move the file, or the template loses its example.
 - Milestone 4 turned up **three cross-cutting phenomena that want names**, under *Cross-cutting
   gotchas* in `notes/research/tooling.md`. They are deliberately *not* registered below, because a
-  research brief should not squat names the suite authors have to live with. Whichever suite writes
+  research note should not squat names the suite authors have to live with. Whichever suite writes
   one first names it and registers it here. They are: (a) instructions mistaken for enforcement —
   a `deny` rule, a line in `CLAUDE.md`, or a skill description read as a hard boundary when none of
   them is one; (b) a tool's self-reported savings diverging from the measured bill; (c) a silent
@@ -2316,7 +2352,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   gotchas* in `notes/research/orchestration.md`. As with milestone 4 they are deliberately **not**
   registered below — whichever suite writes one first names it and registers it. They are: (a) the
   parent sees only a subagent's summary and never checks the transcript, which exists on disk; (b) a
-  subagent inherits the written brief but none of the conversation, so a convention established in
+  subagent inherits the written agent file but none of the conversation, so a convention established in
   chat is silently absent while one written in `CLAUDE.md` is enforced; (c) a merge that git reports
   as clean and that breaks the build, which is the collision class that matters; (d) a fan-out that
   was really just a larger compute budget. Note that (b) is the orchestration-layer sibling of
@@ -2343,7 +2379,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
      403 is TLS-fingerprint based and survives any `curl` header combination.
   2. ~~Octomind's "Why we no longer use LangChain" (June 2024), site unreachable.~~ **Recovered
      from the Internet Archive**, and the quotations in `langchain-langgraph.md` are now verbatim,
-     with two better ones the brief never had. The reason it was never fetchable: **octomind.dev has
+     with two better ones the agent file never had. The reason it was never fetchable: **octomind.dev has
      no DNS `A` record** — the site is gone, not blocking. Everything milestone 5 said about *using*
      it still stands: the post is over two years old, its subject has had a major release since,
      there is no credible successor, and the book should not imply framework removal is a documented
@@ -2427,13 +2463,13 @@ Append discovered constraints and cross-task notes here as work proceeds.
   paying for* — but should build its worked example on something else. The strongest unspent
   candidates are in `notes/research/token-economics.md`.
 - **Two cross-cutting gotchas were used but deliberately not named by the Context suite.**
-  *Write the brief the agent actually reads* states the instructions-are-not-enforcement
-  distinction in its closing paragraph (a brief "does not constrain the agent, it competes for its
+  *Write the agent file that actually gets read* states the instructions-are-not-enforcement
+  distinction in its closing paragraph (an agent file "does not constrain the agent, it competes for its
   attention"; blocking an action needs a hook) but leaves milestone 4's gotcha (a) **unnamed**,
   because the Harness suite owns permissions, hooks, and the `deny`-rule example and should name it
   where the reader can act on it. Similarly, *Scope a task to fit the window* uses milestone 6's
   phenomenon (b) — coverage retention 0.93–0.95 against strict success retention 0.375 — as the
-  play's transferable idea, and leaves it unnamed for Part III. Note the brief's own warning, which
+  play's transferable idea, and leaves it unnamed for Part III. Note the agent file's own warning, which
   the play honours: this is **not** a context-window problem and must not be written as one.
 - **Part I's "there is no name for it" sentence survived milestone 8.** *Scope a task to fit the
   window* opens on the mid-run-overwrite phenomenon (the agent re-implementing a helper it wrote
@@ -2489,7 +2525,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   arXiv 2607.17937 should carry the word *retention* — the figures are meaningless without it.
 - **The judgement calls were deferred rather than fixed**, on two board items. `fce3cee8fa34` held
   three marginal budget overruns — *Before Git, before Scrum, before this* at ~1,548 words against
-  1,500, *Scope a task to fit the window*'s *The play* at ~559 against 500, and *Write the brief
+  1,500, *Scope a task to fit the window*'s *The play* at ~559 against 500, and *Write the agent file
   the agent actually reads*'s *Failure mode* at ~219 against 200 — plus the verbatim clause shared
   by `context/index.md` and *Starve the context*, which is the tie-back-to-the-opener pattern
   working slightly too literally. **That item is now done; see [*The budget trim*](#the-budget-trim)
@@ -2516,7 +2552,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `agent-context-files.md`. The research was fine. The spending was not, and the reason was a
   single line of writing guidance: *"cite vendor documentation, not blog posts, on context
   files."* It was aimed at a wall of mid-2026 posts wrongly claiming Claude Code cannot read
-  `AGENTS.md`. The hub brief did carve out an exception, in prose, four hundred lines further
+  `AGENTS.md`. The hub agent file did carve out an exception, in prose, four hundred lines further
   down; the headline instruction in the handoff won, as headline instructions do. The lesson
   generalises past this incident: **a rule stated as a category ("blog posts") will be applied to
   the category, not to the problem the rule was written for.** If a guardrail names a genre rather
@@ -2526,7 +2562,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **The book practised a pattern for six milestones without teaching it.** This repo runs on the
   cards pattern from the author's own post — a slim root `CLAUDE.md` index plus five
   self-contained `cards/`, and the Context suite never mentions it. The word "card" appears in
-  *Write the brief the agent actually reads* exactly once, undefined, which is how board item
+  *Write the agent file that actually gets read* exactly once, undefined, which is how board item
   `9dd4d6b84b80` came to exist. Worth noticing as a class of gap: conventions adopted in the
   *repo* during setup do not automatically become content in the *book*, and the setup milestone
   is the most likely place for good material to be silently spent on infrastructure instead. It
@@ -2535,7 +2571,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
 
 - **Milestone 9 named milestone 4's gotcha (a) as the Paper Fence**, which closes the note above
   about the Context suite leaving it unnamed. It covers both halves deliberately: the permission
-  rule that matches a spelling rather than a capability, and the line of prose in a brief that reads
+  rule that matches a spelling rather than a capability, and the line of prose in an agent file that reads
   as a refusal and is a sentence competing for attention. Gotchas (b) and (c) from that pass remain
   spent-and-unnamed and unnamed-entirely respectively — (b) is the Flattering Dashboard, (c) is
   still free.
@@ -2576,8 +2612,8 @@ Append discovered constraints and cross-task notes here as work proceeds.
   and
   a checklist item in *Decompose into subagents*, which is the right weight for it, since the
   remedy ("give one agent the same budget and measure") is cheaper than the diagnosis. (b), the
-  brief-travels-conversation-does-not asymmetry, is stated as step 5 of that play and named nowhere.
-  The handoff note asked whether it wanted the Brief That Never Arrived's name; the answer is no,
+  agent file-travels-conversation-does-not asymmetry, is stated as step 5 of that play and named nowhere.
+  The handoff note asked whether it wanted the Agent File That Never Arrived's name; the answer is no,
   and neither does it want a third. They are different phenomena — one is a file that never loaded,
   the other is a file that loaded correctly while an unwritten convention did not travel — but the
   second has no separate tell a reader could act on beyond "write it down", which is already the
@@ -2590,7 +2626,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   a
   numbered step, not in the failure mode. Worth copying for Part III, which owns the same posture at
   chapter length.
-- **The `single-agent-wins.md` brief is left largely unspent on purpose.** The Orchestration suite
+- **The `single-agent-wins.md` agent file is left largely unspent on purpose.** The Orchestration suite
   draws one figure from it. Its best material — Anthropic's "optimizing single LLM calls with
   retrieval and in-context examples is usually enough", the AssetOpsBench latency result with both
   halves, and the METR doubling-time trend — belongs to *Know when not to use an agent*
@@ -2602,7 +2638,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   contains the section-accurate word counter that makes budget compliance checkable rather than
   estimated. Board item `6b0110f76388` should land both: a long line is a problem, and a section
   over its template budget is at least a note.
-- **The Orchestration suite cites four of milestone 5's seven briefs and no adoption figures**, on
+- **The Orchestration suite cites four of milestone 5's seven agent files and no adoption figures**, on
   the precedent the Harness suite set. No LangChain download counts, no n8n valuation, no tool
   table: two of the best-known parallel-agent tools in that table died or announced sunset inside a
   year, and the plays name tools only where a mechanic is that vendor's — `tools: Read, Glob, Grep`
@@ -2663,7 +2699,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   small request returning a large diff. Phenomena (a) to (d) in `evidence.md` are therefore **still
   entirely free for Part III**, as are the three in `failure-modes.md`. This is the fourth suite in
   a row to land on three plays, and no fourth was wanted: the material that might have made one —
-  subscription-versus-API billing — is the fastest-rotting section of the fastest-rotting brief, and
+  subscription-versus-API billing — is the fastest-rotting section of the fastest-rotting agent file, and
   it appears as a clause rather than a play for that reason.
 - **The Economics suite cites no adoption counts, no leaderboard scores, and nothing from the
   consolidated do-not-cite list.** Specifically checked and not used: every SWE-bench per-instance
@@ -2675,7 +2711,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **Two figures in the suite are load-bearing and hedged in the sentence that carries them.** The
   Tessl comparison (roughly 3× cheaper per token, roughly 3× more expensive per review, 156 turns
   against 42) is named as ten pull requests in August 2026 and paired with the thirtyfold
-  run-to-run variance that makes ten thin — mechanism seriously, magnitude lightly, as the brief
+  run-to-run variance that makes ten thin — mechanism seriously, magnitude lightly, as the agent file
   asks. The five-of-six protocol-matched comparison is attributed to ten benchmarks in June 2026.
   Neither is printed anywhere else in the suite.
 - **The AssetOpsBench latency result was deliberately not used.** `single-agent-wins.md` carries it
@@ -2733,11 +2769,11 @@ Append discovered constraints and cross-task notes here as work proceeds.
   `AGENTS.md` precedence trap is a team problem — one person's private file switches off the file
   the team maintains — and it appears twice in this suite: as a verification step and a fenced
   agreement clause in *Build the working agreement* and *Onboard someone into all this*, and as the
-  imperfect beat of the latter's worked example. It is named as **the Brief That Never Arrived**,
+  imperfect beat of the latter's worked example. It is named as **the Agent File That Never Arrived**,
   plain and linked, because the Context suite's definition already covers it exactly ("instructions
   written, committed, and never loaded; nothing errors, and the usual check reports the same thing
   whether they loaded or not"). All three of milestone 4's gotchas are now spent: (a) is the Paper
-  Fence, (b) is the Flattering Dashboard, (c) is the Brief That Never Arrived.
+  Fence, (b) is the Flattering Dashboard, (c) is the Agent File That Never Arrived.
 - **Vendor mechanics in this suite are named and version-stamped in the sentence that uses them**,
   per the milestone-9 rule. Claude Code 2.x and the precedence behaviour are attributed where the
   reader is told a fact; inside the fictional agreement the same rule is written the way a team
@@ -2753,7 +2789,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   independent writings of the same width checker is the strongest case yet for `6b0110f76388`**,
   and with Part II complete its value is now entirely to the editorial pass.
 - **Two long lines in this suite were caused by a deep link, not by prose.** A
-  `[*title*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode)` inside an indented list
+  `[*title*](../context/write-the-agent-file-that-actually-gets-read.md#failure-mode)` inside an indented list
   item cannot be wrapped and overshoots by ten columns. Both were resolved by dropping the anchor
   to a file-level link, which `book/README.md` already prefers. Worth knowing before the checker
   lands: the fix for an over-long cross-reference is usually to shorten the link, not the sentence.
@@ -2763,7 +2799,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   Quote, (c) the Green Suite That Tests Nothing (Verification, milestone 11), and (d) the Immaculate
   Surface. `failure-modes.md`'s seven map on to those plus the Endless Polish (#3), the Instant
   Concession (#4), and #7, which is not a name — reviewing overtaking writing is the whole of *Where
-  the time actually goes* and does not want one. **Nothing in the research briefs is still waiting
+  the time actually goes* and does not want one. **Nothing in the research notes is still waiting
   for a name**, and the editorial pass can treat the registry as closed unless Part IV coins one.
 - **Part I's outstanding rewrite is done and the loop is closed in both directions.** *Before Git,
   before Scrum, before this* now reads "It has no agreed name… This book calls it the Vanishing
@@ -2784,7 +2820,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   openai.com returns HTTP 403 to automated fetching, so the primary was never read. *What is
   genuinely contested* attributes it to OpenAI and carries no sub-split. This joins the seven leads
   already on board item `57772ad900e3`.
-- **The Apiiro figures are used once, in Part III, with the hedge the brief prescribes.** The −76% /
+- **The Apiiro figures are used once, in Part III, with the hedge the agent file prescribes.** The −76% /
   −60% / +322% / +153% pair drives *the Immaculate Surface*, attributed as one vendor's telemetry,
   with the broad definition of "security issue" stated and the magnitudes explicitly held lightly
   against the shape. No other chapter in the book cites Apiiro. The same applies to Veracode, whose
@@ -2886,8 +2922,8 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **Verifying produced two corrections nobody was looking for, both about attribution rather than
   arithmetic.** The Copyright Office's two most-quoted "conclusions" are the Office quoting a court
   and quoting a submitted comment; and the NSA guidance is NSA-only and dated May, where three
-  briefs had "NSA/CISA" and "June" because June is in the URL path. Neither would have been caught
-  by re-reading the briefs, and neither was in scope when the item was written. **Reading a primary
+  agent files had "NSA/CISA" and "June" because June is in the URL path. Neither would have been caught
+  by re-reading the agent files, and neither was in scope when the item was written. **Reading a primary
   end to end finds things that checking a specific claim against it does not.**
 - **`make check` is clean and Part III sits at 14%.** The book moved from 39,370 to 39,513 words,
   all of it in the rewritten section. Two over-length lines exist in
@@ -2914,7 +2950,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   promise, and considerably less than explaining to a reader why the book hedged its own contract.
 
 - Milestone 19's second chapter landed: `703e507c86aa` wrote
-  [*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md), the
+  [*Split the agent file into cards*](../book/part-2-plays/context/split-the-agent-file-into-cards.md), the
   Context suite's fourth play, and with it the first worked example in the book whose subject is
   this repository. `book/examples/cards/reproduce.py` asserts both of its captured blocks against
   the real `cards/` directory, which makes an edit there an edit to the book — see
@@ -2939,7 +2975,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **A framing idea is cheaper than it looks and a play is dearer.** The whole thread cost 275 words
   and one deleted duplicate sentence. As a play it would have cost 1,100 words, a worked example on
   a project not yet taken, a failure mode name, and an argument with two existing Context plays
-  about which of them owns the brief.
+  about which of them owns the agent file.
 
 - `f986730f7a1f` verified the three dated claims in *Wire in the outside world* against primary
   sources. **All three hold; one was described wrongly and is corrected in print.** Full account in
@@ -2957,7 +2993,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
   no figures, the correction was a clause rather than a paragraph, and nothing downstream moved. The
   claims that did not survive — the long benign window, the vendor's own maintainer — were both
   adjectival, and the ones that did were the package name, the month, and the mechanism. **Worth
-  copying for any claim a research brief flags as unverified:** write the part you are confident in
+  copying for any claim a research note flags as unverified:** write the part you are confident in
   and leave the qualifier out until someone has opened the source.
 - **A primary source can be retired by an acquisition.** Koi Security's postmark-mcp write-up is
   the origin of every download figure on the subject, and it now 301s to a Palo Alto Networks
@@ -2999,7 +3035,7 @@ Append discovered constraints and cross-task notes here as work proceeds.
 - **Retrieval routes, confirming and extending `57772ad900e3`'s table.** `curl` + `pdftotext
   -layout` opened fourteen arXiv PDFs with no failures, including ones earlier passes recorded as
   "resisted text extraction" — the obstacle was always the fetch size limit. Two additions worth
-  recording: **arXiv version pinning matters** (`arxiv.org/pdf/<id>v1` gets the version a brief
+  recording: **arXiv version pinning matters** (`arxiv.org/pdf/<id>v1` gets the version an agent file
   actually cited, and two Part III sources have since been revised with different headline
   numbers), and **a figure with no numeric labels is not extractable by any route** — render the
   page with `pdftoppm -r 600` and read the image before concluding a number is missing, which is
@@ -3012,10 +3048,10 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 
 | Name | Phenomenon | First used in |
 |---|---|---|
-| **the Context Landfill** | A brief that only ever grew; stale and current instructions weighted equally. | `context/write-the-brief-the-agent-actually-reads.md` (coined in `book/STYLE.md` sample 4) |
+| **the Context Landfill** | An agent file that only ever grew; stale and current instructions weighted equally. | `context/write-the-agent-file-that-actually-gets-read.md` (coined in `book/STYLE.md` sample 4) |
 | **the Merged Hand** | Agent run started on a dirty tree; the diff interleaves two authors and can be neither kept nor discarded. | `book/TEMPLATE-play.md` specimen play |
-| **the Brief That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-brief-the-agent-actually-reads.md` |
-| **the Reassembled Brief** | A short index and short cards, and every run still loads most of the material, because each card links to the next one a reader would want. Not the Context Landfill — nothing is stale and nothing is flat. The tell is an agent opening three files before it edits one. | `context/split-the-brief-into-cards.md` |
+| **the Agent File That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-agent-file-that-actually-gets-read.md` |
+| **the Reassembled Agent file** | A short index and short cards, and every run still loads most of the material, because each card links to the next one a reader would want. Not the Context Landfill — nothing is stale and nothing is flat. The tell is an agent opening three files before it edits one. | `context/split-the-agent-file-into-cards.md` |
 | **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
 | **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |
 | **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |

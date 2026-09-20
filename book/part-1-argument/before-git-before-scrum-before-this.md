@@ -1,10 +1,11 @@
 # Before Git, before Scrum, before this
 
 Two developers on the same team, the same repository, the same agent. One writes three sentences of
-context and steers in conversation. The other maintains a four-hundred-line brief, fires off a task,
-and goes to get coffee. Both ship work that passes review. Neither can tell you why their approach
-beats the other's, and if you put them in a room to settle it they would reach for anecdotes,
-because anecdotes are what either of them has.
+context and steers in conversation. The other maintains a four-hundred-line *agent file* — the
+`AGENTS.md` or `CLAUDE.md` every session loads — fires off a task, and goes to get coffee. Both ship
+work that passes review. Neither can tell you why their approach beats the other's, and if you put
+them in a room to settle it they would reach for anecdotes, because anecdotes are what either of
+them has.
 
 Nothing is wrong here. There is no agreed answer, because nobody has written one down and had it
 argued with for long enough. That is a specific condition with a recognisable shape, and this
@@ -90,8 +91,8 @@ dozen files and you will usually get back something that compiles and does much 
 What does not exist is everything around that. Consider how few of these your team could answer out
 loud in the same words:
 
-- What belongs in the brief the agent reads, and what is noise that costs attention and money.
-- Whether that brief is versioned with the code or lives in one person's home directory.
+- What belongs in the agent file the agent reads, and what is noise that costs attention and money.
+- Whether that agent file is versioned with the code or lives in one person's home directory.
 - Who reviews the diff, against what standard, and whether that standard matches a colleague's.
 - Whether the prompt that produced the diff is an artefact worth keeping.
 - Whether two people can run agents against the same repository at once without ruining each other's

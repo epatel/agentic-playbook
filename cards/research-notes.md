@@ -1,4 +1,4 @@
-# Research briefs — the output contract
+# Research notes — the output contract
 
 The book makes claims about tooling conventions, orchestration patterns, productivity evidence,
 and token economics. Research passes gather that evidence *before* the writing starts, so
@@ -9,20 +9,20 @@ produces material that a later writing task draws from. Resist the urge to draft
 can see forming — a different agent will write it, and pre-written prose in the wrong voice is
 harder to use than good notes.
 
-## Where briefs go
+## Where agent files go
 
-One file per brief in `notes/research/`, lowercase and hyphenated, named for the subject:
+One file per research note in `notes/research/`, lowercase and hyphenated, named for the subject:
 `mcp-adoption.md`, `token-pricing-tiers.md`. Create the directory if it does not exist.
 
-Several small briefs beat one enormous one. A writer looking for pricing numbers should not have
+Several small agent files beat one enormous one. A writer looking for pricing numbers should not have
 to read a survey of orchestration frameworks to find them.
 
-## Brief format
+## Agent file format
 
 ```markdown
 # <Subject>
 
-**Question asked:** what this brief was commissioned to answer.
+**Question asked:** what this agent file was commissioned to answer.
 **Researched:** <date>
 **Confidence:** high / medium / low — and why.
 

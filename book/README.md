@@ -126,8 +126,8 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 3 | `part-1-argument/what-this-book-assumes-about-you.md` | What this book assumes about you | ✅ |
 | **Part II** | | **The Plays** | |
 | 4 | `part-2-plays/context/index.md` | Context | ✅ |
-| 5 | `part-2-plays/context/write-the-brief-the-agent-actually-reads.md` | Write the brief the agent actually reads | ✅ |
-| 6 | `part-2-plays/context/split-the-brief-into-cards.md` | Split the brief into cards | ✅ |
+| 5 | `part-2-plays/context/write-the-agent-file-that-actually-gets-read.md` | Write the agent file that actually gets read | ✅ |
+| 6 | `part-2-plays/context/split-the-agent-file-into-cards.md` | Split the agent file into cards | ✅ |
 | 7 | `part-2-plays/context/starve-the-context.md` | Starve the context | ✅ |
 | 8 | `part-2-plays/context/scope-a-task-to-fit-the-window.md` | Scope a task to fit the window | ✅ |
 | 9 | `part-2-plays/harness/index.md` | Harness | ✅ |
@@ -227,8 +227,8 @@ above. Nine writing tasks run in parallel; forbidding forward references would m
 cross-reference anything. The link resolves when the file lands, and the editorial pass sweeps for
 paths that never did.
 
-**Evidence:** cite briefs in [`notes/research/`](../notes/research/) with relative links. Never link
-into `notes/raw/` — it is frozen provenance, not a source the book stands on.
+**Evidence:** cite research notes in [`notes/research/`](../notes/research/) with relative links.
+Never link into `notes/raw/` — it is frozen provenance, not a source the book stands on.
 
 **External links:** inline, full URL, no shorteners. Name the document as well as linking it, so the
 reference still means something after the vendor reorganises their docs.

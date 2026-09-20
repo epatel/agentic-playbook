@@ -2,7 +2,7 @@
 
 Agents are noticeably better in some codebases than in others, and the difference does not track the
 things you would expect. Not the language, not the age, not the test count, not whether the team is
-any good. The same model, given the same quality of brief, will produce a clean change in one
+any good. The same model, given the same quality of agent file, will produce a clean change in one
 repository and a plausible mess in another down the corridor. The second wave is the suspicion that
 this is a property of the codebase, that the property is nameable, and that it can be changed on
 purpose.
@@ -97,7 +97,7 @@ produces better output. The mechanism is plausible and the evidence is an absenc
 
 Two things would settle it, and both are runnable by a team with a spare week rather than by a
 laboratory. Take a real repository, restructure one subsystem feature-first, and run the same twenty
-tasks against both versions with the same model and the same briefs, counting accepted changes
+tasks against both versions with the same model and the same agent files, counting accepted changes
 rather than diffs produced. Separately, count how much of a run's input is spent reassembling the
 same feature across sessions; if that number is small, the whole argument is smaller than it sounds.
 

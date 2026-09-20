@@ -26,7 +26,7 @@ expecting sceptical readers to start there. If you are one of them, start there.
 
 A note on how this was made, because the book argues elsewhere that this should be disclosed. *The
 Agentic Playbook* was written with agents: several of them, working in parallel on separate
-chapters, against a shared plan, a style guide, and a set of research briefs, with a human
+chapters, against a shared plan, a style guide, and a set of research notes, with a human
 commissioning the work and this final pass reconciling the results into one voice. That is the
 practice the book describes, applied to the book. It also means the failure modes named in these
 pages were not researched at a distance. Most of them turned up in the drafting.

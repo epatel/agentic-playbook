@@ -21,8 +21,8 @@ python3 book/examples/session-cost/check.py
 
 | Project | Backs | Needs |
 |---|---|---|
-| [`atlas/`](atlas/) | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) | `wc` |
-| [`cards/`](cards/) | [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md) | `wc`, `grep` |
+| [`atlas/`](atlas/) | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) | `wc` |
+| [`cards/`](cards/) | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) | `wc`, `grep` |
 | [`meridian/`](meridian/) | [*Decompose into subagents*](../part-2-plays/orchestration/decompose-into-subagents.md), [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md) | `git`, `rg`, `awk` |
 | [`tideline/`](tideline/) | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md), [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md), [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) | `git`, `rg` |
 | [`session-cost/`](session-cost/) | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) | nothing |
@@ -49,7 +49,7 @@ and none of them prints output in the book:
 | `lodestone`'s clone-and-setup in [*Onboard someone into all this*](../part-2-plays/team/onboard-someone-into-all-this.md) | The remote is fictional, and the example is about a joiner's first hour rather than about a command. |
 | The harness configuration in [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md), [*Wire in the outside world*](../part-2-plays/harness/wire-in-the-outside-world.md) and [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md) | Settings files, not transcripts. Every one parses as JSON; the behaviour they describe is cited to dated vendor documentation in the play. |
 | The subagent and skill definitions across the Orchestration, Harness, Economics and Team suites | File contents, not output. |
-| Everything in Part III | Published studies, cited to briefs in [`notes/research/`](../../notes/research/). No `Worked example` heading exists outside Part II. |
+| Everything in Part III | Published studies, cited to research notes in [`notes/research/`](../../notes/research/). No `Worked example` heading exists outside Part II. |
 
 The one behavioural claim these projects do exercise without the book printing it is
 `git diff --name-only --diff-filter=DM tests/` — the stop gate in *Make the agent prove it*, whose

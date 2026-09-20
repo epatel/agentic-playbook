@@ -17,8 +17,8 @@ not go in a file.
 1. **Make the checkout the setup.** Everything the team shares is in the repository, so day one is
    clone, install the harness, and verify. Verification is a step rather than an assumption: ask the
    agent what the project instructions say and check the answer against the file. A precedence rule
-   above the checkout can stop the team's brief loading with no error at all
-   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode)),
+   above the checkout can stop the team's agent file loading with no error at all
+   ([*Write the agent file that actually gets read*](../context/write-the-agent-file-that-actually-gets-read.md#failure-mode)),
    and a joiner is the person least equipped to notice.
 2. **Hand over the agreement before the codebase.** It is one page, and it is the shortest accurate
    description of how this team works that exists. A joiner who reads it on Monday stops inferring
@@ -62,8 +62,8 @@ $ claude
 The answer described nothing specific to `lodestone`. Following a setup note from a blog post, the
 joiner had created a `CLAUDE.local.md` for their own sandbox URLs, which took precedence and stopped
 the team's committed `AGENTS.md` loading. Nothing errored and the loaded-file list looked the same
-either way. That is the Brief That Never Arrived, described in
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md),
+either way. That is the Agent File That Never Arrived, described in
+[*Write the agent file that actually gets read*](../context/write-the-agent-file-that-actually-gets-read.md),
 and it surfaced within the hour only because asking the question was a step.
 
 The pairing was the part nobody had budgeted for and the part that mattered. On the first run the

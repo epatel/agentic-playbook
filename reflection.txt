@@ -1,0 +1,9 @@
+Style is good.
+
+Occationally hard to understand, using difficult language.
+
+Dropped "rocket", from "rocket launch".
+
+Rules to add
+* Keep agent files up to date (should be included from cards setup)
+* Ask for clarification when getting conflicting instructions

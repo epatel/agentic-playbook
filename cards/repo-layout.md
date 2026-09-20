@@ -12,7 +12,7 @@ are read-only.
 | `PLAN.md` | The authoritative design document: locked decisions, book outline, play template, build sequence. | Rarely — see below |
 | `plans/agentic-playbook.md` | The shared execution plan: goal, non-goals, milestones, decision log, handoff note, open questions. | **Yes — every task updates it** |
 | `book/` | The book itself. Chapter and play files, one file per unit. | Yes |
-| `notes/research/` | Cited research briefs. Evidence the chapters draw from. | Yes |
+| `notes/research/` | Cited research notes. Evidence the chapters draw from. | Yes |
 | `notes/raw/` | Original scattered ideation, superseded by `PLAN.md`. | **No — frozen** |
 | `cards/` | These reference cards. | Yes, when a convention changes — then see below |
 | `scripts/`, `Makefile` | The book build: collect the chapters, render a PDF. See [building-the-book](building-the-book.md). | Yes |
@@ -34,7 +34,7 @@ and ask rather than quietly working around it.
 ## Where new work goes
 
 - Writing a chapter or a play → a new file in `book/`
-- Producing research → a cited brief in `notes/research/`
+- Producing research → a cited research note in `notes/research/`
 - Discovering a constraint or making a call that affects other tasks → append it to the
   execution plan at `plans/agentic-playbook.md`
 - Establishing a repo-wide convention that future agents must follow → a new card in `cards/`,
@@ -56,7 +56,7 @@ conflict waiting to happen.
 
 ## Editing a card is editing the book
 
-[*Split the brief into cards*](../book/part-2-plays/context/split-the-brief-into-cards.md) uses
+[*Split the agent file into cards*](../book/part-2-plays/context/split-the-agent-file-into-cards.md) uses
 this repository's own two-tier setup as its worked example, and prints the per-card line counts
 and an audit of links between cards as captured output. `book/examples/cards/reproduce.py`
 asserts both blocks against the real directory, so a card that changes length, a new card, or a

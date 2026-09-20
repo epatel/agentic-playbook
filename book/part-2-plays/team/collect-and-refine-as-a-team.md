@@ -5,9 +5,9 @@
 Three people on the team have each worked out something that makes these tools noticeably better,
 and none of the three knows about the other two. One has a skill in their home directory that gets a
 fiddly procedure right every time. One stopped letting the agent near the migration folder months
-ago and has never said why. One writes briefs in a shape that reliably gets the test written first,
-and could not tell you what the shape is. Nobody is hiding anything; it never came up. The team pays
-the discovery cost three times and collects the benefit once each.
+ago and has never said why. One writes agent files in a shape that reliably gets the test written
+first, and could not tell you what the shape is. Nobody is hiding anything; it never came up. The
+team pays the discovery cost three times and collects the benefit once each.
 
 ## The play
 
@@ -23,8 +23,8 @@ loads, and take out as much as you put in.
    until somebody spends the first one. Without it the comparison has nothing to compare: every
    account is a success, and successes do not explain each other.
 3. **Promote an artefact, not an anecdote.** Every practice that survives the comparison leaves the
-   room as a file — a skill, a line in the shared brief, an item in the review template. If nobody
-   will write the file, the practice was not worth the hour.
+   room as a file — a skill, a line in the shared agent file, an item in the review template. If
+   nobody will write the file, the practice was not worth the hour.
 4. **Have someone else write the description.** A skill is routed on its `name` and `description`
    alone, never on its body
    ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)). A skill described
@@ -33,13 +33,12 @@ loads, and take out as much as you put in.
 5. **Move it to where everyone loads it, then check on someone else's machine.** Shared skills into
    the repository's skills directory, shared conventions into the committed context file, personal
    material out of the repository. Verify on a checkout that is not the author's: instructions that
-   silently fail to load are the Brief That Never Arrived
-   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)).
-6. **Remove something every time.** A skill nobody has triggered since the last harvest, a brief
-   line about a tool the team replaced, a card describing a service deleted in June. A library that
-   only ever grows becomes the Context Landfill
-   ([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode))
-   at team scale.
+   silently fail to load are the Agent File That Never Arrived ([*Write the agent file that actually
+   gets read*](../context/write-the-agent-file-that-actually-gets-read.md)).
+6. **Remove something every time.** A skill nobody has triggered since the last harvest, an agent
+   file line about a tool the team replaced, a card describing a service deleted in June. A library
+   that only ever grows becomes the Context Landfill ([*Write the agent file that actually gets
+   read*](../context/write-the-agent-file-that-actually-gets-read.md#failure-mode)) at team scale.
 
 Everyone has the same tools. What a team can actually differentiate on is the rate at which one
 person's discovery becomes everyone's default, and that rate is set by two costs: writing a thing
@@ -84,11 +83,11 @@ It moved to `.claude/skills/claims-adapter/`, and the same session removed two t
 deployment process retired in the spring, and four lines in `AGENTS.md` describing a linter the team
 had replaced.
 
-Not everything survived. The engineer who wrote briefs in a shape that got the test written first
-could not reconstruct the shape under questioning, and three attempts at writing it down produced
-advice indistinguishable from "write a clear brief". It was left alone rather than promoted, and the
-note from the session says so. A month later the skill had fired for six of the nine engineers; the
-other three had not written an adapter.
+Not everything survived. The engineer who wrote agent files in a shape that got the test written
+first could not reconstruct the shape under questioning, and three attempts at writing it down
+produced advice indistinguishable from "write a clear agent file". It was left alone rather than
+promoted, and the note from the session says so. A month later the skill had fired for six of the
+nine engineers; the other three had not written an adapter.
 
 The two deletions took forty seconds and were the only part of the hour nobody argued about.
 
@@ -115,6 +114,6 @@ described a run that failed, on a technology whose failures are its most-discuss
 - [ ] Something was deleted in the same session as something was added
 - [ ] Files are small, single-subject, dated, and do not depend on each other
 
-**See also:** [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) ·
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md) ·
-[*Build the working agreement*](build-the-working-agreement.md)
+**See also:** [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) · [*Write
+the agent file that actually gets read*](../context/write-the-agent-file-that-actually-gets-read.md)
+· [*Build the working agreement*](build-the-working-agreement.md)

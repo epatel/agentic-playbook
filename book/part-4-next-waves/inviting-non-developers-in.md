@@ -34,8 +34,9 @@ What a developer contributes to a one-line copy change is not the line. It is kn
 string is also used in the onboarding email, that the settings page is the one screen with its own
 translation pipeline, and that the component was rewritten last month by somebody who has since
 left. None of that is in the repository in a form anybody can read, which is the same problem
-[*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md)
-addresses for the agent, arriving now for a colleague.
+[*Write the agent file that actually gets
+read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) addresses for the
+agent, arriving now for a colleague.
 
 So the honest framing of this wave is not "can a designer ship a change" — they could always have
 learned to, and some of them did. It is "what has to be true before their change is safe to merge
@@ -55,11 +56,11 @@ Four conditions, in rough order of how much they buy.
    or does not. This is the same requirement as
    [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md),
    and here it is doing double duty: it is what tells the contributor they are done, and it is what
-   lets the reviewer be brief.
-3. **A brief written in their vocabulary, not yours.** The project context file that serves your
-   team is full of words like "migration" and "handler". A contributor working on copy needs to know
-   where strings live, what the tone rules are, and which three files they must not touch. That is a
-   second brief scoped to their surface, and writing it is the actual work of this wave.
+   lets the reviewer be agent file.
+3. **An agent file written in their vocabulary, not yours.** The project context file that serves
+   your team is full of words like "migration" and "handler". A contributor working on copy needs to
+   know where strings live, what the tone rules are, and which three files they must not touch. That
+   is a second agent file scoped to their surface, and writing it is the actual work of this wave.
 4. **A named person who signs off.** Not a process, a person, in the sense
    [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) means
    it: somebody who can explain the change, and who may decline it on volume alone without owing an
@@ -127,8 +128,8 @@ describes.
 Every one of the four conditions is worth building for your own team first, and none of them depends
 on this wave arriving.
 
-A surface with a stated boundary, a check that adjudicates without a person, a brief written for
-whoever actually works on that surface, and a named owner are the things that make your own
+A surface with a stated boundary, a check that adjudicates without a person, an agent file written
+for whoever actually works on that surface, and a named owner are the things that make your own
 agent-authored changes reviewable. Build them for the developers, notice how much easier the first
 outside contribution turns out to be, and let the wave arrive on its own schedule. The version of
 this that goes badly is the one where the invitation is issued first and the conditions are

@@ -182,7 +182,7 @@ The one-paragraph version, for a writer who needs the shape before the detail.
   method for externally observing an agent's state".
 - **A trap worth recording once:** the `machinedge/building-effective-agents` GitHub file is a
   rewritten derivative of Anthropic's post, not Anthropic's text, and its plausible-sounding figures
-  are not Anthropic's. Exactly the failure `cards/research-briefs.md` exists to prevent.
+  are not Anthropic's. Exactly the failure `cards/research-notes.md` exists to prevent.
 - **The domain gap is this pass's real weakness.** The two strongest controlled single-versus-multi
   comparisons are multi-hop reasoning and mixed benchmarks [8][9]; the best coding-specific evidence
   is institutional or historical. Hedge coding claims to the *shape* of a finding, not its figure.

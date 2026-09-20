@@ -14,7 +14,7 @@ Or **[read the whole book in one page](https://epatel.github.io/agentic-playbook
 drawn and contents in the sidebar.
 
 Complete and readable end to end: 32 chapters, about 41,000 words, every figure traced to a cited
-brief. Licensed [CC BY 4.0](LICENSE).
+research note. Licensed [CC BY 4.0](LICENSE).
 
 ## Contents
 
@@ -39,7 +39,7 @@ deadline. Tools appear inside plays as examples, never as headings.
 
 **[Context](book/part-2-plays/context/index.md)** — signal over noise.
 
-4. [Write the brief the agent actually reads](book/part-2-plays/context/write-the-brief-the-agent-actually-reads.md)
+4. [Write the agent file that actually gets read](book/part-2-plays/context/write-the-agent-file-that-actually-gets-read.md)
 5. [Starve the context](book/part-2-plays/context/starve-the-context.md)
 6. [Scope a task to fit the window](book/part-2-plays/context/scope-a-task-to-fit-the-window.md)
 
@@ -125,7 +125,7 @@ people have fetched cannot be moved honestly, so the checks come first. Releases
 Output goes to `build/`, which is generated and never committed. See
 [`cards/building-the-book.md`](cards/building-the-book.md).
 
-Links that leave the book — a research brief, `PLAN.md` — stay relative in the markdown, which is
+Links that leave the book — a research note, `PLAN.md` — stay relative in the markdown, which is
 what makes them work when a chapter is read on GitHub. Collected into one file they would resolve
 against wherever that file sits, so the build rewrites them to `REPO_URL` (the repository on
 `main` by default; a release pins them to its own tag).
@@ -142,7 +142,7 @@ The same HTML build is published to
 | [`book/STYLE.md`](book/STYLE.md) | Voice, the outright bans, the formatting mechanics. |
 | [`book/TEMPLATE-play.md`](book/TEMPLATE-play.md) | The five-heading play contract, plus one fully written specimen play. |
 | [`book/examples/`](book/examples/) | Scratch projects behind the worked examples, so captured command output can be captured again. |
-| [`notes/research/`](notes/research/) | Twenty-one cited research briefs. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
+| [`notes/research/`](notes/research/) | Twenty-one cited research notes. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
 | [`notes/raw/`](notes/raw/) | The original ideation, frozen as a provenance record. |
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
 | [`plans/agentic-playbook.md`](plans/agentic-playbook.md) | The execution plan: milestones, the decision log, the handoff note, the open questions. |

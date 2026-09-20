@@ -1,17 +1,17 @@
-# Write the brief the agent actually reads
+# Write the agent file that actually gets read
 
 ## Problem
 
-Your project brief is four hundred lines long and every line was true on the day somebody added it.
-The agent reads all of it and still opens a pull request using the error-handling pattern the team
-abandoned in March — the one described on line 30, under a heading nobody has scrolled past in a
-year. You retype the correction, as you did last week. The file is not wrong; it is flat. Four
+Your project agent file is four hundred lines long and every line was true on the day somebody added
+it. The agent reads all of it and still opens a pull request using the error-handling pattern the
+team abandoned in March — the one described on line 30, under a heading nobody has scrolled past in
+a year. You retype the correction, as you did last week. The file is not wrong; it is flat. Four
 hundred equally weighted instructions, perhaps twelve of which change what the agent does, and you
-now brief the agent twice: once in the file, and once by hand, every session.
+now instruct the agent twice: once in the file, and once by hand, every session.
 
 ## The play
 
-Treat the brief as a working set, not as a description of the project. Six moves, in order.
+Treat the agent file as a working set, not as a description of the project. Six moves, in order.
 
 1. **Write it from corrections, not from a tour of the codebase.** Add a line when you have typed
    the same correction twice, when a review catches something the agent should have known, or when a
@@ -25,28 +25,28 @@ Treat the brief as a working set, not as a description of the project. Six moves
    (a short self-contained file on one subject, loaded when that subject comes up). See
    [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) for the procedural
    half.
-3. **Do not mistake reorganisation for reduction.** Splitting a 600-line brief into six `@path`
+3. **Do not mistake reorganisation for reduction.** Splitting a 600-line agent file into six `@path`
    imports is housekeeping, not savings: imports are expanded at launch and the token count is
    unchanged. Only conditional loading reduces anything.
 4. **Make one file the source of truth, and make it portable.** `AGENTS.md` is the multi-vendor
    filename, stewarded by the Linux Foundation's Agentic AI Foundation since December 2025.
    `CLAUDE.md` is one vendor's filename with its own precedence rules. Put the content in
    `AGENTS.md` and let the vendor file be a one-line import, so a colleague who switches tools does
-   not fork the brief.
+   not fork the agent file.
 5. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
-   project instructions back to you. This is the check that separates "the agent ignored the brief"
-   from "the brief never loaded" — different problems, different fixes.
+   project instructions back to you. That separates "ignored" from "never loaded" — different
+   problems, different fixes.
 6. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
    same subject is how the first one got ignored.
 
-This works because a brief is context, not configuration. Claude Code's own documentation was
+This works because an agent file is context, not configuration. Claude Code's own documentation was
 unusually plain about it in September 2026: the file is "delivered as a user message after the
 system prompt". An action you need blocked regardless of what the model decides needs a hook, not a
-sentence. So the brief does not constrain the agent, it competes for its attention — with the task,
-the files it has opened, and every other line of the brief. A line that changes nothing is not
-neutral. It is noise, paid for out of the same attention as the lines that matter. That is the
-exchange rate here. You give up the comfort of writing something down once and considering it
+sentence. So the agent file does not constrain the agent, it competes for its attention — with the
+task, the files it has opened, and every other line of the agent file. A line that changes nothing
+is not neutral. It is noise, paid for out of the same attention as the lines that matter. That is
+the exchange rate here. You give up the comfort of writing something down once and considering it
 handled, and you get a file whose instructions are followed because there are few enough of them to
 be followed.
 
@@ -84,7 +84,7 @@ paths:
 - Never edit a migration that exists on `main`. Add a new one.
 ```
 
-What remained became the brief, in `AGENTS.md`, with the vendor file reduced to an import:
+What remained became the agent file, in `AGENTS.md`, with the vendor file reduced to an import:
 
 > Captured September 2026, BSD `wc` on macOS 26.4.
 
@@ -110,23 +110,24 @@ feedback arrives in a day rather than in an incident review.
 
 ## Failure mode
 
-**The Context Landfill.** Every useful fact about the project went into the brief, because each one
-was useful on the day it was added, and nothing has ever been removed. The file did not become
+**The Context Landfill.** Every useful fact about the project went into the agent file, because each
+one was useful on the day it was added, and nothing has ever been removed. The file did not become
 wrong. It became flat: the convention that matters and the note about last spring's CI runner arrive
 with the same weight, and the agent follows the current convention roughly half the time. The tells
-are a brief that has only ever grown, and two instructions that contradict each other and have gone
-unnoticed because nobody reads the file end to end.
+are an agent file that has only ever grown, and two instructions that contradict each other and have
+gone unnoticed because nobody reads the file end to end.
 
-**The Brief That Never Arrived.** The instructions are correct, committed, and not loaded. The agent
-behaves like a competent stranger — reasonable code, house conventions absent — and the obvious
-explanation, that it ignored the brief, is wrong. Precedence rules do this silently: on Claude Code
-2.x, a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing errors. The
-tell is that your usual check cannot separate the two cases: a natively read `AGENTS.md` never
-appears in `/context` under Memory files, so that list is empty on success and on failure alike.
+**The Agent File That Never Arrived.** The instructions are correct, committed, and not loaded. The
+agent behaves like a competent stranger — reasonable code, house conventions absent — and the
+obvious explanation, that it ignored the agent file, is wrong. Precedence rules do this silently: on
+Claude Code 2.x, a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing
+errors. The tell is that your usual check cannot separate the two cases: a natively read `AGENTS.md`
+never appears in `/context` under Memory files, so that list is empty on success and on failure
+alike.
 
 ## Checklist
 
-- [ ] Every line in the brief traces to a correction you would otherwise retype
+- [ ] Every line in the agent file traces to a correction you would otherwise retype
 - [ ] Nothing in it is scoped to one directory, one procedure, or one rare situation
 - [ ] Splitting into imports was not counted as a reduction
 - [ ] One file holds the content; the vendor-specific file is an import or a symlink
@@ -134,6 +135,6 @@ appears in `/context` under Memory files, so that list is empty on success and o
 - [ ] No two lines in the file contradict each other
 - [ ] Lines corrected around, rather than followed, were rewritten or deleted
 
-**See also:** [*Split the brief into cards*](split-the-brief-into-cards.md) ·
+**See also:** [*Split the agent file into cards*](split-the-agent-file-into-cards.md) ·
 [*Starve the context*](starve-the-context.md) ·
 [*Package repeatable expertise*](../harness/package-repeatable-expertise.md)

@@ -1,7 +1,7 @@
 # cards — worked example
 
 Backs the worked example in
-[*Split the brief into cards*](../../part-2-plays/context/split-the-brief-into-cards.md). Unlike
+[*Split the agent file into cards*](../../part-2-plays/context/split-the-agent-file-into-cards.md). Unlike
 every other project in this directory, the subject is not fictional: it is this repository, whose
 root [`CLAUDE.md`](../../../CLAUDE.md) is a real two-tier index and whose
 [`cards/`](../../../cards/) directory holds the real cards. There is no tree to ship, so there is

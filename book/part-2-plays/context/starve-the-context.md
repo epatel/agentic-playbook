@@ -20,11 +20,10 @@ Reduction never happens by accident. Somebody has to decide what not to send.
    the window, it is in the window because it was nearby.
 2. **Load on arrival, not in advance.** Anything conditional — a convention for one directory, a
    procedure for one situation — belongs behind a trigger, whether that is a path-scoped rule, a
-   skill description
-   ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)), or a card you
-   load by hand ([*Split the brief into cards*](split-the-brief-into-cards.md)). Three vendors
-   have built three mechanisms for this and they encode one idea: the instruction should turn up
-   when its situation does.
+   skill description ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)),
+   or a card you load by hand ([*Split the agent file into
+   cards*](split-the-agent-file-into-cards.md)). Three vendors have built three mechanisms for this
+   and they encode one idea: the instruction should turn up when its situation does.
 3. **Prefer a smaller task to a filtered one.** Filtering is damage control applied after you have
    already asked for the wrong thing. If the window is under pressure, the first move is
    [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md), not a compression layer.

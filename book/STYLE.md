@@ -129,7 +129,7 @@ book an expiry date. The working line:
 - Prefer shape to figure. "Roughly an order of magnitude cheaper per token" survives a price change;
   a pricing table does not.
 - **Never invent a measurement.** Timings, token counts, percentages, and study results are
-  measured, cited to a brief in [`notes/research/`](../notes/research/), or not stated. A
+  measured, cited to a research note in [`notes/research/`](../notes/research/), or not stated. A
   precise-looking number that came from nowhere is the single fastest way to lose this reader.
 
 The editorial pass settled this as written: the working line above is the book's line. What it cost
@@ -204,7 +204,7 @@ put the reader in the room.
 > 3. Split the task at the first boundary where the agent would need to hold both halves in mind
 >    at once. In practice that is a module edge or a change of data format: the migration script
 >    and the code that reads the new format are two tasks, not one. Write the boundary into the
->    brief, so the second task does not re-derive it and disagree.
+>    agent file, so the second task does not re-derive it and disagree.
 
 **Passes:** zero humour, imperative, one transferable heuristic, one concrete instance, and it says
 what to do with the result. This is what the whole book reads like inside a procedure.
@@ -223,7 +223,7 @@ helps them act.
 > the file opens with a note about a CI runner decommissioned last spring, and the convention that
 > actually matters is on line 340. The agent reads all of it and weights it roughly evenly, which
 > is the part people find surprising: the file did not become wrong, it became flat. The tells are
-> a brief that has only ever grown, two instructions that contradict each other and have gone
+> an agent file that has only ever grown, two instructions that contradict each other and have gone
 > unnoticed because nobody reads the file end to end, and an agent that follows the current
 > convention about half the time.
 

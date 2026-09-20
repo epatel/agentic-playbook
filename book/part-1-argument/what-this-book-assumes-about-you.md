@@ -71,7 +71,7 @@ stopped agreeing to work without AI at all — a collapse that is itself the mos
 in the field, and which
 [*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md)
 reports in full. Where this book hedges, that is why. Where it gives a figure, the figure is dated
-in the sentence and traceable to a brief in [`notes/research/`](../../notes/research/).
+in the sentence and traceable to a research note in [`notes/research/`](../../notes/research/).
 
 ## Preparation and execution
 
@@ -87,10 +87,11 @@ and then a task rather than a briefing. Closer to a launch than to a conversatio
 explained on the pad.
 
 That splits the work into two modes. *Preparation* is everything that makes the project legible
-without you in the room — the brief, the cards, the conventions written down, the checks a change
-has to pass. *Execution* is handing a prepared project a task and reading what comes back. The
-agent is useful in both, which is the half that gets missed: most preparation material is written
-and kept current by the agent itself.
+without you in the room — the agent file, the *cards* (short files, one subject each, loaded when
+that subject comes up), the conventions written down, the checks a
+change has to pass. *Execution* is handing a prepared project a task and reading what comes back.
+The agent is useful in both, which is the half that gets missed: most preparation material is
+written and kept current by the agent itself.
 
 The reason to hold them apart is that they happen at different times. A well-prepared project needs
 almost no preparation at the moment of use. You sit down, you give it a task, and the first prompt
@@ -108,13 +109,13 @@ somebody who opens the book at one play can act on it the same afternoon without
 anything around it. Plays link to each other where the dependency is real. There is no required
 order.
 
-*Where It Struggles* is where the book argues against itself:
-[*What agents are reliably bad at*](../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md),
-[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md),
-[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and
-[*What is genuinely contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you
-are sceptical, start there. It is the part that decides whether the rest is worth your week, and it
-was written expecting to be read first.
+*Where It Struggles* is where the book argues against itself: [*What agents are reliably bad
+at*](../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md), [*The failure modes worth
+naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), [*Where the time actually
+goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and [*What is genuinely
+contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you are sceptical,
+start there. It is the part that decides whether the rest is worth your week, and it was written
+expecting to be read first.
 
 *The Argument* — this — exists to be short.
 

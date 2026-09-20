@@ -13,27 +13,28 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   sense throughout. The distinction is load-bearing when reading evidence, because almost all
   published research on "AI coding productivity" measures autocomplete or chat rather than agents.
 
-- **Brief.** The project context file an agent reads at the start of a session — `AGENTS.md`,
+- **Agent file.** The project context file an agent reads at the start of a session — `AGENTS.md`,
   `CLAUDE.md`, or their equivalents. It is context rather than configuration: it competes for the
   model's attention alongside the task and every file opened, and it does not constrain anything.
-  See
-  [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md).
+  See [*Write the agent file that actually gets
+  read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md).
 
 - **Cache read.** A token supplied from the provider's prompt cache rather than processed fresh,
   billed at roughly a tenth of the input rate. Since every turn re-sends the whole conversation,
   what the cache is worth and what invalidates it dominate the bill on long sessions. See
-  [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md).
+  [*Understand what you are paying
+  for*](../part-2-plays/economics/understand-what-you-are-paying-for.md).
 
 - **Card.** A short, self-contained markdown file holding one subject's conventions, loaded when its
-  situation arrives rather than in every session, indexed from a slim brief that names its trigger.
-  The defining rule is self-containment: loading one card never requires loading another. A
+  situation arrives rather than in every session, indexed from a slim agent file that names its
+  trigger. The defining rule is self-containment: loading one card never requires loading another. A
   convention rather than a standard — no tool enforces it, and the directory is called `cards/`
-  because somebody chose that. See
-  [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md).
+  because somebody chose that. See [*Split the agent file into
+  cards*](../part-2-plays/context/split-the-agent-file-into-cards.md).
 
-- **Context window.** The maximum amount of text — brief, conversation, file contents, tool output —
-  a model can consider at once, measured in tokens. Everything the agent knows in a given turn is
-  inside it, and everything inside it was paid for. Filling it is easy; the plays in
+- **Context window.** The maximum amount of text — agent file, conversation, file contents, tool
+  output — a model can consider at once, measured in tokens. Everything the agent knows in a given
+  turn is inside it, and everything inside it was paid for. Filling it is easy; the plays in
   [*Context*](../part-2-plays/context/index.md) are about not doing so.
 
 - **Fan-out.** Running several agents on parts of one job at the same time. Distinct from a larger
@@ -77,8 +78,8 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   before answering, billed as output tokens. A first-order cost control, and one worth setting per
   class of work rather than leaving at its default everywhere.
 
-- **Run.** One agent session against one task, from the opening brief to the point where it stops.
-  Composed of turns; the thing a checkpoint lets you discard.
+- **Run.** One agent session against one task, from the opening agent file to the point where it
+  stops. Composed of turns; the thing a checkpoint lets you discard.
 
 - **Sandbox.** Operating-system isolation — filesystem and network — enforced by the kernel against
   the agent's process and everything it spawns. The only layer in the stack that survives a bad
@@ -117,5 +118,5 @@ Named failure modes are a separate vocabulary and are indexed at the end of
 - **Worktree.** A second checkout of the same repository sharing one `.git` directory, which lets
   several agents work in parallel without overwriting each other's files. Ergonomics rather than
   isolation: the branches still merge into one tree, and the collisions worth fearing live in the
-  union. See
-  [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md).
+  union. See [*Work in parallel without
+  collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md).

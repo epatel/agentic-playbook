@@ -15,7 +15,7 @@ Size the unit of work by what has to be held in mind at once, not by how many li
 
 1. **Split at the first boundary where the agent would need both halves at the same time.** In
    practice that is a module edge or a change of data format: the migration script and the code that
-   reads the new format are two tasks. Write the boundary into the brief for each half, so the
+   reads the new format are two tasks. Write the boundary into the agent file for each half, so the
    second task does not re-derive it and disagree.
 2. **Scope by capability, not by layer.** "Add validation to the checkout endpoint, its schema, and
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
@@ -34,19 +34,19 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    an earlier edit from the same run; you have said "continue" more than twice.
 5. **Hand off state in a file, not in the conversation.** Before a session ends, have the agent
    write what was done, what is next, which decisions were made and why, and what must not be
-   redone. The next session inherits the written brief and none of the chat, so a convention you
-   established by typing it is gone.
+   redone. The next session inherits the written agent file and none of the chat, so a convention
+   you established by typing it is gone.
 6. **Start the next unit from that file and a clean tree**, rather than from a continued session.
 
 Fitting in the window is necessary and nowhere near sufficient. In the same study the agent's
 coverage of the requirements barely moved as the context grew, while the rate at which it satisfied
 all of them at once collapsed — the failure this book calls the Requirement It Can Still Quote,
-measured in
-[*The failure modes worth naming*](../../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
-The question is not "will it fit" but "can it still satisfy all of this at once", so the answer is a
-smaller task rather than a bigger window. The exchange rate: four briefs instead of one, four sets
-of results to read, and a boundary you might place wrong, against the ability to re-run a quarter of
-the work instead of all of it.
+measured in [*The failure modes worth
+naming*](../../part-3-where-it-struggles/the-failure-modes-worth-naming.md). The question is not
+"will it fit" but "can it still satisfy all of this at once", so the answer is a smaller task rather
+than a bigger window. The exchange rate: four agent files instead of one, four sets of results to
+read, and a boundary you might place wrong, against the ability to re-run a quarter of the work
+instead of all of it.
 
 ## Worked example
 
@@ -97,10 +97,10 @@ the continuation also ends just short. The work is genuinely progressing and gen
 arriving, and because each individual turn looks like the last one needed, there is no moment that
 presents itself as the moment to stop. It is the dominant outcome on long-horizon benchmarks — near
 misses outnumber passes, and most unresolved runs end on a time budget rather than on anything
-breaking, which is measured in
-[*What agents are reliably bad at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md).
-The tell is that your estimate of "nearly done" has not moved in twenty minutes while the diff has.
-The second tell is reaching for "continue" instead of reading what you already have.
+breaking, which is measured in [*What agents are reliably bad
+at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md). The tell is that your
+estimate of "nearly done" has not moved in twenty minutes while the diff has. The second tell is
+reaching for "continue" instead of reading what you already have.
 
 ## Checklist
 

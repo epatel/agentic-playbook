@@ -28,7 +28,7 @@ Load a card when its situation matches. Each one stands alone.
   existing material, or about to edit something in `notes/raw/` or `PLAN.md`
 - [book-structure](cards/book-structure.md) — writing or editing any part of the book itself:
   which part it belongs to, how long it should be, what shape a play takes
-- [research-briefs](cards/research-briefs.md) — running a research pass, or producing anything
+- [research-notes](cards/research-notes.md) — running a research pass, or producing anything
   that a later writing task will cite
 - [standing-defaults](cards/standing-defaults.md) — adding a diagram, adding a script or
   dependency, or wondering how to format a file

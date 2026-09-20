@@ -59,8 +59,8 @@ Rules:
   reader takes to a situation this play does not cover. This is the most valuable paragraph in most
   plays and the one most often left out.
 - **State the exchange rate.** One sentence naming what the reader gives up: a slower first pass,
-  four briefs instead of one, being occasionally under-supplied. *What this book assumes about you*
-  promises in print that where a play has a cost, the play states it — so a play listing only
+  four agent files instead of one, being occasionally under-supplied. *What this book assumes about
+  you* promises in print that where a play has a cost, the play states it — so a play listing only
   benefits contradicts Part I in print. It sits naturally at the end of the why-it-works paragraph.
 - A mermaid diagram belongs here if there is a topology or a flow. Never ASCII art.
 
@@ -155,8 +155,8 @@ The book's standard is "real files, real commands, real output":
   a multi-week situation, a fictional remote — and those stay representative. What they may not do
   is print a plausible-looking result and let the prose lean on it.
 - **Never invent a measurement.** Timings, token counts, costs, percentages, and study results are
-  either measured, cited to a brief in [`notes/research/`](../notes/research/), or expressed as
-  shape — "roughly a third of the cost", not "31% cheaper".
+  either measured, cited to a research note in [`notes/research/`](../notes/research/), or expressed
+  as shape — "roughly a third of the cost", not "31% cheaper".
 - **Abridge honestly.** `…` and `# … 14 more files` are better than padding an example to look
   complete. Dropping a `diff --git` header and starting the block at the `@@` hunk marker is
   abridgement; retyping the hunk so the numbers come out rounder is not.
@@ -215,7 +215,7 @@ is an archaeology dig, conducted against a deadline, and archaeology is slower t
 ## The play
 
 Make the working tree disposable before every agent run, so that "throw it away and try a better
-brief" costs nothing and therefore actually happens.
+agent file" costs nothing and therefore actually happens.
 
 1. **Commit or stash your own work first.** The tree is clean at the moment the agent starts. If the
    work is not commit-worthy, `git stash -u` is enough; the point is only that `git diff` afterwards
@@ -233,13 +233,13 @@ brief" costs nothing and therefore actually happens.
 
 What this is really buying is the ability to discard. Teams that skip the checkpoint do not discard
 bad runs, they salvage them — because discarding would take their own work down with it. Salvaging a
-bad run is almost always more expensive than re-running it with a better brief, and it is always
-more expensive than it feels while you are doing it. Every other benefit here is downstream of
-making the cheap option available.
+bad run is almost always more expensive than re-running it with a better agent file, and it is
+always more expensive than it feels while you are doing it. Every other benefit here is downstream
+of making the cheap option available.
 
 The same argument, applied to more than one run at a time, leads to separate directories rather than
-separate branches: see
-[*Work in parallel without collisions*](part-2-plays/orchestration/work-in-parallel-without-collisions.md).
+separate branches: see [*Work in parallel without
+collisions*](part-2-plays/orchestration/work-in-parallel-without-collisions.md).
 
 ## Worked example
 
@@ -306,6 +306,6 @@ carefully you read it.
 - [ ] Discarded runs discarded, not salvaged
 - [ ] Agent's intermediate commits squashed before merge
 
-**See also:**
-[*Work in parallel without collisions*](part-2-plays/orchestration/work-in-parallel-without-collisions.md) ·
-[*Review code you did not write*](part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
+**See also:** [*Work in parallel without
+collisions*](part-2-plays/orchestration/work-in-parallel-without-collisions.md) · [*Review code you
+did not write*](part-2-plays/verification-and-trust/review-code-you-did-not-write.md)

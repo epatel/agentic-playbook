@@ -20,10 +20,10 @@ Move the proof outside the agent's turn. Anything the run authored about the run
    guidance asks the same as a "Done when" clause. Know the limit: that evaluator runs no commands,
    so it grades the transcript rather than the repository
    ([`verification.md`](../../../notes/research/verification.md)).
-2. **Back it with a gate that is not advice.** A line in a brief competes for the model's attention;
-   a hook that blocks the turn from ending does not. Gate on the two things cheap to check and
-   expensive to miss: the suite passes, and no existing test file was deleted or modified. The
-   documentation describing that hook also says the harness overrides it after eight consecutive
+2. **Back it with a gate that is not advice.** A line in an agent file competes for the model's
+   attention; a hook that blocks the turn from ending does not. Gate on the two things cheap to
+   check and expensive to miss: the suite passes, and no existing test file was deleted or modified.
+   The documentation describing that hook also says the harness overrides it after eight consecutive
    blocks, so it narrows the options rather than removing them.
 3. **Rank your signals by who authored them, and buy from the top down.** Hardest to fake first: the
    type checker, defeatable only by widening a type in a line you can see; a *held-out suite*,
@@ -135,7 +135,8 @@ goes red, the suite was never watching that.
 ## Checklist
 
 - [ ] The finish condition exists in writing, names a command, and names what must not change
-- [ ] A deterministic gate blocks the run's end, rather than a sentence in a brief asking it to
+- [ ] A deterministic gate blocks the run's end, rather than a sentence in an agent file asking it
+      to
 - [ ] Test files are write-protected or diff-gated for the duration of the run
 - [ ] The type checker, linter, and pre-existing suite all run and all pass unmodified
 - [ ] A suite the run could not see was run afterwards
@@ -143,7 +144,7 @@ goes red, the suite was never watching that.
 - [ ] Tests for the part that matters were written by a human, before the implementation
 - [ ] One deliberate break was tried and the suite noticed
 
-**See also:** [*Review code you did not write*](review-code-you-did-not-write.md) ·
-[*Decide who signs off*](decide-who-signs-off.md) ·
-[*Choose your harness*](../harness/choose-your-harness.md) ·
-[*What agents are reliably bad at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
+**See also:** [*Review code you did not write*](review-code-you-did-not-write.md) · [*Decide who
+signs off*](decide-who-signs-off.md) · [*Choose your harness*](../harness/choose-your-harness.md) ·
+[*What agents are reliably bad
+at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)

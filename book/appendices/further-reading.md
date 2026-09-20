@@ -1,8 +1,8 @@
 # Further reading
 
-This book stands on twenty-one research briefs in [`notes/research/`](../../notes/research/), each
+This book stands on twenty-one research notes in [`notes/research/`](../../notes/research/), each
 one a set of findings with numbered sources, a list of what the pass could *not* establish, a
-do-not-cite list, and an assessment of how fast its material is rotting. The briefs are where a
+do-not-cite list, and an assessment of how fast its material is rotting. The agent files are where a
 disputed sentence in this book should be checked first; what follows is the shortest path into them,
 plus the primary documents worth reading directly.
 
@@ -83,15 +83,15 @@ and the do-not-cite list across six subjects. Beneath it:
   EASE 2026, arXiv 2605.02273 — https://arxiv.org/html/2605.02273v1
 - **Beyond lexical metrics: sentence-embedding detection of reviewer habituation in AI code
   review**, arXiv 2609.06213 — https://arxiv.org/html/2609.06213 — the measurement behind the
-  Drifting Yes
-  ([*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md)).
+  Drifting Yes ([*Review code you did not
+  write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md)).
 - **DORA's annual reports** — https://dora.dev/ — the source of the *verification tax*, and the
   largest recurring survey in the field. Self-report, and says so.
 
 ## The history behind Part I
 
 [`convergence-history.md`](../../notes/research/convergence-history.md) sources the pre-Git,
-pre-Scrum analogy. It is the least perishable brief in the project.
+pre-Scrum analogy. It is the least perishable agent file in the project.
 
 - **Walter F. Tichy, "RCS — a system for version control"**, 1985 —
   https://www.gnu.org/software/rcs/tichy-paper.pdf — locking as the default assumption, stated
@@ -120,8 +120,8 @@ The most useful artefact in the research is the part that lists what had to be t
 forty widely-circulated figures across the six subjects trace only to vendor marketing, to a
 mislabelled survey year, to a laundered secondary write-up, or to a search engine's synthesis of
 blogs. Several are the first result a search returns. The consolidated list is in
-[`evidence.md`](../../notes/research/evidence.md), with per-subject lists in each brief; the five
-worth knowing before you next quote something in a meeting:
+[`evidence.md`](../../notes/research/evidence.md), with per-subject lists in each research note; the
+five worth knowing before you next quote something in a meeting:
 
 - **Every published SWE-bench per-instance dollar figure.** The leaderboard carries no cost column.
 - **The "200–400 lines in under 60 minutes" code-review rule.** It appears nowhere in the study it

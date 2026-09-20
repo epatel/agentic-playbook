@@ -16,7 +16,7 @@ the six suites fail at different rates.
 
 Assembled from the four plays in [*Context*](../part-2-plays/context/index.md).
 
-- [ ] One file holds the project brief; the vendor-specific file is an import or a symlink
+- [ ] One file holds the project agent file; the vendor-specific file is an import or a symlink
 - [ ] Every line in it traces to a correction somebody would otherwise retype
 - [ ] Nothing in it is scoped to one directory, one procedure, or one rare situation
 - [ ] Somebody has had the agent state its project instructions back to them this week
@@ -50,7 +50,7 @@ Assembled from the three plays in [*Orchestration*](../part-2-plays/orchestratio
 - [ ] A single agent with the same token budget was tried before any fan-out was kept
 - [ ] Every irreversible action is performed by code, after a check that code ran
 - [ ] Each scripted stage names the capability gap it covers, and removing it would be a deletion
-- [ ] Each parallel agent's owned paths are in its brief, and landmine files are serialised
+- [ ] Each parallel agent's owned paths are in its agent file, and landmine files are serialised
 - [ ] Branches are integrated one at a time and the full suite runs on the merged tree
 
 ## Verification and trust
@@ -64,7 +64,7 @@ Assembled from the three plays in
 - [ ] A send-back threshold on size and file count is agreed in advance, and reviewers use it
 - [ ] One critical path is traced end to end and can be explained without the description open
 - [ ] The finish condition exists in writing, names a command, and names what must not change
-- [ ] A deterministic gate blocks a run's end, rather than a sentence in a brief asking it to
+- [ ] A deterministic gate blocks a run's end, rather than a sentence in an agent file asking it to
 - [ ] Evidence attached to a change is command output rather than a summary of it
 - [ ] One named person owns each change, may decline on volume alone, and has done so recently
 

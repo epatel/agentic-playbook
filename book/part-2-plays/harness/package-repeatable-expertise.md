@@ -16,12 +16,12 @@ alongside any scripts and reference files it needs, which the agent loads when i
 rather than in every session.
 
 1. **Wait for the third time, then convert.** Two corrections of the same kind is a line in the
-   project brief. A multi-step procedure you have walked the agent through three times is a skill.
-   Below that threshold you are writing artefacts for a situation you cannot yet describe.
+   project agent file. A multi-step procedure you have walked the agent through three times is a
+   skill. Below that threshold you are writing artefacts for a situation you cannot yet describe.
 2. **Cut the boundary at a situation, not a subject.** "What we do when a search index mapping
    changes" is a skill: it has a trigger, so something can decide when to load it. "Search" is not.
    A subject-shaped skill has no moment at which it applies, so it either never loads or loads
-   constantly, and it grows until it is a second brief. The test is whether you can finish the
+   constantly, and it grows until it is a second agent file. The test is whether you can finish the
    sentence "use this when…" in one clause, without the word "and".
 3. **Write the `description` before the body, as when-plus-what.** Discovery matches on `name` and
    `description` alone; the body is never consulted when deciding whether the skill is relevant
@@ -41,11 +41,11 @@ rather than in every session.
 The arithmetic underneath this is progressive disclosure. A skill costs only its metadata until it
 fires — roughly a hundred tokens each, in the published figures — so thirty of them is a few
 thousand tokens of permanent context carrying an arbitrary amount of procedure behind it. The same
-thirty procedures written into the always-loaded brief are tens of thousands of tokens, nearly all
-of them irrelevant to whatever you are doing today, and competing for attention with the part that
-is not. The exchange rate is certainty of delivery. A brief always arrives and is always competing
-with itself; a skill arrives only when its description matched a request you did not write, and you
-cannot verify that match in advance.
+thirty procedures written into the always-loaded agent file are tens of thousands of tokens, nearly
+all of them irrelevant to whatever you are doing today, and competing for attention with the part
+that is not. The exchange rate is certainty of delivery. An agent file always arrives and is always
+competing with itself; a skill arrives only when its description matched a request you did not
+write, and you cannot verify that match in advance.
 
 ## Worked example
 
@@ -98,9 +98,9 @@ nothing about.
 **The Unsummoned Skill.** The skill is written, reviewed, and committed, and the agent does the job
 the long way every time. Nothing errors, because from the harness's point of view nothing went
 wrong: the metadata loaded exactly as designed, the request did not match it, and a non-match is not
-an event anyone logs. This is not the Brief That Never Arrived
-([*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md#failure-mode))
-— there the file never arrived; here it arrived and lost a match. The cause is almost always the
+an event anyone logs. This is not the Agent File That Never Arrived ([*Write the agent file that
+actually gets read*](../context/write-the-agent-file-that-actually-gets-read.md#failure-mode)) —
+there the file never arrived; here it arrived and lost a match. The cause is almost always the
 `description`, which is the entire routing table and the field people write last, in ten words,
 describing what the skill is rather than when to reach for it.
 
@@ -119,6 +119,6 @@ window while the skill sits in the same repository, unmentioned.
 - [ ] Frontmatter is `name` and `description` only, if anyone outside your harness will use it
 - [ ] It has fired at least once on a request that did not name it
 
-**See also:**
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md) ·
-[*Starve the context*](../context/starve-the-context.md)
+**See also:** [*Write the agent file that actually gets
+read*](../context/write-the-agent-file-that-actually-gets-read.md) · [*Starve the
+context*](../context/starve-the-context.md)

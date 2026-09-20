@@ -1,12 +1,12 @@
 # atlas — worked example
 
 Backs the worked example in
-[*Write the brief the agent actually reads*](../../part-2-plays/context/write-the-brief-the-agent-actually-reads.md).
+[*Write the agent file that actually gets read*](../../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md).
 `atlas` is a fictional Python billing service, eighteen months old, four contributors.
 
 ## The two trees
 
-`before/` holds the brief as it stood at eighteen months: a single 412-line `CLAUDE.md` containing
+`before/` holds the agent file as it stood at eighteen months: a single 412-line `CLAUDE.md` containing
 the three piles the play sorts it into — stale material (a CI runner decommissioned last spring, a
 deploy script replaced in January), generic material (eleven lines of Python style that `ruff`
 already enforces), and scoped material (forty lines of migration workflow that matter only under
@@ -30,5 +30,5 @@ Standard library only; nothing to install.
 
 ## Not reproduced
 
-The agent behaviour is not reproduced — whether a shorter brief is actually followed more often is
+The agent behaviour is not reproduced — whether a shorter agent file is actually followed more often is
 the play's claim, not this example's, and only the line counts are mechanically checkable here.

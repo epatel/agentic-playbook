@@ -21,7 +21,7 @@ playbook" — Part I is exactly where that failure recurs.
 
 | Suite | Plays (working titles) |
 |---|---|
-| **Context** | Write the brief the agent actually reads · Starve the context · Scope a task to fit the window |
+| **Context** | Write the agent file that actually gets read · Starve the context · Scope a task to fit the window |
 | **Harness** | Choose your harness · Package repeatable expertise · Wire in the outside world |
 | **Orchestration** | Decompose into subagents · Make the control flow deterministic · Work in parallel without collisions |
 | **Verification & Trust** | Review code you did not write · Make the agent prove it · Decide who signs off |

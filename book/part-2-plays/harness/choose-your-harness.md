@@ -19,10 +19,10 @@ Choose the harness deliberately, then move every safety assumption onto the laye
    operating system will refuse regardless. Find where each one is configured. If you cannot find
    the fourth, you are not running one.
 2. **Sort your safety assumptions by what enforces them.** Three rows, and only two of them enforce
-   anything: instructions in a brief or a skill body are enforced by nothing, permission rules are
-   enforced by the client before the call runs, and an OS sandbox is enforced by the kernel for the
-   process and every child it spawns. Anything you would describe out loud as a control, sitting on
-   the first row, is misfiled.
+   anything: instructions in an agent file or a skill body are enforced by nothing, permission rules
+   are enforced by the client before the call runs, and an OS sandbox is enforced by the kernel for
+   the process and every child it spawns. Anything you would describe out loud as a control, sitting
+   on the first row, is misfiled.
 3. **Tune permission rules for prompt volume, not for safety.** Allow the commands you run
    constantly, keep `ask` on the destructive ones, and read the matching rules before trusting any
    of it: compound commands are split and matched part by part, a fixed list of wrappers like
@@ -41,7 +41,7 @@ Choose the harness deliberately, then move every safety assumption onto the laye
 
 ```mermaid
 graph LR
-    A["Instructions<br/><i>brief, rules, skill bodies</i>"] -->|"enforced by nothing"| M["Shapes a decision"]
+    A["Instructions<br/><i>agent file, rules, skill bodies</i>"] -->|"enforced by nothing"| M["Shapes a decision"]
     B["Permission rules<br/><i>allow / ask / deny</i>"] -->|"enforced by the client"| C["Survives a decision"]
     D["OS sandbox<br/><i>Seatbelt, bubblewrap</i>"] -->|"enforced by the kernel"| C
 ```
@@ -107,8 +107,8 @@ adoption is a fortnight, most of it spent finding out what your build quietly re
 the thing it forbids happens anyway. What makes it a fence rather than a bug is that it works most
 of the time — it matches the invocation the agent usually produces, so every uneventful run confirms
 it. The bypasses are not clever; `git 'push' origin main` is the same command with quotes around a
-word. The prose version is the same failure one layer up: a line in the brief saying never to run
-migrations against production is a sentence competing for attention, not a refusal.
+word. The prose version is the same failure one layer up: a line in the agent file saying never to
+run migrations against production is a sentence competing for attention, not a refusal.
 
 The tell is somebody saying "it can't do that, we have a rule" about a rule nobody has watched fire.
 The second tell is a rule written against a program name rather than against a capability, because a
@@ -127,5 +127,5 @@ program name is a spelling and spellings have synonyms.
 - [ ] Credential files and tokens are denied or masked by name, since nothing is denied by default
 - [ ] Anything needing the full command text, the branch, or an argument's meaning is a hook
 
-**See also:** [*Wire in the outside world*](wire-in-the-outside-world.md) ·
-[*Write the brief the agent actually reads*](../context/write-the-brief-the-agent-actually-reads.md)
+**See also:** [*Wire in the outside world*](wire-in-the-outside-world.md) · [*Write the agent file
+that actually gets read*](../context/write-the-agent-file-that-actually-gets-read.md)

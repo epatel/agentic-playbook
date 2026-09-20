@@ -32,10 +32,10 @@ path and a reproducer ahead of the diff.
 
 One class of it has a cause outside the model. Where behaviour is attached invisibly — a decorator
 that registers a route at import time, a lifecycle hook that writes to a second table — none of it
-appears in the file being edited, so the patch is locally correct and globally wrong.
-[*Refactoring a codebase for agents*](../part-4-next-waves/refactoring-a-codebase-for-agents.md)
-argues that back to the architecture; the response here is narrower: name the mechanism in the brief
-when the change sits near one.
+appears in the file being edited, so the patch is locally correct and globally wrong. [*Refactoring
+a codebase for agents*](../part-4-next-waves/refactoring-a-codebase-for-agents.md) argues that back
+to the architecture; the response here is narrower: name the mechanism in the agent file when the
+change sits near one.
 
 ## The Vanishing Fix
 
@@ -86,9 +86,9 @@ nothing stops. Verbosity, complexity concentration, and cost all climb across a 
 gain in solve rate, while human repositories hold the same metrics flat; the measurement is in
 [*What agents are reliably bad at*](what-agents-are-reliably-bad-at.md).
 
-It is a different animal from the Permanent Near Miss
-([*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md#failure-mode)),
-which is about a run that never arrives. This one arrives repeatedly and leaves sediment each time.
+It is a different animal from the Permanent Near Miss ([*Scope a task to fit the
+window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md#failure-mode)), which is about a
+run that never arrives. This one arrives repeatedly and leaves sediment each time.
 
 The tell is a file that has grown on every iteration, a run of recent passes with no behavioural
 change to show for them, and near-duplicate boilerplate sitting in adjacent branches of the same
@@ -109,8 +109,8 @@ the error classes that got cheap to catch went away, and the ones that were alwa
 catch went up.
 
 The tell is a review in which every comment you raised was about naming or formatting, on a change
-whose effects you could not draw. This is not the Drifting Yes
-([*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md#failure-mode)),
+whose effects you could not draw. This is not the Drifting Yes ([*Review code you did not
+write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md#failure-mode)),
 where the standard slips with exposure. Here the standard holds and it is pointed at the wrong class
 of defect.
 
@@ -154,9 +154,9 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Endless Polish** | Every pass improves something and the file is worse than five passes ago | This chapter |
 | **the Immaculate Surface** | Every automated check clean, the defect in the class you never automated | This chapter |
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
-| **the Context Landfill** | A brief that only ever grew; the current convention followed about half the time | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) |
-| **the Brief That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the brief the agent actually reads*](../part-2-plays/context/write-the-brief-the-agent-actually-reads.md) |
-| **the Reassembled Brief** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the brief into cards*](../part-2-plays/context/split-the-brief-into-cards.md) |
+| **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
+| **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
+| **the Reassembled Agent file** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
 | **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
 | **the Paper Fence** | A rule that forbids something and does not stop it | [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md) |

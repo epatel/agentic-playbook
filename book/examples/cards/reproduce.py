@@ -28,7 +28,7 @@ EXPECTED_COUNTS = {
     "cards/book-structure.md": 70,
     "cards/building-the-book.md": 197,
     "cards/repo-layout.md": 64,
-    "cards/research-briefs.md": 65,
+    "cards/research-notes.md": 65,
     "cards/standing-defaults.md": 76,
 }
 

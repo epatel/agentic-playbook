@@ -2,7 +2,7 @@
 
 Everything else in this book is downstream of what the agent could see. The model is the one part of
 the stack you cannot change this afternoon; the context is the part you control completely, and
-almost nobody treats it as a design surface — it fills up the way a garage fills up, one reasonable
+almost nobody treats it as a design surface — it fills up the way a garage does, one reasonable
 decision at a time.
 
 The suite is one idea: signal over noise. Not less context for its own sake, but a higher
@@ -12,13 +12,13 @@ with every other line, including the twelve that mattered.
 
 Four plays, the same move at four layers.
 
-[*Write the brief the agent actually reads*](write-the-brief-the-agent-actually-reads.md) — signal
-in the layer that loads every session. The file every project has and few maintain: what belongs in
-it, and how to spot what does not without reading four hundred lines.
+[*Write the agent file that actually gets read*](write-the-agent-file-that-actually-gets-read.md) —
+signal in the layer that loads every session. The file every project has and few maintain: what
+belongs in it, and how to spot what does not without reading four hundred lines.
 
-[*Split the brief into cards*](split-the-brief-into-cards.md) — signal in the shape of that layer
-rather than its contents. Where everything the brief threw out goes, and what brings a piece of it
-back.
+[*Split the agent file into cards*](split-the-agent-file-into-cards.md) — signal in the shape of
+that layer rather than its contents. Where everything it threw out goes, and what brings a piece
+of it back.
 
 [*Starve the context*](starve-the-context.md) — signal in a single run. No window gets smaller on
 its own, a fuller context often produces a worse answer, and what a filtering tool says it saved

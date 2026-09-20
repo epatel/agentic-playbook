@@ -224,7 +224,7 @@ python3 scripts/build_book.py --help
 make html ARGS='--repo-url https://github.com/<owner>/<repo>/blob/main'
 ```
 
-`--repo-url` turns links that leave the book — research briefs, the plans — into absolute URLs,
+`--repo-url` turns links that leave the book — research notes, the plans — into absolute URLs,
 so they still work for someone reading the built book without the repo. It is worth passing
 whenever you are sending the HTML to somebody. `--no-draft-note` drops the *About this build*
 page. `--verbose` echoes the pandoc and mermaid commands.

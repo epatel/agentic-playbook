@@ -13,10 +13,10 @@ anything.
 
 Partition the repository before you start, and treat integration as the part that costs money.
 
-1. **Split by directory, and put the split in every brief.** Each agent owns named paths, and each
-   brief ends with the clause that makes the ownership real: if you need to change something outside
-   these paths, stop and tell me. Without it, an agent that needs one line elsewhere takes it, and
-   the partition you designed is a partition only you observed.
+1. **Split by directory, and put the split in every agent file.** Each agent owns named paths, and
+   each agent file ends with the clause that makes the ownership real: if you need to change
+   something outside these paths, stop and tell me. Without it, an agent that needs one line
+   elsewhere takes it, and the partition you designed is a partition only you observed.
 2. **Give each agent its own checkout, and budget for the environment.** `git worktree
    add ../meridian-invoices -b feat/invoices` is the ergonomic option — one repository, one `git
    worktree list`, shared refs. It is not the cheap one: a worktree is a fresh checkout, so
@@ -95,9 +95,9 @@ call site that existed when it started. Agent B, working from the same base, add
 `feat/invoices` the method was still there.
 
 The fix was procedural rather than clever: `db/migrate/` and `config/routes.rb` were added to the
-brief as files no agent may touch, and integration became one branch at a time with the full suite
-run on the merged tree. That would have caught the rename, assuming the suite covers that path —
-which, on the day in question, it did not. Partitioning removes the collisions you predicted. The
+agent file as files no agent may touch, and integration became one branch at a time with the full
+suite run on the merged tree. That would have caught the rename, assuming the suite covers that path
+— which, on the day in question, it did not. Partitioning removes the collisions you predicted. The
 residue is what your tests are for, which is a less satisfying conclusion than the one where the
 tooling saves you.
 
@@ -117,7 +117,7 @@ run against since the last branch landed.
 
 ## Checklist
 
-- [ ] Each agent's owned paths are named in its brief, with the stop-and-tell-me clause
+- [ ] Each agent's owned paths are named in its agent file, with the stop-and-tell-me clause
 - [ ] Each agent has its own checkout, with its own dependencies and environment file
 - [ ] Landmine files — migrations, route tables, index files, lockfiles — are serialised
 - [ ] Branch pairs were checked for overlapping changed files before merging
