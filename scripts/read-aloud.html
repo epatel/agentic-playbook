@@ -1,0 +1,152 @@
+<!-- Read aloud, injected into the HTML book by scripts/build_book.py with --include-after-body.
+
+     A play button beside every chapter and section heading. It uses the Web Speech API, which
+     means it is only as good as the voices the browser has: Edge exposes its neural voices and
+     sounds like Read Aloud, Chrome offers a system voice and does not. If the browser has no
+     usable voice the buttons are never drawn.
+
+     The PDF never sees this file. Nothing here is required to read the book. -->
+
+<style>
+  :root { --aloud-wash: rgba(26, 79, 138, .09); }
+  @media (prefers-color-scheme: dark) { :root { --aloud-wash: rgba(127, 178, 232, .13); } }
+
+  h2, h3 { position: relative; }
+  .aloud {
+    position: absolute; left: -1.5rem;
+    width: 1.15rem; height: 1.15rem; padding: 0; border: 0; border-radius: 50%;
+    background: none; color: var(--ink-faint); cursor: pointer; line-height: 1;
+    display: grid; place-items: center; font-size: .68rem; opacity: 0;
+  }
+  /* book.css gives h2 a rule and 1.25rem of padding above it, and h3 neither. */
+  h2 .aloud { top: 1.6em; }
+  h3 .aloud { top: .2em; }
+  h2:hover .aloud, h3:hover .aloud, .aloud:focus-visible, .aloud.on { opacity: 1; }
+  .aloud:hover, .aloud.on { color: var(--link); }
+  .aloud-speaking { background: var(--aloud-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--aloud-wash); }
+
+  @media print { .aloud { display: none; } }
+</style>
+
+<script>
+(function () {
+  'use strict';
+  if (!('speechSynthesis' in window)) return;
+
+  var READABLE = 'p, ul, ol, blockquote, h2, h3, h4';
+  var state = { voice: null, blocks: [], on: null };
+
+  function textOf(el) {
+    var clone = el.cloneNode(true);
+    Array.prototype.forEach.call(clone.querySelectorAll('.aloud'), function (b) { b.remove(); });
+    return clone.textContent;
+  }
+
+  /* One utterance per sentence: Chromium stops partway through a long one, and a paragraph of
+     this book runs well past that. */
+  function sentences(text) {
+    var parts = text.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z"'“‘])/);
+    var out = [];
+    parts.forEach(function (part) {
+      if (out.length && part.length < 40) out[out.length - 1] += ' ' + part;
+      else if (part) out.push(part);
+    });
+    return out;
+  }
+
+  var level = function (el) { return /^H[1-6]$/.test(el.tagName) ? +el.tagName[1] : 99; };
+  /* `> Captured September 2026, BSD wc on macOS 26.4.` is provenance for the block beneath it. */
+  var isProvenance = function (el) {
+    return el.tagName === 'BLOCKQUOTE' && /^\s*Captured\b/.test(el.textContent);
+  };
+  var readable = function (el) {
+    return el.matches(READABLE) && !el.closest('pre, table') && !isProvenance(el);
+  };
+
+  function blocksOf(heading) {
+    var stop = level(heading), out = [heading];
+    for (var el = heading.nextElementSibling; el; el = el.nextElementSibling) {
+      if (level(el) <= stop) break;
+      if (readable(el)) out.push(el);
+    }
+    return out;
+  }
+
+  function stop() {
+    speechSynthesis.cancel();
+    Array.prototype.forEach.call(document.querySelectorAll('.aloud-speaking'), function (el) {
+      el.classList.remove('aloud-speaking');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.aloud.on'), function (b) {
+      b.classList.remove('on'); b.textContent = '▶';
+    });
+    state.blocks = []; state.on = null;
+  }
+
+  function speakFrom(index) {
+    var block = state.blocks[index];
+    if (!block) return stop();
+    Array.prototype.forEach.call(document.querySelectorAll('.aloud-speaking'), function (el) {
+      el.classList.remove('aloud-speaking');
+    });
+    block.classList.add('aloud-speaking');
+    var box = block.getBoundingClientRect();
+    if (box.top > innerHeight - 80 || box.top < 60) {
+      block.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    var queue = sentences(textOf(block)), done = 0;
+    if (!queue.length) return speakFrom(index + 1);
+    queue.forEach(function (line) {
+      var u = new SpeechSynthesisUtterance(line);
+      if (state.voice) { u.voice = state.voice; u.lang = state.voice.lang; }
+      u.onend = u.onerror = function () {
+        if (++done === queue.length && state.on) speakFrom(index + 1);
+      };
+      speechSynthesis.speak(u);
+    });
+  }
+
+  function toggle(button, heading) {
+    var wasOn = button.classList.contains('on');
+    stop();
+    if (wasOn) return;
+    state.on = button;
+    state.blocks = blocksOf(heading);
+    button.classList.add('on');
+    button.textContent = '■';
+    speakFrom(0);
+  }
+
+  function draw() {
+    var name = state.voice ? state.voice.name.replace(/^Microsoft /, '').replace(/ - .*$/, '') : '';
+    var headings = document.querySelectorAll('h2, h3');
+    Array.prototype.forEach.call(headings, function (heading) {
+      if (heading.closest('#TOC') || heading.querySelector('.aloud')) return;
+      var button = document.createElement('button');
+      button.className = 'aloud';
+      button.textContent = '▶';
+      button.title = 'Read aloud' + (name ? ' — ' + name : '');
+      button.setAttribute('aria-label', button.title);
+      button.addEventListener('click', function (e) { e.stopPropagation(); toggle(button, heading); });
+      heading.insertBefore(button, heading.firstChild);
+    });
+  }
+
+  function pickVoice() {
+    var all = speechSynthesis.getVoices();
+    if (!all.length) return false;
+    var en = all.filter(function (v) { return v.lang.indexOf('en') === 0; });
+    state.voice =
+      en.filter(function (v) { return /\bAndrew\b/i.test(v.name) && !/Multilingual/i.test(v.name); })[0] ||
+      en.filter(function (v) { return /Andrew/i.test(v.name); })[0] ||
+      en.filter(function (v) { return /Natural/i.test(v.name) && v.lang === 'en-US'; })[0] ||
+      en.filter(function (v) { return v.default; })[0] || en[0] || null;
+    return !!state.voice;
+  }
+
+  function start() { if (pickVoice()) draw(); }
+  start();
+  speechSynthesis.onvoiceschanged = start;   // most engines populate voices asynchronously
+  addEventListener('beforeunload', function () { speechSynthesis.cancel(); });
+})();
+</script>

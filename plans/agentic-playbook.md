@@ -2557,6 +2557,21 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   0.83em of padding above it and gives the chapter `h1` neither, so a single offset put the button
   on the rule for one and beside the text for the other. They have separate offsets.
 
+- **Read aloud is in the HTML book too**, as `scripts/read-aloud.html`, injected by
+  `--include-after-body` for `--format html` only — checked for all three formats, because
+  `pandoc_command` is shared and a stray `<script>` in the typst input would be a bad way to find
+  out. 212 buttons: 41 chapters and 171 sections.
+- **The built book is not shaped like the review server, and the port had to notice.** The build
+  shifts every chapter's headings down a level, so a chapter is an `h2` and a section an `h3`
+  where the review server has `h1` and `h2`; pandoc wraps fenced code in `div.sourceCode` rather
+  than leaving a bare `pre`; and there is a `#TOC` sidebar full of headings that must not get
+  buttons. Section extent is taken from heading *level* rather than tag equality, so a chapter
+  button stops at the next chapter and a section button at the next section.
+- **The book gets no new chrome.** The review server names the voice in a sidebar line; the
+  published book puts it in the button's `title` and draws no buttons at all when the browser has
+  no usable voice. A reader who never hovers a heading cannot tell the feature is there, which is
+  the right default for something nobody asked for.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

@@ -243,6 +243,7 @@ engine-specific parts, and nothing about how the book *looks* lives in the Pytho
 |---|---|
 | `scripts/book-metadata.yaml` | Title, language, page size, margins, link colour — the PDF's typography. |
 | `scripts/book.css` | The HTML book: reading measure, the contents sidebar, code, tables, diagrams, dark mode, and the print rules a browser uses for `Cmd+P`. |
+| `scripts/read-aloud.html` | A play button on every chapter and section heading of the HTML book, injected with `--include-after-body`. HTML only; the PDF never sees it. |
 
 Changing either is a data edit, not a code edit. That is the point of them.
 

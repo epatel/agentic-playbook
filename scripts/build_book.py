@@ -38,6 +38,9 @@ TOC_FILE = BOOK / "README.md"
 DEFAULT_OUT = ROOT / "build"
 METADATA_FILE = Path(__file__).resolve().parent / "book-metadata.yaml"
 CSS_FILE = Path(__file__).resolve().parent / "book.css"
+#: Injected at the end of <body> for the HTML book only: a play button on every chapter and
+#: section heading, using whatever voices the reader's browser has. The PDF never sees it.
+ALOUD_FILE = Path(__file__).resolve().parent / "read-aloud.html"
 
 #: Files in ``book/`` that are instructions to authors rather than book content. They are excluded
 #: from the build deliberately, and are not reported as orphans.
@@ -876,6 +879,8 @@ def pandoc_command(source: Path, output: Path, fmt: str, engine: str | None, dat
         command.append("--embed-resources")
         if CSS_FILE.is_file():
             command.append(f"--css={CSS_FILE}")
+        if ALOUD_FILE.is_file():
+            command.append(f"--include-after-body={ALOUD_FILE}")
     if fmt == "pdf" and engine:
         command.append(f"--pdf-engine={engine}")
         if engine in TEX_PDF_ENGINES:
