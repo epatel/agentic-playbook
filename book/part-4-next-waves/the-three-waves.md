@@ -6,7 +6,7 @@ being quoted. This part is the unsafe move. It is kept short and it is labelled.
 
 The rest of this book describes one situation: a developer, a codebase written for people, and a set
 of tools to get good at. That is the first wave. It is where most teams are, it is where the
-evidence is, and it is what the nineteen plays are about. Two more waves look likely enough to be
+evidence is, and it is what the twenty plays are about. Two more waves look likely enough to be
 worth preparing for, and they are the only material in this book that is not an account of something
 already happening.
 

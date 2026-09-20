@@ -17,7 +17,7 @@ Every play in `part-2-plays/` uses these five headings, in this order, with exac
 ```
 
 The headings are not a suggested outline. The book's usefulness under deadline depends on a reader
-being able to jump to *Checklist* in any of nineteen plays without looking, and on cross-references
+being able to jump to *Checklist* in any of twenty plays without looking, and on cross-references
 being able to anchor at `#failure-mode` and land in the right place. Do not reword, reorder, merge,
 or add to them. If your material does not fit, the material is usually two plays.
 
