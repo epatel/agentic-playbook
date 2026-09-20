@@ -13,14 +13,17 @@
 
   h2, h3 { position: relative; }
   .aloud {
-    position: absolute; left: -1.5rem;
+    position: absolute; left: -1.4rem;
     width: 1.15rem; height: 1.15rem; padding: 0; border: 0; border-radius: 50%;
-    background: none; color: var(--ink-faint); cursor: pointer; line-height: 1;
-    display: grid; place-items: center; font-size: .68rem; opacity: 0;
+    background: none; color: var(--ink-faint); cursor: pointer;
+    display: grid; place-items: center; font-size: .68rem; line-height: 1; opacity: 0;
+    /* Vertical position is in rem, measured against book.css's heading sizes. Neither `em` nor
+       `lh` works here: both resolve against this button's own font-size, and a unitless
+       line-height inherited from the heading does the same. If book.css changes a heading's size
+       or line-height, re-measure these two. */
+    top: .3rem;          /* h2, a chapter */
   }
-  /* book.css gives h2 a rule and 1.25rem of padding above it, and h3 neither. */
-  h2 .aloud { top: 1.6em; }
-  h3 .aloud { top: .2em; }
+  h3 .aloud { top: .07rem; }
   h2:hover .aloud, h3:hover .aloud, .aloud:focus-visible, .aloud.on { opacity: 1; }
   .aloud:hover, .aloud.on { color: var(--link); }
   .aloud-speaking { background: var(--aloud-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--aloud-wash); }

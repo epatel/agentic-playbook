@@ -241,14 +241,20 @@ hub = Hub()
 app = FastAPI(title="The Agentic Playbook — review")
 
 
+#: The page and its stylesheet are edited while the server is running, and a browser that caches
+#: them will serve yesterday's build back with no sign that it has. This is a local review tool;
+#: correctness on reload is worth more than a cached kilobyte.
+NO_CACHE = {"Cache-Control": "no-store, must-revalidate"}
+
+
 @app.get("/", response_class=HTMLResponse)
 def index() -> FileResponse:
-    return FileResponse(APP_HTML)
+    return FileResponse(APP_HTML, headers=NO_CACHE)
 
 
 @app.get("/book.css")
 def book_css() -> FileResponse:
-    return FileResponse(BOOK_CSS, media_type="text/css")
+    return FileResponse(BOOK_CSS, media_type="text/css", headers=NO_CACHE)
 
 
 @app.get("/api/toc")

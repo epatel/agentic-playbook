@@ -2572,6 +2572,18 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   no usable voice. A reader who never hovers a heading cannot tell the feature is there, which is
   the right default for something nobody asked for.
 
+- **The play button's vertical offset was wrong in both surfaces, for a reason worth writing
+  down.** It was set in `em` — and `em` inside an absolutely positioned child resolves against
+  *that child's* font-size, which here is `.68rem`. `top: 1.6em` was 18px where it read as 41px.
+  **`lh` does not rescue it either**, nor does `line-height: inherit`: a unitless line-height
+  inherited from the heading is re-resolved against the child's font-size too, so `1lh` came out
+  as 14px rather than the heading's 30px. The offsets are plain `rem`, measured, with a comment
+  saying to re-measure them if `book.css` changes a heading. Both surfaces now sit at 0px.
+- **The review server sends `Cache-Control: no-store` for its page and stylesheet.** Editing
+  `review_app.html` while the server runs and reloading gave back a copy from before the feature
+  existed, with no sign anything was stale — which cost a diagnosis that started out looking like
+  broken JavaScript. It is a local tool; correctness on reload beats a cached kilobyte.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
