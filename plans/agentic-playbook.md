@@ -101,7 +101,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `3884b4f3fc82` | Re-check Part III's remaining derived figures — 26 sources opened, eleven defects in print, four of them the same species as the reward-hacking trio | ✅ done |
 | `023ba519cdd0` | Teach `make lint` the word budgets — every budget in `STYLE.md` and `TEMPLATE-play.md`, counted with the build's own counter; eleven overruns found that nobody had ever counted | ✅ done |
 | `bfc99c593aeb` | Trim the eleven Part II overruns — all eleven inside budget, and over-budget promoted from a note to a problem | ✅ done |
-| *unassigned* | Say what context engineering is worth, in the Context opener — as a scorecard, not a benefits list. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ⬜ proposed |
+| *unassigned* | Say what context engineering is worth, in the Context opener — written as a scorecard, paid for out of the four play blurbs. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ✅ done |
 | *unassigned* | A fourth Team play — written, as *Settle what the team cannot agree*, on deciding rather than on facilitating. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ✅ done |
 
 ## Current state / handoff
@@ -2426,6 +2426,25 @@ contracts. **A play is not one file.**
 **One leftover from the terminology rename was found on the way**: the registry still read *the
 Reassembled Agent file*, lowercase, where the naming rule requires Title Case. Fixed in the registry
 and at the coinage.
+
+### What the Context opener says now
+
+**Written as planned: a scorecard, not a benefits list.** The opener's new third paragraph says
+three things get claimed for this work and these plays support them unevenly — quality is the
+strong one, cost is contested, speed is the weakest — and closes on "the case is quality; the rest
+is why to measure". Every clause traces to a play: the quality claim to *Scope a task to fit the
+window*, where coverage of the requirements barely moves as context grows while the rate of
+satisfying them all at once collapses; the cost and speed claims to *Starve the context*, whose one
+turns measurement points the wrong way.
+
+**It cost the opener its four play blurbs, which is the right trade.** The opener was at 300 words
+of a 300-word budget, so the paragraph had to be bought. Two of the blurbs were paying for content
+the scorecard now states better — the Starve blurb already carried both the quality and the cost
+claims — and the rest said what the play titles say. All four are now a clause each. **The opener
+is at exactly 300.**
+
+**One line was lost worth noting**: "No window gets smaller on its own". If the budget ever moves,
+that is the sentence to put back.
 
 ### Which is worth doing first
 
