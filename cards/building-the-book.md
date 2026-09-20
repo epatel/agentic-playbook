@@ -259,6 +259,10 @@ falling back to any natural en-US voice and then to whatever the browser has —
 system voice, so it works and sounds worse. Code blocks, tables, diagrams and the
 `> Captured <month> <year>` provenance lines are not read: they are not prose.
 
+A word the synthesiser mispronounces is fixed in the `SAY` list at the top of the read-aloud
+script, which rewrites the string handed to the speech engine and leaves the page alone. It is the
+one place where the book's text and the book's sound are allowed to differ.
+
 **If you are the agent acting on a review, read [`review/REVIEW.md`](../review/REVIEW.md).** It is
 the open annotations as a task list, in the book's own reading order, each one giving
 `book/<path>:<line>` and the passage that was quoted. It is generated from the event log on every

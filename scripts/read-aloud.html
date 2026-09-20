@@ -45,6 +45,19 @@
     return clone.textContent;
   }
 
+
+  /* Spoken-only respellings. The page still shows the word exactly as written; only the string
+     handed to the speech engine changes. Add a pair here whenever the synthesiser gets a word
+     wrong — it is the one place where the book's text and the book's sound are allowed to differ. */
+  var SAY = [
+    [/\bPreface\b/g, 'Pre face']
+  ];
+
+  function spoken(text) {
+    SAY.forEach(function (pair) { text = text.replace(pair[0], pair[1]); });
+    return text;
+  }
+
   /* One utterance per sentence: Chromium stops partway through a long one, and a paragraph of
      this book runs well past that. */
   function sentences(text) {
@@ -97,7 +110,7 @@
     if (box.top > innerHeight - 80 || box.top < 60) {
       block.scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
-    var queue = sentences(textOf(block)), done = 0;
+    var queue = sentences(spoken(textOf(block))), done = 0;
     if (!queue.length) return speakFrom(index + 1);
     queue.forEach(function (line) {
       var u = new SpeechSynthesisUtterance(line);

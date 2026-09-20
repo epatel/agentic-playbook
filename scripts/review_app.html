@@ -348,6 +348,14 @@ async function pickVoice() {
   $('#voice').textContent = speech.voice ? `reading aloud as ${name}` : 'no voice available';
 }
 
+
+/* Spoken-only respellings. The page still shows the word exactly as written; only the string
+   handed to the speech engine changes. Add a pair here whenever the synthesiser gets a word
+   wrong — it is the one place where the book's text and the book's sound are allowed to differ. */
+const SAY = [
+  [/\bPreface\b/g, 'Pre face'],
+];
+const spoken = (text) => SAY.reduce((out, [from, to]) => out.replace(from, to), text);
 /* One utterance per sentence. A whole paragraph in one utterance runs past the point where
    Chromium quietly stops speaking, and sentence-sized pieces also make the pauses sound right. */
 function sentences(text) {
@@ -406,7 +414,7 @@ function speakFrom(index) {
   if (block.getBoundingClientRect().top > innerHeight - 80 || block.getBoundingClientRect().top < 60) {
     block.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
-  const queue = sentences(textOf(block));
+  const queue = sentences(spoken(textOf(block)));
   let done = 0;
   for (const line of queue) {
     const u = new SpeechSynthesisUtterance(line);
