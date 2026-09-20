@@ -130,7 +130,7 @@ which is a good argument for occasionally reading your own cards in the order th
 
 ## Failure mode
 
-**The Reassembled Agent file.** The cards are written, the index is short, and every run still ends
+**The Reassembled Agent File.** The cards are written, the index is short, and every run still ends
 up with most of the material in the window, because the auth card points at the sessions card for
 the token format and that one points at the API card for the error envelope. Every link was added by
 somebody being helpful about the exact thing a reader would want next. The arrangement now costs

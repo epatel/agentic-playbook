@@ -83,13 +83,15 @@ Assembled from the three plays in [*Economics*](../part-2-plays/economics/index.
 
 ## Team
 
-Assembled from the three plays in [*Team*](../part-2-plays/team/index.md).
+Assembled from the four plays in [*Team*](../part-2-plays/team/index.md).
 
 - [ ] The agreement's agenda came from disagreements in real pull requests, not from a blank page
 - [ ] Every rule concerns something that leaves a machine; the rest is written down as personal
 - [ ] The page is in the repository, fits on a screen, and anyone may amend it
 - [ ] It carries a date, a version, and a line saying what last changed and why
 - [ ] The next revision is triggered by an event, and experiments have a standing exception
+- [ ] A decider was named before the contested items, and every decision carries a date and the
+      losing argument
 - [ ] Sharing sessions ask for discarded runs first, and somebody senior answers that one first
 - [ ] What survives a session leaves as a committed file, described by somebody other than its
       author

@@ -156,7 +156,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
 | **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
-| **the Reassembled Agent file** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
+| **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
 | **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
 | **the Paper Fence** | A rule that forbids something and does not stop it | [*Choose your harness*](../part-2-plays/harness/choose-your-harness.md) |
@@ -172,5 +172,6 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Long Way Round** | Cheaper per token, larger invoice, several times as many turns | [*Match the model to the job*](../part-2-plays/economics/match-the-model-to-the-job.md) |
 | **the Errand That Became a Project** | A one-line request returning a defensible diff across nine files | [*Know when not to use an agent*](../part-2-plays/economics/know-when-not-to-use-an-agent.md) |
 | **the Founding Document** | A working agreement nobody amends, everyone has drifted from, and people quote | [*Build the working agreement*](../part-2-plays/team/build-the-working-agreement.md) |
+| **the Nodded-Through Agreement** | Every item agreed first time, and nothing anyone does on Monday is different | [*Settle what the team cannot agree*](../part-2-plays/team/settle-what-the-team-cannot-agree.md) |
 | **the Showreel** | A shared library assembled from everyone's best day | [*Collect and refine as a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) |
 | **the Fluent Stranger** | Correctly-shaped work from someone with no sense yet of what is load-bearing | [*Onboard someone into all this*](../part-2-plays/team/onboard-someone-into-all-this.md) |

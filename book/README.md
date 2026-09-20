@@ -148,22 +148,23 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 24 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
 | 25 | `part-2-plays/team/index.md` | Team | ✅ |
 | 26 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
-| 27 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
-| 28 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
+| 27 | `part-2-plays/team/settle-what-the-team-cannot-agree.md` | Settle what the team cannot agree | ✅ |
+| 28 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
+| 29 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
-| 29 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
-| 30 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
-| 31 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
-| 32 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
+| 30 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
+| 31 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
+| 32 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
+| 33 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 33 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
-| 34 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
-| 35 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
+| 34 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
+| 35 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
+| 36 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
 | **Appendices** | | | |
-| 36 | `appendices/glossary.md` | Glossary | ✅ |
-| 37 | `appendices/team-checklists.md` | Team checklists | ✅ |
-| 38 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
-| 39 | `appendices/further-reading.md` | Further reading | ✅ |
+| 37 | `appendices/glossary.md` | Glossary | ✅ |
+| 38 | `appendices/team-checklists.md` | Team checklists | ✅ |
+| 39 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
+| 40 | `appendices/further-reading.md` | Further reading | ✅ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it

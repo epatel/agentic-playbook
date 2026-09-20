@@ -102,7 +102,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `023ba519cdd0` | Teach `make lint` the word budgets — every budget in `STYLE.md` and `TEMPLATE-play.md`, counted with the build's own counter; eleven overruns found that nobody had ever counted | ✅ done |
 | `bfc99c593aeb` | Trim the eleven Part II overruns — all eleven inside budget, and over-budget promoted from a note to a problem | ✅ done |
 | *unassigned* | Say what context engineering is worth, in the Context opener — as a scorecard, not a benefits list. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ⬜ proposed |
-| *unassigned* | A fourth Team play on running the session that writes the agreement. Same section | ⬜ proposed |
+| *unassigned* | A fourth Team play — written, as *Settle what the team cannot agree*, on deciding rather than on facilitating. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ✅ done |
 
 ## Current state / handoff
 
@@ -2392,6 +2392,40 @@ line that [*Open questions*](#open-questions) treats as the limit. The Team suit
 plays, matching Context; the spread stays within one play, as that question requires. **The
 procedure it also requires — raise a fourth play rather than adding it quietly — has been followed
 by this entry.**
+
+### What the fourth Team play turned out to be
+
+**The proposal above was wrong about the gap, and the research found it before the writing did.**
+It claimed *Build the working agreement* is silent on how a room agrees. The suite is not: *Collect
+and refine as a team* is already a facilitated-session play — "run a recurring harvest", compare on
+one task shape, ask for the discarded runs first and have the most senior person answer first, leave
+with an artefact — and *Build the working agreement*'s first step already supplies the agenda from
+twenty real pull requests. A play on running the session would have repeated two plays that exist.
+
+**What is genuinely absent is the decision, not the discussion.** *Build the working agreement* says
+"Agree the items with team-visible consequences" and never says who decides when nine engineers
+across two time zones do not. Nothing in the suite names a decider, a time-box, or what becomes of a
+split. Both neighbouring plays sit at 500 words of a 500-word budget, so neither could absorb it.
+The play written is [*Settle what the team cannot
+agree*](../book/part-2-plays/team/settle-what-the-team-cannot-agree.md): positions in writing before
+anyone speaks, a clock, a named decider, a dated provisional call, and the losing argument recorded
+next to it. It coins **the Nodded-Through Agreement** — every item agreed first time and nothing
+different on Monday — whose tell is a page carrying no losing arguments at all.
+
+**The suite reads Build, Settle, Collect, Onboard.** Decide, then what happens when you cannot,
+then the material, then the transfer. The table of contents, the suite opener and the root README
+were all put in that order; they disagreed at first, and `make check` caught it.
+
+**The ripple was six files, and the checker found three of them.** The new README-contents check
+added earlier the same day reported both the missing entry and "says 'nineteen plays', but the
+table of contents has 20", and the structural check reported the ordering disagreement. The rest —
+the suite opener, which needed six words trimmed to stay inside 300; the failure-mode registry; the
+Team section of *Team checklists*, which had said "the three plays" — were found by reading the
+contracts. **A play is not one file.**
+
+**One leftover from the terminology rename was found on the way**: the registry still read *the
+Reassembled Agent file*, lowercase, where the naming rule requires Title Case. Fixed in the registry
+and at the coinage.
 
 ### Which is worth doing first
 

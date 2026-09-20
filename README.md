@@ -33,7 +33,7 @@ needs to know. Roughly 11% of the book, and deliberately out of the way after th
 
 ### Part II — The Plays
 
-Nineteen plays in six suites. Each one is the problem, the play, a worked example, the way it goes
+Twenty plays in six suites. Each one is the problem, the play, a worked example, the way it goes
 wrong, and a checklist — the same five headings every time, so the book is skimmable under
 deadline. Tools appear inside plays as examples, never as headings.
 
@@ -75,33 +75,34 @@ agent produces about its own work is a claim.
 that has to be written, maintained, and handed over.
 
 20. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
-21. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
-22. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
+21. [Settle what the team cannot agree](book/part-2-plays/team/settle-what-the-team-cannot-agree.md)
+22. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
+23. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
 
 ### Part III — Where It Struggles
 
 The honest accounting, written expecting a sceptical reader to start here.
 
-23. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
-24. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
-25. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
-26. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
+24. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
+25. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
+26. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
+27. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
 
 ### Part IV — Next Waves
 
 The only speculative material in the book, labelled as such, dated, with the experiment that would
 settle each claim.
 
-27. [The three waves](book/part-4-next-waves/the-three-waves.md)
-28. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
-29. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
+28. [The three waves](book/part-4-next-waves/the-three-waves.md)
+29. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
+30. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
 
 ### Appendices
 
-30. [Glossary](book/appendices/glossary.md)
-31. [Team checklists](book/appendices/team-checklists.md)
-32. [Copy-paste templates](book/appendices/copy-paste-templates.md)
-33. [Further reading](book/appendices/further-reading.md)
+31. [Glossary](book/appendices/glossary.md)
+32. [Team checklists](book/appendices/team-checklists.md)
+33. [Copy-paste templates](book/appendices/copy-paste-templates.md)
+34. [Further reading](book/appendices/further-reading.md)
 
 ## Reading it in one file
 
