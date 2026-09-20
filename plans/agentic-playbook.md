@@ -2429,13 +2429,27 @@ and at the coinage.
 
 ### What the Context opener says now
 
-**Written as planned: a scorecard, not a benefits list.** The opener's new third paragraph says
-three things get claimed for this work and these plays support them unevenly — quality is the
-strong one, cost is contested, speed is the weakest — and closes on "the case is quality; the rest
-is why to measure". Every clause traces to a play: the quality claim to *Scope a task to fit the
-window*, where coverage of the requirements barely moves as context grows while the rate of
-satisfying them all at once collapses; the cost and speed claims to *Starve the context*, whose one
-turns measurement points the wrong way.
+**Written as a scorecard, then corrected — the first version judged the suite by the wrong
+experiment.** It said cost was contested and speed the weakest, citing *Starve the context*. Both
+citations were a category error the author caught: **`rtk` is an output filter, not context
+structure.** It compresses what a command prints, after the fact; an agent file and conditional
+cards make the context small before anything runs. A tool that failed to save money by compressing
+output says nothing about whether a four-hundred-line agent file cut to forty saves money, and
+reading it as the suite's cost verdict judged structure by an experiment about compression.
+
+**Cost is in fact the suite's most mechanical claim, and the book already had the arithmetic.**
+*Understand what you are paying for* measures 94.3% of a session's tokens as the conversation
+re-reading itself and cache reads as 51% of the bill, and concludes that the expensive thing is how
+many times the conversation gets re-sent. So whatever loads every session is re-read on every turn,
+and shrinking that layer is the one move that touches the largest line on the bill — which is what
+*Split the agent file into cards* measures as roughly a tenth loading unconditionally, and what
+*Write the agent file* means by "only conditional loading reduces anything". **It also explains why
+`rtk` failed where structure does not**: the filter compresses output, 0.5% of tokens, leaves the
+re-read prefix untouched, and buys extra turns, which multiplies the re-reads.
+
+**The speed line was wrong the same way and is now honest**: nobody here has measured it, and the
+book's one turns figure belongs to that compression layer rather than to a smaller context. The
+opener names cost as mechanical, quality as measured, and speed as unmeasured.
 
 **It cost the opener its four play blurbs, which is the right trade.** The opener was at 300 words
 of a 300-word budget, so the paragraph had to be bought. Two of the blurbs were paying for content
