@@ -43,8 +43,13 @@
     background: var(--shell);
   }
   #app > * { min-width: 0; }   /* #app is display:contents, so its children are the grid items */
-  /* book.css hyphenates for justified print. In a 15rem column that gives 'be-fore this'. */
+  /* book.css hyphenates for justified print. In a narrow column that gives 'be-fore this'. */
   .contents, .margin { hyphens: manual; }
+
+  /* book.css predates border-box and the book's own blocks are laid out assuming content-box,
+     so this is scoped to the chrome: a textarea at width:100% plus padding and a border
+     otherwise overflows the margin it sits in. The sheet keeps the book's own box model. */
+  .contents, .contents *, .margin, .margin * { box-sizing: border-box; }
 
   /* ------------------------------------------------------------------ contents */
 
@@ -354,10 +359,19 @@ function blockFor(line) {
 function place() {
   const margin = $('#margin');
   const top = margin.getBoundingClientRect().top;
+  const composer = $('#composer');
   const items = [...margin.querySelectorAll('.note')];
-  if (!$('#composer').hidden && state.pending) {
-    items.push(Object.assign($('#composer'), { dataset: { anchor: state.pending.line } }));
+  if (!composer.hidden && state.pending) {
+    /* `dataset` is a read-only accessor: assigning the whole object throws, and a module script
+       is strict mode, so the throw took the rest of this function with it and nothing was ever
+       positioned. Set the key, not the map. */
+    composer.dataset.anchor = state.pending.line;
+    items.push(composer);
   }
+  /* Down the page in anchor order, so the composer sits among the notes rather than after them.
+     On a tie it goes first: the reader is looking at it. */
+  items.sort((a, b) => (Number(a.dataset.anchor) - Number(b.dataset.anchor))
+                       || (a === composer ? -1 : b === composer ? 1 : 0));
   let floor = 0;
   for (const item of items) {
     const anchor = blockFor(item.dataset.anchor);
