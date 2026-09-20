@@ -2500,6 +2500,24 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
 - **The Context opener now says quality "fails quietly" rather than "oddly"**, a one-word swap that
   costs nothing and points at the new mode.
 
+- **`rtk` is the book's only named example of a filtering tool, and the book was letting v0.43.0
+  evidence stand as a verdict on the product** (author's reflection). The play was already careful
+  in the ways that matter — the figures are dated, versioned and qualified by reasoning effort, the
+  prescription is a paired run rather than a prohibition, step 5 endorses the first-party reduction
+  primitives, and the worked example *keeps* the filter on the one command where it won. What it
+  never said is that **the benchmarks tested a version nobody has re-tested**, which
+  `notes/research/token-filtering.md` had flagged in as many words: "a claim that rtk costs more
+  should be dated and versioned or softened to the general lesson".
+- **The play now says so in four words**, and *Further reading* carries the full caveat, since the
+  appendices have no word budget: both benchmarks tested v0.43.0, the direction differed between
+  two models, the effect largely vanished at high reasoning effort, and **a filtering tool that
+  survives the same paired run is worth keeping — the objection is to the dashboard, not to the
+  category**. That last sentence is the one to keep if this is ever edited: the Flattering
+  Dashboard is a claim about self-measurement, not about filtering.
+- **The play sits at 1,199 words of its 1,200 ceiling.** Anything further about `rtk` has to go in
+  the appendix or replace something. The cited figures are the output of two source-verification
+  passes and are not available to pay for it.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

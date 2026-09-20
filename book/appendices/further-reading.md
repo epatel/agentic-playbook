@@ -34,6 +34,10 @@ table separating what is standardised from what is one vendor's habit. Beneath i
   https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/, read next to Quesma's cost
   comparison, https://quesma.com/blog/does-rtk-make-ai-coding-cheaper/. Two competent measurements
   of the same tool reaching opposite conclusions, which is the most instructive thing in the pass.
+  Read them for the method rather than as a verdict on the tool: both tested v0.43.0 and nothing
+  found re-tests the versions since, the direction differed between two models, and the effect
+  largely vanished at high reasoning effort. A filtering tool that survives the same paired run is
+  worth keeping; the objection is to the dashboard, not to the category.
 
 ## Orchestration
 

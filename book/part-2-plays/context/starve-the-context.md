@@ -51,17 +51,17 @@ under-supplied is cheaper than being reliably over-supplied.
 
 `atlas`, the Python billing service. Somebody had installed a token-filtering proxy globally — a
 `PreToolUse` hook that rewrites eligible shell calls, so the agent never knows it exists — and its
-analytics reported savings in the high tens of percentage points. The question was whether to keep
+analytics reported savings in the high tens of percent. The question was whether to keep
 it.
 
 The published evidence is why that question is worth asking
 ([`token-filtering.md`](../../../notes/research/token-filtering.md)). Two independent benchmarks
-measured `rtk` v0.43.0 in mid-2026. JetBrains ran 425 billed trials against Claude Code 2.1.201 and
-found cost per task up 7.6% at low reasoning effort, turns up 13.8%, and task quality statistically
-tied — while the tool's own analytics reported 96.2 million tokens saved over the same trials, 99.8%
-of everything it touched. Quesma, independently, on Terminal-Bench 2.1 across 1,740 attempts and two
-models, found it marginally cheaper with one and 7% more expensive with the other, and concluded:
-"We do not recommend RTK as a generic cost-saving tool."
+measured `rtk` v0.43.0 in mid-2026; nothing has re-tested it since. JetBrains ran 425 billed trials
+against Claude Code 2.1.201 and found cost per task up 7.6% at low reasoning effort, turns up 13.8%,
+and task quality statistically tied — while the tool's own analytics reported 96.2 million tokens
+saved over the same trials, 99.8% of everything it touched. Quesma, on Terminal-Bench 2.1 across
+1,740 attempts and two models, found it marginally cheaper with one and 7% more expensive with the
+other, and concluded: "We do not recommend RTK as a generic cost-saving tool."
 
 Both sides are telling the truth. The tool removes 60–90% of the bytes a command emits; the bill
 still goes up. Most of a session's input cost arrives as cached re-reads billed at roughly a tenth
