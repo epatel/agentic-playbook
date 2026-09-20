@@ -93,13 +93,13 @@ Five entries in that shape, and nothing else that loads unconditionally. The two
 
 ```bash
 $ wc -l CLAUDE.md cards/*.md
-      49 CLAUDE.md
+      52 CLAUDE.md
       70 cards/book-structure.md
-     197 cards/building-the-book.md
+     243 cards/building-the-book.md
       64 cards/repo-layout.md
       65 cards/research-notes.md
       76 cards/standing-defaults.md
-     521 total
+     570 total
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger

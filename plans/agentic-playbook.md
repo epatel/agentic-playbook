@@ -2243,6 +2243,19 @@ Grafana's spelling**; the reason is in the agent file.
   assume you know this" disclaimer, or matched the audit only as ordinary English — the verb *run*,
   the everyday *skill*. **The promise is kept; it was never enforced by anything, and still is not.**
 
+- **The root `README.md` had been missing a play since the Context suite grew to four, and nothing
+  reported it.** It listed eighteen plays and numbered the rest of the book around that gap, so
+  every entry after *Write the agent file that actually gets read* was off by one. The fix is
+  mechanical, but the lesson is that **the root README duplicates `book/README.md`'s table and
+  nothing keeps them honest**: the authoritative table is machine-readable, so a dozen lines of
+  Python can compare the two and report exactly this class of drift. That check is worth having
+  before the next play is added, not after.
+- **The worked example in *Split the agent file into cards* was printing stale counts** — 49 and
+  197 against a repo that had reached 52 and 243 — and `book/examples/cards/reproduce.py` had been
+  reporting the drift to anyone who ran it. Both captured blocks are re-taken. **A captured block
+  measuring this repository goes stale every time the thing it measures is edited**, which for the
+  cards is often; the verifier is the only reason it was noticed, and running it is cheap.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

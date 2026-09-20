@@ -33,74 +33,75 @@ needs to know. Roughly 11% of the book, and deliberately out of the way after th
 
 ### Part II — The Plays
 
-Eighteen plays in six suites. Each one is the problem, the play, a worked example, the way it goes
+Nineteen plays in six suites. Each one is the problem, the play, a worked example, the way it goes
 wrong, and a checklist — the same five headings every time, so the book is skimmable under
 deadline. Tools appear inside plays as examples, never as headings.
 
 **[Context](book/part-2-plays/context/index.md)** — signal over noise.
 
 4. [Write the agent file that actually gets read](book/part-2-plays/context/write-the-agent-file-that-actually-gets-read.md)
-5. [Starve the context](book/part-2-plays/context/starve-the-context.md)
-6. [Scope a task to fit the window](book/part-2-plays/context/scope-a-task-to-fit-the-window.md)
+5. [Split the agent file into cards](book/part-2-plays/context/split-the-agent-file-into-cards.md)
+6. [Starve the context](book/part-2-plays/context/starve-the-context.md)
+7. [Scope a task to fit the window](book/part-2-plays/context/scope-a-task-to-fit-the-window.md)
 
 **[Harness](book/part-2-plays/harness/index.md)** — every extension of reach is an extension of
 what can go wrong, bought together.
 
-7. [Choose your harness](book/part-2-plays/harness/choose-your-harness.md)
-8. [Package repeatable expertise](book/part-2-plays/harness/package-repeatable-expertise.md)
-9. [Wire in the outside world](book/part-2-plays/harness/wire-in-the-outside-world.md)
+8. [Choose your harness](book/part-2-plays/harness/choose-your-harness.md)
+9. [Package repeatable expertise](book/part-2-plays/harness/package-repeatable-expertise.md)
+10. [Wire in the outside world](book/part-2-plays/harness/wire-in-the-outside-world.md)
 
 **[Orchestration](book/part-2-plays/orchestration/index.md)** — every piece of orchestration
 encodes an assumption about what the model cannot do, and assumptions expire.
 
-10. [Decompose into subagents](book/part-2-plays/orchestration/decompose-into-subagents.md)
-11. [Make the control flow deterministic](book/part-2-plays/orchestration/make-the-control-flow-deterministic.md)
-12. [Work in parallel without collisions](book/part-2-plays/orchestration/work-in-parallel-without-collisions.md)
+11. [Decompose into subagents](book/part-2-plays/orchestration/decompose-into-subagents.md)
+12. [Make the control flow deterministic](book/part-2-plays/orchestration/make-the-control-flow-deterministic.md)
+13. [Work in parallel without collisions](book/part-2-plays/orchestration/work-in-parallel-without-collisions.md)
 
 **[Verification and trust](book/part-2-plays/verification-and-trust/index.md)** — everything the
 agent produces about its own work is a claim.
 
-13. [Review code you did not write](book/part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
-14. [Make the agent prove it](book/part-2-plays/verification-and-trust/make-the-agent-prove-it.md)
-15. [Decide who signs off](book/part-2-plays/verification-and-trust/decide-who-signs-off.md)
+14. [Review code you did not write](book/part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
+15. [Make the agent prove it](book/part-2-plays/verification-and-trust/make-the-agent-prove-it.md)
+16. [Decide who signs off](book/part-2-plays/verification-and-trust/decide-who-signs-off.md)
 
 **[Economics](book/part-2-plays/economics/index.md)** — cost is a product, not a price.
 
-16. [Understand what you are paying for](book/part-2-plays/economics/understand-what-you-are-paying-for.md)
-17. [Match the model to the job](book/part-2-plays/economics/match-the-model-to-the-job.md)
-18. [Know when not to use an agent](book/part-2-plays/economics/know-when-not-to-use-an-agent.md)
+17. [Understand what you are paying for](book/part-2-plays/economics/understand-what-you-are-paying-for.md)
+18. [Match the model to the job](book/part-2-plays/economics/match-the-model-to-the-job.md)
+19. [Know when not to use an agent](book/part-2-plays/economics/know-when-not-to-use-an-agent.md)
 
 **[Team](book/part-2-plays/team/index.md)** — a team's practice with these tools is an artefact
 that has to be written, maintained, and handed over.
 
-19. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
-20. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
-21. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
+20. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
+21. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
+22. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
 
 ### Part III — Where It Struggles
 
 The honest accounting, written expecting a sceptical reader to start here.
 
-22. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
-23. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
-24. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
-25. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
+23. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
+24. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
+25. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
+26. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
 
 ### Part IV — Next Waves
 
 The only speculative material in the book, labelled as such, dated, with the experiment that would
 settle each claim.
 
-26. [The three waves](book/part-4-next-waves/the-three-waves.md)
-27. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
-28. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
+27. [The three waves](book/part-4-next-waves/the-three-waves.md)
+28. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
+29. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
 
 ### Appendices
 
-29. [Glossary](book/appendices/glossary.md)
-30. [Team checklists](book/appendices/team-checklists.md)
-31. [Copy-paste templates](book/appendices/copy-paste-templates.md)
-32. [Further reading](book/appendices/further-reading.md)
+30. [Glossary](book/appendices/glossary.md)
+31. [Team checklists](book/appendices/team-checklists.md)
+32. [Copy-paste templates](book/appendices/copy-paste-templates.md)
+33. [Further reading](book/appendices/further-reading.md)
 
 ## Reading it in one file
 
