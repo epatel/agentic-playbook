@@ -2518,6 +2518,26 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   the appendix or replace something. The cited figures are the output of two source-verification
   passes and are not available to pay for it.
 
+- **A staged adoption model is now named and discounted in *The three waves***, prompted by a
+  five-stage maturity ladder the author circulated. The chapter already had the hook — "they are
+  waves rather than stages because they overlap and because none of them finishes" — and never said
+  what it was rejecting. The new paragraph argues from mechanism, as Part IV requires: **the levels
+  conflate how far an agent is trusted with how many are running, and those are independent**, and
+  the ladders are mostly written by the people selling the rungs, which is the Flattering Dashboard
+  objection applied to a roadmap. It names its falsifier — teams that tried to skip a level and
+  could not — and ties the bottleneck at every level back to the measured one, which is that
+  somebody still has to read the output.
+- **The specific document is deliberately not cited, and this is the interesting part.** It was
+  read as a third-party artifact whose byline could not be verified from the page itself. The book
+  has spent three source-verification passes removing claims that rested on somebody else's
+  attribution, so asserting authorship on the strength of a page saying so would undo exactly that
+  discipline. **The paragraph is therefore written about the genre rather than the instance**,
+  which is also more durable: the argument survives the artifact going away. If the provenance is
+  ever confirmed, a *Further reading* entry is the place for it, not the chapter.
+- **`make lint` caught "unlocking" in the first draft** — banned hype vocabulary, and a word that
+  arrived by absorbing the source's register while paraphrasing it. Worth knowing that summarising
+  vendor material imports vendor vocabulary unless something checks.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

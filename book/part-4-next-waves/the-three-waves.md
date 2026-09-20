@@ -34,6 +34,21 @@ be halfway into the second while still losing arguments that belong to the first
 needs enough of the second to be in place that an outsider's change can be adjudicated by something
 other than a developer reading it.
 
+The distinction is worth making because a genre of staged adoption model circulates alongside this
+one: four or five numbered levels, from a locked-down pilot to an organisation running agents in
+the hundreds, each level granting a little more trust and a little more tooling than the last.
+They are worth reading for the bottlenecks they name and worth discounting as a route, for two
+reasons. The levels conflate how far an agent is trusted with how many are running, and those are
+independent — a team can run ten agents under synchronous review, or one under none. And they are
+mostly written by people who sell the rungs, which makes a ladder a scoreboard kept by an
+interested party, the same objection this book makes to a tool that reports its own savings
+([*Starve the context*](../part-2-plays/context/starve-the-context.md#failure-mode)). What would
+change the reading is evidence that the order is forced rather than described: teams that tried to
+skip a level and could not. Until somebody follows a cohort through, a ladder is a taxonomy with an
+arrow drawn on it — and at every level the binding constraint is the one
+[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md)
+measures, which is that somebody still has to read the output.
+
 ## How to discount this part
 
 Four things are true of both
