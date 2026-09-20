@@ -2116,6 +2116,11 @@ Grafana's spelling**; the reason is in the agent file.
 - **The rocket-launch metaphor is spent once, in one clause, and is not a heading.** The names that
   travel are *preparation mode* and *execution mode*. A metaphor repeated across a 40,000-word book
   reads as a running gag, which is the register `book/STYLE.md` rules out.
+  **Amended 2026-09-20: the clause now says "rocket launch" rather than "launch".** Dropping the
+  word as well as the repetition left "closer to a launch than to a conversation", which reads as a
+  product launch; "on the pad" was carrying the image alone and the author reported missing it. The
+  decision is unchanged — once, in one clause, never a heading. This is what spending it once
+  looks like, so do not trim the word back out.
 
 - **A verification item that finds the work already done should say so and stop** (`5e0f39858134`).
   The Wave #2 check confirmed all five things the handoff demanded of the chapter and made no

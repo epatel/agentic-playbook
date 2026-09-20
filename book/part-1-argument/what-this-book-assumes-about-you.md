@@ -83,8 +83,8 @@ again, and the part of the day you are sharpest goes on re-describing a codebase
 since Tuesday.
 
 The alternative is that the project is ready before the agent starts: prepared, checked, in place,
-and then a task rather than a briefing. Closer to a launch than to a conversation, and nothing gets
-explained on the pad.
+and then a task rather than a briefing. Closer to a rocket launch than to a conversation, and
+nothing gets explained on the pad.
 
 That splits the work into two modes. *Preparation* is everything that makes the project legible
 without you in the room — the agent file, the *cards* (short files, one subject each, loaded when
