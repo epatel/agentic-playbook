@@ -9,11 +9,10 @@ proportion of what the agent reads changing what it does. The noise is rarely wr
 useful, nearby — which is what makes it hard to throw out. Every line competes with every other
 line, including the twelve that mattered.
 
-Three things get claimed for this, and these plays support them unevenly. Cost is the mechanical
-one: whatever loads every session is re-read on every turn, and re-reading is most of the bill.
-Quality is the measured one, and it fails quietly — as context grows the agent still covers the
-requirements and stops satisfying them at once. Speed nobody here has measured: this book's turns
-figure belongs to a compression layer, not to a smaller context.
+Three things get claimed for this. Cost and speed are the same arithmetic: whatever loads every
+session is re-read on every turn, and the turns an agent spends finding out what the context could
+have told it are turns not spent on the task. Quality is the third, and it fails quietly — as
+context grows the agent still covers the requirements and stops satisfying them at once.
 
 [*Write the agent file that actually gets read*](write-the-agent-file-that-actually-gets-read.md) —
 signal in the layer that loads every session, and what belongs in it.
@@ -21,8 +20,8 @@ signal in the layer that loads every session, and what belongs in it.
 [*Split the agent file into cards*](split-the-agent-file-into-cards.md) — signal in the shape of
 that layer, and where what it threw out goes.
 
-[*Starve the context*](starve-the-context.md) — signal in a single run, and why measuring
-whether a filter helped is harder than installing one.
+[*Starve the context*](starve-the-context.md) — signal in a single run. No window gets smaller on
+its own, and measuring whether a filter helped is harder than installing one.
 
 [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md) — signal in the task itself,
 and how much can be handed over at once.

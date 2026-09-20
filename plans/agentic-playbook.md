@@ -2447,9 +2447,23 @@ and shrinking that layer is the one move that touches the largest line on the bi
 `rtk` failed where structure does not**: the filter compresses output, 0.5% of tokens, leaves the
 re-read prefix untouched, and buys extra turns, which multiplies the re-reads.
 
-**The speed line was wrong the same way and is now honest**: nobody here has measured it, and the
-book's one turns figure belongs to that compression layer rather than to a smaller context. The
-opener names cost as mechanical, quality as measured, and speed as unmeasured.
+**The speed line was wrong the same way, twice.** The first version blamed `rtk` for it. The
+second said nobody here had measured speed — also wrong, because it looked for a *measurement* and
+the book states a *mechanism*. **Good context is fast because the agent does not have to go and
+find out.** Part I has it: context assembled in the conversation means "five prompts in — here is
+the actual task", and the part of the day you are sharpest goes on re-describing a codebase that
+has not moved since Tuesday. *Split the agent file into cards* has the agent-side version — the
+tell of a chained card set is "an agent that opens three files before it makes an edit".
+
+**So cost and speed are the same arithmetic, and the opener now says so.** The bill and the clock
+are both turns multiplied by what is in them: a smaller always-loaded layer shrinks the second
+factor, and a context that answers the agent's questions up front shrinks the first. That is one
+claim, which is why the scorecard is now two sentences rather than three. Quality stays the odd one
+out, and stays last, because it fails quietly enough that nobody acts on it.
+
+**The restored line.** Dropping the `rtk` caution from the opener — it belongs in the play, not in
+the suite's summary — freed exactly enough for "No window gets smaller on its own" to come back,
+which the entry above had flagged as the sentence to restore if the budget ever moved.
 
 **It cost the opener its four play blurbs, which is the right trade.** The opener was at 300 words
 of a 300-word budget, so the paragraph had to be bought. Two of the blurbs were paying for content
