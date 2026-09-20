@@ -252,6 +252,12 @@ Changing either is a data edit, not a code edit. That is the point of them.
 attach a comment to it. Several people can read at once over a WebSocket, and a comment appears in
 every open window as it is made.
 
+Each heading carries a play button that reads that section aloud, for catching by ear what the
+eye skips. It uses the Web Speech API and prefers Edge's `Microsoft Andrew Online (Natural)`,
+falling back to any natural en-US voice and then to whatever the browser has — in Chrome that is a
+system voice, so it works and sounds worse. Code blocks, tables, diagrams and the
+`> Captured <month> <year>` provenance lines are not read: they are not prose.
+
 **If you are the agent acting on a review, read [`review/REVIEW.md`](../review/REVIEW.md).** It is
 the open annotations as a task list, in the book's own reading order, each one giving
 `book/<path>:<line>` and the passage that was quoted. It is generated from the event log on every

@@ -109,6 +109,26 @@
   }
   .mark:hover, .mark.lit { background: var(--mark-wash); }
 
+  /* Read aloud. The button sits in the gutter beside its heading, like the change bar, and is
+     only visible when the section is under the cursor or speaking. */
+  .sheet h1, .sheet h2 { position: relative; }
+  /* book.css gives h2 a section rule and 0.83em of padding above it, and the chapter h1 neither,
+     so the two headings need different offsets to put the button beside the text rather than on
+     the rule. */
+  .sheet h1 .speak { top: .45em; }
+  .sheet h2 .speak { top: 1.6em; }
+  .speak {
+    position: absolute; left: -1.5rem;               /* the gutter the change bars use */
+    width: 1.15rem; height: 1.15rem; padding: 0; border: 0; border-radius: 50%;
+    background: none; color: var(--ink-faint); cursor: pointer; line-height: 1;
+    display: grid; place-items: center; font-size: .68rem; opacity: 0;
+  }
+  .sheet h1:hover .speak, .sheet h2:hover .speak, .speak:focus-visible, .speak.on { opacity: 1; }
+  .speak:hover, .speak.on { color: var(--mark); }
+  .speaking { background: var(--mark-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--mark-wash); }
+
+  .voice { font-size: .74rem; font-style: italic; color: var(--ink-faint); margin: -1rem 0 1.4rem; }
+
   /* ------------------------------------------------------------------ the margin */
 
   .margin { position: relative; padding: 3.5rem 1.4rem 60vh 1.1rem; }
@@ -174,6 +194,7 @@
   <p class="wordmark">The Agentic Playbook</p>
   <p class="readers" id="readers">connecting</p>
   <input class="who" id="who" placeholder="who is reading?" autocomplete="name">
+  <p class="voice" id="voice"></p>
   <div id="toc"></div>
 </nav>
 
@@ -251,7 +272,9 @@ async function openChapter(path) {
   if (!path) return;
   state.path = path;
   const chapter = await (await fetch(`/api/chapter/${path}`)).json();
+  stopSpeech();
   $('#chapter').innerHTML = chapter.html;
+  addSpeakButtons();
   location.hash = encodeURIComponent(path);
   closeComposer();
   drawToc(); draw();
@@ -301,6 +324,120 @@ $('#composerText').addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) $('#composer').requestSubmit();
   if (event.key === 'Escape') closeComposer();
 });
+
+/* ---------------------------------------------------------------- read aloud */
+/* Edge exposes its natural voices to the Web Speech API, which is the only reason this sounds
+   like Read Aloud rather than like a 1998 screen reader. Andrew first, then any natural en-US,
+   then whatever the browser has — the feature degrades rather than disappearing. */
+const speech = { voice: null, blocks: [], at: 0, on: null };
+
+async function pickVoice() {
+  let all = speechSynthesis.getVoices();
+  if (!all.length) {
+    await new Promise(r => { speechSynthesis.onvoiceschanged = r; setTimeout(r, 1500); });
+    all = speechSynthesis.getVoices();
+  }
+  const en = all.filter(v => v.lang.startsWith('en'));
+  speech.voice =
+    en.find(v => /\bAndrew\b/i.test(v.name) && !/Multilingual/i.test(v.name)) ||
+    en.find(v => /Andrew/i.test(v.name)) ||
+    en.find(v => /Natural/i.test(v.name) && v.lang === 'en-US') ||
+    en.find(v => v.default) || en[0] || null;
+  const name = speech.voice ? speech.voice.name.replace(/^Microsoft /, '').replace(/ - .*$/, '') : 'none';
+  $('#voice').textContent = speech.voice ? `reading aloud as ${name}` : 'no voice available';
+}
+
+/* One utterance per sentence. A whole paragraph in one utterance runs past the point where
+   Chromium quietly stops speaking, and sentence-sized pieces also make the pauses sound right. */
+function sentences(text) {
+  const parts = text.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z"'\u201c\u2018])/);
+  const out = [];
+  for (const part of parts) {
+    if (out.length && part.length < 40) out[out.length - 1] += ' ' + part;
+    else out.push(part);
+  }
+  return out.filter(Boolean);
+}
+
+/* Code, tables and diagrams are not prose and do not survive being read out. */
+const READABLE = 'p, ul, ol, blockquote, h1, h2, h3, h4';
+
+/* The play button lives inside its heading so it can be positioned against it, which means the
+   heading's own textContent starts with a triangle. Strip it, or the first thing read aloud in
+   every section is a piece of punctuation. */
+function textOf(el) {
+  const clone = el.cloneNode(true);
+  for (const button of clone.querySelectorAll('.speak')) button.remove();
+  return clone.textContent;
+}
+
+/* `> Captured September 2026, BSD wc on macOS 26.4.` is provenance for the block beneath it — a
+   convention of book/TEMPLATE-play.md — and reading tool versions aloud mid-example helps nobody. */
+const isProvenance = (el) => el.tagName === 'BLOCKQUOTE' && /^\s*Captured\b/.test(el.textContent);
+const readable = (el) => el.matches(READABLE) && !el.closest('pre, table') && !isProvenance(el);
+
+function blocksOf(heading) {
+  if (heading.tagName === 'H1') {
+    return [...$('#chapter').querySelectorAll(READABLE)].filter(readable);
+  }
+  const out = [heading];
+  for (let el = heading.nextElementSibling; el; el = el.nextElementSibling) {
+    if (el.tagName === heading.tagName) break;
+    if (readable(el)) out.push(el);
+  }
+  return out;
+}
+
+function stopSpeech() {
+  speechSynthesis.cancel();
+  for (const el of $('#chapter').querySelectorAll('.speaking')) el.classList.remove('speaking');
+  for (const b of $('#chapter').querySelectorAll('.speak.on')) {
+    b.classList.remove('on'); b.textContent = '▶'; b.title = 'Read this section aloud';
+  }
+  speech.blocks = []; speech.at = 0; speech.on = null;
+}
+
+function speakFrom(index) {
+  const block = speech.blocks[index];
+  if (!block) return stopSpeech();
+  for (const el of $('#chapter').querySelectorAll('.speaking')) el.classList.remove('speaking');
+  block.classList.add('speaking');
+  if (block.getBoundingClientRect().top > innerHeight - 80 || block.getBoundingClientRect().top < 60) {
+    block.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  const queue = sentences(textOf(block));
+  let done = 0;
+  for (const line of queue) {
+    const u = new SpeechSynthesisUtterance(line);
+    if (speech.voice) { u.voice = speech.voice; u.lang = speech.voice.lang; }
+    u.onend = () => { if (++done === queue.length && speech.on) speakFrom(index + 1); };
+    u.onerror = () => { if (++done === queue.length && speech.on) speakFrom(index + 1); };
+    speechSynthesis.speak(u);
+  }
+}
+
+function toggleSpeak(button, heading) {
+  const wasOn = button.classList.contains('on');
+  stopSpeech();
+  if (wasOn) return;
+  speech.on = button;
+  speech.blocks = blocksOf(heading);
+  button.classList.add('on'); button.textContent = '■'; button.title = 'Stop';
+  speakFrom(0);
+}
+
+function addSpeakButtons() {
+  for (const heading of $('#chapter').querySelectorAll('h1, h2')) {
+    const button = document.createElement('button');
+    button.className = 'speak';
+    button.textContent = '▶';
+    button.title = heading.tagName === 'H1' ? 'Read the chapter aloud' : 'Read this section aloud';
+    button.setAttribute('aria-label', button.title);
+    button.onclick = (e) => { e.stopPropagation(); toggleSpeak(button, heading); };
+    heading.prepend(button);
+  }
+}
+addEventListener('beforeunload', () => speechSynthesis.cancel());
 
 /* ------------------------------------------------------------------- the margin */
 function draw() {
@@ -442,6 +579,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 const shorten = (s, n) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
 
 connect();
+pickVoice();
 loadToc();
 </script>
 </body>

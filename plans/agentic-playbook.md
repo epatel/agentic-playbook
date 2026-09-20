@@ -2538,6 +2538,25 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   arrived by absorbing the source's register while paraphrasing it. Worth knowing that summarising
   vendor material imports vendor vocabulary unless something checks.
 
+- **The review server reads sections aloud**, one play button per heading, because reading prose
+  by ear catches what the eye skips and the review server is the editing surface. It uses the Web
+  Speech API and prefers `Microsoft Andrew Online (Natural)`. **This only sounds good in Edge**:
+  Edge exposes its neural voices to `speechSynthesis` — 392 of them on the machine this was built
+  on — and Chrome offers system voices instead. The choice degrades rather than disappearing, and
+  the sidebar names the voice in use so it is obvious which you got.
+- **Three things are deliberately not read aloud**: code blocks, tables and diagrams, which are not
+  prose; and the `> Captured <month> <year>, <tool> <version>` provenance lines, which are a
+  convention of `book/TEMPLATE-play.md` and would put tool versions in the middle of an example.
+- **Two bugs worth remembering if this is rebuilt.** The button lives inside its heading so it can
+  be positioned against it, which put a triangle at the start of every heading's `textContent` —
+  **the first thing spoken in each section was a piece of punctuation** until the text was taken
+  from a clone with the button removed. And speech is queued **per sentence, not per paragraph**:
+  Chromium stops speaking partway through a long utterance, and a hundred-word paragraph is well
+  past the limit.
+- **Alignment had to be measured rather than eyeballed.** `book.css` gives `h2` a section rule and
+  0.83em of padding above it and gives the chapter `h1` neither, so a single offset put the button
+  on the rule for one and beside the text for the other. They have separate offsets.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

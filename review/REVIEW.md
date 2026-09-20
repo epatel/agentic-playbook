@@ -5,6 +5,6 @@ Annotations left on the book in the review server, newest state, in reading orde
 book, not this file.** Resolving an annotation in the browser removes it from the open
 list below; the event log keeps it either way.
 
-0 open, 0 resolved, as of 2026-09-20T10:00:50+00:00.
+0 open, 0 resolved, as of 2026-09-20T21:16:03+00:00.
 
 Nothing open.
