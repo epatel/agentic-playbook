@@ -1,5 +1,12 @@
 <!doctype html>
-<!-- The review server's one page. Served by scripts/review_server.py; see its docstring. -->
+<!-- The review server's one page. Served by scripts/review_server.py; see its docstring.
+
+     The design is a galley proof. The middle column is the book, set exactly as the book sets
+     itself — same serif, same measure, same palette as `make html`, because you are reviewing the
+     book and it should look like the book. The review layer is the only thing that is not the
+     book, and it is drawn in an editor's red: an underline under a marked passage, a change bar
+     beside the block under the cursor, and notes that hang in the margin beside the line they are
+     about rather than stacking in a list somewhere else. -->
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
@@ -7,77 +14,180 @@
 <title>The Agentic Playbook — review</title>
 <link rel="stylesheet" href="/book.css">
 <style>
-  :root { --margin-w: 22rem; --ok: #2e7d4f; --warn: #b3261e; }
-  @media (prefers-color-scheme: dark) { :root { --ok: #7fc59b; --warn: #f28279; } }
+  /* book.css lays the built book out as a document: one reading column, indented past a fixed
+     contents sidebar, with a rule above every chapter opener. This is an app shell, so that has to
+     go. The selector is copied from book.css deliberately — `:not(#TOC)` carries an id's
+     specificity, so `body > nav` loses to it however obvious it looks. Same selector, same
+     specificity, loaded afterwards; it also neutralises the two copies in book.css's own media
+     queries. */
+  body > :not(#TOC) { max-width: none; margin: 0; padding: 0; }
 
-  body { display: grid; grid-template-columns: 17rem minmax(0, 1fr) var(--margin-w); min-height: 100vh; }
-  body > * { min-width: 0; }
+  /* Everything lives inside #app so that the rule above has exactly one element to neutralise.
+     Left as direct children of <body>, the three columns inherit that reset too, and a class
+     selector cannot win it back — `:not(#TOC)` outranks `.contents` however specific it looks. */
+  #app { display: contents; }
 
-  /* book.css lays the built book out around a sidebar; this page does its own layout. */
-  body > nav, body > main, body > aside { max-width: none; margin: 0; }
+  :root {
+    --mark: #b4362f;              /* the editor's pencil; the only colour the book does not have */
+    --mark-wash: rgba(180, 54, 47, .09);
+    --shell: #f3f2ef;             /* the desk the proof lies on, a shade off the page */
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --mark: #e2796f; --mark-wash: rgba(226, 121, 111, .13); --shell: #131417; }
+  }
 
-  nav, aside { border-color: var(--rule); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; }
-  nav { border-right: 1px solid var(--rule); overflow-y: auto; height: 100vh; position: sticky; top: 0; padding: 1.2rem 1rem; }
-  aside { border-left: 1px solid var(--rule); overflow-y: auto; height: 100vh; position: sticky; top: 0; padding: 1.2rem 1rem; background: var(--accent-bg); }
-  main { padding: 2.2rem 3rem 8rem; }
+  body {
+    display: grid;
+    grid-template-columns: 16.5rem minmax(0, 1fr) 21rem;
+    min-height: 100vh;
+    background: var(--shell);
+  }
+  #app > * { min-width: 0; }   /* #app is display:contents, so its children are the grid items */
+  /* book.css hyphenates for justified print. In a 15rem column that gives 'be-fore this'. */
+  .contents, .margin { hyphens: manual; }
 
-  .brand { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: .9rem; }
-  .part { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.1rem 0 .35rem; }
-  nav a { display: block; padding: .28rem .45rem; border-radius: 4px; font-size: .84rem; line-height: 1.35; text-decoration: none; color: var(--ink); }
-  nav a:hover { background: var(--code-bg); }
-  nav a.on { background: var(--code-bg); font-weight: 600; }
-  nav a .count { float: right; color: var(--ink-faint); font-size: .78rem; }
+  /* ------------------------------------------------------------------ contents */
 
-  .status { display: flex; gap: .5rem; align-items: center; font-size: .78rem; color: var(--ink-soft); margin-bottom: .8rem; }
-  .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--warn); }
-  .dot.live { background: var(--ok); }
+  .contents {
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    padding: 2rem 1.1rem 3rem 1.6rem;
+  }
+  .wordmark { font-size: 1rem; line-height: 1.25; margin: 0 0 .15rem; font-weight: 600; letter-spacing: -.01em; }
+  .readers { font-size: .8rem; color: var(--ink-faint); font-style: italic; margin-bottom: 1.4rem;
+             display: flex; align-items: baseline; gap: .45rem; }
+  .readers::before { content: ""; width: .4rem; height: .4rem; border-radius: 50%;
+                     background: var(--mark); flex: none; transform: translateY(-.1em); }
+  .readers.offline::before { background: var(--ink-faint); }
 
-  [data-line] { position: relative; }
-  main [data-line]:hover { background: color-mix(in srgb, var(--code-bg) 55%, transparent); }
-  .marked { background: color-mix(in srgb, #f4c76a 38%, transparent); border-radius: 2px; }
-  @media (prefers-color-scheme: dark) { .marked { background: color-mix(in srgb, #f4c76a 22%, transparent); } }
+  .who {
+    width: 100%; font: inherit; font-size: .84rem; padding: .3rem 0; margin-bottom: 1.6rem;
+    border: 0; border-bottom: 1px solid var(--rule); background: none; color: var(--ink);
+  }
+  .who:focus { outline: none; border-bottom-color: var(--mark); }
+  .who::placeholder { color: var(--ink-faint); font-style: italic; }
 
-  #pop { position: absolute; z-index: 40; display: none; width: 21rem; padding: .7rem; border: 1px solid var(--rule); border-radius: 7px; background: var(--page); box-shadow: 0 8px 26px rgba(0,0,0,.18); }
-  #pop textarea { width: 100%; min-height: 4.6rem; font: inherit; font-size: .85rem; padding: .45rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--page); color: var(--ink); resize: vertical; }
-  #pop .q { font-size: .76rem; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: .5rem; margin-bottom: .5rem; max-height: 4rem; overflow: hidden; }
-  .row { display: flex; gap: .4rem; justify-content: flex-end; margin-top: .5rem; }
-  button { font: inherit; font-size: .8rem; padding: .32rem .7rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--code-bg); color: var(--ink); cursor: pointer; }
-  button.primary { background: var(--link); border-color: var(--link); color: #fff; }
-  button:hover { filter: brightness(1.06); }
+  .part { font-size: .82rem; font-style: italic; color: var(--ink-faint); margin: 1.5rem 0 .4rem; }
+  .part:first-child { margin-top: 0; }
+  .contents a {
+    display: block; padding: .2rem 0 .2rem .7rem; margin-left: -.7rem;
+    border-left: 2px solid transparent;
+    font-size: .86rem; line-height: 1.4; text-decoration: none; color: var(--ink-soft);
+  }
+  .contents a:hover { color: var(--ink); }
+  .contents a[aria-current] { color: var(--ink); border-left-color: var(--ink); font-weight: 600; }
+  .contents a .n { color: var(--mark); font-size: .8rem; margin-left: .3rem; }
 
-  .ann { border: 1px solid var(--rule); border-radius: 6px; padding: .6rem .65rem; margin-bottom: .6rem; background: var(--page); font-size: .84rem; }
-  .ann.resolved { opacity: .55; }
-  .ann .where { font-size: .72rem; color: var(--ink-faint); font-family: "SF Mono", Menlo, monospace; }
-  .ann .quote { font-size: .78rem; color: var(--ink-soft); border-left: 2px solid var(--rule); padding-left: .45rem; margin: .35rem 0; }
-  .ann .body { white-space: pre-wrap; }
-  .ann .acts { display: flex; gap: .35rem; margin-top: .45rem; }
-  .ann .acts button { font-size: .72rem; padding: .18rem .5rem; }
-  .empty { color: var(--ink-faint); font-size: .84rem; }
-  .who { width: 100%; font: inherit; font-size: .8rem; padding: .3rem .4rem; margin-bottom: .8rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--page); color: var(--ink); }
+  /* ------------------------------------------------------------------ the proof */
+
+  .proof { background: var(--page); border-inline: 1px solid var(--rule); }
+  .sheet { max-width: 35rem; margin: 0 auto; padding: 3.5rem 1.5rem 60vh; position: relative; }
+
+  /* The book's own chapter opener is a printed page-break device: a 3px rule and five rems of
+     air. On screen it reads as a stray line at the top of the column. */
+  .sheet h1 { margin: 0 0 1.8rem; padding: 0; border-top: 0; font-size: 1.75rem; }
+  .sheet { hyphens: manual; }          /* book.css hyphenates for justified print; this is ragged */
+
+  .sheet [data-line] { position: relative; }
+  .sheet [data-line]::before {
+    content: ""; position: absolute; left: -1.5rem; top: .15em; bottom: .15em; width: 2px;
+    background: var(--ink-faint); opacity: 0; border-radius: 1px;
+  }
+  .sheet [data-line]:hover::before { opacity: .35; }      /* a proofreader's change bar */
+  .sheet [data-line].cited::before { opacity: 1; background: var(--mark); }
+
+  /* A marked passage is underlined, the way an editor marks one — not filled in like a highlighter. */
+  .mark {
+    text-decoration: underline 1.5px var(--mark);
+    text-underline-offset: .22em;
+    background: transparent;
+    cursor: pointer;
+  }
+  .mark:hover, .mark.lit { background: var(--mark-wash); }
+
+  /* ------------------------------------------------------------------ the margin */
+
+  .margin { position: relative; padding: 3.5rem 1.4rem 60vh 1.1rem; }
+  .margin .none { font-size: .84rem; font-style: italic; color: var(--ink-faint); }
+
+  .note {
+    position: absolute; left: 1.1rem; right: 1.4rem;
+    font-size: .82rem; line-height: 1.5;
+    border-left: 2px solid var(--mark);
+    padding: 0 0 .1rem .75rem;
+  }
+  .note.resolved { border-left-color: var(--rule); color: var(--ink-faint); }
+  .note .lead { position: absolute; left: -1.1rem; top: .55em; width: 1.1rem; height: 1px; background: var(--mark); opacity: .45; }
+  .note.resolved .lead { background: var(--rule); }
+  .note .said { white-space: pre-wrap; }
+  .note .quote { font-style: italic; color: var(--ink-faint); margin-bottom: .3rem; }
+  .note .by { color: var(--ink-faint); font-size: .78rem; margin-top: .25rem; }
+  .note .acts { display: none; gap: .8rem; margin-top: .35rem; }
+  .note:hover .acts, .note:focus-within .acts { display: flex; }
+  .note .acts button {
+    border: 0; background: none; padding: 0; font: inherit; font-size: .78rem;
+    color: var(--ink-faint); text-decoration: underline; text-underline-offset: .2em; cursor: pointer;
+  }
+  .note .acts button:hover { color: var(--mark); }
+  .note.lit { color: var(--ink); }
+  .note.lit .lead { opacity: 1; }
+
+  /* ------------------------------------------------------------------ the composer */
+
+  .composer { position: absolute; left: 1.1rem; right: 1.4rem; border-left: 2px solid var(--mark); padding-left: .75rem; }
+  .composer[hidden] { display: none; }
+  .composer .quote { font-style: italic; color: var(--ink-faint); font-size: .82rem; margin-bottom: .4rem; }
+  .composer textarea {
+    width: 100%; min-height: 5rem; font: inherit; font-size: .82rem; line-height: 1.5;
+    padding: .4rem .5rem; border: 1px solid var(--rule); border-radius: 2px;
+    background: var(--page); color: var(--ink); resize: vertical;
+  }
+  .composer textarea:focus { outline: none; border-color: var(--mark); }
+  .composer .row { display: flex; gap: .9rem; align-items: baseline; margin-top: .45rem; }
+  .composer .row .hint { font-size: .74rem; color: var(--ink-faint); margin-left: auto; }
+  .composer button {
+    font: inherit; font-size: .8rem; padding: .25rem .8rem; border: 1px solid var(--mark);
+    border-radius: 2px; background: var(--mark); color: #fff; cursor: pointer;
+  }
+  .composer button.quiet { background: none; color: var(--ink-faint); border-color: transparent; padding-inline: 0; text-decoration: underline; text-underline-offset: .2em; }
+
+  :focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  @media (max-width: 62rem) {
+    body { grid-template-columns: 1fr; }
+    .contents, .margin { position: static; height: auto; }
+    .proof { border-inline: 0; }
+    .note, .composer { position: static; margin-bottom: 1rem; }
+    .note .lead { display: none; }
+  }
 </style>
 </head>
 <body>
+<div id="app">
 
-<nav>
-  <div class="brand">The Agentic Playbook</div>
-  <div class="status"><span class="dot" id="dot"></span><span id="live">connecting…</span></div>
-  <input class="who" id="who" placeholder="your name" autocomplete="name">
+<nav class="contents">
+  <p class="wordmark">The Agentic Playbook</p>
+  <p class="readers" id="readers">connecting</p>
+  <input class="who" id="who" placeholder="who is reading?" autocomplete="name">
   <div id="toc"></div>
 </nav>
 
-<main><article id="chapter"><p class="empty">Pick a chapter.</p></article></main>
+<main class="proof"><article class="sheet" id="chapter"></article></main>
 
-<aside>
-  <div class="brand">Annotations</div>
-  <div id="margin"><p class="empty">Select any passage to comment on it.</p></div>
+<aside class="margin" id="margin">
+  <p class="none" id="none">Select a passage to mark it.</p>
+  <form class="composer" id="composer" hidden>
+    <p class="quote" id="composerQuote"></p>
+    <textarea id="composerText" placeholder="What is wrong with this passage?"></textarea>
+    <div class="row">
+      <button type="submit">Save note</button>
+      <button type="button" class="quiet" id="composerCancel">Cancel</button>
+      <span class="hint">⌘↵</span>
+    </div>
+  </form>
 </aside>
 
-<div id="pop">
-  <div class="q" id="popQuote"></div>
-  <textarea id="popText" placeholder="What is wrong with this passage?"></textarea>
-  <div class="row"><button id="popCancel">Cancel</button><button class="primary" id="popSave">Comment</button></div>
 </div>
-
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 mermaid.initialize({ startOnLoad: false, theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default' });
@@ -89,67 +199,69 @@ const who = $('#who');
 who.value = localStorage.getItem('reviewer') || '';
 who.addEventListener('change', () => localStorage.setItem('reviewer', who.value.trim()));
 
-/* ---------------------------------------------------------------- the wire */
+/* ---------------------------------------------------------------------- the wire */
 function connect() {
   const socket = new WebSocket(`ws://${location.host}/ws`);
   state.socket = socket;
-  socket.onopen = () => { $('#dot').classList.add('live'); };
   socket.onclose = () => {
-    $('#dot').classList.remove('live');
-    $('#live').textContent = 'reconnecting…';
-    setTimeout(connect, 1500);           // the server restarts often while it is being written
+    $('#readers').classList.add('offline');
+    $('#readers').textContent = 'reconnecting';
+    setTimeout(connect, 1500);
   };
   socket.onmessage = (event) => {
     const message = JSON.parse(event.data);
     if (message.annotations) state.annotations = message.annotations;
     if (message.readers !== undefined) {
-      $('#live').textContent = message.readers === 1 ? 'just you' : `${message.readers} reading`;
+      $('#readers').classList.remove('offline');
+      $('#readers').textContent = message.readers === 1
+        ? 'reading alone' : `${message.readers} reading`;
     }
-    drawMargin(); drawToc(); markUp();
+    draw();
   };
 }
-const send = (message) => state.socket?.readyState === 1 && state.socket.send(JSON.stringify(message));
+const send = (m) => state.socket?.readyState === 1 && state.socket.send(JSON.stringify(m));
 
-/* ------------------------------------------------------------ the chapters */
+/* ------------------------------------------------------------------ the chapters */
 async function loadToc() {
   state.toc = await (await fetch('/api/toc')).json();
   drawToc();
   const wanted = decodeURIComponent(location.hash.slice(1));
-  open(state.toc.some(c => c.path === wanted) ? wanted : state.toc[0]?.path);
+  openChapter(state.toc.some(c => c.path === wanted) ? wanted : state.toc[0]?.path);
 }
 
 function drawToc() {
   const counts = {};
   for (const a of state.annotations) if (a.status === 'open') counts[a.file] = (counts[a.file] || 0) + 1;
   let html = '', part = null;
-  for (const chapter of state.toc) {
-    if (chapter.part !== part) { part = chapter.part; html += `<div class="part">${esc(part)}</div>`; }
-    const n = counts[chapter.path] ? `<span class="count">${counts[chapter.path]}</span>` : '';
-    const on = chapter.path === state.path ? ' class="on"' : '';
-    html += `<a href="#${encodeURIComponent(chapter.path)}"${on} data-path="${esc(chapter.path)}">${esc(chapter.title)}${n}</a>`;
+  for (const c of state.toc) {
+    if (c.part !== part) { part = c.part; html += `<p class="part">${esc(part)}</p>`; }
+    const n = counts[c.path] ? `<span class="n">${counts[c.path]}</span>` : '';
+    const here = c.path === state.path ? ' aria-current="page"' : '';
+    html += `<a href="#${encodeURIComponent(c.path)}"${here}>${esc(c.title)}${n}</a>`;
   }
   $('#toc').innerHTML = html;
 }
 
-async function open(path) {
+async function openChapter(path) {
   if (!path) return;
   state.path = path;
   const chapter = await (await fetch(`/api/chapter/${path}`)).json();
   $('#chapter').innerHTML = chapter.html;
   location.hash = encodeURIComponent(path);
-  drawToc(); drawMargin(); markUp();
+  closeComposer();
+  drawToc(); draw();
   const diagrams = $('#chapter').querySelectorAll('pre.mermaid');
-  if (diagrams.length) mermaid.run({ nodes: diagrams });
+  if (diagrams.length) mermaid.run({ nodes: diagrams }).then(place);
 }
 addEventListener('hashchange', () => {
   const path = decodeURIComponent(location.hash.slice(1));
-  if (path && path !== state.path) open(path);
+  if (path && path !== state.path) openChapter(path);
 });
 
-/* --------------------------------------------------- selecting and commenting */
-$('#chapter').addEventListener('mouseup', () => setTimeout(offerComment, 0));
+/* --------------------------------------------------------- marking a passage */
+$('#chapter').addEventListener('mouseup', () => setTimeout(offerMark, 0));
 
-function offerComment() {
+function offerMark() {
   const selection = getSelection();
   const quote = selection.toString().trim();
   if (!quote || selection.isCollapsed) return;
@@ -158,88 +270,162 @@ function offerComment() {
   if (!node || !$('#chapter').contains(node)) return;
 
   state.pending = { file: state.path, line: Number(node.getAttribute('data-line')), quote };
-  const box = selection.getRangeAt(0).getBoundingClientRect();
-  const pop = $('#pop');
-  pop.style.display = 'block';
-  pop.style.top = `${scrollY + box.bottom + 8}px`;
-  pop.style.left = `${Math.min(scrollX + box.left, innerWidth - 360)}px`;
-  $('#popQuote').textContent = quote.length > 220 ? quote.slice(0, 217) + '…' : quote;
-  $('#popText').value = '';
-  $('#popText').focus();
+  $('#composerQuote').textContent = shorten(quote, 150);
+  $('#composerText').value = '';
+  $('#composer').hidden = false;
+  $('#none').hidden = true;
+  place();
+  $('#composerText').focus();
 }
 
-const closePop = () => { $('#pop').style.display = 'none'; state.pending = null; };
-$('#popCancel').onclick = closePop;
-$('#popSave').onclick = () => {
-  const comment = $('#popText').value.trim();
-  if (!comment || !state.pending) return closePop();
-  send({ type: 'create', ...state.pending, comment, author: who.value.trim() || 'anonymous' });
-  closePop();
-};
-$('#popText').addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) $('#popSave').click();
-  if (event.key === 'Escape') closePop();
+function closeComposer() {
+  $('#composer').hidden = true;
+  state.pending = null;
+  draw();
+}
+$('#composerCancel').onclick = closeComposer;
+$('#composer').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const comment = $('#composerText').value.trim();
+  if (comment && state.pending) {
+    send({ type: 'create', ...state.pending, comment, author: who.value.trim() || 'anonymous' });
+  }
+  closeComposer();
+});
+$('#composerText').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) $('#composer').requestSubmit();
+  if (event.key === 'Escape') closeComposer();
 });
 
-/* --------------------------------------------------------------- the margin */
-function drawMargin() {
+/* ------------------------------------------------------------------- the margin */
+function draw() {
   const mine = state.annotations
     .filter(a => a.file === state.path)
     .sort((a, b) => (a.line - b.line) || a.ts.localeCompare(b.ts));
-  if (!mine.length) {
-    $('#margin').innerHTML = '<p class="empty">Select any passage to comment on it.</p>';
-    return;
-  }
-  $('#margin').innerHTML = mine.map(a => `
-    <div class="ann ${a.status === 'resolved' ? 'resolved' : ''}" data-id="${a.id}">
-      <div class="where">line ${a.line} · ${esc(a.author || 'anonymous')}</div>
-      ${a.quote ? `<div class="quote">${esc(trim(a.quote))}</div>` : ''}
-      <div class="body">${esc(a.comment)}</div>
+
+  for (const old of $('#margin').querySelectorAll('.note')) old.remove();
+  $('#none').hidden = mine.length > 0 || !$('#composer').hidden;
+  $('#none').textContent = mine.length ? '' : 'Select a passage to mark it.';
+
+  for (const a of mine) {
+    const note = document.createElement('div');
+    note.className = 'note' + (a.status === 'resolved' ? ' resolved' : '');
+    note.dataset.id = a.id;
+    note.dataset.anchor = a.line;
+    note.innerHTML = `
+      <span class="lead"></span>
+      ${a.quote ? `<p class="quote">${esc(shorten(a.quote, 110))}</p>` : ''}
+      <div class="said">${esc(a.comment)}</div>
+      <p class="by">${esc(a.author || 'anonymous')}, line ${a.line}</p>
       <div class="acts">
         <button data-act="${a.status === 'resolved' ? 'reopen' : 'resolve'}">${a.status === 'resolved' ? 'Reopen' : 'Resolve'}</button>
         <button data-act="delete">Delete</button>
-      </div>
-    </div>`).join('');
+      </div>`;
+    $('#margin').append(note);
+  }
+  markUp();
+  place();
 }
 
 $('#margin').addEventListener('click', (event) => {
   const act = event.target.dataset?.act;
   if (!act) return;
-  const id = event.target.closest('.ann').dataset.id;
-  if (act === 'delete' && !confirm('Delete this annotation? The event log keeps a record.')) return;
+  const id = event.target.closest('.note').dataset.id;
+  if (act === 'delete' && !confirm('Delete this note? The event log keeps a record.')) return;
   send({ type: act, id });
 });
 
-/* Highlight every annotated passage, by finding its quote inside its own block. */
+/* The block an annotation belongs to. An exact hit is the normal case, but a stored line can
+   fall inside a block rather than at its head — the book has been edited since, or the note was
+   made against a line the renderer does not start a block on — so fall back to the last block
+   that begins at or before it. A note with nowhere to hang would silently vanish. */
+function blockFor(line) {
+  const sheet = $('#chapter');
+  const exact = sheet.querySelector(`[data-line="${line}"]`);
+  if (exact) return exact;
+  let best = null;
+  for (const block of sheet.querySelectorAll('[data-line]')) {
+    if (Number(block.dataset.line) <= Number(line)) best = block; else break;
+  }
+  return best || sheet.querySelector('[data-line]');
+}
+
+/* Put every note beside the line it is about, then push apart anything that collides. */
+function place() {
+  const margin = $('#margin');
+  const top = margin.getBoundingClientRect().top;
+  const items = [...margin.querySelectorAll('.note')];
+  if (!$('#composer').hidden && state.pending) {
+    items.push(Object.assign($('#composer'), { dataset: { anchor: state.pending.line } }));
+  }
+  let floor = 0;
+  for (const item of items) {
+    const anchor = blockFor(item.dataset.anchor);
+    if (!anchor) continue;
+    const wanted = anchor.getBoundingClientRect().top - top;
+    const at = Math.max(wanted, floor);
+    item.style.top = `${at}px`;
+    floor = at + item.offsetHeight + 14;
+  }
+}
+addEventListener('resize', place);
+new ResizeObserver(place).observe(document.documentElement);
+
+/* ------------------------------------------------------------------ the marks */
 function markUp() {
-  for (const old of $('#chapter').querySelectorAll('.marked')) {
+  for (const old of $('#chapter').querySelectorAll('.mark')) {
     old.replaceWith(document.createTextNode(old.textContent));
   }
+  for (const cited of $('#chapter').querySelectorAll('.cited')) cited.classList.remove('cited');
   $('#chapter').normalize();
+
   for (const a of state.annotations) {
     if (a.file !== state.path || a.status === 'resolved' || !a.quote) continue;
-    const block = $('#chapter').querySelector(`[data-line="${a.line}"]`);
-    if (block) highlight(block, a.quote.trim());
+    const block = blockFor(a.line);
+    if (!block) continue;
+    block.classList.add('cited');
+    /* Try the block it was left on; failing that, the quote itself is the anchor — which is why
+       it is stored. A passage that has moved is still found, and still marked. */
+    if (!underline(block, a.quote.trim(), a.id)) {
+      for (const other of $('#chapter').querySelectorAll('[data-line]')) {
+        if (underline(other, a.quote.trim(), a.id)) { other.classList.add('cited'); break; }
+      }
+    }
   }
 }
 
-function highlight(block, quote) {
+function underline(block, quote, id) {
   const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     const at = node.nodeValue.indexOf(quote);
-    if (at === -1) continue;                     // a quote spanning inline markup is left unmarked
+    if (at === -1) continue;              /* a quote spanning inline markup stays unmarked */
+    if (node.parentElement.closest('.mark')) continue;
     const range = document.createRange();
     range.setStart(node, at);
     range.setEnd(node, at + quote.length);
     const mark = document.createElement('span');
-    mark.className = 'marked';
+    mark.className = 'mark';
+    mark.dataset.id = id;
     range.surroundContents(mark);
-    return;
+    return true;
+  }
+  return false;
+}
+
+/* Hovering either half lights both, so it is obvious which note belongs to which passage. */
+for (const [root, sel] of [[$('#chapter'), '.mark'], [$('#margin'), '.note']]) {
+  root.addEventListener('mouseover', (e) => light(e.target.closest(sel)?.dataset.id, true));
+  root.addEventListener('mouseout', (e) => light(e.target.closest(sel)?.dataset.id, false));
+}
+function light(id, on) {
+  if (!id) return;
+  for (const el of document.querySelectorAll(`.mark[data-id="${id}"], .note[data-id="${id}"]`)) {
+    el.classList.toggle('lit', on);
   }
 }
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const trim = (s) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length > 180 ? t.slice(0, 177) + '…' : t; };
+const shorten = (s, n) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
 
 connect();
 loadToc();
