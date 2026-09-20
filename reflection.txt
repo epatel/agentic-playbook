@@ -1,9 +1,7 @@
-Style is good.
+Why context engineering? 
+* Cost
+* Speed
+* Quality
 
-Occationally hard to understand, using difficult language.
+Team defining/consolidating agentic way of working can maybe be done through something like a Design Sprint? specially designed for this?
 
-Dropped "rocket", from "rocket launch".
-
-Rules to add
-* Keep agent files up to date (should be included from cards setup)
-* Ask for clarification when getting conflicting instructions

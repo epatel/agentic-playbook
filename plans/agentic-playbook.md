@@ -101,6 +101,8 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `3884b4f3fc82` | Re-check Part III's remaining derived figures — 26 sources opened, eleven defects in print, four of them the same species as the reward-hacking trio | ✅ done |
 | `023ba519cdd0` | Teach `make lint` the word budgets — every budget in `STYLE.md` and `TEMPLATE-play.md`, counted with the build's own counter; eleven overruns found that nobody had ever counted | ✅ done |
 | `bfc99c593aeb` | Trim the eleven Part II overruns — all eleven inside budget, and over-budget promoted from a note to a problem | ✅ done |
+| *unassigned* | Say what context engineering is worth, in the Context opener — as a scorecard, not a benefits list. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ⬜ proposed |
+| *unassigned* | A fourth Team play on running the session that writes the agreement. Same section | ⬜ proposed |
 
 ## Current state / handoff
 
@@ -2330,6 +2332,72 @@ Grafana's spelling**; the reason is in the agent file.
   signposts now says five. The new link was checked against that claim rather than assumed to meet
   it. **Every edit to a card or to `CLAUDE.md` moves at least one figure in that play**; run
   `book/examples/cards/reproduce.py` before finishing.
+
+## Two proposals from the author's reflection
+
+Raised from `reflection.txt`, assessed against what the book already says rather than taken as
+gaps. One needs inverting before it can go in; the other is a real hole. **Neither is written.**
+
+### 1. Why context engineering — and why not as a triad
+
+The reflection asks the Context suite to answer *why*, and offers cost, speed, quality. **The
+suite opener does not currently answer it.** It gives the principle (signal over noise) and the
+cost of entry ("none of the four needs a budget line"), and never says what the reader gets back.
+That asymmetry is worth fixing: `book/TEMPLATE-play.md` requires every play to state what the
+reader gives up, so the book is rigorous about costs and silent about returns.
+
+**But the triad cannot go in as a benefits list, for two reasons that are both the book's own.**
+`book/STYLE.md` bans "rule-of-three lists that exist for rhythm rather than because there are three
+things". And *Starve the context* — the most carefully evidenced play in the suite — is a
+counter-example to all three at once: a filtering tool reported 96.2 million tokens saved while an
+independent trial measured cost *up* 7.6% and turns *up* 13.8%, with task quality tied. A suite
+opener claiming context engineering buys cost, speed and quality would be contradicted four files
+later by its own evidence.
+
+**The version that survives is a scorecard: the three things people claim, and what this book's
+evidence actually supports.** Quality is the strong one — the opener already says a fuller context
+often produces a worse answer, and *Scope a task to fit the window* has the retention figures.
+Cost is contested, and *Starve the context* is where the contest is. Speed is the weakest: the one
+measurement in the book points the wrong way. That paragraph is in the book's register, it is
+already sourced, and it makes the opener answer the question a sceptical reader arrives with.
+
+**Constraint: the opener is at 300 words against a 150–300 budget.** It is full. This is a trade,
+not an insertion — and the likeliest donor is the four-play summary, which repeats what the play
+titles already say.
+
+### 2. A fourth Team play: running the session
+
+*Build the working agreement* says what to decide — usually six items — and where to write it, and
+step 1 gives a real method for building the agenda (read the last twenty agent-authored pull
+requests and list where they differ). **Step 3 is "Agree the items with team-visible
+consequences", and the play is silent on how.** Getting a room from six disagreements to one signed
+page in bounded time is exactly where this stalls, and nothing in the book helps.
+
+A bounded, facilitated format is the most actionable thing the Team suite could add. Three
+cautions, all from the repo's own rules:
+
+- **Do not call it a Design Sprint.** The book names no vendor in a heading, and a five-day product
+  sprint is the wrong shape for a half-day decision meeting. Adapt the structure — time-boxed,
+  silent generation before discussion, a named decider so consensus theatre cannot set in — and
+  credit the lineage in a clause.
+- **The worked example may be representative.** `TEMPLATE-play.md` already exempts "a team
+  practice" from the captured-output rule, so this play can be written without inventing a
+  measurement. It must not print a plausible-looking result and lean on it.
+- **It needs a named failure mode of its own**, against the registry in Part III. The obvious
+  candidate is the session that produces agreement in the room and no change in behaviour.
+
+**Arithmetic.** Part II is 23,425 words of 40,848, or 57%. A fourth Team play at the suite's own
+length — its three plays run 1,129 to 1,197 words — puts Part II at about **58.6%**, inside the 60%
+line that [*Open questions*](#open-questions) treats as the limit. The Team suite would go to four
+plays, matching Context; the spread stays within one play, as that question requires. **The
+procedure it also requires — raise a fourth play rather than adding it quietly — has been followed
+by this entry.**
+
+### Which is worth doing first
+
+The second. It adds something the book does not contain, and the Team suite is where a reader with
+a team problem arrives. The first is a reframing of material the book already holds, cheaper to
+write and easy to get wrong: written carelessly it becomes the benefits list the style guide bans.
 
 ## Open questions
 
