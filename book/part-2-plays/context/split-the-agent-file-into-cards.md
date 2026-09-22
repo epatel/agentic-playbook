@@ -95,11 +95,11 @@ Five entries in that shape, and nothing else that loads unconditionally. The two
 $ wc -l CLAUDE.md cards/*.md
       60 CLAUDE.md
       70 cards/book-structure.md
-     285 cards/building-the-book.md
+     286 cards/building-the-book.md
       64 cards/repo-layout.md
       65 cards/research-notes.md
       76 cards/standing-defaults.md
-     620 total
+     621 total
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger

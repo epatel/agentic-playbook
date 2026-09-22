@@ -27,6 +27,7 @@ import json
 import re
 import shlex
 import shutil
+from base64 import b64encode
 import subprocess
 import sys
 from dataclasses import dataclass, field
@@ -41,6 +42,10 @@ CSS_FILE = Path(__file__).resolve().parent / "book.css"
 #: Injected at the end of <body> for the HTML book only: a play button on every chapter and
 #: section heading, using whatever voices the reader's browser has. The PDF never sees it.
 ALOUD_FILE = Path(__file__).resolve().parent / "read-aloud.html"
+#: The favicon, inlined into <head> as a data URI rather than published beside the page, so
+#: that the HTML book keeps the property the rest of the build is organised around: one file
+#: that still works when somebody emails it to a colleague.
+FAVICON_FILE = Path(__file__).resolve().parent / "favicon.svg"
 
 #: Files in ``book/`` that are instructions to authors rather than book content. They are excluded
 #: from the build deliberately, and are not reported as orphans.
@@ -881,6 +886,9 @@ def pandoc_command(source: Path, output: Path, fmt: str, engine: str | None, dat
             command.append(f"--css={CSS_FILE}")
         if ALOUD_FILE.is_file():
             command.append(f"--include-after-body={ALOUD_FILE}")
+        icon = favicon_header(output.parent)
+        if icon:
+            command.append(f"--include-in-header={icon}")
     if fmt == "pdf" and engine:
         command.append(f"--pdf-engine={engine}")
         if engine in TEX_PDF_ENGINES:
@@ -893,6 +901,27 @@ def pandoc_command(source: Path, output: Path, fmt: str, engine: str | None, dat
         # typst and the HTML engines are configured from book-metadata.yaml instead: typst's
         # `margin` is a map, which the -V flag cannot express.
     return command + extra
+
+
+def favicon_header(out_dir: Path) -> Path | None:
+    """Write a <head> fragment carrying the favicon as a data URI, and return its path.
+
+    The SVG stays the editable source; this is generated from it on every build, so the two
+    cannot drift. Comments are stripped because they are dead weight in every copy of the book.
+
+    It is base64 rather than percent-encoded on purpose. An SVG is full of double quotes and
+    angle brackets, and a percent-encoding permissive enough to stay readable leaves them intact,
+    which ends the href attribute in the middle of the image and hands pandoc the rest of the
+    drawing as stray attributes. Base64 has nothing in it that HTML cares about.
+    """
+    if not FAVICON_FILE.is_file():
+        return None
+    svg = re.sub(r"<!--.*?-->", "", FAVICON_FILE.read_text(encoding="utf-8"), flags=re.S)
+    svg = re.sub(r"\s+", " ", svg).strip()
+    uri = "data:image/svg+xml;base64," + b64encode(svg.encode("utf-8")).decode("ascii")
+    header = out_dir / ".favicon-head.html"
+    header.write_text(f'<link rel="icon" href="{uri}">\n', encoding="utf-8")
+    return header
 
 
 def run_pandoc(command: list[str], verbose: bool) -> bool:

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="The Agentic Playbook">
+  <!-- Signal over noise, the idea the book opens with: lines of text with one of them carrying
+       the weight. Three bars is all that survives being drawn at 16 pixels. The blue is the link
+       colour from scripts/book.css and the bars are its page colour, so the mark is made of the
+       book's own two colours. An XML comment may not contain a doubled hyphen, which is why the
+       variables are named in prose here. -->
+  <rect width="32" height="32" rx="7" fill="#1a4f8a"/>
+  <g fill="#fdfdfc">
+    <rect x="7" y="8" width="18" height="3.4" rx="1.7" opacity=".42"/>
+    <rect x="7" y="14.3" width="18" height="3.4" rx="1.7"/>
+    <rect x="7" y="20.6" width="11" height="3.4" rx="1.7" opacity=".42"/>
+  </g>
+</svg>
