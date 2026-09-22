@@ -31,6 +31,19 @@
   h3 .aloud { top: .07rem; }
   h2:hover .aloud, h3:hover .aloud, .aloud:hover, .aloud:focus-visible, .aloud.on { opacity: 1; }
   .aloud:hover, .aloud.on { color: var(--link); }
+  /* Below the desktop breakpoint there is no gutter to hang the button in: the heading starts at
+     the edge of the screen, so `left: -1.4rem` puts the button off it. On a narrow screen it
+     joins the line instead of sitting beside it. */
+  @media (max-width: 62rem) {
+    .aloud {
+      position: static;
+      display: inline-grid;
+      vertical-align: middle;
+      margin-right: .4rem;
+      transform: translateY(-.06em);
+    }
+  }
+
   .aloud-speaking { background: var(--aloud-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--aloud-wash); }
 
   @media print { .aloud { display: none; } }

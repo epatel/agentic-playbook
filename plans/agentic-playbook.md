@@ -2618,6 +2618,19 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   also made the earlier `@media (hover: none)` patch unnecessary — with the buttons visible by
   default there is no hover to be missing.
 
+- **The play buttons were off the left edge of a phone, not missing from it.** They hang in the
+  gutter at `left: -1.4rem`, which works on a desktop because the reading column is indented past
+  a fixed sidebar and there is a gutter to hang in. Below the breakpoint the heading starts at the
+  edge of the screen, so the same rule put every button at `left: -22px`, outside the viewport and
+  unreachable — overflow to the left is clipped and cannot be scrolled to. **Drawn, styled,
+  opaque, and invisible.** Below 62rem they are `position: static` and join the line instead.
+- **Three separate reports of "the read-aloud button is missing", three different causes**: first
+  a specificity bug that put it on the section rule, then `opacity: 0` until hover, now a negative
+  offset with no gutter to absorb it. Each was invisible to the check that passed the previous
+  one, because each check measured the thing the last fix broke. **A button is only verified when
+  something asserts it is inside the viewport at the width being claimed** — which is now what the
+  measurement does, at 414 and at 1280.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
