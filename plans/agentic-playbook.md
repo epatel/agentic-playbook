@@ -2607,6 +2607,17 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   clamped to 40rem, which quietly turned a 1280px desktop check into another 680px one until it
   was given `max-width: none`.
 
+- **The read-aloud buttons were drawn and invisible, which is worse than absent.** They were
+  `opacity: 0` until the heading was hovered, on the reasoning that a reader who never wants the
+  feature should never see it. **The person who asked for the feature then could not find it**,
+  reported it missing, and was right to — 212 buttons were in the page, all of them transparent.
+  They now sit at `opacity: .5` in the gutter and go solid on hover or while speaking.
+- **The lesson is about who the default was written for.** Hiding an affordance until hover
+  optimises for an imagined reader who is not in the room, at the expense of the one who is. A
+  quiet mark in the margin costs almost nothing; an invisible control costs the whole feature. It
+  also made the earlier `@media (hover: none)` patch unnecessary — with the buttons visible by
+  default there is no hover to be missing.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book
