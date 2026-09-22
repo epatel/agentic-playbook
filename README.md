@@ -11,9 +11,11 @@ afternoon.** Nothing has a required order and nothing has to be built to read it
 [`book/`](book/) is the deliverable.
 
 Or **[read the whole book in one page](https://epatel.github.io/agentic-playbook/)**, diagrams
-drawn and contents in the sidebar.
+drawn and contents in the sidebar, or take the
+**[presentation](https://home.memention.net/presentation-builder/show/the-agentic-playbook)** if
+you would rather be walked through it.
 
-Complete and readable end to end: 32 chapters, about 41,000 words, every figure traced to a cited
+Complete and readable end to end: 34 chapters, about 42,000 words, every figure traced to a cited
 research note. Licensed [CC BY 4.0](LICENSE).
 
 ## Contents
