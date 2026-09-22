@@ -103,18 +103,53 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | `bfc99c593aeb` | Trim the eleven Part II overruns — all eleven inside budget, and over-budget promoted from a note to a problem | ✅ done |
 | *unassigned* | Say what context engineering is worth, in the Context opener — written as a scorecard, paid for out of the four play blurbs. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ✅ done |
 | *unassigned* | A fourth Team play — written, as *Settle what the team cannot agree*, on deciding rather than on facilitating. See [*Two proposals from the author's reflection*](#two-proposals-from-the-authors-reflection) | ✅ done |
+| *unassigned* | Publish the book — CC BY 4.0, a public GitHub repository, GitHub Pages on every push, and `make release` for dated PDF releases pinned to their own tag | ✅ done |
+| *unassigned* | Fix what publishing exposed — a code palette legible on both backgrounds, outbound links rewritten to the repository, and the deliberately-empty table made to read as a form | ✅ done |
+| *unassigned* | Rename the central term: *brief* became **agent file**, *research brief* became **research note**; two plays and one card changed filename | ✅ done |
+| *unassigned* | Teach `make check` the root README — its contents list against the table of contents, and its play count | ✅ done |
+| *unassigned* | Name **the Adequate Answer** in *Starve the context*, and discount staged adoption models in *The three waves* | ✅ done |
+| *unassigned* | `make review` — a local server that renders the chapters, takes annotations into an append-only log, and collects them into `review/REVIEW.md` for an agent to act on | ✅ done |
+| *unassigned* | Read aloud on both surfaces, a favicon, and a mobile pass on the HTML book: no horizontal overflow from 360px up | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, has been through its editorial pass, its worked examples have been
-run, its unreadable primary sources have now been read, and its central term has been renamed.** 40
-files, 40,825 words, a preface, a root `README.md`, and one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 42,193 words, one voice.
+It is on GitHub under CC BY 4.0; the HTML build is served at
+[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
+`main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
+than to `main`. **`make check` is clean, and running it is how you finish.**
 
 **Start with the terminology rename if you are editing anything.** What the book called a *brief*
 is now an **agent file**, and what it called a *research brief* is now a **research note** — the
 one word had been doing both jobs. Two plays and one card changed filename with it, so **a link
 written from memory against the old paths is dead**. The reasoning, the rejected alternatives and
-what the rename cost are the four newest entries in the [decisions log](#decisions-log-append-only). What the editorial pass changed and what it deliberately left alone
+what the rename cost are in the [decisions log](#decisions-log-append-only).
+
+**Four obligations that did not exist during the writing milestones:**
+
+1. **Editing a card or `CLAUDE.md` moves figures that are in print.** *Split the agent file into
+   cards* prints `wc -l` over them and counts the links between them, so a one-line edit to a card
+   falsifies a captured block. Run `python3 book/examples/cards/reproduce.py` before you finish;
+   it tells you what moved.
+2. **`make check` now also checks the root `README.md`** — its contents list against the table of
+   contents, entry by entry, and its "N plays in six suites" sentence. **It does not check a count
+   written out in prose**, and the README's opening figures have gone stale twice for that reason.
+3. **The repo has dependencies now, and they are quarantined.** `requirements.txt` and `.venv/`
+   exist for `make review` alone; `make html`, `make pdf` and `make check` still run on a bare
+   `python3`. Do not let that spread.
+4. **`scripts/book.css` has one selector that outranks almost anything you will write.**
+   `body > :not(#TOC)` carries an id's specificity because of the `:not()`, and it sets the
+   reading measure, margins and padding. Three separate changes have been silently overridden by
+   it. **When a rule that should obviously apply does not, suspect that one first.**
+
+**The book has two reading surfaces beyond the markdown**, both described in
+[`cards/building-the-book.md`](../cards/building-the-book.md): the published HTML book, and
+`make review`, a local server that renders the chapters and lets reviewers attach comments to a
+passage. Annotations land in `review/annotations.jsonl` and are collected into
+[`review/REVIEW.md`](../review/REVIEW.md), **which is the file to read if you have been asked to
+act on a review.** Both surfaces can read a section aloud.
+
+What the editorial pass changed and what it deliberately left alone
 is in [*The editorial pass*](#the-editorial-pass) below; read that before editing any chapter,
 because several conventions in this section were corrected by it. What the verification pass
 changed, and the new obligation it puts on anyone editing a worked example, is in [*The verification
@@ -155,8 +190,9 @@ Three things every writing task must do, which are easy to miss:
 
 1. **Add your row to the table of contents in `book/README.md`**, in the same commit as the file.
    Nothing else encodes order, and an untabled file is an orphan to the editorial pass.
-2. **Create your own part directory.** None of them exist yet; there are no `.gitkeep` files by
-   design. `book/README.md` has the layout table.
+2. **Put the file in the right part directory.** All six exist now, and the layout table in
+   `book/README.md` says which is which. A new *suite* is a change to `PLAN.md`, not a directory
+   you create.
 3. **Append any failure mode you name to the running log below**, and check it first. Two names
    for one phenomenon is the defect the editorial pass is least able to fix cheaply.
 
