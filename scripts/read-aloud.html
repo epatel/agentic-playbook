@@ -25,6 +25,9 @@
   }
   h3 .aloud { top: .07rem; }
   h2:hover .aloud, h3:hover .aloud, .aloud:focus-visible, .aloud.on { opacity: 1; }
+  /* A touch screen has no hover, so a button that only appears on hover is a button nobody can
+     press. Show them, dimmed, wherever hovering is not available. */
+  @media (hover: none) { .aloud { opacity: .55; } }
   .aloud:hover, .aloud.on { color: var(--link); }
   .aloud-speaking { background: var(--aloud-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--aloud-wash); }
 

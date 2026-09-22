@@ -125,6 +125,9 @@
   .sheet h1 .speak { top: .48rem; }    /* the chapter title: no rule, no padding */
   .sheet h2 .speak { top: 1.56rem; }   /* a section: clears book.css's rule and 1.25rem padding */
   .sheet h1:hover .speak, .sheet h2:hover .speak, .speak:focus-visible, .speak.on { opacity: 1; }
+  /* A touch screen has no hover, so a button that only appears on hover is a button nobody can
+     press. Show them, dimmed, wherever hovering is not available. */
+  @media (hover: none) { .speak { opacity: .55; } }
   .speak:hover, .speak.on { color: var(--mark); }
   .speaking { background: var(--mark-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--mark-wash); }
 

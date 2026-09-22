@@ -2584,6 +2584,29 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   existed, with no sign anything was stale — which cost a diagnosis that started out looking like
   broken JavaScript. It is a local tool; correctness on reload beats a cached kilobyte.
 
+- **The HTML book had 96 pixels of sideways scroll on a phone, and three separate causes.** The
+  stylesheet already had a 62rem breakpoint, so the failure was not that nobody had thought about
+  it — it was that the things which overflow have a width of their own and are invisible on a
+  desktop. **Fenced code**: pandoc wraps highlighted code in a `div.sourceCode`, and the `pre`
+  inside it already scrolls, so the missing `overflow-x` on the div shows up nowhere until the
+  viewport is narrower than the code. **Tables**: the six-column cost table cannot be made narrow,
+  so below 48rem a table becomes a block that scrolls inside itself. **The contents**: 22rem of
+  navigation above the book on a 414px screen, now 13rem.
+- **A fourth fault had nothing to do with width.** The read-aloud buttons are revealed by
+  `:hover`, and a touch screen has none, so on a phone they were unreachable rather than merely
+  ugly. They are shown dimmed under `@media (hover: none)` in both surfaces.
+- **The table fix needed the specificity trap again.** `book.css`'s `body > :not(#TOC)` holds
+  everything to the 40rem measure and its `:not()` carries an id's specificity, so a plain
+  `table { max-width: 100% }` lost and the table stayed 640px wide on a 414px screen — briefly
+  making the overflow worse rather than better. `body > table:not(#TOC)` wins. **That is three
+  times this file's one selector has caught something out; it is the first thing to suspect when
+  a rule that should obviously apply does not.**
+- **Measured with iframes rather than by resizing the window**, which this browser does not
+  translate into a page viewport. An iframe of a given width is a real viewport for media
+  queries. One trap: an injected iframe is itself a `body > :not(#TOC)` in the host page and gets
+  clamped to 40rem, which quietly turned a 1280px desktop check into another 680px one until it
+  was given `max-width: none`.
+
 ## Open questions
 
 Raise these rather than guessing. An agent that silently picks one answer commits the whole book

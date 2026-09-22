@@ -394,6 +394,29 @@ pre.mermaid:not([data-processed]) {
 
 /* ------------------------------------------------------------------------ narrow screens, print */
 
+/* ------------------------------------------------------------------------------------- narrow */
+
+/* Two things overflow a phone no matter how the column is sized, because their content has a
+   width of its own: a fenced block of code and a six-column table. Both scroll inside themselves
+   rather than taking the page sideways with them. pandoc wraps highlighted code in a div of its
+   own, and it is the div that has to scroll — the pre inside it already does, which is why this
+   is easy to miss on a desktop. */
+div.sourceCode { overflow-x: auto; }
+
+@media (max-width: 48rem) {
+  /* The selector has to out-rank `body > :not(#TOC)` above, whose `:not()` carries an id's
+     specificity and would otherwise hold the table at the 40rem reading measure — which on a
+     phone is the overflow, not the cure. */
+  body > table:not(#TOC) {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  /* A long URL in Further reading has no break point of its own. */
+  p, li { overflow-wrap: break-word; }
+}
+
 @media (max-width: 62rem) {
   html { font-size: 16px; }
 
@@ -413,6 +436,11 @@ pre.mermaid:not([data-processed]) {
   }
 
   #title-block-header { margin-top: 2.5rem; }
+}
+
+/* The contents sit above the book on a narrow screen, so they should not fill it. */
+@media (max-width: 48rem) {
+  #TOC { max-height: 13rem; }
 }
 
 @media print {
