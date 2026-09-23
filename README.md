@@ -29,7 +29,7 @@ research note. Licensed [CC BY 4.0](LICENSE).
 ### Part I — The Argument
 
 Why the engineering layer around these tools is genuinely unsettled, and what a developer still
-needs to know. Roughly 11% of the book, and deliberately out of the way after that.
+needs to know. Roughly a tenth of the book, and deliberately out of the way after that.
 
 1. [Before Git, before Scrum, before this](book/part-1-argument/before-git-before-scrum-before-this.md)
 2. [The four areas, re-weighted](book/part-1-argument/the-four-areas-reweighted.md)
@@ -154,7 +154,7 @@ The same HTML build is published to
 | [`book/`](book/) | The book. [`book/README.md`](book/README.md) holds the authoritative table of contents, which is the only thing that encodes order. |
 | [`book/STYLE.md`](book/STYLE.md) | Voice, the outright bans, the formatting mechanics. |
 | [`book/TEMPLATE-play.md`](book/TEMPLATE-play.md) | The five-heading play contract, plus one fully written specimen play. |
-| [`book/examples/`](book/examples/) | Scratch projects behind the worked examples, so captured command output can be captured again. |
+| [`book/examples/`](book/examples/) | Scratch projects behind the worked examples, so captured command output can be captured again, plus `filter-paired-run/`, a paired test of token-filtering tools against the bill — written, not yet run, and the one project here that spends money. |
 | [`notes/research/`](notes/research/) | Twenty-one cited research notes. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
 | [`notes/raw/`](notes/raw/) | The original ideation, frozen as a provenance record. |
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
