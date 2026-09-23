@@ -63,9 +63,10 @@ simple, greenfield work against 10% or less on complex legacy — though it prin
 behind it.
 
 Meanwhile, review changed character. Automated review rose from about 19% of pull requests to about
-84% and overtook human review outright, and latency on agent-authored pull requests rose about 20%.
-Merge rates stayed essentially flat and revert rates declined slightly, which is the detail that
-catches teams out: the quality signal everyone watches is the one that does not move.
+84% and overtook human review outright, and agent-authored pull requests spent about 20% longer
+between first human review and merge than comparable human ones. Merge rates stayed essentially flat
+and revert rates declined slightly, which is the detail that catches teams out: the quality signal
+everyone watches is the one that does not move.
 
 The authors' own summary is the sentence to carry, because it does the hedging for you: the result
 is "evidence that a near-doubling is attainable under favorable conditions and over a long enough

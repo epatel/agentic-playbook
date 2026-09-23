@@ -40,13 +40,14 @@ The constraint that actually binds is not what the agent can do. In the largest 
 available — 802 developers, 196,212 pull requests, January 2024 to April 2026 — a doubling mandate
 worked on its own terms: throughput reached 2.09× baseline and nearly all pull requests became
 agent-authored. Merge and revert rates stayed flat. What moved was human review coverage, from 89%
-of pull requests to 68%, with the load on each remaining reviewer doubling, and end-to-end cycle
-time rose 22% — the thing the mandate existed to compress. The interior of that study is in
-[*Where the time actually goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md).
-Anthropic put the general case plainly in December 2024 and has not retracted it: "For many
-applications, however, optimizing single LLM calls with retrieval and in-context examples is usually
-enough." The exchange rate is throughput on the days you would have got away with it, and the
-occasional half-hour spent hand-writing something an agent would have done perfectly well.
+of pull requests to 68%, with the load on each remaining reviewer doubling, and agent-authored pull
+requests took 22% longer end to end than comparable human ones — what the mandate existed to
+compress. The interior of that study is in [*Where the time actually
+goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md). Anthropic put the general
+case plainly in December 2024 and has not retracted it: "For many applications, however, optimizing
+single LLM calls with retrieval and in-context examples is usually enough." The exchange rate is
+throughput on the days you would have got away with it, and the occasional half-hour spent
+hand-writing something an agent would have done perfectly well.
 
 ## Worked example
 

@@ -271,8 +271,7 @@ requests**, **January 2024 – April 2026**.
 - AI-authored PRs rose **from near zero to ~90%** of PRs by study end.
 - Review transformation: human review coverage fell **21 percentage points, from 89% to 68%**;
   automated review rose **from ~19% to ~84%** of PRs, overtaking human review; **per-reviewer load
-  doubled (2.0×)**; AI-authored PR review latency rose **~20%**; **PR cycle time increased 22%**
-  post-mandate.
+  doubled (2.0×)**; AI-authored PRs take **~20% longer from first human review to merge** and **22% longer in total cycle time** than comparable human PRs, post-mandate (PR-level regression, Table IV; corrected 23 September 2026 from "PR cycle time increased 22%", which read as organisation-wide).
 - Quality indicators: **merge rates essentially flat**; **revert rates declined slightly (−0.067 for
   AI-authored PRs)**.
 - Heterogeneity: management tier **+86%**; IC through Principal **+27% to +42%**; **legacy code +12%
@@ -675,7 +674,7 @@ Then look at where the work went.
 Human review coverage fell **21 percentage points, from 89% of PRs to 68%**. Automated review rose
 from about **19% to about 84%** of PRs and overtook human review entirely. The load on each
 remaining human reviewer **doubled**. Review latency on AI-authored PRs rose about **20%**. And
-end-to-end **PR cycle time went up 22%** after the mandate — the thing the mandate was meant to
+AI-authored PRs took **22% longer end to end than comparable human PRs** after the mandate — the thing the mandate was meant to
 compress.
 
 The quality signals were the surprise: **merge rates stayed essentially flat** and **revert rates

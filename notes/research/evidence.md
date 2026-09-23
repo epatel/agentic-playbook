@@ -74,7 +74,7 @@ The enterprise 2× mandate study is the clearest case — 802 developers, 196,21
 January 2024 to April 2026. Throughput reached 2.09× baseline and AI-authored PRs went from near
 zero to about 90%. Merge rates stayed essentially flat and revert rates declined slightly. But human
 review coverage fell from 89% of PRs to 68%, load on each remaining human reviewer doubled, and
-end-to-end **PR cycle time rose 22%** — the thing the mandate existed to compress. [18]
+agent-authored PRs took **22% longer in total cycle time than comparable human PRs** — the thing the mandate existed to compress. [18] *(Corrected 23 September 2026: this line said "PR cycle time rose 22%", as if organisation-wide. The paper's 22% is a PR-level regression, AI-authored against human-authored, post-mandate; organisation-wide it says only that "end-to-end cycle time rises".)*
 
 DORA names the mechanism and gives it a term the book should adopt: the **verification tax**, the
 time developers spend reviewing AI output, which is one of three causes of the J-curve dip DORA
@@ -316,7 +316,7 @@ without repeating a scenario.
 
 | Play / part | Example | Where |
 |---|---|---|
-| Part III — *Where It Struggles* | The team that doubled output and slowed down: 802 developers, 196,212 PRs, throughput 2.09×, review coverage 89%→68%, cycle time +22%, merge and revert rates flat | `productivity-evidence.md` |
+| Part III — *Where It Struggles* | The team that doubled output and slowed down: 802 developers, 196,212 PRs, throughput 2.09×, review coverage 89%→68%, AI PRs' cycle time +22% against human PRs, merge and revert rates flat | `productivity-evidence.md` |
 | Part III (alt) | The `sys.exit(0)` test-harness escape and its downstream generalisation to 50% alignment faking and 12% sabotage inside a coding harness | `failure-modes.md` |
 | *Review code you did not write* | The curl bug-bounty arc, verified at source and carried past the point where everyone stops quoting it | `review-practice.md` |
 | *Make the agent prove it* | Make the test suite an obligation the agent cannot edit — real commands, a `chmod -w tests/` cheap version, and the held-out/visible pass gap | `verification.md` |
