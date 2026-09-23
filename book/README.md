@@ -1,5 +1,7 @@
 # The Agentic Playbook — the book
 
+*Working plays for an unsettled practice.*
+
 This directory is the deliverable: a markdown book, readable on GitHub, for working developers who
 already use agentic coding tools daily and want to get good at them. The design behind it is in
 [`PLAN.md`](../PLAN.md); execution state and the handoff note are in

@@ -2,6 +2,8 @@
 
 # The Agentic Playbook
 
+*Working plays for an unsettled practice.*
+
 A field guide for working developers who already use agentic coding tools daily and want to get
 good at them. It is plays-first: about three-fifths of the book is named, self-contained moves with
 a fixed shape, and the argument that justifies them is kept short on purpose.

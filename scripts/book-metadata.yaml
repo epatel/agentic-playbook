@@ -4,14 +4,14 @@
 #
 # `date` is supplied by the build script, not here, so a rebuild always says when it was built.
 #
-# The subtitle and author lines are deliberately absent. Naming the book on its own title page is
-# an editorial decision (`934259dc8038`), not a build one — uncomment and fill them in when that
-# pass has made the call.
+# The subtitle is the author's call, made 23 September 2026: it says on the title page that the
+# plays are provisional, which the preface and Part III say at length. The author line is still
+# deliberately absent — an editorial decision (`934259dc8038`), not a build one.
 #
-# subtitle: "…"
 # author: "…"
 
 title: "The Agentic Playbook"
+subtitle: "Working plays for an unsettled practice"
 lang: en-GB
 toc-title: "Contents"
 papersize: a4

@@ -2557,6 +2557,12 @@ Grafana's spelling**; the reason is in the agent file.
 - **Context-reduction tools are discussed as a category; `rtk` is the example, not the subject
   (2026-09-23).** At the author's direction. `rtk` keeps its numbers because it is the only one
   with independent cost measurements.
+- **The book keeps its title and gains a subtitle: *Working plays for an unsettled practice*
+  (2026-09-23).** The author asked whether "playbook" overclaims for a book whose evidence is thin
+  and whose preface calls it one account to be disagreed with. The title stays because plays-first
+  is a locked decision and three-fifths of the book is plays; the subtitle carries the provisional
+  status onto the title page. It lives in `scripts/book-metadata.yaml`, the root `README.md`, and
+  `book/README.md`; tool names, the review server, and release tags keep the short title.
 
 ## Two proposals from the author's reflection
 
