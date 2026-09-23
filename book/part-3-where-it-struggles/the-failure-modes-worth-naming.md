@@ -54,21 +54,21 @@ play.
 The agent reads the requirements, restates them accurately, and stops meeting them. A 2026 white-box
 study varying only context size on a fixed code-audit task found strict success falling from eight
 runs in ten to three in ten between a roughly 11,000-character context and a roughly
-300,000-character one — a retention ratio of 0.375. Over the same range, requirement-coverage
-retention held at 0.933 to 0.949. The information is present the whole way down. The compliance is
-not.
+300,000-character one — a retention ratio of 0.375, on ten runs each and short of conventional
+significance. Over the same range, requirement-coverage retention held at 0.933 to 0.949. The
+information is present the whole way down. The compliance is not.
 
-The intuitive diagnosis is wrong and leads somewhere useless: it is not that the requirements fell
-out of the window. They are still there, and the agent will recite them to you.
+The requirements did not fall out of the window. They are still there, and the agent will
+recite them to you.
 
 The tell is the recital itself. Ask what the requirements were; it answers correctly; the code does
 not satisfy them. The failures in that study clustered at compilation, execution, and verification
 rather than at reading the files.
 
 The response is a requirement list that lives outside the conversation and gets checked
-mechanically. In the same study a generic "check your work" self-review recovered five runs in ten,
-and an external requirement list recovered ten in ten. That list is step 3 of
-[*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md).
+mechanically. In the same study a generic request to validate every constraint recovered five runs
+in ten, and an external requirement list recovered ten in ten. That list is step 3 of [*Scope a task
+to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md).
 
 ## The Endless Polish
 

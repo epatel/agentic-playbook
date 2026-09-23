@@ -28,7 +28,7 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    opening message. In the one white-box study of this
    ([`failure-modes.md`](../../../notes/research/failure-modes.md), arXiv 2607.17937, August 2026),
    a large-context task that succeeded 3 times in 10 succeeded 10 times in 10 when the requirements
-   were supplied as an external list; a generic "check your work" prompt got 5.
+   were supplied as an external list; a generic request to validate every constraint got 5.
 4. **Stop on the tells, not on the error.** Three tells, any one of which means re-scope rather than
    continue: the agent re-implements something already present in its own diff; an edit contradicts
    an earlier edit from the same run; you have said "continue" more than twice.
