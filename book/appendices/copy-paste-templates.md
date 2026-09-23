@@ -33,7 +33,7 @@ Load a card when its situation matches. Each one stands alone.
   would use: "adding a migration", "touching anything under billing">
 - [<card-name>](cards/<card-name>.md) — <trigger>
 
-## Working agreements
+## Conventions
 
 - <A convention that is true everywhere, traceable to a correction somebody typed twice.>
 - <Another. If there are more than about six, some of them belong in a card.>
@@ -160,5 +160,5 @@ agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.
 ```
 
 The last item is the one people delete first, and it is the one the evidence supports most directly:
-review coverage is where agent-assisted throughput is paid for, and a reviewer who cannot decline is
-not a reviewer.
+review coverage is where agent-assisted throughput is paid for, and a reviewer past the point of
+attention who says nothing is where it stops being paid.

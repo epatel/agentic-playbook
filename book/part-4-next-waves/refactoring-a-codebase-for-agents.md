@@ -45,8 +45,8 @@ That last one is the part to argue with, and it should be argued with. Duplicati
 arrives later than the saving: the bug fixed in one copy and not the other, the security patch
 applied four times out of five. The claim is not that duplication is free. It is that the exchange
 rate has moved, because the thing duplication used to buy — less code to read — is worth less to a
-reader that reads at no cost, and the thing abstraction charges — behaviour somewhere else — is
-worth more to a reader that cannot see somewhere else.
+reader that reads fast and tirelessly, if not for free, and the thing abstraction charges —
+behaviour somewhere else — is worth more to a reader that cannot see somewhere else.
 
 ## Behaviour you cannot see from the file you are in
 
@@ -86,14 +86,16 @@ work, and all four are cheaper to change.
 - **Names that describe what a thing does rather than where it sits.** `PaymentRetryPolicy` carries
   its own documentation into the window; `Helper2` requires a reading session to recover.
 - **Dead code and dead configuration removed.** An agent has no way to know that the second
-  implementation is the one nobody calls any more. It will find both and pick, roughly evenly.
+  implementation is the one nobody calls any more. It will find both and may build on either.
 
 ## What would change this position
 
 Nobody has measured any of it. There is no published comparison of agent success rates between
 feature-first and layer-first versions of the same codebase, no measurement of what explicit control
-flow is worth in tokens or in correctness, and no study establishing that a shorter context file
-produces better output. The mechanism is plausible and the evidence is an absence.
+flow is worth in tokens or in correctness, and no study of context files as such establishing that
+a shorter one produces better output — the nearest measurement is of context size in general, in
+[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
+The mechanism is plausible and the direct evidence is an absence.
 
 Two things would settle it, and both are runnable by a team with a spare week rather than by a
 laboratory. Take a real repository, restructure one subsystem feature-first, and run the same twenty

@@ -1,6 +1,6 @@
 # The four areas, re-weighted
 
-A developer's work has been described, usefully, as four things happening at once. *Computer
+This book treats a developer's work as four things happening at once. *Computer
 science*: what you know about the machine and about what runs on it. *Software engineering*: the
 things done in order to work together. *Craftsmanship*: personal facility with your tools.
 *Innovation*: the creative part, where a problem gets solved that was not being solved.

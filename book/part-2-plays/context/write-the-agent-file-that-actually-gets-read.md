@@ -41,15 +41,15 @@ Treat the agent file as a working set, not as a description of the project. Six 
    same subject is how the first one got ignored. One line should tell it to stop and ask when two
    lines disagree, rather than silently picking one.
 
-This works because an agent file is context, not configuration. Claude Code's own documentation was
-unusually plain about it in September 2026: the file is "delivered as a user message after the
-system prompt". An action you need blocked regardless of what the model decides needs a hook, not a
-sentence. So the agent file does not constrain the agent, it competes for its attention — with the
-task, the files it has opened, and every other line of the agent file. A line that changes nothing
-is not neutral. It is noise, paid for out of the same attention as the lines that matter. That is
-the exchange rate here. You give up the comfort of writing something down once and considering it
-handled, and you get a file whose instructions are followed because there are few enough of them to
-be followed.
+This works because an agent file is context, not configuration. Claude Code's documentation said as
+much in September 2026: the file is "delivered as a user message after the system prompt". An action
+you need blocked regardless of what the model decides needs a hook, not a sentence. So the agent
+file does not constrain the agent, it competes for its attention — with the task, the open files,
+and every other line. A line that changes nothing is not neutral. It is noise, paid for out of the
+same attention as the lines that matter. That is the exchange rate here. You give up the comfort of
+writing something down once and considering it handled, and you get a file whose instructions are
+followed because there are few enough of them to be followed. That last claim is mechanism, not
+measurement.
 
 ## Worked example
 

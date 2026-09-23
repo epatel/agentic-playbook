@@ -25,6 +25,11 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   [*Understand what you are paying
   for*](../part-2-plays/economics/understand-what-you-are-paying-for.md).
 
+- **Cache write.** Putting a prefix of the conversation into the provider's prompt cache so later
+  turns can read it cheaply. Billed at a premium over fresh input on some vendors, and paid again in
+  full whenever the cache has gone cold — which is why an idle session's next message can cost many
+  times the one before it.
+
 - **Card.** A short, self-contained markdown file holding one subject's conventions, loaded when its
   situation arrives rather than in every session, indexed from a slim agent file that names its
   trigger. The defining rule is self-containment: loading one card never requires loading another. A
@@ -73,6 +78,12 @@ Named failure modes are a separate vocabulary and are indexed at the end of
 - **Play.** This book's unit: a named, self-contained move under five fixed headings — Problem, The
   play, Worked example, Failure mode, Checklist. There is no required order and no play assumes you
   have read another.
+
+- **Preparation and execution.** The two modes of working with an agent. *Preparation* makes the
+  project legible without you in the room: the agent file, the cards, the conventions written down,
+  the checks a change must pass. *Execution* hands a prepared project a task and reads what comes
+  back. Most of Part II is preparation. See [*The four areas,
+  re-weighted*](../part-1-argument/the-four-areas-reweighted.md#software-engineering-the-area-that-grew).
 
 - **Reasoning effort.** A dial exposed by several providers controlling how much the model thinks
   before answering, billed as output tokens. A first-order cost control, and one worth setting per

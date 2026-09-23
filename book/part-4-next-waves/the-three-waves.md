@@ -59,10 +59,10 @@ repeating them.
 - **Written September 2026.** Everything in the two chapters is a position at a date, and the
   argument for the second wave in particular is a bet about what models will still be bad at in a
   year.
-- **Nothing here has a study behind it.** Everywhere else this book makes a claim about the world it
-  cites one. These two chapters argue from mechanism instead: here is how the thing works, therefore
-  here is what should follow. That is weaker evidence, and it is being called weaker evidence rather
-  than dressed up.
+- **Nothing here has a study behind it.** Almost everywhere else this book makes a claim about the
+  world it cites one. These two chapters argue from mechanism instead: here is how the thing works,
+  therefore here is what should follow. That is weaker evidence, and it is being called weaker
+  evidence rather than dressed up.
 - **Each chapter says what would change its mind.** A forecast with no falsifier is a mood. Both
   name the measurement that does not exist yet and would settle the question, and the signal worth
   watching in the meantime.

@@ -1513,8 +1513,27 @@ Not done, deliberately: *Choose your harness* is about configuring a harness mor
 and the *Starve the context* worked example narrates an outcome beside a blank table. The first is
 a structural call for the author; the second waits on `rtk-paired-run` results.
 
-**Still open from the reassessment:** the four-areas framework is introduced as "described,
-usefully" with no attribution. Either credit its origin or own it.
+**Closed later the same day:** the four-areas framework was introduced as "described, usefully"
+with no source. It comes from the author's own ideation (`notes/raw/idea.md`), so the chapter now
+presents it as the book's own.
+
+### Part IV and the appendices, the same pass
+
+1. *Inviting non-developers in* said the check "lets the reviewer be agent file" — the brief → agent
+   file rename had replaced the adjective. The only such casualty; every other preceding word was
+   checked.
+2. *Further reading* said the two `rtk` benchmarks reached "opposite conclusions". They agreed, and
+   Quesma says so. It now also names `book/examples/rtk-paired-run/` — by path, because `make check`
+   refuses a link to a file under `book/` that is not in the table of contents.
+3. *Refactoring a codebase for agents* no longer calls an agent "a reader that reads at no cost",
+   which the Economics suite spends a play refuting; no longer states that an agent picks between
+   dead and live code "roughly evenly"; and says the nearest measurement to "shorter context files
+   work better" is of context size in general. *Write the agent file that actually gets read* now
+   says its version of that claim is mechanism, not measurement.
+4. Smaller: a doubled phrase in *Inviting non-developers in*; "Almost everywhere else" in *The three
+   waves*; the agent-file template's "Working agreements" heading is now "Conventions", so it no
+   longer shares a name with the team document one template later; the review checklist's closing
+   line matches its last item; glossary entries for *cache write* and *preparation and execution*.
 
 ## The Wave #2 check
 
