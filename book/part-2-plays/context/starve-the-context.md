@@ -67,7 +67,7 @@ Both sides are telling the truth. The tool removes most of the bytes a command e
 still goes up: most input cost arrives as cached re-reads at roughly a tenth of the fresh price,
 which a filter never sees, and trimmed output costs extra turns to recover.
 
-So the team ran the paired comparison on their own repo: twelve backlog tasks, three repetitions
+So the team set up the paired comparison on their own repo: twelve backlog tasks, three repetitions
 each. These are the columns that settle it, and nobody else's numbers go in them:
 
 | Condition | Fresh input | Cache reads | Output | Turns | Tasks passed |
@@ -77,11 +77,10 @@ each. These are the columns that settle it, and nobody else's numbers go in them
 
 *Blank on purpose: the only numbers that settle it are the ones you measure.*
 
-The outcome was mixed. The filter was a clear win on exactly one thing: the
-dependency-resolution output from their package manager, four thousand lines of tree in which the
-agent needed six. It was a mild loss everywhere else, mostly in turns. They kept it for that one
-command and uninstalled the global hook — less satisfying than either the README or the
-benchmarks predicted.
+The published runs say where to look. Quesma found one model's savings "depended on one task and did
+not hold across tasks". A win confined to one noisy command, such as a dependency tree of four
+thousand lines in which the agent needs six, with a loss elsewhere, mostly in turns, means keeping
+the filter for that command and removing the global hook.
 
 ## Failure mode
 

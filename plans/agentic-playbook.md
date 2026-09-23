@@ -1510,9 +1510,12 @@ The same model then read Parts II and III and fixed what it found, on 23 Septemb
    up.
 
 Not done then, done later the same day at the author's direction: *Choose your harness* was about
-configuring a harness more than choosing one — see *Harness levels* below. Still waiting: the
-*Starve the context* worked example narrates an outcome beside a blank table. The first is
-a structural call for the author; the second waits on `filter-paired-run` results.
+configuring a harness more than choosing one — see *Harness levels* below. Closed after that:
+the *Starve the context* worked example no longer reports an unmeasured outcome beside its blank
+table. The team now *sets up* the comparison, and the closing paragraph says where to look, from
+Quesma's sourced finding that one model's savings "depended on one task"; the table stays blank as
+the reader's template. It no longer waits on `filter-paired-run`: a run would add evidence to the
+research note, not fix a flaw in the play.
 
 **Closed later the same day:** the four-areas framework was introduced as "described, usefully"
 with no source. It comes from the author's own ideation (`notes/raw/idea.md`), so the chapter now
