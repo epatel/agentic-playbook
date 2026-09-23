@@ -124,6 +124,14 @@ reassessment*](#the-part-i-reassessment). *Preparation and execution* now lives 
 re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,494 and
 1,487 words against a 1,500 ceiling: **anything added to either has to take something out.**
 
+**A re-test of the `rtk` claims is written and not yet run.**
+[`book/examples/rtk-paired-run/`](../book/examples/rtk-paired-run/README.md) is a paired-run
+protocol, fixed before any result exists, with a runner and an analysis script. `check-tasks` passes
+(twelve seeded bugs, each verified to break the suite and to match its bug report); `preflight` and
+the paid runs have not happened. Until they do, *Starve the context* still correctly says nothing
+has re-tested v0.49.0. **Do not change that sentence, or fill that play's blank table, except from a
+committed `results/<date>/` directory**, using the sentences the README drafted in advance.
+
 **Start with the terminology rename if you are editing anything.** What the book called a *brief*
 is now an **agent file**, and what it called a *research brief* is now a **research note** — the
 one word had been doing both jobs. Two plays and one card changed filename with it, so **a link
@@ -2414,6 +2422,12 @@ Grafana's spelling**; the reason is in the agent file.
   reassessment*](#the-part-i-reassessment).
 - **Each framing line appears once across the preface and Part I.** A repeated disclaimer reads as
   protesting too much; Part III earns the trust the disclaimers were asking for.
+- **The `rtk` re-test measures cost from token counts at dated prices, not from the harness or
+  from `rtk gain`, and its decision rule was written before any run (2026-09-23).** A dry run on
+  synthetic data with a true +8% effect gave a 95% interval of −2% to +37% at twelve tasks and three
+  repetitions, so the protocol requires a pilot to size the full run, and treats an interval that
+  crosses zero as "no measurable difference at this size", never as "no effect". Tasks are seeded
+  bugs in `more-itertools` v11.1.0 because the check has to be automatic and the repository public.
 
 ## Two proposals from the author's reflection
 

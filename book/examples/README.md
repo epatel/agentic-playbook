@@ -26,12 +26,17 @@ python3 book/examples/session-cost/check.py
 | [`meridian/`](meridian/) | [*Decompose into subagents*](../part-2-plays/orchestration/decompose-into-subagents.md), [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md) | `git`, `rg`, `awk` |
 | [`tideline/`](tideline/) | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md), [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md), [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) | `git`, `rg` |
 | [`session-cost/`](session-cost/) | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) | nothing |
+| [`rtk-paired-run/`](rtk-paired-run/) | [*Starve the context*](../part-2-plays/context/starve-the-context.md) — a re-test of the `rtk` claims, not yet run | `claude`, `rtk`, `git`, `pytest`, an API key, and money |
 
 `cards/reproduce.py` ships no tree of its own. That play's worked example is this repository's own
 two-tier setup, so the script copies the real `CLAUDE.md` and `cards/` into a temporary directory
 and runs the commands there. Both blocks in the play are printed verbatim and both are asserted
 verbatim, which means editing a card fails the script — the fix is to re-run it and paste the new
 output in.
+
+`rtk-paired-run/` is the exception to every rule above: it calls a paid API, it keeps its results,
+and the book prints nothing from it yet. Its README is a protocol written before the first run, so
+that the result decides what the book says rather than the other way round.
 
 `session-cost/check.py` is the odd one out: it runs no commands. It re-derives every figure in that
 play's cost table from the token counts and the dated prices, so the play's claim that the

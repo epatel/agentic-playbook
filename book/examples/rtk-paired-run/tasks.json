@@ -1,0 +1,92 @@
+{
+  "repo": "https://github.com/more-itertools/more-itertools.git",
+  "ref": "v11.1.0",
+  "commit": "64be96ceb2a6e836f76f069f4a96d2394d59fd0c",
+  "prompt_template": "A user reported this bug in the library:\n\n{report}\n\nFind the cause and fix it in the library code. Do not modify anything under tests/. You are done when `python3 -m pytest -q tests` passes.",
+  "tasks": [
+    {
+      "id": "tail-off-by-one",
+      "file": "more_itertools/recipes.py",
+      "old": "return islice(iterable, max(0, size - n), None)",
+      "new": "return islice(iterable, max(0, size - n + 1), None)",
+      "report": "`tail(3, [1, 2, 3, 4, 5])` returns only two items. The same call on a generator returns three."
+    },
+    {
+      "id": "partition-swapped",
+      "file": "more_itertools/recipes.py",
+      "old": "(true_queue if pred(value) else false_queue).append(value)",
+      "new": "(false_queue if pred(value) else true_queue).append(value)",
+      "report": "`partition()` puts every item in the wrong one of its two outputs."
+    },
+    {
+      "id": "unique-everseen-key",
+      "file": "more_itertools/recipes.py",
+      "old": "            if k not in seen:\n                seen.add(k)",
+      "new": "            if k in seen:\n                seen.add(k)",
+      "report": "`unique_everseen(['a', 'B', 'b'], key=str.lower)` returns nothing at all. Without `key=` it works."
+    },
+    {
+      "id": "sieve-step",
+      "file": "more_itertools/recipes.py",
+      "old": "data[p * p : n : p + p] = bytes(len(range(p * p, n, p + p)))",
+      "new": "data[p * p : n : p] = bytes(len(range(p * p, n, p + p)))",
+      "report": "`list(sieve(100))` raises a ValueError instead of listing the primes below 100."
+    },
+    {
+      "id": "polynomial-eval-order",
+      "file": "more_itertools/recipes.py",
+      "old": "powers = map(pow, repeat(x), reversed(range(n)))",
+      "new": "powers = map(pow, repeat(x), range(n))",
+      "report": "`polynomial_eval([1, 0, 0], 2)` should be 4 (that is x squared at x = 2) but returns 1."
+    },
+    {
+      "id": "nth-or-last-short",
+      "file": "more_itertools/more.py",
+      "old": "return last(islice(iterable, n + 1), default=default)",
+      "new": "return last(islice(iterable, n), default=default)",
+      "report": "`nth_or_last([0, 1, 2, 3], 2)` returns 1. It should return 2."
+    },
+    {
+      "id": "windowed-no-fill",
+      "file": "more_itertools/more.py",
+      "old": "        yield tuple(window) + ((fillvalue,) * (n - len(window)))\n        return",
+      "new": "        yield tuple(window)\n        return",
+      "report": "`list(windowed([1, 2], 3))` returns `[(1, 2)]`. It used to pad the short window with the fill value."
+    },
+    {
+      "id": "interleave-longest-falsy",
+      "file": "more_itertools/more.py",
+      "old": "            if x is not _marker:\n                yield x",
+      "new": "            if x:\n                yield x",
+      "report": "`list(interleave_longest([0, 1], [2]))` returns `[2, 1, <object object at 0x...>]`. The zero has gone missing and a stray object has appeared at the end."
+    },
+    {
+      "id": "split-at-maxsplit",
+      "file": "more_itertools/more.py",
+      "old": "            if maxsplit == 1:\n                yield list(it)\n                return",
+      "new": "            if maxsplit == 2:\n                yield list(it)\n                return",
+      "report": "`split_at` with `maxsplit=2` stops after a single split."
+    },
+    {
+      "id": "mark-ends-last",
+      "file": "more_itertools/more.py",
+      "old": "        yield first, True, a",
+      "new": "        yield first, False, a",
+      "report": "`mark_ends()` never marks any element as the last one."
+    },
+    {
+      "id": "rstrip-cache",
+      "file": "more_itertools/more.py",
+      "old": "            yield from cache\n            cache_clear()\n            yield x",
+      "new": "            yield from cache\n            yield x",
+      "report": "`list(rstrip([1, None, 2, None, 3, None], lambda x: x is None))` repeats some of the `None` values in the middle."
+    },
+    {
+      "id": "consecutive-groups-key",
+      "file": "more_itertools/more.py",
+      "old": "key = lambda x: x[0] - x[1]",
+      "new": "key = lambda x: x[0] + x[1]",
+      "report": "`consecutive_groups([1, 2, 3, 10, 11])` puts every number in a group of its own."
+    }
+  ]
+}
