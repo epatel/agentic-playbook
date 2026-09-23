@@ -90,12 +90,13 @@ work, and all four are cheaper to change.
 
 ## Parts off the shelf
 
-Choosing a component used to be a question about people: who knows it, who can hire for it. It is
-now also a question about the model. A widely published design system, framework, or convention is
-a part with a public datasheet: the agent file names it and its version and describes only your
-departures, where a home-grown equivalent must be documented in full and still arrives unfamiliar.
-That is one more reason for the boring, popular choice. The catch is the edition: a popular part in
-a version the model saw less of is the Wrong Edition, described in [*The failure modes worth
+Choosing a component is the old COTS decision, commercial off-the-shelf against built in-house, and
+it used to be settled by people: who knows it, who can hire for it. Now the model's familiarity
+counts too. A widely published design system, framework, or convention is a part with a public
+datasheet: the agent file names it and its version and describes only your departures, where a
+home-grown equivalent must be documented in full and still arrives unfamiliar. That is one more
+reason for the boring, popular choice. The catch is the edition: a popular part in a version the
+model saw less of is the Wrong Edition, described in [*The failure modes worth
 naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), waiting to happen.
 
 ## What would change this position
