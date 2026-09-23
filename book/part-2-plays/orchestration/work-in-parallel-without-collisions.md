@@ -13,8 +13,8 @@ anything.
 
 Partition the repository before you start, and treat integration as the part that costs money.
 
-1. **Split by directory, and put the split in every agent file.** Each agent owns named paths, and
-   each agent file ends with the clause that makes the ownership real: if you need to change
+1. **Split by directory, and put the split in every task brief.** Each agent owns named paths, and
+   each task brief ends with the clause that makes the ownership real: if you need to change
    something outside these paths, stop and tell me. Without it, an agent that needs one line
    elsewhere takes it, and the partition you designed is a partition only you observed.
 2. **Give each agent its own checkout, and budget for the environment.** `git worktree
@@ -117,7 +117,7 @@ run against since the last branch landed.
 
 ## Checklist
 
-- [ ] Each agent's owned paths are named in its agent file, with the stop-and-tell-me clause
+- [ ] Each agent's owned paths are named in its task brief, with the stop-and-tell-me clause
 - [ ] Each agent has its own checkout, with its own dependencies and environment file
 - [ ] Landmine files — migrations, route tables, index files, lockfiles — are serialised
 - [ ] Branch pairs were checked for overlapping changed files before merging

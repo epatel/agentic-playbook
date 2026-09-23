@@ -18,7 +18,7 @@ Four tests before you delegate, and two habits that keep them honest.
    one-file edit you could make from memory — loses on every term.
 2. **Do it yourself when specifying it is the hard part.** If stating precisely what you want means
    working out the invariant, the ordering, or the constraint, you have done the expensive part by
-   the time the agent file is written. Write the change; delegate the sweep that follows it.
+   the time the task brief is written. Write the change; delegate the sweep that follows it.
 3. **Do it yourself when nothing cheap can say it is wrong.** No test, no type, no reproducer, no
    diff short enough to scan: what comes back is a claim rather than a result. Buying claims is how
    a saving relocates into review, which is where DORA's *verification tax* is paid.
@@ -54,7 +54,7 @@ One week on `granary`, a Kotlin service ingesting warehouse stock feeds from for
 tasks sat on the board looking like the same size of job.
 
 **The rename.** `supplierRef` became `supplierCode` across the ingest module. The agent had done the
-equivalent the month before: an agent file, a wait, and a fourteen-file diff to read. This time it
+equivalent the month before: a task brief, a wait, and a fourteen-file diff to read. This time it
 was one IDE refactoring and a compile.
 
 ```bash

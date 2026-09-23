@@ -5,7 +5,7 @@
 Three people on the team have each worked out something that makes these tools noticeably better,
 and none of the three knows about the other two. One has a skill in their home directory that gets a
 fiddly procedure right every time. One stopped letting the agent near the migration folder months
-ago and has never said why. One writes agent files in a shape that reliably gets the test written
+ago and has never said why. One writes task briefs in a shape that reliably gets the test written
 first, and could not tell you what the shape is. Nobody is hiding anything; it never came up. The
 team pays the discovery cost three times and collects the benefit once each.
 
@@ -83,9 +83,9 @@ It moved to `.claude/skills/claims-adapter/`, and the same session removed two t
 deployment process retired in the spring, and four lines in `AGENTS.md` describing a linter the team
 had replaced.
 
-Not everything survived. The engineer who wrote agent files in a shape that got the test written
+Not everything survived. The engineer who wrote task briefs in a shape that got the test written
 first could not reconstruct the shape under questioning, and three attempts at writing it down
-produced advice indistinguishable from "write a clear agent file". It was left alone rather than
+produced advice indistinguishable from "write a clear task brief". It was left alone rather than
 promoted, and the note from the session says so. A month later the skill had fired for six of the
 nine engineers; the other three had not written an adapter.
 

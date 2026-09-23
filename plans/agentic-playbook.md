@@ -134,7 +134,9 @@ committed `results/<date>/` directory**, using the sentences the README drafted 
 
 **Start with the terminology rename if you are editing anything.** What the book called a *brief*
 is now an **agent file**, and what it called a *research brief* is now a **research note** — the
-one word had been doing both jobs. Two plays and one card changed filename with it, so **a link
+one word had been doing both jobs. It had been doing a third, too — the instructions for a single
+run — and the rename swept that into "agent file" as well; those are now a **task brief**, with a
+glossary entry. Two plays and one card changed filename with it, so **a link
 written from memory against the old paths is dead**. The reasoning, the rejected alternatives and
 what the rename cost are in the [decisions log](#decisions-log-append-only).
 
@@ -2460,6 +2462,12 @@ Grafana's spelling**; the reason is in the agent file.
   repetitions, so the protocol requires a pilot to size the full run, and treats an interval that
   crosses zero as "no measurable difference at this size", never as "no effect". Tasks are seeded
   bugs in `more-itertools` v11.1.0 because the check has to be automatic and the repository public.
+- **A third sense of *brief* gets its own term: *task brief* (2026-09-23).** The brief → agent file
+  rename turned "write the boundary into the brief for each half" into advice to edit `AGENTS.md` per
+  task, in 16 places across seven files. *Task brief* is the per-run instructions, written per task
+  and discarded with it; *agent file* stays the file every session loads. Uses meaning the shared
+  file ("a line in the shared agent file", "added to the agent file as files no agent may touch")
+  were checked and left alone. The author chose the term.
 
 ## Two proposals from the author's reflection
 

@@ -50,7 +50,7 @@ Assembled from the three plays in [*Orchestration*](../part-2-plays/orchestratio
 - [ ] A single agent with the same token budget was tried before any fan-out was kept
 - [ ] Every irreversible action is performed by code, after a check that code ran
 - [ ] Each scripted stage names the capability gap it covers, and removing it would be a deletion
-- [ ] Each parallel agent's owned paths are in its agent file, and landmine files are serialised
+- [ ] Each parallel agent's owned paths are in its task brief, and landmine files are serialised
 - [ ] Branches are integrated one at a time and the full suite runs on the merged tree
 
 ## Verification and trust

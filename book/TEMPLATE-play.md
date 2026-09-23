@@ -59,7 +59,7 @@ Rules:
   reader takes to a situation this play does not cover. This is the most valuable paragraph in most
   plays and the one most often left out.
 - **State the exchange rate.** One sentence naming what the reader gives up: a slower first pass,
-  four agent files instead of one, being occasionally under-supplied. *What this book assumes about
+  four task briefs instead of one, being occasionally under-supplied. *What this book assumes about
   you* promises in print that where a play has a cost, the play states it — so a play listing only
   benefits contradicts Part I in print. It sits naturally at the end of the why-it-works paragraph.
 - A mermaid diagram belongs here if there is a topology or a flow. Never ASCII art.
@@ -215,7 +215,7 @@ is an archaeology dig, conducted against a deadline, and archaeology is slower t
 ## The play
 
 Make the working tree disposable before every agent run, so that "throw it away and try a better
-agent file" costs nothing and therefore actually happens.
+task brief" costs nothing and therefore actually happens.
 
 1. **Commit or stash your own work first.** The tree is clean at the moment the agent starts. If the
    work is not commit-worthy, `git stash -u` is enough; the point is only that `git diff` afterwards
@@ -233,7 +233,7 @@ agent file" costs nothing and therefore actually happens.
 
 What this is really buying is the ability to discard. Teams that skip the checkpoint do not discard
 bad runs, they salvage them — because discarding would take their own work down with it. Salvaging a
-bad run is almost always more expensive than re-running it with a better agent file, and it is
+bad run is almost always more expensive than re-running it with a better task brief, and it is
 always more expensive than it feels while you are doing it. Every other benefit here is downstream
 of making the cheap option available.
 

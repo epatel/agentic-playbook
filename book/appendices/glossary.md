@@ -78,7 +78,7 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   before answering, billed as output tokens. A first-order cost control, and one worth setting per
   class of work rather than leaving at its default everywhere.
 
-- **Run.** One agent session against one task, from the opening agent file to the point where it
+- **Run.** One agent session against one task, from the opening task brief to the point where it
   stops. Composed of turns; the thing a checkpoint lets you discard.
 
 - **Sandbox.** Operating-system isolation — filesystem and network — enforced by the kernel against
@@ -95,6 +95,11 @@ Named failure modes are a separate vocabulary and are indexed at the end of
 - **Subagent.** A second agent invoked by the first, with its own context window and its own tool
   set, which returns a summary rather than its working. The isolation is the point and the summary
   is the risk: it reads the same whether the work was thorough or partial.
+
+- **Task brief.** The instructions for one run: what to do, where the boundary is, what counts as
+  done, and what not to touch. Written per task and discarded with it, which is the difference from
+  the agent file, loaded by every session. See [*Scope a task to fit the
+  window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md).
 
 - **Token.** The unit a model reads, writes, and is billed in — roughly a short word, though models
   of different generations tokenise differently, which is why per-token prices do not compare across
