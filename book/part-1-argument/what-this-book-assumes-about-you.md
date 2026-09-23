@@ -54,14 +54,9 @@ a more productive thing than a conversation with a mandate.
 
 ## What this book will not do
 
-It will not sell you anything. There is no vendor relationship behind any tool named here. Tools
-appear because a concrete example beats an abstract one, and they appear inside plays rather than as
-headings, because a chapter named after a product is a chapter with a shelf life.
-
-It will not tell you that this is inevitable. Not that you are behind, not that developers who do
-not adopt will be replaced, not that the industry is about to be transformed by the end of the
-quarter. Those claims cannot be checked, and the people making them are usually also selling the
-remedy.
+It will not sell you anything. There is no vendor relationship behind any tool named here, and no
+claim that any of this is inevitable: that claim cannot be checked, and the people making it are
+usually also selling the remedy.
 
 It will not give you a number it cannot source. That constraint costs more than it sounds like it
 should, because the published evidence on AI-assisted development is considerably worse than the
@@ -73,41 +68,14 @@ in the field, and which
 reports in full. Where this book hedges, that is why. Where it gives a figure, the figure is dated
 in the sentence and traceable to a research note in [`notes/research/`](../../notes/research/).
 
-## Preparation and execution
-
-There is a way of working with these tools where the context gets assembled in the conversation,
-one prompt at a time. Here is the project. Now here is the module. Now here is the function, and
-here is how this codebase handles errors, and — five prompts in — here is the actual task. It works,
-and it is the wrong shape. None of that briefing survives the session, so tomorrow you pay for it
-again, and the part of the day you are sharpest goes on re-describing a codebase that has not moved
-since Tuesday.
-
-The alternative is that the project is ready before the agent starts: prepared, checked, in place,
-and then a task rather than a briefing. Closer to a rocket launch than to a conversation, and
-nothing gets explained on the pad.
-
-That splits the work into two modes. *Preparation* is everything that makes the project legible
-without you in the room — the agent file, the *cards* (short files, one subject each, loaded when
-that subject comes up), the conventions written down, the checks a
-change has to pass. *Execution* is handing a prepared project a task and reading what comes back.
-The agent is useful in both, which is the half that gets missed: most preparation material is
-written and kept current by the agent itself.
-
-The reason to hold them apart is that they happen at different times. A well-prepared project needs
-almost no preparation at the moment of use. You sit down, you give it a task, and the first prompt
-is real work.
-
-Most of Part II is preparation-mode work: things to do on a quiet afternoon, against a problem you
-do not have yet, and cashed in on a day when you are busy and have no patience for any of it.
-
 ## How to read it
 
 Not front to back, and not in one sitting.
 
-The plays are the point. Six suites, each play self-contained under the same five headings, so that
-somebody who opens the book at one play can act on it the same afternoon without having read
-anything around it. Plays link to each other where the dependency is real. There is no required
-order.
+The plays are the point. Six suites, each play self-contained under the same five headings. Plays
+link to each other where the dependency is real. There is no required order. Most of them are
+preparation work, in the sense [*The four areas,
+re-weighted*](the-four-areas-reweighted.md#software-engineering-the-area-that-grew) gives the word.
 
 *Where It Struggles* is where the book argues against itself: [*What agents are reliably bad
 at*](../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md), [*The failure modes worth
@@ -116,8 +84,6 @@ goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and [*What
 contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you are sceptical,
 start there. It is the part that decides whether the rest is worth your week, and it was written
 expecting to be read first.
-
-*The Argument* — this — exists to be short.
 
 ## What it costs
 

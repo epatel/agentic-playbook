@@ -21,8 +21,7 @@ its own title.
 The other thing the book tries to do is be honest about the evidence, which is in worse shape than
 the discourse suggests. Nearly every published study of "AI coding productivity" measures
 autocomplete rather than agents. Several of the most-quoted figures in the field do not survive
-being looked up. *Where It Struggles* is the part that says so, at length, and it was written
-expecting sceptical readers to start there. If you are one of them, start there.
+being looked up. *Where It Struggles* is the part that says so, at length.
 
 A note on how this was made, because the book argues elsewhere that this should be disclosed. *The
 Agentic Playbook* was written with agents: several of them, working in parallel on separate
@@ -30,10 +29,3 @@ chapters, against a shared plan, a style guide, and a set of research notes, wit
 commissioning the work and this final pass reconciling the results into one voice. That is the
 practice the book describes, applied to the book. It also means the failure modes named in these
 pages were not researched at a distance. Most of them turned up in the drafting.
-
-None of this is the consensus, because there is no consensus to be part of. It is one account,
-written in enough detail to be disagreed with precisely. Where it gives a figure, the figure is
-dated. Where it is speculating, it says so and names the experiment that would settle it. Where a
-play costs you something, the play tells you what.
-
-Start wherever your week hurts.

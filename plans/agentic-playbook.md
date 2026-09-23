@@ -113,11 +113,16 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 42,193 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 41,759 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
 `main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
 than to `main`. **`make check` is clean, and running it is how you finish.**
+
+**Part I was reassessed and restructured after publication** — see [*The Part I
+reassessment*](#the-part-i-reassessment). *Preparation and execution* now lives in *The four areas,
+re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,494 and
+1,487 words against a 1,500 ceiling: **anything added to either has to take something out.**
 
 **Start with the terminology rename if you are editing anything.** What the book called a *brief*
 is now an **agent file**, and what it called a *research brief* is now a **research note** — the
@@ -342,8 +347,8 @@ historical analogy needed sourcing and no research pass covered it.
 
 | File | Owns |
 |---|---|
-| [`before-git-before-scrum-before-this.md`](../book/part-1-argument/before-git-before-scrum-before-this.md) | The historical analogy, the three ways it breaks, and the book's own framing as "not the consensus" |
-| [`the-four-areas-reweighted.md`](../book/part-1-argument/the-four-areas-reweighted.md) | The durable map, with one section per area and a mermaid summary of the four shifts |
+| [`before-git-before-scrum-before-this.md`](../book/part-1-argument/before-git-before-scrum-before-this.md) | The historical analogy, the three ways it breaks, and the conclusion that what converges is a habit (write down, date, re-test) rather than a set of conventions |
+| [`the-four-areas-reweighted.md`](../book/part-1-argument/the-four-areas-reweighted.md) | The durable map, with one section per area and a mermaid summary of the four shifts; *preparation* and *execution* as modes, inside the Software engineering section |
 | [`what-this-book-assumes-about-you.md`](../book/part-1-argument/what-this-book-assumes-about-you.md) | The stated reader, the evidence posture, how to read the book, what it costs, what will go stale |
 
 **Three things in Part I constrain later tasks, and two of them are easy to break by accident:**
@@ -1435,6 +1440,40 @@ Five things in it constrain later work:
    this book will not do*'s first line two sections earlier. The paragraph now starts on "The tools
    are installed".
 
+## The Part I reassessment
+
+A later model was asked to reassess Part I for style and reasoning, and then to make four edits.
+Part I went 4,405 → 4,057 words (preface 473 → 387, not counted in Part I); `make check` is clean.
+
+1. **A self-contradiction in *The four areas, re-weighted* is fixed.** The chapter said "Agentic
+   tools move all four" and then closed on "A tool that claims all four at once is making a sales
+   pitch." The close now says the pitch is claiming all four move *in the flattering direction*.
+2. ***Preparation and execution* moved into *The four areas, re-weighted***, as the last three
+   paragraphs of *Software engineering: the area that grew*, with no heading of its own. This
+   reverses the placement recorded in [*The preparation thread*](#the-preparation-thread), at the
+   author's request. That thread declined chapter two for lack of room and because a new section
+   would break the four-part structure; appending to an existing section keeps the structure, and
+   room was made by cutting restatements (the opener's definition of software engineering repeated
+   in its section, "the source material behind this book", "the ideation behind this book", the
+   duplicate durability claim in *Using the map*, one example from each of two lists). The unsourced
+   "most preparation material is written and kept current by the agent itself" became "it can draft
+   and keep current much of the preparation material itself" — a capability, not a finding.
+   *How to read it* in chapter three now links to the new location.
+3. **Chapter one's conclusion now answers its own "substrate moves" objection.** If conventions
+   encode what the model cannot yet do, they may never settle the way Git's did; the new *What this
+   book is, given all that* says the habit converges instead — write down, date, re-test — and links
+   to *What will go stale, and how to tell*. Room came from cutting the SourceSafe/Subversion
+   paragraph, whose point the RCS paragraph already makes.
+4. **Repetition across the preface and Part I was cut**, so each line appears once: "disagreed with
+   precisely" stays in chapter one only; "If you are sceptical, start there" and "Start wherever
+   your week hurts" stay in chapter three only (the preface now ends on its disclosure paragraph);
+   *What this book will not do* is two paragraphs, having lost the tools-as-headings policy (an
+   internal rule, owned by `book/STYLE.md`) and the inevitability paragraph (covered by "That you are
+   behind"). "*The Argument* — this — exists to be short" is gone.
+
+**Still open from the reassessment:** the four-areas framework is introduced as "described,
+usefully" with no attribution. Either credit its origin or own it.
+
 ## The Wave #2 check
 
 Board item `5e0f39858134` read *Refactoring a codebase for agents* against *The unit of work* and
@@ -2368,6 +2407,13 @@ Grafana's spelling**; the reason is in the agent file.
   signposts now says five. The new link was checked against that claim rather than assumed to meet
   it. **Every edit to a card or to `CLAUDE.md` moves at least one figure in that play**; run
   `book/examples/cards/reproduce.py` before finishing.
+- **Part I reassessment (2026-09-23): *Preparation and execution* moved to chapter two, inside
+  *Software engineering: the area that grew*.** Reverses the placement in *The preparation thread*
+  at the author's request; the two-modes idea is a consequence of tacit convention becoming written
+  convention, which is that section's argument. See [*The Part I
+  reassessment*](#the-part-i-reassessment).
+- **Each framing line appears once across the preface and Part I.** A repeated disclaimer reads as
+  protesting too much; Part III earns the trust the disclaimers were asking for.
 
 ## Two proposals from the author's reflection
 

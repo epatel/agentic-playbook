@@ -20,13 +20,6 @@ time may lock a particular revision, and only this programmer may check in the s
 Breaking somebody's lock sent them an automatic email. Tichy reports the effect: programmers broke
 locks "only in real emergencies, or when a co-worker resigns and leaves locked revisions behind."
 
-A decade later, Microsoft's Visual SourceSafe still allowed "only one user at a time to check out a
-file" in its default work style, with concurrent editing a mode an administrator had to switch on.
-Subversion shipped in 2000 and did not get automatic merge tracking until version 1.5 in June 2008;
-until then, by its own manual's account, a branch left alone too long could be "near-impossible to
-merge" back "without a huge number of conflicts". For most of a decade the dominant tool punished
-the practice that is now the default.
-
 Git shipped on 7 April 2005, with cheap branches and a three-way merge, under a commit message
 describing it as "the information manager from hell". And then, for years, mostly nothing happened.
 The Eclipse Community Survey asked developers for their primary source control system; in 2011, six
@@ -130,10 +123,15 @@ settled.
 
 ## What this book is, given all that
 
-This book is not the consensus. Nobody has one to offer, and anything claiming otherwise is selling
-something. It is one working set of practices, written in enough detail to be disagreed with
-precisely.
+The moving substrate changes what convergence can look like. Git's practices settled because Git
+held still long enough to be argued about; a practice built on what the model cannot yet do
+reliably may not get that long. What is likely to converge is not a set of conventions but a habit
+around them: write down what the team does, date the parts that rest on the model, and
+re-test those parts when the model changes. This book practises that habit; [*What will go stale,
+and how to tell*](what-this-book-assumes-about-you.md#what-will-go-stale-and-how-to-tell) says how.
 
-The reason to write down how your team works with agents is the same reason somebody eventually
-wrote down what a good commit message looks like. Not because the answer was obvious. Because
-writing it down is what makes disagreeing with it cheap.
+It is not the consensus; nobody has one to offer. It is one working set of practices, written in
+enough detail to be disagreed with precisely. The reason to write it down is the same reason
+somebody eventually wrote down what a good commit message looks like. Not because the answer was
+obvious. Because writing it down is what makes disagreeing with it cheap, and what lets you notice
+when it stops being true.
