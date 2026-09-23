@@ -58,8 +58,8 @@ decider on a team that would rather not have one.
 
 `lodestone`, a claims-processing platform — C# services behind a TypeScript front end — maintained
 by nine engineers across two time zones, had four disagreements on its agenda and settled three of
-them by writing them down. The fourth was whether the agent's plan belonged in the pull request
-description. Two engineers had argued it in review threads for six weeks.
+them on the page without a vote. The fourth was whether the agent's plan belonged in the pull
+request description. Two engineers had argued it in review threads for six weeks.
 
 Positions went into a shared document the day before, three sentences each. One held that the plan
 is how a reviewer knows what the agent was asked, and that hiding it wastes the cheapest context

@@ -25,15 +25,15 @@ Partition the repository before you start, and treat integration as the part tha
    Ports and databases are not isolated by any of this.
 3. **Name the landmine files and serialise them.** Migration directories, route tables, barrel and
    index files, translation catalogues, lockfiles. One agent at a time touches these, or you do them
-   yourself afterwards. In the measured data they are a small share of conflicted files; in
-   practitioners' accounts they are a large share of wasted afternoons.
+   yourself afterwards. Measured, lockfiles and configuration are each about 4% of conflicted files;
+   in practitioners' accounts they are a large share of wasted afternoons.
 4. **Check overlap before you merge anything.** Two branches touching one file is a question worth
    asking before git is asked to answer it:
 
    > Captured September 2026, git 2.50.1.
 
    ```bash
-   comm -12 \
+      $ comm -12 \
      <(git diff --name-only "origin/main...feat/invoices" | sort) \
      <(git diff --name-only "origin/main...feat/rate-limit" | sort)
    config/routes.rb
@@ -64,7 +64,7 @@ from writing to integrating. It does not remove it.
 ## Worked example
 
 `meridian`, a Ruby freight-booking platform whose monorepo holds nineteen deployable services, split
-three jobs across three worktrees, all branched from `origin/main`:
+three jobs across three worktrees, all branched from the same commit:
 
 > Captured September 2026, git 2.50.1.
 

@@ -80,7 +80,7 @@ their work does not distribute the load; it concentrates it, on the same three p
 familiar form. A change from somebody who does not know which parts of the system are load-bearing
 is harder to review, not easier, and it arrives looking entirely reasonable. That is
 [*Onboard someone into all this*](../part-2-plays/team/onboard-someone-into-all-this.md)'s Fluent
-Stranger, with the difference that a new engineer acquires the missing sense in three months and a
+Stranger, with the difference that a new engineer acquires the missing sense with time and a
 colleague from another discipline may never acquire it, because acquiring it is not their job.
 
 The second cost is accountability, and it goes wrong in a specific way. The obvious arrangement —

@@ -678,7 +678,7 @@ grading the transcript, not the repository [2].
         "hooks": [
           {
             "type": "command",
-            "command": "git diff --name-only --diff-filter=DM origin/main -- test/ | grep . >&2 && exit 2; exit 0"
+            "command": "git diff --no-renames --name-only --diff-filter=DM origin/main -- test/ | grep . >&2 && exit 2; exit 0"
           },
           {
             "type": "command",
@@ -702,7 +702,9 @@ proceeds" [Claude Code hooks reference, https://code.claude.com/docs/en/hooks, a
 September 2026]. A failing `npm test` exits 1, so the turn ended anyway. And `git diff` with no
 revision compares the working tree against the index, so a test file the run deleted and committed
 was invisible to it. Diffing against `origin/main` covers committed and uncommitted changes alike;
-sending the output to stderr is what makes it the reason Claude is shown. This is the direct countermeasure to the measured behaviour where, in non-improving Java agent
+sending the output to stderr is what makes it the reason Claude is shown. `--no-renames` was added
+the same day: git detects renames by default, so a test file renamed and weakened was reported as
+`R` and passed a `DM` filter; with renames off it is a deletion, and the gate catches it. This is the direct countermeasure to the measured behaviour where, in non-improving Java agent
 PRs, "agents delete more tests than they add (82 deleted vs. 31 added, a 2.6× ratio)" [16].
 
 Tell the reader the escape hatch honestly: "Claude Code overrides the hook and ends the turn after 8

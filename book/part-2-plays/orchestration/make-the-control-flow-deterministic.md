@@ -61,9 +61,9 @@ exchange for being able to say what ran.
 
 `meridian`, a Ruby freight-booking platform whose monorepo holds nineteen deployable services, had a
 bot opening a pull request whenever a shared gem was bumped. The first version of the triage lived
-on an n8n canvas, and for a fortnight it was the right call: the GitHub webhook, the Slack post, the
-retry policy, and the schedule were configuration rather than code, and the on-call engineer could
-open the canvas and read it.
+on an n8n canvas, and for its first months it was the right call: the GitHub webhook, the Slack
+post, the retry policy, and the schedule were configuration rather than code, and the on-call
+engineer could open the canvas and read it.
 
 It outgrew that in three months, in the usual way. Release-branch bumps had to page on-call. Two
 services were exempt. A gem that had failed twice in a day was not to be retried a third time, which
@@ -76,8 +76,9 @@ The rewrite kept n8n for the edges and moved the judgement into `scripts/upgrade
 for service in services:                 # nineteen short runs, not one long one
     apply_bump(service, gem, version)
     result = run_tests(service)
-    if result.failed:
-        result = agent_patch(service, result, max_steps=8)   # the only model step
+        if result.failed:
+        agent_patch(service, result, max_steps=8)   # the only model step
+        result = run_tests(service)                 # the gate runs again, in code
     if result.passed and not service.release_branch:
         merge(service)                   # performed by code, never by the agent
     else:

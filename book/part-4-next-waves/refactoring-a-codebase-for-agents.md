@@ -1,8 +1,8 @@
 # Refactoring a codebase for agents
 
-Agents are noticeably better in some codebases than in others, and the difference does not track the
-things you would expect. Not the language, not the age, not the test count, not whether the team is
-any good. The same model, given the same quality of agent file, will produce a clean change in one
+Agents seem noticeably better in some codebases than in others, and in practitioners' accounts the
+difference tracks less than you would expect: not obviously the age, or whether the team is any
+good. The same model, given the same quality of agent file, will produce a clean change in one
 repository and a plausible mess in another down the corridor. The second wave is the suspicion that
 this is a property of the codebase, that the property is nameable, and that it can be changed on
 purpose.
@@ -45,7 +45,7 @@ That last one is the part to argue with, and it should be argued with. Duplicati
 arrives later than the saving: the bug fixed in one copy and not the other, the security patch
 applied four times out of five. The claim is not that duplication is free. It is that the exchange
 rate has moved, because the thing duplication used to buy — less code to read — is worth less to a
-reader that reads fast and tirelessly, if not for free, and the thing abstraction charges —
+reader that reads fast and in bulk, if not for free, and the thing abstraction charges —
 behaviour somewhere else — is worth more to a reader that cannot see somewhere else.
 
 ## Behaviour you cannot see from the file you are in
@@ -105,12 +105,12 @@ same feature across sessions; if that number is small, the whole argument is sma
 
 The signal to watch in the other direction is model capability, because this entire wave is a bet on
 something staying hard. Every restructuring here encodes an assumption about what the model cannot
-do — exactly the assumption that
-[*Make the control flow deterministic*](../part-2-plays/orchestration/make-the-control-flow-deterministic.md)
-warns expires — and a year from now, "agents cannot follow behaviour across six files" may read the
-way "agents cannot use a terminal" reads today. A quarter-long reorganisation justified on that
-basis is the Load-Bearing Scaffold at the scale of a repository, which is a considerably more
-expensive place to have one.
+do — exactly the assumption that [*Make the control flow
+deterministic*](../part-2-plays/orchestration/make-the-control-flow-deterministic.md) warns expires
+— and a year from now, "agents cannot follow behaviour across six files" may read the way "agents
+cannot use a terminal" reads today. A quarter-long reorganisation justified on that basis is the
+Load-Bearing Scaffold at the scale of a repository, which is a considerably more expensive place to
+have one.
 
 ## What is worth doing anyway
 

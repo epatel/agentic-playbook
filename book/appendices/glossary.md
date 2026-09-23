@@ -83,7 +83,7 @@ Named failure modes are a separate vocabulary and are indexed at the end of
   project legible without you in the room: the agent file, the cards, the conventions written down,
   the checks a change must pass. *Execution* hands a prepared project a task and reads what comes
   back. Most of Part II is preparation. See [*The four areas,
-  re-weighted*](../part-1-argument/the-four-areas-reweighted.md#software-engineering-the-area-that-grew).
+  re-weighted*](../part-1-argument/the-four-areas-reweighted.md).
 
 - **Reasoning effort.** A dial exposed by several providers controlling how much the model thinks
   before answering, billed as output tokens. A first-order cost control, and one worth setting per

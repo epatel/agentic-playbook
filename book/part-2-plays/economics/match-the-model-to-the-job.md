@@ -80,8 +80,8 @@ same verdicts — with no difference anyone could measure in the verdicts themse
 
 The adapter pass did not hold. On three of the twenty feeds the small tier hit the turn ceiling
 without producing a diff at all, which is the visible failure and the cheap one. The expensive
-failure was quieter: two of the diffs it did produce passed the contract suite while asserting the
-schema version against the wrong field, because the oracle `granary` had was good enough to catch a
+failure was quieter: two of the adapters it did produce passed the contract suite while reading the
+schema version from the wrong field, because the oracle `granary` had was good enough to catch a
 broken adapter and not good enough to catch a plausible one.
 
 They kept the split, and described it to themselves accurately, which is the part that took the

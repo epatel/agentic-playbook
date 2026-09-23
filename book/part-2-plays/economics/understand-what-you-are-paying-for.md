@@ -88,7 +88,7 @@ $0.30 for a cache read. Line by line:
 
 Which rounds to the $0.55 the tool printed, so the arithmetic is checkable rather than modelled.
 Three things fall out of it, and all three are counter-intuitive. You did not pay for what the model
-wrote: input in all its forms is 85.6% of the bill. Almost everything you paid for, the model had
+wrote: input in all its forms is 85.6% of the bill. Almost everything the model processed, it had
 already seen — 94.3% of the tokens are the conversation re-reading itself. And caching did nearly
 all the work: those 991,200 input tokens at the full $3 rate, plus the same output, would have come
 to $3.0531 rather than $0.5526 — a saving of 81.9%, switched on by default.

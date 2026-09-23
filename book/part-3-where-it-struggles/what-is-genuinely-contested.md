@@ -24,8 +24,8 @@ developer expertise — gains concentrate in newer code and in work the develope
 the effect is smallest or negative in mature repositories with expert maintainers.
 
 The useful question is not "does it work" but "does it work *here*", and the only instrument that
-answers it is your own paired run. [*Match the model to the
-job*](../part-2-plays/economics/match-the-model-to-the-job.md) is the play.
+answers it is your own comparison. [*Know when not to use an
+agent*](../part-2-plays/economics/know-when-not-to-use-an-agent.md) is the play.
 
 ## Does agent assistance degrade the codebase
 
@@ -36,16 +36,16 @@ has no limitations section, and the quality effects are two to four per cent.
 
 The pessimistic evidence is observational and at scale. GitClear, a developer-analytics vendor,
 analysed 623 million code changes from 2023 to 2026 and reports refactored code falling from 21% of
-changed lines in 2022 to 3.8% year-to-date in 2026, block duplication up 81% on its 2023 level, and
-error-masking constructs up 47%. It classifies nothing as AI-assisted — the corpus is every change
-and the attribution is inferred from timing — and the company sells the diagnosis.
+changed lines in 2022 to 3.8% year-to-date in 2026, and block duplication up 81% on its 2023 level.
+It classifies nothing as AI-assisted — the corpus is every change and the attribution is inferred
+from timing — and the company sells the diagnosis.
 
 Between them sits the study that actually tried to answer the downstream question. Borg and
 colleagues, reporting in February 2026, ran two phases: 151 participants, 95% of them professional
 developers, built features with or without AI; a *different* set then evolved the resulting code
 without AI. Phase one showed a 30.7% median speedup. Phase two found "no significant differences in
 subsequent evolution with respect to completion time or code quality", with the Bayesian analysis
-putting any difference at "at most small and highly uncertain".
+putting any improvement at "at most small and highly uncertain".
 
 Note the asymmetry. The evidence that it improves things is a controlled experiment on greenfield
 work; the evidence that it degrades things is observational, at repository scale, over time. Neither
@@ -115,9 +115,10 @@ confirmation rate had recovered to "somewhere in the 15-16% range" — pre-AI le
 situation is not a problem anymore", and "almost every security report now uses AI to various
 degrees".
 
-Two things changed over that window and neither was the tooling: the money went, and reporting moved
-off HackerOne and back. Stenberg dates the turn from the platform move. Anyone citing curl as
-evidence that AI-assisted submissions are worthless is citing January and stopping.
+Several things changed over that window: the money went, reporting moved off HackerOne and back,
+and, by Stenberg's own account, the tools kept improving. Stenberg dates the turn from the platform
+move. Anyone citing curl as evidence that AI-assisted submissions are worthless is citing January
+and stopping.
 
 ## Who is responsible
 

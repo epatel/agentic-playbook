@@ -6,7 +6,7 @@ everyone is being asked to work inside it anyway.
 That is not a complaint about the tools. The tools are remarkable and they arrive faster than anyone
 can absorb. It is an observation about everything else: the conventions, the review habits, the
 division of labour, the agreed answer to "who is accountable for this diff". Those have historically
-taken the industry a decade to settle, and they were settled the same way every time — by
+taken the industry a decade or more to settle, and they were settled the same way every time — by
 practitioners writing down what they actually did, arguing about it in public, and gradually
 converging. Source control went through it. Process went through it. This is going through it now,
 and it is at the stage where everyone has a strong opinion and nobody has a citation.
@@ -20,8 +20,8 @@ its own title.
 
 The other thing the book tries to do is be honest about the evidence, which is in worse shape than
 the discourse suggests. Nearly every published study of "AI coding productivity" measures
-autocomplete rather than agents. Several of the most-quoted figures in the field do not survive
-being looked up. *Where It Struggles* is the part that says so, at length.
+autocomplete or chat rather than agents. Several of the most-quoted figures in the field do not
+survive being looked up. *Where It Struggles* is the part that says so, at length.
 
 A note on how this was made, because the book argues elsewhere that this should be disclosed. *The
 Agentic Playbook* was written with agents: several of them, working in parallel on separate

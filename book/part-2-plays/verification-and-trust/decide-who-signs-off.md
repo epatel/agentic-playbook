@@ -13,11 +13,11 @@ two separate events, and only one of them is recorded.
 
 Decide it in advance, in writing, as a team. The question does not get easier during an incident.
 
-1. **State that a named person owns every change, and say what owning it means.** Every project that
-   has written anything down lands here: the Linux kernel's `coding-assistants.rst` says agents must
-   not add `Signed-off-by` tags, only humans can certify the Developer Certificate of Origin, and
-   the human takes "full responsibility". The test worth stealing is Kubernetes's, because it is
-   checkable — if you cannot personally explain the change, the pull request is closed
+1. **State that a named person owns every change, and say what owning it means.** Every project with
+   a written policy lands here: the Linux kernel's `coding-assistants.rst` says agents must not add
+   `Signed-off-by` tags, only humans can certify the Developer Certificate of Origin, and the human
+   takes "full responsibility". The test worth stealing is Kubernetes's, because it is checkable —
+   if you cannot personally explain the change, the pull request is closed
    ([`accountability.md`](../../../notes/research/accountability.md)).
 2. **Write the argument against your own rule into the same document.** "The human owns the diff" is
    unanimous in policy and contested in the literature: Elish's moral-crumple-zone argument is that
@@ -37,12 +37,12 @@ Decide it in advance, in writing, as a team. The question does not get easier du
    2026, and reverted it to opt-in after people found it on commits they had written
    ([`accountability.md`](../../../notes/research/accountability.md)).
 5. **Find out what your domain already requires before inventing a policy.** As of September 2026 no
-   regulator anywhere had published a position on who may sign off on code a model wrote. Where
-   sign-off is genuinely constrained the constraint predates all of this — ISO 26262-8 clause 11
-   already governs software tools used in safety-related development and covers code generators
-   explicitly. A vendor indemnity is not that: it is a conditional promise to defend an
-   intellectual-property claim, silent on defects, outages, and regulators. None of this is legal
-   advice; it is what those documents say, on the date they were read.
+   aviation, automotive, or medical-device regulator had published a position on who may sign off on
+   code a model wrote. Where sign-off is genuinely constrained the constraint predates all of this —
+   ISO 26262-8 clause 11 already governs software tools used in safety-related development and
+   covers code generators explicitly. A vendor indemnity is not that: it is a conditional promise to
+   defend an intellectual-property claim, silent on defects, outages, and regulators. None of this
+   is legal advice; it is what those documents say, on the date they were read.
 
 What you are assigning is not blame, it is the obligation to explain the change to somebody else,
 and nothing else can hold it: no standard records which model produced which hunk. The exchange rate

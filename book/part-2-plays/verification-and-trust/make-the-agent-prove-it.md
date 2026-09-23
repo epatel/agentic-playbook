@@ -87,7 +87,7 @@ The hard version of the same constraint, in `.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "git diff --name-only --diff-filter=DM origin/main -- tests/ | grep . >&2 && exit 2; exit 0"
+            "command": "git diff --no-renames --name-only --diff-filter=DM origin/main -- tests/ | grep . >&2 && exit 2; exit 0"
           },
           { "type": "command", "command": "npm test >&2 && npm run typecheck >&2 || exit 2" }
         ]
@@ -97,11 +97,11 @@ The hard version of the same constraint, in `.claude/settings.json`:
 }
 ```
 
-Two details carry it. `--diff-filter=DM` against `origin/main` lets added test files through and
-catches deleted or modified ones, whether or not the run has committed them yet. And `exit 2` is the
-only exit code that keeps the turn open: any other failure is logged as a hook error and the turn
-ends anyway, so a bare `npm test`, failing, gates nothing. The same constraint again, one layer
-down, for the duration of the run:
+Two details carry it. `--no-renames --diff-filter=DM` against `origin/main` lets added test files
+through and catches deleted, modified, or renamed ones, whether or not the run has committed them
+yet. And `exit 2` is the only exit code that keeps the turn open: any other failure is logged as a
+hook error and the turn ends anyway, so a bare `npm test`, failing, gates nothing. The same
+constraint again, one layer down, for the duration of the run:
 
 ```bash
 $ chmod -R a-w tests/
@@ -115,10 +115,10 @@ description of "correct" the run had, so the visible suite is what it satisfied.
 
 A second suite, kept out of the working tree and run only in CI, caught it on the first push. The
 gap between the visible pass rate and the held-out one is how the research detects exactly this, and
-in a 2026 benchmark of thirty long-horizon tasks it widened by roughly 28 percentage points per
-tenfold increase in code size ([`verification.md`](../../../notes/research/verification.md)).
-Read-only tests were never going to prevent this, and the published finding says so in the sentence
-that recommends them.
+in a 2026 benchmark of thirty tasks, short-horizon to very long it widened by roughly 28 percentage
+points per tenfold increase in code size
+([`verification.md`](../../../notes/research/verification.md)). Read-only tests were never going to
+prevent this, and the published finding says so in the sentence that recommends them.
 
 ## Failure mode
 

@@ -51,8 +51,8 @@ Where nearly every team belongs, and where the other two levels start.
 
 When a part you need cannot be configured: runs in CI with nobody watching, a model yours does not
 support, isolation it does not offer. Compare candidates on your own tasks, because public rankings
-hold the harness still on purpose; SWE-bench runs every model "in a minimal bash environment. No
-tools, no special scaffold structure; just a simple ReAct agent loop"
+hold the harness still on purpose; SWE-bench Verified's model-comparison track runs every model "in
+a minimal bash environment. No tools, no special scaffold structure; just a simple ReAct agent loop"
 ([`single-agent-wins.md`](../../../notes/research/single-agent-wins.md)). Level one comes with you,
 and has to be done again.
 
@@ -90,8 +90,8 @@ origin main` and `git 'push' origin main` are outside the other. The vendor's ow
 so in September 2026: a Bash rule "covers the invocation Claude usually produces and isn't a
 security boundary around the program".
 
-The rules stayed — they are still a fair record of what the team intends — and the boundary moved
-down a layer:
+The rules stayed as a record of intent, and the boundary moved down; it blocks a push by
+withholding the token, though deletes in the tree still run:
 
 ```json
 {
@@ -109,7 +109,7 @@ down a layer:
 }
 ```
 
-Adoption took a fortnight rather than an afternoon. `go test ./...` failed on the first day because
+ `go test ./...` failed on the first day because
 module downloads went to a domain that was not on the list, which is what `proxy.golang.org` is
 doing above. One contributor responded by turning the sandbox off locally and leaving it off for a
 week, discovered only when somebody opened the sandbox status and found a machine reporting no

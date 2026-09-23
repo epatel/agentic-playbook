@@ -5,9 +5,9 @@ afternoon; five runs in parallel is a diagram, and a diagram can be shown to peo
 who is counselling restraint. Anthropic published the best multi-agent result anybody has and noted
 in the same post that coding has fewer genuinely parallel parts than research does. OpenAI's
 guidance is to maximise a single agent's capabilities before splitting it. Cognition published a
-piece called *Don't Build Multi-Agents* and spent the next year narrowing the exceptions rather than
-widening them. The vendors are more conservative than their users, and the measured comparisons are
-more conservative than the vendors.
+piece called *Don't Build Multi-Agents*, and its update ten months later allowed exceptions only
+where writes stay single-threaded. The vendors are more conservative than their users, and the
+measured comparisons are more conservative than the vendors.
 
 The suite is one idea: every piece of orchestration is machinery you have built around a model, and
 each piece encodes an assumption about something the model cannot do on its own. Those assumptions

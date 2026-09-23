@@ -1,6 +1,6 @@
 # Where the time actually goes
 
-The promise is that typing gets cheaper. It does. The question this chapter asks is what happens to
+The promise is that typing gets cheaper. It does. The question here is what happens to
 the hour you were going to save, and the answer, with reasonable consistency across everything
 measured so far, is that it relocates rather than disappearing. Understanding where it lands is the
 difference between a practice that captures the gain and one that files it under "we are definitely
@@ -119,8 +119,7 @@ And the biggest hole sits directly under this book's central recommendation: the
 study of what reviewers miss in agent-authored code. Nobody has seeded known defects into agent pull
 requests and measured detection rate against human-authored ones. The automation-bias literature
 that gets cited in its place comes from aviation and clinical decision support. Transferring it is a
-reasonable argument, and it is an argument rather than a citation, and this book has been careful to
-use it as one.
+reasonable argument, and it is an argument rather than a citation.
 
 Nothing published measures whether a team with an explicit working agreement outperforms one
 without, either. The [*Team*](../part-2-plays/team/index.md) suite is built on mechanisms that make

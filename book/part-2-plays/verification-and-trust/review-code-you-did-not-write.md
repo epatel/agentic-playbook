@@ -17,16 +17,16 @@ reading is what you run out of.
 1. **Look at what the change did to the things that check it, before what it does.** Test files, CI
    configuration, linter settings, and type-checker settings. A net-negative line count in a test
    file, a test moved to `skip`, a relaxed rule, a widened type, a deleted pipeline step: each is a
-   send-back on its own. One command, and it catches the evasion agents are measured making: across
-   roughly 4,900 agent pull requests in 2026, those adding tests without improving coverage deleted
-   tests at about two and a half times the rate they added them
+   send-back on its own. One command, and it catches the evasion agents are measured making: in a
+   2026 study, Java agent pull requests that added tests without improving coverage deleted tests at
+   about two and a half times the rate they added them
    ([`verification.md`](../../../notes/research/verification.md)).
 2. **Send it back on size and shape without reading it.** Google's review guidance grants reviewers
    the authority to reject a change for being too large and nothing else, and GitHub's 2026 guidance
    names the triggers for agent pull requests: more than five unrelated files, a purpose that will
    not fit in one sentence, test changes arriving alongside CI failures.
 3. **Search for the thing before accepting that it needed writing.** Agent pull requests carried
-   roughly 1.9 times the semantic duplication of human ones in the largest 2026 corpus
+   roughly 1.9 times the semantic duplication of human ones in a 2026 corpus of 3,858
    ([`review-practice.md`](../../../notes/research/review-practice.md)). Two implementations of one
    rounding rule is not a style problem; it is two answers to one question, one of which will be
    wrong later.
@@ -92,8 +92,9 @@ $ git diff origin/main...HEAD -- tests/rollout.spec.ts | rg '^[-+] *it[.(]'
 -  it("treats the threshold as inclusive", async () => {
 ```
 
-One test skipped and one deleted outright, which is the 11 deletions on that row. Then one search,
-before reading the new module:
+One test skipped and one deleted outright; the full diff showed the skipped test had lost its two
+assertions as well, nine of the row's eleven changed lines. Then one search, before reading the new
+module:
 
 > Captured September 2026, ripgrep 15.2.0.
 
@@ -109,17 +110,17 @@ Three files, two of them the pull request's own. `assign.ts` already had
 `cohorts.ts` and called it from `schedule.ts`, with a different tie-break at the boundary: the
 existing helper rounds a device on a bucket edge down, the new one rounds it up.
 
-The change went back with four notes: restore the two pipeline steps, un-skip the battery test,
-restore the threshold test that had gone with it, and use the helper that exists. The rollout
-arithmetic itself was right, and better commented than the module next to it. Everything the review
-caught was about what the change had removed and what it had duplicated, which is the shape the
-measurements predict.
+The change went back with four notes: restore the two pipeline steps, un-skip the battery test with
+its assertions, restore the threshold test, and use the helper that exists. The rollout arithmetic
+itself was right, and better commented than the module next to it. Everything the review caught was
+about what the change had removed and what it had duplicated, which is the shape the measurements
+predict.
 
 What it missed surfaced six days later. Cohort assignment ran before the battery check rather than
 after, so devices were enrolled and then held back, and sat in a cohort they had never been eligible
-for. The restored battery test passed the whole time: it tested the predicate, not where the
-predicate was called. Four minutes of checking found four things, and the fifth was the one worth
-forty.
+for. The restored battery test passed the whole time: it checked that a low-battery device was held
+back, not that it was held back before it was enrolled. Four minutes of checking found four things,
+and the fifth was the one worth forty.
 
 ## Failure mode
 

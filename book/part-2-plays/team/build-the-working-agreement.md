@@ -26,8 +26,8 @@ a trigger.
    agent-authored change; what a reviewer may decline; who can see what the tools cost; and what the
    team never delegates. The fourth is the one teams omit, and it is the one the measurements say
    costs most: under a doubling mandate, review coverage falls and each remaining reviewer's load
-   doubles
-   ([*Where the time actually goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md)).
+   doubles ([*Where the time actually
+   goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md)).
 4. **Write it in the repository, at one page.** Beside the shared context file, not in a wiki nobody
    has open. A page that fits on a screen gets re-read; a longer one gets cited rather than
    followed.
@@ -69,15 +69,15 @@ The result was one file, `docs/agent-working-agreement.md`:
 ```markdown
 # How we work with agents — lodestone
 
-Version 3, 2026-09-12. Amend by pull request; anyone may open one.
+Version 3, 2026-08-14. Amend by pull request; anyone may open one.
 Last changed because: our August model upgrade made the one-file-per-run rule pointless.
 
 ## Shared, and in the repository
 - Project instructions live in `AGENTS.md` at the repo root. Anything a new joiner
   needs on day one belongs there.
 - Team skills live in `.claude/skills/`. Personal skills stay in your home directory.
-- Do not commit a `CLAUDE.md` or a `CLAUDE.local.md`. On Claude Code 2.x either one
-  stops `AGENTS.md` loading, silently, for whoever has it.
+- Keep any `CLAUDE.md` or `CLAUDE.local.md` out of the checkout, committed or not.
+  On Claude Code 2.x either one stops `AGENTS.md` loading, silently.
 - If you keep personal agent notes above the checkout, set `claude-md-and-agents-md`
   in `/config` yourself. That setting is per-user and cannot be committed.
 
@@ -98,7 +98,7 @@ Last changed because: our August model upgrade made the one-file-per-run rule po
 - Monthly spend is posted in the team channel on the 1st. Nobody is asked about
   their share.
 - We do not delegate: schema migrations, anything under `Billing/`, or the release
-  script. Reviewed 2026-09-12.
+  script. Reviewed 2026-08-14.
 
 ## Yours, not ours
 - Which harness, which model, which editor, how you prompt, what is in your own
@@ -107,6 +107,10 @@ Last changed because: our August model upgrade made the one-file-per-run rule po
 ## Experiments
 - Standing exception: say in advance that you are working against this agreement on
   purpose, and report what happened at the next harvest.
+
+## When this changes
+- A model release we adopt, a tool anyone wants to bring in, or the second time
+  somebody cites this page and it turns out to be wrong.
 ```
 
 Two of the four disagreements were settled by being written down and did not come back. The third —
@@ -116,8 +120,8 @@ trigger. The fourth did not survive contact with the page: "we always run the te
 for review" turned out to describe what four people did and what five people intended to do, and it
 was rewritten as a condition on the change rather than an instruction to the person.
 
-The page is at version three. Versions one and two were written in a wiki, which is where they still
-are.
+The page shown is version three. Versions one and two were written in a wiki, which is where they
+still are.
 
 ## Failure mode
 

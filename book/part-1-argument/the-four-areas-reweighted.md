@@ -43,12 +43,12 @@ step is removed for an entire cohort, the acquisition path for the judgement goe
 nobody has a convincing account of what replaces it. This book cannot fix that. It can decline to
 pretend the trade is free.
 
-The other half of the re-weighting is breadth: less computer science, more technologies. An agent
-will pick a library, and it will pick a plausible one. Whether that library is maintained, whether
-its licence is compatible with your product, whether it drags in a transitive dependency your
-security team has an opinion about, whether your codebase already depends on two libraries that do
-the same thing — none of that is in the model's reward function, and all of it is in your afternoon.
-Knowing the shape of the technology landscape got more valuable, not less.
+The other half of the re-weighting is breadth, across technologies rather than into algorithms. An
+agent will pick a library, and it will pick a plausible one. Whether that library is maintained,
+whether its licence is compatible with your product, whether it drags in a transitive dependency
+your security team has an opinion about, whether your codebase already depends on two libraries that
+do the same thing — none of that is in the model's reward function, and all of it is in your
+afternoon. Knowing the shape of the technology landscape got more valuable, not less.
 
 ## Software engineering: the area that grew
 
@@ -70,7 +70,7 @@ The full accounting is in [*Where the time actually
 goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), with the evidence in
 [`notes/research/evidence.md`](../../notes/research/evidence.md). Review was already the scarcest
 resource on most teams. It is now being asked to cover more diff per week, produced by something
-tireless.
+that does not slow down.
 
 Written convention also changes the shape of the working day. One way of working assembles context
 in the conversation: here is the project, now the module, now how this codebase handles errors, and
@@ -137,8 +137,8 @@ will arrive before this book is old — the useful question is not whether it is
 which of the four it moves. A tool that only moves craftsmanship is a personal preference and can be
 adopted by one developer on a Tuesday afternoon without telling anyone. A tool that moves software
 engineering changes how a team works and needs an agreement before it needs a licence. A tool that
-moves computer science is claiming your judgement is no longer load-bearing, which is a claim worth
-testing carefully and in a branch.
+claims to take computer science off your hands is claiming your judgement is no longer load-bearing,
+which is a claim worth testing carefully and in a branch.
 
 Agentic tools do move all four, mostly towards more judgement rather than less. A tool that claims
 to move all four in the flattering direction is making a sales pitch, and you have heard a number of

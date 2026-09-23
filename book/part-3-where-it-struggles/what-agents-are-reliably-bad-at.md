@@ -7,7 +7,7 @@ this book assumes you use these tools every day and intend to keep doing so. The
 argument is only that a practice built on the marketing version of the capability will be built in
 the wrong shape.
 
-One caution about the evidence, stated once and then assumed. Almost nothing published about "AI
+One caution about the evidence. Almost nothing published about "AI
 coding productivity" is about agents: every randomised trial in the field measures autocomplete,
 inline completion, or chat. What follows is drawn from benchmark results, vendor measurements that
 say so, and studies with stated sample sizes. Where a figure is vendor-reported, the sentence says
@@ -42,7 +42,7 @@ same harness, same evaluation.
 The likeliest explanation is not that private code is harder in some deep sense. It is that public
 code has been read. In 2025 contamination work, models identified the buggy file in a SWE-bench
 repository from the issue text alone — with no repository structure in the prompt at all — at up to
-76% accuracy, against up to 53% on repositories outside the benchmark; a separate 2025 audit found
+76% accuracy, against up to 53% on repositories outside the benchmark; a separate 2024 audit found
 32.67% of successful patches involving solution leakage, with the fix stated in the issue report or
 its comments. Your repository is the commercial set.
 

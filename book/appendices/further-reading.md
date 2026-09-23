@@ -38,10 +38,10 @@ table separating what is standardised from what is one vendor's habit. Beneath i
   comparison, https://quesma.com/blog/does-rtk-make-ai-coding-cheaper/. Two independent measurements
   on different suites that reached the same conclusion — no reliable saving on the bill while the
   tool's own dashboard reported enormous ones. Read them for the method rather than as a verdict:
-  both tested v0.43.0, the direction differed between two models, and the effect largely vanished at
-  high reasoning effort. The same test, written down for any such tool and not yet run, is in this
-  book's repository at `book/examples/filter-paired-run/`. A tool that survives it is worth keeping;
-  the objection is to the dashboard, not to the category.
+  JetBrains tested v0.43.0, the direction differed between two models, and the effect largely
+  vanished at high reasoning effort. The same test, written down for any such tool and not yet run,
+  is in this book's repository at `book/examples/filter-paired-run/`. A tool that survives it is
+  worth keeping; the objection is to the dashboard, not to the category.
 
 ## Orchestration
 
@@ -132,8 +132,8 @@ blogs. Several are the first result a search returns. The consolidated list is i
 five worth knowing before you next quote something in a meeting:
 
 - **Every published SWE-bench per-instance dollar figure.** The leaderboard carries no cost column.
-- **The "200–400 lines in under 60 minutes" code-review rule.** It appears nowhere in the study it
-  is attributed to, whose design could not have measured it.
+- **The "200–400 lines over 60–90 minutes yields 70–90% defect discovery" code-review rule.** It
+  appears nowhere in the study it is attributed to, whose design could not have measured it.
 - **Any "Stack Overflow Developer Survey 2026" figure.** That survey had not reported; the numbers
   in circulation are 2025 data under a 2026 headline.
 - **The Standish CHAOS figures** — the 1994 success split and the 189% average cost overrun, the

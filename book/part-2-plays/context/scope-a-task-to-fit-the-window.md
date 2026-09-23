@@ -83,7 +83,7 @@ same one:
 
 Unit 2 came back wrong in one respect, and it was the interesting one. Unit 1 had decided to raise
 `AuthError` and let the middleware map it to a 401; unit 2, which never saw that conversation, went
-with returning a response directly from the middleware. Both are defensible; having both is not. The
+with returning a response directly from the routes. Both are defensible; having both is not. The
 decision had been made in chat and therefore did not exist. It went into the handoff file as one
 line — "auth failures raise `AuthError`; only the middleware serialises it" — and unit 2 was re-run
 against it. Re-running one of four units is a cheap correction, and it was cheap precisely because

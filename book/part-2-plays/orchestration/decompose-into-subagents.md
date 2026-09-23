@@ -19,10 +19,10 @@ Fan out to read. Keep every write in one place.
    implementing, and testing depend on the same understanding, stays in the main conversation. That
    second case is where delegation reliably costs more than it saves, because each handoff sheds
    what the previous stage knew.
-2. **Single-thread the writes.** Cognition's position as of April 2026, after two years of
-   publishing against its own earlier advice, is that multi-agent systems work when writes stay
-   single-threaded and the extra agents contribute intelligence rather than actions. Two agents
-   editing toward one goal make conflicting implicit decisions, and reconciling them lands on you.
+2. **Single-thread the writes.** Cognition's position as of April 2026, ten months after *Don't
+   Build Multi-Agents*, is that multi-agent systems work when writes stay single-threaded and the
+   extra agents contribute intelligence rather than actions. Two agents editing toward one goal make
+   conflicting implicit decisions, and reconciling them lands on you.
 3. **Make read-only mechanical rather than polite.** A tool allowlist in the subagent's definition —
    in Claude Code 2.x, `tools: Read, Glob, Grep` in the frontmatter — removes the write tools from
    the worker entirely. A sentence in the prompt asking it not to edit files is a request competing
@@ -32,7 +32,7 @@ Fan out to read. Keep every write in one place.
    that returns prose gives you something to believe.
 5. **Write the convention down before you delegate.** A subagent inherits your project context files
    and none of your conversation. A rule you established in chat forty turns ago is silently absent;
-   the same rule in `AGENTS.md` is enforced. Nothing errors either way.
+   the same rule in `AGENTS.md` is loaded. Nothing errors either way.
 6. **Spend the tokens on one agent first.** Multi-agent advantages shrink or disappear when thinking
    tokens are held constant, and in the one protocol-matched comparison available — six systems,
    GPT-4.1, June 2026 — five underperformed a single-agent baseline by between two and eleven
@@ -103,13 +103,13 @@ $ rg --count-matches 'Billing::Client\.new' services/ engines/ \
 52
 ```
 
-The scouts' `TOTAL=` values summed to 47. The independent count said 52. The gap was in
-`services/tracking`, where one scout had stopped at a directory it read as vendored and said so
-nowhere in its summary. That is the whole argument for the fixed format in one number: the fan-out
-was wrong, and finding out cost one command rather than a production incident. The full transcript
-of that scout was on disk the entire time — Claude Code 2.x keeps subagent transcripts under
-`~/.claude/projects/` for a configurable retention period — and nobody would have opened it without
-a reason to look.
+The scouts' `TOTAL=` values summed to 47. The independent count, across every service, said 52; the
+other fifteen services had none. The gap was in `services/tracking`, where one scout had stopped at
+a directory it read as vendored and said so nowhere in its summary. That is the whole argument for
+the fixed format in one number: the fan-out was wrong, and finding out cost one command rather than
+a production incident. The full transcript of that scout was on disk the entire time — Claude Code
+2.x keeps subagent transcripts under `~/.claude/projects/` for a configurable retention period — and
+nobody would have opened it without a reason to look.
 
 ## Failure mode
 

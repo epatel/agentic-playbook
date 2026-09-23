@@ -6,8 +6,8 @@ incompatible ways of working. So the team invents one in private, and discovers 
 disagree during code review — a slow and public place to learn that half the team thinks the
 agent's plan belongs in the pull request and half think it is noise.
 
-DORA's 2025 survey puts the mechanism plainly: AI acts "as an amplifier — it magnifies
-the strengths of high-performing organizations and the dysfunctions of struggling ones".
+DORA's 2025 survey says AI's primary role "is that of an amplifier. It
+magnifies the strengths of high-performing organizations and the dysfunctions of struggling ones".
 
 The suite is one idea: a team's practice with these tools is an artefact, and it has to be written,
 maintained, and handed over like any other. What is not written down is not a practice but a habit

@@ -22,8 +22,8 @@ Reduction never happens by accident. Somebody has to decide what not to send.
    procedure for one situation — belongs behind a trigger, whether that is a path-scoped rule, a
    skill description ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)),
    or a card you load by hand ([*Split the agent file into
-   cards*](split-the-agent-file-into-cards.md)). Three vendors have built three mechanisms for this
-   and they encode one idea: the instruction should turn up when its situation does.
+   cards*](split-the-agent-file-into-cards.md)). The mechanisms differ, and a card is no vendor's
+   feature, but they encode one idea: the instruction should turn up when its situation does.
 3. **Prefer a smaller task to a filtered one.** Filtering is damage control applied after you have
    already asked for the wrong thing. If the window is under pressure, the first move is
    [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md), not a compression layer.
@@ -57,11 +57,11 @@ Tools in this category act at different points. Some rewrite shell output before
 return only what the agent asks for, as `context-mode` does. Some compress the prompt itself with a
 small model, as LLMLingua does. Nearly all report their benefit the same way, as tokens removed
 where the tool acts ([`token-filtering.md`](../../../notes/research/token-filtering.md)), and only
-`rtk` has independent cost measurements. Both tested v0.43.0 in mid-2026; nothing has re-tested it
-since. JetBrains' 425 billed trials found cost per task up 7.6% at low reasoning effort and turns up
-13.8%, quality tied, while the tool's own analytics reported 96.2 million tokens saved over the same
-trials. Quesma, across 1,740 attempts on Terminal-Bench 2.1, concluded: "We do not recommend RTK as
-a generic cost-saving tool."
+`rtk` has independent cost measurements. Both measured it in mid-2026, JetBrains on v0.43.0; nothing
+has re-tested it since. JetBrains' 425 billed trials found cost per task up 7.6% at low reasoning
+effort and turns up 13.8%, quality tied, while the tool's own analytics reported 96.2 million tokens
+saved over the same trials. Quesma, across 1,740 attempts on Terminal-Bench 2.1, concluded: "We do
+not recommend RTK as a generic cost-saving tool."
 
 Both sides are telling the truth. The tool removes most of the bytes a command emits, and the bill
 still goes up: most input cost arrives as cached re-reads at roughly a tenth of the fresh price,

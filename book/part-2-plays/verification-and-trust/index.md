@@ -1,7 +1,7 @@
 # Verification and trust
 
 In a 2026 study of a quarter of a million pull requests, a machine wrote the code and a machine
-approved it, with a median of 1.2 minutes between the two events. The study reports no precision, no
+reviewed it, with a median of 1.2 minutes between the two events. The study reports no precision, no
 recall, and no merge outcomes, because nobody has established whether any of it catches anything. It
 is the fastest review process ever measured and there is no evidence it is a review. The human
 numbers in the same 2026 corpora are not much more comforting: humans alone review 8% of

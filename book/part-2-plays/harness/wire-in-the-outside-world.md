@@ -23,8 +23,8 @@ invoke), and any client speaking the protocol can consume them.
    ([`mcp.md`](../../../notes/research/mcp.md)).
 2. **Read the exact command before you approve it, and run it where you run everything else.** A
    local server is a binary executing with your privileges. The specification requires a client
-   offering one-click installation to show the command untruncated, for the reason that the command
-   is the payload; the isolation you put under the agent's other commands belongs under this one too
+   offering one-click installation to show the command untruncated, because the command is the
+   payload. A harness sandbox may not cover the servers it launches; check, and isolate them if not
    ([*Choose your harness*](choose-your-harness.md)).
 3. **Scope the credential down to the job.** Read-only where reading is the job, one project rather
    than the organisation, one repository rather than the account. Broad grants make a leaked token
@@ -78,9 +78,9 @@ not have reached through any amount of pasting, because nobody had thought to pa
 Two things did not go the tidy way. A second server, for the ticket tracker, was proposed in the
 same review and dropped: the only token the tracker could issue was organisation-wide and could
 write, and the value on offer was saving a paste. And the metrics server was removed from
-`.mcp.json` when the investigation closed, because its forty tool descriptions, loaded up front by
-the harness, were arriving on every turn of every session, including the several hundred that had
-nothing to do with latency. It goes back in when the next regression does.
+`.mcp.json` when the investigation closed, because a connection to a server that can silence alerts
+is a standing trust, and the investigation that justified it was over. It goes back in when the next
+regression does.
 
 ## Failure mode
 
@@ -101,7 +101,7 @@ every server your agent is connected to and who publishes each one.
 
 - [ ] Every connected server crosses a boundary, rather than merely existing and looking useful
 - [ ] You have read the exact command or URL for each one, untruncated, before approving it
-- [ ] Local servers run inside the same isolation as the agent's other commands
+- [ ] Local servers run under isolation of their own, not assumed to inherit the agent's
 - [ ] Each credential is scoped to the narrowest thing that does the job, read-only where possible
 - [ ] Installed versions are pinned, and updates are reviewed rather than taken
 - [ ] The connected list is short enough to recite from memory, and was pruned this quarter

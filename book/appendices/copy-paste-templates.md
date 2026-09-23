@@ -2,7 +2,7 @@
 
 Three skeletons. None of them was written for this appendix: each is the reduced form of something a
 play works through at length, and the play is where the reasoning is. A template lifted without the
-reasoning survives about a fortnight.
+reasoning does not survive long.
 
 Two rules apply to all three. Delete anything you cannot justify — every line you keep out of
 politeness is a line competing for attention with the lines that matter. And date them, because the
@@ -55,7 +55,7 @@ A card is the same shape one level down, and short enough to read in one pass:
 <As above. If this file needs a third heading level, it is two cards.>
 ```
 
-The vendor file wires it up and holds nothing else:
+The vendor file wires it up and holds only what is specific to that tool:
 
 ```markdown
 @AGENTS.md
@@ -159,6 +159,6 @@ agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.
       said so and asked for a second reviewer
 ```
 
-The last item is the one people delete first, and it is the one the evidence supports most directly:
-review coverage is where agent-assisted throughput is paid for, and a reviewer past the point of
-attention who says nothing is where it stops being paid.
+The last item is the one people delete first. Nothing measures how many reviews a person does well
+in a day, so the number is the team's to choose; what the evidence does show is that review coverage
+is where agent-assisted throughput is paid for, and per-reviewer load is what rises.

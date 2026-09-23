@@ -20,12 +20,12 @@ time may lock a particular revision, and only this programmer may check in the s
 Breaking somebody's lock sent them an automatic email. Tichy reports the effect: programmers broke
 locks "only in real emergencies, or when a co-worker resigns and leaves locked revisions behind."
 
-Git shipped on 7 April 2005, with cheap branches and a three-way merge, under a commit message
-describing it as "the information manager from hell". And then, for years, mostly nothing happened.
-The Eclipse Community Survey asked developers for their primary source control system; in 2011, six
-years in, Subversion was on 51.3%, CVS on 13.3%, and Git and GitHub together on 12.8%. Stack
-Overflow's 2018 survey, thirteen years in, put Git at 87.2%. In that same survey, 7.9% of
-respondents reported backing work up as zip files.
+Git's first commit landed on 7 April 2005, describing it as "the information manager from hell";
+version 1.0 followed that December. And then, for years, mostly nothing happened. The Eclipse
+Community Survey asked developers for their primary source control system; in 2011, six years in,
+Subversion was on 51.3%, CVS on 13.3%, and Git and GitHub together on 12.8%. Stack Overflow's 2018
+survey, a different question to a different population, put Git at 87.2%. In that same survey, 7.9%
+of respondents reported backing work up as zip files.
 
 That decade usually gets told as a story about installing software, which is the least interesting
 thing about it. Installing Git took an afternoon. What took ten years was agreeing what a commit was
@@ -37,7 +37,7 @@ post describes it, in full, as a way to "tell people who forked from you they ne
 notification. GitHub did not call it code review until "Pull Requests 2.0" in August 2010, two and a
 half years later, and even then the practice was thin: researchers examining 1.9 million pull
 requests across 2012 and 2013 found 14% of active repositories using pull requests at all, and 12%
-of those carrying a review comment.
+of pull requests carrying a review comment.
 
 The tool was ready in 2005. The discipline arrived by argument rather than by release note. Sources
 are in [`notes/research/convergence-history.md`](../../notes/research/convergence-history.md).
@@ -65,11 +65,11 @@ their process. Scrum came back at 12.3%, and nearly 29% reported using no formal
 Stack Overflow's 2018 survey, with roughly 59,000 respondents, Agile was at 85.4% and Scrum at
 62.7%.
 
-What spread, though, was not the method. When researchers interviewed ten companies running Scrum in
-2015, every one had varied it, to the point of "a substantial deviation from Scrum as initially
-proposed". What held constant across all ten was sprint length, the events, and team size — the
-vocabulary. What varied was roles, estimation, and quality assurance: everything with substance in
-it.
+What spread, though, was not the method. When researchers interviewed ten companies running Scrum,
+in a study published in 2015, every one had varied it, to the point of "a substantial deviation from
+Scrum as initially proposed". What varied least was sprint length, the events, team size, and
+requirements engineering — mostly the vocabulary. What varied was roles, estimation, and quality
+assurance: everything with substance in it.
 
 That reads like an indictment and is not one. The value was never that Scrum was correct. It was
 that a developer could change employer and know, on the first morning, what "sprint", "backlog", and
@@ -114,7 +114,7 @@ That did not happen with Git.
 
 The substrate moves. Git 1.5 did not get better at merging while you slept. Every convention you
 adopt here encodes an assumption about what the model cannot yet do reliably, and some of those
-assumptions expire without notice — nothing in your repository will tell you which.
+assumptions expire without notice.
 
 Neither previous interim was a crisis. Teams shipped good software on CVS with locked files and a
 process their tech lead invented over a weekend. The decade of argument was not a decade of failure;
@@ -124,11 +124,11 @@ settled.
 ## What this book is, given all that
 
 The moving substrate changes what convergence can look like. Git's practices settled because Git
-held still long enough to be argued about; a practice built on what the model cannot yet do
-reliably may not get that long. What is likely to converge is not a set of conventions but a habit
-around them: write down what the team does, date the parts that rest on the model, and
-re-test those parts when the model changes. This book practises that habit; [*What will go stale,
-and how to tell*](what-this-book-assumes-about-you.md#what-will-go-stale-and-how-to-tell) says how.
+held still long enough to be argued about; a practice built on what the model cannot yet do reliably
+may not get that long. What is likely to converge is not a set of conventions but a habit around
+them: write down what the team does, date the parts that rest on the model, and re-test those parts
+when the model changes. This book practises that habit; [*What this book assumes about
+you*](what-this-book-assumes-about-you.md) says how.
 
 It is not the consensus; nobody has one to offer. It is one working set of practices, written in
 enough detail to be disagreed with precisely. The reason to write it down is the same reason

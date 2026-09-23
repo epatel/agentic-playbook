@@ -60,13 +60,13 @@ usually also selling the remedy.
 
 It will not give you a number it cannot source. That constraint costs more than it sounds like it
 should, because the published evidence on AI-assisted development is considerably worse than the
-discourse implies. Nearly all of it measures autocomplete or chat rather than agents, and the one
-serious attempt at the missing randomised trial was abandoned by its own authors when developers
-stopped agreeing to work without AI at all — a collapse that is itself the most interesting result
-in the field, and which
-[*Where the time actually goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md)
-reports in full. Where this book hedges, that is why. Where it gives a figure, the figure is dated
-in the sentence and traceable to a research note in [`notes/research/`](../../notes/research/).
+discourse implies. Nearly all of it measures autocomplete or chat rather than agents, and the most
+careful randomised trial of recent tools had its follow-up abandoned by its own authors once too
+many developers declined to do tasks without AI — a collapse that is itself the most interesting
+result in the field, and which [*Where the time actually
+goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md) reports in full. Where this
+book hedges, that is why. Where it gives a figure, the figure is dated in the sentence and traceable
+to a research note in [`notes/research/`](../../notes/research/).
 
 ## How to read it
 
@@ -74,16 +74,15 @@ Not front to back, and not in one sitting.
 
 The plays are the point. Six suites, each play self-contained under the same five headings. Plays
 link to each other where the dependency is real. There is no required order. Most of them are
-preparation work, in the sense [*The four areas,
-re-weighted*](the-four-areas-reweighted.md#software-engineering-the-area-that-grew) gives the word.
+preparation work, in the sense [*The four areas, re-weighted*](the-four-areas-reweighted.md) gives
+the word.
 
 *Where It Struggles* is where the book argues against itself: [*What agents are reliably bad
 at*](../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md), [*The failure modes worth
 naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), [*Where the time actually
 goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and [*What is genuinely
 contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you are sceptical,
-start there. It is the part that decides whether the rest is worth your week, and it was written
-expecting to be read first.
+start there. It is the part that decides whether the rest is worth your week.
 
 ## What it costs
 
@@ -107,8 +106,6 @@ disagree in this book, trust the shape and go and check the figure.
 ## Where to start
 
 The tools are installed, you are already using them, and whatever purchase decision existed was
-made somewhere above your head a while ago. What is missing is the practice, and practice gets built
-by people who write down what they do and then discover, in public and slightly uncomfortably, which
-parts of it were wrong.
+made somewhere above your head a while ago. What is missing is the practice.
 
-The rest of this book is one attempt at that. Start wherever your week hurts.
+The rest of this book is one attempt at it. Start wherever your week hurts.

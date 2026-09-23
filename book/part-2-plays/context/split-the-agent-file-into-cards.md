@@ -103,7 +103,9 @@ $ wc -l CLAUDE.md cards/*.md
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger
-matches, which for most tasks is one card.
+matches, which for most tasks is one card. One exception is deliberate: every task reads the shared
+plan first, longer than all the cards together, because it keeps tasks that never share a window
+aligned.
 
 Self-containment is the rule with nothing enforcing it: a link from one card to another is an
 ordinary markdown link, and no tool objects. So it was audited by hand.

@@ -22,11 +22,11 @@ Four tests before you delegate, and two habits that keep them honest.
 3. **Do it yourself when nothing cheap can say it is wrong.** No test, no type, no reproducer, no
    diff short enough to scan: what comes back is a claim rather than a result. Buying claims is how
    a saving relocates into review, which is where DORA's *verification tax* is paid.
-4. **Do not add agents to buy capability.** Fan-out multiplies everything: vendor figures put
-   multi-agent systems at roughly fifteen times the tokens of a chat interaction, because every
-   teammate carries its own context and none of them share a cache. Give one agent the same budget
-   first, and keep the fan-out only if it beat that
-   ([*Decompose into subagents*](../orchestration/decompose-into-subagents.md)).
+4. **Do not add agents to buy capability.** Fan-out multiplies everything: Anthropic's June 2025
+   figure put its multi-agent research system at roughly fifteen times the tokens of a chat
+   interaction, because every agent carries its own context. Give one agent the same budget first,
+   and keep the fan-out only if it beat that ([*Decompose into
+   subagents*](../orchestration/decompose-into-subagents.md)).
 5. **Do not ask the agent what the job will cost.** In 2026 measurements, frontier models predicted
    their own token usage at correlations up to 0.39 and systematically underestimated it. Expert
    human difficulty ratings align only weakly with actual token cost, so neither of the two

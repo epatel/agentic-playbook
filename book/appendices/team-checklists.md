@@ -16,7 +16,7 @@ the six suites fail at different rates.
 
 Assembled from the four plays in [*Context*](../part-2-plays/context/index.md).
 
-- [ ] One file holds the project agent file; the vendor-specific file is an import or a symlink
+- [ ] One file holds the agent file's content; the vendor-specific file is an import or a symlink
 - [ ] Every line in it traces to a correction somebody would otherwise retype
 - [ ] Nothing in it is scoped to one directory, one procedure, or one rare situation
 - [ ] Somebody has had the agent state its project instructions back to them this week

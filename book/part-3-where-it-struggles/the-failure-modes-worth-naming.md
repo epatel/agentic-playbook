@@ -1,7 +1,7 @@
 # The failure modes worth naming
 
 A failure you can name is a failure you can raise in a review without spending a paragraph on
-preamble first. That is the entire argument for this chapter, and it is not a small one: the
+preamble first. That is the whole argument, and it is not a small one: the
 phenomena below are all common, all recognised on sight by people who use these tools daily, and all
 routinely left unmentioned because saying them out loud costs more sentences than anyone has
 patience for at half past four.

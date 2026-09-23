@@ -51,10 +51,9 @@ measures, which is that somebody still has to read the output.
 
 ## How to discount this part
 
-Four things are true of both
-[*Refactoring a codebase for agents*](refactoring-a-codebase-for-agents.md) and
-[*Inviting non-developers in*](inviting-non-developers-in.md), and stating them once here saves
-repeating them.
+Four things are true of both [*Refactoring a codebase for
+agents*](refactoring-a-codebase-for-agents.md) and [*Inviting non-developers
+in*](inviting-non-developers-in.md).
 
 - **Written September 2026.** Everything in the two chapters is a position at a date, and the
   argument for the second wave in particular is a bet about what models will still be bad at in a
@@ -72,4 +71,5 @@ repeating them.
 The material underneath both is old enough to be reassuring. A codebase organised so that one
 capability lives in one place, behaviour that is visible where it happens, and a check fast enough
 to run on every change are all things somebody argued for before any of this existed. What is new is
-that there is now a second reader, it has no memory between sessions, and it is extremely confident.
+that there is now a second reader, it has no memory between sessions, and its output always sounds
+certain.

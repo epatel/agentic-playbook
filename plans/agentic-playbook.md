@@ -113,7 +113,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 41,759 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 42201 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
 `main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
@@ -1540,6 +1540,43 @@ category, including what Claude Code already truncates. The test moved from `rtk
 `filter-paired-run/` and takes any filter (`--filter rtk`, or a settings file, with an MCP server if
 the tool needs one); its protocol text was generalised before any run, so the pre-registration
 still holds.
+
+### The whole-book review by four fresh readers
+
+After the harness and token-filter changes, four subagents that had not seen the session's edits
+each reviewed a quarter of the book against `book/STYLE.md`, `book/TEMPLATE-play.md`, and the
+research notes. Every finding was checked against its source before anything changed; about sixty
+were reported and nearly all held. **The pattern worth knowing: most were a precise figure whose
+denominator or scope had drifted from its note, or a worked example that had drifted from its own
+fixture.** The fixes that change what the book claims:
+
+- *Before Git*: 12% is of pull requests, not repositories; Git's first commit had no merge; the
+  Eclipse and Stack Overflow surveys are no longer read as one series; the Scrum study's "varied
+  least" is no longer "held constant".
+- *What this book assumes about you*: METR's first trial finished; only the follow-up was abandoned,
+  and developers declined *some* tasks without AI, not all work.
+- *The four areas*: two contradictions introduced by the earlier trim are gone.
+- *Make the agent prove it*: the gate adds `--no-renames` (tested: a renamed, weakened test file was
+  reported as `R` and passed `DM`). Propagated to the note, `tideline/reproduce.py`, and the examples
+  README.
+- *Review code you did not write*: the 2.6× deletion ratio is from about 41 Java pull requests, not
+  4,900; the duplication corpus is 3,858, not "the largest"; the worked example now says the skipped
+  test also lost its assertions, which the fixture shows and the `rg` filter hid.
+- Orchestration: Cognition's update came ten months after *Don't Build Multi-Agents*, not two years,
+  and did not narrow the exceptions; the control-flow script re-runs the tests after the model step;
+  "`AGENTS.md` is enforced" is now "loaded".
+- Harness: MCP servers are not assumed to inherit the harness sandbox; the `kestrel` sandbox is said
+  to stop the push and not the in-tree delete; SWE-bench's fixed harness is the Verified comparison
+  track, not all of SWE-bench.
+- *Split the agent file into cards*: the worked example now admits the one deliberate unconditional
+  load — every task reads this plan first.
+- Part III: curl's turnaround no longer rules out the tooling, which Stenberg names; the UTBoost tie
+  no longer credited to the tests alone; GitClear's unsupported +47% removed; SWE-Bench+ dated 2024.
+- Team: `lodestone`'s versions and dates reconcile across two plays, and its agreement carries the
+  trigger its own play requires.
+
+Left deliberately: a few places where the book refers to itself in a chapter opener, and the
+autocomplete caveat appearing in two Part III chapters, both judged low and in context.
 
 ### Part IV and the appendices, the same pass
 
