@@ -371,8 +371,26 @@ const SAY = [
   [/\bPreface\b/g, 'Pre face'],
 ];
 const spoken = (text) => SAY.reduce((out, [from, to]) => out.replace(from, to), text);
-/* One utterance per sentence. A whole paragraph in one utterance runs past the point where
-   Chromium quietly stops speaking, and sentence-sized pieces also make the pauses sound right. */
+/* How much to hand the engine at once. Chrome's online Google voices stop about fifteen seconds
+   into an utterance, so everything else gets one sentence at a time. Edge's Microsoft online
+   ("Natural") voices do not stop, but they fetch each utterance over the network, so a sentence
+   each puts a round trip, a pause of whatever length the network chooses, between every two
+   sentences. For those a whole block goes as one utterance, split only if it is very long, and the
+   only pauses left are between paragraphs. Same rule as scripts/read-aloud.html. */
+const LONG = 1500;
+const streamsWhole = (v) => !!v && !v.localService && /^Microsoft\b.*\bOnline\b/.test(v.name);
+
+function pieces(text) {
+  const list = sentences(text);
+  if (!streamsWhole(speech.voice)) return list;
+  const out = [];
+  for (const s of list) {
+    if (out.length && out[out.length - 1].length + s.length < LONG) out[out.length - 1] += ' ' + s;
+    else out.push(s);
+  }
+  return out;
+}
+
 function sentences(text) {
   const parts = text.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z"'\u201c\u2018])/);
   const out = [];
@@ -429,7 +447,7 @@ function speakFrom(index) {
   if (block.getBoundingClientRect().top > innerHeight - 80 || block.getBoundingClientRect().top < 60) {
     block.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
-  const queue = sentences(spoken(textOf(block)));
+  const queue = pieces(spoken(textOf(block)));
   let done = 0;
   for (const line of queue) {
     const u = new SpeechSynthesisUtterance(line);

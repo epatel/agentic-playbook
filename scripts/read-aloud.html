@@ -76,8 +76,26 @@
     return text;
   }
 
-  /* One utterance per sentence: Chromium stops partway through a long one, and a paragraph of
-     this book runs well past that. */
+  /* How much to hand the engine at once. Chrome's online Google voices stop about fifteen seconds
+     into an utterance, so everything else gets one sentence at a time. Edge's Microsoft online
+     ("Natural") voices do not stop, but they fetch each utterance over the network, so a sentence
+     each puts a round trip — a pause of whatever length the network chooses — between every two
+     sentences. For those, a whole block goes as one utterance, split only if it is very long, and
+     the only pauses left are between paragraphs, where a reader expects one. */
+  var LONG = 1500;
+  var streamsWhole = function (v) { return !!v && !v.localService && /^Microsoft\b.*\bOnline\b/.test(v.name); };
+
+  function pieces(text) {
+    var list = sentences(text);
+    if (!streamsWhole(state.voice)) return list;
+    var out = [];
+    list.forEach(function (s) {
+      if (out.length && out[out.length - 1].length + s.length < LONG) out[out.length - 1] += ' ' + s;
+      else out.push(s);
+    });
+    return out;
+  }
+
   function sentences(text) {
     var parts = text.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+(?=[A-Z"'“‘])/);
     var out = [];
@@ -128,7 +146,7 @@
     if (box.top > innerHeight - 80 || box.top < 60) {
       block.scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
-    var queue = sentences(spoken(textOf(block))), done = 0;
+    var queue = pieces(spoken(textOf(block))), done = 0;
     if (!queue.length) return speakFrom(index + 1);
     queue.forEach(function (line) {
       var u = new SpeechSynthesisUtterance(line);

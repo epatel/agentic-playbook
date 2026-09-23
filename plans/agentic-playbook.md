@@ -113,7 +113,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 42201 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 42,325 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
 `main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
@@ -2792,6 +2792,11 @@ write and easy to get wrong: written carelessly it becomes the benefits list the
   from a clone with the button removed. And speech is queued **per sentence, not per paragraph**:
   Chromium stops speaking partway through a long utterance, and a hundred-word paragraph is well
   past the limit.
+  **Corrected 23 September 2026:** that limit belongs to Chrome's online Google voices. Edge's
+  Microsoft online ("Natural") voices fetch each utterance over the network, so sentence-sized
+  pieces put a round trip between every two sentences — irregular pauses, varying with the network,
+  which the author heard in Edge. Both surfaces now send a whole block as one utterance (split past
+  1,500 characters) when the voice is a Microsoft online voice, and keep sentences for every other.
 - **Alignment had to be measured rather than eyeballed.** `book.css` gives `h2` a section rule and
   0.83em of padding above it and gives the chapter `h1` neither, so a single offset put the button
   on the rule for one and beside the text for the other. They have separate offsets.
