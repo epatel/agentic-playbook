@@ -30,16 +30,18 @@ table separating what is standardised from what is one vendor's habit. Beneath i
   https://blog.modelcontextprotocol.io/posts/2026-07-28/ — and its **Security Best Practices**
   document, https://modelcontextprotocol.io/specification/2026-07-28/basic/security_best_practices,
   which is normative and unusually direct about trust boundaries.
-- **The `rtk` pair** — JetBrains' benchmark,
+- **Token-filtering tools, and the one measured against a bill.** The category is surveyed in
+  [`token-filtering.md`](../../notes/research/token-filtering.md): tools that rewrite command
+  output, keep it in a sandbox, or compress the prompt, nearly all reporting savings where they act.
+  Only `rtk` has been measured independently against cost — JetBrains' benchmark,
   https://blog.jetbrains.com/ai/2026/07/rtk-claude-code-token-savings/, read next to Quesma's cost
   comparison, https://quesma.com/blog/does-rtk-make-ai-coding-cheaper/. Two independent measurements
   on different suites that reached the same conclusion — no reliable saving on the bill while the
-  tool's own dashboard reported enormous ones — which is the most instructive thing in the pass.
-  Read them for the method rather than as a verdict on the tool: both tested v0.43.0, the direction
-  differed between two models, and the effect largely vanished at high reasoning effort. The same
-  test, written down for the current version and not yet run, is in this book's repository at
-  `book/examples/rtk-paired-run/`. A filtering tool that survives the same paired run is worth
-  keeping; the objection is to the dashboard, not to the category.
+  tool's own dashboard reported enormous ones. Read them for the method rather than as a verdict:
+  both tested v0.43.0, the direction differed between two models, and the effect largely vanished at
+  high reasoning effort. The same test, written down for any such tool and not yet run, is in this
+  book's repository at `book/examples/filter-paired-run/`. A tool that survives it is worth keeping;
+  the objection is to the dashboard, not to the category.
 
 ## Orchestration
 

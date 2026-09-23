@@ -124,8 +124,8 @@ reassessment*](#the-part-i-reassessment). *Preparation and execution* now lives 
 re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,494 and
 1,487 words against a 1,500 ceiling: **anything added to either has to take something out.**
 
-**A re-test of the `rtk` claims is written and not yet run.**
-[`book/examples/rtk-paired-run/`](../book/examples/rtk-paired-run/README.md) is a paired-run
+**A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
+[`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
 protocol, fixed before any result exists, with a runner and an analysis script. `check-tasks` passes
 (twelve seeded bugs, each verified to break the suite and to match its bug report); `preflight` and
 the paid runs have not happened. Until they do, *Starve the context* still correctly says nothing
@@ -1509,13 +1509,37 @@ The same model then read Parts II and III and fixed what it found, on 23 Septemb
 7. "Human-only review runs at 8%" now says what it is 8% of; the *Choose your harness* timeline adds
    up.
 
-Not done, deliberately: *Choose your harness* is about configuring a harness more than choosing one,
-and the *Starve the context* worked example narrates an outcome beside a blank table. The first is
-a structural call for the author; the second waits on `rtk-paired-run` results.
+Not done then, done later the same day at the author's direction: *Choose your harness* was about
+configuring a harness more than choosing one — see *Harness levels* below. Still waiting: the
+*Starve the context* worked example narrates an outcome beside a blank table. The first is
+a structural call for the author; the second waits on `filter-paired-run` results.
 
 **Closed later the same day:** the four-areas framework was introduced as "described, usefully"
 with no source. It comes from the author's own ideation (`notes/raw/idea.md`), so the chapter now
 presents it as the book's own.
+
+### Harness levels, and token filters as a category
+
+Two changes the author asked for, 23 September 2026.
+
+**Choose your harness is organised as three levels, not a ladder.** Configure the harness you have;
+choose a different one; build your own. The reader picks the lowest level that changes what they
+need and stops there — the author was explicit that this is not a sequence to climb, so nothing in
+the book should say "then". Level one holds everything the play said before about enforcement
+layers, permissions, sandboxing, and hooks. Level two rests on the one sourced point available:
+public model rankings hold the harness fixed on purpose (SWE-bench's "No tools, no special scaffold
+structure", `single-agent-wins.md`), so nobody else's ranking picks a harness for you. Level three
+points at *Make the control flow deterministic*. The diagram is now "what do you need to change",
+not the enforcement layers; the Harness opener and the team checklist follow.
+
+**Token filtering is a category, with `rtk` as the example.** *Starve the context* now names three
+mechanisms — rewriting command output (`rtk`), keeping it in a sandbox (`context-mode`), compressing
+the prompt (LLMLingua) — and the finding that generalises: nearly all report savings where they act,
+and only `rtk` has been measured against a bill. `token-filtering.md` gains a sourced section on the
+category, including what Claude Code already truncates. The test moved from `rtk-paired-run/` to
+`filter-paired-run/` and takes any filter (`--filter rtk`, or a settings file, with an MCP server if
+the tool needs one); its protocol text was generalised before any run, so the pre-registration
+still holds.
 
 ### Part IV and the appendices, the same pass
 
@@ -1523,7 +1547,7 @@ presents it as the book's own.
    file rename had replaced the adjective. The only such casualty; every other preceding word was
    checked.
 2. *Further reading* said the two `rtk` benchmarks reached "opposite conclusions". They agreed, and
-   Quesma says so. It now also names `book/examples/rtk-paired-run/` — by path, because `make check`
+   Quesma says so. It now also names the paired-run test — by path, because `make check`
    refuses a link to a file under `book/` that is not in the table of contents.
 3. *Refactoring a codebase for agents* no longer calls an agent "a reader that reads at no cost",
    which the Economics suite spends a play refuting; no longer states that an agent picks between
@@ -2487,6 +2511,12 @@ Grafana's spelling**; the reason is in the agent file.
   and discarded with it; *agent file* stays the file every session loads. Uses meaning the shared
   file ("a line in the shared agent file", "added to the agent file as files no agent may touch")
   were checked and left alone. The author chose the term.
+- **Harness choice is a level to aim for, not a ladder to climb (2026-09-23).** The author's
+  correction to a first draft that framed it as a ladder. Plain "levels" rather than a metaphor,
+  because the style guide warns that a metaphor repeated at book length becomes a bit.
+- **Context-reduction tools are discussed as a category; `rtk` is the example, not the subject
+  (2026-09-23).** At the author's direction. `rtk` keeps its numbers because it is the only one
+  with independent cost measurements.
 
 ## Two proposals from the author's reflection
 

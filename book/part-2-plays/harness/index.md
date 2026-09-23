@@ -15,8 +15,8 @@ never only what the agent can now reach — it is what still holds when the reac
 Three plays, the same idea at three layers.
 
 [*Choose your harness*](choose-your-harness.md) — the layer you are already running and mostly did
-not choose. What a harness is made of, why that choice outranks the model choice more often than the
-discourse suggests, and where to put a boundary so that it is one.
+not choose. What a harness is made of, the three levels of owning one — configure it, choose
+another, build your own — and why the lowest level that changes what you need is right.
 
 [*Package repeatable expertise*](package-repeatable-expertise.md) — adding competence. When a
 procedure should stop living in your head or in a pasted prompt and become an artefact loaded when

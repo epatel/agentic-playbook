@@ -5,54 +5,69 @@
 You have views about which model to use. They took weeks to form, they are probably right, and they
 matter less often than the question nobody on the team has asked: what is running the model. The
 wrapper around it decides which tools exist, whether a command runs while you are at lunch, and what
-the operating system does when the agent writes a path you never mentioned into `rm -rf`. You
-configured it once, during installation, by pressing return. The first time that configuration is
-load-bearing is the first time you find out which parts of it were decoration.
+the operating system does when the agent writes a path you never mentioned into `rm -rf`. When it
+disappoints, the reflex is to reach higher — a different tool, or a loop of your own — when the
+fault was a setting nobody had read. Aimed wrong, that reflex buys a migration to fix a
+configuration.
 
 ## The play
 
-Choose the harness deliberately, then move every safety assumption onto the layer that can hold it.
+Decide how much of the harness you need to own, aim for that level, and stop there.
 
-1. **Name the four parts of the one you are already running.** The loop — how it plans, edits,
-   re-reads its own output, and decides it has finished. The tool surface — what it can call at all.
-   The permission layer — what it may call without asking you. The isolation layer — what the
-   operating system will refuse regardless. Find where each one is configured. If you cannot find
-   the fourth, you are not running one.
-2. **Sort your safety assumptions by what enforces them.** Three rows, and only two of them enforce
-   anything: instructions in an agent file or a skill body are enforced by nothing, permission rules
-   are enforced by the client before the call runs, and an OS sandbox is enforced by the kernel for
-   the process and every child it spawns. Anything you would describe out loud as a control, sitting
-   on the first row, is misfiled.
-3. **Tune permission rules for prompt volume, not for safety.** Allow the commands you run
-   constantly, keep `ask` on the destructive ones, and read the matching rules before trusting any
-   of it: compound commands are split and matched part by part, a fixed list of wrappers like
-   `timeout` is stripped, and the wrappers that matter are not — `Bash(devbox run *)` approves
-   whatever follows `run`
-   ([`permissions-and-sandboxing.md`](../../../notes/research/permissions-and-sandboxing.md), Claude
-   Code v2.1.x, September 2026).
-4. **Put the boundary where the kernel can hold it, before the first unattended run.** Turn on
-   filesystem and network isolation, deny reads on credential files and tokens by name — nothing is
-   denied by default — and set the two flags that are not defaults: fail the run if the sandbox
-   cannot start, and switch off the escape hatch that lets a command be retried unsandboxed. Without
-   both, a missing dependency on one machine silently downgrades that machine to no isolation.
-5. **Use a hook for the rules a pattern cannot express** — the current branch, whether a file is
-   generated, what an argument actually means. A hook sees the call before it runs and can refuse
-   it, which is the thing prose cannot do.
+Start by naming the four parts of the one you already run. The loop: how it plans, edits, re-reads
+its output, and decides it has finished. The tool surface: what it can call at all. The permission
+layer: what it may call without asking. The isolation layer: what the operating system refuses
+regardless. The level you need is set by what you have to change — a setting, a part your harness
+cannot give you, or the loop itself.
 
 ```mermaid
-graph LR
-    A["Instructions<br/><i>agent file, rules, skill bodies</i>"] -->|"enforced by nothing"| M["Shapes a decision"]
-    B["Permission rules<br/><i>allow / ask / deny</i>"] -->|"enforced by the client"| C["Survives a decision"]
-    D["OS sandbox<br/><i>Seatbelt, bubblewrap</i>"] -->|"enforced by the kernel"| C
+graph TD
+    Q{"What do you need<br/>to change?"}
+    Q -->|"a setting: permissions,<br/>isolation, hooks, context"| L1["<b>Level one</b><br/><i>configure the harness you have</i>"]
+    Q -->|"a part yours<br/>cannot give you"| L2["<b>Level two</b><br/><i>choose a different harness</i>"]
+    Q -->|"the loop is<br/>what you ship"| L3["<b>Level three</b><br/><i>build your own</i>"]
 ```
 
-What this is really buying is the distinction between things that shape a decision and things that
-survive a bad one. Teams file the first as the second constantly, and the consequence lands in the
-harness rather than in the model: a capable model that cannot run your tests produces
-better-sounding output you still cannot check, while a cheaper one that can run the suite, read the
-failure, and try again produces work that arrives verified. The exchange rate is friction, and it is
-not small — real isolation means commands failing for reasons unrelated to your task, and with the
-escape hatch off, some of those failures land on you at 16:50 on a Friday.
+### Level one: configure the harness you have
+
+Where nearly every team belongs, and where the other two levels start.
+
+1. **Sort your safety assumptions by what enforces them.** Instructions in an agent file or a skill
+   body are enforced by nothing, permission rules by the client before the call runs, and an OS
+   sandbox by the kernel, for the process and every child it spawns.
+2. **Tune permission rules for prompt volume, not for safety.** They match spelling: compound
+   commands are split, a fixed list of wrappers like `timeout` is stripped, and the wrappers that
+   matter are not — `Bash(devbox run *)` approves whatever follows `run`
+   ([`permissions-and-sandboxing.md`](../../../notes/research/permissions-and-sandboxing.md), Claude
+   Code v2.1.x, September 2026).
+3. **Put the boundary in the kernel before the first unattended run.** Filesystem and network
+   isolation on, credential files and tokens denied by name, the run set to fail if the sandbox
+   cannot start, and unsandboxed retries off. Without the last two, one machine's missing dependency
+   silently means no isolation on that machine.
+4. **Use a hook for what a pattern cannot express** — the branch, whether a file is generated, what
+   an argument means.
+
+### Level two: choose a different harness
+
+When a part you need cannot be configured: runs in CI with nobody watching, a model yours does not
+support, isolation it does not offer. Compare candidates on your own tasks, because public rankings
+hold the harness still on purpose; SWE-bench runs every model "in a minimal bash environment. No
+tools, no special scaffold structure; just a simple ReAct agent loop"
+([`single-agent-wins.md`](../../../notes/research/single-agent-wins.md)). Level one comes with you,
+and has to be done again.
+
+### Level three: build your own
+
+When the loop is what you ship: a pipeline nobody supervises, or a product with an agent inside it.
+An SDK supplies the loop, and the permission and isolation layers a harness used to hold are now
+yours to write. Build each piece so it can be deleted when the model stops needing it ([*Make the
+control flow deterministic*](../orchestration/make-the-control-flow-deterministic.md)).
+
+Each level buys control over one more part and hands you its upkeep, so the right level is the
+lowest one that changes what you need, and reaching higher to fix a setting is the dearest mistake
+on offer. The exchange rate at level one is friction — real isolation fails commands for reasons
+unrelated to your task, some of them at 16:50 on a Friday — and above it, a second harness to learn
+or a loop of your own to keep alive.
 
 ## Worked example
 
@@ -98,8 +113,12 @@ Adoption took a fortnight rather than an afternoon. `go test ./...` failed on th
 module downloads went to a domain that was not on the list, which is what `proxy.golang.org` is
 doing above. One contributor responded by turning the sandbox off locally and leaving it off for a
 week, discovered only when somebody opened the sandbox status and found a machine reporting no
-isolation. That is the ordinary shape of this change: the configuration is twenty minutes and the
-adoption is a fortnight, most of it spent finding out what your build quietly reaches for.
+isolation. The configuration took twenty minutes; the adoption took a fortnight, most of it spent
+finding out what the build quietly reached for.
+
+That fortnight somebody proposed a different harness, because the agent could not run in CI. It
+could: the harness already ran headless, and CI lacked only a flag and a scoped token. The team
+stayed at level one.
 
 ## Failure mode
 
@@ -116,12 +135,13 @@ program name is a spelling and spellings have synonyms.
 
 ## Checklist
 
+- [ ] The level aimed for is the lowest one that changes what you need
 - [ ] You can name what runs the loop, which tools exist, what runs without asking, and what the OS
       will refuse
 - [ ] Every safety assumption is written on the layer that enforces it: nothing, the client, or the
       kernel
-- [ ] Permission rules are treated as prompt-volume tuning and a record of intent, not as a boundary
-- [ ] No rule you rely on can be sidestepped by a wrapper, an absolute path, or a pair of quotes
+- [ ] Permission rules are prompt-volume tuning, and none you rely on falls to a wrapper, an
+      absolute path, or a pair of quotes
 - [ ] Filesystem and network isolation are on for any run you will not be watching
 - [ ] The sandbox is set to fail rather than degrade, and you have checked that it actually started
 - [ ] Credential files and tokens are denied or masked by name, since nothing is denied by default

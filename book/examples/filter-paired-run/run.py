@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Paired run: the same seeded-bug tasks with and without the rtk hook.
+"""Paired run: the same seeded-bug tasks with and without a token-filtering tool.
+
+The filter is any settings fragment passed to Claude Code with --settings. `rtk` is the built-in
+preset (--filter rtk, the default); any other tool is --filter path/to/settings.json.
 
 Three modes, in the order you should use them:
 
@@ -25,14 +28,34 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 TASKS = json.loads((HERE / "tasks.json").read_text())
-CACHE = Path(os.environ.get("RTK_PAIRED_CACHE", Path.home() / ".cache" / "rtk-paired-run"))
-RTK_ON = {
-    "hooks": {
-        "PreToolUse": [
-            {"matcher": "Bash", "hooks": [{"type": "command", "command": "rtk hook claude"}]}
-        ]
-    }
+CACHE = Path(os.environ.get("FILTER_PAIRED_CACHE", Path.home() / ".cache" / "filter-paired-run"))
+PRESETS = {
+    # Exactly what `rtk init --global` installs. `report` is the tool's own per-directory account
+    # of what it saved, kept beside the measured bill; a custom filter has none.
+    "rtk": {
+        "settings": {"hooks": {"PreToolUse": [
+            {"matcher": "Bash", "hooks": [{"type": "command", "command": "rtk hook claude"}]}]}},
+        "mcp": None,
+        "report": ["rtk", "gain", "-p", "-f", "json"],
+        "recalls": ["rtk", "gain", "-p", "--recalls"],
+    },
 }
+
+
+def load_filter(name):
+    if name in PRESETS:
+        return {"name": name, **PRESETS[name]}
+    path = Path(name)
+    if not path.exists():
+        sys.exit(f"--filter {name}: not a preset ({', '.join(PRESETS)}) and not a settings file")
+    spec = json.loads(path.read_text())
+    # Either a bare settings fragment, or {"settings": {...}, "mcpServers": {...}} for a tool that
+    # runs as an MCP server. The server is passed with --mcp-config, so --strict-mcp-config still
+    # keeps every other server out of both arms.
+    if "settings" in spec or "mcpServers" in spec:
+        return {"name": path.stem, "settings": spec.get("settings", {}),
+                "mcp": spec.get("mcpServers"), "report": None, "recalls": None}
+    return {"name": path.stem, "settings": spec, "mcp": None, "report": None, "recalls": None}
 PYTEST = [sys.executable, "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider", "tests"]
 
 
@@ -110,13 +133,15 @@ def claude_cmd(prompt, arm, args):
         "--setting-sources", "project",
     ]
     if arm == "on":
-        cmd += ["--settings", json.dumps(RTK_ON)]
+        cmd += ["--settings", json.dumps(args.filter_spec["settings"])]
+        if args.filter_spec["mcp"]:
+            cmd += ["--mcp-config", json.dumps({"mcpServers": args.filter_spec["mcp"]})]
     return cmd
 
 
 def run_one(task, arm, effort, rep, args, out):
     run_id = f"{task['id']}__{effort}__r{rep}__{arm}"
-    with tempfile.TemporaryDirectory(prefix="rtkpair-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="filterpair-") as tmp:
         repo = make_workdir(tmp, task)
         config = Path(tmp) / "config"
         config.mkdir()
@@ -147,12 +172,15 @@ def run_one(task, arm, effort, rep, args, out):
         sh(["git", "clean", "-fdq", "--", "tests"], cwd=repo)
         passed = suite_passes(repo)                # judged against the original tests only
 
-        gain = sh(["rtk", "gain", "-p", "-f", "json"], cwd=repo, check=False).stdout
-        recalls = sh(["rtk", "gain", "-p", "--recalls"], cwd=repo, check=False).stdout
-        try:
-            rtk_summary = json.loads(gain)["summary"]
-        except (ValueError, KeyError):
-            rtk_summary = {"unparsed": gain}
+        spec = args.filter_spec
+        report, recalls = None, ""
+        if spec["report"]:
+            raw = sh(spec["report"], cwd=repo, check=False).stdout
+            try:
+                report = json.loads(raw)["summary"]
+            except (ValueError, KeyError):
+                report = {"unparsed": raw}
+            recalls = sh(spec["recalls"], cwd=repo, check=False).stdout
 
     return {
         "run_id": run_id, "task": task["id"], "arm": arm, "effort": effort, "rep": rep,
@@ -161,7 +189,7 @@ def run_one(task, arm, effort, rep, args, out):
         "num_turns": result.get("num_turns"), "subtype": result.get("subtype"),
         "harness_cost_usd": result.get("total_cost_usd"),
         "usage": result.get("usage"), "model_usage": result.get("modelUsage"),
-        "rtk": rtk_summary, "rtk_recalls": recalls,
+        "filter": args.filter_spec["name"], "filter_report": report, "filter_recalls": recalls,
         "finished": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     }
 
@@ -185,6 +213,9 @@ def require_key():
 def preflight(args):
     """One trivial run per arm: the hook must fire in 'on' and must not fire in 'off'."""
     require_key()
+    if not args.filter_spec["report"]:
+        sys.exit(f"filter '{args.filter_spec['name']}' has no self-report, so the preflight cannot "
+                 "see whether it fired. Check one transcript from each arm by hand instead.")
     task = {"id": "preflight",
             "prompt": "Nothing is broken. Run `git status` and `ls more_itertools`, then reply DONE."}
     args.max_turns, failures = 5, 0
@@ -193,10 +224,10 @@ def preflight(args):
         (out / "transcripts").mkdir()
         for arm in ("off", "on"):
             rec = run_one(task, arm, args.efforts[0], 0, args, out)
-            cmds = rec["rtk"].get("total_commands", 0)
+            cmds = (rec["filter_report"] or {}).get("total_commands", 0)
             ok = (cmds > 0) if arm == "on" else (cmds == 0)
             failures += not ok
-            print(f"{'ok  ' if ok else 'FAIL'}  arm={arm:3}  rtk rewrote {cmds} command(s), "
+            print(f"{'ok  ' if ok else 'FAIL'}  arm={arm:3}  filter rewrote {cmds} command(s), "
                   f"turns={rec['num_turns']}, harness cost=${rec['harness_cost_usd']}")
     sys.exit(1 if failures else 0)
 
@@ -211,7 +242,9 @@ def run(args):
         done = {json.loads(l)["run_id"] for l in results.read_text().splitlines() if l.strip()}
     meta = out / "meta.json"
     if not meta.exists():
-        meta.write_text(json.dumps({**versions(), "model": args.model, "efforts": args.efforts,
+        meta.write_text(json.dumps({**versions(), "filter": args.filter_spec["name"],
+                                    "filter_settings": args.filter_spec["settings"],
+                                    "model": args.model, "efforts": args.efforts,
                                     "reps": args.reps, "seed": args.seed,
                                     "max_turns": args.max_turns, "started": time.strftime("%F %T %z")},
                                    indent=2) + "\n")
@@ -242,6 +275,8 @@ def main():
     sub.add_parser("check-tasks")
     for name in ("preflight", "run"):
         s = sub.add_parser(name)
+        s.add_argument("--filter", default="rtk",
+                       help="a preset name (rtk) or a settings JSON file that installs the filter")
         s.add_argument("--model", default="claude-sonnet-5")
         s.add_argument("--efforts", default="low,high", type=lambda v: v.split(","))
         s.add_argument("--max-turns", type=int, default=60)
@@ -253,6 +288,8 @@ def main():
             s.add_argument("--tasks", type=lambda v: v.split(","), default=None,
                            help="comma-separated task ids; default all twelve")
     args = p.parse_args()
+    if args.mode != "check-tasks":
+        args.filter_spec = load_filter(args.filter)
     {"check-tasks": check_tasks, "preflight": preflight, "run": run}[args.mode](args)
 
 

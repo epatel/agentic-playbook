@@ -31,6 +31,8 @@ Assembled from the three plays in [*Harness*](../part-2-plays/harness/index.md).
 
 - [ ] Everyone can name what runs the loop, which tools exist, what runs unasked, and what the
       operating system refuses
+- [ ] The team aims for the lowest level of owning a harness that changes what it needs —
+      configure it, choose another, or build one — and stops there
 - [ ] Every safety assumption is written on the layer that enforces it: nothing, the client, or
       the kernel
 - [ ] Filesystem and network isolation are on for unattended runs, set to fail rather than degrade

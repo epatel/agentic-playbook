@@ -27,7 +27,7 @@ Reduction never happens by accident. Somebody has to decide what not to send.
 3. **Prefer a smaller task to a filtered one.** Filtering is damage control applied after you have
    already asked for the wrong thing. If the window is under pressure, the first move is
    [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md), not a compression layer.
-4. **If you do filter at the tool boundary, measure the bill rather than the dashboard.** Run the
+4. **If you add a context-reduction tool, measure the bill rather than the dashboard.** Run the
    same task set with the filter and without it, several repetitions each, same model and same
    reasoning effort. Read cost from the provider's billing view, broken out into fresh input, cache
    reads, cache writes, and output. Record turns in the same table, because a tool that cuts tokens
@@ -49,24 +49,23 @@ under-supplied is cheaper than being reliably over-supplied.
 
 ## Worked example
 
-`atlas`, the Python billing service. Somebody had installed a token-filtering proxy globally — a
-`PreToolUse` hook that rewrites eligible shell calls, so the agent never knows it exists — and its
-analytics reported savings in the high tens of percent. The question was whether to keep
-it.
+`atlas`, the Python billing service. Somebody had installed a token-filtering tool globally, and
+its own analytics reported savings in the high tens of percent. The question was whether to keep it.
 
-The published evidence is why that question is worth asking
-([`token-filtering.md`](../../../notes/research/token-filtering.md)). Two independent benchmarks
-measured `rtk` v0.43.0 in mid-2026; nothing has re-tested it since. JetBrains ran 425 billed trials
-against Claude Code 2.1.201 and found cost per task up 7.6% at low reasoning effort, turns up 13.8%,
-and task quality statistically tied — while the tool's own analytics reported 96.2 million tokens
-saved over the same trials, 99.8% of everything it touched. Quesma, on Terminal-Bench 2.1 across
-1,740 attempts and two models, found it marginally cheaper with one and 7% more expensive with the
-other, and concluded: "We do not recommend RTK as a generic cost-saving tool."
+Tools in this category act at different points. Some rewrite shell output before the agent sees it:
+`rtk` is a `PreToolUse` hook the agent never knows exists. Some keep raw output in a sandbox and
+return only what the agent asks for, as `context-mode` does. Some compress the prompt itself with a
+small model, as LLMLingua does. Nearly all report their benefit the same way, as tokens removed
+where the tool acts ([`token-filtering.md`](../../../notes/research/token-filtering.md)), and only
+`rtk` has independent cost measurements. Both tested v0.43.0 in mid-2026; nothing has re-tested it
+since. JetBrains' 425 billed trials found cost per task up 7.6% at low reasoning effort and turns up
+13.8%, quality tied, while the tool's own analytics reported 96.2 million tokens saved over the same
+trials. Quesma, across 1,740 attempts on Terminal-Bench 2.1, concluded: "We do not recommend RTK as
+a generic cost-saving tool."
 
-Both sides are telling the truth. The tool removes 60–90% of the bytes a command emits; the bill
-still goes up. Most of a session's input cost arrives as cached re-reads billed at roughly a tenth
-of fresh tokens, which the hook never sees, and compressed output costs extra turns to recover.
-"Less output" and "higher bill" were never contradictory claims.
+Both sides are telling the truth. The tool removes most of the bytes a command emits, and the bill
+still goes up: most input cost arrives as cached re-reads at roughly a tenth of the fresh price,
+which a filter never sees, and trimmed output costs extra turns to recover.
 
 So the team ran the paired comparison on their own repo: twelve backlog tasks, three repetitions
 each. These are the columns that settle it, and nobody else's numbers go in them:
@@ -81,8 +80,8 @@ each. These are the columns that settle it, and nobody else's numbers go in them
 The outcome was mixed. The filter was a clear win on exactly one thing: the
 dependency-resolution output from their package manager, four thousand lines of tree in which the
 agent needed six. It was a mild loss everywhere else, mostly in turns. They kept it for that one
-command and uninstalled the global hook — a less satisfying result than either the README or the
-benchmark predicted, and the only one either of them supports.
+command and uninstalled the global hook — less satisfying than either the README or the
+benchmarks predicted.
 
 ## Failure mode
 

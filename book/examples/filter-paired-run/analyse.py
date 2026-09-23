@@ -65,9 +65,9 @@ def flatten(rec):
     row.update(turns=rec.get("num_turns") or 0, wall_s=rec["wall_s"],
                bash_calls=rec["bash_calls"], passed=bool(rec["passed"]),
                harness_cost=rec.get("harness_cost_usd") or 0.0,
-               rtk_saved=(rec.get("rtk") or {}).get("total_saved", 0),
-               rtk_commands=(rec.get("rtk") or {}).get("total_commands", 0),
-               recalled="No recall activity" not in (rec.get("rtk_recalls") or "No recall activity"),
+               rtk_saved=(rec.get("filter_report") or {}).get("total_saved", 0),
+               rtk_commands=(rec.get("filter_report") or {}).get("total_commands", 0),
+               recalled="No recall activity" not in (rec.get("filter_recalls") or "No recall activity"),
                tests_touched=rec.get("tests_touched", False), timed_out=rec.get("timed_out", False))
     return row
 
@@ -97,8 +97,9 @@ def main():
         runs[(r["task"], r["effort"], r["rep"])][r["arm"]] = flatten(r)
     pairs = {k: v for k, v in runs.items() if {"on", "off"} <= v.keys()}
 
-    print(f"# rtk paired run — {out.name}\n")
-    print(f"claude {meta['claude']} · rtk {meta['rtk']} · model {meta['model']} · "
+    print(f"# Filter paired run — {out.name}\n")
+    print(f"filter {meta.get('filter', 'rtk')} · claude {meta['claude']} · rtk {meta['rtk']} · "
+          f"model {meta['model']} · "
           f"tasks at {meta['task_commit'][:12]} · prices dated {PRICES_DATE}")
     print(f"{len(pairs)} complete pairs; {len(runs) - len(pairs)} unpaired runs ignored\n")
 
@@ -148,11 +149,11 @@ def main():
 
         print(f"\n- Pass rate: {pass_off:.0f}% without, {pass_on:.0f}% with")
         print(f"- Cost per passed run: ${cpp(flat_off):.4f} without, ${cpp(flat_on):.4f} with")
-        print(f"- rtk's own report over the 'with' runs: {rtk_saved:,} tokens saved, "
+        print(f"- The filter's own report over the 'with' runs: {rtk_saved:,} tokens saved, "
               f"{sum(r['rtk_commands'] for r in flat_on)} commands rewritten")
         print(f"- Measured change in input tokens of every kind, with minus without: "
               f"{measured:+,}")
-        print(f"- 'With' runs where rtk recorded an agent re-fetching elided output: "
+        print(f"- 'With' runs where the filter recorded an agent re-fetching elided output: "
               f"{sum(r['recalled'] for r in flat_on)}/{len(flat_on)}")
         print(f"- Harness cost estimate, summed: ${sum(r['harness_cost'] for r in flat_off):.2f} "
               f"without, ${sum(r['harness_cost'] for r in flat_on):.2f} with — reconcile the "
@@ -160,7 +161,7 @@ def main():
         leaks = sum(r["rtk_commands"] > 0 for r in flat_off)
         touched = sum(r["tests_touched"] for r in flat_on + flat_off)
         if leaks:
-            print(f"- **Isolation failed:** rtk rewrote commands in {leaks} 'without' runs. "
+            print(f"- **Isolation failed:** the filter acted in {leaks} 'without' runs. "
                   f"Discard this effort level.")
         if touched:
             print(f"- {touched} runs edited tests/; they were judged against the original tests")

@@ -23,6 +23,34 @@ Worth separating in the prose, because they fail differently:
    and memory primitives. Operates on the conversation itself, with the billing system's own view of
    what a token is.
 
+### The category, and where each kind of tool acts
+
+*Added 23 September 2026*, when the book stopped treating `rtk` as the subject and started treating
+it as one example of a category. Four places a tool can cut what reaches the model:
+
+- **Rewriting command output before it arrives.** `rtk`, below: a `PreToolUse` hook that rewrites
+  shell calls so their output comes back compressed. [1]
+- **Keeping raw output out of the context altogether.** `context-mode` (v1.0.162, Elastic-2.0) runs
+  commands in a sandboxed subprocess where "only that stdout enters the conversation context. The
+  raw data … never leaves the sandbox", and indexes large output into SQLite FTS5 so the agent
+  searches it instead of reading it. It installs as an MCP server plus hooks, across Claude Code,
+  Gemini CLI, Codex CLI, and others. Its headline is "saves 98% of your context window", and every
+  figure it publishes is bytes before and after at the tool ("315 KB becomes 5.4 KB"). It publishes
+  no cost or task-success comparison. [10]
+- **Compressing the prompt itself.** LLMLingua (Microsoft; EMNLP 2023, with LongLLMLingua and
+  LLMLingua-2 at ACL 2024) uses "a compact, well-trained language model (e.g., GPT2-small,
+  LLaMA-7B) to identify and remove non-essential tokens in prompts", claiming "up to 20x
+  compression with minimal performance loss". Its claims concern prompts and retrieval, not agentic
+  coding or tool output. [11]
+- **What the harness already does.** Claude Code reads back at most `BASH_MAX_OUTPUT_LENGTH`
+  characters of a command's output, "default: 30000; maximum: 150000" [12], and puts MCP tools behind
+  a search step by default [13]. Filtering you did not install is already happening.
+
+**The finding that generalises:** every third-party tool in the category found in this pass reports
+its benefit at the point where it acts, in bytes or tokens removed. Only `rtk` has been measured
+independently against a bill, and that measurement disagreed with its dashboard. The absence of
+cost measurements for the others is a gap, not evidence in either direction.
+
 ### `rtk` — what it claims
 
 Open source, Apache 2.0, a single Rust binary with no dependencies. v0.49.0 at time of writing.
@@ -201,3 +229,10 @@ in opposite directions. [3]
     https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools — accessed 18 September 2026
 [9] Effective context engineering for AI agents, Anthropic, 29 September 2025 —
     https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents — accessed 18 September 2026
+[10] mksglu/context-mode — https://github.com/mksglu/context-mode — accessed 23 September 2026;
+    version and licence from the installed plugin's `package.json`
+[11] microsoft/LLMLingua — https://github.com/microsoft/LLMLingua — accessed 23 September 2026
+[12] Environment variables, Claude Code documentation — https://code.claude.com/docs/en/env-vars —
+    accessed 23 September 2026
+[13] Connect Claude Code to tools via MCP, Claude Code documentation —
+    https://code.claude.com/docs/en/mcp — accessed 23 September 2026
