@@ -100,7 +100,7 @@ naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), waitin
 
 ## What would change this position
 
-Nobody has measured any of it. There is no published comparison of agent success rates between
+Nobody has measured most of it. There is no published comparison of agent success rates between
 feature-first and layer-first versions of the same codebase, no measurement of what explicit control
 flow is worth in tokens or in correctness, and no study of context files as such establishing that
 a shorter one produces better output — the nearest measurement is of context size in general, in

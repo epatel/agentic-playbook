@@ -41,7 +41,7 @@ Treat the agent file as a working set, not as a description of the project. Seve
    lines disagree.
 
 This works because an agent file is context, not configuration. Claude Code's documentation said as
-much in September 2026: the file is "delivered as a user message after the system prompt".  So the
+much in September 2026: the file is "delivered as a user message after the system prompt". So the
 agent file does not constrain the agent, it competes for its attention — with the task, the open
 files, and every other line. A line that changes nothing is not neutral. It is noise, paid for out
 of the same attention as the lines that matter. That is the exchange rate here. You give up the
