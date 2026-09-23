@@ -798,6 +798,12 @@ here were introduced within the six months before this brief was written.
 > tokens at full price: 940,000 × $3.75 / 1,000,000 = **$3.53 for one message**, against the $0.55
 > the entire session cost up to that point.
 >
+> **Correction, 23 September 2026.** The figure above is wrong by a factor of about nineteen. The
+> 940,000 cache-read tokens are summed over every turn of the session; they are not the size of the
+> conversation, and they exceed the model's default context window. A cold message writes back the
+> conversation as it stands, which the session's 50,000 cache-write tokens bound: 50,000 × $3.75 /
+> 1,000,000 = $0.1875, against $0.015 warm — the 12.5× multiple above, applied to the right base.
+>
 > That is the economics play in one number. The expensive thing in an agentic session is not the
 > model you chose, or how much it wrote. It is how many times the conversation gets re-sent, and
 > whether it is warm when it does.

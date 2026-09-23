@@ -116,6 +116,8 @@ stage does nothing but call a function, and nobody proposed deleting it, because
 - [ ] Removing any one stage is a deletion, not a rewrite
 - [ ] Something outside the run detects a run that stopped
 
-**See also:** [*Decompose into subagents*](decompose-into-subagents.md) ·
+**See also:** [*Scope a task to fit the window*](../context/scope-a-task-to-fit-the-window.md),
+before the stages can be named ·
+[*Decompose into subagents*](decompose-into-subagents.md) ·
 [*Choose your harness*](../harness/choose-your-harness.md) ·
 [*Know when not to use an agent*](../economics/know-when-not-to-use-an-agent.md)

@@ -678,11 +678,11 @@ grading the transcript, not the repository [2].
         "hooks": [
           {
             "type": "command",
-            "command": "git diff --name-only --diff-filter=DM test/ | grep -q . && exit 2"
+            "command": "git diff --name-only --diff-filter=DM origin/main -- test/ | grep . >&2 && exit 2; exit 0"
           },
           {
             "type": "command",
-            "command": "npm test && npm run typecheck"
+            "command": "npm test >&2 && npm run typecheck >&2 || exit 2"
           }
         ]
       }
@@ -692,7 +692,17 @@ grading the transcript, not the repository [2].
 ```
 
 The `--diff-filter=DM` clause is the point: added test files are fine, deleted or modified ones are
-not. This is the direct countermeasure to the measured behaviour where, in non-improving Java agent
+not.
+
+**Correction, 23 September 2026.** The block above originally read `git diff --name-only
+--diff-filter=DM test/ | grep -q . && exit 2` and `npm test && npm run typecheck`. Neither gated
+what it claimed to. For a `Stop` hook, exit code 2 "Prevents Claude from stopping, continues the
+conversation"; any other non-zero exit is "a non-blocking error for most hook events: the action
+proceeds" [Claude Code hooks reference, https://code.claude.com/docs/en/hooks, accessed 23
+September 2026]. A failing `npm test` exits 1, so the turn ended anyway. And `git diff` with no
+revision compares the working tree against the index, so a test file the run deleted and committed
+was invisible to it. Diffing against `origin/main` covers committed and uncommitted changes alike;
+sending the output to stderr is what makes it the reason Claude is shown. This is the direct countermeasure to the measured behaviour where, in non-improving Java agent
 PRs, "agents delete more tests than they add (82 deleted vs. 31 added, a 2.6× ratio)" [16].
 
 Tell the reader the escape hatch honestly: "Claude Code overrides the hook and ends the turn after 8

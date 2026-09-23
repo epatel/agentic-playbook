@@ -87,9 +87,9 @@ The hard version of the same constraint, in `.claude/settings.json`:
         "hooks": [
           {
             "type": "command",
-            "command": "git diff --name-only --diff-filter=DM tests/ | grep -q . && exit 2"
+            "command": "git diff --name-only --diff-filter=DM origin/main -- tests/ | grep . >&2 && exit 2; exit 0"
           },
-          { "type": "command", "command": "npm test && npm run typecheck" }
+          { "type": "command", "command": "npm test >&2 && npm run typecheck >&2 || exit 2" }
         ]
       }
     ]
@@ -97,8 +97,11 @@ The hard version of the same constraint, in `.claude/settings.json`:
 }
 ```
 
-`--diff-filter=DM` is the whole point: added test files are fine, deleted or modified ones end the
-turn. The same constraint again, one layer down, for the duration of the run:
+Two details carry it. `--diff-filter=DM` against `origin/main` lets added test files through and
+catches deleted or modified ones, whether or not the run has committed them yet. And `exit 2` is the
+only exit code that keeps the turn open: any other failure is logged as a hook error and the turn
+ends anyway, so a bare `npm test`, failing, gates nothing. The same constraint again, one layer
+down, for the duration of the run:
 
 ```bash
 $ chmod -R a-w tests/

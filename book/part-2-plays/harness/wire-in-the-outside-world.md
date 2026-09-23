@@ -39,15 +39,15 @@ invoke), and any client speaking the protocol can consume them.
    about a version, not about a package. The known case is `postmark-mcp`, which wore a mail
    vendor's name without being theirs: fifteen releases that did what they said, then one in
    September 2025 that silently copied every sent email to the publisher's address.
-6. **Keep the list short enough to recite, and prune it.** Every connected server costs context on
-   every turn and adds a party you are trusting. A server nobody has used since the spring is still
-   connected, still describing its tools, and still shipping updates.
+6. **Keep the list short enough to recite, and prune it.** Every server is a party you trust, and
+   costs context wherever tool definitions load up front. A server nobody has used since the spring
+   is still connected, still describing its tools, and still shipping updates.
 
 What you are actually doing when you install a server is granting two things, and teams reliably
 notice only the first. The agent gets a capability. The author gets a writable channel into the
-agent's context window, for as long as the connection exists, on every turn. The exchange rate
-follows from that: reach costs permanent context and a standing trust relationship per server, and
-what you give up is the reflex to install something because it exists and might be useful later.
+agent's context window, for as long as the connection exists, every time its tools are loaded. The
+exchange rate follows from that: reach costs context and a standing trust relationship per server,
+and what you give up is the reflex to install something because it exists and might be useful later.
 
 ## Worked example
 
@@ -78,9 +78,9 @@ not have reached through any amount of pasting, because nobody had thought to pa
 Two things did not go the tidy way. A second server, for the ticket tracker, was proposed in the
 same review and dropped: the only token the tracker could issue was organisation-wide and could
 write, and the value on offer was saving a paste. And the metrics server was removed from
-`.mcp.json` when the investigation closed, because its forty tool descriptions were arriving on
-every turn of every session, including the several hundred that had nothing to do with latency. It
-goes back in when the next regression does.
+`.mcp.json` when the investigation closed, because its forty tool descriptions, loaded up front by
+the harness, were arriving on every turn of every session, including the several hundred that had
+nothing to do with latency. It goes back in when the next regression does.
 
 ## Failure mode
 

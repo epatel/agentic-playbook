@@ -21,8 +21,15 @@ That the prices are current. They are dated in the play â€” 19 September 2026 â€
 print that they will have moved by the time you read it. Update `RATES` and the numbers change;
 that is the point of the example, not a failure of it.
 
-## One thing it caught
+## One thing it caught, and one it could not
 
-The cache-expiry figure. 940,000 tokens at $3.75 per million is $3.525 exactly, sitting on a
-half-cent, so it rounds to $3.53 under one convention and $3.52 under the other. The play now
-prints three places rather than picking a side and being a cent out under the other one.
+It caught a rounding question: the old cache-expiry figure, 940,000 tokens at $3.75 per million,
+is $3.525 exactly, on a half-cent.
+
+It could not catch that the figure was wrong, because the arithmetic was right. The 940,000 is
+cache reads summed over every turn of the session, not the size of the conversation that a cold
+message has to write back, and it is larger than the model's default context window. The play now
+bounds the conversation by the session's cache writes, 50,000 tokens, which puts the cold message at
+$0.1875 rather than $3.525. A checker that re-derives a number from its inputs proves the
+multiplication. It says nothing about whether the input measured the thing the sentence says it
+does.

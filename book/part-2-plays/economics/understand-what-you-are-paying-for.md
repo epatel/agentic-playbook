@@ -94,18 +94,19 @@ all the work: those 991,200 input tokens at the full $3 rate, plus the same outp
 to $3.0531 rather than $0.5526 — a saving of 81.9%, switched on by default.
 
 Which is also where it gets fragile. Take a coffee break long enough for the cache to expire, and
-the next message reprocesses 940,000 tokens at that date's $3.75 write rate: $3.525 for one message,
-against the $0.55 the whole session had cost up to that point. The expensive thing in an agent
-session is not the model you chose or how much it wrote. It is how many times the conversation gets
-re-sent, and whether it is warm when it goes.
+the next message writes the conversation back. That is not the 940,000, which is reads summed over
+every turn, but roughly the 50,000 the session ever wrote. At that date's $3.75 write rate it is
+$0.1875 against $0.015 warm, twelve and a half times the turn before the break. The expensive thing
+in an agent session is not the model you chose or how much it wrote. It is how many times the
+conversation gets re-sent, and whether it is warm when it goes.
 
 ## Failure mode
 
-**The Expensive Nothing.** You come back from a meeting, type "yes, do that", and the turn bills
-more than the entire morning did. Nothing about the message was expensive. The cache went cold while
-the session sat there, so the request reprocessed the whole conversation at the fresh-input rate,
-and on a vendor that charges to write the cache it paid to put it back as well. The work performed
-was one line of agreement.
+**The Expensive Nothing.** You come back from a meeting, type "yes, do that", and the turn bills a
+dozen times what the one before it did. Nothing about the message was expensive. The cache went cold
+while the session sat there, so the request reprocessed the whole conversation at the fresh-input
+rate, and on a vendor that charges to write the cache it paid to put it back as well. The work
+performed was one line of agreement.
 
 The tell is a per-turn cost with no work behind it — a spike on a message you could have sent by
 nodding. The second tell is noticing that your most expensive days are your most interrupted ones,

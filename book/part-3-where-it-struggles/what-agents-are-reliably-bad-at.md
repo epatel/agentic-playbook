@@ -2,8 +2,8 @@
 
 Every tool sold to developers arrives with a list of what it is good at and a silence where the
 other list should be. This part is the other list. It is shorter than the sceptics claim and
-considerably longer than the release notes imply, and none of it is a reason to stop — the plays in
-this book are written by someone who uses these tools every day and intends to keep doing so. The
+considerably longer than the release notes imply, and none of it is a reason to stop — every play in
+this book assumes you use these tools every day and intend to keep doing so. The
 argument is only that a practice built on the marketing version of the capability will be built in
 the wrong shape.
 

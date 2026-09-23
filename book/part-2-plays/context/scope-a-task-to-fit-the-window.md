@@ -113,4 +113,6 @@ reaching for "continue" instead of reading what you already have.
 - [ ] The next unit starts from that file and a clean tree, not from a continued session
 
 **See also:** [*Starve the context*](starve-the-context.md) ·
-[*Decompose into subagents*](../orchestration/decompose-into-subagents.md)
+[*Decompose into subagents*](../orchestration/decompose-into-subagents.md) ·
+[*Make the control flow deterministic*](../orchestration/make-the-control-flow-deterministic.md)
+for the same split repeated across many items

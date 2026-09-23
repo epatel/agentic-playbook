@@ -65,7 +65,7 @@ in a minute.
 
 ## Worked example
 
-This book's own repository, which has no application code in it: thirty-nine markdown chapters, the
+This book's own repository, which has no application code in it: forty-one markdown chapters, the
 research notes behind them, and a build script. It was written by agents working in parallel on
 separate board items, each starting from an empty context window with no memory of the last, which
 makes the always-loaded tier the only thing every author was guaranteed to have read.
@@ -123,7 +123,7 @@ Five links between cards, in three files. Reading them, all five turn out to be 
 sentence around each one is complete, and an agent that never follows the link still acts
 correctly. That judgement is the part the command cannot make.
 
-What did drift is size. `building-the-book` is 274 lines, four times its neighbours, because it
+What did drift is size. `building-the-book` is 286 lines, four times its neighbours, because it
 absorbed every follow-up that had nowhere else to go, and it is now a small version of the thing
 the arrangement exists to prevent. Nothing signalled it, because in the index it is still one line —
 which is a good argument for occasionally reading your own cards in the order the agent does.

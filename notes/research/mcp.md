@@ -254,6 +254,14 @@ agent's context window, on every turn, forever. Worse, both Invariant Labs demon
 server B, whether B sends email [15] or WhatsApp messages [16]. Your threat model is the union of
 every server you have connected, not each one separately.
 
+**Update, 23 September 2026 — "on every turn" is now harness-dependent.** Claude Code's MCP
+documentation describes tool search as "on by default", with `ENABLE_TOOL_SEARCH=false` and a
+custom `ANTHROPIC_BASE_URL` among the configurations without it [19]. With it on, MCP tool
+definitions are found through a `ToolSearch` call rather than all loaded up front, so an idle
+server no longer costs context on every turn in that harness. The trust argument above is
+unchanged: a description is still text the server's author writes into the context whenever the
+tool is loaded.
+
 The rug-pull variant is what makes it operationally nasty, and it has two forms. **The code form:**
 postmark-mcp shipped fifteen releases that did what they said and then one that did not [11]. **The
 description form**, which is cheaper for an attacker and which the book does not yet use: a server
@@ -368,3 +376,5 @@ is that the command is the payload.
 [18] **PRIMARY** — `grafana/mcp-grafana`, the official Grafana MCP server —
      https://github.com/grafana/mcp-grafana — accessed 19 September 2026. Tool list showing read
      and write tools in one server, and the `--disable-write` flag
+[19] **PRIMARY** — *Connect Claude Code to tools via MCP*, Claude Code documentation —
+     https://code.claude.com/docs/en/mcp — accessed 23 September 2026

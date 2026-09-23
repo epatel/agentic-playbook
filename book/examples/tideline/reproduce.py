@@ -170,7 +170,7 @@ def main() -> int:
         heading("play: make-the-agent-prove-it")
         print("\nThe deterministic stop gate, run by hand against this change:")
         show(
-            "git diff --name-only --diff-filter=DM origin/main...HEAD -- tests/",
+            "git diff --name-only --diff-filter=DM origin/main -- tests/",
             repo,
         )
         print("\nMaking the suite read-only for the run:")

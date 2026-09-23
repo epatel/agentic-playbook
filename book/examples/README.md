@@ -57,7 +57,7 @@ and none of them prints output in the book:
 | Everything in Part III | Published studies, cited to research notes in [`notes/research/`](../../notes/research/). No `Worked example` heading exists outside Part II. |
 
 The one behavioural claim these projects do exercise without the book printing it is
-`git diff --name-only --diff-filter=DM tests/` — the stop gate in *Make the agent prove it*, whose
+`git diff --name-only --diff-filter=DM origin/main -- tests/` — the stop gate in *Make the agent prove it*, whose
 whole point is that added test files pass and deleted or modified ones do not.
 `tideline/reproduce.py` runs it against a branch that skips one test and deletes another, and prints
 what comes back.

@@ -57,8 +57,8 @@ escape hatch off, some of those failures land on you at 16:50 on a Friday.
 ## Worked example
 
 `kestrel`, a Go search-indexing service, four contributors, one shared deploy pipeline. The team
-believed the agent could not push to a remote or delete anything, because of this, committed in
-March:
+believed the agent could not push to a remote or delete anything, because of this, committed the
+previous December:
 
 ```json
 {

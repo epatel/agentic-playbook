@@ -142,7 +142,7 @@ rather than "this is wrong".
 
 ## The index
 
-Every name this book uses, and where it is described — the six above plus the twenty the plays
+Every name this book uses, and where it is described — the six above plus the twenty-two the plays
 coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
 than the cause: a reader should recognise the thing before they understand it.
 

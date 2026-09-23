@@ -59,9 +59,13 @@ EXPECTED = {
     "uncached_input_tokens": 991_200,
     "uncached_total": 3.0531,
     "caching_saving": 81.9,
-    # Exactly on a half-cent, so the play prints three places rather than picking a
-    # rounding convention and being a cent out under the other one.
-    "cold_message": 3.525,
+    # One message after the cache expires writes the conversation back. Its size is
+    # bounded by what the session ever wrote to the cache, not by the cache reads, which
+    # are summed over every turn.
+    "cold_message": 0.1875,
+    "warm_message": 0.015,
+    "cold_over_warm": 12.5,
+    "cold_share_of_session": 33.9,
 }
 
 INPUT_ROWS = ("Fresh input", "Cache reads", "Cache writes")
@@ -108,8 +112,14 @@ def main() -> int:
     check("the same session uncached", uncached_total, EXPECTED["uncached_total"], 4)
     check("saving from caching", saving, EXPECTED["caching_saving"], 1)
 
-    cold = TOKENS["Cache reads"] * RATES["Cache writes"] / 1_000_000
-    check("one message after the cache expires", cold, EXPECTED["cold_message"], 3)
+    conversation = TOKENS["Cache writes"]
+    cold = conversation * RATES["Cache writes"] / 1_000_000
+    warm = conversation * RATES["Cache reads"] / 1_000_000
+    check("one message after the cache expires", cold, EXPECTED["cold_message"], 4)
+    check("the same message warm", warm, EXPECTED["warm_message"], 4)
+    check("cold over warm", cold / warm, EXPECTED["cold_over_warm"], 1)
+    check("cold message as a share of the session", cold / total_cost * 100,
+          EXPECTED["cold_share_of_session"], 1)
 
     print()
     print(f"Input in all its forms:            {input_share:.1f}% of the bill")
@@ -117,7 +127,7 @@ def main() -> int:
           f"{TOKENS['Cache reads'] / total_tokens * 100:.1f}%")
     print(f"The same session with no caching:  ${uncached_total:.4f} "
           f"— a saving of {saving:.1f}%")
-    print(f"One message after the cache expires: ${cold:.3f}")
+    print(f"One message after the cache expires: ${cold:.4f}, against ${warm:.4f} warm")
     print()
 
     if problems:

@@ -1479,6 +1479,38 @@ Part I went 4,405 → 4,057 words (preface 473 → 387, not counted in Part I); 
    internal rule, owned by `book/STYLE.md`) and the inevitability paragraph (covered by "That you are
    behind"). "*The Argument* — this — exists to be short" is gone.
 
+### Parts II and III, the same pass
+
+The same model then read Parts II and III and fixed what it found, on 23 September 2026:
+
+1. **The stop gate in *Make the agent prove it* gated nothing.** For a `Stop` hook only exit code 2
+   blocks; any other non-zero exit is a non-blocking error and the turn ends anyway (Claude Code
+   hooks reference, accessed that day). `npm test && npm run typecheck` exits 1 on failure, and
+   `git diff` with no revision could not see a test file deleted and committed. The play, the
+   research note `verification.md` (with a dated correction), `tideline/reproduce.py`, and the
+   examples README now diff against `origin/main` and `exit 2` explicitly.
+2. **The cold-cache figure in *Understand what you are paying for* was about nineteen times too
+   large.** It priced the 940,000 cache reads, which are summed over every turn and exceed the
+   default context window, as the conversation a cold message writes back. The conversation is
+   bounded by the session's 50,000 cache writes: $0.1875, against $0.015 warm. `session-cost/check.py`
+   asserts the new figures. **The milestone-17 note below that credits the checker with "a real
+   defect" is about rounding; the checker could not have caught this one, because the multiplication
+   was right and the input was wrong.** The same species as the Part III figure re-check.
+3. Part III's opener no longer claims the plays were "written by someone who uses these tools every
+   day", which the preface's disclosure contradicts.
+4. Stale counts: 286 lines and forty-one chapters in *Split the agent file into cards*; twenty-two
+   play-coined names in the failure-mode index.
+5. *Wire in the outside world* no longer says every server costs context on every turn: Claude Code
+   has tool search on by default. Dated note and source added to `mcp.md`.
+6. *Scope a task to fit the window* and *Make the control flow deterministic* describe the same
+   drifting long run and now link to each other, saying which applies when.
+7. "Human-only review runs at 8%" now says what it is 8% of; the *Choose your harness* timeline adds
+   up.
+
+Not done, deliberately: *Choose your harness* is about configuring a harness more than choosing one,
+and the *Starve the context* worked example narrates an outcome beside a blank table. The first is
+a structural call for the author; the second waits on `rtk-paired-run` results.
+
 **Still open from the reassessment:** the four-areas framework is introduced as "described,
 usefully" with no attribution. Either credit its origin or own it.
 
