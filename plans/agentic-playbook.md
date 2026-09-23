@@ -2563,6 +2563,14 @@ Grafana's spelling**; the reason is in the agent file.
   is a locked decision and three-fifths of the book is plays; the subtitle carries the provisional
   status onto the title page. It lives in `scripts/book-metadata.yaml`, the root `README.md`, and
   `book/README.md`; tool names, the review server, and release tags keep the short title.
+- **Name what the model already knows; document only the departures (2026-09-23).** The author's
+  idea, framed as choosing a COTS part: a widely published design system or convention costs one
+  line to name. It went in three places rather than a new play, because the move is one line plus
+  its caveats: step 3 of *Write the agent file that actually gets read* (pin the version, list the
+  departures), a *Parts off the shelf* section in *Refactoring a codebase for agents* (it is also a
+  reason for the boring, popular choice), and a seventh Part III name, *the Wrong Edition*, sourced
+  to GitChameleon 2.0 and its predecessors in `failure-modes.md`. Room in the Part III chapter came
+  from cutting a paragraph that restated Part IV's architecture argument.
 
 ## Two proposals from the author's reflection
 
@@ -3694,6 +3702,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Endless Polish** | Each pass improves something and the file is worse than it was five passes ago; nothing fails, so nothing stops. Distinct from the Permanent Near Miss — that is a run that never arrives, this one arrives repeatedly and leaves sediment. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 | **the Immaculate Surface** | Every check you have automated is clean and the defect is in a class you have not automated a check for. The tell is your own review comments getting shorter and more stylistic while the changes get larger. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 | **the Instant Concession** | Push back on something the agent got right and it agrees immediately, replacing it with something worse. Named on recognition rather than on measurement, and the chapter says so in print. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Wrong Edition** | Idiomatic, confident code for a version of a dependency the team does not run: naming a library or design system brings back the edition the model saw most. Measured only for version-conditioned completion (GitChameleon 2.0, 48–51%), not in repositories. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 
 **The Merged Hand is registered but is not in the book.** It is named in `book/TEMPLATE-play.md`'s
 specimen play, which is deliberately not in the table of contents, so Part III's index of failure

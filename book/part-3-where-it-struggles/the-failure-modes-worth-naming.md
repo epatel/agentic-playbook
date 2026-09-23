@@ -6,9 +6,9 @@ phenomena below are all common, all recognised on sight by people who use these 
 routinely left unmentioned because saying them out loud costs more sentences than anyone has
 patience for at half past four.
 
-Six of them get their names here, because no play in this book owned the material. Each entry gives
-the name, what it is, the tell — the thing you can check today — and the response. Every other name
-the book uses is indexed at the end, so this chapter is the one place to look them all up.
+Seven of them get their names here, because no play in this book owned the material. Each entry
+gives the name, what it is, the tell — the thing you can check today — and the response. Every other
+name the book uses is indexed at the end.
 
 ## The Confident Wrong Rewrite
 
@@ -30,13 +30,6 @@ before reading the code. That is why [*Review code you did not
 write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) puts one traced
 path and a reproducer ahead of the diff.
 
-One class of it has a cause outside the model. Where behaviour is attached invisibly — a decorator
-that registers a route at import time, a lifecycle hook that writes to a second table — none of it
-appears in the file being edited, so the patch is locally correct and globally wrong. [*Refactoring
-a codebase for agents*](../part-4-next-waves/refactoring-a-codebase-for-agents.md) argues that back
-to the architecture; the response here is narrower: name the mechanism in the agent file when the
-change sits near one.
-
 ## The Vanishing Fix
 
 The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
@@ -54,9 +47,7 @@ by construction.
 The response is to shorten the run and to commit at green. A run that stops when the check first
 passes cannot overwrite the thing that made it pass, and a commit is cheaper than a diagnosis.
 [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) is the
-play, and [*Before Git, before Scrum, before
-this*](../part-1-argument/before-git-before-scrum-before-this.md) uses this phenomenon as its
-example of the vocabulary the field has not settled.
+play.
 
 ## The Requirement It Can Still Quote
 
@@ -129,9 +120,9 @@ logical ones — a 44.3% drop rate against 20.0%. Among the four models that exp
 collapse "typically occurs while the correct position remains represented rather than after it
 disappears". It did not lose the answer. It stopped asserting it.
 
-Nobody has published a measurement of an agent abandoning a correct patch after a reviewer pushes
-back. This name is given on recognition rather than on evidence, and that is stated here rather than
-hidden, because the alternative is a book that quietly upgrades an extrapolation into a citation.
+Nobody has measured an agent abandoning a correct patch after a reviewer pushes back. This name is
+given on recognition rather than on evidence, and says so rather than upgrading an extrapolation
+into a citation.
 
 The tell is a rewrite with no argument attached, arriving faster than a considered disagreement
 would.
@@ -140,9 +131,24 @@ The response is to make disagreeing cheap. Ask it to defend the original before 
 phrase the pushback as a question rather than a correction — "what happens at zero elements here?"
 rather than "this is wrong".
 
+## The Wrong Edition
+
+Idiomatic, confident code for a version of a dependency you do not run: naming a library or design
+system brings back the edition the model saw most. Measured narrowly: on GitChameleon 2.0, July
+2025, 328 Python problems each tied to a stated library version, enterprise models' baseline success
+ran 48 to 51%. Nobody has measured the agentic case: a repository whose lockfile alone holds the
+version.
+
+The tell is an API that no longer exists, a renamed flag, or an import path from the previous major
+version: code that reads correctly and fails at the version boundary.
+
+The response is to pin the version wherever the dependency is named, and to hand the agent the
+changelog for the jump you are on. [*Write the agent file that actually gets
+read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) is the play.
+
 ## The index
 
-Every name this book uses, and where it is described — the six above plus the twenty-two the plays
+Every name this book uses, and where it is described — the seven above plus the twenty-two the plays
 coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
 than the cause: a reader should recognise the thing before they understand it.
 
@@ -154,6 +160,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Endless Polish** | Every pass improves something and the file is worse than five passes ago | This chapter |
 | **the Immaculate Surface** | Every automated check clean, the defect in the class you never automated | This chapter |
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
+| **the Wrong Edition** | Idiomatic code for a version of a dependency you do not run | This chapter |
 | **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |

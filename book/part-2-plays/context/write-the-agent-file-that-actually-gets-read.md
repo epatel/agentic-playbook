@@ -11,7 +11,7 @@ now instruct the agent twice: once in the file, and once by hand, every session.
 
 ## The play
 
-Treat the agent file as a working set, not as a description of the project. Six moves, in order.
+Treat the agent file as a working set, not as a description of the project. Seven moves, in order.
 
 1. **Write it from corrections, not from a tour of the codebase.** Add a line when you have typed
    the same correction twice, when a review catches something the agent should have known, or when a
@@ -21,35 +21,33 @@ Treat the agent file as a working set, not as a description of the project. Six 
 2. **Keep only what is true everywhere.** A convention that applies to one directory, a procedure
    with steps, or a rule that matters twice a quarter does not belong in a file that loads in every
    session. Move it to something conditional, so it arrives when its situation does: a path-scoped
-   rule, a skill (a folder of instructions loaded when a request matches its description), or a
-   card. See
-   [*Package repeatable expertise*](../harness/package-repeatable-expertise.md) for the procedural
-   half.
-3. **Do not mistake reorganisation for reduction.** Splitting a 600-line agent file into six `@path`
-   imports is housekeeping, not savings: imports are expanded at launch and the token count is
-   unchanged. Only conditional loading reduces anything.
-4. **Make one file the source of truth, and make it portable.** `AGENTS.md` is the multi-vendor
-   filename, stewarded by the Linux Foundation's Agentic AI Foundation since December 2025.
-   `CLAUDE.md` is one vendor's filename with its own precedence rules. Put the content in
-   `AGENTS.md` and let the vendor file be a one-line import, so a colleague who switches tools does
-   not fork the agent file.
-5. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
+   rule, a skill, or a card.
+3. **Name what the model already knows, and write down only where you differ.** A widely published
+   standard — a public design system, a commit convention, a language's style guide — costs one line
+   to name and pages to describe. Pin the version, because the model knows an edition rather than
+   yours, then list your departures: "Material 3; square buttons; no floating action button".
+4. **Do not mistake reorganisation for reduction.** Splitting the file into `@path` imports is
+   housekeeping: imports expand at launch and the token count is unchanged. Only conditional loading
+   reduces anything.
+5. **Make one file the source of truth, and make it portable.** `AGENTS.md` is the multi-vendor
+   filename; `CLAUDE.md` is one vendor's, with its own precedence rules. Put the content in
+   `AGENTS.md` and let the vendor file be a one-line import, so switching tools does not fork it.
+6. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
    project instructions back to you. That separates "ignored" from "never loaded" — different
    problems, different fixes.
-6. **Prune on the same trigger you add on.** When you correct the agent on something the file
+7. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
    same subject is how the first one got ignored. One line should tell it to stop and ask when two
-   lines disagree, rather than silently picking one.
+   lines disagree.
 
 This works because an agent file is context, not configuration. Claude Code's documentation said as
-much in September 2026: the file is "delivered as a user message after the system prompt". An action
-you need blocked regardless of what the model decides needs a hook, not a sentence. So the agent
-file does not constrain the agent, it competes for its attention — with the task, the open files,
-and every other line. A line that changes nothing is not neutral. It is noise, paid for out of the
-same attention as the lines that matter. That is the exchange rate here. You give up the comfort of
-writing something down once and considering it handled, and you get a file whose instructions are
-followed because there are few enough of them to be followed. That last claim is mechanism, not
-measurement.
+much in September 2026: the file is "delivered as a user message after the system prompt".  So the
+agent file does not constrain the agent, it competes for its attention — with the task, the open
+files, and every other line. A line that changes nothing is not neutral. It is noise, paid for out
+of the same attention as the lines that matter. That is the exchange rate here. You give up the
+comfort of writing something down once and considering it handled, and you get a file whose
+instructions are followed because there are few enough of them to be followed. That last claim is
+mechanism, not measurement.
 
 ## Worked example
 
@@ -133,8 +131,8 @@ alike.
 - [ ] Splitting into imports was not counted as a reduction
 - [ ] One file holds the content; the vendor-specific file is an import or a symlink
 - [ ] The agent has stated its project instructions back to you in a fresh session this week
-- [ ] No two lines in the file contradict each other
-- [ ] The file tells the agent to stop and ask when two of its lines disagree
+- [ ] No two lines contradict, and the file says to stop and ask if two ever do
+- [ ] Published standards are named with their version, and only departures are written out
 - [ ] Lines corrected around, rather than followed, were rewritten or deleted
 
 **See also:** [*Split the agent file into cards*](split-the-agent-file-into-cards.md) ·

@@ -88,6 +88,16 @@ work, and all four are cheaper to change.
 - **Dead code and dead configuration removed.** An agent has no way to know that the second
   implementation is the one nobody calls any more. It will find both and may build on either.
 
+## Parts off the shelf
+
+Choosing a component used to be a question about people: who knows it, who can hire for it. It is
+now also a question about the model. A widely published design system, framework, or convention is
+a part with a public datasheet: the agent file names it and its version and describes only your
+departures, where a home-grown equivalent must be documented in full and still arrives unfamiliar.
+That is one more reason for the boring, popular choice. The catch is the edition: a popular part in
+a version the model saw less of is the Wrong Edition, described in [*The failure modes worth
+naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), waiting to happen.
+
 ## What would change this position
 
 Nobody has measured any of it. There is no published comparison of agent success rates between

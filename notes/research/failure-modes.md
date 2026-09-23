@@ -592,6 +592,31 @@ This is the thinnest evidence area. Carry it carefully.
     display issues in Gemini CLI allowed **undetectable arbitrary code execution**; Google
     patched it. [43]
 
+### Version drift — code for the edition the model saw, not the one you run
+
+*Added 23 September 2026*, for a Part III name the author asked for (*the Wrong Edition*) and for a
+step in *Write the agent file that actually gets read* about referencing a published standard
+instead of documenting it.
+
+- **GitChameleon 2.0** (Misra et al., arXiv 2507.12367, 16 July 2025): **328 Python code
+  completion problems**, each conditioned on a specific library version and checked by executable
+  tests. "enterprise models achieving baseline success rates in the 48-51% range". [47]
+- **GitChameleon** (Islah et al., arXiv 2411.05830, 5 November 2024), the first version: 116
+  problems; "GPT-4o achieves a pass@10 of only 39.9% (43.7% when provided with error feedback)". [48]
+- **VersiCode** (Wu et al., arXiv 2406.07411, June 2024, revised October 2024): version-specific
+  completion and version-aware migration; "version-controllable code generation is indeed a
+  significant challenge, even for GPT-4o and other strong frontier models." No headline figure in
+  the abstract. [49]
+- **The other side of the same coin** is already in this note: SWE-Bench Pro's public/commercial
+  split (Claude Sonnet 4 at 42.7% against 9.1%) and the contamination results, read as "public code
+  has been read". Material the model has seen widely is material it handles better; material it has
+  seen *in an earlier edition* is material it handles confidently and wrongly.
+
+**Scope when quoting.** These benchmarks measure version-conditioned completion of Python library
+calls with the version stated in the prompt. They do not measure an agent working in a repository
+where the version is only in a lockfile, which is the case the book describes; that case is
+plausibly worse, and unmeasured. Date the figures; the models are 2024–25.
+
 ---
 
 ## Contested claims
@@ -974,3 +999,10 @@ extractable from the PDF*
 [46] Beyond Resolution Rates: Behavioral Drivers of Coding Agent Success and Failure
 (arXiv:2604.02547, 6 April 2026) — https://arxiv.org/pdf/2604.02547 — accessed 19 September 2026 —
 *qualitative findings only; percentages not extractable*
+[47] GitChameleon 2.0: Evaluating AI Code Generation Against Python Library Version
+     Incompatibilities (Misra et al., arXiv:2507.12367) — https://arxiv.org/abs/2507.12367 —
+     accessed 23 September 2026
+[48] GitChameleon: Unmasking the Version-Switching Capabilities of Code Generation Models (Islah et
+     al., arXiv:2411.05830) — https://arxiv.org/abs/2411.05830 — accessed 23 September 2026
+[49] VersiCode: Towards Version-controllable Code Generation (Wu et al., arXiv:2406.07411) —
+     https://arxiv.org/abs/2406.07411 — accessed 23 September 2026
