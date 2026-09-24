@@ -113,7 +113,7 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 42,325 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 42,341 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
 `main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
@@ -123,6 +123,9 @@ than to `main`. **`make check` is clean, and running it is how you finish.**
 reassessment*](#the-part-i-reassessment). *Preparation and execution* now lives in *The four areas,
 re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,494 and
 1,487 words against a 1,500 ceiling: **anything added to either has to take something out.**
+
+**Undecided options live in `options/`**, which is gitignored and exists only on the author's
+machine. Do not act on one without the author choosing it.
 
 **A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
 [`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
