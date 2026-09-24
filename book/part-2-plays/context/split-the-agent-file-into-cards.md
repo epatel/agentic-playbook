@@ -2,11 +2,11 @@
 
 ## Problem
 
-You did the pruning. The four-hundred-line agent file is thirty lines now, and the forty lines on
-the migration workflow, the release runbook, and the note explaining why the search index is
-denormalised have gone to `docs/`, where they are correct, current, and read by nobody. The agent
+You did the pruning. The four-hundred-line agent file is thirty lines now. The forty lines on the
+migration workflow, the release runbook, and the note explaining why the search index is
+denormalised have gone to `docs/`. There they are correct, current, and read by nobody. The agent
 works from the thirty lines and its own guesses, so the migration advice arrives in code review
-instead — from you, retyped, in the words you deleted last month. Moving the material out was right.
+instead: from you, retyped, in the words you deleted last month. Moving the material out was right.
 Nothing brought it back, and a prune with no return path is a deletion with a longer audit trail.
 
 ## The play
@@ -25,13 +25,13 @@ Two tiers: an index that loads every turn, and files that load when the index sa
    - [auth](cards/auth.md) — when touching login, sessions, or permissions
    ```
 3. **One card, one load, no chains.** A card never requires another card. Where two need the same
-   paragraph, hoist it into a third card and index that, or repeat it: a duplicated paragraph costs
+   paragraph, hoist it into a third card and index that, or repeat it. A duplicated paragraph costs
    a few dozen tokens, a chain costs the property the arrangement is built on. A link a reader may
    follow is not a chain; a sentence that cannot be acted on without the other file is.
 4. **Put the reason next to the rule.** The body is prose because no schema has a field for why the
-   database is Postgres, and the reason is what makes the card deletable next year by somebody who
-   was not there.
-5. **Let the kinds stay informal.** Most cards are a domain, a feature, or a decision — a slice of
+   database is Postgres. The reason is what makes the card deletable next year by somebody who was
+   not there.
+5. **Let the kinds stay informal.** Most cards are a domain, a feature, or a decision: a slice of
    the system, one capability, or why this and not that. Useful for noticing a card trying to be
    two, not a taxonomy to declare.
 6. **Prune the index rather than the cards.** When the agent gets something wrong that a card
@@ -53,27 +53,27 @@ graph TD
 ```
 
 Splitting an agent file into `@path` imports is not this move: imports expand at launch and change
-nothing, while the saving here is a file going unread. Three mechanisms now do conditional loading
-and differ mainly in who decides. A path-scoped rule fires when a matching file is opened, so the
+nothing, while the saving here is a file going unread. Three mechanisms do conditional loading and
+differ mainly in who decides. A path-scoped rule fires when a matching file is opened, so the
 filesystem decides. A skill fires when the harness matches a request against a description
 ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)). A card fires when
 the model reads one line of prose and judges that it applies. The card is the weakest of the three
-and the only one whose trigger can carry a reason. That is the exchange rate: the match is a
-judgement rather than a rule, so a card will sometimes not load when it should — the same silent
-non-event as the Unsummoned Skill — in return for a mechanism you can write in a sentence and change
-in a minute.
+and the only one whose trigger can carry a reason. That is the exchange rate. The match is a
+judgement, not a rule, so a card will sometimes not load when it should: the same silent non-event
+as the Unsummoned Skill. In return you get a mechanism you can write in a sentence and change in a
+minute.
 
 ## Worked example
 
 This book's own repository, which has no application code in it: forty-one markdown chapters, the
-research notes behind them, and a build script. It was written by agents working in parallel on
-separate board items, each starting from an empty context window with no memory of the last, which
-makes the always-loaded tier the only thing every author was guaranteed to have read.
+research notes behind them, and a build script. Agents wrote it in parallel, on separate board
+items, each starting from an empty context window with no memory of the last. So the always-loaded
+tier was the only thing every author was guaranteed to have read.
 
-The alternative was one file holding every convention the repo has — the column limit, where
+The alternative was one file holding every convention the repo has: the column limit, where
 research notes go, what shape a play takes, how the PDF is rendered, which directories are frozen.
-That was declined early, on the grounds that a task writing a chapter would pay for the build
-instructions in every turn. What loads instead is the index:
+It was declined early, because a task writing a chapter would pay for the build instructions in
+every turn. What loads instead is the index:
 
 ```markdown
 ## Context cards
@@ -126,15 +126,15 @@ sentence around each one is complete, and an agent that never follows the link s
 correctly. That judgement is the part the command cannot make.
 
 What did drift is size. `building-the-book` is 316 lines, four times its neighbours, because it
-absorbed every follow-up that had nowhere else to go, and it is now a small version of the thing
-the arrangement exists to prevent. Nothing signalled it, because in the index it is still one line —
-which is a good argument for occasionally reading your own cards in the order the agent does.
+absorbed every follow-up that had nowhere else to go. It is now a small version of the thing the
+arrangement exists to prevent. Nothing signalled it, because in the index it is still one line.
+That is a good argument for occasionally reading your own cards in the order the agent does.
 
 ## Failure mode
 
 **The Reassembled Agent File.** The cards are written, the index is short, and every run still ends
-up with most of the material in the window, because the auth card points at the sessions card for
-the token format and that one points at the API card for the error envelope. Every link was added by
+up with most of the material in the window. The auth card points at the sessions card for the token
+format, and that one points at the API card for the error envelope. Every link was added by
 somebody being helpful about the exact thing a reader would want next. The arrangement now costs
 what the four-hundred-line agent file cost, with the ordering scattered across five files and a
 directory listing that reads like a well-organised system. It is not the Context Landfill: nothing

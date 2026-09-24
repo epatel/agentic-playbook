@@ -84,7 +84,7 @@ goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md), and [*What
 contested*](../part-3-where-it-struggles/what-is-genuinely-contested.md). If you are sceptical,
 start there. It is the part that decides whether the rest is worth your week.
 
-## A play with a price states it
+## Plays that cost you something say so
 
 Several plays ask you to give something up. Speed on the first pass. A habit that currently feels
 productive. The specific pleasure of watching a very large diff appear in under a minute. Where a

@@ -60,9 +60,9 @@ Research on model-written tests points both ways, for one reason. The damning re
 asking a model for tests and keeping what came back. The enthusiastic ones, such as a 73% engineer
 acceptance rate on production tests at Meta in 2025, fed an external, executable adequacy signal
 back into generation. The difference is whether the loop closed against something the model did not
-write. The price is setup and friction. Every signal above the soft half takes work to install,
-mutation testing returns the least for what it costs, and you will lose runs to a gate that was
-correct and inconvenient.
+write. The exchange rate is setup and friction. Every signal above the soft half takes work to
+install, mutation testing returns the least for what it costs, and you will lose runs to a gate that
+was correct and inconvenient.
 
 ## Worked example
 

@@ -2,11 +2,11 @@
 
 ## Problem
 
-Your project agent file is four hundred lines long and every line was true on the day somebody added
-it. The agent reads all of it and still opens a pull request using the error-handling pattern the
-team abandoned in March — the one described on line 30, under a heading nobody has scrolled past in
-a year. You retype the correction, as you did last week. The file is not wrong; it is flat. Four
-hundred equally weighted instructions, perhaps twelve of which change what the agent does, and you
+Your project agent file is four hundred lines long, and every line was true on the day somebody
+added it. The agent reads all of it and still opens a pull request using the error-handling pattern
+the team abandoned in March. That pattern is on line 30, under a heading nobody has scrolled past in
+a year. You retype the correction, as you did last week. The file is not wrong; it is flat. It holds
+four hundred equally weighted instructions, perhaps twelve of which change what the agent does. You
 now instruct the agent twice: once in the file, and once by hand, every session.
 
 ## The play
@@ -23,7 +23,7 @@ Treat the agent file as a working set, not as a description of the project. Seve
    session. Move it to something conditional, so it arrives when its situation does: a path-scoped
    rule, a skill, or a card.
 3. **Name what the model already knows, and write down only where you differ.** A widely published
-   standard — a public design system, a commit convention, a language's style guide — costs one line
+   standard (a public design system, a commit convention, a language's style guide) costs one line
    to name and pages to describe. Pin the version, because the model knows an edition rather than
    yours, then list your departures: "Material 3; square buttons; no floating action button".
 4. **Do not mistake reorganisation for reduction.** Splitting the file into `@path` imports is
@@ -33,7 +33,7 @@ Treat the agent file as a working set, not as a description of the project. Seve
    filename; `CLAUDE.md` is one vendor's, with its own precedence rules. Put the content in
    `AGENTS.md` and let the vendor file be a one-line import, so switching tools does not fork it.
 6. **Verify that it arrived.** Ask the agent, in its first message of a session, to state its
-   project instructions back to you. That separates "ignored" from "never loaded" — different
+   project instructions back to you. That separates "ignored" from "never loaded": different
    problems, different fixes.
 7. **Prune on the same trigger you add on.** When you correct the agent on something the file
    already says, that line is not working. Rewrite it or delete it. Adding a second line about the
@@ -42,11 +42,11 @@ Treat the agent file as a working set, not as a description of the project. Seve
 
 This works because an agent file is context, not configuration. Claude Code's documentation said as
 much in September 2026: the file is "delivered as a user message after the system prompt". So the
-agent file does not constrain the agent, it competes for its attention — with the task, the open
+agent file does not constrain the agent. It competes for its attention with the task, the open
 files, and every other line. A line that changes nothing is not neutral. It is noise, paid for out
-of the same attention as the lines that matter. That is the exchange rate here. You give up the
-comfort of writing something down once and considering it handled, and you get a file whose
-instructions are followed because there are few enough of them to be followed. That last claim is
+of the same attention as the lines that matter. That is the exchange rate. You give up the comfort
+of writing something down once and considering it handled. In return you get a file whose
+instructions are followed because there are few enough of them to follow. That last claim is
 mechanism, not measurement.
 
 ## Worked example
@@ -62,14 +62,14 @@ $ wc -l CLAUDE.md
      412 CLAUDE.md
 ```
 
-Reading it end to end — which nobody had done since about line 200 was written — the lines sorted
-into three piles. Stale: a note about a CI runner decommissioned last spring, and instructions for a
-deployment script that was replaced in January. Generic: eleven lines on Python style that `ruff`
-already enforces and the agent already knew. Scoped: forty lines about the migration workflow, which
-matter enormously when touching `atlas/migrations/` and never otherwise.
+Nobody had read the file end to end since about line 200 was written. Read that way, its lines
+sorted into three piles. Stale: a note about a CI runner decommissioned last spring, and
+instructions for a deployment script that was replaced in January. Generic: eleven lines on Python
+style that `ruff` already enforces and the agent already knew. Scoped: forty lines about the
+migration workflow, which matter enormously when touching `atlas/migrations/` and never otherwise.
 
-The stale pile was deleted. The generic pile was deleted. The scoped pile moved out into a rule that
-loads only when the agent opens a matching file:
+The stale and generic piles were deleted. The scoped pile moved out into a rule that loads only
+when the agent opens a matching file:
 
 ```markdown
 ---
@@ -101,28 +101,27 @@ $ wc -l AGENTS.md CLAUDE.md
 Use plan mode for anything under `atlas/billing/`.
 ```
 
-The result was not clean. Within two days the agent twice wrote raw SQL into a data migration, which
-the deleted deployment section had forbidden in a subordinate clause nobody had noticed was
+The result was not clean. Within two days the agent twice wrote raw SQL into a data migration. The
+deleted deployment section had forbidden that, in a subordinate clause nobody had noticed was
 load-bearing. One line went back, into the path-scoped rule, where it costs nothing until it is
 relevant. That is the shape of a good prune: you find out what mattered by removing it, and the
-feedback arrives in a day rather than in an incident review.
+feedback arrives in a day, not in an incident review.
 
 ## Failure mode
 
 **The Context Landfill.** Every useful fact about the project went into the agent file, because each
 one was useful on the day it was added, and nothing has ever been removed. The file did not become
 wrong. It became flat: the convention that matters and the note about last spring's CI runner arrive
-with the same weight, and the agent follows the current convention roughly half the time. The tells
+with the same weight. The agent follows the current convention roughly half the time. The tells
 are an agent file that has only ever grown, and two instructions that contradict each other and have
 gone unnoticed because nobody reads the file end to end.
 
 **The Agent File That Never Arrived.** The instructions are correct, committed, and not loaded. The
-agent behaves like a competent stranger — reasonable code, house conventions absent — and the
-obvious explanation, that it ignored the agent file, is wrong. Precedence rules do this silently: on
-Claude Code 2.x, a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing
-errors. The tell is that your usual check cannot separate the two cases: a natively read `AGENTS.md`
-never appears in `/context` under Memory files, so that list is empty on success and on failure
-alike.
+agent behaves like a competent stranger: reasonable code, house conventions absent. The obvious
+explanation, that it ignored the agent file, is wrong. Precedence rules do this silently: on Claude
+Code 2.x, a `CLAUDE.local.md` stops the team's `AGENTS.md` being read at all, and nothing errors.
+The tell is that your usual check cannot separate the two cases. A natively read `AGENTS.md` never
+appears in `/context` under Memory files, so that list is empty on success and failure alike.
 
 ## Checklist
 
