@@ -111,10 +111,11 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | *unassigned* | `make review` — a local server that renders the chapters, takes annotations into an append-only log, and collects them into `review/REVIEW.md` for an agent to act on | ✅ done |
 | *unassigned* | Read aloud on both surfaces, a favicon, and a mobile pass on the HTML book: no horizontal overflow from 360px up | ✅ done |
 | *unassigned* | Keep raising the bar — folded into *Collect and refine as a team* (step 6), **the Comfortable Peak** in Part III, and exploring on a model change in *What this book assumes about you*; no new play | ✅ done |
+| *unassigned* | The consolidated rewrite — `STYLE.md` revised (thread, main point first, Turk and Kirkman, economy), `make facts` added, all 41 files rewritten two agents at a time, then a whole-book read and its fixes; tag `pre-consolidated-rewrite` holds the book before it | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 42,464 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 41,945 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
 `main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
@@ -123,8 +124,8 @@ than to `main`. **`make check` is clean, and running it is how you finish.**
 
 **Part I was reassessed and restructured after publication** — see [*The Part I
 reassessment*](#the-part-i-reassessment). *Preparation and execution* now lives in *The four areas,
-re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,494 and
-1,487 words against a 1,500 ceiling: **anything added to either has to take something out.**
+re-weighted*, not in *What this book assumes about you*, and chapters one and two sit at 1,464 and
+1,475 words against a 1,500 ceiling: **anything added to either has to take something out.**
 
 **Undecided options live in `options/`**, which is gitignored and exists only on the author's
 machine. Do not act on one without the author choosing it.
@@ -137,10 +138,23 @@ Comfortable Peak**, the eighth name *The failure modes worth naming* owns; and *
 stale, and how to tell* asks for one retry of the easy way when the model changes. **Three
 chapters are now at their ceiling:** *The failure modes worth naming* (1,498 of 1,500), *Collect
 and refine as a team* (1,195 of 1,200, *The play* at 499 of 500), so anything added to either has
-to take something out. The rest of `options/consolidated.md` (one thread, main point first, Turk
-and Kirkman's *Effective Writing*, a teaching manner) is still a pilot and not in the book; its
-reworded thread already carries this point ("re-tested and raised, because the world keeps
-moving").
+to take something out.
+
+**The whole book was rewritten to a revised style guide (2026-09-25): the consolidated rewrite.**
+`book/STYLE.md` now names Turk and Kirkman's *Effective Writing* as its reference and has a section,
+*How the prose is built*: one thread through the book ("written down, checked outside the agent,
+and re-tested and raised, because the world keeps moving") with a table of which part serves which
+move; main point first, with informative openers and headings; no sentence over 40 words; em dashes
+split out; verbs over abstract nouns; a teaching manner with no claims of experience; and **an edit
+never makes a file longer**. Every suite opener now opens on its move. All 41 files were rewritten
+to it, by agents two at a time, on the branch `rewrite/consolidated`; the book before it is the
+tag `pre-consolidated-rewrite`. The book came out about 520 words shorter, with lint notes down
+from 36 to 2 (both in appendices left alone on purpose: further reading's dashes are its citation
+format, and the copy-paste templates were out of scope). **`make facts` is the guard for any
+rewording edit**: it proves a chapter lost no number, quotation, link or code block against a ref.
+A whole-book read after the parallel pass found and fixed cross-chapter disagreements that predate
+the rewrite (see the decision log). Headings in Parts I, III and IV changed, and *Play* headings did
+not; chapter titles and the table of contents are unchanged.
 
 **A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
 [`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
@@ -2613,6 +2627,23 @@ Grafana's spelling**; the reason is in the agent file.
   by memory it stops doing. Room in both full chapters came from a sentence-shape pass, which also
   cleared every lint note on the four files touched; *How to read it* became *Read the plays in any
   order* (no links pointed at the old anchor).
+- **The consolidated rewrite (2026-09-25).** The author took `options/consolidated.md` (merged from
+  five options: a red thread, technical writing, Turk and Kirkman's *Effective Writing*, a teaching
+  voice, and a restructure of the parts, which stays deferred). Decisions: Turk and Kirkman are
+  named in `STYLE.md`; the pre-rewrite book is tagged and the tag pushed; at most two agents run at
+  once; the appendices get a light pass (glossary only; further reading's dashes are its citation
+  format). Order: rules first (`STYLE.md`, the suite-opener contract in `book/README.md`), then a
+  guard (`make facts`), then four pilot pieces landed as specimens, then twelve agent tasks in six
+  rounds, each committed after `make check` and `make facts`. The planned anchor check was dropped:
+  `make check` already reports a `#fragment` that resolves to nothing. Lessons worth keeping:
+  **splitting sentences adds words**, so every pilot went over budget until cut, and the rule "an
+  edit never makes a file longer" is what kept the pass inside budgets; **a term can drift in a
+  specimen and spread**: the specimen play turned "exchange rate" into "price", two agents copied
+  it, and it was reverted (it is a house term, now also in the glossary); and **parallel authors
+  retell shared facts differently**: a whole-book read found the enterprise study told two ways,
+  `lodestone`'s four disagreements told three ways, and an unsourced "roughly half the time", all
+  predating the rewrite and fixed against the research notes. The Orchestration opener glosses the
+  third move as "re-tested, and raised or removed", which the author has seen.
 
 ## Two proposals from the author's reflection
 
