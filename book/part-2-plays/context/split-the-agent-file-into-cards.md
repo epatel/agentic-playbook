@@ -93,13 +93,13 @@ Five entries in that shape, and nothing else that loads unconditionally. The two
 
 ```bash
 $ wc -l CLAUDE.md cards/*.md
-      60 CLAUDE.md
+      62 CLAUDE.md
       70 cards/book-structure.md
-     286 cards/building-the-book.md
+     305 cards/building-the-book.md
       65 cards/repo-layout.md
       65 cards/research-notes.md
       76 cards/standing-defaults.md
-     622 total
+     643 total
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger
@@ -125,7 +125,7 @@ Five links between cards, in three files. Reading them, all five turn out to be 
 sentence around each one is complete, and an agent that never follows the link still acts
 correctly. That judgement is the part the command cannot make.
 
-What did drift is size. `building-the-book` is 286 lines, four times its neighbours, because it
+What did drift is size. `building-the-book` is 305 lines, four times its neighbours, because it
 absorbed every follow-up that had nowhere else to go, and it is now a small version of the thing
 the arrangement exists to prevent. Nothing signalled it, because in the index it is still one line —
 which is a good argument for occasionally reading your own cards in the order the agent does.

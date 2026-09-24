@@ -2571,6 +2571,15 @@ Grafana's spelling**; the reason is in the agent file.
   reason for the boring, popular choice), and a seventh Part III name, *the Wrong Edition*, sourced
   to GitChameleon 2.0 and its predecessors in `failure-modes.md`. Room in the Part III chapter came
   from cutting a paragraph that restated Part IV's architecture argument.
+- **`make lint` measures sentence shape, as notes (2026-09-24).** Three notes, at the author's
+  request, from an option still under consideration (applying technical-writing principles):
+  sentences over 40 words, em dashes over 10 per 1,000 words, and Part I/III/IV headings that point
+  back at the prose. They never fail the build — a long sentence or a dash can be right — and a run
+  with only notes now ends "No problems; the notes above are for a person to judge", because "No
+  defects" was the line people looked for and no longer prints. First run: 31 files with long
+  sentences, 4 over the dash threshold, 5 headings to judge. Documented in
+  `cards/building-the-book.md`; the card and `CLAUDE.md` edits moved the line counts *Split the agent
+  file into cards* prints, which were re-captured (62 and 305 lines, 643 total).
 
 ## Two proposals from the author's reflection
 

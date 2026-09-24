@@ -147,6 +147,25 @@ The budgets are hard-coded in the script, each one naming the document it came f
 hard-coded at all. **Move a number in `book/STYLE.md` or `book/TEMPLATE-play.md` and the self-test
 fails until the script agrees with it.**
 
+### Sentence shape
+
+Three more checks, added 24 September 2026, measure how sentences are built. All three are
+**notes**: they report and never fail the build, because a long sentence or a dash can be the right
+choice and only a person can say so. Each reports once per file where it can, so the list shows
+which files to work on first and shrinks as they improve.
+
+| Note | Reports | Threshold |
+|---|---|---|
+| `long-sentence` | how many sentences in a file run over the limit, and on which lines | over 40 words |
+| `dash-density` | em dashes per 1,000 words of prose, for files of 300 words or more | over 10 |
+| `heading-review` | a Part I, III or IV heading that points back at the prose — ends on a pronoun, or opens *Where that…* — instead of saying what the section holds | — |
+
+They measure running prose only: headings, tables, block quotes and fenced blocks are left out,
+every list item is measured as its own paragraph, and the constraint documents at the top of
+`book/` are not measured. Sentences are split the way the read-aloud script splits them. A run
+with notes and no problems ends **No problems; the notes above are for a person to judge**, which
+is a clean run — "No defects" only appears when there are no notes at all.
+
 ## Two severities, because the book is half-written
 
 A **problem** is something a person should fix. A **note** is the expected consequence of building

@@ -43,8 +43,10 @@ Load a card when its situation matches. Each one stands alone.
   are what make that survivable. `make lint` decides it, along with everything else in
   `book/STYLE.md` a machine can decide. Do not write your own checker — four tasks already did.
 - **`make lint` also counts the word budgets**, per chapter, per opener, per play and per play
-  section. It reports them as notes, so read the ones against the file you edited. Do not count
-  words by hand or with `wc`; both run high against the counter the book is measured with.
+  section, and an overrun fails the build. Do not count words by hand or with `wc`; both run high
+  against the counter the book is measured with. It also reports **sentence-shape notes** (long
+  sentences, em-dash density, headings that point back): these never fail, and a run that ends "No
+  problems" is clean.
 - **Diagrams are mermaid**, in fenced ```mermaid``` blocks. Never ASCII art.
 - **`notes/raw/` is frozen.** It is a provenance record of the original ideation, not a spec.
 - **Locked decisions in `PLAN.md` are not reopened unilaterally.** If your task cannot proceed

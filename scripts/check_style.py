@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Check the book's mechanical conventions: wrapping, whitespace, fences, bans, and word budgets.
+"""Check the book's mechanical conventions: wrapping, whitespace, fences, bans, word budgets, and
+the shape of its sentences.
 
 Four writing tasks wrote their own throwaway version of this in /tmp before it was written down
 once. The rules it checks are the ones a machine can decide — the column limit, trailing
 whitespace, a fenced block with no language tag, the bans in ``book/STYLE.md`` that are a fixed
 list of characters or words, and the word budgets in ``book/STYLE.md`` and
-``book/TEMPLATE-play.md``. Everything about voice stays where it belongs, which is a person
-reading the prose.
+``book/TEMPLATE-play.md``. Three notes measure sentence shape — sentences over 40 words, em-dash
+density, and headings that point back at the prose instead of describing it — and report without
+ever failing. Everything else about voice stays where it belongs, which is a person reading the
+prose.
 
 Nothing here writes to the book. It reports, and with ``--strict`` it exits non-zero.
 
@@ -364,6 +367,145 @@ def budget_defects(path: Path, lines: list[str], prose: list[str | None]) -> lis
     return defects
 
 
+# --------------------------------------------------------------------------------------------
+# Prose shape: three notes for a person to act on
+# --------------------------------------------------------------------------------------------
+
+#: Sentences longer than this are reported, one note per file listing where they are. Plain-
+#: language guidance keeps most sentences under about 25 words; 40 is where a sentence has almost
+#: always stopped carrying one idea. A note, not a problem: a long sentence can be the right one.
+LONG_SENTENCE = 40
+
+#: Em dashes per 1,000 words of prose above which a file is reported. The book averaged 8.5 when
+#: this was added (24 September 2026) against the 1–2 typical of technical documentation; one per
+#: hundred words is where a file stands out from its neighbours rather than from a style guide, and
+#: the dash is the main way this book builds the nested sentences the note above catches. Files
+#: under ``DASH_MIN_WORDS`` are too short for a rate to mean anything.
+DASH_DENSITY = 10.0
+DASH_MIN_WORDS = 300
+
+#: A sentence ends at ., ! or ?, possibly followed by closing quotes, brackets or emphasis, then
+#: whitespace, then something that can start a sentence. The same shape the read-aloud script
+#: splits on, so "a sentence" means the same thing to both.
+SENTENCE_BREAK = re.compile(r"(?<=[.!?])[\"'”’)*_]*\s+(?=[\"'“‘(*_\[`]*[A-Z0-9])")
+WORDLIKE = re.compile(r"[A-Za-z0-9]")
+
+#: A heading that points back at the prose instead of saying what the section holds: one that ends
+#: on a pronoun (*How to read it*, *What this book is, given all that*) or opens with *Where
+#: that…*. Deliberately narrow — "that" and "it" in ordinary use (*the area that grew*) are not
+#: back-references — so the note lists a handful of headings to judge rather than nagging about
+#: every one.
+BACK_REFERENCE_HEADING = re.compile(
+    r"\b(this|that|these|those|it)\s*$|^where (that|this|it)\b", re.IGNORECASE)
+
+#: Heading review applies to the prose chapters only: a play's five headings are fixed by the
+#: template, and the appendices are reference material with headings that are already labels.
+HEADING_REVIEW_DIRS = {"part-1-argument", "part-3-where-it-struggles", "part-4-next-waves"}
+
+#: The constraint documents at the top of ``book/`` are instructions to authors, not the book's
+#: prose, and are not measured for sentence shape. ``preface.md`` is the book and is measured.
+APPARATUS = {"README.md", "STYLE.md", "TEMPLATE-play.md"}
+
+
+def book_parts(path: Path) -> tuple[str, ...] | None:
+    """The path's parts under ``book/``, or None if it is outside the book or is apparatus."""
+    try:
+        parts = path.resolve().relative_to(BOOK).parts
+    except ValueError:
+        return None
+    if len(parts) == 1 and parts[0] in APPARATUS:
+        return None
+    return parts
+
+
+def prose_paragraphs(lines: list[str], prose: list[str | None]) -> list[list[tuple[int, str]]]:
+    """Paragraphs of the book's own running prose, as (line number, text) pairs.
+
+    Headings, table rows and block quotes are left out — a block quote is a capture line or a
+    quotation — and every list item starts a paragraph of its own, so a numbered step is measured
+    as the unit a reader meets.
+    """
+    paragraphs: list[list[tuple[int, str]]] = []
+    current: list[tuple[int, str]] = []
+    for number, line in enumerate(lines, start=1):
+        text = prose[number - 1]
+        stripped = text.strip() if text is not None else ""
+        if text is None or not stripped or stripped.startswith(("#", "|", ">")):
+            if current:
+                paragraphs.append(current)
+            current = []
+            continue
+        if re.match(r"^(\d+\.|[-*])\s", stripped) and current:
+            paragraphs.append(current)
+            current = []
+        current.append((number, stripped))
+    if current:
+        paragraphs.append(current)
+    return paragraphs
+
+
+def long_sentences(paragraphs: list[list[tuple[int, str]]]) -> list[tuple[int, int]]:
+    """(line the sentence starts on, its length in words) for every sentence over the limit."""
+    found = []
+    for paragraph in paragraphs:
+        text, starts = "", []
+        for number, line in paragraph:
+            starts.append((len(text), number))
+            text += line + " "
+        cut = [0] + [m.end() for m in SENTENCE_BREAK.finditer(text)] + [len(text)]
+        for begin, end in zip(cut, cut[1:]):
+            words = sum(1 for token in text[begin:end].split() if WORDLIKE.search(token))
+            if words > LONG_SENTENCE:
+                line = max(number for offset, number in starts if offset <= begin)
+                found.append((line, words))
+    return found
+
+
+def prose_notes(path: Path, lines: list[str], prose: list[str | None]) -> list[Defect]:
+    """Sentence length, em-dash density, and headings that point back: all notes, never problems.
+
+    These measure sentence *shape*, which `book/STYLE.md` leaves to judgement, so they report and
+    never fail the build. Each is one line per file where it can be, so `make lint` stays readable:
+    the point is to show which files to work on first, and to show progress as they improve.
+    """
+    parts = book_parts(path)
+    if parts is None:
+        return []
+    defects: list[Defect] = []
+
+    def note(line_no: int, rule: str, message: str) -> None:
+        defects.append(Defect(path, line_no, rule, message, problem=False))
+
+    paragraphs = prose_paragraphs(lines, prose)
+    long = long_sentences(paragraphs)
+    if long:
+        where = ", ".join(str(line) for line, _ in long)
+        longest = max(words for _, words in long)
+        plural = "s" if len(long) != 1 else ""
+        note(long[0][0], "long-sentence",
+             f"{len(long)} sentence{plural} over {LONG_SENTENCE} words, at line{plural} {where} "
+             f"(longest {longest})")
+
+    text = "\n".join(line for paragraph in paragraphs for _, line in paragraph)
+    words = word_count(text)
+    if words >= DASH_MIN_WORDS:
+        # Compared as printed, so the note never says "10.0, over the 10".
+        density = round(text.count("—") * 1000 / words, 1)
+        if density > DASH_DENSITY:
+            note(1, "dash-density",
+                 f"{density:.1f} em dashes per 1,000 words, over the {DASH_DENSITY:g} this reports "
+                 f"at; splitting a sentence at its dash is usually the fix")
+
+    if parts[0] in HEADING_REVIEW_DIRS:
+        for number, line in enumerate(lines, start=1):
+            heading = HEADING.match(line) if prose[number - 1] is not None else None
+            if heading and BACK_REFERENCE_HEADING.search(heading.group(1)):
+                note(number, "heading-review",
+                     f"heading {heading.group(1)!r} points back at the prose rather than saying "
+                     f"what the section holds")
+    return defects
+
+
 def check_text(path: Path, text: str) -> list[Defect]:
     """Every rule for one file. Fenced blocks are classified first; nothing else looks inside."""
     defects: list[Defect] = []
@@ -410,6 +552,7 @@ def check_text(path: Path, text: str) -> list[Defect]:
     # which need the fence mask from pass one and nothing from the line-by-line rules below.
     voice = mask_quotations(prose)
     defects.extend(budget_defects(path, lines, prose))
+    defects.extend(prose_notes(path, lines, prose))
     check_bans = path.name not in BANS_EXEMPT
 
     # Pass three: the rules.
@@ -633,9 +776,61 @@ def budget_source_test() -> list[str]:
     return failures
 
 
+def sentence(words: int) -> str:
+    """One sentence of exactly this many words, as ``long_sentences`` counts them."""
+    return ("Word " + "word " * (words - 1)).strip() + "."
+
+
+def prose_self_test() -> list[str]:
+    """The three prose notes: each fires just past its threshold, not at it, and never as a problem.
+
+    Also the scoping that keeps them usable — the apparatus at the top of ``book/`` is not measured,
+    and heading review does not reach the plays, whose headings the template fixes.
+    """
+    failures = []
+    appendix, style = NO_BUDGET_PATH, BOOK / "STYLE.md"
+
+    def notes(path: Path, text: str) -> list[tuple[int, str]]:
+        defects = [d for d in check_text(path, text)
+                   if d.rule in ("long-sentence", "dash-density", "heading-review")]
+        if any(d.problem for d in defects):
+            failures.append(f"{rel(path)}: a prose-shape rule was reported as a problem, not a note")
+        return sorted((d.line, d.rule) for d in defects)
+
+    def dashes(n: int, total: int) -> str:
+        """About ``total`` words with ``n`` em dashes among them, as ten-word sentences, so that
+        the dash fixture never trips the long-sentence note. Every dash is kept."""
+        items = ["word —"] * n + ["word"] * (total - 2 * n)
+        return " ".join("Word " + " ".join(items[i:i + 9]) + "." for i in range(0, len(items), 9))
+    for label, path, text, expected in (
+        ("41 words", appendix, f"# A\n\n{sentence(41)}\n", [(3, "long-sentence")]),
+        ("40 words", appendix, f"# A\n\n{sentence(40)}\n", []),
+        ("two sentences of 30, one paragraph", appendix,
+         f"# A\n\n{sentence(30)} {sentence(30)}\n", []),
+        ("a long sentence starting on the second line", appendix,
+         f"# A\n\n{sentence(10)}\n{sentence(45)}\n", [(4, "long-sentence")]),
+        ("5 dashes in 400 words", appendix, f"# A\n\n{dashes(5, 400)}\n", [(1, "dash-density")]),
+        ("3 dashes in 400 words", appendix, f"# A\n\n{dashes(3, 400)}\n", []),
+        ("dense but too short to rate", appendix, f"# A\n\n{dashes(10, 200)}\n", []),
+        ("a back-referencing heading", CHAPTER_PATH,
+         f"# A\n\n## Where that puts this\n\n{sentence(5)}\n", [(3, "heading-review")]),
+        ("a heading ending on a pronoun", CHAPTER_PATH,
+         f"# A\n\n## How to read it\n\n{sentence(5)}\n", [(3, "heading-review")]),
+        ("a descriptive heading with an ordinary 'that'", CHAPTER_PATH,
+         f"# A\n\n## The area that grew\n\n{sentence(5)}\n", []),
+        ("a back-referencing heading in an appendix", appendix,
+         f"# A\n\n## Where that puts this\n\n{sentence(5)}\n", []),
+        ("the style guide, which is apparatus", style, f"# A\n\n{sentence(60)}\n", []),
+    ):
+        got = notes(path, text)
+        if got != expected:
+            failures.append(f"prose notes, {label}: expected {expected}, got {got}")
+    return failures
+
+
 def self_test() -> int:
     """Check the checker. No dependencies, so it runs anywhere the book does."""
-    failures = budget_self_test() + budget_source_test()
+    failures = budget_self_test() + budget_source_test() + prose_self_test()
     defects = check_text(Path("fixture.md"), FIXTURE)
     problems = sorted((d.line, d.rule) for d in defects if d.problem)
     notes = sorted((d.line, d.rule) for d in defects if not d.problem)
@@ -699,11 +894,15 @@ def main(argv: list[str] | None = None) -> int:
         (reporter.warn if defect.problem else reporter.note)(defect.render())
 
     log(f"Checked {len(files)} markdown file{'s' if len(files) != 1 else ''} against "
-        f"{LIMIT} columns, book/STYLE.md, and the word budgets in book/STYLE.md and "
-        f"book/TEMPLATE-play.md.")
+        f"{LIMIT} columns, book/STYLE.md, the word budgets in book/STYLE.md and "
+        f"book/TEMPLATE-play.md, and sentence shape.")
     reporter.print()
     if not defects:
         log("No defects.")
+    elif not reporter.problems:
+        # Notes are the normal state now that sentence shape is measured, so say plainly that the
+        # run is clean: "no defects" was the line people looked for, and it no longer prints.
+        log("No problems; the notes above are for a person to judge.")
     return 1 if (args.strict and reporter.problems) else 0
 
 
