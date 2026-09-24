@@ -2,12 +2,27 @@
 #
 # The site is the same single self-contained file `make html` produces locally, renamed to
 # index.html. Nothing is committed: build/ stays generated, and this workflow rebuilds it from
-# the markdown on every push to main.
+# the markdown on a push to main that can change it.
 name: Pages
 
 on:
   push:
     branches: [main]
+    # Only what the HTML book is built from. A push that touches only the plan, a card, a research
+    # note, an example project or the checker cannot change the page, so it does not redeploy it.
+    # This list has to follow scripts/build_book.py: a new file the build reads goes here too, or
+    # changing it will not reach the site until something else does. workflow_dispatch below
+    # rebuilds by hand whenever that is in doubt.
+    paths:
+      - 'book/**'
+      - '!book/examples/**'
+      - 'scripts/build_book.py'
+      - 'scripts/book.css'
+      - 'scripts/book-metadata.yaml'
+      - 'scripts/read-aloud.html'
+      - 'scripts/favicon.svg'
+      - 'Makefile'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 # Let one deployment finish rather than cancelling it: a half-published site is worse than a

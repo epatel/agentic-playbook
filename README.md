@@ -144,8 +144,10 @@ against wherever that file sits, so the build rewrites them to `REPO_URL` (the r
 `main` by default; a release pins them to its own tag).
 
 The same HTML build is published to
-[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
-`main`, by [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
+[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) by
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml), on a push to `main` that touches what
+the page is built from: the book (not its example projects), the five build inputs in `scripts/`,
+the `Makefile`, or the workflow itself. It can also be run by hand from the Actions tab.
 
 ## What is in this repository
 

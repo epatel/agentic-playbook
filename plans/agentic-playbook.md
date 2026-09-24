@@ -115,8 +115,9 @@ table above, so that the numbered milestones keep the numbers other entries in t
 
 **The manuscript is complete, and the book is published.** 41 chapters, 42,341 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
-[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on every push to
-`main`; and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
+[epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
+`main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
+which must follow any new input `scripts/build_book.py` reads); and `make release` publishes a dated PDF whose outbound links pin to its own tag rather
 than to `main`. **`make check` is clean, and running it is how you finish.**
 
 **Part I was reassessed and restructured after publication** — see [*The Part I
