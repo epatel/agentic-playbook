@@ -14,17 +14,17 @@ uses.
 A syntactically valid patch that is functionally incorrect, incomplete, or does not address the
 problem it was written for. It is not an edge case; it is the dominant failure. In the November 2025
 SWE-Bench Pro paper, Claude Opus 4.1's failing runs on the public set split 511 that submitted a
-patch against 178 that never got that far. Of the 511, 257 — 50.3% — were classified that way,
-against 160 syntax errors. Once the agent got as far as a diff, half of what went wrong went wrong
-while compiling cleanly and reading well.
+patch against 178 that never got that far. Of the 511, 257 (50.3%) were classified that way, against
+160 syntax errors. Once the agent got as far as a diff, half of what went wrong went wrong while
+compiling cleanly and reading well.
 
 The tell is structural, not textual, so reading the diff line by line misses it. The change
 addresses a restatement of the problem, not the problem. It handles the symptom in the ticket and
 not its cause, or does the first of two things the issue asked for and reports both done. A useful
 probe: what does the change do to the case the ticket did not mention?
 
-The response is to check the change against the requirement rather than against itself, and to do it
-before reading the code. That is why [*Review code you did not
+The response is to check the change against the requirement, not against itself, before reading the
+code. That is why [*Review code you did not
 write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) puts one traced
 path and a reproducer ahead of the diff.
 
@@ -33,9 +33,9 @@ path and a reproducer ahead of the diff.
 The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
 uses these tools has watched it happen, and until recently nobody had measured it. A 2026 study
 decomposing 16,758 agent trajectories found the rate climbing with run length: 21.7% of the shortest
-quartile against 63.7% of the longest. Nearly all the length dependence comes from thrashing. A
-near-correct patch corrupted in place happens at any length, so short runs reduce this failure
-without abolishing it.
+quartile against 63.7% of the longest. The study splits the failure in two: thrashing, which drives
+nearly all of that growth, and a near-correct patch corrupted in place, which happens at any length.
+So short runs reduce this failure without abolishing it.
 
 The tell is in the transcript rather than the diff, and the transcript is on disk. A test that went
 green and later went red, a file edited, reverted, and edited again, or a final change that rewrites
@@ -51,14 +51,14 @@ play.
 
 The agent reads the requirements, restates them accurately, and stops meeting them. A 2026 white-box
 study varied only context size on a fixed code-audit task. From a roughly 11,000-character context
-to a roughly 300,000-character one, strict success fell from eight runs in ten to three: a retention
-ratio of 0.375, on ten runs each and short of conventional significance. Over the same range,
-requirement-coverage retention held at 0.933 to 0.949. The information is present the whole way
-down. The compliance is not.
+to a roughly 300,000-character one, strict success fell from eight runs in ten to three. That is a
+retention ratio of 0.375, on ten runs each and short of conventional significance. Over the same
+range, requirement-coverage retention held at 0.933 to 0.949. The information is present the whole
+way down. The compliance is not.
 
-The tell is the recital itself. Ask what the requirements were; it answers correctly; the code does
-not satisfy them. The failures in that study clustered at compilation, execution, and verification
-rather than at reading the files.
+The tell is the recital itself. Ask what the requirements were, and the agent answers correctly. The
+code does not satisfy them. The failures in that study clustered at compilation, execution, and
+verification rather than at reading the files.
 
 The response is a requirement list that lives outside the conversation and gets checked
 mechanically. In the same study a generic request to validate every constraint recovered five runs
@@ -69,7 +69,7 @@ to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md).
 
 Each pass improves something, and the file is worse than it was five passes ago. Nothing fails, so
 nothing stops. Verbosity, complexity concentration, and cost all climb across a trajectory with no
-gain in solve rate, while human repositories hold the same metrics flat; the measurement is in
+gain in solve rate, while human repositories hold the same metrics flat. The measurement is in
 [*What agents are reliably bad at*](what-agents-are-reliably-bad-at.md).
 
 It is a different animal from the Permanent Near Miss ([*Scope a task to fit the
@@ -80,9 +80,8 @@ The tell is a file that has grown on every iteration, a run of recent passes wit
 change to show for them, and near-duplicate boilerplate in adjacent branches of one function, never
 factored out.
 
-The response is to diff against the state five passes ago rather than against the last one, and to
-cap iterations in advance. Ask whether this is better than where it started, not than the last
-attempt.
+The response is to cap iterations in advance, and to diff against the state five passes ago rather
+than the last one.
 
 ## The Immaculate Surface
 
@@ -109,20 +108,20 @@ You push back on something the agent got right, and it agrees immediately and re
 something worse. The measured version is conversational rather than agentic, and the distinction
 matters. In a 2026 benchmark, a proxy user applied sustained pressure to items resting on a false
 presupposition. Collapse rates at 25 turns ran from 65% to 97% depending on the model, on an average
-of six to fifteen turns of pressure. Emotional appeals worked better than logical ones — a 44.3%
-drop rate against 20.0%. Among the four models that expose reasoning traces, collapse "typically
-occurs while the correct position remains represented rather than after it disappears". It did not
+of six to fifteen turns of pressure. Emotional appeals worked better than logical ones: a 44.3% drop
+rate against 20.0%. Among the four models that expose reasoning traces, collapse "typically occurs
+while the correct position remains represented rather than after it disappears". The model did not
 lose the answer. It stopped asserting it.
 
-Nobody has measured an agent abandoning a correct patch after a reviewer pushes back. This name
-rests on recognition, not evidence.
+The agentic version, an agent abandoning a correct patch after a reviewer pushes back, is
+unmeasured. This name rests on recognition, not evidence.
 
 The tell is a rewrite with no argument attached, arriving faster than a considered disagreement
 would.
 
-The response is to make disagreeing cheap. Ask it to defend the original before replacing it, and
-phrase the pushback as a question rather than a correction — "what happens at zero elements here?"
-rather than "this is wrong".
+The response is to make disagreeing cheap. Ask the agent to defend the original before replacing it.
+Phrase the pushback as a question, not a correction: "what happens at zero elements here?" rather
+than "this is wrong".
 
 ## The Wrong Edition
 
@@ -143,7 +142,7 @@ read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) 
 
 Every change is good enough, and none is better than the last. Plausible output is cheap, so the
 team's bar settles where the output lands. That is a local optimum, and the ground under it moves.
-Better models will not lift it: Veracode's security pass rate stayed flat across two years of
+Better models have not lifted it: Veracode's security pass rate stayed flat across two years of
 releases ([*What agents are reliably bad at*](what-agents-are-reliably-bad-at.md)). In a small 2023
 study, people writing with an AI assistant wrote less secure code and felt surer of it.
 
@@ -155,7 +154,7 @@ a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) is the play.
 
 ## The index
 
-Every name this book uses, and where it is described — the eight above plus the twenty-two the plays
+Every name this book uses, and where it is described: the eight above plus the twenty-two the plays
 coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
 than the cause: a reader should recognise the thing before they understand it.
 
@@ -169,7 +168,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
 | **the Wrong Edition** | Idiomatic code for a version of a dependency you do not run | This chapter |
 | **the Comfortable Peak** | Every change good enough, none better, and nothing made stricter in months | This chapter |
-| **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
+| **the Context Landfill** | An agent file that only ever grew; the current convention followed inconsistently | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
 | **the Adequate Answer** | Output nobody objects to, from a context nobody examines, because only a bad result prompts a look | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |

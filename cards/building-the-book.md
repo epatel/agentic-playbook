@@ -166,6 +166,17 @@ every list item is measured as its own paragraph, and the constraint documents a
 with notes and no problems ends **No problems; the notes above are for a person to judge**, which
 is a clean run — "No defects" only appears when there are no notes at all.
 
+### After a rewrite: `make facts`
+
+A rewrite that reshapes sentences must not move a figure. `make facts` compares every chapter with
+the same file at a git ref (`REF`, default `main`) and reports as a **problem** any number in
+digits, quotation, link target or fenced block that the ref had and the working tree has lost.
+Rewrapping is free: text is compared with whitespace collapsed. Two things are only **notes**: a
+number written as a word, which can vanish legitimately, and a changed mermaid diagram, whose labels
+are prose. It proves nothing disappeared; it cannot tell you a figure moved to the wrong claim.
+Run it before committing any edit that rewords rather than adds, for example
+`make facts REF=pre-consolidated-rewrite` during the consolidated rewrite.
+
 ## Two severities, because the book is half-written
 
 A **problem** is something a person should fix. A **note** is the expected consequence of building

@@ -94,7 +94,7 @@ Assembled from the four plays in [*Team*](../part-2-plays/team/index.md).
 - [ ] The next revision is triggered by an event, and experiments have a standing exception
 - [ ] A decider was named before the contested items, and every decision carries a date and the
       losing argument
-- [ ] Sharing sessions ask for discarded runs first, and somebody senior answers that one first
+- [ ] Harvests ask for discarded runs first, and somebody senior answers that one first
 - [ ] What survives a session leaves as a committed file, described by somebody other than its
       author
 - [ ] Every session deletes something and raises one check, enforced in CI and dated

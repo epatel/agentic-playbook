@@ -2,8 +2,8 @@
 
 ## Problem
 
-You hand over the auth migration — fourteen endpoints, one decorator to retire — and forty minutes
-later it is still going. The first six endpoints look good. Somewhere around the ninth it starts
+You hand over the auth migration: fourteen endpoints, one decorator to retire. Forty minutes later
+it is still going. The first six endpoints look good. Somewhere around the ninth it starts
 re-implementing a helper it wrote at minute twelve, and the tenth uses an error shape that
 contradicts the third. Nothing errors, nothing stops, and every time you look it appears to be one
 step from finished, so you type "continue" for the third time. What you end up reviewing is not a
@@ -20,15 +20,15 @@ Size the unit of work by what has to be held in mind at once, not by how many li
 2. **Scope by capability, not by layer.** "Add validation to the checkout endpoint, its schema, and
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
    by the eighth file. An agent's unit of work is a behaviour, not a directory. Where a layer-first
-   layout makes that split awkward — one capability living in six files across three trees — the
-   difficulty is in the repository, not the task: see [*Refactoring a codebase for
+   layout makes that split awkward, with one capability in six files across three trees, the
+   difficulty is in the repository, not the task. See [*Refactoring a codebase for
    agents*](../../part-4-next-waves/refactoring-a-codebase-for-agents.md).
 3. **Hand the requirements over as an external list, not as prose to remember.** A numbered list of
    acceptance conditions in a file the agent can re-read beats the same conditions buried in your
    opening message. In the one white-box study of this
    ([`failure-modes.md`](../../../notes/research/failure-modes.md), arXiv 2607.17937, August 2026),
    a large-context task that succeeded 3 times in 10 succeeded 10 times in 10 when the requirements
-   were supplied as an external list; a generic request to validate every constraint got 5.
+   were supplied as an external list. A generic request to validate every constraint got 5.
 4. **Stop on the tells, not on the error.** Three tells, any one of which means re-scope rather than
    continue: the agent re-implements something already present in its own diff; an edit contradicts
    an earlier edit from the same run; you have said "continue" more than twice.
@@ -38,10 +38,10 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    you established by typing it is gone.
 6. **Start the next unit from that file and a clean tree**, rather than from a continued session.
 
-Fitting in the window is necessary and nowhere near sufficient. In the same study the agent's
-coverage of the requirements barely moved as the context grew, while the rate at which it satisfied
-all of them at once collapsed — the failure this book calls the Requirement It Can Still Quote,
-measured in [*The failure modes worth
+Fitting in the window is necessary and nowhere near sufficient. In the same study, the agent's
+coverage of the requirements barely moved as the context grew. The rate at which it satisfied all of
+them at once collapsed. The book calls that failure the Requirement It Can Still Quote, measured in
+[*The failure modes worth
 naming*](../../part-3-where-it-struggles/the-failure-modes-worth-naming.md). The question is not
 "will it fit" but "can it still satisfy all of this at once", so the answer is a smaller task rather
 than a bigger window. The exchange rate: four task briefs instead of one, four sets of results to
@@ -57,8 +57,8 @@ The first attempt was one task. It produced the forty-minute run in *Problem*: e
 converted cleanly, seven to fourteen drifting, and a diff too tangled to accept in parts. It was
 discarded, at a cost of one run.
 
-The second attempt split at the boundary where both halves would be needed at once — the middleware
-had to exist and be settled before any endpoint could be moved onto it:
+The second attempt split at the boundary where both halves would be needed at once. The middleware
+had to exist and be settled before any endpoint could move onto it:
 
 ```mermaid
 graph LR
@@ -82,25 +82,24 @@ same one:
 ```
 
 Unit 2 came back wrong in one respect, and it was the interesting one. Unit 1 had decided to raise
-`AuthError` and let the middleware map it to a 401; unit 2, which never saw that conversation, went
-with returning a response directly from the routes. Both are defensible; having both is not. The
-decision had been made in chat and therefore did not exist. It went into the handoff file as one
-line — "auth failures raise `AuthError`; only the middleware serialises it" — and unit 2 was re-run
-against it. Re-running one of four units is a cheap correction, and it was cheap precisely because
-it was one of four.
+`AuthError` and let the middleware map it to a 401. Unit 2, which never saw that conversation,
+returned a response directly from the routes. Both are defensible; having both is not. The decision
+had been made in chat and therefore did not exist. It went into the handoff file as one line: "auth
+failures raise `AuthError`; only the middleware serialises it". Unit 2 was re-run against it.
+Re-running one of four units is a cheap correction, and it was cheap precisely because it was one of
+four.
 
 ## Failure mode
 
-**The Permanent Near Miss.** The run does not fail. It ends just short — one endpoint unconverted,
-one test still red, one loose end that looks like one more minute of work — so you continue it, and
+**The Permanent Near Miss.** The run does not fail. It ends just short: one endpoint unconverted,
+one test still red, one loose end that looks like one more minute of work. So you continue it, and
 the continuation also ends just short. The work is genuinely progressing and genuinely never
-arriving, and because each individual turn looks like the last one needed, there is no moment that
-presents itself as the moment to stop. It is the dominant outcome on long-horizon benchmarks — near
-misses outnumber passes, and most unresolved runs end on a time budget rather than on anything
-breaking, which is measured in [*What agents are reliably bad
-at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md). The tell is that your
-estimate of "nearly done" has not moved in twenty minutes while the diff has. The second tell is
-reaching for "continue" instead of reading what you already have.
+arriving. Each turn looks like the last one needed, so no moment presents itself as the moment to
+stop. It is the dominant outcome on long-horizon benchmarks. Near misses outnumber passes, and most
+unresolved runs end on a time budget rather than on anything breaking, as measured in [*What agents
+are reliably bad at*](../../part-3-where-it-struggles/what-agents-are-reliably-bad-at.md). The tell
+is that your estimate of "nearly done" has not moved in twenty minutes while the diff has. The
+second tell is reaching for "continue" instead of reading what you already have.
 
 ## Checklist
 

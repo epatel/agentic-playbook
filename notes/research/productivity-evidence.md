@@ -615,8 +615,9 @@ establish which. Use **33%/46% with the survey page as the citation**, and note 
   verified, vendor-authored. *Reason: unverified; and the category is saturated with vendors whose
   product is rework measurement.*
 - **Any figure presenting the METR 19% as "AI makes developers slower" without qualification.** The
-  authors explicitly disclaim that generalisation [1], their own follow-up could not reproduce it
-  [3], and it measured Cursor Pro with Claude 3.5/3.7 in early 2025 — two model generations ago.
+  authors explicitly disclaim that generalisation [1], their own follow-up could not settle it
+  (the design was abandoned and yielded "only very weak evidence") [3], and it measured Cursor Pro
+  with Claude 3.5/3.7 in early 2025 — two model generations ago.
 
 ### Where autocomplete evidence gets quoted as agent evidence
 
@@ -640,7 +641,7 @@ and the Claude Code adoption panel [35]. That is the whole list, and none of the
 
 | Claim | Why it rots | Suggested hedge |
 |---|---|---|
-| METR's 19% slowdown | Measured Cursor Pro + Claude 3.5/3.7, Feb–Jun 2025. Two model generations old by late 2026. METR's own follow-up could not reproduce it. | "In the only published RCT of its kind, run on early-2025 tooling…" and always pair with METR's 2026 retraction of confidence. |
+| METR's 19% slowdown | Measured Cursor Pro + Claude 3.5/3.7, Feb–Jun 2025. Two model generations old by late 2026. METR's own follow-up could not settle it: the design was abandoned, with "only very weak evidence". | "In the only published RCT of its kind, run on early-2025 tooling…" and always pair with METR's 2026 retraction of confidence. |
 | Peng et al. 55.8% | Mid-2022 Copilot on a greenfield single-file task. Never independently replicated. | "An early-Copilot experiment, on a greenfield task, in 2022…" Never present as an agent result. |
 | DORA adoption at 90% | Adoption is asymptoting; the interesting number is shifting from *whether* to *how*. | "By the 2025 survey, adoption was effectively universal — the live question is no longer adoption." |
 | DORA's throughput sign | Flipped negative→positive between 2024 and 2025. It can flip again. | Quote the year explicitly every time. Never say "DORA found" without the edition. |

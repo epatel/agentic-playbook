@@ -6,7 +6,7 @@ A context window gets packed the way a suitcase gets packed the night before a f
 that might conceivably be needed, on the theory that the alternative is needing it and not having
 it. So the run starts with the architecture document, the four adjacent modules, last week's
 incident write-up, and the whole test file. The answer that comes back is worse than the one you got
-last month from a two-sentence prompt and one file — blander, hedged, quietly ignoring two of the
+last month from a two-sentence prompt and one file: blander, hedged, quietly ignoring two of the
 five requirements. Nothing failed. You paid more for it, and you have no idea which of the things
 you added did the damage.
 
@@ -15,17 +15,18 @@ you added did the damage.
 Reduction never happens by accident. Somebody has to decide what not to send.
 
 1. **Write the exclusion, not only the inclusion.** Before a run, name the two or three things the
-   task genuinely needs, then say out loud what it does not: the other services, the deployment
+   task needs, then say out loud what it does not: the other services, the deployment
    config, the history of why the module is shaped this way. If you cannot state why a file is in
    the window, it is in the window because it was nearby.
-2. **Load on arrival, not in advance.** Anything conditional — a convention for one directory, a
-   procedure for one situation — belongs behind a trigger, whether that is a path-scoped rule, a
-   skill description ([*Package repeatable expertise*](../harness/package-repeatable-expertise.md)),
-   or a card you load by hand ([*Split the agent file into
-   cards*](split-the-agent-file-into-cards.md)). The mechanisms differ, and a card is no vendor's
-   feature, but they encode one idea: the instruction should turn up when its situation does.
+2. **Load on arrival, not in advance.** Anything conditional belongs behind a trigger, such as a
+   convention for one directory or a procedure for one situation. The trigger can be a path-scoped
+   rule, a skill description ([*Package repeatable
+   expertise*](../harness/package-repeatable-expertise.md)), or a card you load by hand ([*Split the
+   agent file into cards*](split-the-agent-file-into-cards.md)). The mechanisms differ, and a card
+   is no vendor's feature, but they encode one idea: the instruction should turn up when its
+   situation does.
 3. **Prefer a smaller task to a filtered one.** Filtering is damage control applied after you have
-   already asked for the wrong thing. If the window is under pressure, the first move is
+   asked for the wrong thing. If the window is under pressure, the first move is
    [*Scope a task to fit the window*](scope-a-task-to-fit-the-window.md), not a compression layer.
 4. **If you add a context-reduction tool, measure the bill rather than the dashboard.** Run the
    same task set with the filter and without it, several repetitions each, same model and same
@@ -39,9 +40,9 @@ Reduction never happens by accident. Somebody has to decide what not to send.
    own framing of the risk is the honest one: aggressive compaction loses "subtle but critical
    context whose importance only becomes apparent later".
 
-What makes this work is that attention is not free per token. Every token attends to every other
-token, so a window is not a shelf you put things on — it is a room where everything you add makes
-everything already there slightly harder to find. The goal Anthropic states for its own agents is
+This works because attention is not free per token. Every token attends to every other token. So
+a window is not a shelf you put things on. It is a room where everything you add makes everything
+already there slightly harder to find. The goal Anthropic states for its own agents is
 worth stealing verbatim: find the smallest set of high-signal tokens that gets you the outcome. That
 is signal over noise taken at the level of one run rather than one project. The exchange rate is
 that you will sometimes have to hand the agent one more file mid-run, and being occasionally
@@ -59,13 +60,13 @@ small model, as LLMLingua does. Nearly all report their benefit the same way, as
 where the tool acts ([`token-filtering.md`](../../../notes/research/token-filtering.md)), and only
 `rtk` has independent cost measurements. Both measured it in mid-2026, JetBrains on v0.43.0; nothing
 has re-tested it since. JetBrains' 425 billed trials found cost per task up 7.6% at low reasoning
-effort and turns up 13.8%, quality tied, while the tool's own analytics reported 96.2 million tokens
-saved over the same trials. Quesma, across 1,740 attempts on Terminal-Bench 2.1, concluded: "We do
+effort and turns up 13.8%, quality tied. Over the same trials, the tool's own analytics reported
+96.2 million tokens saved. Quesma, across 1,740 attempts on Terminal-Bench 2.1, concluded: "We do
 not recommend RTK as a generic cost-saving tool."
 
 Both sides are telling the truth. The tool removes most of the bytes a command emits, and the bill
-still goes up: most input cost arrives as cached re-reads at roughly a tenth of the fresh price,
-which a filter never sees, and trimmed output costs extra turns to recover.
+still goes up. Most input cost arrives as cached re-reads at roughly a tenth of the fresh price,
+which a filter never sees. Trimmed output costs extra turns to recover.
 
 So the team set up the paired comparison on their own repo: twelve backlog tasks, three repetitions
 each. These are the columns that settle it, and nobody else's numbers go in them:
@@ -78,21 +79,21 @@ each. These are the columns that settle it, and nobody else's numbers go in them
 *Blank on purpose: the only numbers that settle it are the ones you measure.*
 
 The published runs say where to look. Quesma found one model's savings "depended on one task and did
-not hold across tasks". A win confined to one noisy command, such as a dependency tree of four
-thousand lines in which the agent needs six, with a loss elsewhere, mostly in turns, means keeping
-the filter for that command and removing the global hook.
+not hold across tasks". A win may be confined to one noisy command, such as a dependency tree of
+four thousand lines in which the agent needs six. If the loss falls elsewhere, mostly in turns, keep
+the filter for that command and remove the global hook.
 
 ## Failure mode
 
-**The Flattering Dashboard.** A tool measures its own benefit at the point where it acts — bytes
-removed, tokens "saved" — against a counterfactual your billing system never applies. The number it
-reports is real and it is not your bill, and because it is enormous, nobody checks. The reported
+**The Flattering Dashboard.** A tool measures its own benefit where it acts, in bytes removed or
+tokens "saved", against a counterfactual your billing system never applies. The number it reports
+is real, but it is not your bill. Because it is enormous, nobody checks. The reported
 saving and the measured spend can move in opposite directions by two orders of magnitude and both be
 accurate. The tell is a savings figure that arrives from the same process that created the saving,
 with no independent measurement anywhere in the loop. Anything that keeps its own scoreboard
 flatters itself, which is not dishonesty but what measuring your own work looks like.
 
-**The Adequate Answer.** The output is fine — not good, not wrong, and fine passes review. So
+**The Adequate Answer.** The output is fine: not good, not wrong. Fine passes review. So
 nobody looks at the context that produced it, and it goes on growing: the only thing that prompts a
 look is a result bad enough to investigate. A capable model absorbs the noise and answers anyway.
 The bill is the only tell.
