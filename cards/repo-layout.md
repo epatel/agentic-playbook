@@ -17,6 +17,7 @@ are read-only.
 | `cards/` | These reference cards. | Yes, when a convention changes — then see below |
 | `scripts/`, `Makefile` | The book build: collect the chapters, render a PDF. See [building-the-book](building-the-book.md). | Yes |
 | `build/` | Build output. | **No — generated, gitignored, never committed** |
+| `options/` | Proposals and assessments the author has not yet decided on, one file each. | Yes, but **gitignored**: nothing in it is shared or published until an option is taken up |
 | `.claude/skills/` | Symlinked agent skills. | Rarely |
 
 ## The two frozen things
