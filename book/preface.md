@@ -19,8 +19,8 @@ nobody has a citation.
 So the book is plays-first. Roughly three-fifths of it is named, self-contained moves with a fixed
 shape: the problem, the play, a worked example, the way it goes wrong, and a checklist. You can open
 it at any play, act on it that afternoon, and never read the pages on either side. The argument
-behind the plays fits in three short chapters at the front. A book called *Playbook* that spends
-half its length clearing its throat has misunderstood its own title.
+behind the plays takes three short chapters at the front. A book called *Playbook* that spends half
+its length clearing its throat has misunderstood its own title.
 
 The evidence is weaker than the discourse suggests, and the book says so. Nearly every published
 study of "AI coding productivity" measures autocomplete or chat, not agents. Several of the

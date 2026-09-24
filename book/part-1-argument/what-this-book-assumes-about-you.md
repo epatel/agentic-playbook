@@ -1,7 +1,7 @@
 # What this book assumes about you
 
-This book is for developers who already use agents on real work and were never told how. It
-assumes you write code and can judge a diff. It does not assume you like any of this, or that
+The book assumes only three things: you write code, you can judge a diff, and you already use agents
+on real work without anyone having told you how. It does not assume you like any of this, or that
 anybody is ahead of you.
 
 You have run an agent on real work this week. Not a demo and not a toy repository: something with a
@@ -103,8 +103,8 @@ would be needed at once" outlives the tool it was first written for. Where a fig
 disagree in this book, trust the shape and go and check the figure.
 
 Your own practice goes stale the same way. When the model changes, re-test the parts that rest on
-it. Also retry one thing the team still does the easy way, because the ceiling may have moved too.
-A team that only re-tests keeps up. One that also retries climbs.
+it. Also retry one thing the team still does the easy way, because the ceiling may have moved. A
+team that only re-tests keeps up. One that also raises the bar climbs.
 
 ## Start wherever your week hurts
 

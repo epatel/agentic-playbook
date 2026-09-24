@@ -126,8 +126,8 @@ Date the parts that rest on the model, so you know to re-test them when it chang
 the bar, because nothing else around you holds still either. This book practises the habit, and
 [*What this book assumes about you*](what-this-book-assumes-about-you.md) says how.
 
-It is not the consensus; nobody has one to offer. It is one working set of practices, written in
-enough detail to disagree with precisely. The reason to write it down is the same reason somebody
+This book is not the consensus; nobody has one to offer. It is one working set of practices, written
+in enough detail to disagree with precisely. The reason to write it down is the same reason somebody
 eventually wrote down what a good commit message looks like. Not because the answer was obvious.
 Because writing it down makes disagreeing with it cheap, and lets you notice when it stops being
 true.

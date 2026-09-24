@@ -1,19 +1,19 @@
 # Harness
 
-The *harness* is where the agent's work starts being checked from outside the agent. It is the loop
-wrapped around the model: it reads the output, runs the tool calls, feeds the results back, and
-decided beforehand which tools existed at all. This suite is for anyone who configures that loop or
-adds to it.
+Checking the agent's work outside the agent is the book's second move, and it starts in the
+*harness*. It is the loop wrapped around the model: it reads the output, runs the tool calls, feeds
+results back, and decides beforehand which tools exist. This suite is for whoever configures that
+loop or extends it.
 
-Most arguments about agentic coding are about models: which one is better at Go, which one shipped
-last week, which one somebody's colleague swears by. Teams change models the way they change desk
-chairs. Then they run them inside a harness nobody has looked at since the afternoon it was
-installed.
+Most arguments about agentic coding are about models: which one is better at Go, which one
+somebody's colleague swears by. Teams change models the way they change desk chairs. Then they run
+them inside a harness nobody has looked at since the afternoon it was installed.
 
-The suite has one idea: everything you add to a harness extends what the agent can do and what it
-can do wrong, in the same purchase. A tool it can call is a tool it can call at the wrong moment. A
-procedure you package is one it will follow while you are at lunch. The design question is not only
-what the agent can now reach, but what still holds when that reach is used badly.
+Everything you add to a harness extends what the agent can do and what it can do wrong, in the same
+purchase. A tool it can call is a tool it can call at the wrong moment. A procedure you package is
+one it will follow while you are at lunch. The design question is what still holds when the added
+reach is used badly. The answer is whatever the harness enforces, the one check that does not depend
+on the agent's own account.
 
 [*Choose your harness*](choose-your-harness.md): the layer you already run and mostly did not
 choose. What a harness is made of, the three levels of owning one (configure it, choose another,

@@ -1,12 +1,12 @@
 # Inviting non-developers in
 
 The third wave is the suspicion that the request queue between developers and everyone else was a
-consequence of typing, and that typing has stopped being the expensive part. This chapter is a
-forecast, for teams weighing whether to let colleagues who do not write code make changes. A
-designer notices that the empty state on the settings page says something slightly wrong. They know
-exactly what it should say. They also know that saying so costs a ticket, a grooming session,
-somebody's sprint, and three weeks. So a good proportion of the time they decide it is fine. This is
-the normal operation of a healthy team, and everyone has made peace with it.
+consequence of typing, and that typing has stopped being the expensive part. A team weighing whether
+to let colleagues who do not write code make changes is betting on that suspicion, and so is this
+chapter. A designer notices that the empty state on the settings page says something slightly wrong.
+They know exactly what it should say. They also know that saying so costs a ticket, a grooming
+session, somebody's sprint, and three weeks. So a good proportion of the time they decide it is
+fine. This is the normal operation of a healthy team, and everyone has made peace with it.
 
 ## Co-pilots make the change; developers make it safe
 
@@ -54,10 +54,10 @@ Four conditions make it safe, in rough order of how much they buy.
    or does not. This is the same requirement as [*Make the agent prove
    it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md). Here it does double
    duty: it tells the contributor they are done, and it lets the reviewer be brief.
-3. **An agent file written in their vocabulary, not yours.** The project context file that serves
-   your team is full of words like "migration" and "handler". A contributor working on copy needs to
-   know where strings live, what the tone rules are, and which three files they must not touch. That
-   is a second agent file scoped to their surface, and writing it is the actual work of this wave.
+3. **An agent file written in their vocabulary, not yours.** The agent file that serves your team is
+   full of words like "migration" and "handler". A contributor working on copy needs to know where
+   strings live, what the tone rules are, and which three files they must not touch. That is a
+   second agent file scoped to their surface, and writing it is the actual work of this wave.
 4. **A named person who signs off.** Not a process, a person, in the sense [*Decide who signs
    off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) means it: somebody who can
    explain the change, and who may decline it on volume alone without owing an explanation.

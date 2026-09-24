@@ -3,10 +3,12 @@
 Agents are reliably bad at five things: finishing long tasks, getting unfamiliar code right,
 security that depends on where data goes, extending their own work, and telling a goal from its
 measurement. Every tool sold to developers arrives with a list of what it is good at and a silence
-where the other list should be. This part is the other list. It is shorter than the sceptics claim
-and longer than the release notes imply. None of it is a reason to stop: every play in this book
-assumes you use these tools every day and intend to keep doing so. But a practice built on the
-marketing version of the capability will be built in the wrong shape.
+where the other list should be. This part is the other list: what happens when one of the book's
+three moves is skipped, and the work is not written down, not checked outside the agent, or not
+re-tested. It is shorter than the sceptics claim and longer than the release notes imply. None of it
+is a reason to stop: every play in this book assumes you use these tools every day and intend to
+keep doing so. But a practice built on the marketing version of the capability will be built in the
+wrong shape.
 
 Almost nothing published about "AI coding productivity" is about agents. Every randomised trial in
 the field measures autocomplete, inline completion, or chat. What follows draws on benchmark
@@ -26,11 +28,11 @@ the threshold to full completion and ten of the fifteen score zero. Near-misses 
 agent hit something it could not do.
 
 The authors read the bottleneck as long-horizon completion rather than local reasoning. That is a
-polite way of saying almost nothing in those runs was beyond the model, and the runs still did not
-finish. You know the small version from your own week: the run that ends at ninety per cent, the
-continuation that also ends at ninety per cent, and no turn that presents itself as the one to stop
-on. [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md)
-names that as the Permanent Near Miss and gives it a stop rule.
+polite way of saying most unresolved runs ran out of time rather than hitting a wall. You know the
+small version from your own week: the run that ends at ninety per cent, the continuation that also
+ends at ninety per cent, and no turn that presents itself as the one to stop on. [*Scope a task to
+fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) names that as the
+Permanent Near Miss and gives it a stop rule.
 
 ## Scores on public code overstate what an agent does on yours
 

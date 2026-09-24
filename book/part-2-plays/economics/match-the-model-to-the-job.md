@@ -12,7 +12,7 @@ trust less, and your table of per-token prices predicts neither.
 
 Route on cost per accepted outcome, and settle it by measurement rather than by price list.
 
-1. **Use the whole formula.** Cost per verified outcome is the price per token, multiplied by the
+1. **Use the whole formula.** Cost per accepted outcome is the price per token, multiplied by the
    tokens consumed, multiplied by one over the rate at which the output is usable. A tier change
    moves the first factor by design and the other two by surprise.
 2. **Tier down the fan-out, not the reasoning.** The vendors publish one split, and it is the only

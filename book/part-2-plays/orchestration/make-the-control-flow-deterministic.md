@@ -76,7 +76,7 @@ The rewrite kept n8n for the edges and moved the judgement into `scripts/upgrade
 for service in services:                 # nineteen short runs, not one long one
     apply_bump(service, gem, version)
     result = run_tests(service)
-        if result.failed:
+    if result.failed:
         agent_patch(service, result, max_steps=8)   # the only model step
         result = run_tests(service)                 # the gate runs again, in code
     if result.passed and not service.release_branch:

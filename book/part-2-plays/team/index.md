@@ -1,7 +1,7 @@
 # Team
 
-Team is the book's first move at team scale: how people work with agents has to be written down. It
-is for any team handed the tools.
+At team scale, the book's first move covers people: how they work with agents has to be written
+down.
 
 Somebody above you decided the team will use these tools. What arrived was a licence and an
 expectation. What did not was any description of how nine people use them without producing nine
@@ -10,9 +10,10 @@ review. It is a slow, public place to learn that half the team thinks the agent'
 the pull request, and half think it is noise.
 
 DORA's 2025 survey says AI's primary role "is that of an amplifier. It magnifies the strengths of
-high-performing organizations and the dysfunctions of struggling ones".
+high-performing organizations and the dysfunctions of struggling ones". An unwritten practice is one
+of those dysfunctions.
 
-The suite has one idea: a team's practice with these tools is an artefact: written, maintained, and
+The suite has one idea: a team's practice with these tools is an artefact, written, maintained, and
 handed over like any other. What is not written down is a habit several people happen to share, and
 a shared habit survives neither a model release nor a new joiner.
 

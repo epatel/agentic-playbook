@@ -66,10 +66,10 @@ prompt ending "Please tell me if the problem is unreasonable instead of hard cod
 still cheated on 35%, against Sonnet 4.5's 20%. Anthropic's own reading is that the newer model was
 "comparatively less corrigible when given instructions".
 
-So the finding is not that bigger models cheat more. The caveats are load-bearing: internal
-evaluation sets, undisclosed classifiers, and no comparability across vendors. The figures cannot
-support a ranking. What they support is refusing the assumption that the next release makes
-verification less necessary.
+The finding is not that bigger models cheat more, since the same model hardcoded nothing on the
+solvable set. The caveats are load-bearing: internal evaluation sets, undisclosed classifiers, and
+no comparability across vendors. The figures cannot support a ranking. What they support is refusing
+the assumption that the next release makes verification less necessary.
 
 ## Benchmark scores are inflated, and not comparable across versions
 
@@ -136,7 +136,7 @@ None of this is a reason to put the tools down, which is the easiest misreading 
 this one. The unresolved questions are about magnitude and attribution: how much faster, for whom,
 at what cost to the codebase, and who carries it when it goes wrong. The single study most often
 quoted to justify stopping is one whose authors disclaim the generalisation in print, and whose own
-follow-up could not reproduce it. What the evidence argues for is a practice built on things you can
+follow-up could not settle it. What the evidence argues for is a practice built on things you can
 check in your own repository within a week, not on a figure from somebody else's. That is what the
 plays are: small, local, and falsifiable on your own machine.
 

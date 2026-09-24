@@ -1,8 +1,8 @@
 # Orchestration
 
-Orchestration is where the book's third move matters most: whatever you build around the agent must
-be re-tested, and raised or removed, as models move. It is for anyone about to run several agents,
-or script one agent's steps.
+The book's third move bites hardest in orchestration: whatever you build around the agent must be
+re-tested, and raised or removed, as models move. If you are about to run several agents, or script
+one agent's steps, that machinery is yours.
 
 Something in this field rewards adding agents. One run that took nine minutes and worked is a good
 afternoon. Five in parallel is a diagram, and a diagram can be shown to people. Oddly, the vendors
@@ -12,10 +12,10 @@ agent's capabilities before splitting it. Cognition published *Don't Build Multi
 ten months later allowed exceptions only where writes stay single-threaded. The vendors are more
 conservative than their users, and the measured comparisons more conservative still.
 
-The suite has one idea: every piece of orchestration is machinery built around a model, and each
-piece encodes an assumption about something the model cannot do alone. Those assumptions expire. So
-the question is rarely whether to orchestrate. It is whether you can delete the machinery cheaply
-when the assumption stops holding, or whether the rest of the system has grown around it.
+Every piece of orchestration is machinery built around a model, and each piece encodes an assumption
+about something the model cannot do alone. Those assumptions expire. So the question is rarely
+whether to orchestrate. It is whether you can delete the machinery cheaply when the assumption stops
+holding, or whether the rest of the system has grown around it.
 
 [*Decompose into subagents*](decompose-into-subagents.md): orchestration across context. When
 handing work to a separate window pays, what a summary-only return costs, and when delegation is

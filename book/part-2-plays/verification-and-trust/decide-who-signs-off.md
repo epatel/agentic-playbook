@@ -22,7 +22,7 @@ Decide it in advance, in writing, as a team. The question does not get easier du
 2. **Write the argument against your own rule into the same document.** "The human owns the diff" is
    unanimous in policy and contested in the literature. Elish's moral-crumple-zone argument is that
    responsibility for an automated system's failure collapses onto the nearest human operator,
-   protecting the system at that person's expense. Nobody has established which is happening here.
+   protecting the system at that person's expense. Which of the two is happening here is still open.
    A team that privately reads the rule as a scapegoating device routes around it.
 3. **Give the owner the right to refuse on volume alone.** Sign-off without standing to decline is a
    signature, not a decision. Google's review guidance grants reviewers that authority explicitly,

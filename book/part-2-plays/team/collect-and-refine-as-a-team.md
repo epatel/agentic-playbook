@@ -30,7 +30,7 @@ loads, take out as much as you put in, and raise one bar each time.
    vocabulary stays invisible to everyone else. The description comes from a colleague, in the words
    their own request would use.
 5. **Move it to where everyone loads it, then check on someone else's machine.** Shared skills go in
-   the repository's skills directory, shared conventions in the committed context file, personal
+   the repository's skills directory, shared conventions in the committed agent file, personal
    material outside it. Instructions that silently fail to load are the Agent File That Never
    Arrived ([*Write the agent file that actually gets
    read*](../context/write-the-agent-file-that-actually-gets-read.md)).
@@ -53,8 +53,8 @@ does not survive being generalised, and builds that fail on code that passed las
 
 ## Worked example
 
-`lodestone` was a claims-processing platform with C# services behind a TypeScript front end. Its
-nine engineers had used agents for about a year and had never compared notes on purpose. The first
+`lodestone`, a claims-processing platform with C# services behind a TypeScript front end, had nine
+engineers who had used agents for about a year and had never compared notes on purpose. The first
 harvest ran for an hour and covered one job: writing a claims adapter for a new insurer's feed.
 
 Three people described their last one. Two accounts were nearly identical. The third was much

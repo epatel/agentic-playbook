@@ -69,8 +69,8 @@ machine's plan under it makes the author's own summary optional.
 The clock ran nine minutes. Nobody moved. The decider, named at the top of the meeting, was the
 engineer who had run the previous two agreements. The call: the plan may be pasted below the
 description, marked, and the description is still written by a person. The page recorded the losing
-case in one line: *plans are cheap reviewer context; revisit if reviewers start skipping the
-description.*
+case in one line: *plans are cheap reviewer context; revisit if reviewers stop reading the
+plans.*
 
 Nobody liked it and everybody could live with it, which is what a provisional call usually feels
 like. It held for five weeks. At the next model upgrade the plans got long enough that two reviewers

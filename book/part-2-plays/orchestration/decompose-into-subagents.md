@@ -30,9 +30,9 @@ Fan out to read. Keep every write in one place.
 4. **Fix the return format, and choose one you can check by other means.** A worker that returns a
    table with a count at the bottom gives you something to compare against a `ripgrep` run. A worker
    that returns prose gives you something to believe.
-5. **Write the convention down before you delegate.** A subagent inherits your project context files
-   and none of your conversation. A rule you established in chat forty turns ago is silently absent;
-   the same rule in `AGENTS.md` is loaded. Nothing errors either way.
+5. **Write the convention down before you delegate.** A subagent inherits your agent files and none
+   of your conversation. A rule you established in chat forty turns ago is silently absent; the same
+   rule in `AGENTS.md` is loaded. Nothing errors either way.
 6. **Spend the tokens on one agent first.** Multi-agent advantages shrink or disappear when thinking
    tokens are held constant. One protocol-matched comparison is available: six systems, GPT-4.1,
    June 2026. Five of them underperformed a single-agent baseline by between two and eleven

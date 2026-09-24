@@ -39,10 +39,10 @@ Four tests before you delegate, and two habits that keep them honest.
 The constraint that binds is not what the agent can do. The largest enterprise study available
 covered 802 developers and 196,212 pull requests, from January 2024 to April 2026. A doubling
 mandate worked on its own terms: throughput reached 2.09× baseline, and nearly all pull requests
-became agent-authored. Merge and revert rates stayed flat. Human review coverage moved instead, from
-89% of pull requests to 68%, and the load on each remaining reviewer doubled. End-to-end time, which
-the mandate existed to compress, rose: agent-authored pull requests took 22% longer than comparable
-human ones. The interior of that study is in [*Where the time actually
+became agent-authored. Merge rates stayed flat and revert rates fell slightly. Human review coverage
+moved instead, from 89% of pull requests to 68%, and the load on each remaining reviewer doubled.
+End-to-end time, which the mandate existed to compress, rose: agent-authored pull requests took 22%
+longer than comparable human ones. The interior of that study is in [*Where the time actually
 goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md). Anthropic put the general
 case plainly in December 2024 and has not retracted it: "For many applications, however, optimizing
 single LLM calls with retrieval and in-context examples is usually enough." The exchange rate is

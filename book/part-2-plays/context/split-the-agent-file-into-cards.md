@@ -70,10 +70,10 @@ research notes behind them, and a build script. Agents wrote it in parallel, on 
 items, each starting from an empty context window with no memory of the last. So the always-loaded
 tier was the only thing every author was guaranteed to have read.
 
-The alternative was one file holding every convention the repo has: the column limit, where
-research notes go, what shape a play takes, how the PDF is rendered, which directories are frozen.
-It was declined early, because a task writing a chapter would pay for the build instructions in
-every turn. What loads instead is the index:
+The alternative was one file holding every convention the repo has: the column limit, where research
+notes go, what shape a play takes, how the PDF is rendered, which directories are frozen. It was
+declined early, because a task writing a chapter would pay for the build instructions in every turn.
+What loaded instead was the index:
 
 ```markdown
 ## Context cards
@@ -125,10 +125,11 @@ Five links between cards, in three files. Reading them, all five turn out to be 
 sentence around each one is complete, and an agent that never follows the link still acts
 correctly. That judgement is the part the command cannot make.
 
-What did drift is size. `building-the-book` is 316 lines, four times its neighbours, because it
-absorbed every follow-up that had nowhere else to go. It is now a small version of the thing the
-arrangement exists to prevent. Nothing signalled it, because in the index it is still one line.
-That is a good argument for occasionally reading your own cards in the order the agent does.
+What did drift was size. `building-the-book` had grown to 316 lines, four times its neighbours,
+because it absorbed every follow-up that had nowhere else to go. It had become a small version of
+the thing the arrangement exists to prevent. Nothing signalled it, because in the index it was still
+one line. That is a good argument for occasionally reading your own cards in the order the agent
+does.
 
 ## Failure mode
 

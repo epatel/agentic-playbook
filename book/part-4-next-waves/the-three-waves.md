@@ -1,11 +1,10 @@
 # The three waves
 
-This part is a forecast, labelled as one. The bet is that two more waves follow the one the rest of
-this book describes: the second changes the codebase, and the third changes who is in the room. It
-is for readers with the first wave in hand, preparing for the next. Forecasting in this field has a
-poor record and an enthusiastic press. The safe move would be to stop where the sourced material
-stops and leave the future to people who enjoy being quoted. This part is the unsafe move, kept
-short.
+This part is a forecast, labelled as one, for readers who have the first wave in hand. The bet is
+that two more waves follow the one the rest of this book describes: the second changes the codebase,
+and the third changes who is in the room. Forecasting in this field has a poor record and an
+enthusiastic press. The safe move would be to stop where the sourced material stops and leave the
+future to people who enjoy being quoted. This part is the unsafe move, kept short.
 
 The rest of this book describes one situation: a developer, a codebase written for people, and a set
 of tools to get good at. That is the first wave. It is where most teams are, where the evidence is,
@@ -68,7 +67,8 @@ non-developers in*](inviting-non-developers-in.md) with four things in mind.
   name the measurement that does not exist yet and would settle the question, and the signal worth
   watching in the meantime.
 - **Each chapter ends on the part worth doing anyway:** the move that pays for itself whether or not
-  the wave arrives. If you read one section per chapter, read that one.
+  the wave arrives. If you read one section per chapter, read *Do it on contact, whether or not the
+  wave arrives* and *Build the four conditions for your own team first*.
 
 The material underneath both is old enough to be reassuring. A codebase organised so that one
 capability lives in one place, behaviour that is visible where it happens, and a check fast enough

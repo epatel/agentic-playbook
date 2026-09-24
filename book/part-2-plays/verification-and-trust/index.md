@@ -1,7 +1,7 @@
 # Verification and trust
 
-Verification is the book's second move at its plainest: check the agent's work outside the agent. It
-is for anyone merging agent-written code.
+Anyone merging agent-written code meets the book's second move at its plainest: check the agent's
+work outside the agent.
 
 A 2026 study of a quarter of a million pull requests found a machine writing the code and a machine
 reviewing it, a median of 1.2 minutes apart. The study reports no precision, no recall, and no merge

@@ -24,11 +24,11 @@ a trigger.
 3. **Agree the items with team-visible consequences.** Usually six: which context files are shared
    and where personal ones go, and whether agent authorship is disclosed. Then come what "done"
    means for an agent-authored change, what a reviewer may decline, who can see what the tools
-   cost, and what the team never delegates. Teams omit the fourth, and the measurements say it costs
-   most. Under a doubling mandate, review coverage falls and each remaining reviewer's load doubles
-   ([*Where the time actually
+   cost, and what the team never delegates. Teams omit the reviewer's right to decline, and the
+   measurements say it costs most. Under a doubling mandate, review coverage falls and each
+   remaining reviewer's load doubles ([*Where the time actually
    goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md)).
-4. **Write it in the repository, at one page.** Put it beside the shared context file, not in a wiki
+4. **Write it in the repository, at one page.** Put it beside the shared agent file, not in a wiki
    nobody has open. A page that fits on a screen gets re-read. A longer one gets cited, not
    followed.
 5. **Give it a trigger rather than a date, and a standing exception.** "Revisit this quarterly"
@@ -60,9 +60,8 @@ anyway. A skeleton is in [*Copy-paste templates*](../../appendices/copy-paste-te
 `lodestone`, a claims-processing platform with C# services behind a TypeScript front end,
 maintained by nine engineers across two time zones. Reading the last twenty agent-authored pull
 requests turned up four live disagreements and no rules at all. Sorting them took longer than
-agreeing them. Two were about what a change had to carry, and one was about review load. The last
-turned out to be about which model people preferred, so it went in the personal column and stopped
-being an argument.
+agreeing them. Two were about what a change had to carry, and one was about review load. The last,
+whether the agent's plan belonged in the description, would not settle on the page at all.
 
 The result was one file, `docs/agent-working-agreement.md`:
 
@@ -113,12 +112,12 @@ Last changed because: our August model upgrade made the one-file-per-run rule po
   somebody cites this page and it turns out to be wrong.
 ```
 
-Two of the four disagreements were settled by being written down and did not come back. The third,
-whether the agent's plan belonged in the description, landed as "pasted below it, marked". Nobody
-liked it and everybody could live with it, and it is the line most likely to move at the next
-trigger. The fourth did not survive contact with the page: "we always run the tests before asking
-for review" described what four people did and what five people intended to do. It was rewritten as
-a condition on the change, not an instruction to the person.
+Two of the four disagreements were settled by being written down and did not come back. The third
+did not survive contact with the page: "we always run the tests before asking for review" described
+what four people did and what five people intended to do. It was rewritten as a condition on the
+change, not an instruction to the person. The fourth, the plan, went to a named decider ([*Settle
+what the team cannot agree*](settle-what-the-team-cannot-agree.md)). It landed as "pasted below it,
+marked", and it is the line most likely to move at the next trigger.
 
 The page shown is version three. Versions one and two were written in a wiki, which is where they
 still are.

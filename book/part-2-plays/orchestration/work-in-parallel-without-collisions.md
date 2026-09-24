@@ -33,7 +33,7 @@ Partition the repository before you start, and treat integration as the part tha
    > Captured September 2026, git 2.50.1.
 
    ```bash
-      $ comm -12 \
+   $ comm -12 \
      <(git diff --name-only "origin/main...feat/invoices" | sort) \
      <(git diff --name-only "origin/main...feat/rate-limit" | sort)
    config/routes.rb

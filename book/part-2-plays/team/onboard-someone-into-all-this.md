@@ -4,10 +4,10 @@
 
 The new engineer starts on Monday. The repository clones, the tests run, and the architecture note
 is three years old but still roughly true. That part of onboarding works. What it no longer covers
-is everything beside it: the committed context file, five shared skills, a one-page working
-agreement, and a review convention nobody wrote down. Nor does it cover the collective sense of
-which tasks this team does not hand to an agent. They will be producing plausible pull requests by
-Wednesday. Plausible now arrives before understanding, and nobody has built a check for the gap.
+is everything beside it: the committed agent file, five shared skills, a one-page working agreement,
+and a review convention nobody wrote down. Nor does it cover the collective sense of which tasks
+this team does not hand to an agent. They will be producing plausible pull requests by Wednesday.
+Plausible now arrives before understanding, and nobody has built a check for the gap.
 
 ## The play
 
@@ -86,7 +86,7 @@ alternatives.
 
 **The Fluent Stranger.** The new joiner is productive immediately and the output is good. They know
 the harness better than half the team, their pull requests are the right size, and the code follows
-conventions they picked up from the shared context file on Monday. What they cannot have yet is a
+conventions they picked up from the shared agent file on Monday. What they cannot have yet is a
 sense of which parts of this system are load-bearing and which tests lie. Nor can they tell which of
 the agent's confident suggestions are wrong in a way specific to this codebase. Nobody notices,
 because the work looks like everyone else's, which is precisely what an agent is good at producing.

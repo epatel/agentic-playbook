@@ -13,7 +13,7 @@ worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
   sense throughout. The distinction is load-bearing when reading evidence, because almost all
   published research on "AI coding productivity" measures autocomplete or chat rather than agents.
 
-- **Agent file.** The project context file an agent reads at the start of a session: `AGENTS.md`,
+- **Agent file.** The context file an agent reads at the start of a session: `AGENTS.md`,
   `CLAUDE.md`, or their equivalents. It is context rather than configuration: it competes for the
   model's attention alongside the task and every file opened, and it does not constrain anything.
   See [*Write the agent file that actually gets
@@ -41,6 +41,11 @@ worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
   conversation, file contents, and tool output together. Everything the agent knows in a given turn
   is inside it, and everything inside it was paid for. Filling it is easy; the plays in
   [*Context*](../part-2-plays/context/index.md) are about not doing so.
+
+- **Exchange rate.** What a play asks you to give up in return for what it buys: a slower first
+  pass, four task briefs instead of one, a file somebody has to maintain. Every play states its own
+  in *The play*, as [*What this book assumes about
+  you*](../part-1-argument/what-this-book-assumes-about-you.md) promises.
 
 - **Fan-out.** Running several agents on parts of one job at the same time. Distinct from a larger
   compute budget, and easy to confuse with one: before concluding a fan-out helped, give a single

@@ -112,9 +112,9 @@ feedback arrives in a day, not in an incident review.
 **The Context Landfill.** Every useful fact about the project went into the agent file, because each
 one was useful on the day it was added, and nothing has ever been removed. The file did not become
 wrong. It became flat: the convention that matters and the note about last spring's CI runner arrive
-with the same weight. The agent follows the current convention roughly half the time. The tells
-are an agent file that has only ever grown, and two instructions that contradict each other and have
-gone unnoticed because nobody reads the file end to end.
+with the same weight. The agent follows the current convention inconsistently. The tells are an
+agent file that has only ever grown, and two instructions that contradict each other and have gone
+unnoticed because nobody reads the file end to end.
 
 **The Agent File That Never Arrived.** The instructions are correct, committed, and not loaded. The
 agent behaves like a competent stranger: reasonable code, house conventions absent. The obvious

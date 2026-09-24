@@ -57,8 +57,8 @@ you cannot act on, because thirtyfold variance does not yield to attention.
 ## Worked example
 
 `granary`, a Kotlin service that ingests warehouse stock feeds from forty suppliers, had the
-problem above: quiet days cost more than busy ones. One session summary, worked line by line,
-settled it.
+problem above: quiet days cost more than busy ones. What explained it was the shape of one
+published session summary, worked line by line.
 
 The numbers below are not `granary`'s, and not this book's. They are the sample session in
 Anthropic's own Claude Code cost documentation. It is the only published session breakdown whose

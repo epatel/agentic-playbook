@@ -90,7 +90,7 @@ push origin main` and `git 'push' origin main` fell outside the other. The vendo
 documentation said so in September 2026: a Bash rule "covers the invocation Claude usually produces
 and isn't a security boundary around the program".
 
-The rules stayed as a record of intent, and the boundary moved down. It blocked a push by
+The rules stayed as a record of intent, and the boundary moved down. The sandbox blocked a push by
 withholding the token, though deletes in the tree still ran:
 
 ```json

@@ -1,12 +1,12 @@
 # Refactoring a codebase for agents
 
 The second wave is the suspicion that how well agents work in a codebase is a property of the
-codebase, that the property is nameable, and that it can be changed on purpose. This chapter is a
-forecast, for teams deciding whether to restructure for agents. Agents seem noticeably better in
-some codebases than in others. In practitioners' accounts the difference tracks less than you would
-expect: not obviously the age, or whether the team is any good. The same model, given the same
-quality of agent file, will produce a clean change in one repository and a plausible mess in another
-down the corridor.
+codebase, that the property is nameable, and that it can be changed on purpose. Teams deciding
+whether to restructure for agents should read this chapter as a forecast. Agents seem noticeably
+better in some codebases than in others. In practitioners' accounts the difference tracks less than
+you would expect: not obviously the age, or whether the team is any good. The same model, given the
+same quality of agent file, will produce a clean change in one repository and a plausible mess in
+another down the corridor.
 
 ## The constraint behind code organisation has swapped ends
 
@@ -102,12 +102,12 @@ naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md), waitin
 
 ## What would change this position
 
-Nobody has measured most of it. There is no published comparison of agent success rates between
-feature-first and layer-first versions of the same codebase. Nobody has measured what explicit
-control flow is worth in tokens or in correctness. No study of context files as such establishes
-that a shorter one produces better output. The nearest measurement is of context size in general, in
-[*The failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md).
-The mechanism is plausible and the direct evidence is an absence.
+Nobody has measured most of it, including what explicit control flow is worth in tokens or in
+correctness. There is no published comparison of agent success rates between feature-first and
+layer-first versions of the same codebase. No study of context files as such establishes that a
+shorter one produces better output. The nearest measurement is of context size in general, in [*The
+failure modes worth naming*](../part-3-where-it-struggles/the-failure-modes-worth-naming.md). The
+mechanism is plausible and the direct evidence is an absence.
 
 Two things would settle it, and a team with a spare week could run both without a laboratory. Take a
 real repository and restructure one subsystem feature-first. Run the same twenty tasks against both

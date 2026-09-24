@@ -33,9 +33,9 @@ path and a reproducer ahead of the diff.
 The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
 uses these tools has watched it happen, and until recently nobody had measured it. A 2026 study
 decomposing 16,758 agent trajectories found the rate climbing with run length: 21.7% of the shortest
-quartile against 63.7% of the longest. Nearly all the length dependence comes from thrashing. A
-near-correct patch corrupted in place happens at any length, so short runs reduce this failure
-without abolishing it.
+quartile against 63.7% of the longest. The study splits the failure in two: thrashing, which drives
+nearly all of that growth, and a near-correct patch corrupted in place, which happens at any length.
+So short runs reduce this failure without abolishing it.
 
 The tell is in the transcript rather than the diff, and the transcript is on disk. A test that went
 green and later went red, a file edited, reverted, and edited again, or a final change that rewrites
@@ -113,8 +113,8 @@ rate against 20.0%. Among the four models that expose reasoning traces, collapse
 while the correct position remains represented rather than after it disappears". The model did not
 lose the answer. It stopped asserting it.
 
-Nobody has measured an agent abandoning a correct patch after a reviewer pushes back. This name
-rests on recognition, not evidence.
+The agentic version, an agent abandoning a correct patch after a reviewer pushes back, is
+unmeasured. This name rests on recognition, not evidence.
 
 The tell is a rewrite with no argument attached, arriving faster than a considered disagreement
 would.
@@ -142,7 +142,7 @@ read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) 
 
 Every change is good enough, and none is better than the last. Plausible output is cheap, so the
 team's bar settles where the output lands. That is a local optimum, and the ground under it moves.
-Better models will not lift it: Veracode's security pass rate stayed flat across two years of
+Better models have not lifted it: Veracode's security pass rate stayed flat across two years of
 releases ([*What agents are reliably bad at*](what-agents-are-reliably-bad-at.md)). In a small 2023
 study, people writing with an AI assistant wrote less secure code and felt surer of it.
 
@@ -168,7 +168,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
 | **the Wrong Edition** | Idiomatic code for a version of a dependency you do not run | This chapter |
 | **the Comfortable Peak** | Every change good enough, none better, and nothing made stricter in months | This chapter |
-| **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
+| **the Context Landfill** | An agent file that only ever grew; the current convention followed inconsistently | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
 | **the Adequate Answer** | Output nobody objects to, from a context nobody examines, because only a bad result prompts a look | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
