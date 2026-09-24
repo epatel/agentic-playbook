@@ -2,11 +2,11 @@
 
 ## Problem
 
-Three agents, three branches, three green suites. The merges are clean — no markers, nothing to
+Three agents, three branches, three green suites. The merges are clean: no markers, nothing to
 resolve, a morning that finally felt like leverage. The first error arrives ninety minutes after the
 deploy, from a call site that was correct on every branch it existed on and is wrong in the tree you
 shipped. What you saved in wall clock you now spend working out which of three tidy diffs is
-responsible, and the tidiness is what makes it hard: none of them looks like the one that broke
+responsible. The tidiness is what makes it hard: none of them looks like the one that broke
 anything.
 
 ## The play
@@ -18,8 +18,8 @@ Partition the repository before you start, and treat integration as the part tha
    something outside these paths, stop and tell me. Without it, an agent that needs one line
    elsewhere takes it, and the partition you designed is a partition only you observed.
 2. **Give each agent its own checkout, and budget for the environment.** `git worktree
-   add ../meridian-invoices -b feat/invoices` is the ergonomic option — one repository, one `git
-   worktree list`, shared refs. It is not the cheap one: a worktree is a fresh checkout, so
+   add ../meridian-invoices -b feat/invoices` is the ergonomic option: one repository, one `git
+   worktree list`, shared refs. It is not the cheap one. A worktree is a fresh checkout, so
    dependencies install per tree and untracked files such as `.env` are absent. A `.worktreeinclude`
    file copies gitignored files across; a package manager with a global store handles the rest.
    Ports and databases are not isolated by any of this.
@@ -46,14 +46,14 @@ Partition the repository before you start, and treat integration as the part tha
    merged tree.** Per-branch green is evidence about each branch in isolation, the state that no
    longer exists once the second one lands.
 6. **Do not mistake a worktree for a boundary.** Worktrees share refs, config, the stash, and
-   `.git/hooks` — so a hook written from inside one runs in the parent repository, as you, the next
-   time you trigger it. Harnesses add their own blocks on top of git's silence; Claude Code 2.x
-   refuses edits aimed at the main checkout and blocks the redirects an agent would otherwise find —
+   `.git/hooks`, so a hook written from inside one runs in the parent repository, as you, the next
+   time you trigger it. Harnesses add their own blocks on top of git's silence. Claude Code 2.x
+   refuses edits aimed at the main checkout and blocks the redirects an agent would otherwise find:
    `git -C`, `--git-dir`, `GIT_DIR`, `GIT_WORK_TREE`, and a `cd` before running git. If you need a
    real boundary, you need a container or a VM.
 
 Across roughly 33,600 agent-authored pull requests sampled in mid-2026, branch pairs from the same
-agent conflicted textually about 20% of the time and pairs from different agents about 42% — and the
+agent conflicted textually about 20% of the time and pairs from different agents about 42%. The
 authors call that a conservative lower bound, because the method counts only what git notices
 ([`parallel-agents-and-collisions.md`](../../../notes/research/parallel-agents-and-collisions.md)).
 Whether parallel agents are faster end to end, counting merge and rework, is substantially
@@ -94,12 +94,12 @@ call site that existed when it started. Agent B, working from the same base, add
 `NoMethodError` ninety minutes later, in a code path the invoice tests did not cover because on
 `feat/invoices` the method was still there.
 
-The fix was procedural rather than clever: `db/migrate/` and `config/routes.rb` were added to the
-agent file as files no agent may touch, and integration became one branch at a time with the full
-suite run on the merged tree. That would have caught the rename, assuming the suite covers that path
-— which, on the day in question, it did not. Partitioning removes the collisions you predicted. The
-residue is what your tests are for, which is a less satisfying conclusion than the one where the
-tooling saves you.
+The fix was procedural rather than clever. `db/migrate/` and `config/routes.rb` went into the agent
+file as files no agent may touch, and integration became one branch at a time with the full suite
+run on the merged tree. That would have caught the rename, assuming the suite covered that path.
+On the day in question, it did not. Partitioning removes the collisions you predicted. The residue
+is what your tests are for, which is a less satisfying conclusion than the one where the tooling
+saves you.
 
 ## Failure mode
 
@@ -107,8 +107,8 @@ tooling saves you.
 never tested by anyone. One agent renamed a method and fixed the call sites that existed; another,
 branched from the same commit, wrote a new one. One tightened a validation rule that another's
 feature depended on being loose. Two wrote the same helper under different names, and nothing at all
-will tell you about that one. The conflicts git can see are the survivable class — they stop you,
-and you fix them in minutes. The class that costs you a deploy is invisible by construction, because
+will tell you about that one. The conflicts git can see are the survivable class: they stop you, and
+you fix them in minutes. The class that costs you a deploy is invisible by construction, because
 each branch is internally consistent and the inconsistency exists only in the union.
 
 The tell is a merge with no conflicts between branches whose changed-file lists overlap, or that

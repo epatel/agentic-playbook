@@ -3,51 +3,51 @@
 ## Problem
 
 The change shipped on Thursday and broke something on Sunday. The commit carries your name on the
-author line and a trailer crediting a model that you did not add and cannot remember configuring.
-You read the diff — you remember reading the diff — and you cannot now reconstruct which parts you
-understood and which parts you accepted because the pipeline was green. The incident review asks who
-approved it. There is an answer, and the cost of it is that the approval and the understanding were
-two separate events, and only one of them is recorded.
+author line, and a trailer crediting a model that you did not add and cannot remember configuring.
+You read the diff; you remember reading the diff. You cannot now reconstruct which parts you
+understood and which you accepted because the pipeline was green. The incident review asks who
+approved it. There is an answer. The trouble is that the approval and the understanding were two
+separate events, and only one of them is recorded.
 
 ## The play
 
 Decide it in advance, in writing, as a team. The question does not get easier during an incident.
 
 1. **State that a named person owns every change, and say what owning it means.** Every project with
-   a written policy lands here: the Linux kernel's `coding-assistants.rst` says agents must not add
+   a written policy lands here. The Linux kernel's `coding-assistants.rst` says agents must not add
    `Signed-off-by` tags, only humans can certify the Developer Certificate of Origin, and the human
-   takes "full responsibility". The test worth stealing is Kubernetes's, because it is checkable —
+   takes "full responsibility". The test worth stealing is Kubernetes's, because it is checkable:
    if you cannot personally explain the change, the pull request is closed
    ([`accountability.md`](../../../notes/research/accountability.md)).
 2. **Write the argument against your own rule into the same document.** "The human owns the diff" is
-   unanimous in policy and contested in the literature: Elish's moral-crumple-zone argument is that
+   unanimous in policy and contested in the literature. Elish's moral-crumple-zone argument is that
    responsibility for an automated system's failure collapses onto the nearest human operator,
-   protecting the system at that person's expense. Nobody has established which is happening here,
-   and a rule the team privately reads as a scapegoating device is one the team routes around.
+   protecting the system at that person's expense. Nobody has established which is happening here.
+   A team that privately reads the rule as a scapegoating device routes around it.
 3. **Give the owner the right to refuse on volume alone.** Sign-off without standing to decline is a
    signature, not a decision. Google's review guidance grants reviewers that authority explicitly,
    and LLVM's version is a test anyone can apply: a contribution should be worth more than the time
    it takes to review it.
 4. **Pick a disclosure string, check what your tools already write, and stop arguing about it.**
-   There is no standard: git accepts any `key: value` trailer and enforces nothing, and the field
+   There is no standard. Git accepts any `key: value` trailer and enforces nothing. The field
    carries `Assisted-by:` at the kernel and Fedora, `Generated-by:` at Apache, and prose in the pull
-   request at Kubernetes. What several agree on is narrower and more useful: the model is not a
+   request at Kubernetes. Several agree on something narrower and more useful: the model is not a
    co-author, because co-authorship implies a rights certification it cannot make. Check your own
-   history first — VS Code shipped a setting appending a Copilot co-author trailer by default in
+   history first. VS Code shipped a setting appending a Copilot co-author trailer by default in
    2026, and reverted it to opt-in after people found it on commits they had written
    ([`accountability.md`](../../../notes/research/accountability.md)).
 5. **Find out what your domain already requires before inventing a policy.** As of September 2026 no
    aviation, automotive, or medical-device regulator had published a position on who may sign off on
-   code a model wrote. Where sign-off is genuinely constrained the constraint predates all of this —
+   code a model wrote. Where sign-off is genuinely constrained, the constraint predates all of this.
    ISO 26262-8 clause 11 already governs software tools used in safety-related development and
-   covers code generators explicitly. A vendor indemnity is not that: it is a conditional promise to
+   covers code generators explicitly. A vendor indemnity is not that. It is a conditional promise to
    defend an intellectual-property claim, silent on defects, outages, and regulators. None of this
    is legal advice; it is what those documents say, on the date they were read.
 
-What you are assigning is not blame, it is the obligation to explain the change to somebody else,
-and nothing else can hold it: no standard records which model produced which hunk. The exchange rate
-is throughput — an owner who can answer for a change is slower than the generation of changes, so
-the team's rate becomes that person's rate, chosen deliberately rather than discovered later.
+What you are assigning is not blame but the obligation to explain the change to somebody else.
+Nothing else can hold it: no standard records which model produced which hunk. The exchange rate is
+throughput. An owner who can answer for a change is slower than the generation of changes, so the
+team's rate becomes that person's rate, chosen deliberately rather than discovered later.
 
 ## Worked example
 
@@ -64,8 +64,8 @@ $ git log --format='%(trailers:only)' -n 400 | grep . | sort | uniq -c | sort -r
 ```
 
 Two thirds of the recent history carried a co-author trailer naming an assistant. Nobody on the team
-had chosen it; an editor default had, and the audit trail had been making an authorship claim for
-four months on the strength of a checkbox. They turned it off and wrote five bullets into
+had chosen it; an editor default had. For four months the audit trail had been making an
+authorship claim on the strength of a checkbox. They turned it off and wrote five bullets into
 `CONTRIBUTING.md`:
 
 ```markdown
@@ -83,10 +83,10 @@ four months on the strength of a checkbox. They turned it off and wrote five bul
 ```
 
 Six weeks later the rule was working and the team was not. Two of five reviewers were doing most of
-the approvals, the queue had grown to a fortnight, and the first correction — adding reviewers —
+the approvals, and the queue had grown to a fortnight. The first correction, adding reviewers,
 spread the same problem across more people. What actually moved was the third bullet, which nobody
-had used yet. Once declining on size became an ordinary thing that happened eleven times in a month,
-the changes arriving got smaller and the queue drained.
+had used yet. Once declining on size became ordinary, happening eleven times in a month, the changes
+arriving got smaller and the queue drained.
 
 The throughput they gave up was throughput they had never been able to verify, which is easier to
 write in a book than to say in a planning meeting.
@@ -96,16 +96,16 @@ write in a book than to say in a planning meeting.
 **The Accountable Bystander.** The policy names an owner, the owner is a real person who takes it
 seriously, and that person approved forty changes this week and could describe four of them. When
 something breaks, the review finds the name and stops there. From the inside it does not feel like
-negligence, because it is not: they did read them, in the time available, at the rate the work
+negligence, because it is not. They did read them, in the time available, at the rate the work
 arrived.
 
-The tell is that the document has a paragraph about who is responsible and no paragraph about what
-they may refuse — which is the whole of the difference between accountability and a nominated
-recipient for it. The second is an incident review that ends at a name rather than at the point
-where the change stopped being understood. This is not the Drifting Yes
-([*Review code you did not write*](review-code-you-did-not-write.md#failure-mode)): there a
-reviewer's standard slips without them noticing, while here the standard holds and the authority to
-act on it was never granted.
+The tell is a document with a paragraph about who is responsible and none about what they may
+refuse. That gap is the whole difference between accountability and a nominated recipient for it.
+The second tell is an incident review that ends at a name rather than at the point where the change
+stopped being understood. This is not the Drifting Yes
+([*Review code you did not write*](review-code-you-did-not-write.md#failure-mode)). There a
+reviewer's standard slips without them noticing; here the standard holds and the authority to act
+on it was never granted.
 
 ## Checklist
 
