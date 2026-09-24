@@ -97,4 +97,5 @@ Assembled from the four plays in [*Team*](../part-2-plays/team/index.md).
 - [ ] Sharing sessions ask for discarded runs first, and somebody senior answers that one first
 - [ ] What survives a session leaves as a committed file, described by somebody other than its
       author
+- [ ] Every session deletes something and raises one check, enforced in CI and dated
 - [ ] Day-one setup is a script and a page, and the joiner verifies that the instructions loaded

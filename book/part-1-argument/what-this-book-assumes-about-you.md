@@ -48,9 +48,9 @@ holding the keyboard.
 
 This book takes that as the reader's condition rather than as something to escalate. It is not
 addressed to your manager and contains nothing worth forwarding to them. What it contains is a set
-of moves an individual developer or a team lead can make without waiting for direction, and — in
-[*Team*](../part-2-plays/team/index.md) — the material for a conversation with colleagues, which is
-a more productive thing than a conversation with a mandate.
+of moves an individual developer or a team lead can make without waiting for direction.
+[*Team*](../part-2-plays/team/index.md) adds the material for a conversation with colleagues, which
+is more productive than a conversation with a mandate.
 
 ## What this book will not do
 
@@ -60,15 +60,15 @@ usually also selling the remedy.
 
 It will not give you a number it cannot source. That constraint costs more than it sounds like it
 should, because the published evidence on AI-assisted development is considerably worse than the
-discourse implies. Nearly all of it measures autocomplete or chat rather than agents, and the most
-careful randomised trial of recent tools had its follow-up abandoned by its own authors once too
-many developers declined to do tasks without AI — a collapse that is itself the most interesting
-result in the field, and which [*Where the time actually
-goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md) reports in full. Where this
+discourse implies. Nearly all of it measures autocomplete or chat rather than agents. The most
+careful randomised trial of recent tools had its follow-up abandoned by its own authors, once too
+many developers declined to do tasks without AI. That collapse is itself the most interesting result
+in the field, and [*Where the time actually
+goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md) reports it in full. Where this
 book hedges, that is why. Where it gives a figure, the figure is dated in the sentence and traceable
 to a research note in [`notes/research/`](../../notes/research/).
 
-## How to read it
+## Read the plays in any order
 
 Not front to back, and not in one sitting.
 
@@ -103,9 +103,13 @@ price change; a pricing table does not. "Split the task at the first boundary wh
 would be needed at once" outlives the tool it was first written for. Where a figure and a shape
 disagree in this book, trust the shape and go and check the figure.
 
+Your own practice goes stale the same way. When the model changes, re-test the parts that rest on
+it, and retry one thing the team still does the easy way, because the ceiling may have moved too. A
+team that only re-tests keeps up. One that also retries climbs.
+
 ## Where to start
 
-The tools are installed, you are already using them, and whatever purchase decision existed was
-made somewhere above your head a while ago. What is missing is the practice.
+The tools are installed, you are already using them, and whatever purchase decision existed was made
+somewhere above your head a while ago. What is missing is the practice.
 
 The rest of this book is one attempt at it. Start wherever your week hurts.

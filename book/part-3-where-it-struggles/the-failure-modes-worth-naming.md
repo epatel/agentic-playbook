@@ -1,14 +1,13 @@
 # The failure modes worth naming
 
-A failure you can name is a failure you can raise in a review without spending a paragraph on
-preamble first. That is the whole argument, and it is not a small one: the
-phenomena below are all common, all recognised on sight by people who use these tools daily, and all
-routinely left unmentioned because saying them out loud costs more sentences than anyone has
-patience for at half past four.
+A failure you can name is one you can raise in a review without a paragraph of preamble. The
+phenomena below are all common, and all recognised on sight by people who use these tools daily.
+They also go unmentioned, because describing them costs more sentences than anyone has patience for
+at half past four.
 
-Seven of them get their names here, because no play in this book owned the material. Each entry
-gives the name, what it is, the tell — the thing you can check today — and the response. Every other
-name the book uses is indexed at the end.
+Eight get their names here, because no play owned the material. Each entry gives what it is, the
+tell you can check today, and the response. The index at the end lists every other name the book
+uses.
 
 ## The Confident Wrong Rewrite
 
@@ -19,11 +18,10 @@ patch against 178 that never got that far. Of the 511, 257 — 50.3% — were cl
 against 160 syntax errors. Once the agent got as far as a diff, half of what went wrong went wrong
 while compiling cleanly and reading well.
 
-The tell is structural rather than textual, which is why reading the diff line by line does not find
-it. The change addresses a restatement of the problem rather than the problem: it handles the
-symptom in the ticket and not the condition that produced it, or it implements the first of two
-things the issue asked for and summarises as though it did both. A useful probe is to ask what the
-change does to the case the ticket did not mention.
+The tell is structural, not textual, so reading the diff line by line misses it. The change
+addresses a restatement of the problem, not the problem. It handles the symptom in the ticket and
+not its cause, or does the first of two things the issue asked for and reports both done. A useful
+probe: what does the change do to the case the ticket did not mention?
 
 The response is to check the change against the requirement rather than against itself, and to do it
 before reading the code. That is why [*Review code you did not
@@ -33,16 +31,16 @@ path and a reproducer ahead of the diff.
 ## The Vanishing Fix
 
 The run reaches a correct solution partway through, keeps going, and overwrites it. Everyone who
-uses these tools has watched this happen and, until recently, nobody had measured it. A 2026 study
+uses these tools has watched it happen, and until recently nobody had measured it. A 2026 study
 decomposing 16,758 agent trajectories found the rate climbing with run length: 21.7% of the shortest
-quartile against 63.7% of the longest. The length dependence comes almost entirely from one
-sub-type, the thrashing kind; the other kind — a near-correct patch corrupted in place — is
-length-independent, so short runs reduce this and do not abolish it.
+quartile against 63.7% of the longest. Nearly all the length dependence comes from thrashing. A
+near-correct patch corrupted in place happens at any length, so short runs reduce this failure
+without abolishing it.
 
 The tell is in the transcript rather than the diff, and the transcript is on disk. A test that went
 green and later went red, a file edited, reverted, and edited again, or a final change that rewrites
-a function the run had already got right. If you only read the summary at the end, this is invisible
-by construction.
+a function the run had already got right. Read only the final summary and this is invisible by
+construction.
 
 The response is to shorten the run and to commit at green. A run that stops when the check first
 passes cannot overwrite the thing that made it pass, and a commit is cheaper than a diagnosis.
@@ -52,14 +50,11 @@ play.
 ## The Requirement It Can Still Quote
 
 The agent reads the requirements, restates them accurately, and stops meeting them. A 2026 white-box
-study varying only context size on a fixed code-audit task found strict success falling from eight
-runs in ten to three in ten between a roughly 11,000-character context and a roughly
-300,000-character one — a retention ratio of 0.375, on ten runs each and short of conventional
-significance. Over the same range, requirement-coverage retention held at 0.933 to 0.949. The
-information is present the whole way down. The compliance is not.
-
-The requirements did not fall out of the window. They are still there, and the agent will
-recite them to you.
+study varied only context size on a fixed code-audit task. From a roughly 11,000-character context
+to a roughly 300,000-character one, strict success fell from eight runs in ten to three: a retention
+ratio of 0.375, on ten runs each and short of conventional significance. Over the same range,
+requirement-coverage retention held at 0.933 to 0.949. The information is present the whole way
+down. The compliance is not.
 
 The tell is the recital itself. Ask what the requirements were; it answers correctly; the code does
 not satisfy them. The failures in that study clustered at compilation, execution, and verification
@@ -82,22 +77,21 @@ window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md#failure-mode)
 run that never arrives. This one arrives repeatedly and leaves sediment each time.
 
 The tell is a file that has grown on every iteration, a run of recent passes with no behavioural
-change to show for them, and near-duplicate boilerplate sitting in adjacent branches of the same
-function rather than factored out.
+change to show for them, and near-duplicate boilerplate in adjacent branches of one function, never
+factored out.
 
 The response is to diff against the state five passes ago rather than against the last one, and to
-cap iterations in advance. The comparison that matters is not "is this better than the previous
-attempt" but "is this better than where this started".
+cap iterations in advance. Ask whether this is better than where it started, not than the last
+attempt.
 
 ## The Immaculate Surface
 
-Every check you have automated is clean, and the defect is in a class you have not automated a check
-for. One vendor's 2025 telemetry across tens of thousands of repositories reported syntax errors
-down 76% and logic bugs down more than 60%, against privilege-escalation paths up 322% and
-architectural design flaws up 153%. It prints no baseline and no window for those four figures and
-its definition of "security issue" is broad, so hold the magnitudes lightly. The shape is the point:
-the error classes that got cheap to catch went away, and the ones that were always expensive to
-catch went up.
+Every automated check is clean, and the defect is in a class you never automated. One vendor's 2025
+telemetry across tens of thousands of repositories reported syntax errors down 76% and logic bugs
+down more than 60%, against privilege-escalation paths up 322% and architectural design flaws up
+153%. It prints no baseline or window for those figures, and defines "security issue" broadly, so
+hold the magnitudes lightly. The shape is the point: the error classes that got cheap to catch went
+away, and the ones that were always expensive to catch went up.
 
 The tell is a review in which every comment you raised was about naming or formatting, on a change
 whose effects you could not draw. This is not the Drifting Yes ([*Review code you did not
@@ -105,24 +99,23 @@ write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md#
 where the standard slips with exposure. Here the standard holds and it is pointed at the wrong class
 of defect.
 
-The response is to review the blast radius rather than the lines. What can this change now reach
-that it could not reach before — which credentials, which tables, which callers? That question is
-cheap to ask and has no automated substitute.
+The response is to review the blast radius rather than the lines. What can this change reach that it
+could not before: which credentials, which tables, which callers? The question is cheap and has no
+automated substitute.
 
 ## The Instant Concession
 
 You push back on something the agent got right, and it agrees immediately and replaces it with
-something worse. The measured version of this is conversational rather than agentic, and the
-distinction matters: in a 2026 benchmark where a proxy user applied sustained pressure to items
-resting on a false presupposition, collapse rates at 25 turns ran from 65% to 97% depending on the
-model, on an average of six to fifteen turns of pressure. Emotional appeals worked better than
-logical ones — a 44.3% drop rate against 20.0%. Among the four models that expose reasoning traces,
-collapse "typically occurs while the correct position remains represented rather than after it
-disappears". It did not lose the answer. It stopped asserting it.
+something worse. The measured version is conversational rather than agentic, and the distinction
+matters. In a 2026 benchmark, a proxy user applied sustained pressure to items resting on a false
+presupposition. Collapse rates at 25 turns ran from 65% to 97% depending on the model, on an average
+of six to fifteen turns of pressure. Emotional appeals worked better than logical ones — a 44.3%
+drop rate against 20.0%. Among the four models that expose reasoning traces, collapse "typically
+occurs while the correct position remains represented rather than after it disappears". It did not
+lose the answer. It stopped asserting it.
 
-Nobody has measured an agent abandoning a correct patch after a reviewer pushes back. This name is
-given on recognition rather than on evidence, and says so rather than upgrading an extrapolation
-into a citation.
+Nobody has measured an agent abandoning a correct patch after a reviewer pushes back. This name
+rests on recognition, not evidence.
 
 The tell is a rewrite with no argument attached, arriving faster than a considered disagreement
 would.
@@ -146,9 +139,23 @@ The response is to pin the version wherever the dependency is named, and to hand
 changelog for the jump you are on. [*Write the agent file that actually gets
 read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) is the play.
 
+## The Comfortable Peak
+
+Every change is good enough, and none is better than the last. Plausible output is cheap, so the
+team's bar settles where the output lands. That is a local optimum, and the ground under it moves.
+Better models will not lift it: Veracode's security pass rate stayed flat across two years of
+releases ([*What agents are reliably bad at*](what-agents-are-reliably-bad-at.md)). In a small 2023
+study, people writing with an AI assistant wrote less secure code and felt surer of it.
+
+The tell: gates unchanged for months while output rose, and nobody can name the last thing made
+stricter.
+
+The response is to raise one bar at every harvest, enforced in CI and dated. [*Collect and refine as
+a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) is the play.
+
 ## The index
 
-Every name this book uses, and where it is described — the seven above plus the twenty-two the plays
+Every name this book uses, and where it is described — the eight above plus the twenty-two the plays
 coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
 than the cause: a reader should recognise the thing before they understand it.
 
@@ -161,6 +168,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Immaculate Surface** | Every automated check clean, the defect in the class you never automated | This chapter |
 | **the Instant Concession** | Pushback on a correct answer, agreed to instantly and replaced with a worse one | This chapter |
 | **the Wrong Edition** | Idiomatic code for a version of a dependency you do not run | This chapter |
+| **the Comfortable Peak** | Every change good enough, none better, and nothing made stricter in months | This chapter |
 | **the Context Landfill** | An agent file that only ever grew; the current convention followed about half the time | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |

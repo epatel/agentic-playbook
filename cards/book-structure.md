@@ -19,14 +19,14 @@ playbook" — Part I is exactly where that failure recurs.
 
 ## The six suites of Part II
 
-| Suite | Plays (working titles) |
+| Suite | Plays, in book order |
 |---|---|
-| **Context** | Write the agent file that actually gets read · Starve the context · Scope a task to fit the window |
+| **Context** | Write the agent file that actually gets read · Split the agent file into cards · Starve the context · Scope a task to fit the window |
 | **Harness** | Choose your harness · Package repeatable expertise · Wire in the outside world |
 | **Orchestration** | Decompose into subagents · Make the control flow deterministic · Work in parallel without collisions |
 | **Verification & Trust** | Review code you did not write · Make the agent prove it · Decide who signs off |
 | **Economics** | Understand what you are paying for · Match the model to the job · Know when not to use an agent |
-| **Team** | Build the working agreement · Collect and refine as a team · Onboard someone into all this |
+| **Team** | Build the working agreement · Settle what the team cannot agree · Collect and refine as a team · Onboard someone into all this |
 
 ## The play template
 

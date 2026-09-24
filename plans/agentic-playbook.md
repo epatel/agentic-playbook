@@ -110,10 +110,11 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | *unassigned* | Name **the Adequate Answer** in *Starve the context*, and discount staged adoption models in *The three waves* | ✅ done |
 | *unassigned* | `make review` — a local server that renders the chapters, takes annotations into an append-only log, and collects them into `review/REVIEW.md` for an agent to act on | ✅ done |
 | *unassigned* | Read aloud on both surfaces, a favicon, and a mobile pass on the HTML book: no horizontal overflow from 360px up | ✅ done |
+| *unassigned* | Keep raising the bar — folded into *Collect and refine as a team* (step 6), **the Comfortable Peak** in Part III, and exploring on a model change in *What this book assumes about you*; no new play | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 42,341 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 42,464 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
 `main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
@@ -127,6 +128,19 @@ re-weighted*, not in *What this book assumes about you*, and chapters one and tw
 
 **Undecided options live in `options/`**, which is gitignored and exists only on the author's
 machine. Do not act on one without the author choosing it.
+
+**The first option taken from `options/` is in (2026-09-25): keep raising the bar.** The author's
+point: the tools make "good enough" easy, easy is a local optimum, and the world keeps moving. It
+went into three chapters rather than a play (see the decision log): step 6 of *Collect and refine
+as a team* now raises one check per harvest, enforced in CI and dated; Part III names **the
+Comfortable Peak**, the eighth name *The failure modes worth naming* owns; and *What will go
+stale, and how to tell* asks for one retry of the easy way when the model changes. **Three
+chapters are now at their ceiling:** *The failure modes worth naming* (1,498 of 1,500), *Collect
+and refine as a team* (1,195 of 1,200, *The play* at 499 of 500), so anything added to either has
+to take something out. The rest of `options/consolidated.md` (one thread, main point first, Turk
+and Kirkman's *Effective Writing*, a teaching manner) is still a pilot and not in the book; its
+reworded thread already carries this point ("re-tested and raised, because the world keeps
+moving").
 
 **A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
 [`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
@@ -2584,6 +2598,21 @@ Grafana's spelling**; the reason is in the agent file.
   sentences, 4 over the dash threshold, 5 headings to judge. Documented in
   `cards/building-the-book.md`; the card and `CLAUDE.md` edits moved the line counts *Split the agent
   file into cards* prints, which were re-captured (62 and 305 lines, 643 total).
+- **Keep raising the bar, folded into existing chapters (2026-09-25).** The author's idea: the tools
+  make plausible output cheap, so "good enough" feels like a peak; it is a local optimum, and the
+  models, attackers and other teams keep moving. First planned as a fifth Team play, then folded in
+  at the author's choice, because Team already had four plays and a fifth would widen the spread
+  recorded under *Open questions* to two. The precedent is *Name what the model already knows*: the
+  move went into step 6 of *Collect and refine as a team* (take one thing out and raise one check,
+  enforced in CI and dated, paid for with saved time), with a `lodestone` worked example turning
+  nullable warnings into errors; the name went to Part III as **the Comfortable Peak**, sourced to
+  Perry et al. (CCS 2023, `review-practice.md`, cited for mechanism not magnitude) and Veracode's
+  flat security pass rate (linked to *What agents are reliably bad at*, not restated); and *What
+  will go stale, and how to tell* gained a retry of the easy way on each model change. A sketched
+  move to keep some code hand-written was dropped on the author's objection that what a team does
+  by memory it stops doing. Room in both full chapters came from a sentence-shape pass, which also
+  cleared every lint note on the four files touched; *How to read it* became *Read the plays in any
+  order* (no links pointed at the old anchor).
 
 ## Two proposals from the author's reflection
 
@@ -3721,6 +3750,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Immaculate Surface** | Every check you have automated is clean and the defect is in a class you have not automated a check for. The tell is your own review comments getting shorter and more stylistic while the changes get larger. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 | **the Instant Concession** | Push back on something the agent got right and it agrees immediately, replacing it with something worse. Named on recognition rather than on measurement, and the chapter says so in print. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 | **the Wrong Edition** | Idiomatic, confident code for a version of a dependency the team does not run: naming a library or design system brings back the edition the model saw most. Measured only for version-conditioned completion (GitChameleon 2.0, 48–51%), not in repositories. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
+| **the Comfortable Peak** | Every change good enough and none better: plausible output is cheap, so the team's bar settles where the output lands and stays there while the models, attackers and other teams move. The tell is gates unchanged for months while output rose, and nobody able to name the last thing made stricter. Distinct from the Drifting Yes — that is one reviewer's standard slipping; this is the team's standard never rising. | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` |
 
 **The Merged Hand is registered but is not in the book.** It is named in `book/TEMPLATE-play.md`'s
 specimen play, which is deliberately not in the table of contents, so Part III's index of failure
