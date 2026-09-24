@@ -96,10 +96,10 @@ $ wc -l CLAUDE.md cards/*.md
       60 CLAUDE.md
       70 cards/book-structure.md
      286 cards/building-the-book.md
-      64 cards/repo-layout.md
+      65 cards/repo-layout.md
       65 cards/research-notes.md
       76 cards/standing-defaults.md
-     621 total
+     622 total
 ```
 
 Roughly a tenth of the written conventions load unconditionally. The rest arrive when a trigger
