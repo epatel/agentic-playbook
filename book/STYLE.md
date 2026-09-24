@@ -8,6 +8,13 @@ individual play is in [`TEMPLATE-play.md`](TEMPLATE-play.md).
 The book has several authors and one voice. That only works if the voice is described in examples
 rather than adjectives, which is what most of this file is.
 
+How the prose is built, as distinct from how it sounds, follows one reference: Christopher Turk and
+John Kirkman, *Effective Writing: Improving Scientific, Technical and Business Communication* (2nd
+edition, 1989). It was written for engineers and scientists who write as part of their work, which
+is this book's reader, and it favours headings, numbering, tables and instructions, which is what
+the plays are made of. [*How the prose is built*](#how-the-prose-is-built) below is what the book
+takes from it.
+
 ## Who is talking
 
 An experienced colleague who has been burned and finds it funny in retrospect. Someone who has
@@ -15,6 +22,11 @@ shipped this way for a while, is neither impressed nor alarmed by it, and has op
 from consequences rather than from a keynote.
 
 Not a vendor. Not a lecturer. Not a friend who has had one coffee too many.
+
+In the prose paragraphs the manner is a good teacher's: explain a concept at the point the reader
+needs it, not before, and say where people get stuck ("This is a little strange at first"). An
+aside about the subject is welcome. A claim about the author's own experience is not: agents wrote
+this book, and the preface says so.
 
 Three tests before a sentence stays:
 
@@ -87,6 +99,55 @@ These are not judgement calls. The editorial pass removes them without discussio
 | "Context rot 😬" | "**The Context Landfill**" | The name carries it; nothing else has to |
 | "Let's dive into verification!" | "Verification is the part teams skip, and it is the part that decides whether any of this was worth it." | Opens with the argument, not with throat-clearing |
 | "AI won't replace developers… unless?" | *(cut entirely)* | The gag has no second half worth writing |
+
+## How the prose is built
+
+### One thread
+
+The whole book serves one argument, and every opener says which part of it the chapter serves:
+
+> The agent writes fast and remembers nothing. So what makes it work has to be **written down**,
+> **checked outside the agent**, and **re-tested and raised, because the world keeps moving**.
+
+| Move | Where the book does it |
+|---|---|
+| Written down | Context, Team |
+| Checked outside the agent | Harness, Verification and trust, Economics |
+| Re-tested and raised | Orchestration, *What will go stale, and how to tell*, *Collect and refine as a team*, Part IV |
+| What happens when a move is skipped | Part III |
+
+A suite opener names its move in its first sentence; the suite's own one idea follows it. See
+[`README.md`](README.md#suite-openers).
+
+### Main point first
+
+A reader who stops after a section's first paragraph should already have its point. Openers are
+*informative*, giving the finding, not *descriptive*, announcing what the section covers. This
+applies to openers and to the first paragraph of every Part I, III and IV chapter and section.
+The one exception is a play's *Problem*, which opens on the scene, because its job is to put the
+reader in the room; *The play* then leads with the move.
+
+Headings in Parts I, III and IV say what the section finds: *Git took a decade to become a
+discipline*, not *The tool was never the hard part*; *The analogy breaks in three places*, not
+*Where the analogy breaks*. `make lint` lists headings that point back at the prose. Play headings
+are fixed by the template and do not change.
+
+### Sentences
+
+- **None over 40 words**, and most well under 20. `make lint` reports every sentence over 40.
+- **Split at the dash.** A long sentence is usually a short one with an aside bolted on, and the em
+  dash is the bolt. Use a colon, a full stop, or a comma instead; keep dashes rare. `make lint`
+  reports a file over 10 per 1,000 words.
+- **One idea per sentence**, in active voice where the actor matters.
+- **Verbs, not abstract nouns.** "Evaluate", not "carry out an evaluation of". "Teams took it up
+  slowly", not "adoption was slow". "The pressure runs the other way", not "the direction of
+  pressure is reversed".
+
+### Economy
+
+Splitting sentences adds words, and most files sit near their budget. **Editing a file never makes
+it longer.** Pay for every split by cutting a restatement, a hedge that another sentence already
+carries, or a clause that says what the next sentence shows.
 
 ## Mechanics
 
@@ -247,8 +308,8 @@ in [`cards/book-structure.md`](../cards/book-structure.md) are the point of the 
 guideline.
 
 **`make lint` counts every budget on this page and in `TEMPLATE-play.md`, and names anything
-outside one.** It reports them as notes rather than as problems, because a draft is legitimately
-over for a while — so read the notes against the file you are editing before you finish. Do not
+outside one.** An overrun is a problem and fails the build, so read the report against the file
+you are editing before you finish. Do not
 count by hand: `wc -w` runs a few percent high against the counter the book is measured with, and
 these budgets are decided on margins smaller than that.
 

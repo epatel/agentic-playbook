@@ -92,10 +92,12 @@ words. Stated as a play it costs a slot and overlaps its neighbour.
 
 An opener contains, in order:
 
-1. A paragraph of framing that puts the reader in the suite's situation. Humour is allowed here — it
+1. The move of the book's thread the suite serves, in its first sentence, and who the suite is
+   for. See [`STYLE.md`](STYLE.md#one-thread).
+2. A paragraph of framing that puts the reader in the suite's situation. Humour is allowed here: it
    is one of the few places it is. See [`STYLE.md`](STYLE.md#where-humour-is-allowed).
-2. The suite's one idea, named in a sentence, in words a reader could repeat.
-3. One short paragraph per play, linking to it and saying which layer or case it covers.
+3. The suite's one idea, named in a sentence, in words a reader could repeat.
+4. One short paragraph per play, linking to it and saying which layer or case it covers.
 
 150–300 words, per [`STYLE.md`](STYLE.md#length). Do not re-establish why any of this matters — Part
 I did that, and a suite opener that re-argues it is the fastest way for Part II to lose the space
