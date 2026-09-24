@@ -9,6 +9,9 @@ BUILD  ?= build
 NAME   ?= agentic-playbook
 SCRIPT := scripts/build_book.py
 STYLE  := scripts/check_style.py
+FACTS  := scripts/check_facts.py
+# The ref a rewrite is compared against by `make facts`: every figure it had must survive.
+REF    ?= main
 ARGS   ?=
 # Extra flags for the style checker alone, so that ARGS keeps carrying build flags. Not
 # named LINT: make has a built-in variable of that name, and it is already set to `lint`.
@@ -40,7 +43,7 @@ RELEASE_PDF := $(BUILD)/$(NAME)-$(VERSION).pdf
 OPENER ?= $(shell command -v open 2>/dev/null || command -v xdg-open 2>/dev/null)
 
 .DEFAULT_GOAL := help
-.PHONY: help pdf md html open open-html check lint release review clean
+.PHONY: help pdf md html open open-html check lint facts release review clean
 
 help: ## Show this help
 	@echo "The Agentic Playbook"
@@ -78,6 +81,9 @@ check: ## Report structural problems, README drift and style defects; write noth
 
 lint: ## Report style defects only: 100 columns, whitespace, fences, the outright bans
 	$(PYTHON) $(STYLE) --strict $(STYLEARGS)
+
+facts: ## After a rewrite: every number, quotation, link and code block at REF (default main) survives
+	$(PYTHON) $(FACTS) --strict --ref $(REF)
 
 # Publishing is irreversible in the way that matters — a tag other people have fetched cannot be
 # moved honestly — so everything that can be checked is checked before anything is pushed.
