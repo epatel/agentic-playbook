@@ -2,11 +2,11 @@
 
 ## Problem
 
-The change is one line and you know exactly which line. You describe it instead — four sentences,
-because describing it is the reflex now — and eleven minutes later there is a diff across nine
-files, all of it defensible, most of it not what you asked for, and a review nobody budgeted. The
-change ships. What it cost was not tokens. It was twenty-five minutes, one context switch, and a
-small erosion in your ability to say what your own code does without going to look.
+The change is one line and you know exactly which line. You describe it instead, in four sentences,
+because describing it is the reflex now. Eleven minutes later there is a diff across nine files: all
+of it defensible, most of it not what you asked for, and a review nobody budgeted. The change ships.
+It cost not tokens but twenty-five minutes, one context switch, and a small erosion in your ability
+to say what your own code does without going to look.
 
 ## The play
 
@@ -14,15 +14,15 @@ Four tests before you delegate, and two habits that keep them honest.
 
 1. **Compare against your own hands, review included.** The comparison people run is typing time
    against prompt time. The real one is typing time against prompt, wait, read the diff, decide, and
-   correct. Anything a deterministic tool already does — an IDE rename, a codemod, a formatter, a
-   one-file edit you could make from memory — loses on every term.
+   correct. Anything a deterministic tool already does loses on every term: an IDE rename, a
+   codemod, a formatter, a one-file edit you could make from memory.
 2. **Do it yourself when specifying it is the hard part.** If stating precisely what you want means
    working out the invariant, the ordering, or the constraint, you have done the expensive part by
    the time the task brief is written. Write the change; delegate the sweep that follows it.
 3. **Do it yourself when nothing cheap can say it is wrong.** No test, no type, no reproducer, no
-   diff short enough to scan: what comes back is a claim rather than a result. Buying claims is how
-   a saving relocates into review, which is where DORA's *verification tax* is paid.
-4. **Do not add agents to buy capability.** Fan-out multiplies everything: Anthropic's June 2025
+   diff short enough to scan: what comes back is a claim rather than a result. Buying claims moves
+   the saving into review, which is where DORA's *verification tax* is paid.
+4. **Do not add agents to buy capability.** Fan-out multiplies everything. Anthropic's June 2025
    figure put its multi-agent research system at roughly fifteen times the tokens of a chat
    interaction, because every agent carries its own context. Give one agent the same budget first,
    and keep the fan-out only if it beat that ([*Decompose into
@@ -32,17 +32,17 @@ Four tests before you delegate, and two habits that keep them honest.
    human difficulty ratings align only weakly with actual token cost, so neither of the two
    available estimators works.
 6. **Date your no-go list.** On METR's published measurements the 50% task-length horizon has been
-   doubling roughly every three months on the 2024-onward trend, so a rule written last year
-   describes last year's models. It moves the other way too, as review capacity rather than model
+   doubling roughly every three months on the 2024-onward trend. A rule written last year describes
+   last year's models. The list moves the other way too, as review capacity rather than model
    capability becomes the thing you run out of.
 
-The constraint that actually binds is not what the agent can do. In the largest enterprise study
-available — 802 developers, 196,212 pull requests, January 2024 to April 2026 — a doubling mandate
-worked on its own terms: throughput reached 2.09× baseline and nearly all pull requests became
-agent-authored. Merge and revert rates stayed flat. What moved was human review coverage, from 89%
-of pull requests to 68%, with the load on each remaining reviewer doubling, and agent-authored pull
-requests took 22% longer end to end than comparable human ones — what the mandate existed to
-compress. The interior of that study is in [*Where the time actually
+The constraint that binds is not what the agent can do. The largest enterprise study available
+covered 802 developers and 196,212 pull requests, from January 2024 to April 2026. A doubling
+mandate worked on its own terms: throughput reached 2.09× baseline, and nearly all pull requests
+became agent-authored. Merge and revert rates stayed flat. Human review coverage moved instead, from
+89% of pull requests to 68%, and the load on each remaining reviewer doubled. End-to-end time, which
+the mandate existed to compress, rose: agent-authored pull requests took 22% longer than comparable
+human ones. The interior of that study is in [*Where the time actually
 goes*](../../part-3-where-it-struggles/where-the-time-actually-goes.md). Anthropic put the general
 case plainly in December 2024 and has not retracted it: "For many applications, however, optimizing
 single LLM calls with retrieval and in-context examples is usually enough." The exchange rate is
@@ -62,19 +62,19 @@ was one IDE refactoring and a compile.
 $ ./gradlew :ingest:compileKotlin
 ```
 
-Both routes missed the same thing — the identifier embedded in a JSON fixture, which a rename
-refactoring does not see and a compile does not catch. The difference was that this time it took
-seconds rather than a review, and the gap was a known limitation rather than a surprise in a diff.
+Both routes missed the same thing: the identifier embedded in a JSON fixture, which a rename
+refactoring does not see and a compile does not catch. This time the job took seconds rather than a
+review, and the gap was a known limitation rather than a surprise in a diff.
 
 **The bug.** One supplier had begun omitting `unitOfMeasure`, and the adapter was turning that into
 a silent zero four layers downstream. Finding it took forty minutes and ended in a failing test.
 Writing the fix took two. Nothing was delegated, because by the time the reproducer existed the
-expensive work was done — which is also what made the *next* task delegable.
+expensive work was done. That was also what made the *next* task delegable.
 
 **The sweep.** Add the same schema-version assertion to all forty adapter tests. Bounded, tedious,
-and `./gradlew test` says immediately whether each one is right. That went to the agent, and came
+and `./gradlew test` says immediately whether each one is right. That went to the agent and came
 back with three of the forty asserting against the wrong field. The suite caught all three in under
-a minute, which is the entire argument: the work was worth delegating because being wrong was cheap
+a minute. That is the entire argument: the work was worth delegating because being wrong was cheap
 to detect, not because it was large.
 
 The honest part of the accounting is that nobody had noticed the previous month's rename costing
@@ -83,11 +83,11 @@ anything at all until the three tasks were written down next to each other.
 ## Failure mode
 
 **The Errand That Became a Project.** You ask for a one-line change and get a diff across nine
-files. None of it is wrong, exactly — the agent tidied two adjacent things, extracted a helper, and
-updated a test that was already a bit odd — and none of it is what you asked for. Now the review is
-the real task, and it is larger than the change you were going to make by hand. Reverting feels
-wasteful because the extra work is genuinely fine, so it ships, and the repository acquires a
-refactor nobody proposed.
+files. None of it is wrong, exactly. The agent tidied two adjacent things, extracted a helper, and
+updated a test that was already a bit odd. None of it is what you asked for either. Now the review
+is the real task, and it is larger than the change you would have made by hand. Reverting feels
+wasteful because the extra work is fine, so it ships, and the repository acquires a refactor nobody
+proposed.
 
 The tell is a diff whose size bears no relation to the request. The second tell is the sentence you
 find yourself writing in the pull-request description, where "and" appears twice and the change no

@@ -26,7 +26,7 @@ loads, take out as much as you put in, and raise one bar each time.
    the file, the practice was not worth the hour.
 4. **Have someone else write the description.** A skill is routed on its `name` and `description`
    alone, never on its body ([*Package repeatable
-   expertise*](../harness/package-repeatable-expertise.md)), so one described in its author's
+   expertise*](../harness/package-repeatable-expertise.md)). One described in its author's
    vocabulary stays invisible to everyone else. The description comes from a colleague, in the words
    their own request would use.
 5. **Move it to where everyone loads it, then check on someone else's machine.** Shared skills go in
@@ -53,8 +53,8 @@ does not survive being generalised, and builds that fail on code that passed las
 
 ## Worked example
 
-`lodestone`, a claims-processing platform — C# services behind a TypeScript front end — where nine
-engineers had been using agents for about a year and had never compared notes on purpose. The first
+`lodestone` was a claims-processing platform with C# services behind a TypeScript front end. Its
+nine engineers had used agents for about a year and had never compared notes on purpose. The first
 harvest ran for an hour and covered one job: writing a claims adapter for a new insurer's feed.
 
 Three people described their last one. Two accounts were nearly identical. The third was much
@@ -68,8 +68,8 @@ description: Adapter conventions for claims ingest.
 ---
 ```
 
-The skill was good. The description had been written by somebody who already knew the skill existed.
-A colleague who had never seen it rewrote the frontmatter from the request end, using sentences they
+The skill was good. Somebody who already knew the skill existed had written the description. A
+colleague who had never seen it rewrote the frontmatter from the request end, using sentences they
 would actually have typed:
 
 ```markdown
@@ -87,7 +87,7 @@ deployment process retired in the spring, and four lines in `AGENTS.md` describi
 had replaced.
 
 It also raised one bar. Adapters were now quick, and the last two ingest bugs had both been nulls
-from an insurer's file, so the ingest project turned nullable warnings into errors:
+from an insurer's file. So the ingest project turned nullable warnings into errors:
 
 ```xml
 <PropertyGroup>
@@ -101,7 +101,7 @@ line: what was raised, and why. The first build failed on months of old warnings
 took the next day.
 
 Not everything survived. The engineer who wrote task briefs in a shape that got the test written
-first could not reconstruct the shape under questioning, and three attempts at writing it down
+first could not reconstruct the shape under questioning. Three attempts at writing it down
 produced advice indistinguishable from "write a clear task brief". It was left unpromoted, and the
 session note says so. A month later the skill had fired for six of the nine engineers; the other
 three had not written an adapter.
@@ -112,8 +112,8 @@ The two deletions took forty seconds and were the only part of the hour nobody a
 
 **The Showreel.** The team meets to share what works, and everyone shares what worked. Each person
 demonstrates their best run: four files and a passing suite in eleven minutes. Nobody mentions the
-three attempts that morning that went nowhere, because the session was called by somebody who would
-like adoption to be going well, and the room can read a temperature. What comes out is a library
+three attempts that morning that went nowhere. Somebody who would like adoption to be going well
+called the session, and the room can read a temperature. What comes out is a library
 assembled from everyone's best day, which reproduces for nobody on an average one.
 
 The tell is a shared library that grows every session beside a team channel where the same questions
