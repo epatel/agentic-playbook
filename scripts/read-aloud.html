@@ -44,9 +44,41 @@
     }
   }
 
+  /* A callout on the first button only, because a faint mark in the gutter is easy to miss the
+     first time and not worth making louder on every heading. Shown until the reader closes it or
+     presses any ▶, then remembered in this browser. Its `left` and the arrow's `--tip` are set by
+     the script from where the button actually is, since that differs between the gutter layout and
+     the narrow one; the values here are only the desktop fallback. */
+  .aloud-callout {
+    position: absolute; bottom: calc(100% + .6rem); left: -1.9rem; z-index: 2;
+    display: flex; align-items: center; gap: .6rem;
+    padding: .4rem .45rem .4rem .7rem;
+    background: var(--page); color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    font-size: .8rem; font-weight: 400; line-height: 1.3; letter-spacing: normal;
+    white-space: nowrap;
+  }
+  .aloud-callout::after {
+    content: ""; position: absolute; bottom: -.3rem; left: calc(var(--tip, 1.075rem) - .28rem);
+    width: .55rem; height: .55rem;
+    background: var(--page);
+    border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    transform: rotate(45deg);
+  }
+  .aloud-callout button {
+    border: 0; background: none; padding: 0 .15rem; cursor: pointer;
+    color: var(--ink-faint); font-size: 1rem; line-height: 1;
+  }
+  .aloud-callout button:hover, .aloud-callout button:focus-visible { color: var(--ink); }
+  .aloud.called { opacity: 1; color: var(--link); }
+  @media (max-width: 62rem) {
+    .aloud-callout { white-space: normal; max-width: calc(100vw - 2rem); }
+  }
+
   .aloud-speaking { background: var(--aloud-wash); border-radius: 2px; box-shadow: 0 0 0 .3rem var(--aloud-wash); }
 
-  @media print { .aloud { display: none; } }
+  @media print { .aloud, .aloud-callout { display: none; } }
 </style>
 
 <script>
@@ -59,7 +91,7 @@
 
   function textOf(el) {
     var clone = el.cloneNode(true);
-    Array.prototype.forEach.call(clone.querySelectorAll('.aloud'), function (b) { b.remove(); });
+    Array.prototype.forEach.call(clone.querySelectorAll('.aloud, .aloud-callout'), function (b) { b.remove(); });
     return clone.textContent;
   }
 
@@ -124,6 +156,44 @@
     return out;
   }
 
+  /* The callout. Storage can be missing or throw (private windows, blocked site data), so every
+     read and write is guarded, and without it the callout simply shows again next visit. */
+  var SEEN = 'aloud-callout-dismissed';
+  function seen() { try { return localStorage.getItem(SEEN) === '1'; } catch (e) { return false; } }
+  function dismiss() {
+    try { localStorage.setItem(SEEN, '1'); } catch (e) { /* show again next time */ }
+    var callout = document.querySelector('.aloud-callout');
+    if (callout) callout.remove();
+    Array.prototype.forEach.call(document.querySelectorAll('.aloud.called'), function (b) {
+      b.classList.remove('called');
+    });
+  }
+  function callOut(button) {
+    if (seen() || document.querySelector('.aloud-callout')) return;
+    var note = document.createElement('span');
+    note.className = 'aloud-callout';
+    note.setAttribute('role', 'note');
+    note.textContent = 'To listen, press \u25B6 beside any heading.';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = '\u00D7';
+    close.setAttribute('aria-label', 'Dismiss');
+    close.addEventListener('click', function (e) { e.stopPropagation(); dismiss(); });
+    note.appendChild(close);
+    button.classList.add('called');
+    button.parentNode.insertBefore(note, button);
+    place();
+    addEventListener('resize', place);
+  }
+  /* Start the callout a little left of the button and put the arrow's tip under its centre. */
+  function place() {
+    var note = document.querySelector('.aloud-callout'), button = document.querySelector('.aloud.called');
+    if (!note || !button) return;
+    var inset = 8;
+    note.style.left = (button.offsetLeft - inset) + 'px';
+    note.style.setProperty('--tip', (inset + button.offsetWidth / 2) + 'px');
+  }
+
   function stop() {
     speechSynthesis.cancel();
     Array.prototype.forEach.call(document.querySelectorAll('.aloud-speaking'), function (el) {
@@ -159,6 +229,7 @@
   }
 
   function toggle(button, heading) {
+    dismiss();
     var wasOn = button.classList.contains('on');
     stop();
     if (wasOn) return;
@@ -182,6 +253,8 @@
       button.addEventListener('click', function (e) { e.stopPropagation(); toggle(button, heading); });
       heading.insertBefore(button, heading.firstChild);
     });
+    var first = document.querySelector('.aloud');
+    if (first) callOut(first);
   }
 
   function pickVoice() {
