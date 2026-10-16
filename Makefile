@@ -96,7 +96,7 @@ release: ## Build the PDF and publish it as a GitHub release tagged with the dat
 	@git fetch --quiet origin
 	@test "$$(git rev-parse HEAD)" = "$$(git rev-parse '@{u}')" \
 		|| { echo "make release: HEAD differs from its upstream — push first, so the tag names public history"; exit 1; }
-	@$(MAKE) --no-print-directory check
+	@"$(MAKE)" --no-print-directory check
 	$(PYTHON) $(SCRIPT) --format pdf --out-dir $(BUILD) --name $(NAME)-$(VERSION) \
 		--repo-url $(REPO)/blob/$(VERSION) $(ARGS)
 	@test -f "$(RELEASE_PDF)" || { echo "make release: $(RELEASE_PDF) was not rendered — see the build output above"; exit 1; }
