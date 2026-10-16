@@ -15,24 +15,23 @@ code is expensive, and for an agent that constraint sits at the other end. The o
 arrange things to do less of both. That is where abstraction comes from, and it was correct. A layer
 you can learn once and then stop reading is a layer you have stopped paying for.
 
-For an agent, writing is cheap: it will produce four hundred lines about as readily as forty. The
-expensive thing is behaviour it cannot see. The agent has no memory of last Tuesday's session, no
-accumulated feel for which module is load-bearing, and no way to notice the convention that lives in
-everyone's head. What it has is whatever it can pull into one window, and it pays for the assembly
-every single time.
+An agent inverts that. Four hundred lines cost it about what forty do; the cost is behaviour absent
+from the text it reads. The agent has no memory of last Tuesday's session, no accumulated feel for
+which module is load-bearing, and no way to notice the convention that lives in everyone's head.
+What it has is whatever it can pull into one window, and it pays for the assembly every single time.
 
 Almost everything else in this chapter follows from that one swap. The moves are not new; the reason
 for them is.
 
 ## An agent works in features, so organise by feature
 
-An agent's unit of work is a capability, not a layer. The task arrives as "add a discount code to
-checkout", never as "add a row to the service layer". A codebase organised by layer fights that. All
-the controllers sit in one directory, the services in another, the repositories in a third, and a
-single feature is scattered across six files in three trees. A developer with jump-to-definition
-crosses that in a keystroke and stops noticing the cost. An agent reassembles the feature from
-fragments at the start of every run. It spends a meaningful share of its window rebuilding a flow
-that could have lived in one directory.
+An agent is asked for capabilities, and layers never appear in the request. The task arrives as "add
+a discount code to checkout", never as "add a row to the service layer". A codebase organised by
+layer fights that. Controllers live together, services live together, repositories live together,
+and one feature ends up as six files spread over three trees. Jump-to-definition carries a developer
+across that in a keystroke, and the cost goes unnoticed. An agent pieces the feature back together
+at the start of every run, and a meaningful share of its window goes to tracing a flow one directory
+could have held.
 
 Organised feature-first, one capability is one folder: the handler through to the response, the
 logic beside its test. Three things follow. The behaviour is visible in one place, which is what

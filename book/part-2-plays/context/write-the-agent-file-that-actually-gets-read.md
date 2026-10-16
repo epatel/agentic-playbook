@@ -23,9 +23,9 @@ Treat the agent file as a working set, not as a description of the project. Seve
    session. Move it to something conditional, so it arrives when its situation does: a path-scoped
    rule, a skill, or a card.
 3. **Name what the model already knows, and write down only where you differ.** A framework, a
-   library, or a published standard costs one line to name and pages to describe. Add where it
-   lives and how you depart from it: "go_router; all routes in `lib/app/router.dart`". Pin a
-   version only where it changes the API the agent should write against.
+   library, or a published standard costs one line to name and pages to describe. Add where it lives
+   and your departures: "React Router; every route declared in `src/routes.tsx`". Pin a version only
+   where it changes the API the agent should write against.
 4. **Do not mistake reorganisation for reduction.** Splitting the file into `@path` imports is
    housekeeping: imports expand at launch and the token count is unchanged. Only conditional loading
    reduces anything.

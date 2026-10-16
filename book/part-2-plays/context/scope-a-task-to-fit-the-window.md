@@ -19,9 +19,9 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    second task does not re-derive it and disagree.
 2. **Scope by capability, not by layer.** "Add validation to the checkout endpoint, its schema, and
    its tests" is one unit; "add validation to every schema in the repo" is a sweep that will drift
-   by the eighth file. An agent's unit of work is a behaviour, not a directory. Where a layer-first
-   layout makes that split awkward, with one capability in six files across three trees, the
-   difficulty is in the repository, not the task. See [*Refactoring a codebase for
+   by the eighth file. Agents are asked for behaviours, not directories. Where a layer-first layout
+   makes that split awkward, with one capability in six files across three trees, the difficulty is
+   in the repository, not the task. See [*Refactoring a codebase for
    agents*](../../part-4-next-waves/refactoring-a-codebase-for-agents.md).
 3. **Hand the requirements over as an external list, not as prose to remember.** A numbered list of
    acceptance conditions in a file the agent can re-read beats the same conditions buried in your
@@ -34,8 +34,8 @@ Size the unit of work by what has to be held in mind at once, not by how many li
    an earlier edit from the same run; you have said "continue" more than twice.
 5. **Hand off state in a file, not in the conversation.** Before a session ends, have the agent
    write what was done, what is next, which decisions were made and why, and what must not be
-   redone. The next session inherits the written handoff and none of the chat, so a convention
-   you established by typing it is gone.
+   redone. The next session inherits the written handoff and none of the chat, so a convention you
+   established by typing it is gone.
 6. **Start the next unit from that file and a clean tree**, rather than from a continued session.
 
 Fitting in the window is necessary and nowhere near sufficient. In the same study, the agent's

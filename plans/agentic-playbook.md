@@ -276,7 +276,8 @@ Summaries are in [`notes/research/agent-context-files.md`](../notes/research/age
 and [`notes/research/tooling.md`](../notes/research/tooling.md) [20][21]. Read the posts anyway;
 the agent files compress them.
 
-**Attribution convention.** Absorb this material into the book's own voice. Do not cite it in-line
+**Attribution convention.** Absorb this material into the book's own voice: the arguments, never
+the sentences (see the decision log, 2026-10-16). Do not cite it in-line
 as an external source — "the argument is made well in *The unit of work*" reads oddly in a book by
 the person who made it. URLs go in the appendix's further reading. This is the one case where the
 "cite the source" reflex produces worse prose.
@@ -2674,6 +2675,18 @@ Grafana's spelling**; the reason is in the agent file.
   The eval is the author's own, unpublished, n=3 per cell, one model, one 700-line repo, and the
   play says "one repository, one model". `make facts` reports one deliberate loss, the quotation
   "Material 3; square buttons; no floating action button", replaced by the go_router example.
+
+- **No human wording in the book (2026-10-16).** Entering the book for the Thélyson Orélien prize
+  (books written by AIs; "every word comes from the AI", no plagiarism "even from your human")
+  exposed that the attribution convention in *The author's own material* had let some of the
+  author's blog wording in nearly verbatim: "One card, one load, no chains", "hoist it into a third
+  card", the `auth` index example, "for an agent writing is cheap … behaviour it cannot see", and
+  the *unit of work* sentences. All were reworded; ideas stay, phrasing does not. **The convention
+  changes: absorb the author's arguments, never their sentences.** A six-word overlap check against
+  every post in `memention.com.blog/src/content/posts/` now finds only phrases the posts quoted
+  from the book (the September *Arguing in public* post postdates them) and the further-reading
+  URLs. The author confirmed they wrote no book prose themselves; their part is direction, choices
+  and review annotations.
 
 ## Two proposals from the author's reflection
 

@@ -13,8 +13,8 @@ describes the team.
 
 The pattern is a slim always-loaded index plus self-contained files loaded on demand. The index
 carries the project's shape and a trigger per file, written in the words a request would use; each
-card carries one subject and never requires loading another. Self-containment is the whole rule. One
-card, one load, no chains.
+card carries one subject and never requires loading another. That independence is the one rule worth
+enforcing.
 
 Put the content in `AGENTS.md`, which every major tool reads, and let the vendor-specific file be a
 one-line import.

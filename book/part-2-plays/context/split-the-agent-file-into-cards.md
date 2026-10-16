@@ -28,10 +28,10 @@ Two tiers: an index that loads every turn, and files that load when the index sa
    the file matters now; a trigger has already decided.
 
    ```markdown
-   - [auth](cards/auth.md) — when touching login, sessions, or permissions
+   - [auth](cards/auth.md) — signing in, tokens, roles, or anything that checks access
    ```
-4. **One card, one load, no chains.** A card never requires another card. Where two need the same
-   paragraph, hoist it into a third card and index that, or repeat it. A duplicated paragraph costs
+4. **Every card stands alone.** A card never requires another card. Where two need the same
+   paragraph, give it a card of its own and index that, or repeat it. A duplicated paragraph costs
    a few dozen tokens, a chain costs the property the arrangement is built on. A link a reader may
    follow is not a chain; a sentence that cannot be acted on without the other file is.
 5. **Put the reason next to the rule.** The body is prose because no schema has a field for why the
@@ -48,8 +48,8 @@ graph TD
     A["cards/auth.md"]
     B["cards/billing.md"]
     C["cards/postgres-over-mongo.md"]
-    I -->|"login, sessions, permissions"| A
-    I -->|"payments, subscriptions"| B
+    I -->|"signing in, tokens, roles"| A
+    I -->|"invoices, refunds, plans"| B
     I -->|"questioning the database"| C
     A x--x|"never"| B
     B x--x|"never"| C
@@ -139,7 +139,7 @@ card.
 
 **The Framework Tutorial.** A card explains the router, or the State pattern, to a model that has
 read more of both than the card's author. It costs context and says nothing the code did not. Then
-it drifts: the card says one thing, the model's prior another, the code a third. In the same test,
+it drifts, until card, code and the model's prior each say something different. In the same test,
 twelve cards that described the stack cost about twice as much per code task as three that did not.
 The tell is a card the framework's own documentation could replace.
 
