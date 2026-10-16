@@ -112,10 +112,11 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | *unassigned* | Read aloud on both surfaces, a favicon, and a mobile pass on the HTML book: no horizontal overflow from 360px up | ✅ done |
 | *unassigned* | Keep raising the bar — folded into *Collect and refine as a team* (step 6), **the Comfortable Peak** in Part III, and exploring on a model change in *What this book assumes about you*; no new play | ✅ done |
 | *unassigned* | The consolidated rewrite — `STYLE.md` revised (thread, main point first, Turk and Kirkman, economy), `make facts` added, all 41 files rewritten two agents at a time, then a whole-book read and its fixes; tag `pre-consolidated-rewrite` holds the book before it | ✅ done |
+| *unassigned* | **Known stack** folded into the Context suite from the author's A/B test on `blory_stok`: research note `known-stack-eval.md`, step 3 of *Write the agent file* narrowed, a new step 2 and **the Framework Tutorial** in *Split the agent file into cards*, the Wrong Edition's response aligned | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 41,945 words, one voice.
+**The manuscript is complete, and the book is published.** 41 chapters, 41,944 words, one voice.
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
 `main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
@@ -155,6 +156,18 @@ rewording edit**: it proves a chapter lost no number, quotation, link or code bl
 A whole-book read after the parallel pass found and fixed cross-chapter disagreements that predate
 the rewrite (see the decision log). Headings in Parts I, III and IV changed, and *Play* headings did
 not; chapter titles and the table of contents are unchanged.
+
+**Known stack is in (2026-10-16).** The author's pattern (name each framework the model already
+knows in one line, with where it lives and the local twist; card only what neither code nor model
+can supply) came from an A/B test on their own Flutter repo, `blory_stok`, which is **private**, so
+the book cites [`notes/research/known-stack-eval.md`](../notes/research/known-stack-eval.md) and
+never the repo. It went into existing plays, not a new one: step 3 of *Write the agent file that
+actually gets read* now covers frameworks and pins a version **only where it changes the API**; *Split
+the agent file into cards* has a new step 2 with the 8.2 → 4.9 turns figure and a second failure
+mode, **the Framework Tutorial**; and the Wrong Edition's response in Part III now says "wherever
+the API has moved", to agree with step 3. **Cite the turns and cost figures, not the quality
+scores:** the eval's own caveat puts its quality gaps inside noise. *Split the agent file into
+cards* is now at 1,183 of 1,200, *The play* at 499 of 500.
 
 **A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
 [`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
@@ -2645,6 +2658,23 @@ Grafana's spelling**; the reason is in the agent file.
   predating the rewrite and fixed against the research notes. The Orchestration opener glosses the
   third move as "re-tested, and raised or removed", which the author has seen.
 
+- **Known stack, folded in rather than a play (2026-10-16).** The author asked whether their
+  "Known stack" pattern (ai.memention.net setup, blog post of the same date) belonged in the book.
+  Half of it was already step 3 of *Write the agent file that actually gets read*; what was new was
+  frameworks and patterns rather than published standards, file paths as the twist, the rule for
+  what does not earn a card, and a measurement. A new play would have duplicated step 3 and moved
+  the play count, so it went into the two Context plays, with every addition paid for by a cut in
+  the same play (cut: *Split the agent file*'s "kinds stay informal" step, its `@path` sentence that
+  repeats the agent-file play, and four worked-example sentences of commentary). Decisions: the
+  author chose to **narrow the version advice** from "pin the version" to "pin a version only where
+  it changes the API", matching their test repo, which pins one SDK and nothing else; Part III's
+  Wrong Edition response was aligned the same day so the two do not disagree. The quality claim in
+  the blog post and setup card ("lean scored higher") is **not** in the book, because the eval's own
+  caveat puts quality differences under about 1 point inside noise; the turns and cost figures are.
+  The eval is the author's own, unpublished, n=3 per cell, one model, one 700-line repo, and the
+  play says "one repository, one model". `make facts` reports one deliberate loss, the quotation
+  "Material 3; square buttons; no floating action button", replaced by the go_router example.
+
 ## Two proposals from the author's reflection
 
 Raised from `reflection.txt`, assessed against what the book already says rather than taken as
@@ -3757,6 +3787,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Merged Hand** | Agent run started on a dirty tree; the diff interleaves two authors and can be neither kept nor discarded. | `book/TEMPLATE-play.md` specimen play |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded. Nothing errors, and the usual check reports the same thing whether they loaded or not. | `context/write-the-agent-file-that-actually-gets-read.md` |
 | **the Reassembled Agent file** | A short index and short cards, and every run still loads most of the material, because each card links to the next one a reader would want. Not the Context Landfill — nothing is stale and nothing is flat. The tell is an agent opening three files before it edits one. | `context/split-the-agent-file-into-cards.md` |
+| **the Framework Tutorial** | A card that teaches the model a framework it already knows and uses the standard way: it costs context, says nothing the code did not, and drifts from both the code and the model's prior. Distinct from the Reassembled Agent File — that is cards loading each other; this is a card that should not exist. | `context/split-the-agent-file-into-cards.md` |
 | **the Flattering Dashboard** | A tool reports large savings measured at its own boundary, against a counterfactual the billing system never applies, while the bill rises. | `context/starve-the-context.md` |
 | **the Permanent Near Miss** | Every run ends just short of done and every continuation also ends just short; no turn presents itself as the one to stop on. | `context/scope-a-task-to-fit-the-window.md` |
 | **the Paper Fence** | A rule that forbids something and does not stop it: it matches the spelling the agent usually produces, so uneventful runs read as evidence. Covers the prose version too — an instruction mistaken for enforcement. | `harness/choose-your-harness.md` |

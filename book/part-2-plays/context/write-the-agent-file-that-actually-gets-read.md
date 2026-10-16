@@ -22,10 +22,10 @@ Treat the agent file as a working set, not as a description of the project. Seve
    with steps, or a rule that matters twice a quarter does not belong in a file that loads in every
    session. Move it to something conditional, so it arrives when its situation does: a path-scoped
    rule, a skill, or a card.
-3. **Name what the model already knows, and write down only where you differ.** A widely published
-   standard (a public design system, a commit convention, a language's style guide) costs one line
-   to name and pages to describe. Pin the version, because the model knows an edition rather than
-   yours, then list your departures: "Material 3; square buttons; no floating action button".
+3. **Name what the model already knows, and write down only where you differ.** A framework, a
+   library, or a published standard costs one line to name and pages to describe. Add where it
+   lives and how you depart from it: "go_router; all routes in `lib/app/router.dart`". Pin a
+   version only where it changes the API the agent should write against.
 4. **Do not mistake reorganisation for reduction.** Splitting the file into `@path` imports is
    housekeeping: imports expand at launch and the token count is unchanged. Only conditional loading
    reduces anything.
@@ -131,7 +131,7 @@ appears in `/context` under Memory files, so that list is empty on success and f
 - [ ] One file holds the content; the vendor-specific file is an import or a symlink
 - [ ] The agent has stated its project instructions back to you in a fresh session this week
 - [ ] No two lines contradict, and the file says to stop and ask if two ever do
-- [ ] Published standards are named with their version, and only departures are written out
+- [ ] Known frameworks and standards are named, with where they live and only your departures
 - [ ] Lines corrected around, rather than followed, were rewritten or deleted
 
 **See also:** [*Split the agent file into cards*](split-the-agent-file-into-cards.md) ·

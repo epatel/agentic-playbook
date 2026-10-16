@@ -134,7 +134,7 @@ version.
 The tell is an API that no longer exists, a renamed flag, or an import path from the previous major
 version: code that reads correctly and fails at the version boundary.
 
-The response is to pin the version wherever the dependency is named, and to hand the agent the
+The response is to pin the version wherever the API has moved, and to hand the agent the
 changelog for the jump you are on. [*Write the agent file that actually gets
 read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) is the play.
 
@@ -154,9 +154,9 @@ a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) is the play.
 
 ## The index
 
-Every name this book uses, and where it is described: the eight above plus the twenty-two the plays
-coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom rather
-than the cause: a reader should recognise the thing before they understand it.
+Every name this book uses, and where it is described: the eight above plus the twenty-three the
+plays coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom
+rather than the cause: a reader should recognise the thing before they understand it.
 
 | Name | What you see | Described in |
 |---|---|---|
@@ -171,6 +171,7 @@ than the cause: a reader should recognise the thing before they understand it.
 | **the Context Landfill** | An agent file that only ever grew; the current convention followed inconsistently | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Agent File That Never Arrived** | Instructions written, committed, and never loaded; nothing errors | [*Write the agent file that actually gets read*](../part-2-plays/context/write-the-agent-file-that-actually-gets-read.md) |
 | **the Reassembled Agent File** | Short cards, a short index, and every run still loading most of the material through links between them | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
+| **the Framework Tutorial** | A card that teaches the model a framework it already knows, then drifts from it | [*Split the agent file into cards*](../part-2-plays/context/split-the-agent-file-into-cards.md) |
 | **the Adequate Answer** | Output nobody objects to, from a context nobody examines, because only a bad result prompts a look | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Flattering Dashboard** | A tool reports large savings while the bill goes up | [*Starve the context*](../part-2-plays/context/starve-the-context.md) |
 | **the Permanent Near Miss** | Every run ends just short, including the ones that continue the last one | [*Scope a task to fit the window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md) |
