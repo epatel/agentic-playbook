@@ -46,14 +46,14 @@ how a team acquires a second review queue and no extra reviewers.
 Four conditions make it safe, in rough order of how much they buy.
 
 1. **A surface narrow enough to own.** Copy strings, design tokens, feature-flag configuration,
-   content, the contents of one screen. A surface has a boundary somebody can be shown, and the
-   boundary is what makes "this is yours" a sentence rather than a sentiment. Widening it later is
-   cheap. Narrowing it after an incident is not.
+   content, the contents of one screen. A surface has a boundary somebody can be shown, which makes
+   "this is yours" a sentence rather than a sentiment. Widening later is cheap. Narrowing it
+   after an incident is not.
 2. **A check that adjudicates without a developer.** A build that fails, a visual-diff that flags a
-   layout change, a schema that rejects an unknown token, a preview environment that either renders
-   or does not. This is the same requirement as [*Make the agent prove
-   it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md). Here it does double
-   duty: it tells the contributor they are done, and it lets the reviewer be brief.
+   layout change, a schema that rejects an unknown token, a preview that renders or does not, a
+   structural delta that fails when the code gets worse. This is the same requirement as [*Make the
+   agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md). Here it
+   does double duty: it tells the contributor they are done and lets the reviewer be brief.
 3. **An agent file written in their vocabulary, not yours.** The agent file that serves your team is
    full of words like "migration" and "handler". A contributor working on copy needs to know where
    strings live, what the tone rules are, and which three files they must not touch. That is a
@@ -63,7 +63,7 @@ Four conditions make it safe, in rough order of how much they buy.
    explain the change, and who may decline it on volume alone without owing an explanation.
 
 Nothing on that list is new technology. A team could do all four this quarter, and a good team
-already does three of them for its own developers.
+already does three for its own developers.
 
 ## Review capacity and accountability carry the cost
 

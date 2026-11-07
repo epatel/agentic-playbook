@@ -14,7 +14,7 @@ carries the worked examples in four plays:
 |---|---|
 | `main/` | The tree as it stood on `origin/main`: battery-gated rollout staging, nine files. |
 | `agent/` | The same tree after the agent's pull request, which adds percentage-gated cohorts. |
-| `health/pass1/`, `health/pass2/` | The hold-back rules change, applied on top of `agent/`: the agent's first pass, then its refactor. One file each, `src/rollout/holdback.ts`, with the same behaviour. |
+| `health/pass1/`, `health/pass2/` | The hold-back rules change: the agent's first pass, then its refactor. One file each, `src/rollout/holdback.ts`, with the same behaviour. Applied on top of `agent/` because it needs that tree's `reachPercent` and `cohort` types; the review's four requested fixes touch neither the types nor this file, so the scores are the same either way. The `src/cohort/` scan runs on `agent/` as it was sent back, which is what the play says. |
 | `reproduce.py` | Builds a throwaway git repository from the two trees and runs the book's commands. |
 
 The two trees are the *contents* of two commits, not a git repository. `reproduce.py` turns them

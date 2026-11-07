@@ -57,8 +57,8 @@ RCT in [`productivity-evidence.md`](productivity-evidence.md).
 
 ### Vendor research: code health and agent break rates
 
-- **Tornhill and Borg, *Code Red*, TechDebt 2022** (arXiv 2203.04374), peer-reviewed, both authors
-  CodeScene-affiliated. [4] Pre-dates agents; human developers. 39 proprietary codebases, 30,737
+- **Tornhill and Borg, *Code Red*, TechDebt 2022** (arXiv 2203.04374), peer-reviewed. Tornhill:
+  CodeScene; Borg at the time: RISE and Lund University. Data from CodeScene's tool and customers. [4] Pre-dates agents; human developers. 39 proprietary codebases, 30,737
   files, Jira data. Alert code vs Healthy: **15 times more defects**; development time **124%
   longer** (Warning code already **78% longer**); maximum cycle times **9 times longer**. The
   abstract summarises this as "twice the development speed".

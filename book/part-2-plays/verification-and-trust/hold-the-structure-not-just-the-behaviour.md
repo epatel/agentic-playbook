@@ -4,10 +4,10 @@
 
 The run added hold-back rules to the rollout planner. The tests passed, the diff was a single new
 function, and the review took ten minutes. Four changes later, the same function decides seven
-things, takes nine arguments, and nests five deep. Every one of those changes passed every check you
-have, because every check you have asks whether the code works. None asks whether it can still be
-changed. You find out when a two-line fix takes an afternoon, from you and from the agent, which
-now spends most of its run reading the function before it touches it.
+things, takes nine arguments, and nests five deep. Every change passed every check you run. They ask
+whether the code works; the one linter rule that asked about shape was loosened the week it blocked
+a legacy file. You find out when a two-line fix takes an afternoon, from you and from the agent,
+which now spends most of its run reading the function before it touches it.
 
 ## The play
 
@@ -19,13 +19,15 @@ ends, not to a reviewer afterwards.
    path and a line. A project-wide score averages new damage into old health and moves too slowly
    to see one change.
 2. **Put it in the loop.** Report after each edit, and gate the end of the turn: if health fell,
-   the run gets the findings and one more turn. CodeScene ships this as an MCP server; `aihealth`,
-   an open-source tool written by this book's author, ships it as a CLI with Claude Code hooks.
-   Both narrow the run's options rather than removing them. The `aihealth` stop hook never fires
-   twice in a row, so a run can still finish degraded.
+   the run gets the findings and one more turn. CodeScene ships the check as an MCP server, which
+   the agent calls when it thinks to: advice. `aihealth`, an open-source tool from this book's
+   author, ships it as Claude Code hooks, which run either way. Even a hook narrows the options
+   rather than removing them: the `aihealth` stop hook never fires twice in a row, so a run can
+   still finish degraded.
 3. **Ratchet, do not target.** Fail on any fall in a file the change touched, and hold new files to
-   the healthy band. An absolute threshold on a legacy file at 4 blocks every change to it, and the
-   team switches the check off within a week.
+   the healthy band, 9 or above on the 1–10 scale both tools use. A linter's complexity limit is a
+   target: set tight, it blocks every change to a legacy file, so it gets loosened until it never
+   fires.
 4. **Keep the behaviour checks in front.** Run the structural check only after the suite and the
    type checker pass. A refactor that improves the score and changes behaviour is the worse result.
 5. **Read the findings, not the number.** The score summarises; the smells with line numbers are
@@ -41,14 +43,16 @@ graph LR
 ```
 
 This works because structural decay arrives one passing step at a time, so only a check that
-compares each step to the last can see it. The evidence is about what agents produce. In a 2026
-study of 806 open-source projects that adopted Cursor, code complexity rose by 41.6% and stayed up,
-while the speed-up was gone after two months. The claim that agents themselves work better on
-healthy code is weaker than it is usually told: the one controlled study found no significant
-difference for a frontier model ([`code-health.md`](../../../notes/research/code-health.md)). Hold
-the structure for whoever changes the code next, person or agent. The exchange rate is an extra turn
-on most changes, refactors you would have waved through, and a metric somebody must calibrate and
-sometimes overrule.
+compares each step to the last can see it. The evidence is about what agents produce. A 2026 study
+of 806 open-source projects that adopted Cursor in 2024 and early 2025 found code complexity up
+41.6% and staying up, while the speed-up was gone after two months. The popular reason for caring,
+that agents work better on healthy code, is the score vendor's own headline. Its own controlled
+study, of refactoring single-file programs, found no significant difference for a frontier model or
+for Claude Code ([`code-health.md`](../../../notes/research/code-health.md)). Agents do not need
+clean code. The people who review and change it next do: in the same vendor's 2022 study of 39
+proprietary codebases, the least healthy code took 124% longer to change. The exchange rate is an
+extra turn on most changes, refactors you would have waved through, and a metric somebody must
+calibrate and sometimes overrule.
 
 ## Worked example
 
@@ -110,20 +114,21 @@ aihealth delta: working tree vs HEAD: UNCHANGED
 exit 0
 ```
 
-The check has a blind spot, and `tideline` already contained it. The cohort module merged the month
-before holds two bucketing helpers that round a boundary device in opposite directions. Scored on
-its own, `src/cohort/` comes back at 10.00. The check measures shape, not meaning, and two tidy
-functions that disagree are perfectly shaped.
+The check has a blind spot, and `tideline`'s history holds it. The cohort pull request a reviewer
+had sent back the month before carried a second bucketing helper, rounding a boundary device the
+opposite way to the first. On that branch, `src/cohort/` scores 10.00. The check measures shape, not
+meaning, and two tidy functions that disagree are perfectly shaped.
 
 ## Failure mode
 
 **The Healthy Average.** The dashboard is green, the trend line is flat, and the newest code is the
-worst in the repository. A project score weights each file by its size, so one new function at 7.89
-barely moves a mean held up by years of settled code. In `tideline` it moved the project to 9.64,
-still labelled healthy. The team watching the number sees stability while the files the agent
-writes every day sit a band lower than the files nobody touches.
+worst in the repository. A project score, including the headline number on both tools' dashboards,
+weights each file by its size. In `tideline`, a 405-line service, one new function at 7.89 pulled
+the project from 10.00 to 9.64, still labelled healthy. In a repository a hundred times larger, the
+same function would not move the second decimal. The team watching the number sees stability while
+the files the agent writes every day sit a band below the files nobody touches.
 
-The tell is a project score that has not moved in a month of heavy agent work, beside a list of
+The tell is a project score that holds steady through a month of heavy agent work, beside a list of
 the worst files that keeps gaining recent ones. The check that settles it is to score only the files
 changed in the last month, and compare.
 

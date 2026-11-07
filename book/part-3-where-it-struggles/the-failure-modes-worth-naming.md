@@ -74,15 +74,16 @@ gain in solve rate, while human repositories hold the same metrics flat. The mea
 
 It is a different animal from the Permanent Near Miss ([*Scope a task to fit the
 window*](../part-2-plays/context/scope-a-task-to-fit-the-window.md#failure-mode)), which is about a
-run that never arrives. This one arrives repeatedly and leaves sediment each time.
+run that never arrives. This one arrives repeatedly, leaving sediment each time.
 
-The tell is a file that has grown on every iteration, a run of recent passes with no behavioural
-change to show for them, and near-duplicate boilerplate in adjacent branches of one function, never
+The tell is a file grown on every iteration, a run of recent passes with no behavioural change to
+show, and near-duplicate boilerplate in adjacent branches of one function, never
 factored out.
 
-The response is a structural check per pass ([*Hold the structure, not just the
+The response is to cap iterations in advance, check structure on every pass ([*Hold the structure,
+not just the
 behaviour*](../part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md)),
-and a diff against five passes ago, not the last.
+and diff against five passes ago, not the last.
 
 ## The Immaculate Surface
 

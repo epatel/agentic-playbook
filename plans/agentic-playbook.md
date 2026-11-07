@@ -2733,6 +2733,17 @@ Grafana's spelling**; the reason is in the agent file.
   **Borg, first author of the *Echoes of AI* RCT that Part III prints, is CodeScene-affiliated**,
   which the book does not say while it names GitClear's interest. The note's *Do not cite* list
   is binding.
+- **The structural-health play was reassessed and sharpened (2026-11-07).** Fixed: a contradiction
+  with *Review code you did not write*, where the duplicate bucketing helper is sent back, not
+  merged (the play now scans "the branch the reviewer sent back"); MCP tools called advice and hooks
+  called gates, per *Make the agent prove it*; the linter's complexity limit named and distinguished
+  as a target; the healthy band defined; the Cursor cohort dated to 2024–25; "from this book's
+  author", not "written by". Sharpened: **agents do not need clean code; the people who change it
+  next do**, with *Code Red*'s 124% as the cost, and the vendor's own headline named as what its
+  own study does not support. The Healthy Average now implicates both tools' dashboards and is
+  stated as scale (a hundred times larger repository does not move the second decimal; checked by
+  arithmetic). *Inviting non-developers in* condition 2 gained a structural delta, so the ladder in
+  *The three waves* and the four conditions agree; the Endless Polish keeps its iteration cap.
 
 ## Two proposals from the author's reflection
 

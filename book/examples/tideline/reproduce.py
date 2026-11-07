@@ -227,7 +227,8 @@ def main() -> int:
         shutil.copy2(HERE / "health" / "pass2" / "src" / "rollout" / "holdback.ts", target)
         pass2 = show("aihealth delta; echo \"exit $?\"", health, check=False)
 
-        print("\nWhat the check cannot see: two bucketing helpers that round differently:")
+        print("\nWhat the check cannot see, on the branch the reviewer sent back: two bucketing\n"
+            "helpers that round a boundary device in opposite directions:")
         dup = show("aihealth scan src/cohort/", health)
 
         heading("assertions")
