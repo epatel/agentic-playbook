@@ -156,7 +156,7 @@ a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) is the play.
 
 ## The index
 
-Every name this book uses, and where it is described: the eight above plus the twenty-four the
+Every name this book uses, and where it is described: the eight above plus the twenty-five the
 plays coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom
 rather than the cause: a reader should recognise the thing before they understand it.
 
@@ -186,6 +186,7 @@ rather than the cause: a reader should recognise the thing before they understan
 | **the Drifting Yes** | Approval of agent changes getting easier with exposure; your own comments getting shorter | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) |
 | **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite | [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md) |
 | **the Healthy Average** | A green project score over new code a band worse than the files nobody touches | [*Hold the structure, not just the behaviour*](../part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md) |
+| **the Borrowed Velocity** | Each widening justified by the last one's speed-up, while review load and complexity arrive later | [*Pace adoption to your checks*](../part-2-plays/team/pace-adoption-to-your-checks.md) |
 | **the Accountable Bystander** | A named owner who approved more than anyone could have understood | [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) |
 | **the Expensive Nothing** | A cost spike on a message you could have sent by nodding | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) |
 | **the Long Way Round** | Cheaper per token, larger invoice, several times as many turns | [*Match the model to the job*](../part-2-plays/economics/match-the-model-to-the-job.md) |

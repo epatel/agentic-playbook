@@ -114,10 +114,11 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | *unassigned* | The consolidated rewrite — `STYLE.md` revised (thread, main point first, Turk and Kirkman, economy), `make facts` added, all 41 files rewritten two agents at a time, then a whole-book read and its fixes; tag `pre-consolidated-rewrite` holds the book before it | ✅ done |
 | *unassigned* | **Known stack** folded into the Context suite from the author's A/B test on `blory_stok`: research note `known-stack-eval.md`, step 3 of *Write the agent file* narrowed, a new step 2 and **the Framework Tutorial** in *Split the agent file into cards*, the Wrong Edition's response aligned | ✅ done |
 | *unassigned* | **Structural health and adoption pacing**, from the author's `ai-phases` post, `aihealth` and Tornhill's GOTO 2026 talk: research note `code-health.md`; a fourth Verification and trust play, *Hold the structure, not just the behaviour*, with **the Healthy Average** and a captured `aihealth` example on `tideline`; the Endless Polish's response now a structural check; Borg's CodeScene affiliation disclosed; the ladder paragraph in *The three waves* split into scale and project-state ladders | ✅ done |
+| *unassigned* | **A fifth Team play**, *Pace adoption to your checks*, at the author's choice over a table in *The three waves*: place each area at one of four levels, exit checks per level, trust and scale as separate dials, one dated widening at a time judged at two months; **the Borrowed Velocity**; *The three waves* links its pacing rule to it | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 42 files, 42,874 words, one voice (41 files at publication; one play added 2026-11-07).
+**The manuscript is complete, and the book is published.** 43 files, 43,946 words, one voice (41 files at publication; two plays added 2026-11-07).
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
 `main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
@@ -180,8 +181,8 @@ list is binding. The play argues from what agents produce (He et al., MSR 2026),
 needing healthier code. Its worked example is **captured**, from `book/examples/tideline/health/`,
 and **`tideline/reproduce.py` now needs `aihealth` on the path** (it exits 2 without it). The
 capture pins `aihealth` 0.1.0 at commit `abfdd17`; a newer `aihealth` that rescores the first pass
-will fail the script's assertions, which is the point. The book now has **twenty-one plays**, and
-the counts in the root `README.md`, `book/TEMPLATE-play.md`, *The three waves* and the Part III index
+will fail the script's assertions, which is the point. The book now has **twenty-two plays** (the Team suite's *Pace adoption to your checks* followed the
+same day), and the counts in the root `README.md`, `book/TEMPLATE-play.md`, *The three waves* and the Part III index
 say so. *The failure modes worth naming* changed its Endless Polish response and gained an index
 row; the Borg disclosure in *What is genuinely contested* was paid for with cuts, net shorter.
 
@@ -3869,6 +3870,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Drifting Yes** | Reviewer approval of agent changes gets easier with exposure while approval of colleagues' changes holds flat. Invisible to the surface metrics a reviewer would check; the tell is the reviewer's own comments getting shorter. | `verification-and-trust/review-code-you-did-not-write.md` |
 | **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite: a test deleted or skipped, a test input special-cased in the implementation, or an assertion no plausible defect could fail. | `verification-and-trust/make-the-agent-prove-it.md` (coined in `book/STYLE.md`'s naming section) |
 | **the Healthy Average** | A project score that stays green while the newest code sits a band below the files nobody touches, because a lines-weighted mean dilutes one new function into years of settled code. The tell: a flat score through a month of heavy agent work, beside a worst-files list that keeps gaining recent entries. | `verification-and-trust/hold-the-structure-not-just-the-behaviour.md` |
+| **the Borrowed Velocity** | Each widening of adoption justified by the speed-up from the last, while review load and complexity arrive later; by then more widenings rest on the first and turning one back reads as admitting failure. The tell: widenings dated under two months apart, a review queue growing faster than the team, touched-file health falling under a steady project score. | `team/pace-adoption-to-your-checks.md` |
 | **the Accountable Bystander** | A named owner who approved more changes than anyone could have understood, and had no standing to decline. Accountability by title, bystanding in fact; the incident review finds the name and stops. | `verification-and-trust/decide-who-signs-off.md` |
 | **the Expensive Nothing** | A turn that bills more than everything before it while doing no work: the cache went cold during an interruption, so a one-line reply reprocessed the whole conversation at full rate. The tell is a cost spike on a message you could have sent by nodding. | `economics/understand-what-you-are-paying-for.md` |
 | **the Long Way Round** | The model is cheaper per token and the invoice is larger, because it reaches the same answer through several times as many turns and each turn re-sends the conversation. The per-token saving is real and is applied to far more tokens. | `economics/match-the-model-to-the-job.md` |

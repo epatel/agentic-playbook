@@ -17,7 +17,7 @@ drawn and contents in the sidebar. There is also a short
 **[presentation](https://home.memention.net/presentation-builder/show/the-agentic-playbook)** — an
 overview, not the book itself.
 
-Complete and readable end to end: 35 chapters, about 43,000 words, every figure traced to a cited
+Complete and readable end to end: 36 chapters, about 44,000 words, every figure traced to a cited
 research note. Licensed [CC BY 4.0](LICENSE).
 
 ## Contents
@@ -37,7 +37,7 @@ needs to know. Roughly a tenth of the book, and deliberately out of the way afte
 
 ### Part II — The Plays
 
-Twenty-one plays in six suites. Each one is the problem, the play, a worked example, the way it
+Twenty-two plays in six suites. Each one is the problem, the play, a worked example, the way it
 goes wrong, and a checklist — the same five headings every time, so the book is skimmable under
 deadline. Tools appear inside plays as examples, never as headings.
 
@@ -82,32 +82,33 @@ that has to be written, maintained, and handed over.
 21. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
 22. [Settle what the team cannot agree](book/part-2-plays/team/settle-what-the-team-cannot-agree.md)
 23. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
-24. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
+24. [Pace adoption to your checks](book/part-2-plays/team/pace-adoption-to-your-checks.md)
+25. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
 
 ### Part III — Where It Struggles
 
 The honest accounting, written expecting a sceptical reader to start here.
 
-25. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
-26. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
-27. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
-28. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
+26. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
+27. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
+28. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
+29. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
 
 ### Part IV — Next Waves
 
 The only speculative material in the book, labelled as such, dated, with the experiment that would
 settle each claim.
 
-29. [The three waves](book/part-4-next-waves/the-three-waves.md)
-30. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
-31. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
+30. [The three waves](book/part-4-next-waves/the-three-waves.md)
+31. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
+32. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
 
 ### Appendices
 
-32. [Glossary](book/appendices/glossary.md)
-33. [Team checklists](book/appendices/team-checklists.md)
-34. [Copy-paste templates](book/appendices/copy-paste-templates.md)
-35. [Further reading](book/appendices/further-reading.md)
+33. [Glossary](book/appendices/glossary.md)
+34. [Team checklists](book/appendices/team-checklists.md)
+35. [Copy-paste templates](book/appendices/copy-paste-templates.md)
+36. [Further reading](book/appendices/further-reading.md)
 
 ## Reading it in one file
 

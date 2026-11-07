@@ -26,7 +26,7 @@ playbook" — Part I is exactly where that failure recurs.
 | **Orchestration** | Decompose into subagents · Make the control flow deterministic · Work in parallel without collisions |
 | **Verification & Trust** | Review code you did not write · Make the agent prove it · Hold the structure, not just the behaviour · Decide who signs off |
 | **Economics** | Understand what you are paying for · Match the model to the job · Know when not to use an agent |
-| **Team** | Build the working agreement · Settle what the team cannot agree · Collect and refine as a team · Onboard someone into all this |
+| **Team** | Build the working agreement · Settle what the team cannot agree · Collect and refine as a team · Pace adoption to your checks · Onboard someone into all this |
 
 ## The play template
 

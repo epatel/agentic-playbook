@@ -155,21 +155,22 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 27 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
 | 28 | `part-2-plays/team/settle-what-the-team-cannot-agree.md` | Settle what the team cannot agree | ✅ |
 | 29 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
-| 30 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
+| 30 | `part-2-plays/team/pace-adoption-to-your-checks.md` | Pace adoption to your checks | ✅ |
+| 31 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
-| 31 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
-| 32 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
-| 33 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
-| 34 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
+| 32 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
+| 33 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
+| 34 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
+| 35 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 35 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
-| 36 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
-| 37 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
+| 36 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
+| 37 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
+| 38 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
 | **Appendices** | | | |
-| 38 | `appendices/glossary.md` | Glossary | ✅ |
-| 39 | `appendices/team-checklists.md` | Team checklists | ✅ |
-| 40 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
-| 41 | `appendices/further-reading.md` | Further reading | ✅ |
+| 39 | `appendices/glossary.md` | Glossary | ✅ |
+| 40 | `appendices/team-checklists.md` | Team checklists | ✅ |
+| 41 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
+| 42 | `appendices/further-reading.md` | Further reading | ✅ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it

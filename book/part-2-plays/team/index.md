@@ -18,16 +18,16 @@ handed over like any other. What is not written down is a habit several people h
 a shared habit survives neither a model release nor a new joiner.
 
 [*Build the working agreement*](build-the-working-agreement.md): the decisions. Which choices affect
-other people and so have to be common, which stay nobody's business but yours, and how to write the
-result so that amending it beats ignoring it.
+other people and must be common, and how to write them so that amending beats ignoring.
 
 [*Settle what the team cannot agree*](settle-what-the-team-cannot-agree.md): the deadlock. Who
 decides the items the agreement could not close, and what makes the decision stick.
 
 [*Collect and refine as a team*](collect-and-refine-as-a-team.md): the material. Turning what
-individuals worked out alone into shared skills and context, including the half nobody does: taking
-things back out.
+individuals worked out alone into shared skills and context, and taking things back out.
+
+[*Pace adoption to your checks*](pace-adoption-to-your-checks.md): the tempo. Widening what agents
+and colleagues may do only when the check that makes it safe already holds.
 
 [*Onboard someone into all this*](onboard-someone-into-all-this.md): the transfer. Getting the tenth
-person productive on a surface that did not exist two years ago, and using them as the only free
-audit of it you get.
+person productive, and using them as the only free audit of the practice you get.
