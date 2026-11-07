@@ -17,7 +17,7 @@ drawn and contents in the sidebar. There is also a short
 **[presentation](https://home.memention.net/presentation-builder/show/the-agentic-playbook)** — an
 overview, not the book itself.
 
-Complete and readable end to end: 34 chapters, about 42,000 words, every figure traced to a cited
+Complete and readable end to end: 35 chapters, about 43,000 words, every figure traced to a cited
 research note. Licensed [CC BY 4.0](LICENSE).
 
 ## Contents
@@ -37,8 +37,8 @@ needs to know. Roughly a tenth of the book, and deliberately out of the way afte
 
 ### Part II — The Plays
 
-Twenty plays in six suites. Each one is the problem, the play, a worked example, the way it goes
-wrong, and a checklist — the same five headings every time, so the book is skimmable under
+Twenty-one plays in six suites. Each one is the problem, the play, a worked example, the way it
+goes wrong, and a checklist — the same five headings every time, so the book is skimmable under
 deadline. Tools appear inside plays as examples, never as headings.
 
 **[Context](book/part-2-plays/context/index.md)** — signal over noise.
@@ -67,46 +67,47 @@ agent produces about its own work is a claim.
 
 14. [Review code you did not write](book/part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
 15. [Make the agent prove it](book/part-2-plays/verification-and-trust/make-the-agent-prove-it.md)
-16. [Decide who signs off](book/part-2-plays/verification-and-trust/decide-who-signs-off.md)
+16. [Hold the structure, not just the behaviour](book/part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md)
+17. [Decide who signs off](book/part-2-plays/verification-and-trust/decide-who-signs-off.md)
 
 **[Economics](book/part-2-plays/economics/index.md)** — cost is a product, not a price.
 
-17. [Understand what you are paying for](book/part-2-plays/economics/understand-what-you-are-paying-for.md)
-18. [Match the model to the job](book/part-2-plays/economics/match-the-model-to-the-job.md)
-19. [Know when not to use an agent](book/part-2-plays/economics/know-when-not-to-use-an-agent.md)
+18. [Understand what you are paying for](book/part-2-plays/economics/understand-what-you-are-paying-for.md)
+19. [Match the model to the job](book/part-2-plays/economics/match-the-model-to-the-job.md)
+20. [Know when not to use an agent](book/part-2-plays/economics/know-when-not-to-use-an-agent.md)
 
 **[Team](book/part-2-plays/team/index.md)** — a team's practice with these tools is an artefact
 that has to be written, maintained, and handed over.
 
-20. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
-21. [Settle what the team cannot agree](book/part-2-plays/team/settle-what-the-team-cannot-agree.md)
-22. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
-23. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
+21. [Build the working agreement](book/part-2-plays/team/build-the-working-agreement.md)
+22. [Settle what the team cannot agree](book/part-2-plays/team/settle-what-the-team-cannot-agree.md)
+23. [Collect and refine as a team](book/part-2-plays/team/collect-and-refine-as-a-team.md)
+24. [Onboard someone into all this](book/part-2-plays/team/onboard-someone-into-all-this.md)
 
 ### Part III — Where It Struggles
 
 The honest accounting, written expecting a sceptical reader to start here.
 
-24. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
-25. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
-26. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
-27. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
+25. [What agents are reliably bad at](book/part-3-where-it-struggles/what-agents-are-reliably-bad-at.md)
+26. [The failure modes worth naming](book/part-3-where-it-struggles/the-failure-modes-worth-naming.md)
+27. [Where the time actually goes](book/part-3-where-it-struggles/where-the-time-actually-goes.md)
+28. [What is genuinely contested](book/part-3-where-it-struggles/what-is-genuinely-contested.md)
 
 ### Part IV — Next Waves
 
 The only speculative material in the book, labelled as such, dated, with the experiment that would
 settle each claim.
 
-28. [The three waves](book/part-4-next-waves/the-three-waves.md)
-29. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
-30. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
+29. [The three waves](book/part-4-next-waves/the-three-waves.md)
+30. [Refactoring a codebase for agents](book/part-4-next-waves/refactoring-a-codebase-for-agents.md)
+31. [Inviting non-developers in](book/part-4-next-waves/inviting-non-developers-in.md)
 
 ### Appendices
 
-31. [Glossary](book/appendices/glossary.md)
-32. [Team checklists](book/appendices/team-checklists.md)
-33. [Copy-paste templates](book/appendices/copy-paste-templates.md)
-34. [Further reading](book/appendices/further-reading.md)
+32. [Glossary](book/appendices/glossary.md)
+33. [Team checklists](book/appendices/team-checklists.md)
+34. [Copy-paste templates](book/appendices/copy-paste-templates.md)
+35. [Further reading](book/appendices/further-reading.md)
 
 ## Reading it in one file
 
@@ -157,7 +158,7 @@ the `Makefile`, or the workflow itself. It can also be run by hand from the Acti
 | [`book/STYLE.md`](book/STYLE.md) | Voice, the outright bans, the formatting mechanics. |
 | [`book/TEMPLATE-play.md`](book/TEMPLATE-play.md) | The five-heading play contract, plus one fully written specimen play. |
 | [`book/examples/`](book/examples/) | Scratch projects behind the worked examples, so captured command output can be captured again, plus `filter-paired-run/`, a paired test of token-filtering tools against the bill — written, not yet run, and the one project here that spends money. |
-| [`notes/research/`](notes/research/) | Twenty-one cited research notes. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
+| [`notes/research/`](notes/research/) | Twenty-two cited research notes. Every figure in the book traces to one, or to a primary source quoted in the sentence. |
 | [`notes/raw/`](notes/raw/) | The original ideation, frozen as a provenance record. |
 | [`PLAN.md`](PLAN.md) | The design document: locked decisions, the outline, the reasoning. |
 | [`plans/agentic-playbook.md`](plans/agentic-playbook.md) | The execution plan: milestones, the decision log, the handoff note, the open questions. |

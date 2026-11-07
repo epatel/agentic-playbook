@@ -114,13 +114,16 @@ pre-Scrum analogy. It is the least perishable research note in the project.
   **Martin Fowler, "Semantic diffusion"**, https://martinfowler.com/bliki/SemanticDiffusion.html, on
   what happens to a word once it wins.
 
-## The two posts this book is developed from
+## The author's posts this book is developed from
 
 Its arguments about two-tier context and about organising a codebase around capabilities were made
-first, and shorter, here.
+first, and shorter, in the first two. The third is a project-state ladder of the kind *The three
+waves* reads as a pacing rule rather than a route.
 
 - **Cards** — https://memention.com/blog/2026/05/25/Cards.html
 - **The unit of work** — https://memention.com/blog/2026/05/29/The-unit-of-work.html
+- **The Five Phases of AI Adoption in a Project**, November 2026 —
+  https://epatel.github.io/ai-phases/
 
 ## What does not survive being looked up
 

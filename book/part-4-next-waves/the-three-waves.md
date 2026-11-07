@@ -8,8 +8,8 @@ future to people who enjoy being quoted. This part is the unsafe move, kept shor
 
 The rest of this book describes one situation: a developer, a codebase written for people, and a set
 of tools to get good at. That is the first wave. It is where most teams are, where the evidence is,
-and what the twenty plays are about. The other two are the only material in this book that is not an
-account of something already happening, and they are here because the world keeps moving.
+and what the twenty-one plays are about. The other two are the only material in this book that is
+not an account of something already happening, and they are here because the world keeps moving.
 
 **The second wave changes the codebase.** The first wave takes the repository as it is and adapts
 the way you work. The second asks what a repository would look like if agents were expected to work
@@ -37,18 +37,18 @@ into the second while still losing arguments that belong to the first. The third
 second in place that something other than a developer reading it can adjudicate an outsider's
 change.
 
-A genre of staged adoption model circulates alongside this one, and it is worth reading for the
-bottlenecks it names and worth discounting as a route. Each offers four or five numbered levels,
-from a locked-down pilot to an organisation running agents in the hundreds. Each level grants a
-little more trust and tooling than the last. There are two reasons to discount them. The levels
-conflate how far an agent is trusted with how many are running, and those are independent: a team
-can run ten agents under synchronous review, or one under none. And people who sell the rungs write
-most of them, which makes a ladder a scoreboard kept by an interested party. This book makes the
-same objection to a tool that reports its own savings ([*Starve the
-context*](../part-2-plays/context/starve-the-context.md#failure-mode)). What would change the
-reading is evidence that the order is forced, not described: teams that tried to skip a level and
-could not. Until somebody follows a cohort through, a ladder is a taxonomy with an arrow drawn on
-it. At every level the binding constraint is the one [*Where the time actually
+Staged adoption models circulate alongside this one, in two kinds. The common kind counts scale,
+from a locked-down pilot to agents in the hundreds. Discount it as a route. It conflates how far an
+agent is trusted with how many are running, and those are independent: a team can run ten agents
+under synchronous review, or one under none. And people who sell the rungs write most of these
+ladders: the objection this book makes to a tool that reports its own savings ([*Starve the
+context*](../part-2-plays/context/starve-the-context.md#failure-mode)). The rarer kind tracks the
+project instead: where its knowledge lives and what enforces it. Context moves from a developer's
+head into the repository, tests let the agent check itself, structure is measured, and only then
+does an outsider drive a change. Each level supplies the check the next one stands on. So the
+pacing rule is to move when the current check holds, not when a tool ships. Nobody has shown the
+order is forced, by following teams that tried to skip a level and could not. At every level the
+binding constraint is the one [*Where the time actually
 goes*](../part-3-where-it-struggles/where-the-time-actually-goes.md) measures: somebody still has to
 read the output.
 

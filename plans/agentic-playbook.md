@@ -113,10 +113,11 @@ table above, so that the numbered milestones keep the numbers other entries in t
 | *unassigned* | Keep raising the bar — folded into *Collect and refine as a team* (step 6), **the Comfortable Peak** in Part III, and exploring on a model change in *What this book assumes about you*; no new play | ✅ done |
 | *unassigned* | The consolidated rewrite — `STYLE.md` revised (thread, main point first, Turk and Kirkman, economy), `make facts` added, all 41 files rewritten two agents at a time, then a whole-book read and its fixes; tag `pre-consolidated-rewrite` holds the book before it | ✅ done |
 | *unassigned* | **Known stack** folded into the Context suite from the author's A/B test on `blory_stok`: research note `known-stack-eval.md`, step 3 of *Write the agent file* narrowed, a new step 2 and **the Framework Tutorial** in *Split the agent file into cards*, the Wrong Edition's response aligned | ✅ done |
+| *unassigned* | **Structural health and adoption pacing**, from the author's `ai-phases` post, `aihealth` and Tornhill's GOTO 2026 talk: research note `code-health.md`; a fourth Verification and trust play, *Hold the structure, not just the behaviour*, with **the Healthy Average** and a captured `aihealth` example on `tideline`; the Endless Polish's response now a structural check; Borg's CodeScene affiliation disclosed; the ladder paragraph in *The three waves* split into scale and project-state ladders | ✅ done |
 
 ## Current state / handoff
 
-**The manuscript is complete, and the book is published.** 41 chapters, 41,944 words, one voice.
+**The manuscript is complete, and the book is published.** 42 files, 42,874 words, one voice (41 files at publication; one play added 2026-11-07).
 It is on GitHub under CC BY 4.0; the HTML build is served at
 [epatel.github.io/agentic-playbook](https://epatel.github.io/agentic-playbook/) on a push to
 `main` that changes what the page is built from (the path list in `.github/workflows/pages.yml`,
@@ -168,6 +169,21 @@ mode, **the Framework Tutorial**; and the Wrong Edition's response in Part III n
 the API has moved", to agree with step 3. **Cite the turns and cost figures, not the quality
 scores:** the eval's own caveat puts its quality gaps inside noise. *Split the agent file into
 cards* is now at 1,183 of 1,200, *The play* at 499 of 500.
+
+**Structural health is in (2026-11-07).** The author's `aihealth` tool and Adam Tornhill's GOTO
+Copenhagen 2026 talk prompted a fourth Verification and trust play, *Hold the structure, not just
+the behaviour*: a structural delta per change, fed to the agent before its turn ends, ratcheted on
+touched files, run after the suite. **Read
+[`notes/research/code-health.md`](../notes/research/code-health.md) before citing anything from the
+talk**: its frontier-agent claim is not supported by its own source, and the note's *Do not cite*
+list is binding. The play argues from what agents produce (He et al., MSR 2026), not from agents
+needing healthier code. Its worked example is **captured**, from `book/examples/tideline/health/`,
+and **`tideline/reproduce.py` now needs `aihealth` on the path** (it exits 2 without it). The
+capture pins `aihealth` 0.1.0 at commit `abfdd17`; a newer `aihealth` that rescores the first pass
+will fail the script's assertions, which is the point. The book now has **twenty-one plays**, and
+the counts in the root `README.md`, `book/TEMPLATE-play.md`, *The three waves* and the Part III index
+say so. *The failure modes worth naming* changed its Endless Polish response and gained an index
+row; the Borg disclosure in *What is genuinely contested* was paid for with cuts, net shorter.
 
 **A paired-run test for token-filtering tools — `rtk` by default — is written and not yet run.**
 [`book/examples/filter-paired-run/`](../book/examples/filter-paired-run/README.md) is a paired-run
@@ -2688,6 +2704,36 @@ Grafana's spelling**; the reason is in the agent file.
   URLs. The author confirmed they wrote no book prose themselves; their part is direction, choices
   and review annotations.
 
+- **Project-state ladders are no longer discounted with scale ladders (2026-11-07).** The five-stage
+  ladder that prompted the paragraph in *The three waves* is the author's own post, *The Five Phases
+  of AI Adoption in a Project* (`epatel/ai-phases`, published November 2026), so the provenance
+  reason for not citing it is gone. Its two objections never fitted it either: it tracks where a
+  project's knowledge lives and what enforces it, not agent count, and nobody sells its rungs. The
+  paragraph now splits the genre: **scale ladders stay discounted** for the original reasons, and
+  **project-state ladders are read as a pacing rule**, move when the current level's check holds.
+  The falsifier stays. The post went into *Further reading*, whose section heading changed to *The
+  author's posts this book is developed from*; a five-word overlap check against the post found
+  nothing shared. Edit is two words shorter. Background in `options/adoption-pacing.md`.
+- **Structural health gets surfaced as a measured signal (2026-11-07), research first.** The author
+  agreed that tooling and measuring are worth surfacing (`options/code-health-in-the-loop.md`): the
+  book proves agents degrade structure (SlopCodeBench, the Endless Polish) and prescribes only a
+  habit. **No figure from Tornhill's GOTO 2026 talk goes into print before
+  `notes/research/code-health.md` exists**: nearly every number in it is CodeScene's research on
+  CodeScene's metric. Planned shape: a Verification and trust play on structural deltas, with
+  `aihealth` (the author's tool, disclosed as such) as the worked-example tool.
+- **The research note is in, and it changes the argument (2026-11-07).**
+  [`notes/research/code-health.md`](../notes/research/code-health.md) opened every study the talk
+  cites. **The talk's central claim, that agents are more sensitive to poor structure than people,
+  is not supported for frontier tools by its own source:** *Code for Machines* found no significant
+  break-rate difference for Claude Sonnet 4.5 or Claude Code. "41% more defects" is He et al.'s
+  41.6% more *complexity*; the Street Fighter III defect and token figures were projected, not
+  measured; the token ranges disagree across the vendor's own posts. **Argue the play from what
+  stands:** agents *produce* complexity (He et al., independent, MSR 2026; SlopCodeBench), regress
+  code over long maintenance (SWE-CI), and low health costs humans (*Code Red*). Also found:
+  **Borg, first author of the *Echoes of AI* RCT that Part III prints, is CodeScene-affiliated**,
+  which the book does not say while it names GitClear's interest. The note's *Do not cite* list
+  is binding.
+
 ## Two proposals from the author's reflection
 
 Raised from `reflection.txt`, assessed against what the book already says rather than taken as
@@ -3811,6 +3857,7 @@ here when you do. Convention is in [`book/STYLE.md`](../book/STYLE.md#naming-fai
 | **the Clean Merge** | Git reports success, both branches were green, and the merged tree was never tested by anyone. The conflicts git can see are the survivable class; the expensive class exists only in the union. | `orchestration/work-in-parallel-without-collisions.md` |
 | **the Drifting Yes** | Reviewer approval of agent changes gets easier with exposure while approval of colleagues' changes holds flat. Invisible to the surface metrics a reviewer would check; the tell is the reviewer's own comments getting shorter. | `verification-and-trust/review-code-you-did-not-write.md` |
 | **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite: a test deleted or skipped, a test input special-cased in the implementation, or an assertion no plausible defect could fail. | `verification-and-trust/make-the-agent-prove-it.md` (coined in `book/STYLE.md`'s naming section) |
+| **the Healthy Average** | A project score that stays green while the newest code sits a band below the files nobody touches, because a lines-weighted mean dilutes one new function into years of settled code. The tell: a flat score through a month of heavy agent work, beside a worst-files list that keeps gaining recent entries. | `verification-and-trust/hold-the-structure-not-just-the-behaviour.md` |
 | **the Accountable Bystander** | A named owner who approved more changes than anyone could have understood, and had no standing to decline. Accountability by title, bystanding in fact; the incident review finds the name and stops. | `verification-and-trust/decide-who-signs-off.md` |
 | **the Expensive Nothing** | A turn that bills more than everything before it while doing no work: the cache went cold during an interruption, so a one-line reply reprocessed the whole conversation at full rate. The tell is a cost spike on a message you could have sent by nodding. | `economics/understand-what-you-are-paying-for.md` |
 | **the Long Way Round** | The model is cheaper per token and the invoice is larger, because it reaches the same answer through several times as many turns and each turn re-sends the conversation. The per-token saving is real and is applied to far more tokens. | `economics/match-the-model-to-the-job.md` |

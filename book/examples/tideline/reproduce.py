@@ -136,12 +136,37 @@ def build_trailer_history(repo: Path) -> None:
         run(f'git commit -q -m "change {i:03d}{trailer}"', repo)
 
 
+def build_health_repo(repo: Path) -> None:
+    """The merged cohort work as `HEAD`, ready for the hold-back change on top.
+
+    This backs *Hold the structure, not just the behaviour*: the agent's first pass
+    and its refactor are overlaid on this tree in turn, uncommitted, the way a hook
+    sees them.
+    """
+    repo.mkdir(parents=True, exist_ok=True)
+    run("git init -q -b main", repo)
+    run("git config user.name tideline", repo)
+    run("git config user.email tideline@example.invalid", repo)
+    copy_tree(HERE / "agent", repo)
+    run("git add -A", repo)
+    run('git commit -q -m "Add percentage-gated cohorts"', repo)
+
+
 def main() -> int:
+    aihealth = shutil.which("aihealth")
+    if aihealth is None:
+        print(
+            "aihealth is not on the path; install it with\n"
+            '  uv tool install "git+https://github.com/epatel/ai-health"',
+            file=sys.stderr,
+        )
+        return 2
     scratch = Path(tempfile.mkdtemp(prefix="tideline-example-"))
     try:
         heading("environment")
         show("git --version", scratch)
         show("rg --version | head -1", scratch)
+        show("aihealth --version", scratch)
 
         repo = scratch / "tideline"
         build_repo(repo)
@@ -186,8 +211,32 @@ def main() -> int:
             trailers,
         )
 
+        heading("play: hold-the-structure-not-just-the-behaviour")
+        health = scratch / "tideline-health"
+        build_health_repo(health)
+        target = health / "src" / "rollout" / "holdback.ts"
+
+        print("\nThe agent's first pass at hold-back rules, uncommitted:")
+        shutil.copy2(HERE / "health" / "pass1" / "src" / "rollout" / "holdback.ts", target)
+        pass1 = show("aihealth delta; echo \"exit $?\"", health, check=False)
+
+        print("\nThe project score with that pass in the tree:")
+        scan1 = show("aihealth scan .", health)
+
+        print("\nAfter the refactor turn:")
+        shutil.copy2(HERE / "health" / "pass2" / "src" / "rollout" / "holdback.ts", target)
+        pass2 = show("aihealth delta; echo \"exit $?\"", health, check=False)
+
+        print("\nWhat the check cannot see: two bucketing helpers that round differently:")
+        dup = show("aihealth scan src/cohort/", health)
+
         heading("assertions")
         checks = [
+            ("first pass degrades and exits 1", "DEGRADED" in pass1 and "exit 1" in pass1),
+            ("first pass flags eight parameters", "takes 8 parameters" in pass1),
+            ("project score still reads healthy", "(healthy)" in scan1),
+            ("refactor exits 0 at 10.00", "10.00" in pass2 and "exit 0" in pass2),
+            ("cohort code scores 10.00 regardless", "10.00" in dup),
             ("nine files in the change", "9 files changed" in whole),
             ("three rows in the gate-first stat", "3 files changed" in stat_out),
             (

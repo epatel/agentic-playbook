@@ -23,6 +23,7 @@ not have to read a survey of kernel commit trailers to find them:
 | [`verification.md`](verification.md) | *Make the agent prove it* | Vendor guidance, tests that pass rather than verify, LLM-generated test quality, the fakeability ranking |
 | [`accountability.md`](accountability.md) | *Decide who signs off* | The DCO fight, trailer conventions, copyright, regulation, vendor indemnities |
 | [`token-economics.md`](token-economics.md) | All three Economics plays | Live prices across three vendors, caching, subscription billing, what actually drives spend |
+| [`code-health.md`](code-health.md) | Verification and trust; Part III; Part IV | Structural health and agents: the Cursor DiD study, SWE-CI, CodeScene's papers read against Tornhill's GOTO 2026 talk, structural delta gates |
 
 Two briefs from earlier passes belong to this material and should be read with it:
 [`token-filtering.md`](token-filtering.md) (a tool's dashboard reporting 96.2M tokens saved over

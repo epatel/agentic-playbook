@@ -80,8 +80,9 @@ The tell is a file that has grown on every iteration, a run of recent passes wit
 change to show for them, and near-duplicate boilerplate in adjacent branches of one function, never
 factored out.
 
-The response is to cap iterations in advance, and to diff against the state five passes ago rather
-than the last one.
+The response is a structural check per pass ([*Hold the structure, not just the
+behaviour*](../part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md)),
+and a diff against five passes ago, not the last.
 
 ## The Immaculate Surface
 
@@ -154,7 +155,7 @@ a team*](../part-2-plays/team/collect-and-refine-as-a-team.md) is the play.
 
 ## The index
 
-Every name this book uses, and where it is described: the eight above plus the twenty-three the
+Every name this book uses, and where it is described: the eight above plus the twenty-four the
 plays coined. The convention throughout is one name per phenomenon, Title Case, naming the symptom
 rather than the cause: a reader should recognise the thing before they understand it.
 
@@ -183,6 +184,7 @@ rather than the cause: a reader should recognise the thing before they understan
 | **the Clean Merge** | Git succeeded, both branches were green, the merged tree was never tested | [*Work in parallel without collisions*](../part-2-plays/orchestration/work-in-parallel-without-collisions.md) |
 | **the Drifting Yes** | Approval of agent changes getting easier with exposure; your own comments getting shorter | [*Review code you did not write*](../part-2-plays/verification-and-trust/review-code-you-did-not-write.md) |
 | **the Green Suite That Tests Nothing** | The suite passes and the green is a fact about the suite | [*Make the agent prove it*](../part-2-plays/verification-and-trust/make-the-agent-prove-it.md) |
+| **the Healthy Average** | A green project score over new code a band worse than the files nobody touches | [*Hold the structure, not just the behaviour*](../part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md) |
 | **the Accountable Bystander** | A named owner who approved more than anyone could have understood | [*Decide who signs off*](../part-2-plays/verification-and-trust/decide-who-signs-off.md) |
 | **the Expensive Nothing** | A cost spike on a message you could have sent by nodding | [*Understand what you are paying for*](../part-2-plays/economics/understand-what-you-are-paying-for.md) |
 | **the Long Way Round** | Cheaper per token, larger invoice, several times as many turns | [*Match the model to the job*](../part-2-plays/economics/match-the-model-to-the-job.md) |

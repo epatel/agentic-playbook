@@ -1,10 +1,11 @@
 # `tideline` — the Verification and Trust scratch project
 
 `tideline` is the TypeScript service that stages firmware rollouts to field devices, and it
-carries the worked examples in three plays:
+carries the worked examples in four plays:
 
 - [*Review code you did not write*](../../part-2-plays/verification-and-trust/review-code-you-did-not-write.md)
 - [*Make the agent prove it*](../../part-2-plays/verification-and-trust/make-the-agent-prove-it.md)
+- [*Hold the structure, not just the behaviour*](../../part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md)
 - [*Decide who signs off*](../../part-2-plays/verification-and-trust/decide-who-signs-off.md)
 
 ## What is here
@@ -13,6 +14,7 @@ carries the worked examples in three plays:
 |---|---|
 | `main/` | The tree as it stood on `origin/main`: battery-gated rollout staging, nine files. |
 | `agent/` | The same tree after the agent's pull request, which adds percentage-gated cohorts. |
+| `health/pass1/`, `health/pass2/` | The hold-back rules change, applied on top of `agent/`: the agent's first pass, then its refactor. One file each, `src/rollout/holdback.ts`, with the same behaviour. |
 | `reproduce.py` | Builds a throwaway git repository from the two trees and runs the book's commands. |
 
 The two trees are the *contents* of two commits, not a git repository. `reproduce.py` turns them
@@ -26,11 +28,13 @@ what it says.
 python3 book/examples/tideline/reproduce.py
 ```
 
-Python 3 standard library only, plus `git` and `rg` on the path. It writes nothing outside a
-temporary directory, cleans up after itself, and exits non-zero if a command fails or if one of the
-shapes the book asserts — nine changed files, three rows in the gate-first `--stat`, two bucketing
-helpers in `src/` — is no longer true. Commit identity and dates are pinned, so the output is the
-same on every machine.
+Python 3 standard library only, plus `git`, `rg` and `aihealth` on the path (`uv tool install
+"git+https://github.com/epatel/ai-health"`; the script exits 2 without it). It writes nothing
+outside a temporary directory, cleans up after itself, and exits non-zero if a command fails or if
+one of the shapes the book asserts is no longer true: nine changed files, three rows in the
+gate-first `--stat`, two bucketing helpers in `src/`, a first hold-back pass that degrades and
+exits 1 while the project score still reads healthy, and a refactor that exits 0 at 10.00. Commit
+identity and dates are pinned, so the output is the same on every machine.
 
 ## The defect the example turns on
 

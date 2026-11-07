@@ -145,30 +145,31 @@ Status: ⬜ not written · 🟡 in progress · ✅ done.
 | 17 | `part-2-plays/verification-and-trust/index.md` | Verification and trust | ✅ |
 | 18 | `part-2-plays/verification-and-trust/review-code-you-did-not-write.md` | Review code you did not write | ✅ |
 | 19 | `part-2-plays/verification-and-trust/make-the-agent-prove-it.md` | Make the agent prove it | ✅ |
-| 20 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ✅ |
-| 21 | `part-2-plays/economics/index.md` | Economics | ✅ |
-| 22 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ✅ |
-| 23 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ✅ |
-| 24 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
-| 25 | `part-2-plays/team/index.md` | Team | ✅ |
-| 26 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
-| 27 | `part-2-plays/team/settle-what-the-team-cannot-agree.md` | Settle what the team cannot agree | ✅ |
-| 28 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
-| 29 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
+| 20 | `part-2-plays/verification-and-trust/hold-the-structure-not-just-the-behaviour.md` | Hold the structure, not just the behaviour | ✅ |
+| 21 | `part-2-plays/verification-and-trust/decide-who-signs-off.md` | Decide who signs off | ✅ |
+| 22 | `part-2-plays/economics/index.md` | Economics | ✅ |
+| 23 | `part-2-plays/economics/understand-what-you-are-paying-for.md` | Understand what you are paying for | ✅ |
+| 24 | `part-2-plays/economics/match-the-model-to-the-job.md` | Match the model to the job | ✅ |
+| 25 | `part-2-plays/economics/know-when-not-to-use-an-agent.md` | Know when not to use an agent | ✅ |
+| 26 | `part-2-plays/team/index.md` | Team | ✅ |
+| 27 | `part-2-plays/team/build-the-working-agreement.md` | Build the working agreement | ✅ |
+| 28 | `part-2-plays/team/settle-what-the-team-cannot-agree.md` | Settle what the team cannot agree | ✅ |
+| 29 | `part-2-plays/team/collect-and-refine-as-a-team.md` | Collect and refine as a team | ✅ |
+| 30 | `part-2-plays/team/onboard-someone-into-all-this.md` | Onboard someone into all this | ✅ |
 | **Part III** | | **Where It Struggles** | |
-| 30 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
-| 31 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
-| 32 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
-| 33 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
+| 31 | `part-3-where-it-struggles/what-agents-are-reliably-bad-at.md` | What agents are reliably bad at | ✅ |
+| 32 | `part-3-where-it-struggles/the-failure-modes-worth-naming.md` | The failure modes worth naming | ✅ |
+| 33 | `part-3-where-it-struggles/where-the-time-actually-goes.md` | Where the time actually goes | ✅ |
+| 34 | `part-3-where-it-struggles/what-is-genuinely-contested.md` | What is genuinely contested | ✅ |
 | **Part IV** | | **Next Waves** | |
-| 34 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
-| 35 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
-| 36 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
+| 35 | `part-4-next-waves/the-three-waves.md` | The three waves | ✅ |
+| 36 | `part-4-next-waves/refactoring-a-codebase-for-agents.md` | Refactoring a codebase for agents | ✅ |
+| 37 | `part-4-next-waves/inviting-non-developers-in.md` | Inviting non-developers in | ✅ |
 | **Appendices** | | | |
-| 37 | `appendices/glossary.md` | Glossary | ✅ |
-| 38 | `appendices/team-checklists.md` | Team checklists | ✅ |
-| 39 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
-| 40 | `appendices/further-reading.md` | Further reading | ✅ |
+| 38 | `appendices/glossary.md` | Glossary | ✅ |
+| 39 | `appendices/team-checklists.md` | Team checklists | ✅ |
+| 40 | `appendices/copy-paste-templates.md` | Copy-paste templates | ✅ |
+| 41 | `appendices/further-reading.md` | Further reading | ✅ |
 
 Titles here are the working titles from `PLAN.md`. Sharpening one is fine and expected — change the
 title, the filename, and this row together, and note it in the running log so anyone linking to it

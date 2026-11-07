@@ -40,16 +40,17 @@ changed lines in 2022 to 3.8% year-to-date in 2026, and block duplication up 81%
 It classifies nothing as AI-assisted: the corpus is every change, and it infers attribution from
 timing. And the company sells the diagnosis.
 
-Between them sits the study that actually tried to answer the downstream question. Borg and
-colleagues, reporting in February 2026, ran two phases. In the first, 151 participants, 95% of them
-professional developers, built features with or without AI. In the second, a *different* set evolved
-the resulting code without AI. Phase one showed a 30.7% median speedup. Phase two found "no
-significant differences in subsequent evolution with respect to completion time or code quality",
-with the Bayesian analysis putting any improvement at "at most small and highly uncertain".
+Between them sits the one study built for the downstream question. Borg, of the code-health vendor
+CodeScene, and colleagues, reporting in February 2026, ran two phases. In the first, 151
+participants, 95% of them professional developers, built features with or without AI. In the second,
+a *different* set evolved that code without AI. Phase one showed a 30.7% median speedup. Phase two
+found "no significant differences in subsequent evolution with respect to completion time or code
+quality", with the Bayesian analysis putting any improvement at "at most small and highly
+uncertain".
 
-Note the asymmetry. The evidence that agents improve things is a controlled experiment on greenfield
-work. The evidence that they degrade things is observational, at repository scale, over time.
-Neither refutes the other, and the direct measurement is not the result either camp wanted.
+The evidence that agents improve things is a controlled experiment on greenfield work. The evidence
+that they degrade things is observational, at repository scale, over time. Neither refutes the
+other, and the direct measurement is not the result either camp wanted.
 
 ## Capability fixed cheating on solvable problems, not on impossible ones
 

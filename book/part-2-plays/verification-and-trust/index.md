@@ -15,14 +15,17 @@ worth acting on come from outside its turn. The green suite it wrote, the summar
 the second model it consulted all come from the same run. Trust has to be bought somewhere the run
 could not reach.
 
-[*Review code you did not write*](review-code-you-did-not-write.md): the diff. What to look at first
-when reading time is scarce, and why instincts calibrated on a tired human author stop
-discriminating when the author is neither tired nor wrong in the usual places.
+[*Review code you did not write*](review-code-you-did-not-write.md): the diff. What to read first
+when reading time is scarce, and why instincts tuned to a tired human author stop working on this
+one.
 
 [*Make the agent prove it*](make-the-agent-prove-it.md): the harness. Turning "it says it works"
-into evidence: finish conditions with a check in them, gates the run cannot talk its way past, and a
-ranking of verification signals by how hard each is to fake.
+into evidence: finish conditions with a check in them, gates the run cannot talk past, and signals
+ranked by how hard each is to fake.
+
+[*Hold the structure, not just the behaviour*](hold-the-structure-not-just-the-behaviour.md): the
+codebase. A structural check on every change, because working code can stop being changeable.
 
 [*Decide who signs off*](decide-who-signs-off.md): the team. Who answers for agent-authored code
-that ships, what every published policy agrees on, the argument against all of them, and what a team
-must write down for the answer to mean anything.
+that ships, what the published policies agree on and the argument against them, and what a team
+must write down.
